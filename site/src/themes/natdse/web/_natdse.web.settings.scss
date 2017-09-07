@@ -19,6 +19,7 @@ $headerBgColor:         $background4Color !default;
  //-----------------------------------------------------------------------------
  $grey:   #666666;
  $lightgrey:   #f8f8f8;
+ $darkgrey :#969696;
  $blue: #00758f;
  $orange: #f29111;
  // Header
@@ -32,10 +33,11 @@ $mediumFontSize:   oj-px-to-rem(20px, $baseFontSize: 14px) !default;
 $largeFontSize:    oj-px-to-rem(24px, $baseFontSize: 14px) !default;
 $largeFontSize1:    oj-px-to-rem(30px, $baseFontSize: 14px) !default;
 $largeFontSize2:    oj-px-to-rem(26px, $baseFontSize: 14px) !default;
+$largeFontSize3:    oj-px-to-rem(40px, $baseFontSize: 14px) !default;
 $largestFontSize:  oj-px-to-rem(50px, $baseFontSize: 14px) !default;
  //navcolours
-$navlinkTextColor:         #fff !default;
-$navlinkhoverColor:         $grey !default;
+$navlinkTextColor:         $darkgrey!default;
+$navlinkhoverColor:         $blue !default;
  //------Start of Common variables----  //Default
  
  $navigationListItemLabelColorDefault:       $navlinkTextColor !default;
@@ -115,4 +117,13 @@ font-size:$largeFontSize1;
 font-size:$largeFontSize;
 		color:$grey;
 		
-}	
+}
+@mixin bluebutton{
+	background:#00758f;
+	color:#fff;
+	border:none;
+	font-size:$smallestFontSize;
+	padding: 10px 20px;
+    text-align: center;
+	
+	}	
