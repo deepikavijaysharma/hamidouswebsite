@@ -3,29 +3,39 @@
 @import "../../../../node_modules/oraclejet/dist/scss/utilities/oj.utilities.math";
 @import "../../../../node_modules/oraclejet/dist/scss/utilities/oj.utilities.units";
 @import "../../../../node_modules/oraclejet/dist/scss/utilities/oj.utilities.modules";
- $fontFamily:  Arial, sans-serif !default;
- // background colors
- //----------------------------------
- 
+$fontFamily:  Arial, sans-serif !default;
+// background colors
+//----------------------------------
+
 $background1Color: #f8f8f8 !default;
 $background2Color: #7490a5 !default;
 $background4Color: #00758f !default;
 $headerBgColor:         $background4Color !default;
- // BODY 
- //----------------------------------------------------------------------------- 
- $bodyBgColor:   $background1Color !default;
- 
- // TextColors
- //-----------------------------------------------------------------------------
- $grey:   #666666;
- $lightgrey:   #f8f8f8;
- $darkgrey :#969696;
- $blue: #00758f;
- $orange: #f29111;
- // Header
+// BODY 
+//----------------------------------------------------------------------------- 
+$bodyBgColor:   $background1Color !default;
+
+// TextColors
+//-----------------------------------------------------------------------------
+$grey:   #666666;
+$red: #d00d0d;
+$lightgrey:   #f8f8f8;
+$lightgrey1:   #727272;
+$lightgrey2:   #fcfcfc;
+$darkgrey :#969696;
+$darkergrey :#444444;
+$darkergrey1: #3a3a39;
+$lightblue: #a9c5dc;
+$blue: #00758f;
+$darkblue: #003b4d;
+$orange: #f29111;
+$yellow: #ffd000;
+// Header
 $appLayoutWebHeaderBgColor: $headerBgColor !default;
 $appLayoutWebHeaderBoxShadow: none !default;
- $fontSize:         1.25rem !default;
+$fontSize:         1.25rem !default;
+$smallestFontSize2: oj-px-to-rem(12px, $baseFontSize: 14px) !default;
+$smallestFontSize1: oj-px-to-rem(14px, $baseFontSize: 14px) !default;
 $smallestFontSize: oj-px-to-rem(16px, $baseFontSize: 14px) !default;
 $smallFontSize:    oj-px-to-rem(18px, $baseFontSize: 14px) !default;
 $smallFontSize1:    oj-px-to-rem(19px, $baseFontSize: 14px) !default;
@@ -35,95 +45,144 @@ $largeFontSize1:    oj-px-to-rem(30px, $baseFontSize: 14px) !default;
 $largeFontSize2:    oj-px-to-rem(26px, $baseFontSize: 14px) !default;
 $largeFontSize3:    oj-px-to-rem(40px, $baseFontSize: 14px) !default;
 $largestFontSize:  oj-px-to-rem(50px, $baseFontSize: 14px) !default;
- //navcolours
+//navcolours
 $navlinkTextColor:         $darkgrey!default;
 $navlinkhoverColor:         $blue !default;
- //------Start of Common variables----  //Default
- 
- $navigationListItemLabelColorDefault:       $navlinkTextColor !default;
- 
- 
- 
- @mixin opacity100 {
- -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
- filter: alpha(opacity=100);
- -moz-opacity: 1;
- -khtml-opacity: 1;
- opacity:1;
+//------Start of Common variables----  //Default
+
+$navigationListItemLabelColorDefault:       $navlinkTextColor !default;
+
+$screenXSmallRange:  0, 320px !default;
+$responsiveQueryXSmallOnly:  "screen and (max-width: #{upper-bound($screenXSmallRange)})" !default;
+
+
+$screenXlargemedRange1: 1281px, 1366px !default;
+$responsiveQueryXlargemed1:   "screen and (max-width: #{lower-bound($screenXlargemedRange1)})" !default;
+
+
+$screenXlargemedRange: 1367px, 1440px !default;
+$responsiveQueryXlargemed:   "screen and (max-width: #{upper-bound($screenXlargemedRange)})" !default;
+
+@mixin opacity100 {
+-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+filter: alpha(opacity=100);
+-moz-opacity: 1;
+-khtml-opacity: 1;
+opacity:1;
 }
- @mixin opacity70 {
- -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
-	/* IE 5-7 */
-	filter: alpha(opacity=70);
-	/* Netscape */
-	-moz-opacity: 0.7;
-	/* Safari 1.x */
-	-khtml-opacity: 0.7;
-	/* Good browsers */
-	opacity: 0.7;
+@mixin opacity70 {
+-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+/* IE 5-7 */
+filter: alpha(opacity=70);
+/* Netscape */
+-moz-opacity: 0.7;
+/* Safari 1.x */
+-khtml-opacity: 0.7;
+/* Good browsers */
+opacity: 0.7;
 }
 @mixin opacity50 {
- -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-	/* IE 5-7 */
-	filter: alpha(opacity=50);
-	/* Netscape */
-	-moz-opacity: 0.5;
-	/* Safari 1.x */
-	-khtml-opacity: 0.5;
-	/* Good browsers */
-	opacity: 0.5;
+-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+/* IE 5-7 */
+filter: alpha(opacity=50);
+/* Netscape */
+-moz-opacity: 0.5;
+/* Safari 1.x */
+-khtml-opacity: 0.5;
+/* Good browsers */
+opacity: 0.5;
 }
- @mixin buttonswhite {
- background:#fff;
- color:#00758f;
- font-size:$smallFontSize1;
- cursor:pointer;
-}
-
- @mixin buttonswhitehover {
- background:#ccc;
- color:#00758f;
- font-size:$smallFontSize1;
- cursor:pointer;
+@mixin buttonswhite {
+background:#fff;
+color:#00758f;
+font-size:$smallFontSize1;
+cursor:pointer;
 }
 
- @mixin slidercursors {
- border:none;
- width: 36px;
- height: 62px;
- cursor:pointer;
+@mixin buttonswhitehover {
+background:#ccc;
+color:#00758f;
+font-size:$smallFontSize1;
+cursor:pointer;
 }
 
- @mixin verticalcenter {
-    position: relative;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+@mixin slidercursors {
+border:none;
+width: 36px;
+height: 62px;
+cursor:pointer;
+}
+
+@mixin verticalcenter {
+position: relative;
+top: 50%;
+-webkit-transform: translateY(-50%);
+-ms-transform: translateY(-50%);
+transform: translateY(-50%);
 }
 @mixin headings {
 font-size:$largeFontSize1;
-		color:$blue;
-		padding:15px;
-		text-align:center;
-		  box-sizing: border-box;
+color:$blue;
+padding:15px;
+text-align:center;
+box-sizing: border-box;
 }
 
 @mixin greytranparent{
-			background:rgba(0,0,0,0.3);
-	}
-	
+background:rgba(0,0,0,0.3);
+}
+
 @mixin headings2 {
 font-size:$largeFontSize;
-		color:$grey;
-		
+color:$grey;
+
 }
 @mixin bluebutton{
-	background:#00758f;
-	color:#fff;
-	border:none;
-	font-size:$smallestFontSize;
-	padding: 10px 20px;
-    text-align: center;
-	
-	}	
+background:#00758f;
+color:#fff;
+border:none;
+font-size:$smallestFontSize;
+padding: 10px 20px;
+text-align: center;
+}
+@mixin greybutton{
+background:#e4e4e4;
+color:$blue;
+border:none;
+font-size:$smallestFontSize;
+padding: 10px 20px;
+text-align: center;
+border-radius:10px;
+}
+
+@mixin orangeBbutton{
+background:transparent;
+color:$orange;
+border:1px solid $orange;
+font-size:$smallestFontSize;
+padding: 10px 20px;
+text-align: center;
+}
+
+@mixin boxshadow{
+-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);}		
+
+@mixin yellowbadge{
+background:$yellow;
+font-size:$smallestFontSize2;
+padding: 5px 10px;
+position:absolute;
+left:0px;
+top:25px;
+-webkit-clip-path: polygon(0 0, 100% 0%, 95% 100%, 0 100%);
+clip-path: polygon(0 0, 100% 0%, 95% 100%, 0 100%);
+}
+
+@mixin whitebutton{
+border:1px solid $blue;
+color:$blue;
+background:#fff;
+font-size:$mediumFontSize;
+}
