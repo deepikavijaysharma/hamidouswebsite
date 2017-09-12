@@ -3,6 +3,31 @@
  The Universal Permissive License (UPL), Version 1.0
  -->
 
+
+<div id="dialogWrapper" >
+  <div style="display:none" id="modalDialog1" title="Select your role" 
+       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 60%; height: auto; min-width 240px; '}}">
+     <div class="oj-dialog-body roleWrapper">
+      <form id="form1">
+  <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Select your role',
+                                                    rootAttributes: {style:'max-width:20em'}}">
+    
+                                             
+    <option value="role1">Role</option>
+    <option value="role2">Role</option>
+    
+  </select>
+  <div class="oj-dialog-footer">
+        <button id="okButton" data-bind="ojComponent: {component: 'ojButton', label: 'Okay'}"> </button>
+      </div>
+
+</form>
+     </div>
+     
+  </div>
+  
+
+</div>
 <div class="oj-row subnav">
   <div id="tabs-container">
     <div id="tabs" data-bind="ojComponent:{component: 'ojTabs', disabledTabs: [3]}"> 

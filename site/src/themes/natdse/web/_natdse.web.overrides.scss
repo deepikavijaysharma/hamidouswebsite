@@ -837,6 +837,65 @@ position:relative;
 }
 
 }
+/*----------------------------------POPUP----------------------------------*/
+.oj-dialog-title{
+font-size:$mediumFontSize;
+color:#fff;
+}
+
+.oj-dialog{
+background:#fff;
+border:none;
+border-radius: 5px;
+}
+
+.oj-dialog-header{
+background:$blue;
+}
+
+.oj-dialog-body{
+padding:40px 40px 10px;
+}
+.oj-select-chosen.oj-select-default{
+font-style:normal;
+}
+
+.roleWrapper{
+.oj-select{
+margin:0 auto;
+display:flex;
+}
+.oj-select-choice{
+border:none;
+background:$lightgrey;
+color:$darkergrey1;
+font-size:$smallFontSize;
+font-style:normal;
+padding: 20px !important;
+}	
+.oj-dialog-footer{
+justify-content: center;
+.oj-button-jqui.oj-default.oj-button-full-chrome, .oj-button-jqui.oj-focus-only.oj-button-full-chrome, .oj-button.oj-default.oj-button-full-chrome .oj-button-button, .oj-button.oj-focus-only.oj-button-full-chrome .oj-button-button{
+@include bluebutton;
+font-size:$mediumFontSize1;
+padding:10px 50px;
+margin-top: 10px;
+height:auto;
+border-radius:5px;
+}
+.oj-button-jqui.oj-hover.oj-button-full-chrome, .oj-button.oj-hover.oj-button-full-chrome .oj-button-button {
+@include bluebutton;
+color: $lightgrey;
+font-size:$mediumFontSize1;
+padding:10px 50px;
+margin-top: 10px;
+cursor:pointer;
+height:auto;
+border-radius:5px;
+}
+}
+}
+
 /*----------------------------------FOOTER----------------------------------*/
 footer {
 color:$lightgrey;
