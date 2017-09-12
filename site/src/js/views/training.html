@@ -3,30 +3,22 @@
  The Universal Permissive License (UPL), Version 1.0
  -->
 
-
 <div id="dialogWrapper" >
   <div style="display:none" id="modalDialog1" title="Select your role" 
-       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 60%; height: auto; min-width 240px; '}}">
-     <div class="oj-dialog-body roleWrapper">
+       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'escape',rootAttributes: { style: 'width: 60%; height: auto; min-width 240px; '}}">
+    <div class="oj-dialog-body roleWrapper">
       <form id="form1">
-  <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Select your role',
+        <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Select your role',
                                                     rootAttributes: {style:'max-width:20em'}}">
-    
-                                             
-    <option value="role1">Role</option>
-    <option value="role2">Role</option>
-    
-  </select>
-  <div class="oj-dialog-footer">
-        <button id="okButton" data-bind="ojComponent: {component: 'ojButton', label: 'Okay'}"> </button>
-      </div>
-
-</form>
-     </div>
-     
+          <option value="role1">Role</option>
+          <option value="role2">Role</option>
+        </select>
+        <div class="oj-dialog-footer">
+          <button id="okButton" data-bind="ojComponent: {component: 'ojButton', label: 'Okay'}"> </button>
+        </div>
+      </form>
+    </div>
   </div>
-  
-
 </div>
 <div class="oj-row subnav">
   <div id="tabs-container">
@@ -63,8 +55,8 @@
       label: 'Search'},
       click: searchInput"> </button>
               </div>
-              <div class="oj-flex-item oj-sm-7 oj-xl-3">
-                <button id="button-container" class="reqtrain-button " data-bind="ojComponent: {
+              <div class="oj-flex-item oj-sm-7 oj-xl-3 req_block">
+                <button id="button-container" class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
       component: 'ojButton',
       chroming: 'full',
       label: '+ Request Training'}"> </button>
@@ -73,10 +65,9 @@
           </form>
           <!-- COURSES -->
           <div class="oj-flex coursesblock">
-          
             <div class="oj-sm-12 oj-md-4 oj-lg-3 blocks manC oj-flex-item oj-margin"> Mandatory Courses<br>
               (13 Courses)</div>
-              <!-- ko foreach: data -->
+            <!-- ko foreach: data -->
             <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-lg-3 blocks oj-flex-item oj-margin"><span class="badge">Mandatory Course</span>
               <div class="title" data-bind="text:name"></div>
               <div class="desc">Learn Advanced Methods of usability methods</div>
@@ -87,12 +78,35 @@
                 <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:training_type"></span></div>
               </div>
               <div class="date"> Due Date: <br>
-              
                 <b>Sep 20, 2017</b> </div>
               <button class="whitebutton">Enroll</button>
             </div>
-             <!-- /ko -->
+            <!-- /ko --> 
+            <div class="oj-flex oj-sm-12">
+            <div id="collapsiblePage" data-bind="ojComponent: {component: 'ojCollapsible'}" class="oj-sm-12">
+              <div class="morelink">More</div>
+              <div class="oj-flex coursesblock"> 
+                <!-- ko foreach: data -->
+                <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-lg-3 blocks oj-flex-item oj-margin"><span class="badge">Mandatory Course</span>
+                  <div class="title" data-bind="text:name"></div>
+                  <div class="desc">Learn Advanced Methods of usability methods</div>
+                  <div class="oj-flex coursedetails">
+                    <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/duration_icon.png"><span data-bind="text:class_size"></span></div>
+                    <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/level_icon.png"><span data-bind="text:training_level"></span></div>
+                    <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:cloud_onpremise"></span></div>
+                    <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:training_type"></span></div>
+                  </div>
+                  <div class="date"> Due Date: <br>
+                    <b>Sep 20, 2017</b> </div>
+                  <button class="whitebutton">Enroll</button>
+                </div>
+                <!-- /ko --> 
+                
+              </div>
+            </div>
           </div>
+          </div>
+          
           <div class="oj-flex coursesblock">
             <div class="oj-sm-12 oj-md-4 oj-lg-3 blocks salesC oj-flex-item oj-margin"> Sales Courses<br>
               (5 Courses)</div>
@@ -108,7 +122,6 @@
                 <b>Sep 20, 2017</b> </div>
               <button class="whitebutton">Enroll</button>
             </div>
-            
             <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-lg-3 blocks oj-flex-item oj-margin"><span class="badge">Mandatory Course</span>
               <div class="title">Sales Training : Practical Sales Techniques</div>
               <div class="desc">Learn Advanced Methods of usability methods</div>
@@ -121,7 +134,6 @@
                 <b>Sep 20, 2017</b> </div>
               <button class="whitebutton">Enroll</button>
             </div>
-            
             <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-lg-3 blocks oj-flex-item oj-margin"><span class="badge">Mandatory Course</span>
               <div class="title">Sales Training : Practical Sales Techniques</div>
               <div class="desc">Learn Advanced Methods of usability methods</div>
@@ -134,8 +146,11 @@
                 <b>Sep 20, 2017</b> </div>
               <button class="whitebutton">Enroll</button>
             </div>
-            
-            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-lg-3 blocks oj-flex-item oj-margin"><span class="badge">Mandatory Course</span>
+            <div class="oj-flex oj-sm-12">
+            <div id="collapsiblePage" data-bind="ojComponent: {component: 'ojCollapsible'}" class="oj-sm-12">
+              <div class="morelink">More</div>
+              <div class="oj-flex coursesblock"> 
+                <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-lg-3 blocks oj-flex-item oj-margin"><span class="badge">Mandatory Course</span>
               <div class="title">Sales Training : Practical Sales Techniques</div>
               <div class="desc">Learn Advanced Methods of usability methods</div>
               <div class="oj-flex coursedetails">
@@ -147,6 +162,10 @@
                 <b>Sep 20, 2017</b> </div>
               <button class="whitebutton">Enroll</button>
             </div>
+                
+              </div>
+            </div>
+          </div>
           </div>
         </div>
       </div>

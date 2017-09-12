@@ -54,7 +54,16 @@ margin-top: 50px;
 }
 .bgwhite{
 background:#fff;
-padding: 0 40px 40px;}
+padding: 0 40px 40px;
+}
+.morelink{
+color:$blue;
+font-size:$smallFontSize;
+text-align:right;
+a.oj-collapsible-close-icon,a.oj-collapsible-open-icon{
+	color:$blue;
+	}
+}
 /*----------------------------------NAVIGATION----------------------------------*/
 .oj-web-applayout-offcanvas{
 background:$blue;
@@ -588,11 +597,11 @@ font-size:$smallFontSize;
 margin-right:60px !important;
 
 }
-.oj-tabs-title,a:link, a:visited{
+.oj-tabs-title,li a:link, li a:visited{
 color:#fff;
 text-decoration:none;
 }
-a:hover, a:visited:hover{
+li a:hover, li a:visited:hover{
 color:$blue;
 text-decoration:none;
 }	
@@ -655,6 +664,7 @@ height:50px;
 margin-left:10px;
 padding:14px 35px;
 height:auto;
+cursor:pointer;
 font-size:$mediumFontSize;
 height:50px;
 @media  #{$responsiveQuerySmallOnly} {
@@ -665,11 +675,14 @@ margin-top:10px;
 font-size:$smallestFontSize;
 }
 }
+.req_block{
+	padding-right:5px;}
 .reqtrain-button{
 background:$orange;
 margin-left:10px;
 padding:14px 35px;
 height:auto;
+cursor:pointer;
 font-size:$mediumFontSize;
 height:50px;
 border:none;
@@ -693,25 +706,28 @@ background:#fff;
 height:360px;
 @include boxshadow;
 max-width:280px;
-margin-right:8px;
+margin-right:15px;
 position:relative;
 padding:50px 15px 15px 15px;
 
 @media  #{$responsiveQueryXlargemed} {
-max-width:255px;
+max-width:254px;
 }
 @media  #{$responsiveQueryXlargemed1} {
 max-width:255px;
 }
 @media  #{$responsiveQueryLargeDown} {
-max-width:227px;
+max-width:220px;
 }
 @media  #{$responsiveQuerySmallOnly} {
 margin-right:0px;
 margin:0 auto;
 margin-bottom:10px;
-max-width:280px;
+max-width:320px;
 }
+}
+.blocks:nth-child(4n){
+	margin-right:0px;
 }
 .blocks:first-child,.blocks:nth-child(4n+1){
 @media  #{$responsiveQueryLargeUp} {
@@ -816,6 +832,7 @@ position:absolute;
 bottom:10px;
 max-width:250px;
 }
+
 }
 .cardface {
 width:100%;
@@ -838,60 +855,80 @@ position:relative;
 
 }
 /*----------------------------------POPUP----------------------------------*/
-.oj-dialog-title{
+.oj-dialog-title {
 font-size:$mediumFontSize;
-color:#fff;
+color: #fff;
 }
-
-.oj-dialog{
-background:#fff;
-border:none;
+.oj-dialog {
+background: #fff;
+border: none;
 border-radius: 5px;
 }
-
-.oj-dialog-header{
+.oj-dialog-header {
 background:$blue;
 }
-
-.oj-dialog-body{
-padding:40px 40px 10px;
+.oj-dialog-body {
+padding: 40px 40px 10px;
 }
-.oj-select-chosen.oj-select-default{
-font-style:normal;
+.oj-select-chosen.oj-select-default {
+font-style: normal;
 }
-
-.roleWrapper{
-.oj-select{
+/*----------------------------------SELECT ROLE----------------------------------*/
+.roleWrapper {
+.oj-select {
 margin:0 auto;
 display:flex;
 }
-.oj-select-choice{
-border:none;
+.oj-select-choice {
+border: none;
 background:$lightgrey;
 color:$darkergrey1;
 font-size:$smallFontSize;
-font-style:normal;
+font-style: normal;
 padding: 20px !important;
-}	
-.oj-dialog-footer{
+}
+.oj-dialog-footer {
 justify-content: center;
-.oj-button-jqui.oj-default.oj-button-full-chrome, .oj-button-jqui.oj-focus-only.oj-button-full-chrome, .oj-button.oj-default.oj-button-full-chrome .oj-button-button, .oj-button.oj-focus-only.oj-button-full-chrome .oj-button-button{
+.oj-button-jqui.oj-default.oj-button-full-chrome, .oj-button-jqui.oj-focus-only.oj-button-full-chrome, .oj-button.oj-default.oj-button-full-chrome .oj-button-button, .oj-button.oj-focus-only.oj-button-full-chrome .oj-button-button {
 @include bluebutton;
 font-size:$mediumFontSize1;
 padding:10px 50px;
 margin-top: 10px;
 height:auto;
 border-radius:5px;
+@media  #{$responsiveQuerySmallOnly} {
+padding:10px;
+}
 }
 .oj-button-jqui.oj-hover.oj-button-full-chrome, .oj-button.oj-hover.oj-button-full-chrome .oj-button-button {
 @include bluebutton;
 color: $lightgrey;
 font-size:$mediumFontSize1;
-padding:10px 50px;
+padding: 10px 50px;
 margin-top: 10px;
-cursor:pointer;
-height:auto;
-border-radius:5px;
+cursor: pointer;
+height: auto;
+border-radius: 5px;
+@media  #{$responsiveQuerySmallOnly} {
+padding:10px;
+}
+}
+.oj-button-jqui.oj-button-half-chrome,
+.oj-button-jqui.oj-button-half-chrome:link,
+.oj-button-jqui.oj-button-half-chrome:visited,
+.oj-button-jqui.oj-button-half-chrome:hover,
+.oj-button-jqui.oj-button-half-chrome:active,
+.oj-button.oj-button-half-chrome .oj-button-button,
+.oj-button.oj-button-half-chrome .oj-button-button:link,
+.oj-button.oj-button-half-chrome .oj-button-button:visited,
+.oj-button.oj-button-half-chrome .oj-button-button:hover,
+.oj-button.oj-button-half-chrome .oj-button-button:active,.oj-button-jqui.oj-hover.oj-button-half-chrome,
+.oj-button.oj-hover.oj-button-half-chrome .oj-button-button {
+	display:none;
+background-color: transparent !important;
+border: none !important;
+box-shadow: none;
+color: #fff !important;
 }
 }
 }
