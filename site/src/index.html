@@ -26,7 +26,7 @@
   ***************************** IMPORTANT INFORMATION ************************************ -->
 <html lang="en-us">
 <head>
-<title>SE Excellence</title>
+<title>NATD Solution Engineering and Customer Success</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="css/images/favicon.ico" type="image/x-icon" />
@@ -39,6 +39,7 @@
 <!-- This contains icon fonts used by the starter template -->
 <link rel="stylesheet" href="css/demo-alta-site-min.css" type="text/css"/>
 <link rel="stylesheet" href="css/styles.css" type="text/css"/>
+
 </head>
 <body class="oj-web-applayout-body">
 <!-- Template for rendering navigation items shared between nav bar and nav list --> 
@@ -71,38 +72,40 @@
            ** on the JET website for more information on how to use this pattern.
         -->
     <header role="banner" class="oj-web-applayout-header">
-      <div class="oj-web-applayout-max-width oj-flex-bar oj-sm-align-items-center  oj-md-hide"> 
+      <div class="oj-web-applayout-max-width oj-flex-bar oj-sm-align-items-center  oj-lg-hide"> 
         <!-- Offcanvas toggle button -->
+		
         <div class="oj-flex-bar-start">
           <button id="drawerToggleButton" class="oj-button-lg" data-bind="click: toggleDrawer,
                 ojComponent: {component:'ojButton', label: 'Application Navigation',
                 chroming: 'half', display: 'icons', icons: {start: 'fa fa-bars'}}"> </button>
         </div>
       </div>
-      <div role="navigation" class="oj-web-applayout-max-width oj-web-applayout-navbar">
+     
+    </header>
+    <div class="logoBar" id="logoBar">
+      <div class="container">
+        <div class="oj-flex">
+          <div class="oj-sm-12 oj-md-12 oj-lg-6 oj-xl-6 oj-flex-item oraclelogo"><a href="?root=home"><img src="css/images/oracle_logo.svg"></a>
+		  <br><span class="oraclelogotext">NATD Solution Engineering and Customer Success </span></div>
+          <div class="oj-sm-12 oj-md-12 oj-lg-6 oj-xl-6 oj-flex-item topnav"> <div role="navigation" class="oj-web-applayout-max-width oj-web-applayout-navbar">
         <div data-bind="ojComponent: {component: 'ojNavigationList',
               navigationLevel: 'application',
               item: {template: 'navTemplate'}, data: navDataSource,
               selection: router.stateId, edge: 'top'}"
-              class="oj-web-applayout-navbar oj-sm-only-hide oj-md-condense oj-md-justify-content-flex-end"> </div>
-      </div>
-    </header>
-    <div class="logoBar">
-      <div class="container">
-        <div class="oj-flex">
-          <div class="oj-sm-12 oj-md-4 oj-lg-4 oj-xl-4 oj-flex-item oraclelogo"><img src="css/images/oracle_logo.svg"></div>
-          <div class="oj-sm-12 oj-md-8 oj-lg-8 oj-xl-8 oj-flex-item oraclelogotext">NATD Solution Engineering and Customer Success </div>
+              class="oj-web-applayout-navbar oj-sm-only-hide oj-md-only-hide"> </div>
+      </div></div>
         </div>
       </div>
     </div>
     <div role="main" class="oj-web-applayout-content" data-bind="ojModule: router.moduleConfig"> </div>
     <footer class="oj-web-applayout-footer" role="contentinfo">
     
-      <div class="oj-web-applayout-footer-item oj-web-applayout-max-width">
+      <div class="container">
       
       <div class="oj-flex">
-      <div class="oj-flex-item oj-xl-12">NATD Solution Engineering and Customer Success </div>
-      <div class="oj-flex-item oj-xl-12">
+      <div class="oj-flex-item oj-md-12">NATD Solution Engineering and Customer Success </div>
+      <div class="oj-flex-item oj-md-12">
         <ul>
           <!-- ko foreach: footerLinks -->
           <li><a data-bind="text : name, attr : {id: linkId, href : linkTarget}"></a></li>

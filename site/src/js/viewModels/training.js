@@ -22,6 +22,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.handleAttached = function(info) {
                 // Implement if needed
             };
+			
+			self.closeRole = function() {
+				$("#modalDialog1").ojDialog("close")
+				};
+		
+				
+				self.openReqtraining =         function() {
+				 $("#trainingDialog").ojDialog("open");
+				
+				};
+
             /*----------------------------------GET COURSES----------------------------------*/
             self.data = ko.observableArray();
             self.schedules = ko.observableArray();

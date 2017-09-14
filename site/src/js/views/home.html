@@ -1,7 +1,6 @@
 <!------------------------------------SLIDER------------------------------------>
 
-
-<div class="oj-row">
+<div class="oj-row" id="mainBar">
   <div id="filmstrip-overlaidpagingcontrol-example" class="homeslider">
     <div class="oj-panel">
       <div id="filmStripDiv slider" style="position: relative;">
@@ -10,14 +9,14 @@
              component: 'ojFilmStrip', 
              maxItemsPerPage: 1, 
              arrowVisibility: currentNavArrowVisibility}" 
-           >
+           > 
           <!-- ko foreach: slide -->
           <div class="oj-panel oj-panel-alt2 demo-filmstrip-item" 
              data-bind="style: {
                display: getItemInitialDisplay($index())}">
             <div data-bind="html: name,css:classname"></div>
           </div>
-          <!-- /ko -->
+          <!-- /ko --> 
         </div>
         <div class="demo-overlaid-paging-control">
           <div id="pagingControl" 
@@ -32,8 +31,22 @@
     </div>
   </div>
 </div>
+<!-----------------------------------FIXED NAV------------------------------------>
+<div class="oj-row ">
+  <div id="setupBar" class="homesubnav oj-sm-12">
+    <ul class="oj-flex">
+      <li class="oj-sm-6 oj-md-4 oj-lg-2"><img src="css/images/vision_icon_small.png"><a href="#vision">Our Vision</a></li>
+      <li class="oj-sm-6 oj-md-4 oj-lg-2"><img src="css/images/services_icon_small.png"><a href="#services">Our Services</a></li>
+      <li class="oj-sm-6 oj-md-4 oj-lg-2"><img src="css/images/sekeydates_icon_small.png"><a href="#keydates">SE Key Dates</a></li>
+      <li class="oj-sm-6 oj-md-4 oj-lg-2"><img src="css/images/wins_icon_small.png"><a href="#golives">Wins, Go-Lives References</a></li>
+      <li class="oj-sm-6 oj-md-4 oj-lg-2"><img src="css/images/emp_icon_small.png"><a href="#empf">Employee Feature</a></li>
+      <li class="oj-sm-6 oj-md-4 oj-lg-2"><img src="css/images/contact_icon_small.png"><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</div>
+
 <!-----------------------------------VIDEO------------------------------------>
-<div class="oj-row row2">
+<div class="oj-row row2 newrow" id="row2">
   <div class="container">
     <div class="oj-flex">
       <div class="oj-sm-12 oj-md-4 oj-lg-4 oj-xl-4 oj-flex-item">
@@ -53,12 +66,16 @@
       </div>
       
       <!------------------------------------VISION------------------------------------>
-      
-      <div class="oj-sm-12 oj-md-8 oj-lg-8 oj-xl-8 oj-flex-item ">
+      <a class="anchor" name="vision"></a>
+      <div class="oj-sm-12 oj-md-8 oj-lg-8 oj-xl-8 oj-flex-item " >
         <div class="oj-margin visioncontainer">
-          <div class="oj-sm-12 visiontitle">Solution Engineering Vision</div>
+          <div class="oj-sm-12 visiontitle" id="vision">NATD Solution Engineering Vision</div>
           <div class="oj-sm-12 visiondesc oj-flex">
+          <div class="oj-sm-12 subtitle">
+          Sales Engineering-as-a-Service
+          </div>
             <div class="oj-sm-12 oj-md-3 oj-lg-3 oj-xl-2 blocks">
+            
               <div class="blocks_icon">
                 <div class="blocks_icon_inner"><img src="css/images/innovation_icon.png"></div>
               </div>
@@ -72,25 +89,25 @@
             </div>
             <div class="oj-sm-12 oj-md-3 oj-lg-3 oj-xl-2 blocks">
               <div class="blocks_icon">
-                <div class="blocks_icon_inner"><img src="css/images/opportunity_icon.png"></div>
+                <div class="blocks_icon_inner oppor"><img src="css/images/opportunity_icon.png"></div>
               </div>
               <div class="blocks_title">Opportunity</div>
             </div>
             <div class="oj-sm-12 oj-md-3 oj-lg-3 oj-xl-2 blocks">
               <div class="blocks_icon">
-                <div class="blocks_icon_inner"><img src="css/images/innovation_icon.png"></div>
+                <div class="blocks_icon_inner"><img src="css/images/foundation_icon.png"></div>
               </div>
               <div class="blocks_title">Foundational</div>
             </div>
             <div class="oj-sm-12 oj-md-3 oj-lg-3 oj-xl-2 blocks">
               <div class="blocks_icon">
-                <div class="blocks_icon_inner"><img src="css/images/innovation_icon.png"></div>
+                <div class="blocks_icon_inner"><img src="css/images/success_icon.png"></div>
               </div>
               <div class="blocks_title">Success</div>
             </div>
             <div class="oj-sm-12 oj-md-3 oj-lg-3 oj-xl-2 blocks">
               <div class="blocks_icon">
-                <div class="blocks_icon_inner"><img src="css/images/innovation_icon.png"></div>
+                <div class="blocks_icon_inner"><img src="css/images/demand_icon.png"></div>
               </div>
               <div class="blocks_title">Demand</div>
             </div>
@@ -106,8 +123,10 @@
     </div>
   </div>
 </div>
+
 <!------------------------------------SERVICES------------------------------------>
-<div class="oj-row row3 ">
+<a class="anchor" name="services"></a>
+<div class="oj-row row3 newrow" id="">
   <div class="container">
     <div class="col-sm-12 services">
       <div class="oj-flex">
@@ -209,7 +228,8 @@
   </div>
 </div>
 <!------------------------------------CALENDAR------------------------------------>
-<div class="oj-row row5 ">
+<a class="anchor" name="keydates"></a>
+<div class="oj-row row5 newrow">
   <div class="container">
     <div class="col-sm-12 keydates">
       <div class="oj-flex">
@@ -220,8 +240,9 @@
               <div class="oj-margin">
                 <div class="calrow">
                   <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex"><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tuesday, August 23, 2017 </div>
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex"><div class="oj-flex calevents"><p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tuesday, August 23, 2017<br><br><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Time : 9:30 PM IST - 10:30 PM IST</p></div></div>
                     <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Community Call: Monthly Sales accounts call</div>
                     <div class="oj-sm-12 oj-lg-3 ">
                       <div class="orangeBbutton oj-lg-float-end">Add to Calendar</div>
@@ -230,8 +251,9 @@
                 </div>
                 <div class="calrow">
                   <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex"><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tuesday, August 23, 2017 </div>
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex"><p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tuesday, August 23, 2017<br><br><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Time : 9:30 PM IST - 10:30 PM IST</p></div>
                     <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Community Call: Monthly Sales accounts call</div>
                     <div class="oj-sm-12 oj-lg-3 ">
                       <div class="orangeBbutton oj-lg-float-end">Add to Calendar</div>
@@ -240,8 +262,9 @@
                 </div>
                 <div class="calrow">
                   <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex"><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tuesday, August 23, 2017 </div>
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex"><p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tuesday, August 23, 2017<br><br><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Time : 9:30 PM IST - 10:30 PM IST</p></div>
                     <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Community Call: Monthly Sales accounts call</div>
                     <div class="oj-sm-12 oj-lg-3 ">
                       <div class="orangeBbutton oj-lg-float-end">Add to Calendar</div>
@@ -250,8 +273,9 @@
                 </div>
                 <div class="calrow">
                   <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex"><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tuesday, August 23, 2017 </div>
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex"><p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tuesday, August 23, 2017<br><br><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Time : 9:30 PM IST - 10:30 PM IST</p></div>
                     <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Community Call: Monthly Sales accounts call</div>
                     <div class="oj-sm-12 oj-lg-3 ">
                       <div class="orangeBbutton oj-lg-float-end">Add to Calendar</div>
@@ -277,6 +301,7 @@
   </div>
 </div>
 <!------------------------------------Featured Stories------------------------------------>
+<a class="anchor" name="empf"></a>
 <div class="oj-row row6 newrow">
   <div class="container">
     <div class="col-sm-12 featured  bgwhite">
@@ -309,6 +334,7 @@
   </div>
 </div>
 <!------------------------------------Wins, Go-Lives and References------------------------------------>
+<a class="anchor" name="golives"></a>
 <div class="oj-row row7 newrow">
   <div class="container">
     <div class="col-sm-12 wins  bgwhite">
@@ -373,6 +399,7 @@
   </div>
 </div>
 <!------------------------------------WHO TO CONTACT------------------------------------>
+<a class="anchor" name="contact"></a>
 <div class="oj-row row6 newrow">
   <div class="container">
     <div class="col-sm-12 featured  bgwhite">
