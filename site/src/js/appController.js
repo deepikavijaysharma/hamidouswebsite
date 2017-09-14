@@ -19,23 +19,35 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
 
        // Router setup
        self.router = oj.Router.rootInstance;
-       self.router.configure({
-         'home': {label: 'Home', isDefault: true},
-         'training': {label: 'Trainings'},
-		 'tools': {label: 'Tools and Resources'},
-		 'courses': {label: 'Courses'},
-		 'communitycalls': {label: 'Community Calls'},
-		 'offers': {label: 'Offers'},
-		 'admin': {label: 'Admin'}
+   //     self.router.configure({
+   //       'Home': {label: 'Home', isDefault: true},
+   //       'Trainings': {label: 'Trainings'},
+		 //      'Tools': {label: 'Tools and Resources'}
+   //     });
+   //    oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
+
+   //    // Navigation setup
+   //    var navData = [
+   //    {name: 'Home', id: 'Home'},
+	  // {name: 'Trainings', id: 'Trainings'},
+	  // {name: 'Tools', id: 'Tools'}
+      
+   //    ];
+          self.router.configure({
+         'dashboard': {label: 'Home', isDefault: true},
+         'incidents': {label: 'Trainings'},
+         'customers': {label: 'Tools & Resources'}
        });
       oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
 
       // Navigation setup
       var navData = [
-      {name: 'Home', id: 'home'},
-	  {name: 'Trainings', id: 'training'},
-	  {name: 'Tools and Resources', id: 'tools'}
-      
+      {name: 'Home', id: 'dashboard',
+       iconClass: 'oj-navigationlist-item-icon'},
+      {name: 'Trainings', id: 'incidents',
+       iconClass: 'oj-navigationlist-item-icon'},
+      {name: 'Tools & Resources', id: 'customers',
+       iconClass: 'oj-navigationlist-item-icon'}
       ];
       self.navDataSource = new oj.ArrayTableDataSource(navData, {idAttribute: 'id'});
 
@@ -59,14 +71,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       self.appName = ko.observable("App Name");
       // User Info used in Global Navigation area
       self.userLogin = ko.observable("john.hancock@oracle.com");
-       self.addActive = function (routername, pid) {
-alert("s");
-        if (routername === pid) {
 
-          return 'active';
-        }
-
-      };
       // Footer
       function footerLink(name, id, linkTarget) {
         this.name = name;

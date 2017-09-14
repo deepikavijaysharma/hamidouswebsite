@@ -1,20 +1,212 @@
-<!--
- Copyright (c) 2014, 2017, Oracle and/or its affiliates.
- The Universal Permissive License (UPL), Version 1.0
- -->
+<div id="vtabs" data-bind="ojComponent:{component: 'ojTabs', 
+                            orientation: 'vertical', selected: 0}">
 
-<div class="oj-row subnav">
-<div class="container">
-<ul>
-<li data-bind="css: $parent.addActive($parent.router.stateId(),linkId)"><a href="?root=courses">Courses</a></li>
-<li data-bind="css: $parent.addActive($parent.router.stateId(),linkId)"><a href="?root=communitycalls">Community Calls</a></li>
-<li data-bind="css: $parent.addActive($parent.router.stateId(),linkId)"><a href="?root=offers">Offers</a></li>
-<li data-bind="css: $parent.addActive($parent.router.stateId(),linkId)"><a href="?root=admin">Admin</a></li>
+  <ul>
+    <li><span>Create Course</span></li>
+    <li><span>Create Catagory</span></li>
+    <li><span>Create Community Call</span></li>
+    <li><span>Reports</span></li>
+  </ul>
 
-</ul>
-</div>
-</div>
-<div class="container">
-  <h3>Dashboard Content Area</h3>
-  <div> To change the content of this section, you will make edits to the dashboard.html file located in the /js/views folder. </div>
+
+
+
+  <!-- CREATE COURSES BY ADMIN -->
+  <div id="createcourse">
+    <div class="oj-flex">
+      <div class="oj-flex-item">
+        Create Course
+        <!-- ko foreach: roles -->
+        <p>Test</p>
+        <!-- /ko -->
+      </div>
+    </div>
+    <div class="oj-flex">
+      <div class="oj-flex-item">
+        <input type="text" placeholder="course title . . ." data-bind="ojComponent: {component: 'ojInputText',value:coursetitle}"
+        />
+      </div>
+    </div>
+    <br>
+    <div class="oj-flex">
+      <div id="advancedWrapper" data-bind="ojComponent: {component: 'ojButtonset', checked: isAdvanced}">
+        <label for="advanced">Set Mandatory</label>
+        <input type="checkbox" id="advanced" value="advanced" />
+      </div>
+    </div>
+    <br>
+    <div class="oj-flex">
+      <div class="oj-flex-item">
+        <div>
+          <label>Select Roles  </label>
+          <input id="combobox" data-bind="ojComponent: {component: 'ojCombobox', 
+                                   options: roles,optionChange: rolesselected,value:selectedrole,
+                                   rootAttributes: {style:'max-width:20em'}}" />
+        </div>
+      </div>
+      <div class="oj-flex-item">
+        <div>
+          <label>Select Category  </label>
+          <input id="combobox" data-bind="ojComponent: {component: 'ojCombobox', 
+                                   options: rolebasedcategory,optionChange: categorySelected, value:selectedcategory,
+                                   rootAttributes: {style:'max-width:20em'}}" />
+        </div>
+      </div>
+      <div class="oj-flex-item">
+        <div>
+          <label>Select Sub-Category  </label>
+          <input id="combobox" data-bind="ojComponent: {component: 'ojCombobox', 
+                                   options: categorybasedsubcategory, value:selectedsubcategory,
+                                   rootAttributes: {style:'max-width:20em'}}" />
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="oj-flex">
+      <div class="oj-flex-item">
+        <input type="text" placeholder="course link . . ." data-bind="ojComponent: {component: 'ojInputText',value:courselink}" />
+      </div>
+    </div>
+    <br>
+    <div class="oj-flex">
+      <div class="oj-flex-item">
+        <input type="text" placeholder="course description . . ." data-bind="ojComponent: {component: 'ojInputText',value:coursedesc}"
+        />
+      </div>
+    </div>
+    <div class="oj-flex-item">
+      <button id="outlinedPush" onclick="" style="cursor: pointer" data-bind="ojComponent: {
+            component:'ojButton',  
+            label: 'Create Course'}">
+  </button>
+      <button id="outlinedPush" onclick="" style="cursor: pointer" data-bind="ojComponent: {
+            component:'ojButton',  
+            label: 'Reset'}">
+  </button>
+    </div>
+    <div class="oj-flex-item">
+    </div>
+    <div class="oj-flex-item">
+
+    </div>
+  </div>
+  <!-- END OF SECTION -->
+
+
+  <!-- REPORTING MODULE FOR TRAINING -->
+  <div id="createcategory">
+    <div class="oj-flex">
+      <div class="oj-flex-item">
+        <div>
+          <!-- <label>Enter Roles  </label> -->
+          <input type="text" placeholder="roles . . ." data-bind="ojComponent: {component: 'ojInputText',value:role}" />
+        </div>
+      </div>
+      <div class="oj-flex-item">
+        <div>
+          <!-- <label>Enter Category  </label> -->
+          <input type="text" placeholder="category . . ." data-bind="ojComponent: {component: 'ojInputText',value:category}" />
+        </div>
+      </div>
+      <div class="oj-flex-item">
+        <div>
+          <!-- <label>Enter Sub-Category  </label> -->
+          <input type="text" placeholder="sub category . . ." data-bind="ojComponent: {component: 'ojInputText',value:subcategory}"
+          />
+        </div>
+      </div>
+    </div>
+    <br><br>
+    <div class="oj-flex oj-lg-12">
+      <div class="oj-flex-item">
+        <button id="outlinedPush" onclick="createcategory()" style="cursor: pointer" data-bind="ojComponent: {
+            component:'ojButton',  
+            label: 'Create Category'}">
+  </button>
+        <button id="outlinedPush" onclick="resetcat()" style="cursor: pointer" data-bind="ojComponent: {
+            component:'ojButton',  
+            label: 'Reset'}">
+  </button>
+      </div>
+      <div class="oj-flex-item">
+      </div>
+      <div class="oj-flex-item">
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- END OF SECTION -->
+
+
+
+
+
+
+  <!-- CREATE COMMUNITY CALL -->
+  <div id="createcommunitycall">
+    <p>Create Community Call</p>
+    <div class="oj-flex">
+      <input type="text" placeholder="title. . ." data-bind="ojComponent: {component: 'ojInputText',value:callname}" />
+    </div>
+    <div class="oj-flex">
+      <input type="text" placeholder="who is the speaker. . ." data-bind="ojComponent: {component: 'ojInputText',value:callspkr}"
+      />
+    </div>
+    <div class="oj-flex">
+      <input type="text" placeholder="designation. . ." data-bind="ojComponent: {component: 'ojInputText',value:calldesignation}"
+      />
+    </div>
+    <div class="oj-flex">
+      <label>Date & Time</label><br>
+    </div>
+    <div class="oj-flex">
+      <div id="inline" data-bind="ojComponent: {component: 'ojInputDateTime',converter: dateTimeConverter, 
+                                 value: value}"></div>
+    </div>
+    <div class="oj-flex">
+      <input type="text" placeholder="type venue. . ." data-bind="ojComponent: {component: 'ojInputText',value:callvenue}" />
+    </div>
+    <div class="oj-flex">
+      <input type="text" placeholder="meeting link. . ." data-bind="ojComponent: {component: 'ojInputText',value:calllink}" />
+    </div>
+    <div class="oj-flex">
+      <input type="text" placeholder="dial in details. . ." data-bind="ojComponent: {component: 'ojInputText',value:calldialin}"
+      />
+    </div>
+    <div class="oj-flex">
+      <textarea rows="6" cols="50" placeholder="description. . ." data-bind="ojComponent: {component: 'ojInputText',value:calldesc}"></textarea>
+    </div>
+    <div class="oj-flex">
+      <div class="oj-flex-item">
+        <button id="outlinedPush" onclick="createcommunitycall()" style="cursor: pointer" data-bind="ojComponent: {
+              component:'ojButton',
+              label: 'Create Community Call'}">
+    </button>
+        <button id="outlinedPush" onclick="resetcall()" style="cursor: pointer" data-bind="ojComponent: {
+              component:'ojButton',  
+              label: 'Reset'}">
+    </button>
+      </div>
+      <div class="oj-flex-item">
+      </div>
+      <div class="oj-flex-item">
+
+      </div>
+
+    </div>
+  </div>
+  <!-- END OF SECTIONS -->
+
+
+
+  <!-- VIEW REPORTS -->
+  <div id="viewreport">
+    <p>Reporting</p>
+  </div>
+  <!-- END OF SECTIONS -->
+
+
+
 </div>
