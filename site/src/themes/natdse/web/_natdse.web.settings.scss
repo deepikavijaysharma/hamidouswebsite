@@ -31,10 +31,13 @@ $darkgrey :#969696;
 $darkergrey :#444444;
 $darkergrey1: #3a3a39;
 $darkgrey3: #666f76;
+$darkgrey4: #868686;
 $lightblue: #a9c5dc;
 $blue: #00758f;
 $lblue: #b8d7f1;
 $darkblue: #003b4d;
+$medblue: #68b8dd;
+$medblue1: #2290ab;
 $orange: #f29111;
 $yellow: #ffd000;
 // Header
@@ -131,11 +134,15 @@ transform: translateY(-50%);
 }
 @mixin headings {
 font-size:$mediumFontSize;
+line-height:$mediumFontSize;
 color:$blue;
 padding:15px;
 text-align:center;
 box-sizing: border-box;
 font-weight:bold;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 @mixin greytranparent{
@@ -196,6 +203,12 @@ color:$blue;
 background:#fff;
 font-size:$mediumFontSize;
 }
+@mixin whiteTbutton{
+border:1px solid #fff;
+color:#fff;
+background:transparent;
+font-size:$smallFontSize;
+}
 @mixin inputdisabled{
 background:$lightgrey2;
 border:1px solid $lightgrey4;
@@ -225,4 +238,10 @@ font-size:$mediumFontSize;
 	-webkit-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.35);
 -moz-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.35);
 box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.35);
+}
+
+@mixin shadowbottomthin{
+	-webkit-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.35);
+-moz-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.35);
+box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.35);
 }

@@ -5,11 +5,13 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcontrol','ojs/ojradioset','ojs/ojtabs', 'ojs/ojconveyorbelt','ojs/ojbutton'],
+ 
+define(['ojs/ojcore', 'knockout', 'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcontrol','ojs/ojradioset','ojs/ojtabs', 'ojs/ojconveyorbelt','ojs/ojbutton','ojs/ojpopup'],
  function(oj, ko, $) {
   
     function HomeViewModel() {
    var self = this;
+
     $(document).ready(function() {
                 var mainBar = document.getElementById("mainBar");
 				var mainBar_h = mainBar.offsetHeight;
@@ -50,6 +52,7 @@ function addMargin() {
     window.scrollTo(0, window.pageYOffset - secnav_h);
 }
 
+
             });
         
         self.slide = [
@@ -77,6 +80,7 @@ function addMargin() {
 		self.pagingModelwins = null;
 		self.currentNavArrowPlacement = ko.observable("adjacent");
         self.currentNavArrowVisibility = ko.observable("auto");
+		
         
         getItemInitialDisplay = function(index)
         { 

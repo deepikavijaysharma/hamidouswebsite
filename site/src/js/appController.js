@@ -6,7 +6,7 @@
  * Your application specific code will go here
  */
 define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarraytabledatasource',
-  'ojs/ojoffcanvas'],
+  'ojs/ojoffcanvas','ojs/ojtoolbar', 'ojs/ojmenu'],
   function(oj, ko) {
      function ControllerViewModel() {
        var self = this;
@@ -43,7 +43,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       // Close offcanvas on medium and larger screens
       self.mdScreen.subscribe(function() {oj.OffcanvasUtils.close(self.drawerParams);});
       self.drawerParams = {
-        displayMode: 'push',
+        displayMode: 'overlay',
         selector: '#navDrawer',
         content: '#pageContent'
       };
