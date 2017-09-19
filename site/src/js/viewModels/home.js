@@ -6,11 +6,15 @@
  * Your about ViewModel code goes here
  */
  
-define(['ojs/ojcore', 'knockout', 'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcontrol','ojs/ojradioset','ojs/ojtabs', 'ojs/ojconveyorbelt','ojs/ojbutton','ojs/ojpopup'],
+define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcontrol','ojs/ojradioset','ojs/ojtabs', 'ojs/ojconveyorbelt','ojs/ojbutton','ojs/ojpopup','ojs/ojdialog','ojs/ojanimation'],
  function(oj, ko, $) {
   
     function HomeViewModel() {
    var self = this;
+   
+   self.openVideo = function() { alert("yes");
+				$("#modalDialog1").ojDialog("open");
+				};
 
     $(document).ready(function() {
                 var mainBar = document.getElementById("mainBar");
@@ -38,27 +42,62 @@ update_pos = function()
 
 document.addEventListener("scroll", update_pos);
 
-if(window.addEventListener) {
-    window.addEventListener("hashchange", addMargin);
-}
-else if (window.attachEvent) {
-    window.attachEvent("onhashchange", addMargin);//SEE HERE...
-    //missed the on. Fixed thanks to @Robs answer.
+  // Add smooth scrolling to all links
+  $("a").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top 
+      }, 800, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+
+        });
+		
+		/******************************************FLIP*****************************************************/
+	  
+	   self.showingFront = true;
+    
+    self.buttonClick = function(id) {
+		
+      var elem = document.getElementById(id);
+      
+      // Determine startAngle and endAngle
+      var startAngle = self.showingFront ? '0deg' : '180deg';
+      var endAngle = self.showingFront ? '180deg' : '0deg';
+
+      // Animate the element
+      oj.AnimationUtils['flipOut'](elem, {'flipTarget': 'children',
+                                          'persist': 'all',
+                                          'startAngle': startAngle,
+                                          'endAngle': endAngle});
+
+      self.showingFront = !self.showingFront;
+    };
 	
-}
-
-function addMargin() {
 	
-    window.scrollTo(0, window.pageYOffset - secnav_h);
-}
 
-
-            });
+  
+	  
+	  
+	  /******************************************FLIP ENDS*****************************************************/
         
         self.slide = [
-            { name: '<div class="verticalcentertext"><div class="heading">Get Ready for Oracle Open World and JavaOne</div><div class="text">The industry’s most important conferences are coming, October 1 to 5 in San Francisco.</div><div class="buttons_c oj-rwow oj-flex"><div class="oj-sm-12 "><div class=" buttons">Register for Oracle OpenWorld <span class="right-arrow"></span></div><div class="buttons">Register for JavaOne <span class="right-arrow"></span></div></div><div class="oj-sm-12 oj-xl-6 oj-xl-float-end"></div></div></div>',classname:'slide1' },
-            { name: 'Slide 2',classname:'slide2' },
-            { name: 'Slide 3',classname:'slide3' },
+            { name: '<div class="verticalcentertext"><div class="heading">Get Ready for Oracle Open World and JavaOne</div><div class="text">The industry’s most important conferences are coming, October 1 to 5 in San Francisco.</div><div class="buttons_c oj-rwow oj-flex"><div class="oj-sm-12 "><div class=" buttons"><a href="https://www.oracle.com/openworld/index.html?src=ow-ow-us-ocomhp-xx-1" target="_blank">Register for Oracle OpenWorld <span class="right-arrow"></span></a></div><div class="buttons"><a href="https://www.oracle.com/openworld/index.html?src=ow-ow-us-ocomhp-xx-1" target="_blank">Register for JavaOne <span class="right-arrow"></span></a></div></div><div class="oj-sm-12 oj-xl-6 oj-xl-float-end"></div></div></div>',classname:'slide1' },
+           
             
         ];
 		self.chemicals = [

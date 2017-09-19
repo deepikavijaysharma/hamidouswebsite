@@ -36,13 +36,12 @@
   <div id="setupBar" class="homesubnav oj-sm-12">
     <div class="container">
       <ul class="">
-        <li class=""><img src="css/images/vision_icon_small.png"><a href="#vision">Our Vision</a></li>
+        <li class=""><img src="css/images/vision_icon_small.png"><a href="#v-vision">Our Vision</a></li>
         <li class=""><img src="css/images/services_icon_small.png"><a href="#services">Our Services</a></li>
         <li class=""><img src="css/images/sekeydates_icon_small.png"><a href="#keydates">Key Dates</a></li>
         <li class=""><img src="css/images/wins_icon_small.png"><a href="#golives">Featured Go-Lives</a></li>
-        <li class=""><img src="css/images/wins_icon_small.png"><a href="#golives">References</a></li>
+        <li class=""><img src="css/images/wins_icon_small.png"><a href="#references">References</a></li>
         <li class=""><img src="css/images/emp_icon_small.png"><a href="#empf">Employee Feature</a></li>
-        
       </ul>
     </div>
   </div>
@@ -60,7 +59,7 @@
                 <div class="oj-sm-9"><span class="name">Senior Vice President,</span><br>
                   <span class="title">Sales Engineering & Cloud 
                   Customer Success</span></div>
-                <div class="oj-sm-3"><img src="css/images/play_icon.png" class="img-responsive"></div>
+                <div class="oj-sm-3"><a href="https://otube.oracle.com/media/Solutions+Engineer+and+Cloud+Customer+Success+All+Hands/0_w2kl22gc/2977" target="_blank" title="Solutions Engineering and Cloud Customer Success All Hands Webcast from Oracle HQ on Tuesday, June 27, 2017"><img src="css/images/play_icon.png" class="img-responsive"></a></div>
               </div>
             </div>
           </div>
@@ -68,12 +67,12 @@
       </div>
       
       <!------------------------------------VISION------------------------------------> 
-      <a class="anchor" name="vision"></a>
+      <a class="anchor" id="v-vision"></a>
       <div class="oj-sm-12 oj-md-8 oj-lg-8 oj-xl-8 oj-flex-item " >
         <div class="oj-margin visioncontainer">
           <div class="oj-sm-12 visiontitle" id="vision"><img src="css/images/vision_icon_lg.png">&nbsp;Our Vision</div>
           <div class="oj-sm-12 visiondesc oj-flex">
-            <div class="oj-sm-12 subtitle"> Sales Engineering-as-a-Service </div>
+            <div class="oj-sm-12 subtitle">Solution Engineering as a Service</div>
             <div class="oj-sm-12 oj-md-3 oj-lg-3 oj-xl-2 blocks">
               <div class="blocks_icon">
                 <div class="blocks_icon_inner"><img src="css/images/awareness_icon.png"></div>
@@ -124,7 +123,7 @@
 </div>
 
 <!------------------------------------SERVICES------------------------------------> 
-<a class="anchor" name="services"></a>
+<a class="anchor" id="services"></a>
 <div class="oj-row row3 newrow" id="services_sec">
   <div class="container">
     <div class="col-sm-12 services ">
@@ -136,21 +135,20 @@
               <div class="container" style="display:none" id="popup1"
        data-bind="ojComponent:{component: 'ojPopup'}">
                 <div class="popupcontainer">
-                  <div class="popupheading">
-                  <span class="oj-fwk-icon oj-fwk-icon-cross oj-sm-float-end closeicon" data-bind="
+                  <div class="popupheading"> <span class="oj-fwk-icon oj-fwk-icon-cross oj-sm-float-end closeicon" data-bind="
                click: function()
                {
                  $('#popup1').ojPopup('close');
                }"></span>
-                 
                     <h3>Deliver a Cloud
                       Day</h3>
-                      <span class="smalltext">Category : Demand Generation</span>
+                    <span class="smalltext">Category : Demand Generation</span> </div>
+                  <div class="popupdesc">
+                    <h4>Description</h4>
+                    <p>Work with a customer to develop a vision for implementing Cloud technology in order to solve business problems with innovative solutions.  Note: This service is typically provided using either “Cloud Accelerate for LOB” or “ECAL Cloud Vision” engagement frameworks.  In either case, priority use cases are identified along with a conceptual/notional solution architecture.  Storyboards, demos and/or prototypes may be used to prove out the Cloud Solution vision. </p>
+                    <h4>SE Role Engagement </h4>
+                    <p>ECAs and/or Industry Advisors typically lead this engagement and function as the “Ideators” in Cloud Accelerate engagements.  Platform Specialists and/or Hub SEs participate as the “Prototypers” in any development of proofs of value. </p>
                   </div>
-                  <div class="popupdesc"><h4>Description</h4><p>Work with a customer to develop a vision for implementing Cloud technology in order to solve business problems with innovative solutions.  Note: This service is typically provided using either “Cloud Accelerate for LOB” or “ECAL Cloud Vision” engagement frameworks.  In either case, priority use cases are identified along with a conceptual/notional solution architecture.  Storyboards, demos and/or prototypes may be used to prove out the Cloud Solution vision.
-</p><h4>SE Role Engagement
-</h4><p>ECAs and/or Industry Advisors typically lead this engagement and function as the “Ideators” in Cloud Accelerate engagements.  Platform Specialists and/or Hub SEs participate as the “Prototypers” in any development of proofs of value.
-</p> </div>
                 </div>
               </div>
               <div data-bind="
@@ -254,11 +252,6 @@
               <div class="service_title">Deliver a Health<br>
                 Check</div>
             </div>
-            <div class="oj-sm-12 oj-sm-center">
-              <div class="oj-flex-item">
-                <button class="oj-sm-align-center oj-flex">Request Service via SCRM</button>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -266,7 +259,7 @@
   </div>
 </div>
 <!------------------------------------CALENDAR------------------------------------> 
-<a class="anchor" name="keydates"></a>
+<a class="anchor" id="keydates"></a>
 <div class="oj-row row5 newrow">
   <div class="container">
     <div class="col-sm-12 keydates">
@@ -281,15 +274,15 @@
                     <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
                       <div class="oj-flex calevents">
                         <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tuesday, August 23, 2017<br>
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Friday, September 15<br>
                           <br>
                           <span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Time : 9:30 PM IST - 10:30 PM IST</p>
+     class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : 10:00 AM PST / 1:00 PM EST</p>
                       </div>
                     </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Community Call: Monthly Sales accounts call</div>
-                    <div class="oj-sm-12 oj-lg-3 ">
-                      <div class="orangeBbutton oj-lg-float-end">Add to Calendar</div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">iPaaS Community Call: OOW App Integration Updates</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end"><a href="http://retriever.us.oracle.com/apex/f?p=121:22:4428811561900114::NO:RP:P22_CONTAINER_ID,P22_PREV_PAGE:80834,112" target="_blank">Replay</a></div>
                     </div>
                   </div>
                 </div>
@@ -297,14 +290,14 @@
                   <div class="oj-flex">
                     <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
                       <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tuesday, August 23, 2017<br>
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Friday, September 15<br>
                         <br>
                         <span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Time : 9:30 PM IST - 10:30 PM IST</p>
+     class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : 10:00 AM PST / 1:00 PM EST</p>
                     </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Community Call: Monthly Sales accounts call</div>
-                    <div class="oj-sm-12 oj-lg-3 ">
-                      <div class="orangeBbutton oj-lg-float-end">Add to Calendar</div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">iPaaS Community Call: OOW Data Integration Updates</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton ">
+                      <div class="orangeBbutton oj-lg-float-end"><a href="http://retriever.us.oracle.com/apex/f?p=121:22:3360101599823767::NO:RP:P22_CONTAINER_ID,P22_PREV_PAGE:80834,112" target="_blank">Replay</a></div>
                     </div>
                   </div>
                 </div>
@@ -312,14 +305,14 @@
                   <div class="oj-flex">
                     <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
                       <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tuesday, August 23, 2017<br>
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Thursday, September 21<br>
                         <br>
                         <span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Time : 9:30 PM IST - 10:30 PM IST</p>
+     class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : 8:30-9:30 a.m. Pacific</p>
                     </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Community Call: Monthly Sales accounts call</div>
-                    <div class="oj-sm-12 oj-lg-3 ">
-                      <div class="orangeBbutton oj-lg-float-end">Add to Calendar</div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Analytics PM Call: Everything You Need to Know for OOW</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end"><a href="http://retriever.us.oracle.com/apex/f?p=121:22:289065150287241::NO:RP:P22_CONTAINER_ID,P22_PREV_PAGE:77441,4684014" target="_blank">Replay</a></div>
                     </div>
                   </div>
                 </div>
@@ -327,14 +320,72 @@
                   <div class="oj-flex">
                     <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
                       <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tuesday, August 23, 2017<br>
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Wednesday, September 27<br>
                         <br>
                         <span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Time : 9:30 PM IST - 10:30 PM IST</p>
+     class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : 12:00 PM PST / 3:00 PM EST</p>
                     </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Community Call: Monthly Sales accounts call</div>
-                    <div class="oj-sm-12 oj-lg-3 ">
-                      <div class="orangeBbutton oj-lg-float-end">Add to Calendar</div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">SE Excellence Community Call: OOW AppDev Updates</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end"><a href="http://ilearning.oracle.com/ilearn/en/learner/jsp/offering_details_home.jsp?classid=2032578506" target="_blank">Webcast Registration</a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Wednesday, September 27<br>
+                        <br>
+                        <span 
+     class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : 10:00 AM PST / 1:00 PM EST</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">IaaS PM Webinar: OOW IaaS Updates</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end"><a href="https://oracle.zoom.us/webinar/register/e540a365f8fd283fc5b9141539e44ee6" target="_blank">Webcast Registration</a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;TBD<br>
+                        <br>
+                        <span 
+     class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : TBD</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">DB Community Call: Penny Avril</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end">Pending</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Sunday, October 1st - Thursday, October 5th<br>
+                        <br>
+                      </p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Oracle OpenWorld</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end"><a href="https://www.oracle.com/openworld/index.html" target="_blank">OOW Corporate Site</a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Thursday, October 12th<br>
+                        <br>
+                        &nbsp;</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">SE Accelerate Cloud Regional Road Show w/Hamidou Dia - NEW YORK	Regional Only Event</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end">See Calendar Invite</div>
                     </div>
                   </div>
                 </div>
@@ -358,7 +409,7 @@
 </div>
 
 <!------------------------------------Wins, Go-Lives and References------------------------------------> 
-<a class="anchor" name="golives"></a>
+<a class="anchor" id="golives"></a>
 <div class="oj-row row7 newrow">
   <div class="container">
     <div class="col-sm-12 wins  bgwhite">
@@ -367,8 +418,30 @@
         <div class="oj-sm-12">
           <div class="oj-flex">
             <div id="filmStripwins" class="oj-sm-12" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 2,arrowVisibility: 'visible'}">
-              <div id="" class="my-filmstrip-item oj-flex-item oj-margin">
-                <div class="wins_block oj-sm-12">
+              <div id="" class="my-filmstrip-item oj-flex-item oj-margin winsblock">
+                <div id="animationDemo">
+                 
+                  <div id="animatable" class="ani_container"> 
+                    
+                    <!-- back face of card -->
+                    <div class="cardface backside oj-animation-backface">
+                     <div class="wins_block oj-sm-12">
+                  <div class="win_logo oj-sm-12"><img src="css/images/athene_logo.png"></div>
+                  <div class="oj-flex oj-sm-12 win_desc">
+                    <p>Athene needed to save costs on data center hosting and reduced their time to install and maintain their environments. Several different teams pulled together to ensure we successfully met Athene’s aggressive go-live timeline to migrate their on-premise E-Business Suite and Hyperion applications.</p>
+                    <div class="summaryButton oj-sm-12 oj-flex">
+                      <div class="oj-sm-12">
+                        <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable')">Back</button>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+                    </div>
+                    
+                    <!-- front face of card -->
+                    <div class="cardface">
+                     <div class="wins_block oj-sm-12">
                   <div class="win_logo oj-sm-12"><img src="css/images/athene_logo.png"></div>
                   <div class="oj-flex oj-sm-12 win_desc">
                     <div class="oj-sm-6 imgblock"><img src="css/images/misha_img.png" class="img-responsive"></div>
@@ -382,7 +455,7 @@
                     </div>
                     <div class="summaryButton oj-sm-12 oj-flex">
                       <div class="oj-sm-12 oj-xl-6">
-                        <button class="oj-sm-align-center oj-flex">Quick Summary</button>
+                        <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable')">Quick Summary</button>
                       </div>
                       <div class="oj-sm-12 oj-xl-6">
                         <button class="oj-sm-align-center oj-flex">Listen to Interview</button>
@@ -390,9 +463,34 @@
                     </div>
                   </div>
                 </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div id="" class="my-filmstrip-item oj-flex-item oj-margin">
-                <div class="wins_block oj-sm-12">
+              <div id="" class="my-filmstrip-item oj-flex-item oj-margin winsblock">
+                <div id="animationDemo">
+                 
+                  <div id="animatable1" class="ani_container"> 
+                    
+                    <!-- back face of card -->
+                    <div class="cardface backside oj-animation-backface">
+                     <div class="wins_block oj-sm-12">
+                  <div class="win_logo oj-sm-12"><img src="css/images/athene_logo.png"></div>
+                  <div class="oj-flex oj-sm-12 win_desc">
+                    <p>Athene needed to save costs on data center hosting and reduced their time to install and maintain their environments. Several different teams pulled together to ensure we successfully met Athene’s aggressive go-live timeline to migrate their on-premise E-Business Suite and Hyperion applications.</p>
+                    <div class="summaryButton oj-sm-12 oj-flex">
+                      <div class="oj-sm-12">
+                        <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable1')">Back</button>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+                    </div>
+                    
+                    <!-- front face of card -->
+                    <div class="cardface">
+                     <div class="wins_block oj-sm-12">
                   <div class="win_logo oj-sm-12"><img src="css/images/athene_logo.png"></div>
                   <div class="oj-flex oj-sm-12 win_desc">
                     <div class="oj-sm-6 imgblock"><img src="css/images/misha_img.png" class="img-responsive"></div>
@@ -406,11 +504,14 @@
                     </div>
                     <div class="summaryButton oj-sm-12 oj-flex">
                       <div class="oj-sm-12 oj-xl-6">
-                        <button class="oj-sm-align-center oj-flex">Quick Summary</button>
+                        <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable1')">Quick Summary</button>
                       </div>
                       <div class="oj-sm-12 oj-xl-6">
                         <button class="oj-sm-align-center oj-flex">Listen to Interview</button>
                       </div>
+                    </div>
+                  </div>
+                </div>
                     </div>
                   </div>
                 </div>
@@ -423,7 +524,7 @@
   </div>
 </div>
 <!------------------------------------References------------------------------------> 
-<a class="anchor" name="references"></a>
+<a class="anchor" id="references"></a>
 <div class="oj-row row6 newrow">
   <div class="container">
     <div class="oj-sm-12 references  bgwhite">
@@ -431,17 +532,17 @@
         <div class="oj-sm-12 refertitle"><img src="css/images/references_icon_lg.png">&nbsp;References</div>
         <div class="oj-md-6  oj-flex">
           <div class="oj-flex oj-sm-12 oj-margin referencesblock">
-            <div class="oj-sm-12 oj-md-4"><img src="css/images/flexagon.png"></div>
-            <div class="oj-sm-12 oj-md-4"><img src="css/images/radioshack.png"></div>
-            <div class="oj-sm-12 oj-md-4"><img src="css/images/connectonebank.png"></div>
+            <div class="oj-sm-12 oj-lg-4"><img src="css/images/flexagon.png"></div>
+            <div class="oj-sm-12 oj-lg-4"><img src="css/images/radioshack.png"></div>
+            <div class="oj-sm-12 oj-lg-4"><img src="css/images/connectonebank.png"></div>
             <div class="oj-sm-12 button oj-flex"><a  class="whitebutton">Search for IaaS Customers</a></div>
           </div>
         </div>
         <div class="oj-md-6  oj-flex">
           <div class="oj-flex oj-sm-12 oj-margin referencesblock">
-            <div class="oj-sm-12 oj-md-4"><img src="css/images/boise_state.jpg"></div>
-            <div class="oj-sm-12 oj-md-4"><img src="css/images/club_corp.png"></div>
-            <div class="oj-sm-12 oj-md-4"><img src="css/images/cogniaznt.png"></div>
+            <div class="oj-sm-12 oj-lg-4"><img src="css/images/boise_state.jpg"></div>
+            <div class="oj-sm-12 oj-lg-4"><img src="css/images/club_corp.png"></div>
+            <div class="oj-sm-12 oj-lg-4"><img src="css/images/cogniaznt.png"></div>
             <div class="oj-sm-12 button oj-flex"><a class="whitebutton">Search for PaaS Customers</a></div>
           </div>
         </div>
@@ -455,7 +556,7 @@
   </div>
 </div>
 <!------------------------------------Featured Stories------------------------------------> 
-<a class="anchor" name="empf"></a>
+<a class="anchor" id="empf"></a>
 <div class="oj-row row7 newrow">
   <div class="container">
     <div class="oj-sm-12 featured bgwhite">
@@ -504,4 +605,3 @@
     </div>
   </div>
 </div>
-
