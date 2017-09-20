@@ -40,7 +40,7 @@
         <li class=""><img src="css/images/services_icon_small.png"><a href="#services">Our Services</a></li>
         <li class=""><img src="css/images/sekeydates_icon_small.png"><a href="#keydates">Key Dates</a></li>
         <li class=""><img src="css/images/wins_icon_small.png"><a href="#golives">Featured Go-Lives</a></li>
-        <li class=""><img src="css/images/wins_icon_small.png"><a href="#references">References</a></li>
+        <li class=""><img src="css/images/references_icon.png"><a href="#references">References</a></li>
         <li class=""><img src="css/images/emp_icon_small.png"><a href="#empf">Employee Feature</a></li>
       </ul>
     </div>
@@ -130,7 +130,7 @@
       <div class="oj-flex">
         <div class="oj-sm-12 servicestitle"><img src="css/images/services_icon_lg.png">&nbsp;Our Services</div>
         <div class="oj-sm-12 oj-margin-top">
-          <div class="oj-flex">
+          <div class="oj-flex"> <!------------ POPUP ------------------>
             <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock" id="popupWrapper">
               <div class="container" style="display:none" id="popup1"
        data-bind="ojComponent:{component: 'ojPopup'}">
@@ -142,12 +142,12 @@
                }"></span>
                     <h3>Deliver a Cloud
                       Day</h3>
-                    <span class="smalltext">Category : Demand Generation</span> </div>
+                    <span class="smalltext">Category : </span> </div>
                   <div class="popupdesc">
                     <h4>Description</h4>
-                    <p>Work with a customer to develop a vision for implementing Cloud technology in order to solve business problems with innovative solutions.  Note: This service is typically provided using either “Cloud Accelerate for LOB” or “ECAL Cloud Vision” engagement frameworks.  In either case, priority use cases are identified along with a conceptual/notional solution architecture.  Storyboards, demos and/or prototypes may be used to prove out the Cloud Solution vision. </p>
+                    <p></p>
                     <h4>SE Role Engagement </h4>
-                    <p>ECAs and/or Industry Advisors typically lead this engagement and function as the “Ideators” in Cloud Accelerate engagements.  Platform Specialists and/or Hub SEs participate as the “Prototypers” in any development of proofs of value. </p>
+                    <p></p>
                   </div>
                 </div>
               </div>
@@ -165,93 +165,400 @@
                   Day</div>
               </div>
             </div>
+            <!------------ POPUP ------------------>
             <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock" id="popupWrapper">
               <div class="container" style="display:none" id="popup2"
-       data-bind="ojComponent:{component: 'ojPopup'}"> <span class="blink-rainbow">
-                <h3>Develop a Cloud<br>
-                  Vision</h3>
-                Work with a customer to develop a vision for implementing Cloud technology in order to solve business problems with innovative solutions.  Note: This service is typically provided using either “Cloud Accelerate for LOB” or “ECAL Cloud Vision” engagement frameworks.  In either case, priority use cases are identified along with a conceptual/notional solution architecture.  Storyboards, demos and/or prototypes may be used to prove out the Cloud Solution vision. </span> </div>
+       data-bind="ojComponent:{component: 'ojPopup'}">
+                <div class="popupcontainer">
+                  <div class="popupheading"> <span class="oj-fwk-icon oj-fwk-icon-cross oj-sm-float-end closeicon" data-bind="
+               click: function()
+               {
+                 $('#popup2').ojPopup('close');
+               }"></span>
+                    <h3>Develop a Cloud
+                      Vision</h3>
+                    <span class="smalltext">Category : Demand Generation</span> </div>
+                  <div class="popupdesc">
+                    <h4>Description</h4>
+                    This Solution-Engineering-as-a-Service includes:
+                    <ul>
+                      <li>Working with a customer to develop a vision for implementing Cloud technology in order to solve business problems with innovative solutions.</li>
+                      <li>Leveraging Cloud Accelerate for LOB” or “ECAL Cloud Vision” engagement frameworks. </li>
+                      <li>Identifying priority use cases, along with a conceptual/notional solution architecture.  storyboards, demos and/or prototypes to prove out the Cloud Solution vision.</li>
+                    </ul>
+                    <h4>SE Role Engagement </h4>
+                    <ul>
+                      <li>ECAs and/or Industry Advisors typically lead this engagement and function as the “Ideators” in Cloud Accelerate engagements. </li>
+                      <li>Platform Specialists and/or Hub SEs participate as the “Prototypers” in any development of proofs of value. </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
               <div data-bind="
                click: function()
                {
                  $('#popup2').ojPopup('open', '#btnGo1');
                  
                }">
+                <div  id="btnGo1"></div>
                 <div class="service_icon">
                   <div class="service_icon_inner"><img src="css/images/cloud_vision_icon.png"></div>
                 </div>
-                <div class="service_title">Develop a Cloud Vision</div>
+                <div class="service_title">Develop a Cloud<br>
+                  Vision</div>
               </div>
             </div>
-            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock">
-              <div class="service_icon">
-                <div class="service_icon_inner"><img src="css/images/cloud_solution_icon.png"></div>
+            <!------------ POPUP ------------------>
+            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock" id="popupWrapper">
+              <div class="container" style="display:none" id="popup3"
+       data-bind="ojComponent:{component: 'ojPopup'}">
+                <div class="popupcontainer">
+                  <div class="popupheading"> <span class="oj-fwk-icon oj-fwk-icon-cross oj-sm-float-end closeicon" data-bind="
+               click: function()
+               {
+                 $('#popup3').ojPopup('close');
+               }"></span>
+                    <h3>Design a Cloud Solution </h3>
+                    <span class="smalltext">Category : Opportunity Execution </span> </div>
+                  <div class="popupdesc">
+                    <h4>Description</h4>
+                    This Solution-Engineering-as-a-Service includes:
+                    <ul>
+                      <li>Collaboratively working with a customer to turn their Cloud Vision into a robust Solution Presentation and Oracle Sales Proposal.</li>
+                      <li>Producing a sales proposal, including developing logical and physical architectures, sizing current and future workloads, recommending phased implementation roadmaps, creating the intake provisioning document, solution presentation, and contributing to the Oracle Sales Proposal. </li>
+                      <li>This service typically uses ECAL  Stages 2-4 as the underlying execution framework.</li>
+                    </ul>
+                    <h4>SE Role Engagement </h4>
+                    <ul>
+                      <li>ECAs lead this engagement and are responsible for the majority of the deliverables. </li>
+                      <li>Platform Specialists and Hub SEs work on Portfolio and Workload Analysis efforts, contribute to the physical architecture designs, and provide foundation services as needed (e.g. Customer Discovery of current state IT Portfolio, Customer Demos, Sizing/Quoting/Config). </li>
+                      <li>This service may spawn the “Build a POC” service</li>
+                      <li>Business Value Consultants support any value-based activities and deliverables, which can also fall under the “Build a Business Case” service. </li>
+                      <li>CSMs are responsible for ECAL Migration and Adoption Planning activities and deliverables, and the subsequent “Adopt a Cloud Solution” service. </li>
+                      <li>For more information, see our ECAL website</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-              <div class="service_title">Design a Cloud<br>
-                Solution</div>
-            </div>
-            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock">
-              <div class="service_icon">
-                <div class="service_icon_inner"><img src="css/images/adopt_solution_icon.png"></div>
+              <div data-bind="
+               click: function()
+               {
+                 $('#popup3').ojPopup('open', '#btnGo1');
+                 
+               }">
+                <div  id="btnGo1"></div>
+                <div class="service_icon">
+                  <div class="service_icon_inner"><img src="css/images/cloud_solution_icon.png"></div>
+                </div>
+                <div class="service_title">Design a Cloud<br>
+                  Solution</div>
               </div>
-              <div class="service_title">Adopt a Cloud<br>
-                Solution</div>
             </div>
-            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock">
-              <div class="service_icon">
-                <div class="service_icon_inner"><img src="css/images/event_cal_icon.png"></div>
+            
+            <!------------ POPUP ------------------>
+            
+            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock" id="popupWrapper">
+              <div class="container" style="display:none" id="popup4"
+       data-bind="ojComponent:{component: 'ojPopup'}">
+                <div class="popupcontainer">
+                  <div class="popupheading"> <span class="oj-fwk-icon oj-fwk-icon-cross oj-sm-float-end closeicon" data-bind="
+               click: function()
+               {
+                 $('#popup4').ojPopup('close');
+               }"></span>
+                    <h3>Adopt a Cloud
+                      Solution </h3>
+                    <span class="smalltext">Category : </span> </div>
+                  <div class="popupdesc">
+                    <h4>Description</h4>
+                    <h4>SE Role Engagement </h4>
+                  </div>
+                </div>
               </div>
-              <div class="service_title">Support a Marketing<br>
-                Event</div>
-            </div>
-            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock">
-              <div class="service_icon">
-                <div class="service_icon_inner"><img src="css/images/value_icon.png"></div>
+              <div data-bind="
+               click: function()
+               {
+                 $('#popup4').ojPopup('open', '#btnGo1');
+                 
+               }">
+                <div  id="btnGo1"></div>
+                <div class="service_icon">
+                  <div class="service_icon_inner"><img src="css/images/adopt_solution_icon.png"></div>
+                </div>
+                <div class="service_title">Adopt a Cloud<br>
+                  Solution</div>
               </div>
-              <div class="service_title">Develop a Value<br>
-                Hypothesis</div>
             </div>
-            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock">
-              <div class="service_icon">
-                <div class="service_icon_inner"><img src="css/images/poc_icon.png"></div>
+            
+            <!------------ POPUP ------------------>
+            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock" id="popupWrapper">
+              <div class="container" style="display:none" id="popup5"
+       data-bind="ojComponent:{component: 'ojPopup'}">
+                <div class="popupcontainer">
+                  <div class="popupheading"> <span class="oj-fwk-icon oj-fwk-icon-cross oj-sm-float-end closeicon" data-bind="
+               click: function()
+               {
+                 $('#popup5').ojPopup('close');
+               }"></span>
+                    <h3>Support a Marketing Event </h3>
+                    <span class="smalltext">Category : </span> </div>
+                  <div class="popupdesc">
+                    <h4>Description</h4>
+                    <h4>SE Role Engagement </h4>
+                  </div>
+                </div>
               </div>
-              <div class="service_title">Build a POC</div>
-            </div>
-            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock">
-              <div class="service_icon">
-                <div class="service_icon_inner"><img src="css/images/support_icon.png"></div>
+              <div data-bind="
+               click: function()
+               {
+                 $('#popup5').ojPopup('open', '#btnGo1');
+                 
+               }">
+                <div  id="btnGo1"></div>
+                <div class="service_icon">
+                  <div class="service_icon_inner"><img src="css/images/event_cal_icon.png"></div>
+                </div>
+                <div class="service_title">Support a Marketing<br>
+                  Event</div>
               </div>
-              <div class="service_title">Develop a Support<br>
-                Onboarding</div>
             </div>
-            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock">
-              <div class="service_icon">
-                <div class="service_icon_inner"><img src="css/images/exec_binding_icon.png"></div>
+            <!------------ POPUP ------------------>
+            
+            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock" id="popupWrapper">
+              <div class="container" style="display:none" id="popup6"
+       data-bind="ojComponent:{component: 'ojPopup'}">
+                <div class="popupcontainer">
+                  <div class="popupheading"> <span class="oj-fwk-icon oj-fwk-icon-cross oj-sm-float-end closeicon" data-bind="
+               click: function()
+               {
+                 $('#popup6').ojPopup('close');
+               }"></span>
+                    <h3>Develop a Value
+                      Hypothesis </h3>
+                    <span class="smalltext">Category : </span> </div>
+                  <div class="popupdesc">
+                    <h4>Description</h4>
+                    <h4>SE Role Engagement </h4>
+                  </div>
+                </div>
               </div>
-              <div class="service_title">Build an Executive<br>
-                Briefing</div>
-            </div>
-            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock">
-              <div class="service_icon">
-                <div class="service_icon_inner"><img src="css/images/pack_icon.png"></div>
+              <div data-bind="
+               click: function()
+               {
+                 $('#popup6').ojPopup('open', '#btnGo1');
+                 
+               }">
+                <div  id="btnGo1"></div>
+                <div class="service_icon">
+                  <div class="service_icon_inner"><img src="css/images/value_icon.png"></div>
+                </div>
+                <div class="service_title">Develop a Value<br>
+                  Hypothesis</div>
               </div>
-              <div class="service_title">Create a Packaged<br>
-                Proposal</div>
             </div>
-            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock">
-              <div class="service_icon">
-                <div class="service_icon_inner"><img src="css/images/business_icon.png"></div>
+            <!------------ POPUP ------------------>
+            
+            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock" id="popupWrapper">
+              <div class="container" style="display:none" id="popup7"
+       data-bind="ojComponent:{component: 'ojPopup'}">
+                <div class="popupcontainer">
+                  <div class="popupheading"> <span class="oj-fwk-icon oj-fwk-icon-cross oj-sm-float-end closeicon" data-bind="
+               click: function()
+               {
+                 $('#popup7').ojPopup('close');
+               }"></span>
+                    <h3>Build a POC </h3>
+                    <span class="smalltext">Category : </span> </div>
+                  <div class="popupdesc">
+                    <h4>Description</h4>
+                    <h4>SE Role Engagement </h4>
+                  </div>
+                </div>
               </div>
-              <div class="service_title">Build a Business<br>
-                Case</div>
-            </div>
-            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock">
-              <div class="service_icon">
-                <div class="service_icon_inner"><img src="css/images/deliver_icon.png"></div>
+              <div data-bind="
+               click: function()
+               {
+                 $('#popup7').ojPopup('open', '#btnGo1');
+                 
+               }">
+                <div  id="btnGo1"></div>
+                <div class="service_icon">
+                  <div class="service_icon_inner"><img src="css/images/poc_icon.png"></div>
+                </div>
+                <div class="service_title">Build a POC</div>
               </div>
-              <div class="service_title">Deliver a Health<br>
-                Check</div>
             </div>
+            <!------------ POPUP ------------------>
+            
+            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock" id="popupWrapper">
+              <div class="container" style="display:none" id="popup8"
+       data-bind="ojComponent:{component: 'ojPopup'}">
+                <div class="popupcontainer">
+                  <div class="popupheading"> <span class="oj-fwk-icon oj-fwk-icon-cross oj-sm-float-end closeicon" data-bind="
+               click: function()
+               {
+                 $('#popup8').ojPopup('close');
+               }"></span>
+                    <h3>Develop a Support Onboarding </h3>
+                    <span class="smalltext">Category : </span> </div>
+                  <div class="popupdesc">
+                    <h4>Description</h4>
+                    <h4>SE Role Engagement </h4>
+                  </div>
+                </div>
+              </div>
+              <div data-bind="
+               click: function()
+               {
+                 $('#popup8').ojPopup('open', '#btnGo1');
+                 
+               }">
+                <div  id="btnGo1"></div>
+                <div class="service_icon">
+                  <div class="service_icon_inner"><img src="css/images/support_icon.png"></div>
+                </div>
+                <div class="service_title">Develop a Support<br>
+                  Onboarding</div>
+              </div>
+            </div>
+            <!------------ POPUP ------------------>
+            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock" id="popupWrapper">
+              <div class="container" style="display:none" id="popup9"
+       data-bind="ojComponent:{component: 'ojPopup'}">
+                <div class="popupcontainer">
+                  <div class="popupheading"> <span class="oj-fwk-icon oj-fwk-icon-cross oj-sm-float-end closeicon" data-bind="
+               click: function()
+               {
+                 $('#popup9').ojPopup('close');
+               }"></span>
+                    <h3>Build an Executive
+                      Briefing </h3>
+                    <span class="smalltext">Category : </span> </div>
+                  <div class="popupdesc">
+                    <h4>Description</h4>
+                    <h4>SE Role Engagement </h4>
+                  </div>
+                </div>
+              </div>
+              <div data-bind="
+               click: function()
+               {
+                 $('#popup9').ojPopup('open', '#btnGo1');
+                 
+               }">
+                <div  id="btnGo1"></div>
+                <div class="service_icon">
+                  <div class="service_icon_inner"><img src="css/images/support_icon.png"></div>
+                </div>
+                <div class="service_title">Build an Executive<br>
+                  Briefing</div>
+              </div>
+            </div>
+            
+            <!------------ POPUP ------------------>
+            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock" id="popupWrapper">
+              <div class="container" style="display:none" id="popup10"
+       data-bind="ojComponent:{component: 'ojPopup'}">
+                <div class="popupcontainer">
+                  <div class="popupheading"> <span class="oj-fwk-icon oj-fwk-icon-cross oj-sm-float-end closeicon" data-bind="
+               click: function()
+               {
+                 $('#popup10').ojPopup('close');
+               }"></span>
+                    <h3>Create a Packaged
+                      Proposal </h3>
+                    <span class="smalltext">Category : </span> </div>
+                  <div class="popupdesc">
+                    <h4>Description</h4>
+                    <h4>SE Role Engagement </h4>
+                  </div>
+                </div>
+              </div>
+              <div data-bind="
+               click: function()
+               {
+                 $('#popup10').ojPopup('open', '#btnGo1');
+                 
+               }">
+                <div  id="btnGo1"></div>
+                <div class="service_icon">
+                  <div class="service_icon_inner"><img src="css/images/support_icon.png"></div>
+                </div>
+                <div class="service_title">Create a Packaged<br>
+                  Proposal</div>
+              </div>
+            </div>
+            <!------------ POPUP ------------------>
+            
+            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock" id="popupWrapper">
+              <div class="container" style="display:none" id="popup11"
+       data-bind="ojComponent:{component: 'ojPopup'}">
+                <div class="popupcontainer">
+                  <div class="popupheading"> <span class="oj-fwk-icon oj-fwk-icon-cross oj-sm-float-end closeicon" data-bind="
+               click: function()
+               {
+                 $('#popup11').ojPopup('close');
+               }"></span>
+                    <h3>Build a Business
+                      Case </h3>
+                    <span class="smalltext">Category : </span> </div>
+                  <div class="popupdesc">
+                    <h4>Description</h4>
+                    <h4>SE Role Engagement </h4>
+                  </div>
+                </div>
+              </div>
+              <div data-bind="
+               click: function()
+               {
+                 $('#popup11').ojPopup('open', '#btnGo1');
+                 
+               }">
+                <div  id="btnGo1"></div>
+                <div class="service_icon">
+                  <div class="service_icon_inner"><img src="css/images/business_icon.png"></div>
+                </div>
+                <div class="service_title">Build a Business<br>
+                  Case</div>
+              </div>
+            </div>
+            <!------------ POPUP ------------------>
+            
+            <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-xl-2 servicesblock" id="popupWrapper">
+              <div class="container" style="display:none" id="popup12"
+       data-bind="ojComponent:{component: 'ojPopup'}">
+                <div class="popupcontainer">
+                  <div class="popupheading"> <span class="oj-fwk-icon oj-fwk-icon-cross oj-sm-float-end closeicon" data-bind="
+               click: function()
+               {
+                 $('#popup12').ojPopup('close');
+               }"></span>
+                    <h3>Deliver a Health
+                      Check </h3>
+                    <span class="smalltext">Category : </span> </div>
+                  <div class="popupdesc">
+                    <h4>Description</h4>
+                    <h4>SE Role Engagement </h4>
+                  </div>
+                </div>
+              </div>
+              <div data-bind="
+               click: function()
+               {
+                 $('#popup12').ojPopup('open', '#btnGo1');
+                 
+               }">
+                <div  id="btnGo1"></div>
+                <div class="service_icon">
+                  <div class="service_icon_inner"><img src="css/images/business_icon.png"></div>
+                </div>
+                <div class="service_title">Deliver a Health<br>
+                  Check
+                  Case</div>
+              </div>
+            </div>
+            
+            <!------------ POPUP ------------------> 
           </div>
         </div>
       </div>
@@ -383,9 +690,10 @@
                         <br>
                         &nbsp;</p>
                     </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">SE Accelerate Cloud Regional Road Show w/Hamidou Dia - NEW YORK	Regional Only Event</div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">SE Accelerate Cloud Regional Road Show w/Hamidou Dia - NEW YORK</div>
                     <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end">See Calendar Invite</div>
+                      <div class="orangeBbutton oj-lg-float-end">Regional Only Event<br>
+                        See Calendar Invite</div>
                     </div>
                   </div>
                 </div>
@@ -420,98 +728,90 @@
             <div id="filmStripwins" class="oj-sm-12" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 2,arrowVisibility: 'visible'}">
               <div id="" class="my-filmstrip-item oj-flex-item oj-margin winsblock">
                 <div id="animationDemo">
-                 
                   <div id="animatable" class="ani_container"> 
                     
                     <!-- back face of card -->
                     <div class="cardface backside oj-animation-backface">
-                     <div class="wins_block oj-sm-12">
-                  <div class="win_logo oj-sm-12"><img src="css/images/athene_logo.png"></div>
-                  <div class="oj-flex oj-sm-12 win_desc">
-                    <p>Athene needed to save costs on data center hosting and reduced their time to install and maintain their environments. Several different teams pulled together to ensure we successfully met Athene’s aggressive go-live timeline to migrate their on-premise E-Business Suite and Hyperion applications.</p>
-                    <div class="summaryButton oj-sm-12 oj-flex">
-                      <div class="oj-sm-12">
-                        <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable')">Back</button>
+                      <div class="wins_block oj-sm-12">
+                        <div class="win_logo oj-sm-12">IKM</div>
+                        <div class="oj-flex oj-sm-12 win_desc">
+                          <p>Hear how the extended Oracle team worked together to navigate some very tricky internal processes.  This tight collaboration resulted in a successful Cloud go-live for IKM and our first GoldenGate reference. </p>
+                          <div class="summaryButton oj-sm-12 oj-flex">
+                            <div class="oj-sm-12">
+                              <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable')">Back</button>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      
-                    </div>
-                  </div>
-                </div>
                     </div>
                     
                     <!-- front face of card -->
                     <div class="cardface">
-                     <div class="wins_block oj-sm-12">
-                  <div class="win_logo oj-sm-12"><img src="css/images/athene_logo.png"></div>
-                  <div class="oj-flex oj-sm-12 win_desc">
-                    <div class="oj-sm-6 imgblock"><img src="css/images/misha_img.png" class="img-responsive"></div>
-                    <div class="oj-sm-6 textblock">
-                      <div class="win_text">
-                        <p>Hosted by : <br>
-                          <span class="largetext">Misha Logvinov</span></p>
-                        <p>This episode’s guest : <br>
-                          <span class="largetext">Amos Savir-Baruch</span></p>
+                      <div class="wins_block oj-sm-12">
+                        <div class="win_logo oj-sm-12">IKM</div>
+                        <div class="oj-flex oj-sm-12 win_desc">
+                          <div class="oj-sm-6 imgblock"><img src="css/images/misha_img.png" class="img-responsive"></div>
+                          <div class="oj-sm-6 textblock">
+                            <div class="win_text">
+                              <p>Hosted by : <br>
+                                <span class="largetext">Misha Logvinov</span></p>
+                              <p>This episode’s guest : <br>
+                                <span class="largetext">Scott Sharpley</span></p>
+                            </div>
+                          </div>
+                          <div class="summaryButton oj-sm-12 oj-flex">
+                            <div class="oj-sm-12 oj-xl-6">
+                              <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable')">Quick Summary</button>
+                            </div>
+                            <div class="oj-sm-12 oj-xl-6 oj-flex"> <a href="https://otube.oracle.com/media/063017_GoLive_IKM.mp4/0_4dd4n269" target="_blank">Listen to Interview</a> </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div class="summaryButton oj-sm-12 oj-flex">
-                      <div class="oj-sm-12 oj-xl-6">
-                        <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable')">Quick Summary</button>
-                      </div>
-                      <div class="oj-sm-12 oj-xl-6">
-                        <button class="oj-sm-align-center oj-flex">Listen to Interview</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div id="" class="my-filmstrip-item oj-flex-item oj-margin winsblock">
                 <div id="animationDemo">
-                 
                   <div id="animatable1" class="ani_container"> 
                     
                     <!-- back face of card -->
                     <div class="cardface backside oj-animation-backface">
-                     <div class="wins_block oj-sm-12">
-                  <div class="win_logo oj-sm-12"><img src="css/images/athene_logo.png"></div>
-                  <div class="oj-flex oj-sm-12 win_desc">
-                    <p>Athene needed to save costs on data center hosting and reduced their time to install and maintain their environments. Several different teams pulled together to ensure we successfully met Athene’s aggressive go-live timeline to migrate their on-premise E-Business Suite and Hyperion applications.</p>
-                    <div class="summaryButton oj-sm-12 oj-flex">
-                      <div class="oj-sm-12">
-                        <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable1')">Back</button>
+                      <div class="wins_block oj-sm-12">
+                        <div class="win_logo oj-sm-12"><img src="css/images/stanford-logo.png"></div>
+                        <div class="oj-flex oj-sm-12 win_desc">
+                          <p>Hear how we got our foot in the door at Stanford to prove that our Oracle Management Cloud was a better alternative to Splunk.  This initial win led to a successful go live and an expansion at Stanford. </p>
+                          <div class="summaryButton oj-sm-12 oj-flex">
+                            <div class="oj-sm-12">
+                              <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable1')">Back</button>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      
-                    </div>
-                  </div>
-                </div>
                     </div>
                     
                     <!-- front face of card -->
                     <div class="cardface">
-                     <div class="wins_block oj-sm-12">
-                  <div class="win_logo oj-sm-12"><img src="css/images/athene_logo.png"></div>
-                  <div class="oj-flex oj-sm-12 win_desc">
-                    <div class="oj-sm-6 imgblock"><img src="css/images/misha_img.png" class="img-responsive"></div>
-                    <div class="oj-sm-6 textblock">
-                      <div class="win_text">
-                        <p>Hosted by : <br>
-                          <span class="largetext">Misha Logvinov</span></p>
-                        <p>This episode’s guest : <br>
-                          <span class="largetext">Amos Savir-Baruch</span></p>
+                      <div class="wins_block oj-sm-12">
+                        <div class="win_logo oj-sm-12"><img src="css/images/stanford-logo.png"></div>
+                        <div class="oj-flex oj-sm-12 win_desc">
+                          <div class="oj-sm-6 imgblock"><img src="css/images/misha_img.png" class="img-responsive"></div>
+                          <div class="oj-sm-6 textblock">
+                            <div class="win_text">
+                              <p>Hosted by : <br>
+                                <span class="largetext">Misha Logvinov</span></p>
+                              <p>This episode’s guest : <br>
+                                <span class="largetext">Venkat Uppuluri</span></p>
+                            </div>
+                          </div>
+                          <div class="summaryButton oj-sm-12 oj-flex">
+                            <div class="oj-sm-12 oj-xl-6">
+                              <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable1')">Quick Summary</button>
+                            </div>
+                            <div class="oj-sm-12 oj-xl-6 oj-flex"> <a href="https://otube.oracle.com/media/GoLive-Stanford/0_snf30ktm/-1" target="_blank">Listen to Interview</a> </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div class="summaryButton oj-sm-12 oj-flex">
-                      <div class="oj-sm-12 oj-xl-6">
-                        <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable1')">Quick Summary</button>
-                      </div>
-                      <div class="oj-sm-12 oj-xl-6">
-                        <button class="oj-sm-align-center oj-flex">Listen to Interview</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                     </div>
                   </div>
                 </div>
@@ -532,24 +832,30 @@
         <div class="oj-sm-12 refertitle"><img src="css/images/references_icon_lg.png">&nbsp;References</div>
         <div class="oj-md-6  oj-flex">
           <div class="oj-flex oj-sm-12 oj-margin referencesblock">
-            <div class="oj-sm-12 oj-lg-4"><img src="css/images/flexagon.png"></div>
-            <div class="oj-sm-12 oj-lg-4"><img src="css/images/radioshack.png"></div>
-            <div class="oj-sm-12 oj-lg-4"><img src="css/images/connectonebank.png"></div>
-            <div class="oj-sm-12 button oj-flex"><a  class="whitebutton">Search for IaaS Customers</a></div>
+            <div class="oj-flex oj-sm-12  logorow">
+              <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/search/customers/_/N-p5vz?Nr=112&bcid=5508413926001" target="_blank"><img src="css/images/Exhibitor.png"></a></div>
+              <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/corporate/pressrelease/oracle-rac-iaas-050917.html" target="_blank"><img src="css/images/ICAT-300x120.png"></a></div>
+              <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/customers/astute-1-storage-cl.html" target="_blank"><img src="css/images/astute.png"></a></div>
+            </div>
+            <div class="oj-sm-12 button oj-flex"><a  class="whitebutton" href="https://www.oracle.com/search/customers/_/N-1joZp5vz?Nr=112" target="_blank">Search for IaaS Customers</a></div>
           </div>
         </div>
         <div class="oj-md-6  oj-flex">
           <div class="oj-flex oj-sm-12 oj-margin referencesblock">
-            <div class="oj-sm-12 oj-lg-4"><img src="css/images/boise_state.jpg"></div>
-            <div class="oj-sm-12 oj-lg-4"><img src="css/images/club_corp.png"></div>
-            <div class="oj-sm-12 oj-lg-4"><img src="css/images/cogniaznt.png"></div>
-            <div class="oj-sm-12 button oj-flex"><a class="whitebutton">Search for PaaS Customers</a></div>
+            <div class="oj-flex oj-sm-12  ">
+              <div class="oj-flex oj-sm-12 logorow">
+                <div class="oj-sm-12 oj-lg-4"><a href="https://www.forbes.com/sites/oracle/2017/03/15/a-fintech-innovators-race-to-the-cloud/#18ac787315e5" target="_blank"><img src="css/images/calypso.png"></a></div>
+                <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/search/customers/_/N-1joZp5wb?Ntt=trek&Dy=1&Nty=1&Nr=112&Ntk=S1" target="_blank"><img src="css/images/Trek_Bicycle_Corporation_logo.svg.png"></a></div>
+                <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/customers/pragmatyxs-1-dbcs.html?msgid=gcp-PAAS" target="_blank"><img src="css/images/pragmatyxscolorlogo.png"></a></div>
+              </div>
+            </div>
+            <div class="oj-sm-12 button oj-flex"><a class="whitebutton" href="https://www.oracle.com/search/customers/_/N-1joZp5wb?Nr=112" target="_blank">Search for PaaS Customers</a></div>
           </div>
         </div>
         <div class="oj-sm-12 oj-sm-center">
-          <div class="oj-flex-item">
-            <button class="oj-sm-align-center oj-flex bluebutton">Request a Reference</button>
-          </div>
+          <div class="oj-flex-item"> <a href="http://gcp.oraclecorp.com/ocpwb/f?p=144:2060:17175260936151" target="_blank">
+            <button  class="oj-sm-align-center oj-flex bluebutton"> Request a Reference</button>
+            </a> </div>
         </div>
       </div>
     </div>
@@ -566,31 +872,10 @@
           <div class="oj-flex">
             <div id="filmStripfeatured" class="oj-sm-12" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'hidden'}">
               <div id="item1" class="my-filmstrip-item oj-sm-12 oj-margin">
-                <div class="employee_c" style="background:url(css/images/employee_feature.jpg);">
+                <div class="employee_c" style="background:url(css/images/JMinter_small.jpg);">
                   <div class="emp_details">
                     <div class="slash"></div>
-                    NATD employee csr story: News description descripton</div>
-                </div>
-              </div>
-              <div id="item2" class="my-filmstrip-item oj-sm-12 oj-margin">
-                <div class=" employee_c" style="background:url(css/images/hamidou_bg_1.jpg);">
-                  <div class="emp_details">
-                    <div class="slash"></div>
-                    Leader’s featured story</div>
-                </div>
-              </div>
-              <div id="item3" class="my-filmstrip-item oj-sm-12 oj-margin">
-                <div class="employee_c" style="background:url(css/images/employee_feature.jpg);">
-                  <div class="emp_details">
-                    <div class="slash"></div>
-                    NATD employee csr story: News description descripton</div>
-                </div>
-              </div>
-              <div id="item3" class="my-filmstrip-item oj-sm-12 oj-margin">
-                <div class="employee_c" style="background:url(css/images/employee_feature.jpg);">
-                  <div class="emp_details">
-                    <div class="slash"></div>
-                    NATD employee csr story: News description descripton</div>
+                    <a data-bind="click:empf1">TECH TALENT FEATURE: It’s All in the Family - Elite Athletes</a></div>
                 </div>
               </div>
             </div>
@@ -604,4 +889,15 @@
       </div>
     </div>
   </div>
+</div>
+<div id="empfwrapper">
+  <div style="display:none" id="empf1" title="TECH TALENT FEATURE: It’s All in the Family - Elite Athletes" 
+       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
+     <div class="oj-dialog-body empf">
+       <p><img src="css/images/JMinter_small.jpg" align="right">Our “Tech Talent” feature for October is Dustin Minter, Cloud Customer Success Manager, Public Sector/Enterprise.  Dustin has some mighty fine DNA.  His grandpa, Harry Minter, played for the Philadelphia Phillies baseball team, his father, Mike Minter, was on the NBA D-League team for the Dallas Mavericks, Dustin reached the Final Four of the Elite Eight Basketball tournament at Tarleton State University 2003-2006, his middle brother, Kyle, played soccer at the University of Memphis, and his youngest brother, Chase, is playing soccer in the MLS for Real Monarchs Salt Lake City. Dustin’s talents are a great addition to the Oracle Solution Engineering team as he brings to bear his winning and competitive legacy to help our customers succeed in the cloud. </p>
+     </div>
+     
+  </div>
+
+
 </div>

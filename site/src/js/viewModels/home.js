@@ -12,9 +12,12 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
     function HomeViewModel() {
    var self = this;
    
-   self.openVideo = function() { alert("yes");
+   self.openVideo = function() { 
 				$("#modalDialog1").ojDialog("open");
 				};
+ self.empf1 = function() { 
+$("#empf1").ojDialog("open");
+};
 
     $(document).ready(function() {
                 var mainBar = document.getElementById("mainBar");
