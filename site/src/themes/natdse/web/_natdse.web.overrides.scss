@@ -687,12 +687,13 @@ cursor: pointer;
 }
 }
 .oj-popup{
-width:71%;
+width:75%;
 background:#fff;
 padding:0px;
 box-sizing:border-box;
 border:none;
 box-shadow:none;
+max-width:1125px;
 @media  #{$responsiveQueryLargeOnly} {
 width:87%;
 }
@@ -802,7 +803,7 @@ line-height:20px;
 @include headings;
 }
 .employee_c{
-
+border:1px solid $lightgrey3;
 width:100%;
 height:280px;
 background-repeat:no-repeat !important;
@@ -884,6 +885,13 @@ background:$lightgrey;
 padding: 10px 0px;
 text-align:center;
 font-size:$largeFontSize;
+display: flex;
+justify-content: center;
+min-height:37px;
+ align-items: center;
+img{
+	height:100%;
+	}
 }
 .yBadge{
 @include yellowbadge;
@@ -1574,15 +1582,19 @@ line-height:26px;
 border-right:none;
 }
 }
+/*----------------------------------ADMIN----------------------------------*/
 .adminsection{
 .oj-tabs{	
 font-size:$smallFontSize;
 }
+.adminheading{
+border-bottom:1px solid $lightgrey3;	
+	}
 h1{
 font-size:$smallFontSize;
 font-weight:normal;
 color:$medblue;
-border-bottom:1px solid $lightgrey3;
+
 }
 .oj-tabs-vertical > .oj-tabs-nav-root .oj-tabs-anchor{
 padding-left:0px;
