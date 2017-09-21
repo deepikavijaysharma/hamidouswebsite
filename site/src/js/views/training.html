@@ -8,13 +8,15 @@
        data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'escape',rootAttributes: { style: 'width: 60%; height: auto; min-width 240px; '}}">
     <div class="oj-dialog-body roleWrapper">
       <form id="form1">
-        <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Select your role',
-                                                    rootAttributes: {style:'max-width:20em'}}">
-          <option value="role1">Role</option>
-          <option value="role2">Role</option>
+        <select id="basicSelect"  data-bind="ojComponent: {
+          component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Select your role',
+          options: role,
+          value: selectedrole,
+          rootAttributes: {style:'max-width:20em'}
+        }">
         </select>
         <div class="oj-dialog-footer">
-          <button id="okButton" data-bind="ojComponent: {component: 'ojButton', label: 'Okay'},click:closeRole"> </button>
+          <button id="okButton" onclick="roleselected()" data-bind="ojComponent: {component: 'ojButton', label: 'Okay'},click:closeRole"> </button>
         </div>
       </form>
     </div>
@@ -29,45 +31,45 @@
         <div class="reqform">
           <div class="oj-flex">
             <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6 formrow">
-              <div class="oj-margin oj-sm-12">
-                <label for="input">Name</label>
-                <input id="input" data-bind="ojComponent: 
+            <div class="oj-margin oj-sm-12">
+              <label for="input">Name</label>
+              <input id="input" data-bind="ojComponent: 
                    {component: 'ojInputText', value:'text', disabled: true}">
-              </div>
             </div>
-            <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6 formrow">
-              <div class="oj-margin oj-sm-12">
-                <label for="input">Role</label>
-                <input id="input" data-bind="ojComponent: 
+            </div>
+           <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6 formrow">
+            <div class="oj-margin oj-sm-12">
+              <label for="input">Role</label>
+              <input id="input" data-bind="ojComponent: 
                    {component: 'ojInputText', value:'text', disabled: true}">
-              </div>
             </div>
+             </div>
           </div>
           <div class="oj-flex">
             <div class="oj-flex oj-flex-item oj-sm-12 oj-margin reqheading"> Request your course: </div>
           </div>
           <div class="oj-flex">
             <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6">
-              <div class="oj-margin oj-sm-12">
-                <div class="oj-flex-item oj-sm-12 formrow">
-                  <label for="input">Pillar</label>
-                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
-                    <option value="value">value</option>
-                  </select>
-                </div>
-                <div class="oj-flex-item oj-sm-12 formrow">
-                  <label for="input">Platform</label>
-                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
-                    <option value="value">value</option>
-                  </select>
-                </div>
-                <div class="oj-flex-item oj-sm-12">
-                  <label for="input">Course Specifications</label>
-                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
-                    <option value="value">value</option>
-                  </select>
-                </div>
+            <div class="oj-margin oj-sm-12">
+              <div class="oj-flex-item oj-sm-12 formrow">
+                <label for="input">Pillar</label>
+                <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
+                  <option value="value">value</option>
+                </select>
               </div>
+              <div class="oj-flex-item oj-sm-12 formrow">
+                <label for="input">Platform</label>
+                <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
+                  <option value="value">value</option>
+                </select>
+              </div>
+              <div class="oj-flex-item oj-sm-12">
+                <label for="input">Course Specifications</label>
+                <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
+                  <option value="value">value</option>
+                </select>
+              </div>
+            </div>
             </div>
             <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6">
               <div class="oj-margin oj-sm-12 reqsummary">
@@ -122,80 +124,87 @@
                 <label>Catalogue</label>
               </div>
               <div class="oj-flex-item oj-sm-8 oj-md-7 oj-lg-5">
-                <input id="search-input" placeholder="Search courses, community calls, resources…"
-         data-bind="ojComponent: {component: 'ojInputSearch', 
-         value: currentValue,
-         rawValue: currentRawValue,
-         optionChange: optionChangeCallback}"/>
+                <input id="search-input" placeholder="Search courses, community calls, resources…" data-bind="ojComponent:{
+                  component: 'ojInputSearch', 
+                  value: searchtext,
+                  update : searchcourses
+                }"/>
               </div>
               <div class="oj-flex-item oj-sm-5 oj-md-2">
-                <button id="search-button" class="oj-button-confirm" data-bind="ojComponent: {
-      component: 'ojButton',
-      label: 'Search'},
-      click: searchInput"> </button>
+                <button id="search-button" onclick="searchcourses()" class="oj-button-confirm" data-bind="ojComponent: {
+                    component: 'ojButton',
+                    label: 'Search'},
+                    click: searchInput"> 
+                </button>
               </div>
               <div class="oj-flex-item oj-sm-7 oj-xl-3 req_block">
                 <button id="trainingButton" class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
-      component: 'ojButton',
-      chroming: 'full',
-      label: '+ Request Training'},click:openReqtraining"> </button>
+                  component: 'ojButton',
+                  chroming: 'full',
+                  label: '+ Request Training'},click:openReqtraining">
+                </button>
               </div>
             </div>
           </form>
           <!-- COURSES -->
-          
-          <div class="oj-flex coursesblock"> 
-            <!-- ko foreach: categories() --> 
-            <!-- ko if: name -->
-            <div class="oj-flex oj-sm-12">
-              <div class="oj-sm-12 oj-md-4 oj-lg-3 blocks manC oj-flex-item oj-margin" data-bind="text:name"></div>
-              <!-- ko foreach: courses -->
-              <!-- ko if: $index() == 3 -->
-              
-                <div class="morelink">More</div>
-                <!-- /ko --> 
-                <!-- ko if: $index() <= 2 --> 
-                <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-lg-3 blocks oj-flex-item oj-margin"><span class="badge">Mandatory Course</span>
-                  <div class="title" data-bind="text:name"></div>
-                  <div class="desc">Learn Advanced Methods of usability methods</div>
-                  <div class="oj-flex coursedetails">
-                    <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/duration_icon.png"><span data-bind="text:class_size"></span></div>
-                    <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/level_icon.png"><span data-bind="text:training_level"></span></div>
-                    <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:cloud_onpremise"></span></div>
-                    <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:training_type"></span></div>
-                  </div>
-                  <div class="date"> Due Date: <br>
-                    <b>Sep 20, 2017</b> </div>
-                  <a data-bind="attr: { href: directURL}" class="whitebutton">Enroll</a>
-                </div>
-                <!-- /ko --> 
-                <!-- ko if: $index() > 2 -->
-                
-                <div class="oj-sm-12 oj-md-4 oj-lg-3 oj-lg-3 blocks oj-flex-item oj-margin"><span class="badge">aMandatory Course</span>
-                  <div class="title" data-bind="text:name"></div>
-                  <div class="desc">Learn Advanced Methods of usability methods</div>
-                  <div class="oj-flex coursedetails">
-                    <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/duration_icon.png"><span data-bind="text:class_size"></span></div>
-                    <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/level_icon.png"><span data-bind="text:training_level"></span></div>
-                    <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:cloud_onpremise"></span></div>
-                    <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:training_type"></span></div>
-                  </div>
-                  <div class="date"> Due Date: <br>
-                    <b>Sep 20, 2017</b> </div>
-                  <button class="whitebutton">Enroll</button>
-                </div>
-                 <!-- /ko --> 
-                <!-- ko if: $index() == 3 --> 
-              
-             
-              <!-- /ko --> 
-              <!-- /ko --> 
+          <div class="oj-flex coursesblock">
+            <div class="oj-flex-item oj-lg-3" data-bind="foreach: catcnt">
+              <!-- ko if: count > 0 -->
+              <div class="eblocks blocks oj-flex-item oj-margin oj-sm-12 oj-md-4 oj-lg-4">
+                <div class="oj-flex-item"><h4>Refine Courses</h4>
+                    <span data-bind="text:name"></span>(<b data-bind="text:count"></b>)
+                </div> 
+              </div>
+              <!-- /ko -->
             </div>
-            <!-- /ko --> 
-            <!-- /ko --> 
-            
+            <div class="oj-flex-item oj-lg-9">
+              <!-- ko foreach: categories() --> 
+              <!-- ko if: name -->
+              <div class="oj-flex">
+                <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks manC oj-flex-item oj-margin" data-bind="text:name"></div>
+                <!-- ko foreach: courses -->
+                <!-- ko if: $index() > 3 -->              
+                  <!-- <div class="morelink oj-flex-item">More</div> -->
+                  <!-- /ko --> 
+                  <!-- ko if: $index() <= 2 --> 
+                  <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks oj-flex-item oj-margin">
+                    <!-- <span class="badge">Mandatory Course</span> -->
+                    <div class="title" data-bind="text:name"></div>
+                    <div class="desc">Learn Advanced Methods of usability methods</div>
+                    <div class="oj-flex coursedetails">
+                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/duration_icon.png"><span data-bind="text:class_size"></span></div>
+                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/level_icon.png"><span data-bind="text:training_level"></span></div>
+                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:cloud_onpremise"></span></div>
+                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:training_type"></span></div>
+                    </div>
+                    <div class="date"> Due Date: <br><b data-bind="text:start_date">Sep 20, 2017</b></div>
+                    <a data-bind="attr: { href: directURL}" class="whitebutton">Enroll</a>
+                  </div>
+                  <!-- /ko --> 
+                  <!-- ko if: $index() > 2 -->                
+                  <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks oj-flex-item oj-margin">
+                    <!-- <span class="badge">aMandatory Course</span> -->
+                    <div class="title" data-bind="text:name"></div>
+                    <div class="desc">Learn Advanced Methods of usability methods</div>
+                    <div class="oj-flex coursedetails">
+                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/duration_icon.png"><span data-bind="text:class_size"></span></div>
+                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/level_icon.png"><span data-bind="text:training_level"></span></div>
+                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:cloud_onpremise"></span></div>
+                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:training_type"></span></div>
+                    </div>
+                    <div class="date"> Due Date: <br><b data-bind="text:start_date">Sep 20, 2017</b></div>
+                    <button class="whitebutton">Enroll</button>
+                  </div>
+                  <!-- <div class="morelink oj-flex-item">More</div> -->
+                  <!-- /ko --> 
+                  <!-- ko if: $index() == 3 -->          
+                <!-- /ko --> 
+                <!-- /ko --> 
+              </div>
+              <!-- /ko --> 
+              <!-- /ko -->
+            </div>
           </div>
-          
         </div>
       </div>
       <div id="tabs-2" class="ccalls">

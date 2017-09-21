@@ -3,7 +3,7 @@
  * The Universal Permissive License (UPL), Version 1.0
  */
 'use strict';
-
+var baseurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/";
 /**
  * Example of Require.js boostrap javascript
  */
