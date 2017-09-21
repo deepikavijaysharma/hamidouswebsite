@@ -18,8 +18,15 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
  self.empf1 = function() { 
 $("#empf1").ojDialog("open");
 };
+ self.empf2 = function() { 
+$("#empf2").ojDialog("open");
+};
 
     $(document).ready(function() {
+		function isIE(userAgent) {
+  userAgent = userAgent || navigator.userAgent;
+  return userAgent.indexOf("MSIE ") > -1 || userAgent.indexOf("Trident/") > -1 || userAgent.indexOf("Edge/") > -1;
+}
                 var mainBar = document.getElementById("mainBar");
 				var mainBar_h = mainBar.offsetHeight;
 				var secnav = document.getElementById("setupBar");
@@ -28,7 +35,7 @@ $("#empf1").ojDialog("open");
 update_pos = function()
     {
        // alert(document.body.scrollTop);
-		  if (document.documentElement.scrollTop > mainBar_h || document.body.scrollTop > mainBar_h )
+		  if (document.documentElement.scrollTop > mainBar_h || document.body.scrollTop > mainBar_h ||document.getElementById("globalBody").scrollTop )
         {
             setupBar.style.position = "fixed";
             setupBar.style.top = "0";
@@ -41,9 +48,12 @@ update_pos = function()
         }
         
     }
-
+/* add IE CONDITION HERE - IN PROGRESS */
 
 document.addEventListener("scroll", update_pos);
+document.getElementById("globalBody").addEventListener("scroll", update_pos);
+
+
 
   // Add smooth scrolling to all links
   $("a").on('click', function(event) {
