@@ -1,0 +1,201 @@
+<div id="dialogWrapper" >
+  <div style="display:none" id="modalDialog1" title="Select your role" 
+       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'escape',rootAttributes: { style: 'width: 60%; height: auto; min-width 240px; '}}">
+    <div class="oj-dialog-body roleWrapper">
+      <form id="form1">
+        <select id="basicSelect"  data-bind="ojComponent: {
+          component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Select your role',
+          options: role,
+          value: selectedrole,
+          rootAttributes: {style:'max-width:20em'}
+        }">
+        </select>
+        <div class="oj-dialog-footer">
+          <button id="okButton" onclick="roleselected()" data-bind="ojComponent: {component: 'ojButton', label: 'Okay'},click:closeRole"> </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div id="trainingdialogWrapper" >
+  <div style="display:none" id="trainingDialog" title="Request Training" 
+       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'icon',rootAttributes: { style: 'width: 70%; height: auto; min-width 240px; '}}">
+    <div class="oj-dialog-body"> 
+      <!-- FORM -->
+      <div id="form-container" class="oj-form-layout reqtraining">
+        <div class="reqform">
+          <div class="oj-flex">
+            <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6 formrow">
+            <div class="oj-margin oj-sm-12">
+              <label for="input">Name</label>
+              <input id="input" data-bind="ojComponent: 
+                   {component: 'ojInputText', value:'text', disabled: true}">
+            </div>
+            </div>
+           <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6 formrow">
+            <div class="oj-margin oj-sm-12">
+              <label for="input">Role</label>
+              <input id="input" data-bind="ojComponent: 
+                   {component: 'ojInputText', value:'text', disabled: true}">
+            </div>
+             </div>
+          </div>
+          <div class="oj-flex">
+            <div class="oj-flex oj-flex-item oj-sm-12 oj-margin reqheading"> Request your course: </div>
+          </div>
+          <div class="oj-flex">
+            <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6">
+            <div class="oj-margin oj-sm-12">
+              <div class="oj-flex-item oj-sm-12 formrow">
+                <label for="input">Pillar</label>
+                <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
+                  <option value="value">value</option>
+                </select>
+              </div>
+              <div class="oj-flex-item oj-sm-12 formrow">
+                <label for="input">Platform</label>
+                <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
+                  <option value="value">value</option>
+                </select>
+              </div>
+              <div class="oj-flex-item oj-sm-12">
+                <label for="input">Course Specifications</label>
+                <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
+                  <option value="value">value</option>
+                </select>
+              </div>
+            </div>
+            </div>
+            <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6"><div class="oj-margin oj-sm-12 reqsummary"><div class="bluet">Request Summary:</div><p>SaaS > Integration > PCS</p><div class="bluet">Request sent to:</div><b>Marc Asensio</b><p>PCS platform owner, Principle Sales Consultant</p></div></div>
+            <div class="oj-sm-12 footerbuttons">
+            <div class="oj-md-6 oj-lg-4 oj-sm-float-end"><div class="oj-flex oj-sm-12"><div class="oj-flex oj-md-6">
+              <input id="reset" type="reset" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}" class="nobutton"/>
+            </div>
+            <div class="oj-md-6">
+              <button id= "button" data-bind="ojComponent: { component: 'ojButton', label: 'Submit' }" class="bluebutton">
+                </div></div>
+              </button> 
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="oj-row subnav">
+  <div id="tabs-container">
+    <div id="tabs" data-bind="ojComponent:{component: 'ojTabs', disabledTabs: [3]}"> 
+      <!-- tab bar -->
+      
+      <ul>
+        <li><span>Courses</span></li>
+        <li><span>Community Calls</span></li>
+        <li><span>Offers</span></li>
+        <li><span>Admin</span></li>
+      </ul>
+      
+      <!-- tab contents -->
+      
+      <div id="tabs-1">
+        <div class="container"> 
+          <!-- SEARCH -->
+          <form id="form1">
+            <div class="oj-flex search">
+              <div class="oj-flex-item oj-sm-4 oj-md-2 oj-lg-2 labeldiv">
+                <label>Catalogue</label>
+              </div>
+              <div class="oj-flex-item oj-sm-8 oj-md-7 oj-lg-5">
+                <input id="search-input" placeholder="Search courses, community calls, resources…" data-bind="ojComponent:{
+                  component: 'ojInputSearch', 
+                  value: searchtext,
+                  update : searchcourses
+                }"/>
+              </div>
+              <div class="oj-flex-item oj-sm-5 oj-md-2">
+                <button id="search-button" onclick="searchcourses()" class="oj-button-confirm" data-bind="ojComponent: {
+                    component: 'ojButton',
+                    label: 'Search'},
+                    click: searchInput"> 
+                </button>
+              </div>
+              <div class="oj-flex-item oj-sm-7 oj-xl-3 req_block">
+                <button id="trainingButton" class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
+                  component: 'ojButton',
+                  chroming: 'full',
+                  label: '+ Request Training'},click:openReqtraining">
+                </button>
+              </div>
+            </div>
+          </form>
+          <!-- COURSES -->
+          <div class="oj-flex coursesblock">
+            <span data-bind="foreach: catcnt">
+              <!-- ko if: count > 0 -->
+              <div class="eblocks blocks oj-flex-item oj-margin refine oj-sm-12 oj-md-4 oj-lg-4">
+                <div class="oj-sm-12 oj-flex-item"><h4>Refine Courses</h4>
+                    <span data-bind="text:name"></span>(<b data-bind="text:count"></b>)
+                </div> 
+              </div>
+              <!-- /ko -->
+            </span>
+            <div class="oj-flex-item refine">
+              <!-- ko foreach: categories() --> 
+              <!-- ko if: name -->
+              <div class="oj-flex oj-sm-12 ">
+                <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks manC oj-flex-item oj-margin" data-bind="text:name"></div>
+                <!-- ko foreach: courses -->
+                <!-- ko if: $index() == 3 -->              
+                  <div class="morelink">More</div>
+                  <!-- /ko --> 
+                  <!-- ko if: $index() <= 2 --> 
+                  <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks oj-flex-item oj-margin">
+                    <!-- <span class="badge">Mandatory Course</span> -->
+                    <div class="title" data-bind="text:name"></div>
+                    <div class="desc">Learn Advanced Methods of usability methods</div>
+                    <div class="oj-flex coursedetails">
+                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/duration_icon.png"><span data-bind="text:class_size"></span></div>
+                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/level_icon.png"><span data-bind="text:training_level"></span></div>
+                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:cloud_onpremise"></span></div>
+                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:training_type"></span></div>
+                    </div>
+                    <div class="date"> Due Date: <br><b data-bind="text:start_date">Sep 20, 2017</b></div>
+                    <a data-bind="attr: { href: directURL}" class="whitebutton">Enroll</a>
+                  </div>
+                  <!-- /ko --> 
+                  <!-- ko if: $index() > 2 -->                
+                  <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks oj-flex-item oj-margin">
+                    <!-- <span class="badge">aMandatory Course</span> -->
+                    <div class="title" data-bind="text:name"></div>
+                    <div class="desc">Learn Advanced Methods of usability methods</div>
+                    <div class="oj-flex coursedetails">
+                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/duration_icon.png"><span data-bind="text:class_size"></span></div>
+                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/level_icon.png"><span data-bind="text:training_level"></span></div>
+                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:cloud_onpremise"></span></div>
+                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:training_type"></span></div>
+                    </div>
+                    <div class="date"> Due Date: <br><b data-bind="text:start_date">Sep 20, 2017</b></div>
+                    <button class="whitebutton">Enroll</button>
+                  </div>
+                  <div class="morelink">More</div>
+                  <!-- /ko --> 
+                  <!-- ko if: $index() == 3 -->          
+                <!-- /ko --> 
+                <!-- /ko --> 
+              </div>
+              <!-- /ko --> 
+              <!-- /ko -->
+            </div>
+          </div>           
+        </div>
+      </div>
+      <div id="tabs-2"><div class="container">Content coming soon</div></div>
+      <div id="tabs-3">
+       <div class="container">Content coming soon</div>
+      </div>
+      <div id="tabs-4">
+        <p>Disabled Tab Content</p>
+      </div>
+    </div>
+  </div>
+</div>
