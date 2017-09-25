@@ -1,0 +1,609 @@
+
+<!------------------------------------SLIDER------------------------------------>
+
+<div class="oj-row" id="mainBar">
+  <div id="filmstrip-overlaidpagingcontrol-example" class="homeslider">
+    <div class="oj-panel">
+      <div id="filmStripDiv slider" style="position: relative;">
+        <div id="filmStrip" 
+           data-bind="ojComponent: {
+             component: 'ojFilmStrip', 
+             maxItemsPerPage: 1, 
+             arrowVisibility: currentNavArrowVisibility}" 
+           > 
+          <!-- ko foreach: slide -->
+          <div class="oj-panel oj-panel-alt2 demo-filmstrip-item largeslide" 
+             data-bind="style: {
+               display: getItemInitialDisplay($index())}">
+            <div data-bind="html: name,css:classname"></div>
+          </div>
+          <!-- /ko --> 
+        </div>
+        <div class="demo-overlaid-paging-control">
+          <div id="pagingControl" 
+             data-bind="ojComponent: {
+               component: 'ojPagingControl', 
+                 data: getPagingModelslider(), 
+             pageSize: 0, 
+               pageOptions: {type: 'dots'}}"> </div>
+        </div>
+      </div>
+      <!-- end filmStripDiv --> 
+    </div>
+  </div>
+</div>
+<!-----------------------------------FIXED NAV------------------------------------>
+
+<div class="oj-row ">
+  <div id="setupBar" class="homesubnav oj-sm-12">
+    <div class="container">
+      <ul class="">
+        <li class=""><img src="css/images/vision_icon_small.png"><a href="#v-vision">Our Vision</a></li>
+        <li class=""><img src="css/images/services_icon_small.png"><a href="#services">Our Services</a></li>
+        <li class=""><img src="css/images/sekeydates_icon_small.png"><a href="#keydates">Key Dates</a></li>
+        <li class=""><img src="css/images/wins_icon_small.png"><a href="#golives">Featured Go-Lives</a></li>
+        <li class=""><img src="css/images/references_icon.png"><a href="#references">References</a></li>
+        <li class=""><img src="css/images/emp_icon_small.png"><a href="#empf">Employee Feature</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-----------------------------------VIDEO------------------------------------>
+<a class="anchor" id="v-vision"></a>
+<div class="oj-row row2 newrow" id="row2">
+  <div class="container">
+    <div class="oj-flex">
+      <div class="oj-sm-12 oj-md-4 oj-lg-4 oj-xl-4 oj-flex-item">
+        <div class="videoHamidoucontainer oj-margin">
+          <div class="oj-sm-12 videoHamidoutitle">Hamidou Dia</div>
+          <div class="videoHamidou">
+            <div class="oj-sm-12 videoHamidoudesc">
+              <div class="oj-flex">
+                <div class="oj-sm-9"><span class="name">Senior Vice President,</span><br>
+                  <span class="title">Sales Engineering &amp; Cloud 
+                  Customer Success</span></div>
+                <div class="oj-sm-3"><a href="https://otube.oracle.com/media/Solutions+Engineer+and+Cloud+Customer+Success+All+Hands/0_w2kl22gc/2977" target="_blank" title="Solutions Engineering and Cloud Customer Success All Hands Webcast from Oracle HQ on Tuesday, June 27, 2017"><img src="css/images/play_icon.png" class="img-responsive"></a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!------------------------------------VISION------------------------------------> 
+      
+      <div class="oj-sm-12 oj-md-8 oj-lg-8 oj-xl-8 oj-flex-item " >
+        <div class="oj-margin visioncontainer">
+          <div class="oj-sm-12 visiontitle" id="vision"><img src="css/images/vision_icon_lg.png">&nbsp;Top Initiatives - Solution Engineering Top Initiatives</div>
+          <div class="oj-sm-12 visiondesc oj-flex">
+            <div class="oj-flex-item blocks bg1">
+              <div class="blocks_icon">
+                <div class="blocks_icon_inner"><img src="css/images/icon1.png"></div>
+              </div>
+              <!-- <div class="blocks_title">Oracle Cloud Accelrate</div> -->
+            </div>
+            <div class="oj-flex-item blocks bg2">
+              <div class="blocks_icon">
+                <div class="blocks_icon_inner oppor"><img src="css/images/icon2.png"></div>
+              </div>
+              <!-- <div class="blocks_title">Oracle Cloud Solution Hubs</div> -->
+            </div>
+            <div class="oj-flex-item blocks bg3">
+              <div class="blocks_icon">
+                <img src="css/images/icon3.png"></div>
+              </div>
+              <!-- <div class="blocks_title">Enterprise Cloud Adoption Lifecycle</div> -->
+            </div>
+          </div>
+<!--           <div class="visiondesc2">
+            <p>To take our customers problems and turn them into customer opportunities by 
+              designing & building next-gen business solutions that leverage our entire Oracle 
+              Cloud stack, our modern DevOps platform, our Agile development best practices, 
+              and our very talented Cloud developers. </p>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!------------------------------------SERVICES------------------------------------> 
+<a class="anchor" id="services"></a>
+<div class="oj-row row3 newrow" id="services_sec">
+  <div class="container">
+    <div class="col-sm-12 services ">
+      <div class="oj-flex">
+        <div class="col-lg-12 oj-sm-12 servicestitle"><img src="css/images/services_icon_lg.png">&nbsp;Our Services</div>
+<!--         <div class="row">
+          <div class="col-xs-12 col-lg-12 servicesicons">
+            <div class="col-xs-6 col-sm-3"><img src="css/images/awareness.png" style="vertical-align:middle">&nbsp;&nbsp;Awareness</div>
+            <div class="col-xs-6 col-sm-3"><img src="css/images/demand_icon.png" style="vertical-align:middle">&nbsp;&nbsp;Demand</div>
+            <div class="col-xs-6 col-sm-3"><img src="css/images/opportunity.png" style="vertical-align:middle">&nbsp;&nbsp;Opportunity</div>
+            <div class="col-xs-6 col-sm-3"><img src="css/images/success_icon.png" style="vertical-align:middle">&nbsp;&nbsp;Success</div>
+          </div>
+        </div> -->
+        <!-- <div class="row"> -->
+          <div class="oj-flex col-xs-12 col-sm-12 nopadding servicesblocks1">
+            <div class="row oj-flex">
+              <div class="oj-flex-item col-sm-6 col-lg-3 servicesblocksinner">
+                <div class="centerelement"><img src="css/images/cloud_day_icon.png"><br>
+                  <br>
+                  <p>Deliver a Cloud Day</p></div>
+              </div>
+              <div class="oj-flex-item col-sm-6 col-lg-3 servicesblocksinner">
+                <div class="centerelement"><img src="css/images/cloud_vision_icon.png"><br>
+                  <br>
+                  <p>Develop a Cloud Vision</p></div>
+              </div>
+              <div class="oj-flex-item col-sm-6 col-lg-3 servicesblocksinner">
+                <div class="centerelement"><img src="css/images/cloud_solution_icon.png"><br>
+                  <br>
+                  <p>Design a Cloud Solution </p></div>
+              </div>
+              <div class="oj-flex-item col-sm-6 col-lg-3 servicesblocksinner">
+                <div class="centerelement"><img src="css/images/adopt_solution_icon.png"><br>
+                  <br>
+                  <p>Adopt a Cloud Solution</p></div>
+              </div>
+              <div class="oj-flex-item col-sm-6 col-lg-3 servicesblocksinner">
+                <div class="centerelement"><img src="css/images/event_cal_icon.png"><br>
+                  <br>
+                  <p>Support a Marketing Event</p></div>
+              </div>
+              <div class="oj-flex-item col-sm-6 col-lg-3 servicesblocksinner">
+                <div class="centerelement"><img src="css/images/value_icon.png"><br>
+                  <br>
+                  <p>Develop a Value Hypothesis</p></div>
+              </div>
+              <div class="oj-flex-item col-sm-6 col-lg-3 servicesblocksinner">
+                <div class="centerelement"><img src="css/images/poc_icon.png"><br>
+                  <br>
+                  <p>Build a POC</p></div>
+              </div>
+              <div class="oj-flex-item col-sm-6 col-lg-3 servicesblocksinner">
+                <div class="centerelement"><img src="css/images/support_icon.png"><br>
+                  <br>
+                  <p>Deliver a Support Onboarding</p></div>
+              </div>
+              <div class="oj-flex-item col-sm-6 col-lg-3 servicesblocksinner">
+                <div class="centerelement"><img src="css/images/exec_binding_icon.png"><br>
+                  <br>
+                  <p>Build an Executive Briefing</p></div>
+              </div>
+              <div class="oj-flex-item col-sm-6 col-lg-3 servicesblocksinner">
+                <div class="centerelement"><img src="css/images/pack_icon.png"><br>
+                  <br>
+                  <p>Create a Packaged Proposal</p></div>
+              </div>
+              <div class="oj-flex-item col-sm-6 col-lg-3 servicesblocksinner">
+                <div class="centerelement"><img src="css/images/business_icon.png"><br>
+                  <br>
+                  <p>Build a Business Case</p></div>
+              </div>
+              <div class="oj-flex-item col-sm-6 col-lg-3 servicesblocksinner">
+                <div class="centerelement"><img src="css/images/deliver_icon.png"><br>
+                  <br>
+                  <p>Deliver a Health Check</p></div>
+              </div>
+            </div>
+          </div>
+        <!-- </div> -->
+        <div class="row oj-flex">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-sm-6 col-md-3 seserviceblock">
+                <div class="centerelement"><img src="css/images/tick_med.png"><br>
+                  <br>
+                  Customer
+                  Discovery</div>
+              </div>
+              <div class="col-sm-6 col-md-3 seserviceblock">
+                <div class="centerelement"><img src="css/images/tick_med.png"><br>
+                  <br>
+                  Platform
+                  Assessments</div>
+              </div>
+              <div class="col-sm-6 col-md-3 seserviceblock">
+                <div class="centerelement"><img src="css/images/tick_med.png"><br>
+                  <br>
+                  Hands-on
+                  Workshops </div>
+              </div>
+              <div class="col-sm-6 col-md-3 seserviceblock">
+                <div class="centerelement"><img src="css/images/tick_med.png"><br>
+                  <br>
+                  Customer
+                  Demos</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-sm-6 col-md-3 seserviceblock">
+                <div class="centerelement"><img src="css/images/tick_med.png"><br>
+                  <br>
+                  RFx
+                  Response Support</div>
+              </div>
+              <div class="col-sm-6 col-md-3 seserviceblock">
+                <div class="centerelement"><img src="css/images/tick_med.png"><br>
+                  <br>
+                  Sizing,
+                  Quoting & Config Support</div>
+              </div>
+              <div class="col-sm-6 col-md-3 seserviceblock">
+                <div class="centerelement">Project Management Support</div>
+              </div>
+              <div class="col-sm-6 col-md-3 seserviceblock greybg">
+                <div class="centerelement">Reusable
+                  Asset
+                  Harvesting</div>
+              </div>
+            </div>
+          </div>
+        </div>        
+      </div>
+    </div>
+  </div>
+</div>
+<!------------------------------------CALENDAR------------------------------------> 
+<a class="anchor" id="keydates"></a>
+<div class="oj-row row5 newrow">
+  <div class="container">
+    <div class="col-sm-12 keydates">
+      <div class="oj-flex">
+        <div class="oj-sm-12 keydatestitle"><img src="css/images/sekeydates_icon_lg.png">&nbsp;Key Dates</div>
+        <div class="oj-sm-12">
+          <div class="oj-flex">
+            <div class="oj-sm-12">
+              <div class="oj-margin">
+                <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <div class="oj-flex calevents">
+                        <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Friday, September 15<br>
+                          <br>
+                          <span 
+     class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : 10:00 AM PST / 1:00 PM EST</p>
+                      </div>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">iPaaS Community Call: OOW App Integration Updates</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end"><a href="http://retriever.us.oracle.com/apex/f?p=121:22:4428811561900114::NO:RP:P22_CONTAINER_ID,P22_PREV_PAGE:80834,112" target="_blank">Replay</a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Friday, September 15<br>
+                        <br>
+                        <span 
+     class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : 10:00 AM PST / 1:00 PM EST</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">iPaaS Community Call: OOW Data Integration Updates</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton ">
+                      <div class="orangeBbutton oj-lg-float-end"><a href="http://retriever.us.oracle.com/apex/f?p=121:22:3360101599823767::NO:RP:P22_CONTAINER_ID,P22_PREV_PAGE:80834,112" target="_blank">Replay</a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Thursday, September 21<br>
+                        <br>
+                        <span 
+     class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : 8:30-9:30 a.m. Pacific</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Analytics PM Call: Everything You Need to Know for OOW</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end"><a href="http://retriever.us.oracle.com/apex/f?p=121:22:289065150287241::NO:RP:P22_CONTAINER_ID,P22_PREV_PAGE:77441,4684014" target="_blank">Replay</a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Wednesday, September 27<br>
+                        <br>
+                        <span 
+     class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : 12:00 PM PST / 3:00 PM EST</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">SE Excellence Community Call: OOW AppDev Updates</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end"><a href="http://ilearning.oracle.com/ilearn/en/learner/jsp/offering_details_home.jsp?classid=2032578506" target="_blank">Webcast Registration</a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Wednesday, September 27<br>
+                        <br>
+                        <span 
+     class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : 10:00 AM PST / 1:00 PM EST</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">IaaS PM Webinar: OOW IaaS Updates</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end"><a href="https://oracle.zoom.us/webinar/register/e540a365f8fd283fc5b9141539e44ee6" target="_blank">Webcast Registration</a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;TBD<br>
+                        <br>
+                        <span 
+     class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : TBD</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">DB Community Call: Penny Avril</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end">Pending</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Sunday, October 1st - Thursday, October 5th<br>
+                        <br>
+                      </p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Oracle OpenWorld</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end"><a href="https://www.oracle.com/openworld/index.html" target="_blank">OOW Corporate Site</a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Thursday, October 12th<br>
+                        <br>
+                        &nbsp;</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">SE Accelerate Cloud Regional Road Show w/Hamidou Dia - NEW YORK</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end">Regional Only Event<br>
+                        See Calendar Invite</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="oj-sm-12 oj-sm-center">
+                  <div class="oj-flex valign">
+                    <div class="oj-sm-12 oj-lg-4 oj-flex"></div>
+                    <div class="oj-sm-12 oj-lg-5 oj-flex">
+                      <button class="oj-sm-align-center oj-flex bluebutton ">See All</button>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-3"><span class="oj-md-float-end">Missed out any course?<br>
+                      <a href="#">Checkout Archives</a></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!------------------------------------Wins, Go-Lives and References------------------------------------> 
+<a class="anchor" id="golives"></a>
+<div class="oj-row row7 newrow">
+  <div class="container">
+    <div class="col-sm-12 wins  bgwhite">
+      <div class="oj-flex">
+        <div class="oj-sm-12 winstitle"><img src="css/images/featured_icon_lg.png">&nbsp;Featured Go-Lives</div>
+        <div class="oj-sm-12">
+          <div class="oj-flex">
+          <!-- filmstrip container -->
+            <div id="filmStripwins" class="oj-sm-12" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 2,arrowVisibility: 'visible'}">
+              <div id="" class="my-filmstrip-item oj-flex-item oj-margin winsblock">
+                <div id="animationDemo">
+                  <div id="animatable" class="ani_container"> 
+                    
+                    <!-- back face of card -->
+                    <div class="cardface backside oj-animation-backface">
+                      <div class="wins_block oj-sm-12">
+                        <div class="win_logo oj-sm-12">IKM</div>
+                        <div class="oj-flex oj-sm-12 win_desc">
+                          <p>Hear how the extended Oracle team worked together to navigate some very tricky internal processes.  This tight collaboration resulted in a successful Cloud go-live for IKM and our first GoldenGate reference. </p>
+                          <div class="summaryButton oj-sm-12 oj-flex">
+                            <div class="oj-sm-12">
+                              <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable')">Back</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- front face of card -->
+                    <div class="cardface">
+                      <div class="wins_block oj-sm-12">
+                        <div class="win_logo oj-sm-12"><img src="css/images/logo-ikm-3434021.png"></div>
+                        <div class="oj-flex oj-sm-12 win_desc">
+                          <div class="oj-sm-6 imgblock"><img src="css/images/misha_img.png" class="img-responsive"></div>
+                          <div class="oj-sm-6 textblock">
+                            <div class="win_text">
+                              <p>Hosted by : <br>
+                                <span class="largetext">Misha Logvinov</span></p>
+                              <p>This episode’s guest : <br>
+                                <span class="largetext">Scott Sharpley</span></p>
+                            </div>
+                          </div>
+                          <div class="summaryButton oj-sm-12 oj-flex">
+                            <div class="oj-sm-12 oj-xl-6">
+                              <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable')">Quick Summary</button>
+                            </div>
+                            <div class="oj-sm-12 oj-xl-6 oj-flex"> <a href="https://otube.oracle.com/media/063017_GoLive_IKM.mp4/0_4dd4n269" target="_blank">Listen to Interview</a> </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="" class="my-filmstrip-item oj-flex-item oj-margin winsblock">
+                <div id="animationDemo">
+                  <div id="animatable1" class="ani_container"> 
+                    
+                    <!-- back face of card -->
+                    <div class="cardface backside oj-animation-backface">
+                      <div class="wins_block oj-sm-12">
+                        <div class="win_logo oj-sm-12"><img src="css/images/stanford-logo.png"></div>
+                        <div class="oj-flex oj-sm-12 win_desc">
+                          <p>Hear how we got our foot in the door at Stanford to prove that our Oracle Management Cloud was a better alternative to Splunk.  This initial win led to a successful go live and an expansion at Stanford. </p>
+                          <div class="summaryButton oj-sm-12 oj-flex">
+                            <div class="oj-sm-12">
+                              <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable1')">Back</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- front face of card -->
+                    <div class="cardface">
+                      <div class="wins_block oj-sm-12">
+                        <div class="win_logo oj-sm-12"><img src="css/images/stanford-logo.png"></div>
+                        <div class="oj-flex oj-sm-12 win_desc">
+                          <div class="oj-sm-6 imgblock"><img src="css/images/misha_img.png" class="img-responsive"></div>
+                          <div class="oj-sm-6 textblock">
+                            <div class="win_text">
+                              <p>Hosted by : <br>
+                                <span class="largetext">Misha Logvinov</span></p>
+                              <p>This episode’s guest : <br>
+                                <span class="largetext">Venkat Uppuluri</span></p>
+                            </div>
+                          </div>
+                          <div class="summaryButton oj-sm-12 oj-flex">
+                            <div class="oj-sm-12 oj-xl-6">
+                              <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable1')">Quick Summary</button>
+                            </div>
+                            <div class="oj-sm-12 oj-xl-6 oj-flex"> <a href="https://otube.oracle.com/media/GoLive-Stanford/0_snf30ktm/-1" target="_blank">Listen to Interview</a> </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            <!-- filmstrip container -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!------------------------------------References------------------------------------> 
+<a class="anchor" id="references"></a>
+<div class="oj-row row6 newrow">
+  <div class="container">
+    <div class="oj-sm-12 references  bgwhite">
+      <div class="oj-flex">
+        <div class="oj-sm-12 refertitle"><img src="css/images/references_icon_lg.png">&nbsp;References</div>
+        <div class="oj-md-6  oj-flex">
+          <div class="oj-flex oj-sm-12 oj-margin referencesblock">
+            <div class="oj-flex oj-sm-12  logorow">
+              <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/search/customers/_/N-p5vz?Nr=112&bcid=5508413926001" target="_blank"><img src="css/images/Exhibitor.png"></a></div>
+              <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/corporate/pressrelease/oracle-rac-iaas-050917.html" target="_blank"><img src="css/images/ICAT-300x120.png"></a></div>
+              <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/customers/astute-1-storage-cl.html" target="_blank"><img src="css/images/astute.png"></a></div>
+            </div>
+            <div class="oj-sm-12 button oj-flex"><a  class="whitebutton" href="https://www.oracle.com/search/customers/_/N-1joZp5vz?Nr=112" target="_blank">Search for IaaS Customers</a></div>
+          </div>
+        </div>
+        <div class="oj-md-6  oj-flex">
+          <div class="oj-flex oj-sm-12 oj-margin referencesblock">
+            <div class="oj-flex oj-sm-12  ">
+              <div class="oj-flex oj-sm-12 logorow">
+                <div class="oj-sm-12 oj-lg-4"><a href="https://www.forbes.com/sites/oracle/2017/03/15/a-fintech-innovators-race-to-the-cloud/#18ac787315e5" target="_blank"><img src="css/images/calypso.png"></a></div>
+                <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/search/customers/_/N-1joZp5wb?Ntt=trek&Dy=1&Nty=1&Nr=112&Ntk=S1" target="_blank"><img src="css/images/Trek_Bicycle_Corporation_logo.svg.png"></a></div>
+                <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/customers/pragmatyxs-1-dbcs.html?msgid=gcp-PAAS" target="_blank"><img src="css/images/pragmatyxscolorlogo.png"></a></div>
+              </div>
+            </div>
+            <div class="oj-sm-12 button oj-flex"><a class="whitebutton" href="https://www.oracle.com/search/customers/_/N-1joZp5wb?Nr=112" target="_blank">Search for PaaS Customers</a></div>
+          </div>
+        </div>
+        <div class="oj-sm-12 oj-sm-center">
+          <div class="oj-flex-item"> <a href="http://gcp.oraclecorp.com/ocpwb/f?p=144:2060:17175260936151" target="_blank">
+            <button  class="oj-sm-align-center oj-flex bluebutton"> Request a Reference</button>
+            </a> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!------------------------------------Featured Stories------------------------------------> 
+<a class="anchor" id="empf"></a>
+<div class="oj-row row7 newrow">
+  <div class="container">
+    <div class="oj-sm-12 featured bgwhite">
+      <div class="oj-flex">
+        <div class="oj-sm-12 featuredtitle"><img src="css/images/emp_feature_lg.png">&nbsp;Employee Features</div>
+        <div class="oj-sm-12">
+          <div class="oj-flex">
+            <div id="filmStripfeatured" class="" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'hidden'}">   <!-- block 1 -->
+              <div class="oj-panel oj-panel-alt2 my-filmstrip-item" 
+           data-bind="" style="background:url(css/images/JMinter_small.jpg);">
+                <div class="employee_c" >
+                  <div class="emp_details">
+                    <div class="slash"></div>
+                    <a data-bind="click:empf1">TECH TALENT FEATURE: It’s All in the Family - Elite Athletes</a></div>
+                </div>
+              </div>
+              <div class="oj-panel oj-panel-alt2 my-filmstrip-item" 
+           data-bind="" style="background:url(css/images/BellaDosovitsky_Picture.jpg);">
+                <div class="employee_c" >
+                  <div class="emp_details">
+                    <div class="slash"></div>
+                    <a data-bind="click:empf2">Giving Back: Oracle d.Tech Coach Inspires Teenage Girls </a></div>
+                </div>
+              </div>
+               <!-- block 1 -->
+            
+            </div>
+            <div style="text-align: center;" class="oj-sm-12">
+              <div style="display: inline-block;margin-top: 4px;">
+                <div id="pagingControl" 
+             data-bind="ojComponent: {
+               component: 'ojPagingControl', 
+               data: getPagingModelfeatured(), 
+               pageSize: 0, 
+               pageOptions: {type: 'dots'}}"> </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="empfwrapper">
+  <div style="display:none" id="empf1" title="TECH TALENT FEATURE: It’s All in the Family - Elite Athletes" 
+       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
+     <div class="oj-dialog-body empf">
+       <p><img src="css/images/JMinter_small.jpg" align="right">Our “Tech Talent” feature for October is Dustin Minter, Cloud Customer Success Manager, Public Sector/Enterprise.  Dustin has some mighty fine DNA.  His grandpa, Harry Minter, played for the Philadelphia Phillies baseball team, his father, Mike Minter, was on the NBA D-League team for the Dallas Mavericks, Dustin reached the Final Four of the Elite Eight Basketball tournament at Tarleton State University 2003-2006, his middle brother, Kyle, played soccer at the University of Memphis, and his youngest brother, <a href="http://www.uslsoccer.com/chase-minter" target="_blank">Chase</a>, is playing soccer in the MLS for Real Monarchs Salt Lake City. Dustin’s talents are a great addition to the Oracle Solution Engineering team as he brings to bear his winning and competitive legacy to help our customers succeed in the cloud. </p>
+     </div>
+     
+  </div>
+<div style="display:none" id="empf2" title="Giving Back: Oracle d.Tech Coach Inspires Teenage Girls" 
+       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
+     <div class="oj-dialog-body empf">
+       <p><img src="css/images/BellaDosovitsky_Picture.jpg" align="right">Bella Dosovitsky volunteered for a two-week d.Tech high school inter-session through the <a href="http://www.oraclefoundation.org/" target="_blank">Oracle Education Foundation</a>. She coached a 3D printing class of 25 girls, who went through explorative learning of the 3D Printing industry, the fabrication process, and turning their ideas into real-life designs using CAD software and 3D Printers.</p><p>Bella also got to present to the students our personal and professional journeys, lessons learned, and informal conversations about: self-esteem, women in technology, personal development, juggling our desires with our parents’ pressure, and choosing a profession. </p><p><strong>Why Give Back?</strong> – Bella emphatically said that it was “Surely, the single most inspiring things I’ve done at Oracle so far.”</p>
+     </div>
+     
+  </div>
+
+</div>
