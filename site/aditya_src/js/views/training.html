@@ -3,25 +3,6 @@
  The Universal Permissive License (UPL), Version 1.0
  -->
 
-<div id="dialogWrapper" >
-  <div style="display:none" id="modalDialog1" title="Select your role" 
-       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'escape',rootAttributes: { style: 'width: 60%; height: auto; min-width 240px; '}}">
-    <div class="oj-dialog-body roleWrapper">
-      <form id="form1">
-        <select id="basicSelect"  data-bind="ojComponent: {
-          component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Select your role',
-          options: role,
-          value: selectedrole,
-          rootAttributes: {style:'max-width:20em'}
-        }">
-        </select>
-        <div class="oj-dialog-footer">
-          <button id="okButton" onclick="roleselected()" data-bind="ojComponent: {component: 'ojButton', label: 'Okay'},click:closeRole"> </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 <div id="trainingdialogWrapper" >
   <div style="display:none" id="trainingDialog" title="Request Training" 
        data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'icon',rootAttributes: { style: 'width: 70%; height: auto; min-width 240px; '}}">
@@ -148,21 +129,21 @@
           </form>
           <!-- COURSES -->
           <div class="oj-flex coursesblock">
-            <div class="oj-flex-item oj-lg-3" data-bind="foreach: catcnt">
-              <!-- ko if: count > 0 -->
               <div class="eblocks blocks oj-flex-item oj-margin oj-sm-12 oj-md-4 oj-lg-4">
                 <div class="oj-flex-item"><h4>Refine Courses</h4>
-                    <span data-bind="text:name"></span>(<b data-bind="text:count"></b>)
+                  <!-- ko foreach: refinelist() --> 
+                  <div class="oj-flex-item oj-lg-3">
+                      <span data-bind="text:name"></span>
+                  </div>
+                  <!-- /ko --> 
                 </div> 
               </div>
-              <!-- /ko -->
-            </div>
             <div class="oj-flex-item oj-lg-9">
               <!-- ko foreach: categories() --> 
               <!-- ko if: name -->
               <div class="oj-flex">
                 <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks manC oj-flex-item oj-margin" data-bind="text:name"></div>
-                <!-- ko foreach: courses -->
+                <!-- ko foreach: courses() -->
                 <!-- ko if: $index() > 3 -->              
                   <!-- <div class="morelink oj-flex-item">More</div> -->
                   <!-- /ko --> 

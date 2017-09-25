@@ -26,6 +26,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
       self.roles = ko.observableArray([]);
       self.categories = ko.observableArray([]);
       self.subcategories = ko.observableArray([]);
+      self.refinelist = ko.observableArray([]);
             // category count
       self.catcnt = ko.observableArray([]);
       self.rolebasedcategory = ko.observableArray([]);
@@ -68,7 +69,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
         self.categorybasedsubcategory([]);
         for (var i = 0; i < self.categories().length; i++) {
           var category = self.categories()[i];
-          if (category.parent == role) {
+          if (category.parent == "Role 2") {
             self.rolebasedcategory().push(category);
           }
         }
@@ -79,7 +80,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
         self.categorybasedsubcategory([]);
         for (var i = 0; i < self.subcategories().length; i++) {
           var subcategory = self.subcategories()[i];
-          if (subcategory.parent == role) {
+          if (subcategory.parent == "Role 2") {
             self.categorybasedsubcategory().push(subcategory);
           }
         }
@@ -235,7 +236,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
         });
       }
 
-      getcategories();
+      // getcategories();
 
       // RESET CATEGORY FIELD
       resetcat = function () {
@@ -290,11 +291,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
       }	
   		
 /*----------------------------------PLACEHOLDER SELECT ROLE POPUP----------------------------------*/
-            self.emptyPlaceholder = ko.observable(false);
+      self.emptyPlaceholder = ko.observable(false);
 
-            self.handleAttached = function(info) {
-                // Implement if needed
-            };
+      self.handleAttached = function(info) {
+          // Implement if needed
+      };
 			
       self.closeRole = function() {
           $("#modalDialog1").ojDialog("close")
@@ -310,28 +311,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
 
             /*----------------------------------GET COURSES----------------------------------*/
-            self.role = ko.observableArray([]);
-            self.getrole = function(){
-                $.getJSON(baseurl + "getCategories").then(function (roleslist) //CODE FOR THE ROLE POPUP
-                {
-                    for (var i = 0; i < roleslist.roles.length; i++) 
-                    {
-                        var filt = roleslist.roles[i].name;
-                        self.role.push({
-                            value: filt,
-                            label: filt
-                        });
-                    }
-                    $("#modalDialog1").ojDialog("open");
-
-                });
-            }
-
-            self.getrole();
-
-            roleselected=function(){
-                self.fetchcourses();
-            }
 
             searchcourses=function(){
                 self.searchfetchcourses();
@@ -342,157 +321,153 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.courseslistbycat = ko.observableArray();
             self.schedules = ko.observableArray([]);
             self.searchtext = ko.observableArray([]);
-            self.fetchcourses=function(){                
-                if(self.selectedrole().length==0)
-                {
-                    alert("Please select a role then proceed");
-                    return;
-                }
-                else
-                {
-                    var role=self.selectedrole()[0];
-                    // var text=self.searchtext.length>0?self.searchtext:'';
-                    $.ajax({
-                        url: baseurl + "getCourseByFreetext",
-                        method: 'GET',
-                        headers: {
-                            role_name: role,
-                            free_text_search: ''
-                        },
-                        success: function(allcourses) {
-                            self.processCoursesFromService(allcourses);
-                        },
-                        error: function(xhr) {
-                            alert(xhr);
-                        }
-                    });
-                }                
+            self.fetchcourses=function()
+            {                
+              // var text=self.searchtext.length>0?self.searchtext:'';
+              $.ajax({
+                  url: baseurl + "getCourses",
+                  method: 'GET',
+                  headers: {
+                      free_text_search: ''
+                  },
+                  success: function(allcourses) {
+                    console.log("gggf",allcourses);
+                      self.processCoursesFromService(allcourses);
+                  },
+                  error: function(xhr) {
+                      alert(xhr);
+                  }
+              });               
             }
+            self.fetchcourses();
 
-            self.searchfetchcourses=function(){   
-                if(self.searchtext().length==0)
-                {
-                    alert("Enter text to search");
-                    return;
-                }
-                else
-                {
-                    var role=self.selectedrole()[0];
-                    var text=self.searchtext().length>0?self.searchtext():'';
-                    $.ajax({
-                        url: baseurl + "getCourseByFreetext",
-                        method: 'GET',
-                        headers: {
-                            role_name: role,
-                            free_text_search: text
-                        },
-                        success: function(allcourses) {
-                            self.processCoursesFromService(allcourses);
-                            
-                        },
-                        error: function(xhr) {
-                            alert(xhr);
-                        }
-                    });
-                }                
+            self.searchfetchcourses=function()
+            {   
+              if(self.searchtext().length==0)
+              {
+                  console.log("hurr",self.searchtext());
+                  alert("Enter text to search");
+                  return;
+              }
+              else
+              {
+                console.log("whoa",self.searchtext());
+                var text=self.searchtext().length>0?self.searchtext():'';
+                $.ajax({
+                    url: baseurl + "getCourses",
+                    method: 'GET',
+                    headers: {
+                        free_text_search: text
+                    },
+                    success: function(allcourses) 
+                    {
+                      console.log("dasd",allcourses);
+                      self.processCoursesFromService(allcourses);                        
+                    },
+                    error: function(xhr) 
+                    {
+                      alert(xhr);
+                    }
+                });
+              }                
             }            
 
-            self.processCoursesFromService=function(allcourses){
-                self.categories([]);
-                for(var k=0;k<allcourses.courses.length;k++)
-                {
-                    startday = allcourses.courses[k].schedule[0];
-                    var curcourse=allcourses.courses[k];                        
-                    var categoryname=curcourse.category;// console.log(categoryname);                        
-                    var categoryobj=self.getcategorybyname(categoryname);
-                    self.courseslistbycat=categoryobj.courses;
-                    self.courseslistbycat.push({
-                        name: curcourse.name,
-                        description: curcourse.description,
-                        class_size: curcourse.class_size,
-                        cloud_onpremise: curcourse.cloud_onpremise,
-                        training_level: curcourse.training_level,
-                        training_type: curcourse.training_type,
-                        category: curcourse.category,
-                        start_date: startday == undefined ? "NA" : startday.start_date,
-                        directURL: curcourse.directURL
-                    });                   
-                }    
-                console.log(ko.toJSON(self.categories()));
-                self.getcategorycount();
+            self.processCoursesFromService=function(allcourses)
+            {
+              self.categories([]);
+              for(var k=0;k<allcourses.courses.length;k++)
+              {
+                  startday = allcourses.courses[k].schedule[0];
+                  var curcourse=allcourses.courses[k];                        
+                  var categoryname=curcourse.category_name;// console.log(categoryname);                        
+                  var categoryobj=self.getcategorybyname(categoryname);
+                  console.log(categoryobj,"sdSA");
+                  self.courseslistbycat=categoryobj.courses;
+                  self.courseslistbycat.push({
+                      name: curcourse.name,
+                      description: curcourse.description,
+                      class_size: curcourse.class_size,
+                      cloud_onpremise: curcourse.cloud_onpremise,
+                      training_level: curcourse.training_level,
+                      training_type: curcourse.training_type,
+                      category: curcourse.category_name,
+                      start_date: startday == undefined ? "NA" : startday.start_date,
+                      directURL: curcourse.directURL
+                  });                   
+              }
+              console.log(ko.toJSON(self.courseslistbycat()));    
+              console.log(ko.toJSON(self.categories()));
+              // self.getcategorycount();
+              // self.getLeftpanelData();
             }
             
-            self.getcategorycount=function(){
-                self.catcnt([]);
-                var cnt = 0;
-                if(self.courseslistbycat().length>0)
-                {
-                    for(var i=0;i<self.categories().length;i++)
-                    {
-                        var name=self.categories()[i].name;
-                        cnt=self.courseslistbycat().length;
-                        console.log(cnt);
-                        self.catcnt.push({
-                            name:name,
-                            count:cnt
-                        });
-                    }
-                    console.log(ko.toJSON(self.catcnt()));
-                }
-                else
-                {
-                    alert("No Courses present for this role.");
-                    return;
-                }
-            }
-
-            // self.getcomplexitycount=function(){
-            //     self.comcnt([]);
-            //     var cmcnt = 0;
-            //     var counts = {};
+            // self.getcategorycount=function(){
+            //     self.catcnt([]);
+            //     var cnt = 0;
             //     if(self.courseslistbycat().length>0)
             //     {
             //         for(var i=0;i<self.categories().length;i++)
             //         {
-            //             var num = self.categories()[i].training_level;
-            //             counts[num] = counts[num] ? counts[num] + 1 : 1;
-            //             console.log(counts[num]);
-            //             // var com=self.categories()[i].training_level;
-            //             // cmcnt=self.courseslistbycat().length;
-            //             // console.log(cmcnt);
-            //             // self.comcnt.push({
-            //             //     name:name,
-            //             //     count:cnt
-            //             // });
+            //             var name=self.categories()[i].name;
+            //             cnt=self.courseslistbycat().length;
+            //             console.log(cnt);
+            //             self.catcnt.push({
+            //                 name:name,
+            //                 count:cnt
+            //             });
             //         }
-            //         // console.log(ko.toJSON(self.comcnt()));
+            //         console.log(ko.toJSON(self.catcnt()));
             //     }
             //     else
             //     {
             //         alert("No Courses present for this role.");
             //         return;
             //     }
-            // }  
-            // self.getcomplexitycount();
+            // }
 
-            self.getcategorybyname=function(catname){                
-                // Look if the category is already present in the array
-                for(var i=0;i<self.categories().length;i++){
-                    if(self.categories()[i].name===catname){
-                        return self.categories()[i];
-                    }
-                }                
-                // Category is not present so we need to insert the category in the array
-                self.categories.push({
-                    name:catname,
-                    courses:ko.observableArray([])
-                });                
-                var lastindex=self.categories().length-1;
-                return self.categories()[lastindex];                
+            self.getcategorybyname=function(catname)
+            {                
+              // Look if the category is already present in the array
+              for(var i=0;i<self.categories().length;i++){
+                  if(self.categories()[i].category_name===catname){
+                      return self.categories()[i];
+                  }
+              }                
+              // Category is not present so we need to insert the category in the array
+              self.categories.push({
+                  name:catname,
+                  courses:ko.observableArray([])
+              });                
+              var lastindex=self.categories().length-1;
+              return self.categories()[lastindex];                
             }            
             /*------------------------------  END  ------------------------------*/
 
-            /*----------------------------------SEARCH----------------------------------*/
+            /*----------------------------------REFINE CATEGORIES----------------------------------*/
+
+            self.getLeftpanelData = function () 
+            {                
+              $.getJSON("https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/getCategories").then(function (reasons) 
+              {                    
+                self.refinelist([]);                    
+                var categorlist = reasons.categories;
+                for (var i = 0; i < categorlist.length; i++) 
+                {                        
+                  var subcat = categorlist[i].sub_categories;                        
+                  for (var j = 0; j < subcat.length; j++) 
+                  {
+                      console.log(subcat[j].name);                            
+                      self.refinelist.push({                                
+                        name: ko.observable(subcat[j].name),                                
+                        id: ko.observable(subcat[j].id)                            
+                      })                        
+                  }                    
+                }
+                console.log(ko.toJSON(self.refinelist()));
+              }); 
+            }
+            self.getLeftpanelData();
+
 
             /*----------------------------------FLIP----------------------------------*/
 
