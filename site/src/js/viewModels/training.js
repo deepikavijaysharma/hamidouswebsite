@@ -27,7 +27,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
       self.categories = ko.observableArray([]);
       self.subcategories = ko.observableArray([]);
             // category count
-            self.catcnt = ko.observableArray([]);
+      self.catcnt = ko.observableArray([]);
       self.rolebasedcategory = ko.observableArray([]);
       self.categorybasedsubcategory = ko.observableArray([]);
       self.isAdvanced = ko.observableArray([]);
@@ -50,11 +50,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
       self.calllink = ko.observable('');
       self.calldialin = ko.observable('');
       self.calldesc = ko.observable('');
-
-
-
-
-
 
       // EVENT HANDLER FOR ROLE SELECTION
       rolesselected = function (event, ui) {
@@ -120,7 +115,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
         self.calldesc('');
       }			
 			
-// CREATE COMMUNITY CALL
+    // CREATE COMMUNITY CALL
       createcommunitycall = function () {
 
         if (self.calltitle().length == 0) {
@@ -605,8 +600,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             /*----------------------------------SEARCH----------------------------------*/
 
 
+            /*----------------------------------CREATE COURSE----------------------------------*/
 
 
+            
         }
 
         return new DashboardViewModel();

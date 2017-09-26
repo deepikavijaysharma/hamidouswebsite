@@ -41,6 +41,11 @@ $medblue: #68b8dd;
 $medblue1: #2290ab;
 $orange: #f29111;
 $yellow: #ffd000;
+$red: #ff0000;
+$pink: #942645;
+$green: #92d050;
+
+$darkgrey5: #4a4a4a;
 // Header
 $appLayoutWebHeaderBgColor: $headerBgColor !default;
 $appLayoutWebHeaderBoxShadow: none !default;
@@ -237,13 +242,13 @@ font-size:$mediumFontSize;
 }
 
 @mixin shadowbottom{
-	-webkit-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.35);
--moz-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.35);
-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.35);
+	-webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.20);
+-moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.20);
+box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.20);
 }
 
 @mixin shadowbottomthin{
-	-webkit-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.35);
--moz-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.35);
-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.35);
+	-webkit-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.20);
+-moz-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.20);
+box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.20);
 }
