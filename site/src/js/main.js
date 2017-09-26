@@ -4,6 +4,10 @@
  */
 'use strict';
 var baseurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/";
+var hubbaseurl="http://solutionengineering-devops.us.oracle.com:7003/ords/seaas/seaas/";
+var ssoemail='';
+var usertype='';
+var uuid='';
 /**
  * Example of Require.js boostrap javascript
  */

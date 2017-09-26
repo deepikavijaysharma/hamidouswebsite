@@ -3,12 +3,11 @@
  The Universal Permissive License (UPL), Version 1.0
  -->
 
-<div id="dialogWrapper" >
-  <div style="display:none" id="modalDialog1" title="Select your role" 
-       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'escape',rootAttributes: { style: 'width: 60%; height: auto; min-width 240px; '}}">
+<div id="dialogWrapper">
+  <div style="display:none" id="modalDialog1" title="Select your role" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'escape',rootAttributes: { style: 'width: 60%; height: auto; min-width 240px; '}}">
     <div class="oj-dialog-body roleWrapper">
       <form id="form1">
-        <select id="basicSelect"  data-bind="ojComponent: {
+        <select id="basicSelect" data-bind="ojComponent: {
           component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Select your role',
           options: role,
           value: selectedrole,
@@ -22,54 +21,53 @@
     </div>
   </div>
 </div>
-<div id="trainingdialogWrapper" >
-  <div style="display:none" id="trainingDialog" title="Request Training" 
-       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'icon',rootAttributes: { style: 'width: 70%; height: auto; min-width 240px; '}}">
-    <div class="oj-dialog-body"> 
+<div id="trainingdialogWrapper">
+  <div style="display:none" id="trainingDialog" title="Request Training" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'icon',rootAttributes: { style: 'width: 70%; height: auto; min-width 240px; '}}">
+    <div class="oj-dialog-body">
       <!-- FORM -->
       <div id="form-container" class="oj-form-layout reqtraining">
         <div class="reqform">
           <div class="oj-flex">
             <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6 formrow">
-            <div class="oj-margin oj-sm-12">
-              <label for="input">Name</label>
-              <input id="input" data-bind="ojComponent: 
+              <div class="oj-margin oj-sm-12">
+                <label for="input">Name</label>
+                <input id="input" data-bind="ojComponent: 
                    {component: 'ojInputText', value:'text', disabled: true}">
+              </div>
             </div>
-            </div>
-           <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6 formrow">
-            <div class="oj-margin oj-sm-12">
-              <label for="input">Role</label>
-              <input id="input" data-bind="ojComponent: 
+            <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6 formrow">
+              <div class="oj-margin oj-sm-12">
+                <label for="input">Role</label>
+                <input id="input" data-bind="ojComponent: 
                    {component: 'ojInputText', value:'text', disabled: true}">
+              </div>
             </div>
-             </div>
           </div>
           <div class="oj-flex">
             <div class="oj-flex oj-flex-item oj-sm-12 oj-margin reqheading"> Request your course: </div>
           </div>
           <div class="oj-flex">
             <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6">
-            <div class="oj-margin oj-sm-12">
-              <div class="oj-flex-item oj-sm-12 formrow">
-                <label for="input">Pillar</label>
-                <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
+              <div class="oj-margin oj-sm-12">
+                <div class="oj-flex-item oj-sm-12 formrow">
+                  <label for="input">Pillar</label>
+                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
                   <option value="value">value</option>
                 </select>
-              </div>
-              <div class="oj-flex-item oj-sm-12 formrow">
-                <label for="input">Platform</label>
-                <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
+                </div>
+                <div class="oj-flex-item oj-sm-12 formrow">
+                  <label for="input">Platform</label>
+                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
                   <option value="value">value</option>
                 </select>
-              </div>
-              <div class="oj-flex-item oj-sm-12">
-                <label for="input">Course Specifications</label>
-                <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                  <label for="input">Course Specifications</label>
+                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
                   <option value="value">value</option>
                 </select>
+                </div>
               </div>
-            </div>
             </div>
             <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6">
               <div class="oj-margin oj-sm-12 reqsummary">
@@ -83,453 +81,316 @@
             <div class="oj-sm-12 footerbuttons">
               <div class="oj-md-6 oj-lg-4 oj-sm-float-end">
                 <div class="oj-flex oj-sm-12">
-                <div class="oj-flex oj-md-6">
-                  <input id="reset" type="reset" 
-           data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}" class="nobutton"/>
-                </div>
-                <div class="oj-md-6">
-                <button id= "button"
-            data-bind="ojComponent: { component: 'ojButton', label: 'Submit' }" class="bluebutton">
+                  <div class="oj-flex oj-md-6">
+                    <input id="reset" type="reset" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}" class="nobutton" />
+                  </div>
+                  <div class="oj-md-6">
+                    <button id="button" data-bind="ojComponent: { component: 'ojButton', label: 'Submit' }" class="bluebutton">
                 </div>
                 </div>
                 </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="oj-row subnav">
-  <div id="tabs-container">
-    <div id="tabs" data-bind="ojComponent:{component: 'ojTabs',orientation: 'horizontal', disabledTabs: [2]}"> 
-      <!-- tab bar -->
-      
-      <ul class="hnav">
-        <li><span>Courses</span></li>
-        <li><span>Community Calls</span></li>
-        <li><span>Offers</span></li>
-        <li><span>Admin</span></li>
-      </ul>
-      
-      <!-- tab contents -->
-      
-      <div id="tabs-1">
-        <div class="container"> 
-          <!-- SEARCH -->
-          <form id="form1">
-            <div class="oj-flex search">
-              <div class="oj-flex-item oj-sm-4 oj-md-2 oj-lg-2 labeldiv">
-                <label>Catalogue</label>
-              </div>
-              <div class="oj-flex-item oj-sm-8 oj-md-7 oj-lg-5">
-                <input id="search-input" placeholder="Search courses, community calls, resources…" data-bind="ojComponent:{
+    <div class="oj-row subnav">
+      <div id="tabs-container">
+        <div id="tabs" data-bind="ojComponent:{component: 'ojTabs',orientation: 'horizontal', disabledTabs: disabledtab}">
+          <!-- tab bar -->
+
+          <ul class="hnav">
+            <li><span>Courses</span></li>
+            <li><span>Community Calls</span></li>
+            <li><span>Offers</span></li>
+            <li><span>Admin</span></li>
+          </ul>
+
+          <!-- tab contents -->
+
+          <div id="tabs-1">
+            <div class="container">
+              <!-- SEARCH -->
+              <form id="form1">
+                <div class="oj-flex search">
+                  <div class="oj-flex-item oj-sm-4 oj-md-2 oj-lg-2 labeldiv">
+                    <label>Catalogue</label>
+                  </div>
+                  <div class="oj-flex-item oj-sm-8 oj-md-7 oj-lg-5">
+                    <input id="search-input" placeholder="Search courses . . ." data-bind="ojComponent:{
                   component: 'ojInputSearch', 
                   value: searchtext,
                   update : searchcourses
-                }"/>
-              </div>
-              <div class="oj-flex-item oj-sm-5 oj-md-2">
-                <button id="search-button" onclick="searchcourses()" class="oj-button-confirm" data-bind="ojComponent: {
+                }" />
+                  </div>
+                  <!-- <div class="oj-flex-item oj-sm-5 oj-md-2">
+                    <button id="search-button" onclick="searchcourses()" class="oj-button-confirm" data-bind="ojComponent: {
                     component: 'ojButton',
                     label: 'Search'},
                     click: searchInput"> 
                 </button>
-              </div>
-              <div class="oj-flex-item oj-sm-7 oj-xl-3 req_block">
-                <button id="trainingButton" class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
+                  </div> -->
+                  <div class="oj-flex-item oj-sm-7 oj-xl-3 req_block">
+                    <button id="trainingButton" class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
                   component: 'ojButton',
                   chroming: 'full',
                   label: '+ Request Training'},click:openReqtraining">
                 </button>
-              </div>
-            </div>
-          </form>
-          <!-- COURSES -->
-          <div class="oj-flex coursesblock">
-            <div class="oj-flex-item oj-lg-3" data-bind="foreach: catcnt">
-              <!-- ko if: count > 0 -->
-              <div class="eblocks blocks oj-flex-item oj-margin oj-sm-12 oj-md-4 oj-lg-4">
-                <div class="oj-flex-item"><h4>Refine Courses</h4>
-                    <span data-bind="text:name"></span>(<b data-bind="text:count"></b>)
-                </div> 
-              </div>
-              <!-- /ko -->
-            </div>
-            <div class="oj-flex-item oj-lg-9">
-              <!-- ko foreach: categories() --> 
-              <!-- ko if: name -->
-              <div class="oj-flex">
-                <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks manC oj-flex-item oj-margin" data-bind="text:name"></div>
-                <!-- ko foreach: courses -->
-                <!-- ko if: $index() > 3 -->              
-                  <!-- <div class="morelink oj-flex-item">More</div> -->
-                  <!-- /ko --> 
-                  <!-- ko if: $index() <= 2 --> 
-                  <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks oj-flex-item oj-margin">
-                    <!-- <span class="badge">Mandatory Course</span> -->
-                    <div class="title" data-bind="text:name"></div>
-                    <div class="desc">Learn Advanced Methods of usability methods</div>
-                    <div class="oj-flex coursedetails">
-                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/duration_icon.png"><span data-bind="text:class_size"></span></div>
-                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/level_icon.png"><span data-bind="text:training_level"></span></div>
-                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:cloud_onpremise"></span></div>
-                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:training_type"></span></div>
-                    </div>
-                    <div class="date"> Due Date: <br><b data-bind="text:start_date">Sep 20, 2017</b></div>
-                    <a data-bind="attr: { href: directURL}" class="whitebutton">Enroll</a>
+                
                   </div>
-                  <!-- /ko --> 
-                  <!-- ko if: $index() > 2 -->                
-                  <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks oj-flex-item oj-margin">
-                    <!-- <span class="badge">aMandatory Course</span> -->
-                    <div class="title" data-bind="text:name"></div>
-                    <div class="desc">Learn Advanced Methods of usability methods</div>
-                    <div class="oj-flex coursedetails">
-                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/duration_icon.png"><span data-bind="text:class_size"></span></div>
-                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/level_icon.png"><span data-bind="text:training_level"></span></div>
-                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:cloud_onpremise"></span></div>
-                      <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:training_type"></span></div>
+                </div>
+              </form>
+              <!-- COURSES -->
+              <div class="oj-flex coursesblock">
+                <div class="oj-flex-item oj-lg-3">
+                  <div class="eblocks blocks oj-flex-item oj-margin oj-sm-12 oj-md-4 oj-lg-4" style="height: 100%">
+                    <div class="oj-flex-item">
+                      <h4>Refine Courses</h4>
+                      <hr>
+                      <!-- ~~~~~~~~~~~~~ CATEGORIES ~~~~~~~~~~~~~~ -->
+                      <!-- ko if: refinelist().length>0 -->
+                      <h5><b>Categories</b></h5>
+                      <!-- /ko -->
+                      <div id="checkboxSetId" aria-labelledby="mainlabelid" data-bind="ojComponent: {
+                        component: 'ojCheckboxset', 
+                        value: refinecategories}">
+                        <!-- ko foreach: refinelist -->
+                        <span class="oj-choice-item">
+                              <input type="checkbox" data-bind="attr:{value:id},click:refineupdate">
+                              <label data-bind="text:name"></label>
+                              <br><br>
+                        </span>
+                        <!-- /ko -->
+                      </div>
+                      <br><br>
+                      <!-- ~~~~~~~~~~~~~ PRODUCT TYPE ~~~~~~~~~~~~~~ -->
+                      <!-- ko if: producttype().length>0 -->
+                      <h5><b>Product Type</b></h5>
+                      <!-- /ko -->
+                      <div id="checkboxSetId" aria-labelledby="mainlabelid" data-bind="ojComponent: {
+                                              component: 'ojCheckboxset', 
+                                              value: refinecategories}">
+                        <!-- ko foreach: producttype -->
+                        <span class="oj-choice-item">
+                                                    <input type="checkbox" data-bind="attr:{value:id},click:refineupdate">
+                                                    <label data-bind="text:name"></label>
+                                                    <br><br>
+                                              </span>
+                        <!-- /ko -->
+                      </div>
+                      <br><br>
+                      <!-- ~~~~~~~~~~~~~ TRAINING LEVEL ~~~~~~~~~~~~~~ -->
+                      <!-- ko if: training_levels().length>0 -->
+                      <h5><b>Training Level</b></h5>
+                      <!-- /ko -->
+                      <div id="checkboxSetId" aria-labelledby="mainlabelid" data-bind="ojComponent: {
+                                              component: 'ojCheckboxset', 
+                                              value: refinecategories}">
+                        <!-- ko foreach: training_levels -->
+                        <span class="oj-choice-item">
+                                                    <input type="checkbox" data-bind="attr:{value:id},click:refineupdate">
+                                                    <label data-bind="text:name"></label>
+                                                    <br><br>
+                                              </span>
+                        <!-- /ko -->
+                      </div>
+                      <br><br>
+                      <!-- ~~~~~~~~~~~~~ TRAINING TYPE ~~~~~~~~~~~~~~ -->
+                      <!-- ko if: training_types().length>0 -->
+                      <h5><b>Training Type</b></h5>
+                      <!-- /ko -->
+                      <div id="checkboxSetId" aria-labelledby="mainlabelid" data-bind="ojComponent: {
+                                              component: 'ojCheckboxset', 
+                                              value: refinecategories}">
+                        <!-- ko foreach: training_types -->
+                        <span class="oj-choice-item">
+                                                    <input type="checkbox" data-bind="attr:{value:id},click:refineupdate">
+                                                    <label data-bind="text:name"></label>
+                                                    <br><br>
+                                              </span>
+                        <!-- /ko -->
+                      </div>
+                      <br><br>
+                      <!-- ~~~~~~~~~~~~~ CITIES ~~~~~~~~~~~~~~ -->
+                      <!-- ko if: cities().length>0 -->
+                      <h5><b>Cities</b></h5>
+                      <!-- /ko -->
+                      <div id="checkboxSetId" aria-labelledby="mainlabelid" data-bind="ojComponent: {
+                                              component: 'ojCheckboxset', 
+                                              value: refinecategories}">
+                        <!-- ko foreach: cities -->
+                        <span class="oj-choice-item">
+                                                    <input type="checkbox" data-bind="attr:{value:id},click:refineupdate">
+                                                    <label data-bind="text:name"></label>
+                                                    <br><br>
+                                              </span>
+                        <!-- /ko -->
+                      </div>
+                      <br><br>
+
+                      <div>
+                        <button id="button" data-bind="click: refinesearch, 
+                          ojComponent: { component: 'ojButton', label: 'Refine Result' }">
+                          </button>
+                      </div>
                     </div>
-                    <div class="date"> Due Date: <br><b data-bind="text:start_date">Sep 20, 2017</b></div>
-                    <button class="whitebutton">Enroll</button>
                   </div>
-                  <!-- <div class="morelink oj-flex-item">More</div> -->
-                  <!-- /ko --> 
-                  <!-- ko if: $index() == 3 -->          
-                <!-- /ko --> 
-                <!-- /ko --> 
+                </div>
+                <div class="oj-flex-item oj-lg-9">
+                  <!-- ko foreach: categories() -->
+                  <!-- ko if: name -->
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks manC oj-flex-item oj-margin" data-bind="text:name"></div>
+                    <!-- ko foreach: courses -->
+                    <!-- ko if: $index() > 3 -->
+                    <!-- <div class="morelink oj-flex-item">More</div> -->
+                    <!-- /ko -->
+                    <!-- ko if: $index() <= 2 -->
+                    <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks oj-flex-item oj-margin">
+                      <!-- <span class="badge">Mandatory Course</span> -->
+                      <div class="title" data-bind="text:name"></div>
+                      <div class="desc">Learn Advanced Methods of usability methods</div>
+                      <div class="oj-flex coursedetails">
+                        <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/duration_icon.png"><span data-bind="text:class_size"></span></div>
+                        <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/level_icon.png"><span data-bind="text:training_level"></span></div>
+                        <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:cloud_onpremise"></span></div>
+                        <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:training_type"></span></div>
+                      </div>
+                      <div class="date"> Due Date: <br><b data-bind="text:start_date">Sep 20, 2017</b></div>
+                      <a data-bind="attr: { href: directURL}" class="whitebutton">Enroll</a>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: $index() > 2 -->
+                    <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks oj-flex-item oj-margin">
+                      <!-- <span class="badge">aMandatory Course</span> -->
+                      <div class="title" data-bind="text:name"></div>
+                      <div class="desc">Learn Advanced Methods of usability methods</div>
+                      <div class="oj-flex coursedetails">
+                        <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/duration_icon.png"><span data-bind="text:class_size"></span></div>
+                        <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/level_icon.png"><span data-bind="text:training_level"></span></div>
+                        <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:cloud_onpremise"></span></div>
+                        <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:training_type"></span></div>
+                      </div>
+                      <div class="date"> Due Date: <br><b data-bind="text:start_date">Sep 20, 2017</b></div>
+                      <button class="whitebutton">Enroll</button>
+                    </div>
+                    <!-- <div class="morelink oj-flex-item">More</div> -->
+                    <!-- /ko -->
+                    <!-- ko if: $index() == 3 -->
+                    <!-- /ko -->
+                    <!-- /ko -->
+                  </div>
+                  <!-- /ko -->
+                  <!-- /ko -->
+                </div>
               </div>
-              <!-- /ko --> 
-              <!-- /ko -->
             </div>
           </div>
-        </div>
-      </div>
-      <div id="tabs-2" class="ccalls">
-        <div class="container">
-          <form id="form1">
-            <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+
+          <!--========================== COMMUNITY CALLS ==========================-->
+          <div id="tabs-2" class="ccalls">
+            <div class="container">
+              <form id="form1">
+                <div class="oj-flex">
+                  <!-- <div class="oj-flex-item"><select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
                                                     value: val,
                                                     rootAttributes: {style:'max-width:20em'}}">
               <option value="sept2017">September 2017</option>
               <option value="oct2017">October 2017</option>
               <option value="nov2017">November 2017</option>
             </select>
-          </form>
-          <!-- Repeat this -->
-          <div class="oj-flex oj-sm-12 ccrow">
-            <div class="oj-sm-4 oj-md-2  oj-flex">
-              <div class="oj-sm-12 bluebg oj-flex-item">
-                <p><span class="name">Marc Assensio</span><br>
-                  Vice President,<br>
-                  Sales consultant</p>
-                <br>
-              </div>
-            </div>
-            <div class="oj-sm-8 oj-md-10 bgwhitesmall oj-flex">
-              <div class="oj-sm-12 oj-md-1">
-                <div class="lgreybg"><span class="infotext">INFO</span></div>
-              </div>
-              <div class="oj-md-2 cccol">
-                <p><strong class="blue">Date</strong><br>
-                  15.09.2017</p>
-                <p><strong class="blue">Location</strong><br>
-                  Conference Hall</p>
-              </div>
-              <div class="oj-md-3 cccol">
-                <p><strong class="blue">Meeting Link</strong><br>
-                  www.oracle.webex.com</p>
-                <p><strong class="blue">Dial-In</strong><br>
-                  23412349874 - 1234</p>
-              </div>
-              <div class="oj-md-4 cccol">
-                <p><strong class="blue">Description</strong><br>
-                  lorem ipsum lorem ipsum lorem ipsum lorem psum lorem ipsum
-                  lorem  sum asldkfjlskjdf lasjdfljalkjs;flkj</p>
-              </div>
-            </div>
-          </div>
-          <!-- Repeat this -->
-          <div class="oj-flex oj-sm-12 ccrow">
-            <div class="oj-sm-4 oj-md-2  oj-flex">
-              <div class="oj-sm-12 bluebg oj-flex-item">
-                <p><span class="name">Marc Assensio</span><br>
-                  Vice President,<br>
-                  Sales consultant</p>
-                <br>
-              </div>
-            </div>
-            <div class="oj-sm-8 oj-md-10 bgwhitesmall oj-flex">
-              <div class="oj-sm-12 oj-md-1">
-                <div class="lgreybg"><span class="infotext">INFO</span></div>
-              </div>
-              <div class="oj-md-2 cccol">
-                <p><strong class="blue">Date</strong><br>
-                  15.09.2017</p>
-                <p><strong class="blue">Location</strong><br>
-                  Conference Hall</p>
-              </div>
-              <div class="oj-md-3 cccol">
-                <p><strong class="blue">Meeting Link</strong><br>
-                  www.oracle.webex.com</p>
-                <p><strong class="blue">Dial-In</strong><br>
-                  23412349874 - 1234</p>
-              </div>
-              <div class="oj-md-4 cccol">
-                <p><strong class="blue">Description</strong><br>
-                  lorem ipsum lorem ipsum lorem ipsum lorem psum lorem ipsum
-                  lorem  sum asldkfjlskjdf lasjdfljalkjs;flkj</p>
+                  </div> -->
+                  <div class="oj-flex-item oj-sm-8 oj-md-7 oj-lg-5">
+                    <input id="search-input" style="margin-bottom: 10px" placeholder="Speaker, name, description. . ." data-bind="ojComponent:{
+            component: 'ojInputSearch', 
+            value: searchcallstext,
+            update : searchcommunitycalls
+          }" /><button class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
+            component: 'ojButton',
+            chroming: 'full',
+            label: 'Reset Search'},click:resetsearch">
+                  </div>
+                </div>
+              </form>
+              <!-- Repeat this -->
+
+              <div data-bind="foreach:communityCallList">
+                <div class="oj-flex oj-sm-12 ccrow">
+                  <div class="oj-sm-4 oj-md-2  oj-flex">
+                    <div class="oj-sm-12 bluebg oj-flex-item">
+                      <p><span class="name" data-bind="text:speaker"></span><br> <span data-bind="text:designation"></span>
+                        <br>
+                    </div>
+                  </div>
+                  <div class="oj-sm-8 oj-md-10 bgwhitesmall oj-flex">
+                    <div class="oj-sm-12 oj-md-1">
+                      <div class="lgreybg"><span class="infotext">INFO</span></div>
+                    </div>
+                    <div class="oj-md-2 cccol">
+                      <p><strong class="blue">Date</strong><br><span data-bind="text:call_date"></span>&nbsp; <span data-bind="text:call_time"></span></p>
+                      <p><strong class="blue">Location</strong><br> <span data-bind="text:location"></span></p>
+                    </div>
+                    <div class="oj-md-3 cccol">
+                      <p><strong class="blue">Meeting Link</strong><br> <span data-bind="text:meetinglink"></span></p>
+                      <p><strong class="blue">Dial-In</strong><br><span data-bind="text:dialin"></span></p>
+                    </div>
+                    <div class="oj-md-4 cccol">
+                      <p><strong class="blue">Description</strong><br><span data-bind="text:description"></span></p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <!-- Repeat this -->
-          <div class="oj-flex oj-sm-12 ccrow">
-            <div class="oj-sm-4 oj-md-2  oj-flex">
-              <div class="oj-sm-12 bluebg oj-flex-item">
-                <p><span class="name">Marc Assensio</span><br>
-                  Vice President,<br>
-                  Sales consultant</p>
-                <br>
-              </div>
-            </div>
-            <div class="oj-sm-8 oj-md-10 bgwhitesmall oj-flex">
-              <div class="oj-sm-12 oj-md-1">
-                <div class="lgreybg"><span class="infotext">INFO</span></div>
-              </div>
-              <div class="oj-md-2 cccol">
-                <p><strong class="blue">Date</strong><br>
-                  15.09.2017</p>
-                <p><strong class="blue">Location</strong><br>
-                  Conference Hall</p>
-              </div>
-              <div class="oj-md-3 cccol">
-                <p><strong class="blue">Meeting Link</strong><br>
-                  www.oracle.webex.com</p>
-                <p><strong class="blue">Dial-In</strong><br>
-                  23412349874 - 1234</p>
-              </div>
-              <div class="oj-md-4 cccol">
-                <p><strong class="blue">Description</strong><br>
-                  lorem ipsum lorem ipsum lorem ipsum lorem psum lorem ipsum
-                  lorem  sum asldkfjlskjdf lasjdfljalkjs;flkj</p>
-              </div>
-            </div>
+
+          
+          <div id="tabs-3">
+            <div class="container">Content coming soon</div>
           </div>
-          <!-- Repeat this -->
-          <div class="oj-flex oj-sm-12 ccrow">
-            <div class="oj-sm-4 oj-md-2  oj-flex">
-              <div class="oj-sm-12 bluebg oj-flex-item">
-                <p><span class="name">Marc Assensio</span><br>
-                  Vice President,<br>
-                  Sales consultant</p>
-                <br>
+          <!--======================= ADMIN SETTINGS TAB ==========================-->
+          <div id="tabs-4">
+            <div class="container adminsection">
+              <div class="oj-flex adminheading">
+                <h1>Admin Settings</h1>
               </div>
-            </div>
-            <div class="oj-sm-8 oj-md-10 bgwhitesmall oj-flex">
-              <div class="oj-sm-12 oj-md-1">
-                <div class="lgreybg"><span class="infotext">INFO</span></div>
-              </div>
-              <div class="oj-md-2 cccol">
-                <p><strong class="blue">Date</strong><br>
-                  15.09.2017</p>
-                <p><strong class="blue">Location</strong><br>
-                  Conference Hall</p>
-              </div>
-              <div class="oj-md-3 cccol">
-                <p><strong class="blue">Meeting Link</strong><br>
-                  www.oracle.webex.com</p>
-                <p><strong class="blue">Dial-In</strong><br>
-                  23412349874 - 1234</p>
-              </div>
-              <div class="oj-md-4 cccol">
-                <p><strong class="blue">Description</strong><br>
-                  lorem ipsum lorem ipsum lorem ipsum lorem psum lorem ipsum
-                  lorem  sum asldkfjlskjdf lasjdfljalkjs;flkj</p>
-              </div>
-            </div>
-          </div>
-          <!-- Repeat this -->
-          <div class="oj-flex oj-sm-12 ccrow">
-            <div class="oj-sm-4 oj-md-2  oj-flex">
-              <div class="oj-sm-12 bluebg oj-flex-item">
-                <p><span class="name">Marc Assensio</span><br>
-                  Vice President,<br>
-                  Sales consultant</p>
-                <br>
-              </div>
-            </div>
-            <div class="oj-sm-8 oj-md-10 bgwhitesmall oj-flex">
-              <div class="oj-sm-12 oj-md-1">
-                <div class="lgreybg"><span class="infotext">INFO</span></div>
-              </div>
-              <div class="oj-md-2 cccol">
-                <p><strong class="blue">Date</strong><br>
-                  15.09.2017</p>
-                <p><strong class="blue">Location</strong><br>
-                  Conference Hall</p>
-              </div>
-              <div class="oj-md-3 cccol">
-                <p><strong class="blue">Meeting Link</strong><br>
-                  www.oracle.webex.com</p>
-                <p><strong class="blue">Dial-In</strong><br>
-                  23412349874 - 1234</p>
-              </div>
-              <div class="oj-md-4 cccol">
-                <p><strong class="blue">Description</strong><br>
-                  lorem ipsum lorem ipsum lorem ipsum lorem psum lorem ipsum
-                  lorem  sum asldkfjlskjdf lasjdfljalkjs;flkj</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="tabs-3">
-        <div class="container">Content coming soon</div>
-      </div>
-      <div id="tabs-4">
-        <div class="container adminsection">
-        <div class="oj-flex adminheading"><h1>Admin Settings</h1></div>
-          <div id="vtabs" data-bind="ojComponent:{component: 'ojTabs', 
+              <div id="vtabs" data-bind="ojComponent:{component: 'ojTabs', 
                             orientation: 'vertical', selected: 0}">
-            <ul>
-              <li><span>Create Course</span></li>
-              <li><span>Create Category</span></li>
-              <li><span>Create Community Call</span></li>
-              <li><span>Reports</span></li>
-            </ul>
-            
-            <!-- CREATE COURSES BY ADMIN -->
-            
-            <div id="createcourse">
-              <div class="oj-flex">
-                <div class="oj-flex-item"> Create Course 
-                  <!-- ko foreach: roles -->
-                  <p>Test</p>
-                  <!-- /ko --> 
-                </div>
-              </div>
-              <div class="oj-flex">
-                <div class="oj-flex-item">
-                  <input type="text" placeholder="course title . . ." data-bind="ojComponent: {component: 'ojInputText',value:coursetitle}"
-        />
-                </div>
-              </div>
-              <br>
-              <div class="oj-flex">
-                <div id="advancedWrapper" data-bind="ojComponent: {component: 'ojButtonset', checked: isAdvanced}">
-                  <label for="advanced">Set Mandatory</label>
-                  <input type="checkbox" id="advanced" value="advanced" />
-                </div>
-              </div>
-              <br>
-              <div class="oj-flex">
-                <div class="oj-flex-item">
-                  <div>
-                    <label>Select Roles </label>
-                    <input id="combobox" data-bind="ojComponent: {component: 'ojCombobox', 
-                                   options: roles,optionChange: rolesselected,value:selectedrole,
-                                   rootAttributes: {style:'max-width:20em'}}" />
+                <ul>
+                  <li><span>Manage Courses</span></li>
+                  <li><span>Create Community Call</span></li>
+                  <li><span>Reports</span></li>
+                </ul>
+
+                <!-- CREATE COURSES BY ADMIN -->
+
+                
+                <div id="createcategory">
+                  <div class="oj-flex">
+                    <div class="oj-flex-item">
+                      <button>Manage Courses</button>
                   </div>
                 </div>
-                <div class="oj-flex-item">
-                  <div>
-                    <label>Select Category </label>
-                    <input id="combobox" data-bind="ojComponent: {component: 'ojCombobox', 
-                                   options: rolebasedcategory,optionChange: categorySelected, value:selectedcategory,
-                                   rootAttributes: {style:'max-width:20em'}}" />
-                  </div>
-                </div>
-                <div class="oj-flex-item">
-                  <div>
-                    <label>Select Sub-Category </label>
-                    <input id="combobox" data-bind="ojComponent: {component: 'ojCombobox', 
-                                   options: categorybasedsubcategory, value:selectedsubcategory,
-                                   rootAttributes: {style:'max-width:20em'}}" />
-                  </div>
-                </div>
-              </div>
-              <br>
-              <div class="oj-flex">
-                <div class="oj-flex-item">
-                  <input type="text" placeholder="course link . . ." data-bind="ojComponent: {component: 'ojInputText',value:courselink}" />
-                </div>
-              </div>
-              <br>
-              <div class="oj-flex">
-                <div class="oj-flex-item">
-                  <input type="text" placeholder="course description . . ." data-bind="ojComponent: {component: 'ojInputText',value:coursedesc}"
-        />
-                </div>
-              </div>
-              <div class="oj-flex-item">
-                <button id="outlinedPush" onclick="" style="cursor: pointer" data-bind="ojComponent: {
-            component:'ojButton',  
-            label: 'Create Course'}"> </button>
-                <button id="outlinedPush" onclick="" style="cursor: pointer" data-bind="ojComponent: {
-            component:'ojButton',  
-            label: 'Reset'}"> </button>
-              </div>
-              <div class="oj-flex-item"> </div>
-              <div class="oj-flex-item"> </div>
             </div>
-            <!-- END OF SECTION --> 
-            
-            <!-- REPORTING MODULE FOR TRAINING -->
-            <div id="createcategory">
-              <div class="oj-flex">
-                <div class="oj-flex-item">
-                  <div> 
-                    <!-- <label>Enter Roles  </label> -->
-                    <input type="text" placeholder="roles . . ." data-bind="ojComponent: {component: 'ojInputText',value:role}" />
-                  </div>
-                </div>
-                <div class="oj-flex-item">
-                  <div> 
-                    <!-- <label>Enter Category  </label> -->
-                    <input type="text" placeholder="category . . ." data-bind="ojComponent: {component: 'ojInputText',value:category}" />
-                  </div>
-                </div>
-                <div class="oj-flex-item">
-                  <div> 
-                    <!-- <label>Enter Sub-Category  </label> -->
-                    <input type="text" placeholder="sub category . . ." data-bind="ojComponent: {component: 'ojInputText',value:subcategory}"
-          />
-                  </div>
-                </div>
-              </div>
-              <br>
-              <br>
-              <div class="oj-flex oj-lg-12">
-                <div class="oj-flex-item">
-                  <button id="outlinedPush" onclick="createcategory()" style="cursor: pointer" data-bind="ojComponent: {
-            component:'ojButton',  
-            label: 'Create Category'}"> </button>
-                  <button id="outlinedPush" onclick="resetcat()" style="cursor: pointer" data-bind="ojComponent: {
-            component:'ojButton',  
-            label: 'Reset'}"> </button>
-                </div>
-                <div class="oj-flex-item"> </div>
-                <div class="oj-flex-item"> </div>
-              </div>
-            </div>
-            
-            <!-- END OF SECTION --> 
-            
+
+            <!-- END OF SECTION -->
+
             <!-- CREATE COMMUNITY CALL -->
             <div id="createcommunitycall">
               <p>Create Community Call</p>
               <div class="oj-flex">
-                <input type="text" placeholder="title. . ." data-bind="ojComponent: {component: 'ojInputText',value:callname}" />
+                <input type="text" placeholder="community call name. . ." data-bind="ojComponent: {component: 'ojInputText',value:callname}"
+                />
               </div>
               <div class="oj-flex">
                 <input type="text" placeholder="who is the speaker. . ." data-bind="ojComponent: {component: 'ojInputText',value:callspkr}"
-      />
+                />
               </div>
               <div class="oj-flex">
                 <input type="text" placeholder="designation. . ." data-bind="ojComponent: {component: 'ojInputText',value:calldesignation}"
-      />
+                />
               </div>
               <div class="oj-flex">
                 <label>Date & Time</label>
@@ -547,10 +408,15 @@
               </div>
               <div class="oj-flex">
                 <input type="text" placeholder="dial in details. . ." data-bind="ojComponent: {component: 'ojInputText',value:calldialin}"
-      />
+                />
               </div>
+              <br>
               <div class="oj-flex">
                 <textarea rows="6" cols="50" placeholder="description. . ." data-bind="ojComponent: {component: 'ojInputText',value:calldesc}"></textarea>
+              </div>
+              <br>
+              <div class="oj-flex">
+                <textarea rows="6" cols="50" placeholder="additional links. . ." data-bind="ojComponent: {component: 'ojInputText',value:reflink}"></textarea>
               </div>
               <div class="oj-flex">
                 <div class="oj-flex-item">
@@ -565,14 +431,13 @@
                 <div class="oj-flex-item"> </div>
               </div>
             </div>
-            <!-- END OF SECTIONS --> 
-            
-            <!-- VIEW REPORTS -->
+            <!-- END OF SECTIONS -->
+
             <div id="viewreport">
               <p>Reporting</p>
             </div>
-            <!-- END OF SECTIONS --> 
-            
+            <!-- END OF SECTIONS -->
+
           </div>
         </div>
       </div>
