@@ -34,7 +34,8 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       var navData = [
       {name: 'Home', id: 'home'},
 	  {name: 'Trainings', id: 'training'},
-	  {name: 'Tools and Resources', id: 'tools'}
+	  {name: 'Tools and Resources', id: 'tools'},
+	  {name: 'Sign In', id: 'signin'}
       
       ];
       self.navDataSource = new oj.ArrayTableDataSource(navData, {idAttribute: 'id'});
