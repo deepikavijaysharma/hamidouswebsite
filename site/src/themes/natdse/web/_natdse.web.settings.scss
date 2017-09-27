@@ -242,9 +242,9 @@ font-size:$mediumFontSize;
 }
 
 @mixin shadowbottom{
-	-webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.20);
--moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.20);
-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.20);
+	-webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.20) !important;
+-moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.20) !important;
+box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.20) !important;
 }
 
 @mixin shadowbottomthin{

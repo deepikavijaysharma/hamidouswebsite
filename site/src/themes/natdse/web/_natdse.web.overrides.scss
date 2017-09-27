@@ -332,6 +332,30 @@ min-height:350px;
 }
 
 }
+.slide{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	}
+.verticalcentertext{
+	width:100%;
+	}	
+.slide3 {
+background: url(images/slide4bg.png);
+height: 275px;
+border: none;
+background-size:cover;
+display:flex;
+justify-content:center;
+align-items:center;
+.verticalcentertext{
+	width:auto;
+	}
+@media  #{$responsiveQueryMediumDown} {
+height: 100%;
+padding:0px 10px ;
+}
+}
 .slide2 {
 background: url(images/slide3bg.png);
 height: 275px;
@@ -341,10 +365,7 @@ background-size:cover;
 height: 100%;
 padding:0px 10px ;
 }
-.verticalcentertextinner{
-	background:rgba(0,21,37,0.50);
-	padding:20px;
-	}
+
 }
 
 .slide1 {
@@ -391,13 +412,16 @@ font-weight: normal;
 }
 .verticalcentertext{
 @media  #{$responsiveQueryMediumUp} {
-@include verticalcenter;
+
 }
 
 }
 .heading {
 font-size: $largeFontSize1;
 margin-bottom: 20px;
+img{
+	margin-right:10px;
+	}
 @media  #{$responsiveQueryMediumDown} {
 font-size: $largeFontSize;
 padding-top:10px;
@@ -523,8 +547,8 @@ li{
 list-style:none;
 text-align:center;
 display:inline-block;
-margin-left:25px;
-margin-right:25px;
+margin-left:23px;
+margin-right:23px;
 @media  #{$responsiveQueryLargeOnly} {
 margin-left: 15px;
 margin-right: 15px;
@@ -541,7 +565,7 @@ margin-right:10px;
 }
 }
 li img{
-margin-right:4px;
+margin-right:8px;
 vertical-align:middle;
 }
 li a{
@@ -768,7 +792,7 @@ right:20px;
 cursor: pointer;
 }
 }
-.oj-popup{
+.servicespopup{
 width:75%;
 background:#fff;
 padding:0px;
@@ -1787,7 +1811,7 @@ font-size:$smallestFontSize;
 padding:30px 5px !important;
 margin-top:30px;
 a {
-color:$lightgrey;
+color:$lightgrey !important;
 font-size:$smallestFontSize;
 }
 ul{
@@ -2015,7 +2039,7 @@ opacity:0.7;
 }
 }
 .org_blocks{
-@media  #{$responsiveQueryLargeOnly} {
+@media  #{$responsiveQueryLargeUp} {
 box-sizing: border-box;
 flex: 0 1 19.2%;
 margin-right: 10px;
@@ -2032,3 +2056,17 @@ margin-right:0px;}
 	}
 
 /*----------------------------------Our Orgnization--------------------------------------*/
+#ui-id-21{
+	/*background:#F8F8F8;
+	padding:20px;
+	@include shadowbottom;*/
+	}
+/*----------------------------------Tools--------------------------------------*/	
+.toolsbutton{
+background:transparent;
+border:none;
+}
+.toolspopup{
+background:$lightgrey !important;
+@include shadowbottom;
+padding:10px  !important;}

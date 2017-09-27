@@ -1,4 +1,3 @@
-
 function TooltipHelper(rootElement, helpDataAttr)
 {
   this.Init(rootElement, helpDataAttr);
