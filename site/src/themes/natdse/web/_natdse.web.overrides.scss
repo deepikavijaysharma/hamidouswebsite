@@ -1183,12 +1183,15 @@ padding: 20px 0px;
 .hnav li{
 display:inline-block;
 list-style:none;
-font-size:$smallFontSize;
+font-size:$smallestFontSize1;
 margin-right:60px !important;
 
 }
+.oj-tabs{
+	font-size:$smallestFontSize1;
+	}
 .oj-tabs-title,li a:link, li a:visited{
-color:#fff;
+color:$blue;
 text-decoration:none;
 }
 li a:hover, li a:visited:hover{
@@ -1197,7 +1200,7 @@ text-decoration:none;
 }	
 .oj-tabs-tab.oj-selected .oj-tabs-title{
 color:$blue;
-text-decoration:none;
+text-decoration:underline;
 }
 
 .oj-tabs-conveyor{
@@ -1205,7 +1208,8 @@ width:80%;
 max-width:1200px;
 margin:0 auto;}
 .oj-conveyorbelt-content-container{
-background:$lightblue;
+background:#fff;
+@include shadowbottom;
 }	
 .oj-tabs-panel{
 box-sizing:border-box;
@@ -1224,6 +1228,9 @@ color:$blue;
 .oj-tabs-tab-content{
 border:none;
 }
+.oj-tabs-horizontal.oj-tabs{
+	overflow-x:visible;
+	}
 .search{
 margin-top:20px;
 .labeldiv{
@@ -1293,12 +1300,12 @@ margin-top:10px;
 margin-top:20px;
 .blocks{
 background:#fff;
-height:360px;
+height:305px;
 @include boxshadow;
 max-width:280px;
 margin-right:15px;
 position:relative;
-padding:50px 15px 15px 15px;
+padding:15px;
 
 @media  #{$responsiveQueryXlargemed} {
 max-width:254px;
@@ -1358,7 +1365,7 @@ background:url(images/mc_bg.jpg);
 background-size:cover;
 background-position:center;
 color:#fff;
-height:360px;
+height:305px;
 align-items:center;
 text-align:center;
 display:grid;
@@ -1396,11 +1403,21 @@ font-weight:bold;
 font-size:$smallFontSize;
 margin-bottom:10px;
 }
+.titlesmall{
+font-weight:bold;
+font-size:$smallestFontSize1;
+margin-bottom:5px;
+}
 
 .desc{
 font-size:$smallestFontSize;
 color:$grey;
+p{
+	margin-bottom:10px;}
+
 }	
+
+
 .coursedetails{
 font-size:$smallestFontSize2;
 color:$grey;
@@ -1442,7 +1459,18 @@ width:90%;
 }
 
 }
-
+.communityblock{
+	margin-top:20px;}
+.refine {
+	input{
+		margin-right:5px;
+		}
+}
+.infobox{
+@media  #{$responsiveQueryLargeUp} {
+max-width:35px;
+}	
+	}
 
 }
 /*----------------------------------POPUP----------------------------------*/
@@ -1642,8 +1670,8 @@ background:$medblue;
 color:#fff;
 padding:10px;
 box-sizing:border-box;
-max-width:154PX;
-min-width:154px;
+max-width:185PX;
+min-width:185PX;
 min-height:134px;
 @include shadowbottomthin;
 @media  #{$responsiveQueryMediumDown} {
@@ -1702,7 +1730,8 @@ line-height:25px;
 }
 }
 .cccol{
-margin:20px;
+padding:20px;
+word-wrap:break-word;
 @media  #{$responsiveQueryMediumDown} {
 margin:15px;
 }
@@ -1926,13 +1955,13 @@ opacity:0.6;
 	background: #b3ada5
 }
 .bg1{
-	background-color:#4478A0;
+	background-color:#427aa8;
 }
 .bg2{
-	background-color:#F95E5C;
+	background-color:#f80000;
 }
 .bg3{
-	background-color:#97D09B;
+	background-color:#537154;
 }
 .contactcontainer{
 	padding:40px 40px 0;
@@ -2065,6 +2094,7 @@ margin-right:0px;}
 .toolsbutton{
 background:transparent;
 border:none;
+padding:0px;
 }
 .toolspopup{
 background:$lightgrey !important;

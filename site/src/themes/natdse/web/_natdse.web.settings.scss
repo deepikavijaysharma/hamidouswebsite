@@ -162,9 +162,9 @@ color:$grey;
 
 }
 @mixin bluebutton{
-background:#00758f;
-color:#fff;
-border:none;
+background:#00758f !important;
+color:#fff !important;
+border:none !important;
 font-size:$smallestFontSize;
 padding: 10px 20px;
 text-align: center;

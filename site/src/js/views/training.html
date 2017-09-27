@@ -105,7 +105,7 @@
           <ul class="hnav">
             <li><span>Courses</span></li>
             <li><span>Community Calls</span></li>
-            <li><span>Offers</span></li>
+            <li style="display:none"><span>Offers</span></li>
             <li><span>Admin</span></li>
           </ul>
 
@@ -146,13 +146,13 @@
               <!-- COURSES -->
               <div class="oj-flex coursesblock">
                 <div class="oj-flex-item oj-lg-3">
-                  <div class="eblocks blocks oj-flex-item oj-margin oj-sm-12 oj-md-4 oj-lg-4" style="height: 100%">
-                    <div class="oj-flex-item">
-                      <h4>Refine Courses</h4>
+                  <div class="eblocks blocks oj-flex-item oj-margin oj-sm-12 oj-md-4 oj-lg-4" style="height: auto">
+                    <div class="oj-flex-item refine">
+                      <div class="title">Refine Courses</div>
                       <hr>
                       <!-- ~~~~~~~~~~~~~ CATEGORIES ~~~~~~~~~~~~~~ -->
                       <!-- ko if: refinelist().length>0 -->
-                      <h5><b>Categories</b></h5>
+                      <div class="titlesmall">Categories</div>
                       <!-- /ko -->
                       <div id="checkboxSetId" aria-labelledby="mainlabelid" data-bind="ojComponent: {
                         component: 'ojCheckboxset', 
@@ -168,7 +168,7 @@
                       <br><br>
                       <!-- ~~~~~~~~~~~~~ PRODUCT TYPE ~~~~~~~~~~~~~~ -->
                       <!-- ko if: producttype().length>0 -->
-                      <h5><b>Product Type</b></h5>
+                      <div class="titlesmall">Product Type</div>
                       <!-- /ko -->
                       <div id="checkboxSetId" aria-labelledby="mainlabelid" data-bind="ojComponent: {
                                               component: 'ojCheckboxset', 
@@ -184,7 +184,7 @@
                       <br><br>
                       <!-- ~~~~~~~~~~~~~ TRAINING LEVEL ~~~~~~~~~~~~~~ -->
                       <!-- ko if: training_levels().length>0 -->
-                      <h5><b>Training Level</b></h5>
+                      <div class="titlesmall">Training Level</div>
                       <!-- /ko -->
                       <div id="checkboxSetId" aria-labelledby="mainlabelid" data-bind="ojComponent: {
                                               component: 'ojCheckboxset', 
@@ -200,7 +200,7 @@
                       <br><br>
                       <!-- ~~~~~~~~~~~~~ TRAINING TYPE ~~~~~~~~~~~~~~ -->
                       <!-- ko if: training_types().length>0 -->
-                      <h5><b>Training Type</b></h5>
+                      <div class="titlesmall">Training Type</div>
                       <!-- /ko -->
                       <div id="checkboxSetId" aria-labelledby="mainlabelid" data-bind="ojComponent: {
                                               component: 'ojCheckboxset', 
@@ -216,7 +216,7 @@
                       <br><br>
                       <!-- ~~~~~~~~~~~~~ CITIES ~~~~~~~~~~~~~~ -->
                       <!-- ko if: cities().length>0 -->
-                      <h5><b>Cities</b></h5>
+                      <div class="titlesmall">Cities</div>
                       <!-- /ko -->
                       <div id="checkboxSetId" aria-labelledby="mainlabelid" data-bind="ojComponent: {
                                               component: 'ojCheckboxset', 
@@ -232,7 +232,7 @@
                       <br><br>
 
                       <div>
-                        <button id="button" data-bind="click: refinesearch, 
+                        <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: refinesearch, 
                           ojComponent: { component: 'ojButton', label: 'Refine Result' }">
                           </button>
                       </div>
@@ -252,14 +252,14 @@
                     <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks oj-flex-item oj-margin">
                       <!-- <span class="badge">Mandatory Course</span> -->
                       <div class="title" data-bind="text:name"></div>
-                      <div class="desc">Learn Advanced Methods of usability methods</div>
+                      <div class="desc" data-bind="html:subdescription"></div>
                       <div class="oj-flex coursedetails">
                         <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/duration_icon.png"><span data-bind="text:class_size"></span></div>
                         <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/level_icon.png"><span data-bind="text:training_level"></span></div>
                         <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:cloud_onpremise"></span></div>
                         <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:training_type"></span></div>
                       </div>
-                      <div class="date"> Due Date: <br><b data-bind="text:start_date">Sep 20, 2017</b></div>
+                      <div class="date" style="display:none"> Due Date: <br><b data-bind="text:start_date"></b></div>
                       <a data-bind="attr: { href: directURL}" class="whitebutton">Enroll</a>
                     </div>
                     <!-- /ko -->
@@ -293,61 +293,63 @@
           <!--========================== COMMUNITY CALLS ==========================-->
           <div id="tabs-2" class="ccalls">
             <div class="container">
+            <!-- SEARCH -->
               <form id="form1">
-                <div class="oj-flex">
-                  <!-- <div class="oj-flex-item"><select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
-                                                    value: val,
-                                                    rootAttributes: {style:'max-width:20em'}}">
-              <option value="sept2017">September 2017</option>
-              <option value="oct2017">October 2017</option>
-              <option value="nov2017">November 2017</option>
-            </select>
-                  </div> -->
+                <div class="oj-flex search">
+                  
                   <div class="oj-flex-item oj-sm-8 oj-md-7 oj-lg-5">
-                    <input id="search-input" style="margin-bottom: 10px" placeholder="Speaker, name, description. . ." data-bind="ojComponent:{
+                   <input id="search-input" style="margin-bottom: 10px" placeholder="Speaker, name, description. . ." data-bind="ojComponent:{
             component: 'ojInputSearch', 
             value: searchcallstext,
             update : searchcommunitycalls
-          }" /><button class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
+          }" />
+                  </div>
+                 
+                  <div class="oj-flex-item oj-sm-7 oj-xl-3 req_block">
+                    <button class="reqtrain-button " data-bind="ojComponent: {
             component: 'ojButton',
             chroming: 'full',
             label: 'Reset Search'},click:resetsearch">
+                </button>
+                
                   </div>
                 </div>
               </form>
+             
               <!-- Repeat this -->
-
+<div class="communityblock">
               <div data-bind="foreach:communityCallList">
                 <div class="oj-flex oj-sm-12 ccrow">
                   <div class="oj-sm-4 oj-md-2  oj-flex">
                     <div class="oj-sm-12 bluebg oj-flex-item">
-                      <p><span class="name" data-bind="text:speaker"></span><br> <span data-bind="text:designation"></span>
+                      <p><span class="name" data-bind="text:name"></span></span>
                         <br>
                     </div>
                   </div>
                   <div class="oj-sm-8 oj-md-10 bgwhitesmall oj-flex">
-                    <div class="oj-sm-12 oj-md-1">
+                    <div class="oj-sm-12 oj-md-1 infobox">
                       <div class="lgreybg"><span class="infotext">INFO</span></div>
                     </div>
                     <div class="oj-md-2 cccol">
                       <p><strong class="blue">Date</strong><br><span data-bind="text:call_date"></span>&nbsp; <span data-bind="text:call_time"></span></p>
-                      <p><strong class="blue">Location</strong><br> <span data-bind="text:location"></span></p>
+                      <p><strong class="blue">Speaker</strong><br> <span data-bind="text:speaker"></span><br> <span data-bind="text:designation"></p>
                     </div>
                     <div class="oj-md-3 cccol">
                       <p><strong class="blue">Meeting Link</strong><br> <span data-bind="text:meetinglink"></span></p>
                       <p><strong class="blue">Dial-In</strong><br><span data-bind="text:dialin"></span></p>
                     </div>
-                    <div class="oj-md-4 cccol">
-                      <p><strong class="blue">Description</strong><br><span data-bind="text:description"></span></p>
+                    <div class="oj-md-6 cccol">
+                      <p><strong class="blue">Description</strong><br><span data-bind="html:description"></span></p>
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
           </div>
 
           
-          <div id="tabs-3">
+          <div id="tabs-3" style="display:none">
             <div class="container">Content coming soon</div>
           </div>
           <!--======================= ADMIN SETTINGS TAB ==========================-->
@@ -367,7 +369,7 @@
                 <!-- CREATE COURSES BY ADMIN -->
 
                 
-                <div id="createcategory">
+                <div id="createcategory" class="bgwhite admincontent">
                   <div class="oj-flex">
                     <div class="oj-flex-item">
                       <button>Manage Courses</button>
@@ -378,7 +380,7 @@
             <!-- END OF SECTION -->
 
             <!-- CREATE COMMUNITY CALL -->
-            <div id="createcommunitycall">
+            <div id="createcommunitycall" class="bgwhite admincontent">
               <p>Create Community Call</p>
               <div class="oj-flex">
                 <input type="text" placeholder="community call name. . ." data-bind="ojComponent: {component: 'ojInputText',value:callname}"
@@ -433,7 +435,7 @@
             </div>
             <!-- END OF SECTIONS -->
 
-            <div id="viewreport">
+            <div id="viewreport" class="bgwhite admincontent">
               <p>Reporting</p>
             </div>
             <!-- END OF SECTIONS -->
