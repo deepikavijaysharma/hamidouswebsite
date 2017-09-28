@@ -18,7 +18,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.coursetitle = ko.observable('');
             self.courselink = ko.observable('');
             self.coursedesc = ko.observable('');
-            self.disabledtab = ko.observable([2, 3]);
+            self.disabledtab = ko.observable([]);
 
             self.selectedrole = ko.observable('');
             self.selectedcategory = ko.observable('');
@@ -500,9 +500,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     var curcourse = allcourses.courses[k];
                     var categoryname = curcourse.category_name; // console.log(categoryname);                        
                     var categoryobj = self.getcategorybyname(categoryname);
-                    console.log(categoryobj, "sdSA");
-                    self.courseslistbycat = categoryobj.courses;
-                    self.courseslistbycat.push({
+                    categoryobj.courses.push({
                         name: curcourse.name,
                         description: curcourse.description,
 						subdescription:curcourse.description.substring(0,70) + '...' ,
@@ -515,8 +513,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                         directURL: curcourse.directURL
                     });
                 }
-                console.log(ko.toJSON(self.courseslistbycat()));
-                console.log(ko.toJSON(self.categories()));
+                console.log(ko.toJSON(self.categories ()));
                 // self.getcategorycount();
                 // self.getLeftpanelData();
             }
@@ -553,7 +550,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.getcategorybyname = function (catname) {
                 // Look if the category is already present in the array
                 for (var i = 0; i < self.categories().length; i++) {
-                    if (self.categories()[i].category_name === catname) {
+                    if (self.categories()[i].name === catname) {
                         return self.categories()[i];
                     }
                 }
@@ -706,13 +703,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             checkadminrights = function () {
                 if (usertype == 'ADMIN') {
                     self.disabledtab([]);
-                    self.disabledtab().push(2);
+                    // self.disabledtab().push();
                 }
             }
             checkadminrights();
 
             refineupdate = function (param1, param2) {
                 alert("updated");
+            }
+
+            redirecttotrainingapp=function(){
+                self.ssowindow = window.open("https://apex.oraclecorp.com/pls/apex/f?p=TRAINING_SCHEDULER:MANAGE_COURSE");
             }
         }
         return new DashboardViewModel();
