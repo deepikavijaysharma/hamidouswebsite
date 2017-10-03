@@ -146,7 +146,7 @@
               <!-- COURSES -->
               <div class="oj-flex coursesblock">
                 <div class="oj-flex-item oj-lg-3">
-                  <div class="eblocks blocks oj-flex-item oj-margin oj-sm-12 oj-md-4 oj-lg-4" style="height: auto">
+                  <div class="eblocks blocks oj-flex-item  oj-sm-12 oj-md-4 oj-lg-4" style="height: auto">
                     <div class="oj-flex-item refine">
                       <div class="title">Refine Courses</div>
                       <hr>
@@ -154,85 +154,72 @@
                       <!-- ko if: refinelist().length>0 -->
                       <div class="titlesmall">Categories</div>
                       <!-- /ko -->
-                      <div id="checkboxSetId" aria-labelledby="mainlabelid" data-bind="ojComponent: {
-                        component: 'ojCheckboxset', 
-                        value: refinecategories}">
-                        <!-- ko foreach: refinelist -->
-                        <span class="oj-choice-item">
-                              <input type="checkbox" data-bind="attr:{value:id},click:refineupdate">
-                              <label data-bind="text:name"></label>
-                              <br><br>
-                        </span>
-                        <!-- /ko -->
-                      </div>
+
+                      <!-- ko foreach: refinelist -->
+                      <label><input type="checkbox" class="refine" name="category" data-bind="value: id" onchange="refineupdate(this)"></label>
+                      <span data-bind="text: name"></span>
                       <br><br>
+                      <!-- /ko -->
+
                       <!-- ~~~~~~~~~~~~~ PRODUCT TYPE ~~~~~~~~~~~~~~ -->
                       <!-- ko if: producttype().length>0 -->
                       <div class="titlesmall">Product Type</div>
                       <!-- /ko -->
-                      <div id="checkboxSetId" aria-labelledby="mainlabelid" data-bind="ojComponent: {
-                                              component: 'ojCheckboxset', 
-                                              value: refinecategories}">
-                        <!-- ko foreach: producttype -->
-                        <span class="oj-choice-item">
-                                                    <input type="checkbox" data-bind="attr:{value:id},click:refineupdate">
-                                                    <label data-bind="text:name"></label>
-                                                    <br><br>
-                                              </span>
-                        <!-- /ko -->
-                      </div>
+
+                      <!-- ko foreach: producttype -->
+                      <label><input type="checkbox" class="refine" name="prodtype" data-bind="value: name" onchange="refineupdate(this)"></label>
+                      <span data-bind="text: name"></span>
                       <br><br>
+                      <!-- /ko -->
+
+
                       <!-- ~~~~~~~~~~~~~ TRAINING LEVEL ~~~~~~~~~~~~~~ -->
                       <!-- ko if: training_levels().length>0 -->
                       <div class="titlesmall">Training Level</div>
                       <!-- /ko -->
-                      <div id="checkboxSetId" aria-labelledby="mainlabelid" data-bind="ojComponent: {
-                                              component: 'ojCheckboxset', 
-                                              value: refinecategories}">
-                        <!-- ko foreach: training_levels -->
-                        <span class="oj-choice-item">
-                                                    <input type="checkbox" data-bind="attr:{value:id},click:refineupdate">
-                                                    <label data-bind="text:name"></label>
-                                                    <br><br>
-                                              </span>
-                        <!-- /ko -->
-                      </div>
+
+                      <!-- ko foreach: training_levels -->
+                      <label><input type="checkbox" class="refine" name="traininglevel" data-bind="value: name" onchange="refineupdate(this)"></label>
+                      <span data-bind="text: name"></span>
                       <br><br>
+                      <!-- /ko -->
+
                       <!-- ~~~~~~~~~~~~~ TRAINING TYPE ~~~~~~~~~~~~~~ -->
                       <!-- ko if: training_types().length>0 -->
                       <div class="titlesmall">Training Type</div>
                       <!-- /ko -->
-                      <div id="checkboxSetId" aria-labelledby="mainlabelid" data-bind="ojComponent: {
-                                              component: 'ojCheckboxset', 
-                                              value: refinecategories}">
-                        <!-- ko foreach: training_types -->
-                        <span class="oj-choice-item">
-                                                    <input type="checkbox" data-bind="attr:{value:id},click:refineupdate">
-                                                    <label data-bind="text:name"></label>
-                                                    <br><br>
-                                              </span>
-                        <!-- /ko -->
-                      </div>
+
+                      <!-- ko foreach: training_types -->
+                      <label><input type="checkbox" class="refine" name="trainingtype" data-bind="value: name" onchange="refineupdate(this)"></label>
+                      <span data-bind="text: name"></span>
                       <br><br>
+                      <!-- /ko -->
+
                       <!-- ~~~~~~~~~~~~~ CITIES ~~~~~~~~~~~~~~ -->
                       <!-- ko if: cities().length>0 -->
                       <div class="titlesmall">Cities</div>
                       <!-- /ko -->
-                      <div id="checkboxSetId" aria-labelledby="mainlabelid" data-bind="ojComponent: {
-                                              component: 'ojCheckboxset', 
-                                              value: refinecategories}">
-                        <!-- ko foreach: cities -->
-                        <span class="oj-choice-item">
-                                                    <input type="checkbox" data-bind="attr:{value:id},click:refineupdate">
-                                                    <label data-bind="text:name"></label>
-                                                    <br><br>
-                                              </span>
-                        <!-- /ko -->
-                      </div>
+
+                      <!-- ko foreach: cities -->
+                      <label><input type="checkbox" class="refine" name="cities" data-bind="value: name" onchange="refineupdate(this)"></label>
+                      <span data-bind="text: name"></span>
                       <br><br>
+                      <!-- /ko -->
+
+
+                      <!-- ~~~~~~~~~~~~~ ROLES ~~~~~~~~~~~~~~ -->
+                      <!-- ko if: roles().length>0 -->
+                      <div class="titlesmall">Roles</div>
+                      <!-- /ko -->
+
+                      <!-- ko foreach: roles -->
+                      <label><input type="checkbox" class="refine" name="roles" data-bind="value: name" onchange="refineupdate(this)"></label>
+                      <span data-bind="text: name"></span>
+                      <br><br>
+                      <!-- /ko -->
 
                       <div>
-                        <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: refinesearch, 
+                        <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: refinecourses, 
                           ojComponent: { component: 'ojButton', label: 'Refine Result' }">
                           </button>
                       </div>
@@ -242,13 +229,10 @@
                 <div class="oj-flex-item oj-lg-9">
                   <!-- ko foreach: categories -->
                   <div class="oj-flex">
-                    <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks manC oj-flex-item oj-margin" data-bind="text:name"></div>
+                    <h4 class="oj-sm-12" data-bind="text:name"></h4>
+                    <hr>
                     <!-- ko foreach: courses -->
-                    <!-- ko if: $index() > 3 -->
-                    <!-- <div class="morelink oj-flex-item">More</div> -->
-                    <!-- /ko -->
-                    <!-- ko if: $index() <= 2 -->
-                    <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks oj-flex-item">
+                    <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks oj-flex-item oj-margin" style="margin-right:10px">
                       <!-- <span class="badge">Mandatory Course</span> -->
                       <div class="title" data-bind="text:name"></div>
                       <div class="desc" data-bind="html:subdescription"></div>
@@ -259,27 +243,8 @@
                         <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:training_type"></span></div>
                       </div>
                       <div class="date" style="display:none"> Due Date: <br><b data-bind="text:start_date"></b></div>
-                      <a data-bind="attr: { href: directURL}" class="whitebutton">Enroll</a>
+                      <a data-bind="click:showcoursedetails" target="_blank" style="cursor:pointer" class="whitebutton">View Details</a>
                     </div>
-                    <!-- /ko -->
-                    <!-- ko if: $index() > 2 -->
-                    <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks oj-flex-item oj-margin">
-                      <!-- <span class="badge">aMandatory Course</span> -->
-                      <div class="title" data-bind="text:name"></div>
-                      <div class="desc">Learn Advanced Methods of usability methods</div>
-                      <div class="oj-flex coursedetails">
-                        <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/duration_icon.png"><span data-bind="text:class_size"></span></div>
-                        <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/level_icon.png"><span data-bind="text:training_level"></span></div>
-                        <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:cloud_onpremise"></span></div>
-                        <div class="oj-flex-item oj-sm-6 icons"><img src="css/images/type_icon.png"><span data-bind="text:training_type"></span></div>
-                      </div>
-                      <div class="date"> Due Date: <br><b data-bind="text:start_date">Sep 20, 2017</b></div>
-                      <button class="whitebutton">Enroll</button>
-                    </div>
-                    <!-- <div class="morelink oj-flex-item">More</div> -->
-                    <!-- /ko -->
-                    <!-- ko if: $index() == 3 -->
-                    <!-- /ko -->
                     <!-- /ko -->
                   </div>
                   <!-- /ko -->
@@ -296,7 +261,7 @@
                 <div class="oj-flex search">
 
                   <div class="oj-flex-item oj-sm-8 oj-md-7 oj-lg-5">
-                    <input id="search-input" style="margin-bottom: 10px" placeholder="Speaker, name, description. . ." data-bind="ojComponent:{
+                    <input id="search-input" style="margin-bottom: 10px" placeholder="Speaker, community call, description. . ." data-bind="ojComponent:{
             component: 'ojInputSearch', 
             value: searchcallstext,
             update : searchcommunitycalls
@@ -315,7 +280,49 @@
               </form>
 
               <!-- Repeat this -->
-              <div class="communityblock">
+              <div class=" oj-flex coursesblock">
+                  <div class="oj-flex-item oj-lg-3">
+                      <div class="eblocks blocks oj-flex-item  oj-sm-12 oj-md-4 oj-lg-4" style="height: auto;">
+                        <div class="oj-flex-item refine">
+                            <div class="title">Refine Courses</div>
+                            <hr>
+                          
+                            <!-- ~~~~~~~~~~~~~ ROLES ~~~~~~~~~~~~~~ -->
+                            <!-- ko if: roles().length>0 -->
+                            <b><div class="titlesmall">Roles</div></b>
+                            <!-- /ko -->
+      
+                            <!-- ko foreach: roles -->
+                            <label><input type="checkbox" class="refine" name="roles" data-bind="value: name" onchange="refineupdate(this)"></label>
+                            <span data-bind="text: name"></span>
+                            <br><br>
+                            <!-- /ko -->
+
+                            <!-- ~~~~~~~~~~~~~ CALL MODE ~~~~~~~~~~~~~~ -->
+                            <b><div class="titlesmall">Call Mode</div></b>
+      
+                            <label><input type="checkbox" class="refine" name="roles" value="virtual" onchange="refineupdate(this)"></label>
+                            <span>Virtual</span>
+                            <br><br>
+                            <label><input type="checkbox" class="refine" name="roles" value="hall" onchange="refineupdate(this)"></label>
+                            <span>Townhall</span>
+                            <br><br>
+
+                            <!-- ~~~~~~~~~~~~~ PASS CALL ~~~~~~~~~~~~~~ -->
+                            <b><div class="titlesmall">PAST CALLS</div></b>
+                            <label><input type="checkbox" class="refine" name="roles" value="past" onchange="refineupdate(this)"></label>
+                            <span>Past</span>
+                            <br><br>
+      
+                            <div>
+                              <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: refinecourses, 
+                                ojComponent: { component: 'ojButton', label: 'Refine Result' }">
+                                </button>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  <div class="oj-flex-item oj-lg-9">
                 <div data-bind="foreach:communityCallList">
                   <div class="oj-flex oj-sm-12 ccrow">
                     <div class="oj-sm-4 oj-md-2  oj-flex">
@@ -342,6 +349,7 @@
                     </div>
                   </div>
                 </div>
+              </div>
               </div>
             </div>
           </div>
@@ -446,3 +454,50 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div id="dialogWrapper" >
+  <oj-dialog style="display:none" id="coursedetails" title="Course Details" modality="modeless" cancelBehavior='icon'>
+    <div>
+      <div slot="body" class="oj-flex-item" style="padding:20px;height: 500px;overflow-y: scroll" >
+        <span style="color:darkslateblue" data-bind="text:detailedCatName"></span>><span style="color:darkslateblue" data-bind="text:detailedSubCatName"></span>
+        <br><br>
+        <span><b>Name<b></span>
+        <br>
+        <span style="color:gray" data-bind="text:detailedName"></span>
+        <br><br>
+        <span><b>Description<b></span>
+        <br>
+        <span style="color:gray" data-bind="html:detailedDescription"></span>
+        <br><br>
+        <span><b>Product Type/Training Level/Training Type<b></span>
+        <br>
+        <span style="color:gray" data-bind="text:detailedCloudOnpremise"></span>/<span style="color:gray" data-bind="text:detailedTrainingLevel"></span>/<span style="color:gray" data-bind="text:detailedTrainingType"></span>
+        <br><br>
+        <span><b>Class Size<b></span>
+        <br>
+        <span style="color:gray" data-bind="text:detailedClassSize"></span><span> nos</span>
+        <br><br>
+        <span><b>City/State<b></span>
+        <br>
+        <span style="color:gray" data-bind="text:detailedCity"></span>/<span style="color:gray" data-bind="text:detailedstate"></span>
+        <br><br>
+        <span><b>Enrollment/WaitList<b></span>
+        <br>
+        <span style="color:gray" data-bind="text:enrollCount"></span>/<span style="color:gray" data-bind="text:waitlistcount"></span>
+        <br><br>
+        <span><b>Roles<b></span>
+        <br>
+        <span style="color:gray" data-bind="text:detailedRoles"></span>
+        <br><br>
+
+      </div>
+      <div class="oj-flex-item" style="padding:20px">
+        <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: closecoursedetails, 
+        ojComponent: { component: 'ojButton', label: 'Close' }">
+        </button>
+      </div>
+    </div>
+  </oj-dialog>
+</div>
