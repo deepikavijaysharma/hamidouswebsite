@@ -99,16 +99,17 @@
 </div>
 <div class="oj-row subnav">
   <div id="tabs-container">
-    <div id="tabs" data-bind="ojComponent:{component: 'ojTabs',orientation: 'horizontal', disabledTabs: disabledtab}"> 
+    <div id="tabs" data-bind="ojComponent:{component: 'ojTabs',orientation: 'horizontal', disabledTabs:[3,4]}"> 
       <!-- tab bar -->
       
       <ul class="hnav">
         <li><span>Courses</span></li>
         <li><span>Community Calls</span></li>
         <li style="display:none"><span>Offers</span></li>
+        <li onclick="window.open('http://solutionengineering-devops.us.oracle.com/site/?root=ecacertification')"><a href="#">ECA Certification</a></li>
+        <li onclick="window.open('http://solutionengineering-devops.us.oracle.com/site/?root=ecaenablement')"><a href="#">ECA Enablement</a></li>
         <li><span>Admin</span></li>
-        <li onclick="location.href = 'http://solutionengineering-devops.us.oracle.com/site/?root=ecacertification'"><a href="#">ECA Certification</a></li>
-        <li onclick="location.href = 'http://solutionengineering-devops.us.oracle.com/site/?root=ecaenablement'"><a href="#">ECA Enablement</a></li>
+        
       </ul>
       
       <!-- tab contents -->
@@ -394,6 +395,8 @@
           </div>
         </div>
       </div>
+      <div></div>
+      <div></div>
       <div id="tabs-3" style="display:none">
         <div class="container">Content coming soon</div>
       </div>
@@ -518,7 +521,8 @@
     <div style="display:none" class="dialogbodymain" id="communitycallsdetails" title="Community Calls" 
        data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%'}}">
     <div class="dialogbody">
-       test
+      <h1>Name</h1>
+      <p>Maecenas sed gravida dui. Aliquam pulvinar, lacus quis efficitur tempor, mi arcu euismod ante, at posuere massa urna nec diam. Nulla sed purus at orci tincidunt tempor et vitae mi.</p>
     </div>
   </div>
    
