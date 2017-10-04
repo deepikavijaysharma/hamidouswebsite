@@ -26,7 +26,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
           isDefault: true
         },
         'training': {
-          label: 'Trainings'
+          label: 'trainings'
         },
         'tools': {
           label: 'Tools and Resources'
@@ -52,7 +52,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
           id: 'home'
         },
         {
-          name: 'Trainings',
+          name: 'Trainings and Certifications',
           id: 'training'
         },
         {
@@ -108,7 +108,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         if (email) {
           ssoemail = email;
         } else {
-          ssoemail = "";
+          ssoemail = "angan.sen@oracle.com";
         }
       }
 

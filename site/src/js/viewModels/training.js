@@ -514,8 +514,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 self.coursestatus(course.course_status);
                 self.classstatus(course.class_status);
                 self.detailedSchedule(course.schedule);
-
-                document.querySelector("#coursedetails").open();
+$("#coursedetails").ojDialog("open");
+                
                 
             }
 
@@ -864,6 +864,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             redirecttotrainingapp = function () {
                 self.ssowindow = window.open("https://apex.oraclecorp.com/pls/apex/f?p=TRAINING_SCHEDULER:MANAGE_COURSE");
             }
+			self.handleOKClose = function() {
+             document.querySelector("#coursedetails").close();
+         };
         }
         return new DashboardViewModel();
     }
