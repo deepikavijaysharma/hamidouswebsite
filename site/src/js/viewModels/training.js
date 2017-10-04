@@ -518,7 +518,9 @@ $("#coursedetails").ojDialog("open");
                 
                 
             }
-
+opencccall = function () {
+              $("#communitycallsdetails").ojDialog("open");
+            }
 
             searchcourses = function () {
                 self.searchfetchcourses();
@@ -830,7 +832,8 @@ $("#coursedetails").ojDialog("open");
                             location: calls[i].locn != undefined ? calls[i].locn : '',
                             meetinglink: calls[i].meetinglink != undefined ? calls[i].meetinglink : '',
                             dialin: calls[i].dialin != undefined ? calls[i].dialin : '',
-                            description: calls[i].description != undefined ? calls[i].description : ''
+                            description: calls[i].description != undefined ? calls[i].description : '',
+							subdescription: calls[i].description != undefined ? calls[i].description.substring(0, 70) + '...' : ''
                         });
                     }
                     // console.log(ko.toJSON(self.communityCallList()));

@@ -1541,6 +1541,16 @@ width:90%;
 .communityblock{
 margin-top:20px;
 }
+.communitycall{
+	 p{
+margin-bottom:15px;
+}
+.bluebutton{
+	background:$medblue !important;
+	
+	display:inline-flex;
+	}
+}
 .refine {
 input{
 margin-right:5px;
@@ -1564,15 +1574,22 @@ max-width:35px;
 /*----------------------------------POPUP----------------------------------*/
 .oj-dialog-title {
 font-size:$mediumFontSize;
-color: #fff;
+color:$blue;
 }
 .oj-dialog {
-background: #fff;
+background: $lightgrey;
 border: none;
-border-radius: 5px;
+border-radius: 0px;
+
 }
 .oj-dialog-header {
-background:$blue;
+background:$lightgrey;
+text-align:center;
+color:$blue;
+border-bottom:2px solid rgb(255, 255, 255);
+.oj-button.oj-default.oj-button-half-chrome .oj-button-icon, .oj-button.oj-focus-only.oj-button-half-chrome .oj-button-icon{
+		color:$blue !important;
+		}
 }
 .oj-dialog-body {
 padding: 40px 40px 10px;
@@ -1585,6 +1602,9 @@ ul{
 .oj-select-chosen.oj-select-default {
 font-style: normal;
 }
+
+	
+	
 /*----------------------------------SELECT ROLE----------------------------------*/
 .roleWrapper {
 .oj-select {
@@ -2147,6 +2167,8 @@ padding:20px  !important;}
 	h1{
 		margin-bottom:0px;
 		font-size:$smallFontSize;
+		color:$blue;
+		font-weight:normal;
 		}
 	}
 }

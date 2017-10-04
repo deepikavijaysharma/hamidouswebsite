@@ -315,29 +315,33 @@
                   <!-- /ko --> 
                   </ul>
                   <!-- ~~~~~~~~~~~~~ CALL MODE ~~~~~~~~~~~~~~ --> 
-                  <b>
+                  
                   <div class="titlesmall">Call Mode</div>
-                  </b>
+                 <ul class="refinelist">
+                 <li>
                   <label>
                     <input type="checkbox" class="refine" name="roles" value="virtual" onchange="refineupdate(this)">
                   </label>
+                 
+                  
                   <span>Virtual</span> <br>
-                  <br>
+                   </li>
+                   <li>
                   <label>
                     <input type="checkbox" class="refine" name="roles" value="hall" onchange="refineupdate(this)">
                   </label>
                   <span>Townhall</span> <br>
-                  <br>
-                  
+                 </li>
+                  </ul>
                   <!-- ~~~~~~~~~~~~~ PASS CALL ~~~~~~~~~~~~~~ --> 
-                  <b>
-                  <div class="titlesmall">PAST CALLS</div>
-                  </b>
+                                    <div class="titlesmall">PAST CALLS</div>
+                  <ul class="refinelist">
+                  <li>
                   <label>
                     <input type="checkbox" class="refine" name="roles" value="past" onchange="refineupdate(this)">
                   </label>
-                  <span>Past</span> <br>
-                  <br>
+                  <span>Past</span> </li>
+                  </ul>
                   <div>
                     <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: refinecourses, 
                                 ojComponent: { component: 'ojButton', label: 'Refine Result' }"> </button>
@@ -345,7 +349,7 @@
                 </div>
               </div>
             </div>
-            <div class="oj-flex-item oj-lg-9">
+            <div class="oj-flex-item oj-lg-9 communitycall">
               <div data-bind="foreach:communityCallList">
                 <div class="oj-flex oj-sm-12 ccrow">
                   <div class="oj-sm-4 oj-md-2  oj-flex">
@@ -372,8 +376,15 @@
                         <span data-bind="text:dialin"></span></p>
                     </div>
                     <div class="oj-md-6 cccol">
-                      <p><strong class="blue">Description</strong><br>
-                        <span data-bind="html:description"></span></p>
+                   
+                    <p><strong class="blue">Description</strong><br>
+                        <span data-bind="html:subdescription"></span></p>
+                    
+                    <p><strong class="blue">Additional Links</strong><br>
+                        <span data-bind="html:subdescription"></span></p>
+                    <p><strong class="blue">Recordings</strong><br>
+                        <span data-bind="html:subdescription"></span></p>
+                        <p><a data-bind="click:opencccall" target="_blank" style="cursor:pointer" class="bluebutton">View Details</a></p>
                     </div>
                   </div>
                    </div>
@@ -487,24 +498,29 @@
   <div style="display:none" class="dialogbodymain" id="coursedetails" title="Course Details" 
        data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%'}}">
     <div class="dialogbody">
-       <p><span  data-bind="text:detailedCatName"></span>><span  data-bind="text:detailedSubCatName"></span></p>
-        <p><h1>Name</h1>
-          <span  data-bind="text:detailedName"></span></p>
-        <p> <h1>Description</h1>
-          <span  data-bind="html:detailedDescription"></span></p>
-        <p> <h1>Product Type/Training Level/Training Type</h1>
-          <span  data-bind="text:detailedCloudOnpremise"></span>/<span  data-bind="text:detailedTrainingLevel"></span>/<span  data-bind="text:detailedTrainingType"></span></p>
-        <p> <h1>Class Size</b></h1>
-          <span  data-bind="text:detailedClassSize"></span><span> nos</span></p>
-        <p> <h1>City/State</b></h1>
-          <span  data-bind="text:detailedCity"></span>/<span  data-bind="text:detailedstate"></span></p>
-        <p> <h1>Enrollment/WaitList</b></h1>
-           <span  data-bind="text:enrollCount"></span>/<span  data-bind="text:waitlistcount"></span></p>
-        <p> <h1>Roles</b></h1>
-          <span  data-bind="text:detailedRoles"></span></p>
+       <h1><span  data-bind="text:detailedCatName"></span>><span  data-bind="text:detailedSubCatName"></span></h1>
+        <h1>Name</h1>
+          <p><span  data-bind="text:detailedName"></span></p>
+         <h1>Description</h1>
+         <p> <span  data-bind="html:detailedDescription"></span></p>
+         <h1>Product Type/Training Level/Training Type</h1>
+         <p> <span  data-bind="text:detailedCloudOnpremise"></span>/<span  data-bind="text:detailedTrainingLevel"></span>/<span  data-bind="text:detailedTrainingType"></span></p>
+         <h1>Class Size</b></h1>
+        <p>  <span  data-bind="text:detailedClassSize"></span><span> nos</span></p>
+         <h1>City/State</b></h1>
+         <p> <span  data-bind="text:detailedCity"></span>/<span  data-bind="text:detailedstate"></span></p>
+         <h1>Enrollment/WaitList</b></h1>
+          <p> <span  data-bind="text:enrollCount"></span>/<span  data-bind="text:waitlistcount"></span></p>
+         <h1>Roles</b></h1>
+         <p> <span  data-bind="text:detailedRoles"></span></p>
     </div>
   </div>
-    
+    <div style="display:none" class="dialogbodymain" id="communitycallsdetails" title="Community Calls" 
+       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%'}}">
+    <div class="dialogbody">
+       test
+    </div>
+  </div>
    
   </div>
 </div>
