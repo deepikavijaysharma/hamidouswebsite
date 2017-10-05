@@ -416,6 +416,18 @@ padding:0px 10px ;
 
 }
 
+.slide6 {
+background: url(images/slide5bg.jpg);
+height: 275px;
+border: none;
+background-size:cover;
+@media  #{$responsiveQueryMediumDown} {
+height: 100%;
+padding:0px 10px ;
+}
+
+}
+
 .slide1 {
 background: url(images/slide2bg.jpg);
 height: 275px;
@@ -2290,4 +2302,23 @@ padding:20px  !important;}
 		font-weight:normal;
 		}
 	}
+}
+
+/*--------------------------------Banner Homepage ------------------------------*/
+
+.webc{
+    font-weight: 900;
+    color: #C73401;
+    font-size: small;
+        text-align: left;
+}
+.webcp{
+	width:28%;
+}
+
+.loginnav{
+	font-size: 1.28571rem;
+    color: #969696;
+    margin-left: 20px;
+    margin-right: 20px;
 }
