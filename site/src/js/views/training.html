@@ -430,44 +430,62 @@
             <!-- CREATE COMMUNITY CALL -->
             <div id="createcommunitycall" class="bgwhite admincontent">
               <p>Create Community Call</p>
+			  <div class="oj-flex oj-sm-6">
               <div class="oj-flex">
-                <input type="text" placeholder="community call name. . ." data-bind="ojComponent: {component: 'ojInputText',value:callname}"
-                    />
+             <div class="oj-sm-12"><label>Community Call Name</label></div> 
+              <div class="oj-sm-12"><input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:callname}"
+                    /></div> 
+                
               </div>
-              <div class="oj-flex">
-                <input type="text" placeholder="who is the speaker. . ." data-bind="ojComponent: {component: 'ojInputText',value:callspkr}"
-                    />
+			  <br>
+			  <div class="oj-flex">
+             <div class="oj-sm-12"><label>Who is the Speaker</label></div> 
+              <div class="oj-sm-12"><input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:callspkr}"
+                    /></div> 
+                
+              </div><br>
+			   <div class="oj-flex">
+             <div class="oj-sm-12"><label>Designation</label></div> 
+              <div class="oj-sm-12"><input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:calldesignation}"
+                    /></div> 
+                
+              </div><br>
+			   <div class="oj-flex">
+             <div class="oj-sm-12"><label>Date & Time</label></div> 
+              <div class="oj-sm-12"> <div id="inline" data-bind="ojComponent: {component: 'ojInputDateTime',converter: dateTimeConverter, 
+                                 value: value}"></div></div> 
+                
+              </div><br>
+             <div class="oj-flex">
+             <div class="oj-sm-12"><label>Venue</label></div> 
+              <div class="oj-sm-12">  <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:callvenue}" /></div> 
+                
               </div>
-              <div class="oj-flex">
-                <input type="text" placeholder="designation. . ." data-bind="ojComponent: {component: 'ojInputText',value:calldesignation}"
-                    />
-              </div>
-              <div class="oj-flex">
-                <label>Date & Time</label>
-                <br>
-              </div>
-              <div class="oj-flex">
-                <div id="inline" data-bind="ojComponent: {component: 'ojInputDateTime',converter: dateTimeConverter, 
-                                 value: value}"></div>
-              </div>
-              <div class="oj-flex">
-                <input type="text" placeholder="type venue. . ." data-bind="ojComponent: {component: 'ojInputText',value:callvenue}" />
-              </div>
-              <div class="oj-flex">
-                <input type="text" placeholder="meeting link. . ." data-bind="ojComponent: {component: 'ojInputText',value:calllink}" />
-              </div>
-              <div class="oj-flex">
-                <input type="text" placeholder="dial in details. . ." data-bind="ojComponent: {component: 'ojInputText',value:calldialin}"
-                    />
-              </div>
+			  </div>
+			   <div class="oj-flex oj-sm-6">
               <br>
               <div class="oj-flex">
-                <textarea rows="6" cols="50" placeholder="description. . ." data-bind="ojComponent: {component: 'ojInputText',value:calldesc}"></textarea>
-              </div>
-              <br>
+             <div class="oj-sm-12"><label>Meeting Link</label></div> 
+              <div class="oj-sm-12">  <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:calllink}" /></div> 
+                
+              </div><br>
+			  <div class="oj-flex">
+             <div class="oj-sm-12"><label>Dial in details</label></div> 
+              <div class="oj-sm-12">  <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:calldialin}" /></div> 
+                
+              </div><br>
               <div class="oj-flex">
-                <textarea rows="6" cols="50" placeholder="additional links. . ." data-bind="ojComponent: {component: 'ojInputText',value:reflink}"></textarea>
+             <div class="oj-sm-12"><label>Description</label></div> 
+              <div class="oj-sm-12"> <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:calldesc}"></textarea></div> 
+                
+              </div><br>
+             <div class="oj-flex">
+             <div class="oj-sm-12"><label>Additional Links</label></div> 
+              <div class="oj-sm-12"> <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:reflink}"></textarea></div> 
+                
               </div>
+			  </div>
+              <br>
               <div class="oj-flex">
                 <div class="oj-flex-item">
                   <button id="outlinedPush" onclick="createcommunitycall()" style="cursor: pointer" data-bind="ojComponent: {
