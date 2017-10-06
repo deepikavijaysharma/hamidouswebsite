@@ -226,7 +226,7 @@
                         <!-- ko foreach: roles -->
                         <li>
                           <label>
-                        <input type="checkbox" class="roles" name="roles" data-bind="value: name" onchange="refineupdate(this)">
+                        <input type="checkbox" class="roles" name="roles" data-bind="value: id" onchange="refineupdate(this)">
                       </label>
                           <span data-bind="text: name"></span> </li>
                         <!-- /ko -->
@@ -235,7 +235,7 @@
                         <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: refinecourses, 
                           ojComponent: { component: 'ojButton', label: 'Refine Result' }"> </button>
                           <br>
-                          <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: searchcommunitycalls, 
+                          <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: resetCourseFilters, 
                           ojComponent: { component: 'ojButton', label: 'Reset Filters' }"> </button>
                       </div>
                     </div>
@@ -329,10 +329,10 @@
                   </label>
                           <span>Townhall</span> <br>
                         </li>
-                      </ul>
+                      <!-- </ul> -->
                       <!-- ~~~~~~~~~~~~~ PAST CALL ~~~~~~~~~~~~~~ -->
-                      <div class="titlesmall">PAST CALLS</div>
-                      <ul class="refinelist">
+                      <!-- <div class="titlesmall">PAST CALLS</div> -->
+                      <!-- <ul class="refinelist"> -->
                         <li>
                           <label>
                     <input type="checkbox" class="refine" name="past" value="past" onchange="refineupdate(this)">
@@ -365,26 +365,41 @@
                             <p><strong class="blue">Speaker</strong><br>
                               <span data-bind="text:speaker"></span><br>
                               <span data-bind="text:designation"></p>
-                    </div>
-                    <div class="oj-md-3 cccol">
-                      <p><strong class="blue">Meeting Link</strong><br>
-                        <span data-bind="text:meetinglink"></span></p>
-                            <p><strong class="blue">Dial-In</strong><br>
-                              <span data-bind="text:dialin"></span></p>
-                            <p><strong class="blue">Roles</strong><br>
-                              <span data-bind="text:role"></span></p>
                             <p><strong class="blue">Mode of Call</strong><br>
                               <span data-bind="text:mode_of_call"></span></p>
-                          </div>
-                          <div class="oj-md-6 cccol">
+                    </div>
+                    <div class="oj-md-3 cccol">
+                            <!-- ko if: addl_link.length>0 -->
+                            <p><strong class="blue">Meeting Link</strong><br>
+                            <a data-bind="attr:{href:meetinglink}">Click here</a></p>
+                            <!-- /ko --> 
 
+                            <!-- ko if: dialin.length>0 -->
+                            <p><strong class="blue">Dial-In</strong><br>
+                              <span data-bind="text:dialin"></span></p>
+                              <!-- /ko -->
+                              <!-- ko if: role.length>0 -->
+                            <p><strong class="blue">Roles</strong><br>
+                              <span data-bind="text:role"></span></p>
+                              <!-- /ko -->
+                    </div>
+                    <div class="oj-md-6 cccol">
+
+                            <!-- ko if: description.length>0 -->
                             <p><strong class="blue">Description</strong><br>
                               <span data-bind="html:description"></span></p>
+                              <!-- /ko -->
 
+                              <!-- ko if: addl_link.length>0 -->
                             <p><strong class="blue">Additional Links</strong><br>
-                              <span data-bind="html:subdescription"></span></p>
+                              <a data-bind="attr:{href:addl_link}">Click here</a></p>
+                              <!-- /ko --> 
+
+                              <!-- ko if: recording_link.length>0 -->
                             <p><strong class="blue">Recordings</strong><br>
-                              <span data-bind="html:recording_link"></span></p>
+                              <a data-bind="attr:{href:recording_link}" target="_blank">Click here</a></p>
+                              <!-- /ko --> 
+                              
                           </div>
                         </div>
                       </div>
@@ -552,7 +567,7 @@
         <!-- ko foreach: detailedClasses -->
         <li>
         <h1 data-bind="text:city"></h1>
-        <p> <a data-bind="attr: { href: directURL}">
+        <p> <a data-bind="attr: { href: directURL}" target="_blank">
             Click to Enroll
         </a></p>
       </li>
