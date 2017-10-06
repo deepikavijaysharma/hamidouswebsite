@@ -926,6 +926,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                                 meetinglink: calls[i].meetinglink != undefined ? calls[i].meetinglink : '',
                                 dialin: calls[i].dialin != undefined ? calls[i].dialin : '',
                                 description: calls[i].description != undefined ? calls[i].description : '',
+                                mode_of_call:calls[i].mode_of_call != undefined ? calls[i].mode_of_call : '',
+                                role:calls[i].role != undefined ? ko.toJSON(calls[i].role).replace('[', '').replace(']', '').replace(/"/g, '') : '',
+                                recording_link:calls[i].recording_link != undefined ? calls[i].recording_link : '',
                                 subdescription: calls[i].description != undefined ? calls[i].description.substring(0, 70) + '...' : ''
                             });
                         }
