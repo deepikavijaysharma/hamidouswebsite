@@ -85,14 +85,14 @@
                 chroming: 'half', display: 'icons', icons: {start: 'fa fa-bars'}}"> </button>
         </div>
       </div>
-      <div class="oj-flex">
+<!--       <div class="oj-flex">
         <div class="oj-flex-item oj-lg-11">
         </div>
         <div class="oj-flex-item oj-lg-1">
-          <button id="loginbutton" style="display: none" data-bind="click:initsso">Login</button>
+          <button id="loginbutton" data-bind="click:initsso">Login</button>
         </div>
 
-      </div>
+      </div> -->
     </header>
     <div class="logoBar" id="logoBar">
       <div class="container">
@@ -104,10 +104,16 @@
               navigationLevel: 'application',
               item: {template: 'navTemplate'}, data: navDataSource,
               selection: router.stateId, edge: 'top'}"
-              class="oj-web-applayout-navbar oj-sm-only-hide oj-md-only-hide oj-sm-10"></div>
-               
+              class="oj-web-applayout-navbar oj-sm-only-hide oj-md-only-hide oj-sm-10">
+                
+              </div>
+              <!-- Login Button added to Navbar -->               
+              <a href="#" role="button" class="oj-navigationlist-focused-element oj-navigationlist-item-content oj-navigationlist-item-no-icon" aria-pressed="false" tabindex="-1" data-tabmod="-1">
+                <span>
+                  <span id="loginbutton" class="oj-navigationlist-item-label loginnav" style="display: none" data-bind="click:initsso">Login</span>
+                </span>
+              </a>
             </div>
-           
           </div>
         </div>
       </div>
