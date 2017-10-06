@@ -66,6 +66,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.calldialin = ko.observable('');
             self.calldesc = ko.observable('');
             self.reflink = ko.observable('');
+            self.callrecordinglink = ko.observable('');
+            self.callroles = ko.observable('');
+            self.callmode = ko.observable('');
             self.communityCallList = ko.observableArray([]);
 
 
@@ -590,7 +593,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 setuncheck('trainingtype');
                 setuncheck('cities');
                 setuncheck('roles');
-                self.fetchcourses()
+                self.refinecategories([]);
+                self.refineproducttype([]);
+                self.refinetraininglevel([]);
+                self.refinetrainingtype([]);
+                self.refinecitis([]);
+                self.refineroles([]);
+
+                self.fetchcourses();
             }
 
             self.searchfetchcourses = function () {
@@ -629,7 +639,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     training_level: selectedtraininglevels,
                     training_type: selectedtrainingtypes,
                     city: selectedcitis,
-                    role: selectedroles
+                    role_id: selectedroles
                 }
                 console.log(ko.toJSON(headerobj));
                 $.ajax({
@@ -921,14 +931,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                                 speaker: calls[i].speaker != undefined ? calls[i].speaker : '',
                                 designation: calls[i].designation != undefined ? calls[i].designation : '',
                                 call_date: calls[i].call_date != undefined ? calls[i].call_date.split('T')[0] : '',
-                                call_time: calls[i].call_time != undefined ? calls[i].call_time : '',
+                                call_time: calls[i].call_time != undefined ? calls[i].call_time.substring(0,6) : '',
                                 location: calls[i].locn != undefined ? calls[i].locn : '',
                                 meetinglink: calls[i].meetinglink != undefined ? calls[i].meetinglink : '',
                                 dialin: calls[i].dialin != undefined ? calls[i].dialin : '',
                                 description: calls[i].description != undefined ? calls[i].description : '',
-                                mode_of_call:calls[i].mode_of_call != undefined ? calls[i].mode_of_call : '',
+                                mode_of_call:calls[i].mode_of_call != undefined ? calls[i].mode_of_call.replace('$',',') : '',
                                 role:calls[i].role != undefined ? ko.toJSON(calls[i].role).replace('[', '').replace(']', '').replace(/"/g, '') : '',
                                 recording_link:calls[i].recording_link != undefined ? calls[i].recording_link : '',
+                                addl_link:calls[i].addl_link != undefined ? calls[i].addl_link : '',
                                 subdescription: calls[i].description != undefined ? calls[i].description.substring(0, 70) + '...' : ''
                             });
                         }
@@ -941,6 +952,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.resetsearch = function () {
                 getCommunityCalls('GetCommunityCallDetails');
                 self.searchcallstext([]);
+                self.refinecommunitycallroles([]);
+                self.refinecommunitycallmodes([]);
+                self.refinecommunitycallroles([]);
                 setuncheck("refine");
             }
 
