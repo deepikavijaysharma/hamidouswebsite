@@ -235,8 +235,8 @@
                         <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: refinecourses, 
                           ojComponent: { component: 'ojButton', label: 'Refine Result' }"> </button>
                           <br>
-                          <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: fetchcourses, 
-                          ojComponent: { component: 'ojButton', label: 'Reset' }"> </button>
+                          <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: searchcommunitycalls, 
+                          ojComponent: { component: 'ojButton', label: 'Reset Filters' }"> </button>
                       </div>
                     </div>
                   </div>
@@ -337,7 +337,7 @@
                           <label>
                     <input type="checkbox" class="refine" name="past" value="past" onchange="refineupdate(this)">
                   </label>
-                          <span>Past</span> </li>
+                          <span>Replay</span> </li>
                       </ul>
                       <div>
                         <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: searchcommunitycalls, 
@@ -371,6 +371,10 @@
                         <span data-bind="text:meetinglink"></span></p>
                             <p><strong class="blue">Dial-In</strong><br>
                               <span data-bind="text:dialin"></span></p>
+                            <p><strong class="blue">Roles</strong><br>
+                              <span data-bind="text:role"></span></p>
+                            <p><strong class="blue">Mode of Call</strong><br>
+                              <span data-bind="text:mode_of_call"></span></p>
                           </div>
                           <div class="oj-md-6 cccol">
 
@@ -380,8 +384,7 @@
                             <p><strong class="blue">Additional Links</strong><br>
                               <span data-bind="html:subdescription"></span></p>
                             <p><strong class="blue">Recordings</strong><br>
-                              <span data-bind="html:subdescription"></span></p>
-                            <p><a data-bind="click:opencccall" target="_blank" style="cursor:pointer" class="bluebutton">View Details</a></p>
+                              <span data-bind="html:recording_link"></span></p>
                           </div>
                         </div>
                       </div>
@@ -409,12 +412,6 @@
                   <!-- <li><span>Create Community Call</span></li> -->
                   <!-- <li><span>Reports</span></li> -->
                 </ul>
-
-                <!-- CREATE COURSES BY ADMIN -->
-
-
-
-                <!-- END OF SECTION -->
 
                 <!-- CREATE COMMUNITY CALL -->
                 <div id="createcommunitycall" class="bgwhite admincontent">
