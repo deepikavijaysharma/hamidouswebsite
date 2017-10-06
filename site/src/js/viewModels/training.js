@@ -142,6 +142,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 self.reflink('');
                 self.callrecordlink('');
                 self.selectedrole([]);
+              
             }
 
             // CREATE COMMUNITY CALL
@@ -582,6 +583,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             }
             self.fetchcourses();
 
+            self.resetCourseFilters=function(){
+                setuncheck('category');
+                setuncheck('prodtype');
+                setuncheck('traininglevel');
+                setuncheck('trainingtype');
+                setuncheck('cities');
+                setuncheck('roles');
+                self.fetchcourses()
+            }
+
             self.searchfetchcourses = function () {
                 if (self.searchtext().length == 0) {
                     alert("Enter text to search");
@@ -746,10 +757,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     startday = '';//allcourses.courses[k].schedule[0];
                     var curcourse = allcourses.courses[k];
                     var catagorylist=curcourse.categories;
-                    var catlistString=ko.toJSON(catagorylist);
+                    var catlistString=ko.toJSON(self.refinecategories());
                         for(var i=0;i<catagorylist.length;i++){
-                            var categoryname = catagorylist[i];
-                            if(catlistString.indexOf(categoryname)!=-1){
+                            var categoryname = catagorylist[i].name;
+                            var catid=catagorylist[i].id;
+                            if(catlistString.length==2||catlistString.indexOf(catid)!=-1){
                                 var categoryobj = self.getcategorybyname(categoryname);
                                 categoryobj.courses.push({
                                     name: curcourse.name,
@@ -898,11 +910,27 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
             // GET THE LIST OF COMUNITY CALLS
             getCommunityCalls = function (texttosearch) {
-                // self.searchcallstext('');
-                // self.refinecommunitycallroles([]);
-                // self.refinecommunitycallmodes([]);
-                // self.refinepastcalls([]);
-                // searchcommunitycalls();
+                console.log(texttosearch);
+                $.getJSON("http://10.146.89.49:7003/ords/seaashm/seaashm/" + texttosearch).then(function (data) {
+                        var calls = data.items;
+                        self.communityCallList([]);
+                        self.searchcallstext([]);
+                        for (var i = 0; i < calls.length; i++) {
+                            self.communityCallList.push({
+                                name: calls[i].name != undefined ? calls[i].name : '',
+                                speaker: calls[i].speaker != undefined ? calls[i].speaker : '',
+                                designation: calls[i].designation != undefined ? calls[i].designation : '',
+                                call_date: calls[i].call_date != undefined ? calls[i].call_date.split('T')[0] : '',
+                                call_time: calls[i].call_time != undefined ? calls[i].call_time : '',
+                                location: calls[i].locn != undefined ? calls[i].locn : '',
+                                meetinglink: calls[i].meetinglink != undefined ? calls[i].meetinglink : '',
+                                dialin: calls[i].dialin != undefined ? calls[i].dialin : '',
+                                description: calls[i].description != undefined ? calls[i].description : '',
+                                subdescription: calls[i].description != undefined ? calls[i].description.substring(0, 70) + '...' : ''
+                            });
+                        }
+                        // console.log(ko.toJSON(self.communityCallList()));
+                    });
             }
             // getCommunityCalls('GetCommunityCallDetails');
 
@@ -913,6 +941,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 setuncheck("refine");
             }
 
+          
+
             self.searchcallstext = ko.observable('');
             //  SEARCH COMMUNITY CALLS
             searchcommunitycalls = function () {
@@ -922,6 +952,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 var past = '$-$' + ko.toJSON(self.refinepastcalls()).replace('[', '').replace(']', '').replace(/"/g, '');
                 getCommunityCalls('GetCommunityCallDetailsOnFreetextSearch/' + searchtext + '/' + past + '/' + callmodel + '/' + roles);
             }
+
+            loadCommunitycall=function(){
+                self.searchcallstext('');
+                self.refinecommunitycallroles([]);
+                self.refinecommunitycallmodes([]);
+                self.refinepastcalls([]);
+                searchcommunitycalls();
+            }
+            loadCommunitycall();
 
             // CHECK FOR ADMIN RIGHTS
             checkadminrights = function () {
