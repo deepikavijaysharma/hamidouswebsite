@@ -28,14 +28,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.categories = ko.observableArray([]);
             self.subcategories = ko.observableArray([]);
 
-            // REFINE SEARCH 
+            // REFINE SEARCH TRAINING
             self.refinecategories = ko.observableArray();
             self.refineproducttype = ko.observableArray();
             self.refinetraininglevel = ko.observableArray();
             self.refinetrainingtype = ko.observableArray();
             self.refinecitis = ko.observableArray();
-            self.refineroles=ko.observableArray();
-              
+            self.refineroles = ko.observableArray();
+
+            // REFINE SEARCH FOR COMMUNITY CALLS
+            self.refinecommunitycallroles = ko.observableArray();
+            self.refinecommunitycallmodes = ko.observableArray();
+            self.refinepastcalls = ko.observableArray();
+
             // category count
             self.catcnt = ko.observableArray([]);
             self.rolebasedcategory = ko.observableArray([]);
@@ -117,6 +122,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.calllink = ko.observable('');
             self.calldialin = ko.observable('');
             self.calldesc = ko.observable('');
+            self.callrecordlink = ko.observable('');
+            self.selectedrole = ko.observableArray([]);
+            self.selectedcallmode = ko.observableArray([]);
+
+            self.callmodes = ko.observableArray(['Virtual', 'Townhall']);
 
             resetcall = function () {
                 self.callname('');
@@ -130,10 +140,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 self.calldialin('');
                 self.calldesc('');
                 self.reflink('');
+                self.callrecordlink('');
+                self.selectedrole([]);
             }
 
             // CREATE COMMUNITY CALL
             createcommunitycall = function () {
+                var selectedrole = '';
+                var selectedcallmode = '';
 
                 if (self.callname().length == 0) {
                     alert("Please enter Community call name");
@@ -145,35 +159,46 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     return;
                 }
 
-                if (self.calldesignation().length == 0) {
+                // if (self.calldesignation().length == 0) {
 
-                    alert("Please enter designation of the speaker");
-                    return;
-                }
+                //     alert("Please enter designation of the speaker");
+                //     return;
+                // }
 
-                if (self.callvenue().length == 0) {
+                // if (self.callvenue().length == 0) {
 
-                    alert("Please enter venue details");
-                    return;
-                }
+                //     alert("Please enter venue details");
+                //     return;
+                // }
 
-                if (self.calllink().length == 0) {
+                // if (self.calllink().length == 0) {
 
-                    alert("Please enter meeting link");
-                    return;
-                }
+                //     alert("Please enter meeting link");
+                //     return;
+                // }
 
-                if (self.calldialin().length == 0) {
+                // if (self.calldialin().length == 0) {
 
-                    alert("Please enter Dial In details");
-                    return;
-                }
+                //     alert("Please enter Dial In details");
+                //     return;
+                // }
 
                 if (self.calldesc().length == 0) {
 
                     alert("Please enter description");
                     return;
                 }
+
+                if (self.selectedrole().length == 0) {
+                    alert("Please select role");
+                }
+
+                if (self.selectedcallmode().length == 0) {
+                    alert("Please select mode of delivary");
+                }
+                selectedrole = ko.toJSON(self.selectedrole()).replace('[', '').replace(']', '').replace(/"/g, '');
+                selectedcallmode = ko.toJSON(self.selectedcallmode()).replace('[', '').replace(']', '').replace(/"/g, '');
+
 
                 var call = {
                     name: self.callname(),
@@ -186,10 +211,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     dialin: self.calldialin(),
                     description: self.calldesc(),
                     reflink: self.reflink(),
-                    user: ssoemail
+                    user: ssoemail,
+                    recording_link: self.callrecordlink(),
+                    mode_of_call: selectedcallmode,
+                    role: selectedrole
                 }
 
-                // console.log(ko.toJSON(call));
+                console.log(ko.toJSON(call));
                 var url = 'http://10.146.89.49:7003/ords/seaashm/seaashm/INS_COMMUNITY_CALLS';
 
                 $.ajax({
@@ -209,6 +237,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             }
 
             //----------------------- END OF COMMUNITY CALL  ---------------------//
+
+
+
+
             //------------------   CATEGORY  -------------------//
 
 
@@ -263,7 +295,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.selectedcategories = ko.observableArray([]);
 
             getLeftpanelData = function () {
-                $.getJSON("https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/getFilters").
+                $.getJSON("https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/getFiltersV2").
                 then(function (reasons) {
 
                     // CATEGORIES
@@ -437,50 +469,52 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     });
             }
 
-            self.closecoursedetails=function(){
-                
+            self.closecoursedetails = function () {
+
                 $("#coursedetails").ojDialog("close");
             }
 
-            
+
             // SHOW DETAILED DESCRIPTION
-            self.detailedDescription=ko.observable();
-            self.detailedName=ko.observable();
-            self.detailedCourseId=ko.observable();
-            self.detailedClassId=ko.observable();
-            self.detailedCatId=ko.observable();
-            self.detailedCatName=ko.observable();
-            self.detailedSubCatName=ko.observable();
-            self.detailedSubCatId=ko.observable();
-            self.detailedRoles=ko.observable();
-            self.detailedClassSize=ko.observable();
-            self.detailedCloudOnpremise=ko.observable();
-            self.detailedTrainingLevel=ko.observable();
-            self.detailedTrainingType=ko.observable();
-            self.detailedContact=ko.observable();
-            self.detailedCity=ko.observable();
-            self.detailedstate=ko.observable();
-            self.coursestatus=ko.observable();
-            self.classstatus=ko.observable();
-            self.enrollCount=ko.observable();
-            self.waitlistcount=ko.observable();
-            self.detailedSchedule=ko.observableArray([]);
+            self.detailedDescription = ko.observable();
+            self.detailedName = ko.observable();
+            self.detailedCourseId = ko.observable();
+            self.detailedClassId = ko.observable();
+            self.detailedCatId = ko.observable();
+            self.detailedCatName = ko.observable();
+            self.detailedSubCatName = ko.observable();
+            self.detailedSubCatId = ko.observable();
+            self.detailedRoles = ko.observable();
+            self.detailedClassSize = ko.observable();
+            self.detailedprodcut_type = ko.observable();
+            self.detailedTrainingLevel = ko.observable();
+            self.detailedTrainingType = ko.observable();
+            self.detailedClasses=ko.observableArray([]);
+            self.detailedContact = ko.observable();
+            self.detailedCity = ko.observable();
+            self.detailedstate = ko.observable();
+            self.coursestatus = ko.observable();
+            self.classstatus = ko.observable();
+            self.enrollCount = ko.observable();
+            self.waitlistcount = ko.observable();
+            self.detailedSchedule = ko.observableArray([]);
 
 
-            showcoursedetails = function (course,param2) {
+            showcoursedetails = function (course, param2) {
 
                 self.detailedDescription('');
                 self.detailedName('');
                 self.detailedCatName('');
-                self.detailedSubCatName('');        
-                self.detailedCloudOnpremise('');
+                self.detailedSubCatName('');
+                self.detailedprodcut_type('');
                 self.detailedTrainingLevel('');
                 self.detailedTrainingType('');
                 self.detailedContact('');
                 self.detailedCity('');
-                self.detailedstate(''); 
+                self.detailedstate('');
+                self.detailedClasses([]);
                 self.enrollCount('');
-                self.waitlistcount('');       
+                self.waitlistcount('');
                 self.detailedCourseId('');
                 self.detailedClassId('');
                 self.detailedCatId('');
@@ -496,31 +530,30 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 self.detailedDescription(course.description);
                 self.detailedName(course.name);
                 self.detailedCatName(course.category_name);
-                self.detailedSubCatName(course.subcat_name);        
-                self.detailedCloudOnpremise(course.cloud_onpremise);
+                self.detailedSubCatName(course.subcat_name);
+                self.detailedprodcut_type(course.prodcut_type);
                 self.detailedTrainingLevel(course.training_level);
                 self.detailedTrainingType(course.training_type);
+                self.detailedClasses(course.classes);
                 self.detailedContact(course.contact);
                 self.detailedCity(course.city);
-                self.detailedstate(course.state); 
+                self.detailedstate(course.state);
                 self.enrollCount(course.enrollmentCount);
-                self.waitlistcount(course.waitlistCount);       
+                self.waitlistcount(course.waitlistCount);
                 self.detailedCourseId(course.course_id);
                 self.detailedClassId(course.class_id);
                 self.detailedCatId(course.category_id);
                 self.detailedSubCatId(course.subcat_id);
-                self.detailedRoles(ko.toJSON(course.roles).replace('[','').replace(']',''));
+                self.detailedRoles('');
                 self.detailedClassSize(course.class_size);
                 self.coursestatus(course.course_status);
                 self.classstatus(course.class_status);
                 self.detailedSchedule(course.schedule);
-$("#coursedetails").ojDialog("open");
-                
-                
+                $("#coursedetails").ojDialog("open");
+
+
             }
-opencccall = function () {
-              $("#communitycallsdetails").ojDialog("open");
-            }
+
 
             searchcourses = function () {
                 self.searchfetchcourses();
@@ -534,7 +567,7 @@ opencccall = function () {
             self.fetchcourses = function () {
                 // var text=self.searchtext.length>0?self.searchtext:'';
                 $.ajax({
-                    url: baseurl + "getCourses",
+                    url: baseurl + "getCoursesV2",
                     method: 'GET',
                     headers: {
                         free_text_search: ''
@@ -551,20 +584,18 @@ opencccall = function () {
 
             self.searchfetchcourses = function () {
                 if (self.searchtext().length == 0) {
-                    console.log("hurr", self.searchtext());
                     alert("Enter text to search");
                     return;
                 } else {
-                    console.log("whoa", self.searchtext());
+                    //console.log("whoa", self.searchtext());
                     var text = self.searchtext().length > 0 ? self.searchtext() : '';
                     $.ajax({
-                        url: baseurl + "getCourses",
+                        url: baseurl + "getCoursesV2",
                         method: 'GET',
                         headers: {
                             free_text_search: text
                         },
                         success: function (allcourses) {
-                            console.log("dasd", allcourses);
                             self.processCoursesFromService(allcourses);
                         },
                         error: function (xhr) {
@@ -575,130 +606,180 @@ opencccall = function () {
             }
 
             self.refinecourses = function () {
-                    var selectedcategories=ko.toJSON(self.refinecategories()).replace('[','').replace(']','');
-                    var selectedproductypes=ko.toJSON(self.refineproducttype()).replace('[','').replace(']','');
-                    var selectedtraininglevels=ko.toJSON(self.refinetraininglevel()).replace('[','').replace(']','');
-                    var selectedtrainingtypes=ko.toJSON(self.refinetrainingtype()).replace('[','').replace(']','');
-                    var selectedcitis=ko.toJSON(self.refinecitis()).replace('[','').replace(']','');
-                    var selectedroles=ko.toJSON(self.refineroles()).replace('[','').replace(']','');
-                    var headerobj={
-                        category:selectedcategories,
-                        product_type:selectedproductypes,
-                        training_level:selectedtraininglevels,
-                        training_type:selectedtrainingtypes,
-                        city:selectedcitis,
-                        role:selectedroles
+                var selectedcategories = ko.toJSON(self.refinecategories()).replace('[', '').replace(']', '').replace(/"/g, '');
+                var selectedproductypes = ko.toJSON(self.refineproducttype()).replace('[', '').replace(']', '').replace(/"/g, '');
+                var selectedtraininglevels = ko.toJSON(self.refinetraininglevel()).replace('[', '').replace(']', '').replace(/"/g, '');
+                var selectedtrainingtypes = ko.toJSON(self.refinetrainingtype()).replace('[', '').replace(']', '').replace(/"/g, '');
+                var selectedcitis = ko.toJSON(self.refinecitis()).replace('[', '').replace(']', '').replace(/"/g, '');
+                var selectedroles = ko.toJSON(self.refineroles()).replace('[', '').replace(']', '').replace(/"/g, '');
+                var headerobj = {
+                    category_id: selectedcategories,
+                    product_type: selectedproductypes,
+                    training_level: selectedtraininglevels,
+                    training_type: selectedtrainingtypes,
+                    city: selectedcitis,
+                    role: selectedroles
+                }
+                console.log(ko.toJSON(headerobj));
+                $.ajax({
+                    url: baseurl + "getCoursesV2",
+                    method: 'GET',
+                    headers: headerobj,
+                    success: function (allcourses) {
+                        self.processCoursesFromService(allcourses);
+                    },
+                    error: function (xhr) {
+                        alert(xhr);
                     }
-                    console.log(ko.toJSON(headerobj));
-                    $.ajax({
-                        url: baseurl + "getCourses",
-                        method: 'GET',
-                        headers:headerobj,
-                        success: function (allcourses) {
-                            console.log("dasd", allcourses);
-                            self.processCoursesFromService(allcourses);
-                        },
-                        error: function (xhr) {
-                            alert(xhr);
-                        }
-                    });
+                });
             }
 
             refineupdate = function (desc) {
-                var type=desc.name;
+                var type = desc.name;
                 if (desc.checked) {
 
-                    switch(type){
+                    switch (type) {
                         case "category":
-                                self.refinecategories.push(desc.defaultValue);
-                        break;
+                            setuncheck('category');
+                            desc.checked=true;
+                            self.refinecategories.push(desc.defaultValue);
+                            break;
 
                         case "prodtype":
-                                self.refineproducttype.push(desc.defaultValue);
-                        break;
+                            setuncheck('prodtype');
+                            desc.checked=true;
+                            self.refineproducttype.push(desc.defaultValue);
+                            break;
 
                         case "traininglevel":
-                                self.refinetraininglevel.push(desc.defaultValue);
-                        break;
+                            setuncheck('traininglevel');
+                            desc.checked=true;
+                            self.refinetraininglevel.push(desc.defaultValue);
+                            break;
 
                         case "trainingtype":
-                                self.refinetrainingtype.push(desc.defaultValue);
-                        break;
+                            setuncheck('trainingtype');
+                            desc.checked=true;
+                            self.refinetrainingtype.push(desc.defaultValue);
+                            break;
 
                         case "cities":
-                                self.refinecitis.push(desc.defaultValue);
-                        break;
+                            setuncheck('cities');
+                            desc.checked=true;
+                            self.refinecitis.push(desc.defaultValue);
+                            break;
 
                         case "roles":
-                                self.refineroles.push(desc.defaultValue);
-                        break;
+
+                            setuncheck('roles');
+                            desc.checked=true;
+                            self.refineroles.push(desc.defaultValue);
+                            break;
+
+                        case "community_roles":
+                            self.refinecommunitycallroles.push(desc.defaultValue);
+                            break;
+
+                        case "communitymodes":
+                            self.refinecommunitycallmodes.push(desc.defaultValue);
+                            break;
+
+                        case "past":
+                            self.refinepastcalls.push(desc.defaultValue);
+                            break;
                     }
 
-                    
 
                 } else {
-                    switch(type){
+                    switch (type) {
                         case "category":
-                                self.refinecategories.pop(desc.defaultValue);
-                        break;
+                            self.refinecategories.pop(desc.defaultValue);
+                            break;
 
                         case "prodtype":
-                                self.refineproducttype.pop(desc.defaultValue);
-                        break;
+                            self.refineproducttype.pop(desc.defaultValue);
+                            break;
 
                         case "traininglevel":
-                                self.refinetraininglevel.pop(desc.defaultValue);
-                        break;
+                            self.refinetraininglevel.pop(desc.defaultValue);
+                            break;
 
                         case "trainingtype":
-                                self.refinetrainingtype.pop(desc.defaultValue);
-                        break;
+                            self.refinetrainingtype.pop(desc.defaultValue);
+                            break;
 
                         case "cities":
-                                self.refinecitis.pop(desc.defaultValue);
-                        break;
+                            self.refinecitis.pop(desc.defaultValue);
+                            break;
 
                         case "roles":
-                                self.refineroles.pop(desc.defaultValue);
-                        break;
+                            self.refineroles.pop(desc.defaultValue);
+                            break;
+
+                        case "community_roles":
+                            self.refinecommunitycallroles.pop(desc.defaultValue);
+                            break;
+
+                        case "communitymodes":
+                            self.refinecommunitycallmodes.pop(desc.defaultValue);
+                            break;
+
+                        case "past":
+                            self.refinepastcalls.pop(desc.defaultValue);
+                            break;
                     }
 
                 }
             }
 
+            setuncheck=function(classname){
+                var x = document.getElementsByClassName(classname);
+                for(var i=0;i<x.length;i++){
+                    x[i].checked=false;
+                }
+            }
+
             self.processCoursesFromService = function (allcourses) {
+                //console.log(ko.toJSON(allcourses));
                 self.categories([]);
                 for (var k = 0; k < allcourses.courses.length; k++) {
-                    startday = allcourses.courses[k].schedule[0];
+                    startday = '';//allcourses.courses[k].schedule[0];
                     var curcourse = allcourses.courses[k];
-                    var categoryname = curcourse.category_name; // console.log(categoryname);                        
-                    var categoryobj = self.getcategorybyname(categoryname);
-                    categoryobj.courses.push({
-                        name: curcourse.name,
-                        description: curcourse.description,
-                        subdescription: curcourse.description.substring(0, 70) + '...',
-                        class_size: curcourse.class_size,
-                        cloud_onpremise: curcourse.cloud_onpremise,
-                        training_level: curcourse.training_level,
-                        training_type: curcourse.training_type,
-                        category_name: curcourse.category_name,
-                        categoryid: curcourse.category_id,
-                        subcat_name:curcourse.subcat_name,
-                        roles:curcourse.roles,
-                        subcat_id:curcourse.subcat_id,
-                        start_date: startday == undefined ? "NA" : startday.start_date,
-                        directURL: curcourse.directURL,
-                        courseid: curcourse.course_id,
-                        classid: curcourse.class_id,
-                        contact_email: curcourse.contact,
-                        city: curcourse.city,
-                        state: curcourse.state,
-                        course_status: curcourse.course_status,
-                        class_status: curcourse.class_status,
-                        enrollmentCount: curcourse.enrollmentCount,
-                        waitlistCount: curcourse.waitlistCount,
-                        schedule: curcourse.schedule
-                    });
+                    var catagorylist=curcourse.categories;
+                    var catlistString=ko.toJSON(catagorylist);
+                        for(var i=0;i<catagorylist.length;i++){
+                            var categoryname = catagorylist[i];
+                            if(catlistString.indexOf(categoryname)!=-1){
+                                var categoryobj = self.getcategorybyname(categoryname);
+                                categoryobj.courses.push({
+                                    name: curcourse.name,
+                                    description: curcourse.description,
+                                    subdescription: curcourse.description.substring(0, 200) + '...',
+                                    class_size: curcourse.class_size,
+                                    prodcut_type: curcourse.prodcut_type,
+                                    training_level: curcourse.training_level,
+                                    training_type: curcourse.training_type,
+                                    category_name: curcourse.category_name,
+                                    categoryid: curcourse.category_id,
+                                    subcat_name: curcourse.subcat_name,
+                                    classes:curcourse.classes,
+                                    roles: curcourse.roles,
+                                    subcat_id: curcourse.subcat_id,
+                                    start_date: startday == undefined ? "NA" : startday.start_date,
+                                    directURL: curcourse.directURL,
+                                    courseid: curcourse.course_id,
+                                    classid: curcourse.class_id,
+                                    contact_email: curcourse.contact,
+                                    city: curcourse.city,
+                                    state: curcourse.state,
+                                    course_status: curcourse.course_status,
+                                    class_status: curcourse.class_status,
+                                    enrollmentCount: curcourse.enrollmentCount,
+                                    waitlistCount: curcourse.waitlistCount,
+                                    schedule: curcourse.schedule
+                                });
+                            }
+                    }
                 }
                 // console.log(ko.toJSON(self.categories ()));
             }
@@ -807,8 +888,7 @@ opencccall = function () {
             self.currentValue = ko.observableArray();
             self.currentRawValue = ko.observable();
             self.buttonDisabled = ko.observable(true);
-            self.searchInput = function () {
-            };
+            self.searchInput = function () {};
 
 
             /*----------------------------------SEARCH----------------------------------*/
@@ -818,39 +898,29 @@ opencccall = function () {
 
             // GET THE LIST OF COMUNITY CALLS
             getCommunityCalls = function (texttosearch) {
-                $.getJSON("http://10.146.89.49:7003/ords/seaashm/seaashm/" + texttosearch).then(function (data) {
-                    var calls = data.items;
-                    self.communityCallList([]);
-                    self.searchcallstext([]);
-                    for (var i = 0; i < calls.length; i++) {
-                        self.communityCallList.push({
-                            name: calls[i].name != undefined ? calls[i].name : '',
-                            speaker: calls[i].speaker != undefined ? calls[i].speaker : '',
-                            designation: calls[i].designation != undefined ? calls[i].designation : '',
-                            call_date: calls[i].call_date != undefined ? calls[i].call_date.split('T')[0] : '',
-                            call_time: calls[i].call_time != undefined ? calls[i].call_time : '',
-                            location: calls[i].locn != undefined ? calls[i].locn : '',
-                            meetinglink: calls[i].meetinglink != undefined ? calls[i].meetinglink : '',
-                            dialin: calls[i].dialin != undefined ? calls[i].dialin : '',
-                            description: calls[i].description != undefined ? calls[i].description : '',
-							subdescription: calls[i].description != undefined ? calls[i].description.substring(0, 70) + '...' : ''
-                        });
-                    }
-                    // console.log(ko.toJSON(self.communityCallList()));
-                });
+                // self.searchcallstext('');
+                // self.refinecommunitycallroles([]);
+                // self.refinecommunitycallmodes([]);
+                // self.refinepastcalls([]);
+                // searchcommunitycalls();
             }
-            getCommunityCalls('GetCommunityCallDetails');
+            // getCommunityCalls('GetCommunityCallDetails');
+
 
             self.resetsearch = function () {
                 getCommunityCalls('GetCommunityCallDetails');
                 self.searchcallstext([]);
+                setuncheck("refine");
             }
 
             self.searchcallstext = ko.observable('');
             //  SEARCH COMMUNITY CALLS
             searchcommunitycalls = function () {
-                var searchtext = self.searchcallstext()[0];
-                getCommunityCalls('GetCommunityCallDetailsOnFreetextSearch/' + searchtext);
+                var searchtext = '$-$' + ko.toJSON(self.searchcallstext()).replace('[', '').replace(']', '').replace(/"/g, '');
+                var roles = '$-$' + ko.toJSON(self.refinecommunitycallroles()).replace('[', '').replace(']', '').replace(/"/g, '');
+                var callmodel = '$-$' + ko.toJSON(self.refinecommunitycallmodes()).replace('[', '').replace(']', '').replace(/"/g, '');
+                var past = '$-$' + ko.toJSON(self.refinepastcalls()).replace('[', '').replace(']', '').replace(/"/g, '');
+                getCommunityCalls('GetCommunityCallDetailsOnFreetextSearch/' + searchtext + '/' + past + '/' + callmodel + '/' + roles);
             }
 
             // CHECK FOR ADMIN RIGHTS
@@ -862,14 +932,20 @@ opencccall = function () {
             }
             checkadminrights();
 
-            
+
+            // ENROLL EMPLOYEE FOR A COURSE
+            enrollemployee=function(p1,p2,p3){
+                alert('Enroll');
+            }
 
             redirecttotrainingapp = function () {
                 self.ssowindow = window.open("https://apex.oraclecorp.com/pls/apex/f?p=TRAINING_SCHEDULER:MANAGE_COURSE");
             }
-			self.handleOKClose = function() {
-             document.querySelector("#coursedetails").close();
-         };
+            self.handleOKClose = function () {
+                document.querySelector("#coursedetails").close();
+            };
+
+
         }
         return new DashboardViewModel();
     }
