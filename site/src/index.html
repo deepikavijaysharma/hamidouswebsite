@@ -62,10 +62,7 @@
   <div id="navDrawer" class="oj-contrast-marker oj-web-applayout-offcanvas oj-offcanvas-start">
     <div role="navigation" data-bind="click: toggleDrawer, ojComponent: {component: 'ojNavigationList',
           navigationLevel: 'application', item: {template: 'navTemplate'}, data: navDataSource,
-          selection: router.stateId, edge: 'start'}"> </div><div class="oj-lg-hide"><button id="menuButton"
-            data-bind="ojComponent: {component: 'ojButton', label: 'Hubs', 
-                                     menu: '#myMenu'}">
-    </button></div>
+          selection: router.stateId, edge: 'start'}"> </div>
 
   </div>
   <div id="pageContent" class="oj-web-applayout-page"> 
@@ -76,7 +73,7 @@
            ** on the JET website for more information on how to use this pattern.
         -->
     <header role="banner" class="oj-web-applayout-header">
-      <div class="oj-web-applayout-max-width oj-flex-bar oj-sm-align-items-center  oj-lg-hide"> 
+      <div class="oj-web-applayout-max-width oj-flex-bar oj-sm-align-items-center  oj-xl-hide"> 
         <!-- Offcanvas toggle button -->
         
         <div class="oj-flex-bar-start">
@@ -104,7 +101,7 @@
               navigationLevel: 'application',
               item: {template: 'navTemplate'}, data: navDataSource,
               selection: router.stateId, edge: 'top'}"
-              class="oj-web-applayout-navbar oj-sm-only-hide oj-md-only-hide oj-sm-10">
+              class="oj-web-applayout-navbar oj-sm-only-hide oj-md-only-hide oj-lg-only-hide oj-sm-10">
                 
               </div>
               <!-- Login Button added to Navbar -->               

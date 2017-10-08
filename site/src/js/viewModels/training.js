@@ -776,7 +776,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                                 categoryobj.courses.push({
                                     name: curcourse.name,
                                     description: curcourse.description,
-                                    subdescription: curcourse.description.substring(0, 200) + '...',
+                                    subdescription: curcourse.description.substring(0, 120) + '...',
                                     class_size: curcourse.class_size,
                                     prodcut_type: curcourse.prodcut_type,
                                     training_level: curcourse.training_level,
