@@ -162,7 +162,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       // User Info used in Global Navigation area
       self.userLogin = ko.observable("john.hancock@oracle.com");
       self.addActive = function (routername, pid) {
-        alert("s");
+        
         if (routername === pid) {
 
           return 'active';
