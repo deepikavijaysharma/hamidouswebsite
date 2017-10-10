@@ -2618,3 +2618,15 @@ margin-bottom:20px;
 	@media  #{$responsiveQueryLargeDown} {
 	color:#fff;}	
 }
+
+.required {
+	color: red;
+	font-weight: bold;
+	margin:0px;
+}
+
+.hinttext {
+	color: darkolivegreen;
+	font-weight: bold;
+	margin:0px;
+}

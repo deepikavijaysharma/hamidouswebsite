@@ -5,7 +5,8 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs/ojconveyorbelt', 'ojs/ojcheckboxset', 'ojs/ojcollapsible', 'ojs/ojanimation', 'ojs/ojchart', 'ojs/ojselectcombobox', 'ojs/ojbutton', 'ojs/ojinputtext', 'ojs/ojdialog', 'ojs/ojdatetimepicker', 'ojs/ojtimezonedata'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs/ojconveyorbelt', 'ojs/ojcheckboxset', 'ojs/ojcollapsible', 'ojs/ojanimation', 'ojs/ojchart', 'ojs/ojbutton', 'ojs/ojinputtext', 'ojs/ojdialog', 'ojs/ojdatetimepicker',
+             'ojs/ojselectcombobox', 'ojs/ojtimezonedata',],
     function (oj, ko, $) {
 
         function DashboardViewModel() {
@@ -18,7 +19,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.coursetitle = ko.observable('');
             self.courselink = ko.observable('');
             self.coursedesc = ko.observable('');
-            self.disabledtab = ko.observable([]);
+            self.disabledtab = ko.observable([3,4]);
 
             self.selectedrole = ko.observable('');
             self.selectedcategory = ko.observable('');
@@ -58,7 +59,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.calltitle = ko.observable('');
             self.callspkr = ko.observable('');
             self.calldesignation = ko.observable('');
-            self.value = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+            self.date = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+            self.starttime = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+            self.callduration = ko.observable('');
             self.callsdate = ko.observable('');
             self.calltime = ko.observable('');
             self.callvenue = ko.observable('');
@@ -118,7 +121,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.callname = ko.observable('');
             self.callspkr = ko.observable('');
             self.calldesignation = ko.observable('');
-            self.value = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+            self.starttime = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+            self.callduration = ko.observable('');
+            self.date = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
             self.callsdate = ko.observable('');
             self.calltime = ko.observable('');
             self.callvenue = ko.observable('');
@@ -129,13 +134,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.selectedrole = ko.observableArray([]);
             self.selectedcallmode = ko.observableArray([]);
 
-            self.callmodes = ko.observableArray(['Virtual', 'Townhall']);
+            self.callmodes = ko.observableArray(['Virtual', 'Town hall']);
 
             resetcall = function () {
                 self.callname('');
                 self.callspkr('');
                 self.calldesignation('');
-                self.value(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+                self.starttime(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+                self.callduration('');
+                self.date(oj.IntlConverterUtils.dateToLocalIso(new Date()));
                 self.callsdate('');
                 self.calltime('');
                 self.callvenue('');
@@ -163,33 +170,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     return;
                 }
 
-                // if (self.calldesignation().length == 0) {
-
-                //     alert("Please enter designation of the speaker");
-                //     return;
-                // }
-
-                // if (self.callvenue().length == 0) {
-
-                //     alert("Please enter venue details");
-                //     return;
-                // }
-
-                // if (self.calllink().length == 0) {
-
-                //     alert("Please enter meeting link");
-                //     return;
-                // }
-
-                // if (self.calldialin().length == 0) {
-
-                //     alert("Please enter Dial In details");
-                //     return;
-                // }
 
                 if (self.calldesc().length == 0) {
 
                     alert("Please enter description");
+                    return;
+                }
+                if (self.callduration().length == 0) {
+
+                    alert("Please enter duration");
+                    return;
+                }else if(typeof self.callduration() == 'number'){
+                    alert("Please enter valid duration in minute(s)");
                     return;
                 }
 
@@ -208,8 +200,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     name: self.callname(),
                     speaker: self.callspkr(),
                     designation: self.calldesignation(),
-                    call_date: self.value().split('T')[0],
-                    call_time: self.value().split('T')[1],
+                    call_date: self.date().split('T')[0],
+                    call_time: self.starttime().split('T')[1],
+                    callduration:self.duration(),
                     locn: self.callvenue(),
                     meetinglink: self.calllink(),
                     dialin: self.calldialin(),
@@ -234,7 +227,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                         resetcall();
                     }
                 }).fail(function (xhr, textStatus, err) {
-                    alert(err);
+                    // alert(err);
                 });
 
 
@@ -423,7 +416,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                         getcategories();
                     }
                 }).fail(function (xhr, textStatus, err) {
-                    alert(err);
+                    // alert(err);
                 });
 
             }
@@ -580,7 +573,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                         self.processCoursesFromService(allcourses);
                     },
                     error: function (xhr) {
-                        alert(xhr);
+                        // alert(xhr);
                     }
                 });
             }
@@ -650,7 +643,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                         self.processCoursesFromService(allcourses);
                     },
                     error: function (xhr) {
-                        alert(xhr);
+                        // alert(xhr);
                     }
                 });
             }
@@ -931,7 +924,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                                 speaker: calls[i].speaker != undefined ? calls[i].speaker : '',
                                 designation: calls[i].designation != undefined ? calls[i].designation : '',
                                 call_date: calls[i].call_date != undefined ? calls[i].call_date.split('T')[0] : '',
-                                call_time: calls[i].call_time != undefined ? calls[i].call_time.substring(0,6) : '',
+                                call_time: calls[i].call_time != undefined ? calls[i].call_time.substring(0,5) : '',
+                                callduration:calls[i].duration!= undefined ? calls[i].duration+" mins" : 'NA',
                                 location: calls[i].locn != undefined ? calls[i].locn : '',
                                 meetinglink: calls[i].meetinglink != undefined ? calls[i].meetinglink : '',
                                 dialin: calls[i].dialin != undefined ? calls[i].dialin : '',
@@ -940,7 +934,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                                 role:calls[i].role != undefined ? ko.toJSON(calls[i].role).replace('[', '').replace(']', '').replace(/"/g, '') : '',
                                 recording_link:calls[i].recording_link != undefined ? calls[i].recording_link : '',
                                 addl_link:calls[i].addl_link != undefined ? calls[i].addl_link : '',
-                                subdescription: calls[i].description != undefined ? calls[i].description.substring(0, 70) + '...' : ''
+                                subdescription: calls[i].description != undefined ? calls[i].description.substring(0, 150) + '...' : ''
                             });
                         }
                         // console.log(ko.toJSON(self.communityCallList()));
@@ -979,14 +973,34 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             }
             loadCommunitycall();
 
+            setssostatus = function (selector, visibility) {
+                var nodes = document.querySelectorAll(selector),
+                  node,
+                  styleProperty = function (a, b) {
+                    return window.getComputedStyle ? window.getComputedStyle(a).getPropertyValue(b) : a.currentStyle[b];
+                  };
+        
+                [].forEach.call(nodes, function (a, b) {
+                  node = a;
+        
+                  node.style.display = visibility;
+                });
+              }
+
             // CHECK FOR ADMIN RIGHTS
             checkadminrights = function () {
-                if (usertype == 'ADMIN') {
-                    self.disabledtab([]);
-                    // self.disabledtab().push();
-                }
+
+                if (isAdmin) {
+                    $( "#tabs" ).ojTabs( { "disabledTabs": [3,4] } );
+                  } else {
+                    $( "#tabs" ).ojTabs( { "disabledTabs": [3,4,5] } );
+                  }
             }
-            checkadminrights();
+
+            
+            setInterval(function () {
+                checkadminrights();
+              }, 500);
 
 
             // ENROLL EMPLOYEE FOR A COURSE

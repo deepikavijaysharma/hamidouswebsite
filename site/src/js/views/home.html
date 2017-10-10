@@ -1,852 +1,99 @@
 <!------------------------------------SLIDER------------------------------------>
 
 <div class="oj-row" id="mainBar">
-  <div id="filmstrip-overlaidpagingcontrol-example" class="homeslider">
-    <div class="oj-panel">
-      <div id="filmStripDiv slider" style="position: relative;">
-        <div id="filmStrip" 
-           data-bind="ojComponent: {
-             component: 'ojFilmStrip', 
-             maxItemsPerPage: 1, 
-             arrowVisibility: currentNavArrowVisibility}" 
-           > 
-          <!-- ko foreach: slide -->
-          <div class="oj-panel oj-panel-alt2 demo-filmstrip-item largeslide" 
-             data-bind="style: {
-               display: getItemInitialDisplay($index())}">
-            <div data-bind="html: name,css:classname"></div>
-          </div>
-          <!-- /ko --> 
-        </div>
-        <div class="demo-overlaid-paging-control">
-          <div id="pagingControl" 
+    <div id="filmstrip-overlaidpagingcontrol-example" class="homeslider">
+      <div class="oj-panel">
+        <div id="filmStripDiv slider" style="position: relative;">
+          <div id="filmStrip" 
              data-bind="ojComponent: {
-               component: 'ojPagingControl', 
-                 data: getPagingModelslider(), 
-             pageSize: 0, 
-               pageOptions: {type: 'dots'}}"> </div>
-        </div>
-      </div>
-      <!-- end filmStripDiv --> 
-    </div>
-  </div>
-</div>
-<!-----------------------------------FIXED NAV------------------------------------>
-
-<div class="oj-row ">
-  <div id="setupBar" class="homesubnav oj-sm-12">
-    <div class="container">
-      <ul class="">
-        <li class=""><img src="css/images/vision_icon_small.png"><a href="#v-vision">SE Top Initiatives</a></li>
-        <li class=""><img src="css/images/services_icon_small.png"><a href="#services">Our Services</a></li>
-        <li class=""><img src="css/images/our_org_small.png"><a href="#organization">Our Organizations</a></li>
-        <li class=""><img src="css/images/sekeydates_icon_small.png"><a href="#keydates">Key Dates</a></li>
-        <li class=""><img src="css/images/wins_icon_small.png"><a href="#keywins">Key Wins</a></li>
-        <li class=""><img src="css/images/featured_icon.png"><a href="#golives">Featured Go-Lives</a></li>
-        <li class=""><img src="css/images/references_icon.png"><a href="#references">References</a></li>
-        <li class=""><img src="css/images/emp_icon_small.png"><a href="#empf">Employee Features</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-<!-----------------------------------VIDEO------------------------------------> 
-<a class="anchor" id="v-vision"></a>
-<div class="oj-row row2 newrow" id="row2">
-  <div class="container">
-    <div class="oj-flex">
-      <div class="oj-sm-12 oj-md-4 oj-lg-4 oj-xl-4 oj-flex-item">
-        <div class="videoHamidoucontainer oj-margin">
-          <div class="oj-sm-12 videoHamidoutitle">Hamidou Dia</div>
-          <div class="videoHamidou">
-            <div class="oj-sm-12 videoHamidoudesc">
-              <div class="oj-flex">
-                <div class="oj-sm-9"><span class="name">Senior Vice President,</span><br>
-                  <span class="title">Sales Engineering &amp; Cloud 
-                  Customer Success</span></div>
-                <div class="oj-sm-3"><a href="https://otube.oracle.com/media/Solutions+Engineer+and+Cloud+Customer+Success+All+Hands/0_w2kl22gc/2977" target="_blank" title="Solutions Engineering and Cloud Customer Success All Hands Webcast from Oracle HQ on Tuesday, June 27, 2017"><img src="css/images/play_icon.png" class="img-responsive"></a></div>
-              </div>
+               component: 'ojFilmStrip', 
+               maxItemsPerPage: 1, 
+               arrowVisibility: currentNavArrowVisibility}" 
+             > 
+            <!-- ko foreach: slide -->
+            <div class="oj-panel oj-panel-alt2 demo-filmstrip-item largeslide" 
+               data-bind="style: {
+                 display: getItemInitialDisplay($index())}">
+              <div data-bind="html: name,css:classname"></div>
             </div>
+            <!-- /ko --> 
           </div>
-        </div>
-      </div>
-      
-      <!------------------------------------VISION------------------------------------>
-      
-      <div class="oj-sm-12 oj-md-8 oj-lg-8 oj-xl-8 oj-flex-item " >
-        <div class="oj-margin visioncontainer">
-          <div class="oj-sm-12 visiontitle" id="vision"><img src="css/images/vision_icon_lg.png">&nbsp;Top Initiatives - Solution Engineering Top Initiatives</div>
-          <div class="oj-sm-12 visiondesc oj-flex">
-            <div class="oj-flex   oj-sm-12 oj-md-4">
-              <div class="oj-flex-item blocks oj-sm-12 bg1">
-                <div class="blocks_icon_inner"><img src="css/images/icon1.png"></div>
-              </div>
-              <div class="blocks_title_box1 blocks_title oj-flex-item oj-sm-12"><a href="http://innovate.us.oracle.com/cloudaccelerate/" target="_blank">Oracle Cloud <br>
-                Accelerate</a> </div>
-            </div>
-            <div class="oj-flex   oj-sm-12 oj-md-4">
-              <div class="oj-flex-item blocks oj-sm-12 bg2">
-                <div class="blocks_icon_inner oppor"><img src="css/images/icon2.png"></div>
-              </div>
-              <div class="blocks_title_box2 blocks_title oj-flex-item oj-sm-12"><a href="http://solutionengineering.us.oracle.com/hubs/">Oracle Cloud <br>
-                Solution Hubs</a></div>
-            </div>
-            <div class="oj-flex   oj-sm-12 oj-md-4">
-              <div class="oj-flex-item blocks oj-sm-12 bg3"> <img src="css/images/icon3.png"> </div>
-              <div class="blocks_title_box3 blocks_title oj-flex-item oj-sm-12"><a href="http://innovate.us.oracle.com/ecal/" target="_blank">Enterprise Cloud<br>
-                Adoption Lifecycle</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!------------------------------------SERVICES------------------------------------> 
-<a class="anchor" id="services"></a>
-<div class="oj-row row3 newrow" id="services_sec">
-  <div class="container">
-    <div class="oj-sm-12 services "  >
-      <div class="oj-flex">
-        <div class="oj-lg-12 oj-sm-12 servicestitle"><img src="css/images/services_icon_lg.png">&nbsp;Our Services - Solution Engineering-as-a-Service</div>
-        <div  id="btnGo1"></div>
-        <div class="row oj-sm-12">
-          <div class="oj-flex oj-sm-12 nopadding servicesblocks1">
-            <div class="row oj-flex oj-sm-12">
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner1">
-                <p>Awareness</p>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner1">
-                <p>Demand</p>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner1">
-                <p>Opportunity</p>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner1">
-                <p>Success</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="oj-flex oj-sm-12 nopadding servicesblocks1">
-            <div class="row oj-flex oj-sm-12">
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
-                
-                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog"> <img src="css/images/1.png"><br>
-                    <br>
-                    <p>Deliver a Cloud Day</p>
-                  </div>
-                </div>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
-                
-                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog2"> <img src="css/images/4.png"><br>
-                    <br>
-                    <p>Develop a Cloud Vision</p>
-                  </div>
-                </div>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner">
-                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog3"> <img src="css/images/7.png"><br>
-                    <br>
-                    <p>Design a Cloud Solution </p>
-                  </div>
-                </div>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
-                                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog4"> <img src="css/images/10.png"><br>
-                    <br>
-                    <p>Adopt a Cloud Solution</p>
-                  </div>
-                </div>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner">
-                
-                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog5"> <img src="css/images/2.png"><br>
-                    <br>
-                    <p>Support a Marketing Event</p>
-                  </div>
-                </div>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
-                
-                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog6"> <img src="css/images/5.png"><br>
-                    <br>
-                    <p>Develop a Value Hypothesis</p>
-                  </div>
-                </div>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >                
-                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog7"> <img src="css/images/8.png"><br>
-                    <br>
-                    <p>Build a POC</p>
-                  </div>
-                </div>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
-                
-                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog8"> <img src="css/images/11.png"><br>
-                    <br>
-                    <p>Deliver a Support Onboarding</p>
-                  </div>
-                </div>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
-               
-                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog9"> <img src="css/images/3.png"><br>
-                    <br>
-                    <p>Build an Executive Briefing</p>
-                  </div>
-                </div>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
-                
-                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog10"> <img src="css/images/6.png"><br>
-                    <br>
-                    <p>Create a Packaged Proposal</p>
-                  </div>
-                </div>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
-               
-                <div class="centerelement">
-                  <div class="clicksection"  data-bind="click:opendialog11"> <img src="css/images/9.png"><br>
-                    <br>
-                    <p>Build a Business Case</p>
-                  </div>
-                </div>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
-                
-                <div class="centerelement">
-                  <div class="clicksection"  data-bind="click:opendialog12"> <img src="css/images/12.png"><br>
-                    <br>
-                    <p>Deliver a Health Check</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row oj-sm-12 ">
-          <div class="oj-flex oj-sm-12 nopadding servicesblocks1">
-            <div class="row oj-flex oj-sm-12">
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner1">
-                <p>Account Planning</p>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner1">
-                <p>Opportunity Planning</p>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner1">
-                <p>Sales to Success Planning</p>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner1">
-                <p>Renewal Planning</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row oj-flex oj-sm-12 oj-margin-top" >
-          <div class="oj-lg-6">
-            <div class="oj-flex">
-              <div  id="btnGo2"></div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
-                
-                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog13"> <img src="css/images/tick_med.png"><br>
-                    <br>
-                    Customer
-                    Discovery</div>
-                </div>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
-                
-                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog14"> <img src="css/images/tick_med.png"><br>
-                    <br>
-                    Platform
-                    Assessments</div>
-                </div>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
-                
-                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog15"> <img src="css/images/tick_med.png"><br>
-                    <br>
-                    Hands-on
-                    Workshops</div>
-                </div>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
-                
-                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog16"> <img src="css/images/tick_med.png"><br>
-                    <br>
-                    Customer
-                    Demos</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="oj-lg-6">
-            <div class="oj-flex">
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
-                
-                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog17"> <img src="css/images/tick_med.png"><br>
-                    <br>
-                    RFx
-                    Response Support</div>
-                </div>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
-                
-                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog18"> <img src="css/images/tick_med.png"><br>
-                    <br>
-                    Sizing,
-                    Quoting & Config Support</div>
-                </div>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
-                
-                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog19"> Project Management Support</div>
-                </div>
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock reusuable" >
-               
-                <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog20"> Reusable
-                    Asset
-                    Harvesting</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!------------------------------------Our Orgnization------------------------------------> 
-<a class="anchor" id="organization"></a>
-<div class="oj-row row7 newrow">
-  <div class="container">
-    <div class="oj-sm-12 featured bgwhite">
-      <div class="oj-sm-12 featuredtitle"><img src="css/images/our_org.png">&nbsp;Our Organizations</div>
-      <div class="oj-flex oj-sm-12 org_container">
-        <div class="oj-flex-item oj-sm-12 red">
-          <div class="oj-flex oj-sm-12">
-            <h1>Enterprise Cloud Architects</h1>
-          </div>
-          <div class="oj-flex oj-sm-12 org_container_inner">
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
-            <div class="oj-lg-margin-right oj-md-margin-right">
-              <div class=" org_blocks_b"> <img src="css/images/alanlevine.jpg">Alan Levine</div>
-              <div class=" org_blocks_t"> GVP, Retail and Healthcare</div>
-            </div>
-            </div>
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
-            <div class="oj-lg-margin-right oj-md-margin-right">
-              <div class=" org_blocks_b"> <img src="css/images/robinlink.jpg">Robin Link</div>
-              <div class=" org_blocks_t">GVP, Enterprise</div>
-            </div>
-            </div>
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
-            <div class="oj-lg-margin-right">
-              <div class=" org_blocks_b"> <img src="css/images/larry_welles.jpg">Larry Welles </div>
-              <div class=" org_blocks_t">GVP, FSI and Telco</div>
-              </div>
-            </div>
-             
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
-            <div class="oj-lg-margin-right oj-md-margin-right">
-              <div class=" org_blocks_b"> <img src="css/images/edwinupson.jpg">Edwin Upson</div>
-              <div class=" org_blocks_t">GVP, National</div>
-              </div>
-            </div>
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
-            <div class="oj-flex-item oj-sm-12 ">
-          <h1 class="oj-md-only-hide"><br></h1>
-        </div>
-            <div class="oj-lg-margin-right oj-md-margin-right">
-              <div class=" org_blocks_b"> <img src="css/images/aaroncornfeld.jpg">Aaron Cornfeld *</div>
-              <div class=" org_blocks_t">GVP, Public Sector </div>
-              </div>
-            </div>
-           
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks yellow">
-            <div class="oj-flex-item oj-sm-12 ">
-          <h1><a href="https://my.oracle.com/site/nasc/Sales/Organizations/NAS/CloudPlatforms/index.html" target="_blank">Platform Specialists</a></h1>
-        </div>
-            <div class="oj-lg-margin-right">
-          <div class=" org_blocks_b"> <img src="css/images/joestrada.jpg">Joe Strada</div>
-          <div class=" org_blocks_t">GVP, Cloud Platform 
-            Specialists</div>
-            </div>
-        </div>
-        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks yellow">
-        <div class="oj-flex-item oj-sm-12 ">
-          <h1><br></h1>
-        </div>
-        <div class="oj-lg-margin-right oj-md-margin-right">
-          <div class=" org_blocks_b"> <img src="css/images/adamdriver.jpg">Adam Driver *</div>
-          <div class=" org_blocks_t">GVP, Analytics 
-            Specialists </div>
-            </div>
-        </div>
-        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks pink">
-        <div class="oj-flex-item oj-sm-12 ">
-          <h1>Hardware</h1>
-        </div>
-        <div class="oj-lg-margin-right oj-md-margin-right">
-          <div class=" org_blocks_b"> <img src="css/images/chrishause.jpg">Chris Hause *</div>
-          <div class=" org_blocks_t">GVP, Hardware
-            Specialists </div>
-            </div>
-        </div>
-        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks green">
-        <div class="oj-flex-item oj-sm-12 ">
-          <h1>Oracle Digital</h1>
-        </div>
-        <div class="oj-lg-margin-right">
-          <div class=" org_blocks_b"> <img src="css/images/carlgriffin.jpg">Carl Griffin</div>
-          <div class=" org_blocks_t">GVP, Solution Engineering 
-            Specialists</div>
-            </div>
-        </div>
-        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks blue">
-        <div class="oj-flex-item oj-sm-12 ">
-          <h1>SE Excellence</h1>
-        </div>
-        <div class="oj-lg-margin-right oj-md-margin-right">
-          <div class=" org_blocks_b"> <img src="css/images/timkelly.jpg">Tim Kelly</div>
-          <div class=" org_blocks_t">VP, SE Excellence
-            Specialists </div>
-            </div>
-        </div>
-        <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
-        <div class="oj-flex-item oj-sm-12 ">
-          <h1><a href="http://retriever.us.oracle.com/apex/f?p=121:22:2707052959961820::NO:RP:P22_CONTAINER_ID,P22_PREV_PAGE:80873,112
-" target="_blank">Industry Advisors</a></h1>
-        </div>
-        <div class="oj-lg-margin-right oj-md-margin-right">
-          <div class=" org_blocks_b"> <img src="css/images/jimmckeighan.jpg">Jim Mckeighan</div>
-          <div class=" org_blocks_t">VP, Industry Advisors 
-            Specialists </div>
-            </div>
-        </div>
-         <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks blue">
-         <div class="oj-flex-item oj-sm-12 ">
-          <h1>Cloud Solution Hubs</h1>
-        </div>
-         <div class="oj-lg-margin-right">
-          <div class=" org_blocks_b"> <img src="css/images/hamza.jpg">Hamza Jahangir</div>
-          <div class=" org_blocks_t">VP, Solution Engineering 
-            Specialists</div>
-            </div>
-        </div>
-         <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks yellow">
-         <div class="oj-flex-item oj-sm-12 ">
-          <h1>Cloud Customer Success</h1>
-        </div>
-         <div class="oj-lg-margin-right">
-          <div class=" org_blocks_b"> <img src="css/images/misha.jpg">Misha Logvinov</div>
-          <div class=" org_blocks_t">GVP, Cloud Customer 
-            Success </div>
-            </div>
-        </div>
-        <div class="oj-sm-12 dottedline">
-        <span class="">* Dotted Line Report</span>
-        </div>
-          </div>
-        </div>
-        
-        <!------------------------------------ROW3------------------------------------>
-        
-      </div>
-    </div>
-  </div>
-</div>
-<!------------------------------------CALENDAR------------------------------------> 
-<a class="anchor" id="keydates"></a>
-<div class="oj-row row5 newrow">
-  <div class="container">
-    <div class="oj-sm-12 keydates">
-      <div class="oj-flex">
-        <div class="oj-sm-12 keydatestitle"><img src="css/images/sekeydates_icon_lg.png">&nbsp;Key Dates</div>
-        <div class="oj-sm-12">
-          <div class="oj-flex">
-            <div class="oj-sm-12">
-              <div class="oj-margin">
-               
-                <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Wednesday, September 27<br>
-                        <br>
-                        <span 
-     class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : 12:00 PM PST / 3:00 PM EST</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">SE Excellence Community Call: OOW AppDev Updates</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end"><a href="http://oukc.oracle.com/static12/opn/login/?t=checkusercookies%257Cr=-1%257Cc=2037122497" target="_blank">Registration</a></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Wednesday, September 27<br>
-                        <br>
-                        <span 
-     class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : 10:00 AM PST / 1:00 PM EST</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">IaaS PM Webinar: OOW IaaS Updates</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end"><a href="https://oracle.zoom.us/webinar/register/e540a365f8fd283fc5b9141539e44ee6" target="_blank">Registration</a></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;TBD<br>
-                        <br>
-                        <span 
-     class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : TBD</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">DB Community Call: Penny Avril</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end">Pending</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Sunday, October 1st - Thursday, October 5th<br>
-                        <br>
-                      </p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Oracle OpenWorld</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end"><a href="https://www.oracle.com/openworld/index.html" target="_blank">OOW Corporate Site</a></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Thursday, October 12th<br>
-                        <br>
-                        &nbsp;</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">SE Accelerate Cloud Regional Road Show w/Hamidou Dia - NEW YORK</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end">Regional Only Event<br>
-                        See Calendar Invite</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="oj-sm-12 oj-sm-center" style="display:none">
-                  <div class="oj-flex valign">
-                    <div class="oj-sm-12 oj-lg-4 oj-flex"></div>
-                    <div class="oj-sm-12 oj-lg-5 oj-flex">
-                      <button class="oj-sm-align-center oj-flex bluebutton ">See All</button>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-3"><span class="oj-md-float-end">Missed out any course?<br>
-                      <a href="#">Checkout Archives</a></span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<a class="anchor" id="keywins"></a>
-<div class="oj-row row7 newrow">
-  <div class="container">
-    <div class="oj-sm-12 golive bgwhite">
-      <div class="oj-flex">
-        <div class="oj-sm-12 golivetitle"><img src="css/images/wins_large.png">&nbsp;Key Wins</div>
-        <div class="oj-sm-12">
-          <div class="oj-flex">
-            <div id="filmStripwins" class="oj-sm-12" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'visible',arrowplacement:'overlay'}"> <!-- block 1 -->
-              <div class="oj-panel oj-panel-alt2 my-filmstrip-item" 
-           data-bind="" ><p><a href="https://fsn.oraclecorp.com/winref/faces/WinStory?winId=39215" target="_blank"><img src="css/images/signet_logo.png"></a><br>ECA: Greg Jerry</p> </div>
-              <div class="oj-panel oj-panel-alt2 my-filmstrip-item" 
-           data-bind="" > <p><a href="https://fsn.oraclecorp.com/winref/faces/WinStory?source=endeca&winId=55359" target="_blank"><img src="css/images/marvel_logo.png"></a><br>CPS: Gordon Mccart</p> </div>
-              <div class="oj-panel oj-panel-alt2 my-filmstrip-item" 
-           data-bind="" >  <p><a href="https://fsn.oraclecorp.com/winref/faces/WinStory;jsessionid=GBrGsxkFH0kRJLyb6jVdSQzi5x8lV7U04giHZSX8qOdtcgHc3ZfR!-451785802?source=endeca&winId=50755" target="_blank"><img src="css/images/reinhart.png"></a><br>CSM: Chris Fuller</p> </div>
-             
-              <!-- block 1 --> 
-              
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!------------------------------------Wins, Go-Lives and References------------------------------------> 
-<a class="anchor" id="golives"></a>
-<div class="oj-row row7 newrow">
-  <div class="container">
-    <div class="oj-sm-12 wins  bgwhite">
-      <div class="oj-flex">
-        <div class="oj-sm-12 winstitle"><img src="css/images/featured_icon_lg.png">&nbsp;Featured Go-Lives</div>
-        <div class="oj-sm-12">
-          <div class="oj-flex"> 
-            <!-- filmstrip container -->
-            <div id="filmStripwins" class="oj-sm-12" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 2,arrowVisibility: 'visible'}">
-              <div id="" class="my-filmstrip-item oj-flex-item oj-margin winsblock">
-                <div id="animationDemo">
-                  <div id="animatable2" class="ani_container"> 
-                    
-                    <!-- back face of card -->
-                    <div class="cardface backside oj-animation-backface">
-                      <div class="wins_block oj-sm-12">
-                        <div class="win_logo oj-sm-12"><img src="css/images/gap-logo.png"></div>
-                        <div class="oj-flex oj-sm-12 win_desc">
-                          <p>Hear how the entire Oracle ecosystem came together to help Gap embark on a transformational Cloud journey.  Gap is increasing the sophistication of their business and becoming a very nimble retail company with Oracle Cloud. </p>
-                          <div class="summaryButton oj-sm-12 oj-flex">
-                            <div class="oj-sm-12">
-                              <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable2')">Back</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <!-- front face of card -->
-                    <div class="cardface">
-                      <div class="wins_block oj-sm-12">
-                        <div class="win_logo oj-sm-12"><img src="css/images/gap-logo.png"></div>
-                        <div class="oj-flex oj-sm-12 win_desc">
-                          <div class="oj-sm-6 imgblock"><img src="css/images/misha_img.png" class="img-responsive"></div>
-                          <div class="oj-sm-6 textblock">
-                            <div class="win_text">
-                              <p>Hosted by : <br>
-                                <span class="largetext">Misha Logvinov</span></p>
-                              <p>This episode’s guest : <br>
-                                <span class="largetext">Mark Carroll<br>
-                                Jeff Wexler</span> 
-                            </div>
-                          </div>
-                          <div class="summaryButton oj-sm-12 oj-flex">
-                            <div class="oj-sm-12 oj-xl-6">
-                              <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable2')">Quick Summary</button>
-                            </div>
-                            <div class="oj-sm-12 oj-xl-6 oj-flex"> <a href="https://otube.oracle.com/media/GoLive_GAP_092517.mp4/0_9mo76xtq" target="_blank">Listen to Interview</a> </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="" class="my-filmstrip-item oj-flex-item oj-margin winsblock">
-                <div id="animationDemo">
-                  <div id="animatable" class="ani_container"> 
-                    
-                    <!-- back face of card -->
-                    <div class="cardface backside oj-animation-backface">
-                      <div class="wins_block oj-sm-12">
-                        <div class="win_logo oj-sm-12"><img src="css/images/gap-logo.png"></div>
-                        <div class="oj-flex oj-sm-12 win_desc">
-                          <p>Hear how the extended Oracle team worked together to navigate some very tricky internal processes.  This tight collaboration resulted in a successful Cloud go-live for IKM and our first GoldenGate reference. </p>
-                          <div class="summaryButton oj-sm-12 oj-flex">
-                            <div class="oj-sm-12">
-                              <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable')">Back</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <!-- front face of card -->
-                    <div class="cardface">
-                      <div class="wins_block oj-sm-12">
-                        <div class="win_logo oj-sm-12"><img src="css/images/logo-ikm-3434021.png"></div>
-                        <div class="oj-flex oj-sm-12 win_desc">
-                          <div class="oj-sm-6 imgblock"><img src="css/images/misha_img.png" class="img-responsive"></div>
-                          <div class="oj-sm-6 textblock">
-                            <div class="win_text">
-                              <p>Hosted by : <br>
-                                <span class="largetext">Misha Logvinov</span></p>
-                              <p>This episode’s guest : <br>
-                                <span class="largetext">Scott Sharpley</span></p>
-                            </div>
-                          </div>
-                          <div class="summaryButton oj-sm-12 oj-flex">
-                            <div class="oj-sm-12 oj-xl-6">
-                              <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable')">Quick Summary</button>
-                            </div>
-                            <div class="oj-sm-12 oj-xl-6 oj-flex"> <a href="https://otube.oracle.com/media/063017_GoLive_IKM.mp4/0_4dd4n269" target="_blank">Listen to Interview</a> </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="" class="my-filmstrip-item oj-flex-item oj-margin winsblock">
-                <div id="animationDemo">
-                  <div id="animatable1" class="ani_container"> 
-                    
-                    <!-- back face of card -->
-                    <div class="cardface backside oj-animation-backface">
-                      <div class="wins_block oj-sm-12">
-                        <div class="win_logo oj-sm-12"><img src="css/images/stanford-logo.png"></div>
-                        <div class="oj-flex oj-sm-12 win_desc">
-                          <p>Hear how we got our foot in the door at Stanford to prove that our Oracle Management Cloud was a better alternative to Splunk.  This initial win led to a successful go live and an expansion at Stanford. </p>
-                          <div class="summaryButton oj-sm-12 oj-flex">
-                            <div class="oj-sm-12">
-                              <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable1')">Back</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <!-- front face of card -->
-                    <div class="cardface">
-                      <div class="wins_block oj-sm-12">
-                        <div class="win_logo oj-sm-12"><img src="css/images/stanford-logo.png"></div>
-                        <div class="oj-flex oj-sm-12 win_desc">
-                          <div class="oj-sm-6 imgblock"><img src="css/images/misha_img.png" class="img-responsive"></div>
-                          <div class="oj-sm-6 textblock">
-                            <div class="win_text">
-                              <p>Hosted by : <br>
-                                <span class="largetext">Misha Logvinov</span></p>
-                              <p>This episode’s guest : <br>
-                                <span class="largetext">Venkat Uppuluri</span></p>
-                            </div>
-                          </div>
-                          <div class="summaryButton oj-sm-12 oj-flex">
-                            <div class="oj-sm-12 oj-xl-6">
-                              <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable1')">Quick Summary</button>
-                            </div>
-                            <div class="oj-sm-12 oj-xl-6 oj-flex"> <a href="https://otube.oracle.com/media/GoLive-Stanford/0_snf30ktm/-1" target="_blank">Listen to Interview</a> </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- filmstrip container --> 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!------------------------------------References------------------------------------> 
-<a class="anchor" id="references"></a>
-<div class="oj-row row6 newrow">
-  <div class="container">
-    <div class="oj-sm-12 references  bgwhite">
-      <div class="oj-flex">
-        <div class="oj-sm-12 refertitle"><img src="css/images/references_icon_lg.png">&nbsp;References</div>
-        <div class="oj-md-6  oj-flex">
-          <div class="oj-flex oj-sm-12 oj-margin referencesblock">
-            <div class="oj-flex oj-sm-12  logorow">
-              <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/search/customers/_/N-p5vz?Nr=112&bcid=5508413926001" target="_blank"><img src="css/images/Exhibitor.png"></a></div>
-              <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/corporate/pressrelease/oracle-rac-iaas-050917.html" target="_blank"><img src="css/images/ICAT-300x120.png"></a></div>
-              <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/customers/astute-1-storage-cl.html" target="_blank"><img src="css/images/astute.png"></a></div>
-            </div>
-            <div class="oj-sm-12 button oj-flex"><a  class="whitebutton" href="https://www.oracle.com/search/customers/_/N-1joZp5vz?Nr=112" target="_blank">Search for IaaS Customers</a></div>
-          </div>
-        </div>
-        <div class="oj-md-6  oj-flex">
-          <div class="oj-flex oj-sm-12 oj-margin referencesblock">
-            <div class="oj-flex oj-sm-12  ">
-              <div class="oj-flex oj-sm-12 logorow">
-                <div class="oj-sm-12 oj-lg-4"><a href="https://www.forbes.com/sites/oracle/2017/03/15/a-fintech-innovators-race-to-the-cloud/#18ac787315e5" target="_blank"><img src="css/images/calypso.png"></a></div>
-                <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/search/customers/_/N-1joZp5wb?Ntt=trek&Dy=1&Nty=1&Nr=112&Ntk=S1" target="_blank"><img src="css/images/Trek_Bicycle_Corporation_logo.svg.png"></a></div>
-                <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/customers/pragmatyxs-1-dbcs.html?msgid=gcp-PAAS" target="_blank"><img src="css/images/pragmatyxscolorlogo.png"></a></div>
-              </div>
-            </div>
-            <div class="oj-sm-12 button oj-flex"><a class="whitebutton" href="https://www.oracle.com/search/customers/_/N-1joZp5wb?Nr=112" target="_blank">Search for PaaS Customers</a></div>
-          </div>
-        </div>
-        <div class="oj-sm-12 oj-sm-center">
-          <div class="oj-flex-item"> <a href="http://gcp.oraclecorp.com/ocpwb/f?p=144:2060:17175260936151" target="_blank">
-            <button  class="oj-sm-align-center oj-flex bluebutton"> Request a Reference</button>
-            </a> </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!------------------------------------Featured Stories------------------------------------> 
-<a class="anchor" id="empf"></a>
-<div class="oj-row row7 newrow">
-  <div class="container">
-    <div class="oj-sm-12 featured bgwhite">
-      <div class="oj-flex">
-        <div class="oj-sm-12 featuredtitle"><img src="css/images/emp_feature_lg.png">&nbsp;Employee Features</div>
-        <div class="oj-sm-12">
-          <div class="oj-flex">
-            <div id="filmStripfeatured" class="" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'hidden'}"> <!-- block 1 -->
-              <div class="oj-panel oj-panel-alt2 my-filmstrip-item" 
-           data-bind="" style="background:url(css/images/JMinter_small.jpg);">
-                <div class="employee_c" >
-                  <div class="emp_details">
-                    <div class="slash"></div>
-                    <a data-bind="click:empf1">ORACLE'S GOT TALENT: It’s All in the Family - Elite Athletes</a></div>
-                </div>
-              </div>
-              <div class="oj-panel oj-panel-alt2 my-filmstrip-item" 
-           data-bind="" style="background:url(css/images/Bella_Dosovitsky_Picture.jpg);">
-                <div class="employee_c" >
-                  <div class="emp_details">
-                    <div class="slash"></div>
-                    <a data-bind="click:empf2">GIVING BACK: Oracle d.Tech Coach Inspires Teenage Girls </a></div>
-                </div>
-              </div>
-              <div class="oj-panel oj-panel-alt2 my-filmstrip-item" 
-           data-bind="" style="background:url(css/images/InnovatorInterview_ChipBaber.png);background-size:contain !important">
-                <div class="employee_c" >
-                  <div class="emp_details">
-                    <div class="slash"></div>
-                    <a data-bind="click:empf3">INNOVATOR INTERVIEW: Chip Baber, Solution Engineer</a></div>
-                </div>
-              </div>
-              <!-- block 1 --> 
-              
-            </div>
-            <div style="text-align: center;" class="oj-sm-12">
-              <div style="display: inline-block;margin-top: 4px;">
-                <div id="pagingControl" 
-             data-bind="ojComponent: {
-               component: 'ojPagingControl', 
-               data: getPagingModelfeatured(), 
+          <div class="demo-overlaid-paging-control">
+            <div id="pagingControl" 
+               data-bind="ojComponent: {
+                 component: 'ojPagingControl', 
+                   data: getPagingModelslider(), 
                pageSize: 0, 
-               pageOptions: {type: 'dots'}}"> </div>
+                 pageOptions: {type: 'dots'}}"> </div>
+          </div>
+        </div>
+        <!-- end filmStripDiv --> 
+      </div>
+    </div>
+  </div>
+  <!-----------------------------------FIXED NAV------------------------------------>
+  
+  <div class="oj-row ">
+    <div id="setupBar" class="homesubnav oj-sm-12">
+      <div class="container">
+        <ul class="">
+          <li class=""><img src="css/images/vision_icon_small.png"><a href="#v-vision">SE Top Initiatives</a></li>
+          <li class=""><img src="css/images/services_icon_small.png"><a href="#services">Our Services</a></li>
+          <li class=""><img src="css/images/our_org_small.png"><a href="#organization">Our Organizations</a></li>
+          <li class=""><img src="css/images/sekeydates_icon_small.png"><a href="#keydates">Key Dates</a></li>
+          <li class=""><img src="css/images/wins_icon_small.png"><a href="#keywins">Key Wins</a></li>
+          <li class=""><img src="css/images/featured_icon.png"><a href="#golives">Featured Go-Lives</a></li>
+          <li class=""><img src="css/images/references_icon.png"><a href="#references">References</a></li>
+          <li class=""><img src="css/images/emp_icon_small.png"><a href="#empf">Employee Features</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-----------------------------------VIDEO------------------------------------> 
+  <a class="anchor" id="v-vision"></a>
+  <div class="oj-row row2 newrow" id="row2">
+    <div class="container">
+      <div class="oj-flex">
+        <div class="oj-sm-12 oj-md-4 oj-lg-4 oj-xl-4 oj-flex-item">
+          <div class="videoHamidoucontainer oj-margin">
+            <div class="oj-sm-12 videoHamidoutitle">Hamidou Dia</div>
+            <div class="videoHamidou">
+              <div class="oj-sm-12 videoHamidoudesc">
+                <div class="oj-flex">
+                  <div class="oj-sm-9"><span class="name">Senior Vice President,</span><br>
+                    <span class="title">Sales Engineering &amp; Cloud 
+                    Customer Success</span></div>
+                  <div class="oj-sm-3"><a href="https://otube.oracle.com/media/Solutions+Engineer+and+Cloud+Customer+Success+All+Hands/0_w2kl22gc/2977" target="_blank" title="Solutions Engineering and Cloud Customer Success All Hands Webcast from Oracle HQ on Tuesday, June 27, 2017"><img src="css/images/play_icon.png" class="img-responsive"></a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!------------------------------------VISION------------------------------------>
+        
+        <div class="oj-sm-12 oj-md-8 oj-lg-8 oj-xl-8 oj-flex-item " >
+          <div class="oj-margin visioncontainer">
+            <div class="oj-sm-12 visiontitle" id="vision"><img src="css/images/vision_icon_lg.png">&nbsp;Top Initiatives - Solution Engineering Top Initiatives</div>
+            <div class="oj-sm-12 visiondesc oj-flex">
+              <div class="oj-flex   oj-sm-12 oj-md-4">
+                <div class="oj-flex-item blocks oj-sm-12 bg1">
+                  <div class="blocks_icon_inner"><img src="css/images/icon1.png"></div>
+                </div>
+                <div class="blocks_title_box1 blocks_title oj-flex-item oj-sm-12"><a href="http://innovate.us.oracle.com/cloudaccelerate/" target="_blank">Oracle Cloud <br>
+                  Accelerate</a> </div>
+              </div>
+              <div class="oj-flex   oj-sm-12 oj-md-4">
+                <div class="oj-flex-item blocks oj-sm-12 bg2">
+                  <div class="blocks_icon_inner oppor"><img src="css/images/icon2.png"></div>
+                </div>
+                <div class="blocks_title_box2 blocks_title oj-flex-item oj-sm-12"><a href="http://solutionengineering.us.oracle.com/hubs/">Oracle Cloud <br>
+                  Solution Hubs</a></div>
+              </div>
+              <div class="oj-flex   oj-sm-12 oj-md-4">
+                <div class="oj-flex-item blocks oj-sm-12 bg3"> <img src="css/images/icon3.png"> </div>
+                <div class="blocks_title_box3 blocks_title oj-flex-item oj-sm-12"><a href="http://innovate.us.oracle.com/ecal/" target="_blank">Enterprise Cloud<br>
+                  Adoption Lifecycle</a></div>
               </div>
             </div>
           </div>
@@ -854,596 +101,1392 @@
       </div>
     </div>
   </div>
-</div>
-<div class="oj-row row7 newrow">
-  <div class="container">
-    <div class="oj-sm-12 featured bgwhite">
-      <div class="oj-sm-12 featuredtitle"><img src="css/images/contact_icon_lg.png">&nbsp;Solution Engineering Website Governance Board</div>
-      <div class="oj-sm-12">
-        <div class="oj-flex contactcontainer">
-          <div class="oj-sm-12 oj-md-12 oj-lg-7">
-            <p><span class="orange">Heather Hughes</span> : Website Lead, Announcements, Employee Features, Key Dates</p>
-            <p><span class="orange">Kaushik Kundu</span> : Enablement</p>
-            <p><span class="orange">Maharshi Desai</span> : SE-as-a-Service, Oracle Cloud Solution Hubs, ECAL - Method, ECA Certification, ECA  Enablement </p>
-            <p><span class="orange">Bridget Guiley</span> : Go Lives, Wins, and References</p>
+  
+  <!------------------------------------SERVICES------------------------------------> 
+  <a class="anchor" id="services"></a>
+  <div class="oj-row row3 newrow" id="services_sec">
+    <div class="container">
+      <div class="oj-sm-12 services "  >
+        <div class="oj-flex">
+          <div class="oj-lg-12 oj-sm-12 servicestitle"><img src="css/images/services_icon_lg.png">&nbsp;Our Services - Solution Engineering-as-a-Service</div>
+          <div  id="btnGo1"></div>
+          <div class="row oj-sm-12">
+            <div class="oj-flex oj-sm-12 nopadding servicesblocks1">
+              <div class="row oj-flex oj-sm-12">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner1">
+                  <p>Awareness</p>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner1">
+                  <p>Demand</p>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner1">
+                  <p>Opportunity</p>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner1">
+                  <p>Success</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="oj-sm-12 oj-md-12 oj-lg-5">
-            <p><span class="orange">Nick Donatone</span> : Cloud Customer Success </p>
-            <p><span class="orange">Al Kiessel</span> : ECAL - Method, ECA Certification, ECA Enablement </p>
-            <p><span class="orange">Bella Dosovitsky</span> : Platform Specialist Team</p>
-            <p><span class="orange">Souvik Sadhu</span> : Bangalore Hub Design Agency</p>
-            </p>
+          <div class="row">
+            <div class="oj-flex oj-sm-12 nopadding servicesblocks1">
+              <div class="row oj-flex oj-sm-12">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
+                  
+                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog"> <img src="css/images/1.png"><br>
+                      <br>
+                      <p>Deliver a Cloud Day</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
+                  
+                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog2"> <img src="css/images/4.png"><br>
+                      <br>
+                      <p>Develop a Cloud Vision</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner">
+                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog3"> <img src="css/images/7.png"><br>
+                      <br>
+                      <p>Design a Cloud Solution </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
+                                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog4"> <img src="css/images/10.png"><br>
+                      <br>
+                      <p>Adopt a Cloud Solution</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner">
+                  
+                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog5"> <img src="css/images/2.png"><br>
+                      <br>
+                      <p>Support a Marketing Event</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
+                  
+                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog6"> <img src="css/images/5.png"><br>
+                      <br>
+                      <p>Develop a Value Hypothesis</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >                
+                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog7"> <img src="css/images/8.png"><br>
+                      <br>
+                      <p>Build a POC</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
+                  
+                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog8"> <img src="css/images/11.png"><br>
+                      <br>
+                      <p>Deliver a Support Onboarding</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
+                 
+                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog9"> <img src="css/images/3.png"><br>
+                      <br>
+                      <p>Build an Executive Briefing</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
+                  
+                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog10"> <img src="css/images/6.png"><br>
+                      <br>
+                      <p>Create a Packaged Proposal</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
+                 
+                  <div class="centerelement">
+                    <div class="clicksection"  data-bind="click:opendialog11"> <img src="css/images/9.png"><br>
+                      <br>
+                      <p>Build a Business Case</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner" >
+                  
+                  <div class="centerelement">
+                    <div class="clicksection"  data-bind="click:opendialog12"> <img src="css/images/12.png"><br>
+                      <br>
+                      <p>Deliver a Health Check</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="oj-sm-12">
-            <p align="center">Do you have feedback or content to submit? Please contact <a href="mailto:heather.hughes@oracle.com">heather.hughes@oracle.com</a>.</p>
+          <div class="row oj-sm-12 ">
+            <div class="oj-flex oj-sm-12 nopadding servicesblocks1">
+              <div class="row oj-flex oj-sm-12">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner1">
+                  <p>Account Planning</p>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner1">
+                  <p>Opportunity Planning</p>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner1">
+                  <p>Sales to Success Planning</p>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-xl-3 servicesblocksinner1">
+                  <p>Renewal Planning</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row oj-flex oj-sm-12 oj-margin-top" >
+            <div class="oj-lg-6">
+              <div class="oj-flex">
+                <div  id="btnGo2"></div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
+                  
+                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog13"> <img src="css/images/tick_med.png"><br>
+                      <br>
+                      Customer
+                      Discovery</div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
+                  
+                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog14"> <img src="css/images/tick_med.png"><br>
+                      <br>
+                      Platform
+                      Assessments</div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
+                  
+                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog15"> <img src="css/images/tick_med.png"><br>
+                      <br>
+                      Hands-on
+                      Workshops</div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
+                  
+                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog16"> <img src="css/images/tick_med.png"><br>
+                      <br>
+                      Customer
+                      Demos</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="oj-lg-6">
+              <div class="oj-flex">
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
+                  
+                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog17"> <img src="css/images/tick_med.png"><br>
+                      <br>
+                      RFx
+                      Response Support</div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
+                  
+                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog18"> <img src="css/images/tick_med.png"><br>
+                      <br>
+                      Sizing,
+                      Quoting & Config Support</div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
+                  
+                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog19"> Project Management Support</div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock reusuable" >
+                 
+                  <div class="centerelement">
+                    <div class="clicksection" data-bind="click:opendialog20"> Reusable
+                      Asset
+                      Harvesting</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div id="empfwrapper">
-  <div style="display:none" id="empf1" title="TECH TALENT FEATURE: It’s All in the Family - Elite Athletes" 
-       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
-    <div class="oj-dialog-body empf">
-      <p><img src="css/images/JMinter_small.jpg" align="right">Our “Tech Talent” feature for October is Dustin Minter, Cloud Customer Success Manager, Public Sector/Enterprise.  Dustin has some mighty fine DNA.  His grandpa, Harry Minter, played for the Philadelphia Phillies baseball team, his father, Mike Minter, was on the NBA D-League team for the Dallas Mavericks, Dustin reached the Final Four of the Elite Eight Basketball tournament at Tarleton State University 2003-2006, his middle brother, Kyle, played soccer at the University of Memphis, and his youngest brother, <a href="http://www.uslsoccer.com/chase-minter" target="_blank">Chase</a>, is playing soccer in the MLS for Real Monarchs Salt Lake City. Dustin’s talents are a great addition to the Oracle Solution Engineering team as he brings to bear his winning and competitive legacy to help our customers succeed in the cloud. </p>
+  <!------------------------------------Our Orgnization------------------------------------> 
+  <a class="anchor" id="organization"></a>
+  <div class="oj-row row7 newrow">
+    <div class="container">
+      <div class="oj-sm-12 featured bgwhite">
+        <div class="oj-sm-12 featuredtitle"><img src="css/images/our_org.png">&nbsp;Our Organizations</div>
+        <div class="oj-flex oj-sm-12 org_container">
+          <div class="oj-flex-item oj-sm-12 red">
+            <div class="oj-flex oj-sm-12">
+              <h1>Enterprise Cloud Architects</h1>
+            </div>
+            <div class="oj-flex oj-sm-12 org_container_inner">
+              <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
+              <div class="oj-lg-margin-right oj-md-margin-right">
+                <div class=" org_blocks_b"> <img src="css/images/alanlevine.jpg">Alan Levine</div>
+                <div class=" org_blocks_t"> GVP, Retail and Healthcare</div>
+              </div>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
+              <div class="oj-lg-margin-right oj-md-margin-right">
+                <div class=" org_blocks_b"> <img src="css/images/robinlink.jpg">Robin Link</div>
+                <div class=" org_blocks_t">GVP, Enterprise</div>
+              </div>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
+              <div class="oj-lg-margin-right">
+                <div class=" org_blocks_b"> <img src="css/images/larry_welles.jpg">Larry Welles </div>
+                <div class=" org_blocks_t">GVP, FSI and Telco</div>
+                </div>
+              </div>
+               
+              <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
+              <div class="oj-lg-margin-right oj-md-margin-right">
+                <div class=" org_blocks_b"> <img src="css/images/edwinupson.jpg">Edwin Upson</div>
+                <div class=" org_blocks_t">GVP, National</div>
+                </div>
+              </div>
+              <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
+              <div class="oj-flex-item oj-sm-12 ">
+            <h1 class="oj-md-only-hide"><br></h1>
+          </div>
+              <div class="oj-lg-margin-right oj-md-margin-right">
+                <div class=" org_blocks_b"> <img src="css/images/aaroncornfeld.jpg">Aaron Cornfeld</div>
+                <div class=" org_blocks_t">GVP, Public Sector </div>
+                </div>
+              </div>
+             
+              <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks yellow">
+              <div class="oj-flex-item oj-sm-12 ">
+            <h1><a href="https://my.oracle.com/site/nasc/Sales/Organizations/NAS/CloudPlatforms/index.html" target="_blank">Platform Specialists</a></h1>
+          </div>
+              <div class="oj-lg-margin-right">
+            <div class=" org_blocks_b"> <img src="css/images/joestrada.jpg">Joe Strada</div>
+            <div class=" org_blocks_t">GVP, Cloud Platform 
+              Specialists</div>
+              </div>
+          </div>
+          <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks yellow">
+          <div class="oj-flex-item oj-sm-12 ">
+            <h1><br></h1>
+          </div>
+          <div class="oj-lg-margin-right oj-md-margin-right">
+            <div class=" org_blocks_b"> <img src="css/images/adamdriver.jpg">Adam Driver</div>
+            <div class=" org_blocks_t">GVP, Analytics 
+              Specialists </div>
+              </div>
+          </div>
+          <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks pink">
+          <div class="oj-flex-item oj-sm-12 ">
+            <h1>Hardware</h1>
+          </div>
+          <div class="oj-lg-margin-right oj-md-margin-right">
+            <div class=" org_blocks_b"> <img src="css/images/chrishause.jpg">Chris Hause</div>
+            <div class=" org_blocks_t">GVP, Hardware
+              Specialists </div>
+              </div>
+          </div>
+          <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks green">
+          <div class="oj-flex-item oj-sm-12 ">
+            <h1>Oracle Digital</h1>
+          </div>
+          <div class="oj-lg-margin-right">
+            <div class=" org_blocks_b"> <img src="css/images/carlgriffin.jpg">Carl Griffin</div>
+            <div class=" org_blocks_t">GVP, Solution Engineering 
+              Specialists</div>
+              </div>
+          </div>
+          <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks blue">
+          <div class="oj-flex-item oj-sm-12 ">
+            <h1>SE Excellence</h1>
+          </div>
+          <div class="oj-lg-margin-right oj-md-margin-right">
+            <div class=" org_blocks_b"> <img src="css/images/timkelly.jpg">Tim Kelly</div>
+            <div class=" org_blocks_t">VP, SE Excellence
+              Specialists </div>
+              </div>
+          </div>
+          <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
+          <div class="oj-flex-item oj-sm-12 ">
+            <h1><a href="http://retriever.us.oracle.com/apex/f?p=121:22:2707052959961820::NO:RP:P22_CONTAINER_ID,P22_PREV_PAGE:80873,112
+  " target="_blank">Industry Advisors</a></h1>
+          </div>
+          <div class="oj-lg-margin-right oj-md-margin-right">
+            <div class=" org_blocks_b"> <img src="css/images/jimmckeighan.jpg">Jim Mckeighan</div>
+            <div class=" org_blocks_t">VP, Industry Advisors 
+              Specialists </div>
+              </div>
+          </div>
+           <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks blue">
+           <div class="oj-flex-item oj-sm-12 ">
+            <h1>Cloud Solution Hubs</h1>
+          </div>
+           <div class="oj-lg-margin-right">
+            <div class=" org_blocks_b"> <img src="css/images/hamza.jpg">Hamza Jahangir</div>
+            <div class=" org_blocks_t">VP, Solution Engineering 
+              Specialists</div>
+              </div>
+          </div>
+           <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks yellow">
+           <div class="oj-flex-item oj-sm-12 ">
+            <h1>Cloud Customer Success</h1>
+          </div>
+           <div class="oj-lg-margin-right">
+            <div class=" org_blocks_b"> <img src="css/images/misha.jpg">Misha Logvinov</div>
+            <div class=" org_blocks_t">GVP, Cloud Customer 
+              Success </div>
+              </div>
+          </div>
+            </div>
+          </div>
+          
+          <!------------------------------------ROW3------------------------------------>
+          
+        </div>
+      </div>
     </div>
   </div>
-  <div style="display:none" id="empf2" title="Giving Back: Oracle d.Tech Coach Inspires Teenage Girls" 
-       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
-    <div class="oj-dialog-body empf">
-      <p><img src="css/images/BellaDosovitsky_Picture.jpg" align="right">Bella Dosovitsky volunteered for a two-week d.Tech high school inter-session through the <a href="http://www.oraclefoundation.org/" target="_blank">Oracle Education Foundation</a>. She coached a 3D printing class of 25 girls, who went through explorative learning of the 3D Printing industry, the fabrication process, and turning their ideas into real-life designs using CAD software and 3D Printers.</p>
-      <p>Bella also got to present to the students our personal and professional journeys, lessons learned, and informal conversations about: self-esteem, women in technology, personal development, juggling our desires with our parents’ pressure, and choosing a profession. </p>
-      <p><strong>Why Give Back?</strong> – Bella emphatically said that it was “Surely, the single most inspiring things I’ve done at Oracle so far.”</p>
+  <!------------------------------------CALENDAR------------------------------------> 
+  <a class="anchor" id="keydates"></a>
+  <div class="oj-row row5 newrow">
+    <div class="container">
+      <div class="oj-sm-12 keydates">
+        <div class="oj-flex">
+          <div class="oj-sm-12 keydatestitle"><img src="css/images/sekeydates_icon_lg.png">&nbsp;Key Dates</div>
+          <div class="oj-sm-12">
+            <div class="oj-flex">
+              <div class="oj-sm-12">
+                <div class="oj-margin">
+                  <div class="calrow">
+                    <div class="oj-flex">
+                      <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                        <div class="oj-flex calevents">
+                          <p><span 
+       class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Friday, September 15<br>
+                            <br>
+                            <span 
+       class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : 10:00 AM PST / 1:00 PM EST</p>
+                        </div>
+                      </div>
+                      <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">iPaaS Community Call: OOW App Integration Updates</div>
+                      <div class="oj-sm-12 oj-lg-3 calbutton">
+                        <div class="orangeBbutton oj-lg-float-end"><a href="http://retriever.us.oracle.com/apex/f?p=121:22:4428811561900114::NO:RP:P22_CONTAINER_ID,P22_PREV_PAGE:80834,112" target="_blank">Replay</a></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="calrow">
+                    <div class="oj-flex">
+                      <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                        <p><span 
+       class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Friday, September 15<br>
+                          <br>
+                          <span 
+       class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : 10:00 AM PST / 1:00 PM EST</p>
+                      </div>
+                      <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">iPaaS Community Call: OOW Data Integration Updates</div>
+                      <div class="oj-sm-12 oj-lg-3 calbutton ">
+                        <div class="orangeBbutton oj-lg-float-end"><a href="http://retriever.us.oracle.com/apex/f?p=121:22:3360101599823767::NO:RP:P22_CONTAINER_ID,P22_PREV_PAGE:80834,112" target="_blank">Replay</a></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="calrow">
+                    <div class="oj-flex">
+                      <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                        <p><span 
+       class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Thursday, September 21<br>
+                          <br>
+                          <span 
+       class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : 8:30-9:30 a.m. Pacific</p>
+                      </div>
+                      <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Analytics PM Call: Everything You Need to Know for OOW</div>
+                      <div class="oj-sm-12 oj-lg-3 calbutton">
+                        <div class="orangeBbutton oj-lg-float-end"><a href="http://retriever.us.oracle.com/apex/f?p=121:22:289065150287241::NO:RP:P22_CONTAINER_ID,P22_PREV_PAGE:77441,4684014" target="_blank">Replay</a></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="calrow">
+                    <div class="oj-flex">
+                      <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                        <p><span 
+       class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Wednesday, September 27<br>
+                          <br>
+                          <span 
+       class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : 12:00 PM PST / 3:00 PM EST</p>
+                      </div>
+                      <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">SE Excellence Community Call: OOW AppDev Updates</div>
+                      <div class="oj-sm-12 oj-lg-3 calbutton">
+                        <div class="orangeBbutton oj-lg-float-end"><a href="http://oukc.oracle.com/static12/opn/login/?t=checkusercookies%257Cr=-1%257Cc=2037122497" target="_blank">Registration</a></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="calrow">
+                    <div class="oj-flex">
+                      <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                        <p><span 
+       class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Wednesday, September 27<br>
+                          <br>
+                          <span 
+       class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : 10:00 AM PST / 1:00 PM EST</p>
+                      </div>
+                      <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">IaaS PM Webinar: OOW IaaS Updates</div>
+                      <div class="oj-sm-12 oj-lg-3 calbutton">
+                        <div class="orangeBbutton oj-lg-float-end"><a href="https://oracle.zoom.us/webinar/register/e540a365f8fd283fc5b9141539e44ee6" target="_blank">Registration</a></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="calrow">
+                    <div class="oj-flex">
+                      <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                        <p><span 
+       class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;TBD<br>
+                          <br>
+                          <span 
+       class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time : TBD</p>
+                      </div>
+                      <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">DB Community Call: Penny Avril</div>
+                      <div class="oj-sm-12 oj-lg-3 calbutton">
+                        <div class="orangeBbutton oj-lg-float-end">Pending</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="calrow">
+                    <div class="oj-flex">
+                      <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                        <p><span 
+       class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Sunday, October 1st - Thursday, October 5th<br>
+                          <br>
+                        </p>
+                      </div>
+                      <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Oracle OpenWorld</div>
+                      <div class="oj-sm-12 oj-lg-3 calbutton">
+                        <div class="orangeBbutton oj-lg-float-end"><a href="https://www.oracle.com/openworld/index.html" target="_blank">OOW Corporate Site</a></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="calrow">
+                    <div class="oj-flex">
+                      <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                        <p><span 
+       class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Thursday, October 12th<br>
+                          <br>
+                          &nbsp;</p>
+                      </div>
+                      <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">SE Accelerate Cloud Regional Road Show w/Hamidou Dia - NEW YORK</div>
+                      <div class="oj-sm-12 oj-lg-3 calbutton">
+                        <div class="orangeBbutton oj-lg-float-end">Regional Only Event<br>
+                          See Calendar Invite</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="oj-sm-12 oj-sm-center" style="display:none">
+                    <div class="oj-flex valign">
+                      <div class="oj-sm-12 oj-lg-4 oj-flex"></div>
+                      <div class="oj-sm-12 oj-lg-5 oj-flex">
+                        <button class="oj-sm-align-center oj-flex bluebutton ">See All</button>
+                      </div>
+                      <div class="oj-sm-12 oj-lg-3"><span class="oj-md-float-end">Missed out any course?<br>
+                        <a href="#">Checkout Archives</a></span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div style="display:none" id="empf3" title="Innovator Interview: Chip Baber, Solution Engineer" 
-       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
-    <div class="oj-dialog-body empf">
-      <p align="center">"It ain't bragging, if you can do it."<br>
-        -Skeeter Fore, Fuqua School Football Coach </p>
-      <p><b>Chip Baber, Solution Engineer, although a very humble guy, could do some “braggin” about his 17-year career at Oracle, as he has been a great innovator for the corporation.</b> </p>
+  <a class="anchor" id="keywins"></a>
+  <div class="oj-row row7 newrow">
+    <div class="container">
+      <div class="oj-sm-12 golive bgwhite">
+        <div class="oj-flex">
+          <div class="oj-sm-12 golivetitle"><img src="css/images/wins_large.png">&nbsp;Key Wins</div>
+          <div class="oj-sm-12">
+            <div class="oj-flex">
+              <div id="filmStripwins" class="oj-sm-12" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'visible',arrowplacement:'overlay'}"> <!-- block 1 -->
+                <div class="oj-panel oj-panel-alt2 my-filmstrip-item" 
+             data-bind="" ><p><a href="https://fsn.oraclecorp.com/winref/faces/WinStory?winId=39215" target="_blank"><img src="css/images/signet_logo.png"></a><br>ECA: Greg Jerry</p> </div>
+                <div class="oj-panel oj-panel-alt2 my-filmstrip-item" 
+             data-bind="" > <p><a href="https://fsn.oraclecorp.com/winref/faces/WinStory?source=endeca&winId=55359" target="_blank"><img src="css/images/marvel_logo.png"></a><br>CPS: Gordon Mccart</p> </div>
+                <div class="oj-panel oj-panel-alt2 my-filmstrip-item" 
+             data-bind="" >  <p><a href="https://fsn.oraclecorp.com/winref/faces/WinStory;jsessionid=GBrGsxkFH0kRJLyb6jVdSQzi5x8lV7U04giHZSX8qOdtcgHc3ZfR!-451785802?source=endeca&winId=50755" target="_blank"><img src="css/images/reinhart.png"></a><br>CSM: Chris Fuller</p> </div>
+               
+                <!-- block 1 --> 
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!------------------------------------Wins, Go-Lives and References------------------------------------> 
+  <a class="anchor" id="golives"></a>
+  <div class="oj-row row7 newrow">
+    <div class="container">
+      <div class="oj-sm-12 wins  bgwhite">
+        <div class="oj-flex">
+          <div class="oj-sm-12 winstitle"><img src="css/images/featured_icon_lg.png">&nbsp;Featured Go-Lives</div>
+          <div class="oj-sm-12">
+            <div class="oj-flex"> 
+              <!-- filmstrip container -->
+              <div id="filmStripwins" class="oj-sm-12" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 2,arrowVisibility: 'visible'}">
+                <div id="" class="my-filmstrip-item oj-flex-item oj-margin winsblock">
+                  <div id="animationDemo">
+                    <div id="animatable2" class="ani_container"> 
+                      
+                      <!-- back face of card -->
+                      <div class="cardface backside oj-animation-backface">
+                        <div class="wins_block oj-sm-12">
+                          <div class="win_logo oj-sm-12"><img src="css/images/gap-logo.png"></div>
+                          <div class="oj-flex oj-sm-12 win_desc">
+                            <p>Hear how the entire Oracle ecosystem came together to help Gap embark on a transformational Cloud journey.  Gap is increasing the sophistication of their business and becoming a very nimble retail company with Oracle Cloud. </p>
+                            <div class="summaryButton oj-sm-12 oj-flex">
+                              <div class="oj-sm-12">
+                                <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable2')">Back</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- front face of card -->
+                      <div class="cardface">
+                        <div class="wins_block oj-sm-12">
+                          <div class="win_logo oj-sm-12"><img src="css/images/gap-logo.png"></div>
+                          <div class="oj-flex oj-sm-12 win_desc">
+                            <div class="oj-sm-6 imgblock"><img src="css/images/misha_img.png" class="img-responsive"></div>
+                            <div class="oj-sm-6 textblock">
+                              <div class="win_text">
+                                <p>Hosted by : <br>
+                                  <span class="largetext">Misha Logvinov</span></p>
+                                <p>This episode’s guest : <br>
+                                  <span class="largetext">Mark Carroll<br>
+                                  Jeff Wexler</span> 
+                              </div>
+                            </div>
+                            <div class="summaryButton oj-sm-12 oj-flex">
+                              <div class="oj-sm-12 oj-xl-6">
+                                <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable2')">Quick Summary</button>
+                              </div>
+                              <div class="oj-sm-12 oj-xl-6 oj-flex"> <a href="https://otube.oracle.com/media/GoLive_GAP_092517.mp4/0_9mo76xtq" target="_blank">Listen to Interview</a> </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="" class="my-filmstrip-item oj-flex-item oj-margin winsblock">
+                  <div id="animationDemo">
+                    <div id="animatable" class="ani_container"> 
+                      
+                      <!-- back face of card -->
+                      <div class="cardface backside oj-animation-backface">
+                        <div class="wins_block oj-sm-12">
+                          <div class="win_logo oj-sm-12"><img src="css/images/gap-logo.png"></div>
+                          <div class="oj-flex oj-sm-12 win_desc">
+                            <p>Hear how the extended Oracle team worked together to navigate some very tricky internal processes.  This tight collaboration resulted in a successful Cloud go-live for IKM and our first GoldenGate reference. </p>
+                            <div class="summaryButton oj-sm-12 oj-flex">
+                              <div class="oj-sm-12">
+                                <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable')">Back</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- front face of card -->
+                      <div class="cardface">
+                        <div class="wins_block oj-sm-12">
+                          <div class="win_logo oj-sm-12"><img src="css/images/logo-ikm-3434021.png"></div>
+                          <div class="oj-flex oj-sm-12 win_desc">
+                            <div class="oj-sm-6 imgblock"><img src="css/images/misha_img.png" class="img-responsive"></div>
+                            <div class="oj-sm-6 textblock">
+                              <div class="win_text">
+                                <p>Hosted by : <br>
+                                  <span class="largetext">Misha Logvinov</span></p>
+                                <p>This episode’s guest : <br>
+                                  <span class="largetext">Scott Sharpley</span></p>
+                              </div>
+                            </div>
+                            <div class="summaryButton oj-sm-12 oj-flex">
+                              <div class="oj-sm-12 oj-xl-6">
+                                <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable')">Quick Summary</button>
+                              </div>
+                              <div class="oj-sm-12 oj-xl-6 oj-flex"> <a href="https://otube.oracle.com/media/063017_GoLive_IKM.mp4/0_4dd4n269" target="_blank">Listen to Interview</a> </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="" class="my-filmstrip-item oj-flex-item oj-margin winsblock">
+                  <div id="animationDemo">
+                    <div id="animatable1" class="ani_container"> 
+                      
+                      <!-- back face of card -->
+                      <div class="cardface backside oj-animation-backface">
+                        <div class="wins_block oj-sm-12">
+                          <div class="win_logo oj-sm-12"><img src="css/images/stanford-logo.png"></div>
+                          <div class="oj-flex oj-sm-12 win_desc">
+                            <p>Hear how we got our foot in the door at Stanford to prove that our Oracle Management Cloud was a better alternative to Splunk.  This initial win led to a successful go live and an expansion at Stanford. </p>
+                            <div class="summaryButton oj-sm-12 oj-flex">
+                              <div class="oj-sm-12">
+                                <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable1')">Back</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- front face of card -->
+                      <div class="cardface">
+                        <div class="wins_block oj-sm-12">
+                          <div class="win_logo oj-sm-12"><img src="css/images/stanford-logo.png"></div>
+                          <div class="oj-flex oj-sm-12 win_desc">
+                            <div class="oj-sm-6 imgblock"><img src="css/images/misha_img.png" class="img-responsive"></div>
+                            <div class="oj-sm-6 textblock">
+                              <div class="win_text">
+                                <p>Hosted by : <br>
+                                  <span class="largetext">Misha Logvinov</span></p>
+                                <p>This episode’s guest : <br>
+                                  <span class="largetext">Venkat Uppuluri</span></p>
+                              </div>
+                            </div>
+                            <div class="summaryButton oj-sm-12 oj-flex">
+                              <div class="oj-sm-12 oj-xl-6">
+                                <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable1')">Quick Summary</button>
+                              </div>
+                              <div class="oj-sm-12 oj-xl-6 oj-flex"> <a href="https://otube.oracle.com/media/GoLive-Stanford/0_snf30ktm/-1" target="_blank">Listen to Interview</a> </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- filmstrip container --> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!------------------------------------References------------------------------------> 
+  <a class="anchor" id="references"></a>
+  <div class="oj-row row6 newrow">
+    <div class="container">
+      <div class="oj-sm-12 references  bgwhite">
+        <div class="oj-flex">
+          <div class="oj-sm-12 refertitle"><img src="css/images/references_icon_lg.png">&nbsp;References</div>
+          <div class="oj-md-6  oj-flex">
+            <div class="oj-flex oj-sm-12 oj-margin referencesblock">
+              <div class="oj-flex oj-sm-12  logorow">
+                <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/search/customers/_/N-p5vz?Nr=112&bcid=5508413926001" target="_blank"><img src="css/images/Exhibitor.png"></a></div>
+                <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/corporate/pressrelease/oracle-rac-iaas-050917.html" target="_blank"><img src="css/images/ICAT-300x120.png"></a></div>
+                <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/customers/astute-1-storage-cl.html" target="_blank"><img src="css/images/astute.png"></a></div>
+              </div>
+              <div class="oj-sm-12 button oj-flex"><a  class="whitebutton" href="https://www.oracle.com/search/customers/_/N-1joZp5vz?Nr=112" target="_blank">Search for IaaS Customers</a></div>
+            </div>
+          </div>
+          <div class="oj-md-6  oj-flex">
+            <div class="oj-flex oj-sm-12 oj-margin referencesblock">
+              <div class="oj-flex oj-sm-12  ">
+                <div class="oj-flex oj-sm-12 logorow">
+                  <div class="oj-sm-12 oj-lg-4"><a href="https://www.forbes.com/sites/oracle/2017/03/15/a-fintech-innovators-race-to-the-cloud/#18ac787315e5" target="_blank"><img src="css/images/calypso.png"></a></div>
+                  <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/search/customers/_/N-1joZp5wb?Ntt=trek&Dy=1&Nty=1&Nr=112&Ntk=S1" target="_blank"><img src="css/images/Trek_Bicycle_Corporation_logo.svg.png"></a></div>
+                  <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/customers/pragmatyxs-1-dbcs.html?msgid=gcp-PAAS" target="_blank"><img src="css/images/pragmatyxscolorlogo.png"></a></div>
+                </div>
+              </div>
+              <div class="oj-sm-12 button oj-flex"><a class="whitebutton" href="https://www.oracle.com/search/customers/_/N-1joZp5wb?Nr=112" target="_blank">Search for PaaS Customers</a></div>
+            </div>
+          </div>
+          <div class="oj-sm-12 oj-sm-center">
+            <div class="oj-flex-item"> <a href="http://gcp.oraclecorp.com/ocpwb/f?p=144:2060:17175260936151" target="_blank">
+              <button  class="oj-sm-align-center oj-flex bluebutton"> Request a Reference</button>
+              </a> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!------------------------------------Featured Stories------------------------------------> 
+  <a class="anchor" id="empf"></a>
+  <div class="oj-row row7 newrow">
+    <div class="container">
+      <div class="oj-sm-12 featured bgwhite">
+        <div class="oj-flex">
+          <div class="oj-sm-12 featuredtitle"><img src="css/images/emp_feature_lg.png">&nbsp;Employee Features</div>
+          <div class="oj-sm-12">
+            <div class="oj-flex">
+              <div id="filmStripfeatured" class="" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'hidden'}"> <!-- block 1 -->
+                <div class="oj-panel oj-panel-alt2 my-filmstrip-item" 
+             data-bind="" style="background:url(css/images/JMinter_small.jpg);">
+                  <div class="employee_c" >
+                    <div class="emp_details">
+                      <div class="slash"></div>
+                      <a data-bind="click:empf1">TALENT: It’s All in the Family - Elite Athletes</a></div>
+                  </div>
+                </div>
+                <div class="oj-panel oj-panel-alt2 my-filmstrip-item" 
+             data-bind="" style="background:url(css/images/Bella_Dosovitsky_Picture.jpg);">
+                  <div class="employee_c" >
+                    <div class="emp_details">
+                      <div class="slash"></div>
+                      <a data-bind="click:empf2">GIVING BACK: Oracle d.Tech Coach Inspires Teenage Girls </a></div>
+                  </div>
+                </div>
+                <div class="oj-panel oj-panel-alt2 my-filmstrip-item" 
+             data-bind="" style="background:url(css/images/InnovatorInterview_ChipBaber.png);background-size:contain !important">
+                  <div class="employee_c" >
+                    <div class="emp_details">
+                      <div class="slash"></div>
+                      <a data-bind="click:empf3">Innovator Interview: Chip Baber, Solution Engineer</a></div>
+                  </div>
+                </div>
+                <!-- block 1 --> 
+                
+              </div>
+              <div style="text-align: center;" class="oj-sm-12">
+                <div style="display: inline-block;margin-top: 4px;">
+                  <div id="pagingControl" 
+               data-bind="ojComponent: {
+                 component: 'ojPagingControl', 
+                 data: getPagingModelfeatured(), 
+                 pageSize: 0, 
+                 pageOptions: {type: 'dots'}}"> </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="oj-row row7 newrow">
+    <div class="container">
+      <div class="oj-sm-12 featured bgwhite">
+        <div class="oj-sm-12 featuredtitle"><img src="css/images/contact_icon_lg.png">&nbsp;Solution Engineering Website Governance Board</div>
+        <div class="oj-sm-12">
+          <div class="oj-flex contactcontainer">
+            <div class="oj-sm-12 oj-md-12 oj-lg-7">
+              <p><span class="orange">Heather Hughes</span> : Website Lead, Announcements, Employee Features, Key Dates</p>
+              <p><span class="orange">Kaushik Kundu</span> : Enablement</p>
+              <p><span class="orange">Maharshi Desai</span> : SE-as-a-Service, Oracle Cloud Solution Hubs, ECAL - Method, ECA Certification, ECA  Enablement </p>
+              <p><span class="orange">Bridget Guiley</span> : Go Lives, Wins, and References</p>
+            </div>
+            <div class="oj-sm-12 oj-md-12 oj-lg-5">
+              <p><span class="orange">Nick Donatone</span> : Cloud Customer Success </p>
+              <p><span class="orange">Al Kiessel</span> : ECAL - Method, ECA Certification, ECA Enablement </p>
+              <p><span class="orange">Bella Dosovitsky</span> : Platform Specialist Team</p>
+              <p><span class="orange">Souvik Sadhu</span> : Bangalore Hub Design Agency</p>
+              </p>
+            </div>
+            <div class="oj-sm-12">
+              <p align="center">Do you have feedback or content to submit? Please contact <a href="mailto:heather.hughes@oracle.com">heather.hughes@oracle.com</a>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="empfwrapper">
+    <div style="display:none" id="empf1" title="TECH TALENT FEATURE: It’s All in the Family - Elite Athletes" 
+         data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
+      <div class="oj-dialog-body empf">
+        <p><img src="css/images/JMinter_small.jpg" align="right">Our “Tech Talent” feature for October is Dustin Minter, Cloud Customer Success Manager, Public Sector/Enterprise.  Dustin has some mighty fine DNA.  His grandpa, Harry Minter, played for the Philadelphia Phillies baseball team, his father, Mike Minter, was on the NBA D-League team for the Dallas Mavericks, Dustin reached the Final Four of the Elite Eight Basketball tournament at Tarleton State University 2003-2006, his middle brother, Kyle, played soccer at the University of Memphis, and his youngest brother, <a href="http://www.uslsoccer.com/chase-minter" target="_blank">Chase</a>, is playing soccer in the MLS for Real Monarchs Salt Lake City. Dustin’s talents are a great addition to the Oracle Solution Engineering team as he brings to bear his winning and competitive legacy to help our customers succeed in the cloud. </p>
+      </div>
+    </div>
+    <div style="display:none" id="empf2" title="Giving Back: Oracle d.Tech Coach Inspires Teenage Girls" 
+         data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
+      <div class="oj-dialog-body empf">
+        <p><img src="css/images/BellaDosovitsky_Picture.jpg" align="right">Bella Dosovitsky volunteered for a two-week d.Tech high school inter-session through the <a href="http://www.oraclefoundation.org/" target="_blank">Oracle Education Foundation</a>. She coached a 3D printing class of 25 girls, who went through explorative learning of the 3D Printing industry, the fabrication process, and turning their ideas into real-life designs using CAD software and 3D Printers.</p>
+        <p>Bella also got to present to the students our personal and professional journeys, lessons learned, and informal conversations about: self-esteem, women in technology, personal development, juggling our desires with our parents’ pressure, and choosing a profession. </p>
+        <p><strong>Why Give Back?</strong> – Bella emphatically said that it was “Surely, the single most inspiring things I’ve done at Oracle so far.”</p>
+      </div>
+    </div>
+    <div style="display:none" id="empf3" title="Innovator Interview: Chip Baber, Solution Engineer" 
+         data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
+      <div class="oj-dialog-body empf">
+        <p align="center">"It ain't bragging, if you can do it."<br>
+          -Skeeter Fore, Fuqua School Football Coach </p>
+        <p><b>Chip Baber, Solution Engineer, although a very humble guy, could do some “braggin” about his 17-year career at Oracle, as he has been a great innovator for the corporation.</b> </p>
+        <ul>
+          <li>
+            <p><img src="css/images/InnovatorInterview_ChipBaber.png" align="right"><b>1.   What does innovation mean to you?</b><br>
+              Innovation is the courage to respectfully show others a new way to experience the world. Its' success lies in the eyes of the viewer, not the solution created. True Innovation speaks to the viewer emotionally first, then carries the emotional reaction through the message it serves to convey. </p>
+          </li>
+          <li>
+            <p><b>2.  What are some of the innovations that you have contributed to for Solution Engineering?</b><br>
+              The Cloud Accelerate program is by far the most innovative program I have had the opportunity to participate in at Oracle. It is truly a new way to speak, show, and engage our customers. A close second, is the creation of the Online Interactive Lab Guide framework for all our OPC workshops. It pulls customers into our OPC technical content inside Hands on Labs. Programmatically, I had a chance to create the demonstrations and build the companies first public parallax based web experience in an experiment with marketing during 2014.  Last but not least, I had the opportunity to be the lead solution engineer on the original Marvel/Oracle Ironman partnership. We created a 3-part animated series showing Oracle software inside the world of Marvel. </p>
+          </li>
+          <li>
+            <p><b>3.  What are some of the new innovations that you will be bringing to SE this year?</b><br>
+              In FY18, our team is squarely focused on re-engaging the developer community. We are looking to create new engagement channels, innovative assets, and find ways to emotional capture the ever- elusive eyes, ears, and hearts of developers. <br>
+              Technically speaking, if I could build anything in the coming year, it would be a Cloud Native Blockchain Development experience. Specifically, I would introduce and demystify the world of autonomous contracts to our user base and development community, then provide them a path inside our PaaS offering to foster future development. </p>
+          </li>
+          <li>
+            <p><b>4. Who are some of your favorite innovators? Why?</b></br>
+              The inventors of Draft Kings (Jason Robins, Matthew Kalish, and Paul Liberman) are at the top of my list.  These guys, basically, invented a way to transform and monetize the world of fantasy sports. The way they took a human experience that existed for 10+ years and found a way to leverage technology to enhance, extend, and most importantly make profitable the experience. This is an example of innovation in its' purest form. </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--Popups1 -->
+  <div style="display:none" id="modalDialog1" title="Deliver a Cloud Day
+  "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+      <h3>Deliver a Cloud Day </h3>
+      <span class="smalltext">Category: Foundational SE Services </span> </div>
+    <div class="popupbody oj-dialog-body">
+      <h4 style="color:#00758f;">Description</h4>
+      This Solution-Engineering-as-a-Service includes:
       <ul>
-        <li>
-          <p><img src="css/images/InnovatorInterview_ChipBaber.png" align="right"><b>1.   What does innovation mean to you?</b><br>
-            Innovation is the courage to respectfully show others a new way to experience the world. Its' success lies in the eyes of the viewer, not the solution created. True Innovation speaks to the viewer emotionally first, then carries the emotional reaction through the message it serves to convey. </p>
-        </li>
-        <li>
-          <p><b>2.  What are some of the innovations that you have contributed to for Solution Engineering?</b><br>
-            The Cloud Accelerate program is by far the most innovative program I have had the opportunity to participate in at Oracle. It is truly a new way to speak, show, and engage our customers. A close second, is the creation of the Online Interactive Lab Guide framework for all our OPC workshops. It pulls customers into our OPC technical content inside Hands on Labs. Programmatically, I had a chance to create the demonstrations and build the companies first public parallax based web experience in an experiment with marketing during 2014.  Last but not least, I had the opportunity to be the lead solution engineer on the original Marvel/Oracle Ironman partnership. We created a 3-part animated series showing Oracle software inside the world of Marvel. </p>
-        </li>
-        <li>
-          <p><b>3.  What are some of the new innovations that you will be bringing to SE this year?</b><br>
-            In FY18, our team is squarely focused on re-engaging the developer community. We are looking to create new engagement channels, innovative assets, and find ways to emotional capture the ever- elusive eyes, ears, and hearts of developers. <br>
-            Technically speaking, if I could build anything in the coming year, it would be a Cloud Native Blockchain Development experience. Specifically, I would introduce and demystify the world of autonomous contracts to our user base and development community, then provide them a path inside our PaaS offering to foster future development. </p>
-        </li>
-        <li>
-          <p><b>4. Who are some of your favorite innovators? Why?</b></br>
-            The inventors of Draft Kings (Jason Robins, Matthew Kalish, and Paul Liberman) are at the top of my list.  These guys, basically, invented a way to transform and monetize the world of fantasy sports. The way they took a human experience that existed for 10+ years and found a way to leverage technology to enhance, extend, and most importantly make profitable the experience. This is an example of innovation in its' purest form. </p>
-        </li>
+        <li>Participate in an <u>Oracle cloud day</u> where pre-scheduled events provide a forum and community to learn and engage on the value of Oracle Cloud technology and services.  When ready engage your customer by preparing and conducting a <u>Customer Cloud Day</u> to focus on the Customer’s and Oracle’s Cloud strategy together.</li>
       </ul>
+      <h4 style="color:#00758f;" >SE Role Engagement </h4>
+      <h5>Roles:</h5>:
+      <ul>
+        <li>ECAs lead this engagement and are responsible for the majority of the deliverables. </li>
+        <li>Platform Specialists and Hub SEs work on delivering a cloud day </li>
+      </ul>
+      <h4 style="color:#00758f;">How do you request this service? </h4>
+      <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+        Service based model in SCRM is target to be enabled on 12/1/2017. </p>
     </div>
   </div>
-</div>
-<!--Popups1 -->
-<div style="display:none" id="modalDialog1" title="Deliver a Cloud Day
-"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-    <h3>Deliver a Cloud Day </h3>
-    <span class="smalltext">Category: Foundational SE Services </span> </div>
-  <div class="popupbody oj-dialog-body">
-    <h4 style="color:#00758f;">Description</h4>
-    This Solution-Engineering-as-a-Service includes:
-    <ul>
-      <li>Participate in an <u>Oracle cloud day</u> where pre-scheduled events provide a forum and community to learn and engage on the value of Oracle Cloud technology and services.  When ready engage your customer by preparing and conducting a <u>Customer Cloud Day</u> to focus on the Customer’s and Oracle’s Cloud strategy together.</li>
-    </ul>
-    <h4 style="color:#00758f;" >SE Role Engagement </h4>
-    <h5>Roles:</h5>:
-    <ul>
-      <li>ECAs lead this engagement and are responsible for the majority of the deliverables. </li>
-      <li>Platform Specialists and Hub SEs work on delivering a cloud day </li>
-    </ul>
-    <h4 style="color:#00758f;">How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
-      Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+  <!--Popups2 -->
+  <div style="display:none" id="modalDialog2" title="Develop a Cloud Day"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+      <h3>Develop a Cloud Vision </h3>
+      <span class="smalltext">Category: Demand Generation  </span> </div>
+    <div class="popupbody oj-dialog-body">
+      <h4 style="color:#00758f;">Description</h4>
+      This Solution-Engineering-as-a-Service includes:
+      <ul>
+        <li>Participate in an Oracle cloud day where pre-scheduled events provide a forum and community to learn and engage on the value of Oracle Cloud technology and services.  When ready engage your customer by preparing and conducting a Customer Cloud Day to focus on the Customer’s and Oracle’s Cloud strategy together.</li>
+      </ul>
+      <h4 style="color:#00758f;" >SE Role Engagement </h4>
+      <h5>Roles:</h5>:
+      <ul>
+        <li>ECAs lead this engagement and are responsible for the majority of the deliverables. </li>
+        <li>Platform Specialists and Hub SEs work on delivering a cloud day </li>
+      </ul>
+      <h4 style="color:#00758f;">How do you request this service? </h4>
+      <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+        Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+    </div>
   </div>
-</div>
-<!--Popups2 -->
-<div style="display:none" id="modalDialog2" title="Develop a Cloud Day"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-    <h3>Develop a Cloud Vision </h3>
-    <span class="smalltext">Category: Demand Generation  </span> </div>
-  <div class="popupbody oj-dialog-body">
-    <h4 style="color:#00758f;">Description</h4>
-    This Solution-Engineering-as-a-Service includes:
-    <ul>
-      <li>Participate in an Oracle cloud day where pre-scheduled events provide a forum and community to learn and engage on the value of Oracle Cloud technology and services.  When ready engage your customer by preparing and conducting a Customer Cloud Day to focus on the Customer’s and Oracle’s Cloud strategy together.</li>
-    </ul>
-    <h4 style="color:#00758f;" >SE Role Engagement </h4>
-    <h5>Roles:</h5>:
-    <ul>
-      <li>ECAs lead this engagement and are responsible for the majority of the deliverables. </li>
-      <li>Platform Specialists and Hub SEs work on delivering a cloud day </li>
-    </ul>
-    <h4 style="color:#00758f;">How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
-      Service based model in SCRM is target to be enabled on 12/1/2017. </p>
-  </div>
-</div>
-<!--Popups3 -->
-<div style="display:none" id="modalDialog3" title="Develop a Cloud Day"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-    <h3>Design a cloud Solution </h3>
-    <span class="smalltext">Category: Oppurtunity Execution  </span> </div>
-  <div class="popupbody oj-dialog-body">
-   <h4 style="color:#00758f;"> Description </h4>
-    This Solution-Engineering-as-a-Service includes:
-    <ul>
-      <li>Collaboratively working with a customer to turn their Cloud Vision into a robust Solution Presentation and Oracle Sales Proposal.  
-</li>
-      <li> Producing a sales proposal, including developing logical and physical architectures, sizing current and future workloads, recommending phased implementation roadmaps, creating the intake provisioning document, solution presentation, and contributing to the Oracle Sales Proposal.  
-</li>
-      <li> This service typically uses <a href="http://innovate.us.oracle.com/ecal/" target="_blank">ECAL</a> Stages 2-4 as the underlying execution framework.
-</li>
-    </ul>
-    
-    <h4 style="color:#00758f;"> SE Role Engagement </h4>
-    <h5>Roles:</h5>
-    <ul>
-      <li> ECAs lead this engagement and are responsible for the majority of the deliverables.  
-</li>
-      <li> Platform Specialists and Hub SEs work on Portfolio and Workload Analysis efforts, contribute to the physical architecture designs, and provide foundation services as needed (e.g. Customer Discovery of current state IT Portfolio, Customer Demos, Sizing/Quoting/Config).  
-</li>
-<li>This service may spawn the <a href="#" data-bind="click:opendialog7">“Build a POC”</a> service.  
-</li>
-<li>Business Value Consultants support any value-based activities and deliverables, which can also fall under the “Build a Business Case” service.  
-</li>
-<li>CSMs are responsible for ECAL Migration and Adoption Planning activities and deliverables, and the subsequent “Adopt a Cloud Solution” service.  
-</li>
-<li>For more information, see our <a href="http://innovate.us.oracle.com/ecal/" target="_blank">ECAL</a> website.
-</li>
-    </ul>
-    
-    <h4 style="color:#00758f;"> How do you request this service?</h4>
-    <p> Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
-      Service based model in SCRM is target to be enabled on 12/1/2017.</p>
-  </div>
-</div>
-<!--Popups4 -->
-<div style="display:none" id="modalDialog4" title="Develop a Cloud Day"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-    <h3>Adopt a Cloud Solution </h3>
-      <span class="smalltext">Category: Foundational SE Services </span> </div>
-  <div class="popupbody oj-dialog-body">
-   <h4 style="color:#00758f;">Description</h4>
-    This Solution-Engineering-as-a-Service includes:
-    <ul>
-      <li>Develop and integrate customer adoption into your customer  engagement.  Newly acquired services require adoption planning, onboarding, migration and governance.
-</li>
-     
-     
-    </ul>
-    <h4 style="color:#00758f;">SE Role Engagement </h4>
-    <h5>Roles:</h5>
-    <ul>
-      <li>Customer Success Manager
-</li>
+  <!--Popups3 -->
+  <div style="display:none" id="modalDialog3" title="Develop a Cloud Day"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+      <h3>Design a cloud Solution </h3>
+      <span class="smalltext">Category: Oppurtunity Execution  </span> </div>
+    <div class="popupbody oj-dialog-body">
+     <h4 style="color:#00758f;"> Description </h4>
+      This Solution-Engineering-as-a-Service includes:
+      <ul>
+        <li>Collaboratively working with a customer to turn their Cloud Vision into a robust Solution Presentation and Oracle Sales Proposal.  
+  </li>
+        <li> Producing a sales proposal, including developing logical and physical architectures, sizing current and future workloads, recommending phased implementation roadmaps, creating the intake provisioning document, solution presentation, and contributing to the Oracle Sales Proposal.  
+  </li>
+        <li> This service typically uses <a href="http://innovate.us.oracle.com/ecal/" target="_blank">ECAL</a> Stages 2-4 as the underlying execution framework.
+  </li>
+      </ul>
       
-    </ul>
-    <h4 style="color:#00758f;">How do you request this service? </h4>
-    <p>ECA request to CSM Management to assign and engage success services
- </p>
+      <h4 style="color:#00758f;"> SE Role Engagement </h4>
+      <h5>Roles:</h5>
+      <ul>
+        <li> ECAs lead this engagement and are responsible for the majority of the deliverables.  
+  </li>
+        <li> Platform Specialists and Hub SEs work on Portfolio and Workload Analysis efforts, contribute to the physical architecture designs, and provide foundation services as needed (e.g. Customer Discovery of current state IT Portfolio, Customer Demos, Sizing/Quoting/Config).  
+  </li>
+  <li>This service may spawn the <a href="#" data-bind="click:opendialog7">“Build a POC”</a> service.  
+  </li>
+  <li>Business Value Consultants support any value-based activities and deliverables, which can also fall under the “Build a Business Case” service.  
+  </li>
+  <li>CSMs are responsible for ECAL Migration and Adoption Planning activities and deliverables, and the subsequent “Adopt a Cloud Solution” service.  
+  </li>
+  <li>For more information, see our <a href="http://innovate.us.oracle.com/ecal/" target="_blank">ECAL</a> website.
+  </li>
+      </ul>
+      
+      <h4 style="color:#00758f;"> How do you request this service?</h4>
+      <p> Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+        Service based model in SCRM is target to be enabled on 12/1/2017.</p>
+    </div>
   </div>
-</div>
-<!--Popups5 -->
-<div style="display:none" id="modalDialog5" title="Develop a Cloud Day"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-    <h3>Support a Marketing Event </h3>
-      <span class="smalltext">Category: Extended SE Services
-</span> </div>
-  <div class="popupbody oj-dialog-body">
-   <h4 style="color:#00758f;">Description</h4>
-    Provide any asset or demo support for marketing event.
-
-   
-    <h4 style="color:#00758f;">SE Role Engagement </h4>
-    <h5>Roles:</h5>
-    <ul>
-     <li>Platform/Hub Solution Engineers
-</li>
-    </ul>
-    <h4 style="color:#00758f;">How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
-     Service based model in SCRM is target to be enabled on 12/1/2017.
-Asset repository will be published to share successful content at <a href="http://solutionengineering.us.oracle.com">http://solutionengineering.us.oracle.com</a> website. </p>
+  <!--Popups4 -->
+  <div style="display:none" id="modalDialog4" title="Develop a Cloud Day"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+      <h3>Adopt a Cloud Solution </h3>
+        <span class="smalltext">Category: Foundational SE Services </span> </div>
+    <div class="popupbody oj-dialog-body">
+     <h4 style="color:#00758f;">Description</h4>
+      This Solution-Engineering-as-a-Service includes:
+      <ul>
+        <li>Develop and integrate customer adoption into your customer  engagement.  Newly acquired services require adoption planning, onboarding, migration and governance.
+  </li>
+       
+       
+      </ul>
+      <h4 style="color:#00758f;">SE Role Engagement </h4>
+      <h5>Roles:</h5>
+      <ul>
+        <li>Customer Success Manager
+  </li>
+        
+      </ul>
+      <h4 style="color:#00758f;">How do you request this service? </h4>
+      <p>ECA request to CSM Management to assign and engage success services
+   </p>
+    </div>
   </div>
-</div>
-<!--Popups6 -->
-<div style="display:none" id="modalDialog6" title="Develop a Cloud Day"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-    <h3>Develop a Value Hypothesis </h3>
-      <span class="smalltext">Category: Foundational SE Services </span> </div>
-  <div class="popupbody oj-dialog-body">
-   <h4 style="color:#00758f;">Description</h4>
-    This Solution-Engineering-as-a-Service includes:
-    <ul>
-      <li>Create a knowledgeable viewpoint on  how the customer would benefit from using Oracle Public Cloud.  This services provides you the account team with a strategy and outline of how to engage the customer and drive cloud adoption. </li>
-    </ul>
-    <h4 style="color:#00758f;">SE Role Engagement </h4>
-    <h5>Roles:</h5>
-    <ul>
-      <li>ECAs and/or Industry Advisors typically lead this engagement with direct support from Platform </li>
-    </ul>
-    <h4 style="color:#00758f;">How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
+  <!--Popups5 -->
+  <div style="display:none" id="modalDialog5" title="Develop a Cloud Day"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+      <h3>Support a Marketing Event </h3>
+        <span class="smalltext">Category: Extended SE Services
+  </span> </div>
+    <div class="popupbody oj-dialog-body">
+     <h4 style="color:#00758f;">Description</h4>
+      Provide any asset or demo support for marketing event.
+  
+     
+      <h4 style="color:#00758f;">SE Role Engagement </h4>
+      <h5>Roles:</h5>
+      <ul>
+       <li>Platform/Hub Solution Engineers
+  </li>
+      </ul>
+      <h4 style="color:#00758f;">How do you request this service? </h4>
+      <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
   " target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
-      Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+       Service based model in SCRM is target to be enabled on 12/1/2017.
+  Asset repository will be published to share successful content at <a href="http://solutionengineering.us.oracle.com">http://solutionengineering.us.oracle.com</a> website. </p>
+    </div>
   </div>
-</div>
-<!--Popups7 -->
-<div style="display:none" id="modalDialog7" title="Build a POC"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-    <h3>Build a POC </h3>
-      <span class="smalltext">Category: Opportunity Execution </span>  </div>
-  <div class="popupbody oj-dialog-body">
-   <h4 style="color:#00758f;">Description</h4>
-    This Solution-Engineering-as-a-Service includes:
-    <ul>
-      <li>Collaboratively working with a customer to develop a sample solution to demonstrate how an Oracle solution can help them achieve their stated goals. </li>
-      <li>A Proof of Concept to prove out Oracle Cloud technology capabilities and/or to storyboard customer use cases and customer/industry cloud solutions using Oracle Cloud implementations (e.g. some deployed Oracle Cloud Services with demo/customer data, integrations, and custom code). </li>
-    </ul>
-    <h4 style="color:#00758f;">SE Role Engagement </h4>
-    <h5>Roles:</h5>
-    <ul>
-      <li>One Platform Specialist team will lead this effort and will be supported by a combination of Platform Specialists and Hub SEs. </li>
-      <li>US and India Hub SEs may be paired for 24x7 delivery.</li>
-    </ul>
-    <h4 style="color:#00758f;">How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
+  <!--Popups6 -->
+  <div style="display:none" id="modalDialog6" title="Develop a Cloud Day"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+      <h3>Develop a Value Hypothesis </h3>
+        <span class="smalltext">Category: Foundational SE Services </span> </div>
+    <div class="popupbody oj-dialog-body">
+     <h4 style="color:#00758f;">Description</h4>
+      This Solution-Engineering-as-a-Service includes:
+      <ul>
+        <li>Create a knowledgeable viewpoint on  how the customer would benefit from using Oracle Public Cloud.  This services provides you the account team with a strategy and outline of how to engage the customer and drive cloud adoption. </li>
+      </ul>
+      <h4 style="color:#00758f;">SE Role Engagement </h4>
+      <h5>Roles:</h5>
+      <ul>
+        <li>ECAs and/or Industry Advisors typically lead this engagement with direct support from Platform </li>
+      </ul>
+      <h4 style="color:#00758f;">How do you request this service? </h4>
+      <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
     " target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
-      Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+        Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+    </div>
   </div>
-</div>
-<!--Popups8 -->
-<div style="display:none" id="modalDialog8" title="Deliver a Support Onboarding"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-     <h3>Deliver a Support Onboarding </h3>
-      <span class="smalltext">Category: Foundational SE Services </span> </div>
-  <div class="popupbody oj-dialog-body">
-   <h4 style="color:#00758f;">Description</h4>
-    This Solution-Engineering-as-a-Service includes:
-    <ul>
-      <li>Onboarding plan development Utilization Workshops </li>
-    </ul>
-    <h4 style="color:#00758f;">SE Role Engagement </h4>
-    <h5>Roles:</h5>
-    <ul>
-      <li>Customer Success Manager. </li>
-    </ul>
-    <h4 style="color:#00758f;"> How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-    " target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
-      Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+  <!--Popups7 -->
+  <div style="display:none" id="modalDialog7" title="Build a POC"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+      <h3>Build a POC </h3>
+        <span class="smalltext">Category: Opportunity Execution </span>  </div>
+    <div class="popupbody oj-dialog-body">
+     <h4 style="color:#00758f;">Description</h4>
+      This Solution-Engineering-as-a-Service includes:
+      <ul>
+        <li>Collaboratively working with a customer to develop a sample solution to demonstrate how an Oracle solution can help them achieve their stated goals. </li>
+        <li>A Proof of Concept to prove out Oracle Cloud technology capabilities and/or to storyboard customer use cases and customer/industry cloud solutions using Oracle Cloud implementations (e.g. some deployed Oracle Cloud Services with demo/customer data, integrations, and custom code). </li>
+      </ul>
+      <h4 style="color:#00758f;">SE Role Engagement </h4>
+      <h5>Roles:</h5>
+      <ul>
+        <li>One Platform Specialist team will lead this effort and will be supported by a combination of Platform Specialists and Hub SEs. </li>
+        <li>US and India Hub SEs may be paired for 24x7 delivery.</li>
+      </ul>
+      <h4 style="color:#00758f;">How do you request this service? </h4>
+      <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
+      " target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+        Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+    </div>
   </div>
-</div>
-<!--Popups9 -->
-<div style="display:none" id="modalDialog9" title="Build an Executive Briefing"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-     <h3>Build an Executive Briefing </h3>
-      <span class="smalltext">Category: Foundational SE Services </span> </div>
-  <div class="popupbody oj-dialog-body">
-    <h4 style="color:#00758f;">Description</h4>
-    This Solution-Engineering-as-a-Service includes:
-    <ul>
-      <li>NATD SE Industry Architect to brief your customer or set of customers on Cloud impact to the business and the opportunities available that can transform the industry.</li>
-    </ul>
-    <h4 style="color:#00758f;">SE Role Engagement </h4>
-    <h5>Roles:</h5>
-    <ul>
-      <li>Industry Advisors typically lead this engagement with direct support from Platform </li>
-    </ul>
-    <h4 style="color:#00758f;">How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-     " target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
-      Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+  <!--Popups8 -->
+  <div style="display:none" id="modalDialog8" title="Deliver a Support Onboarding"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+       <h3>Deliver a Support Onboarding </h3>
+        <span class="smalltext">Category: Foundational SE Services </span> </div>
+    <div class="popupbody oj-dialog-body">
+     <h4 style="color:#00758f;">Description</h4>
+      This Solution-Engineering-as-a-Service includes:
+      <ul>
+        <li>Onboarding plan development Utilization Workshops </li>
+      </ul>
+      <h4 style="color:#00758f;">SE Role Engagement </h4>
+      <h5>Roles:</h5>
+      <ul>
+        <li>Customer Success Manager. </li>
+      </ul>
+      <h4 style="color:#00758f;"> How do you request this service? </h4>
+      <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
+      " target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+        Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+    </div>
   </div>
-</div>
-<!--Popups10 -->
-<div style="display:none" id="modalDialog10" title="Create a Packaged Proposal"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-     <h3>Create a Packaged Proposal </h3>
-      <span class="smalltext">Category: Foundational SE Services </span>  </div>
-  <div class="popupbody oj-dialog-body">
-    <h4 style="color:#00758f;">Description</h4>
-    This Solution-Engineering-as-a-Service includes:
-    <ul>
-      <li>Quickly prepare and present a customized executive-facing overview regarding Oracle Cloud to your customer, focused on some of our top sales plays.  It is a vehicle that will enable you to highlight Oracle's Cloud strengths, present a compelling pricing picture, and help open the door for further customer data gathering so a final Oracle Cloud proposal and ordering document can be completed.</li>
-    </ul>
-    <h4 style="color:#00758f;">SE Role Engagement </h4>
-    <h5>Roles:</h5>
-    <ul>
-      <li>ECAs and/or Industry Advisors typically lead this engagement with direct support from Platform </li>
-    </ul>
-    <h4 style="color:#00758f;">How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-    " target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
-      Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+  <!--Popups9 -->
+  <div style="display:none" id="modalDialog9" title="Build an Executive Briefing"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+       <h3>Build an Executive Briefing </h3>
+        <span class="smalltext">Category: Foundational SE Services </span> </div>
+    <div class="popupbody oj-dialog-body">
+      <h4 style="color:#00758f;">Description</h4>
+      This Solution-Engineering-as-a-Service includes:
+      <ul>
+        <li>NATD SE Industry Architect to brief your customer or set of customers on Cloud impact to the business and the opportunities available that can transform the industry.</li>
+      </ul>
+      <h4 style="color:#00758f;">SE Role Engagement </h4>
+      <h5>Roles:</h5>
+      <ul>
+        <li>Industry Advisors typically lead this engagement with direct support from Platform </li>
+      </ul>
+      <h4 style="color:#00758f;">How do you request this service? </h4>
+      <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
+       " target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+        Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+    </div>
   </div>
-</div>
-<!--Popups11 -->
-<div style="display:none" id="modalDialog11" title="Build a Business Case"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-     <h3>Build a Business Case </h3>
-      <span class="smalltext">Category: Foundational SE Services </span>  </div>
-  <div class="popupbody oj-dialog-body">
-   <h4 style="color:#00758f;">Description</h4>
-    This Solution-Engineering-as-a-Service includes:
-    <ul>
-      <li>Develop an approach and outcome for creating a Business value case design and delivery </li>
-    </ul>
-    <h4 style="color:#00758f;">SE Role Engagement </h4>
-    <h5>Roles:</h5>
-    <ul>
-      <li>BVC (business Value Consultant) </li>
-    </ul>
-    <h4 style="color:#00758f;">How do you request this service? </h4>
-    <p>Initially this request will be initiated by CRP/ECA/CSM to PS Manager/Director
-</p>
+  <!--Popups10 -->
+  <div style="display:none" id="modalDialog10" title="Create a Packaged Proposal"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+       <h3>Create a Packaged Proposal </h3>
+        <span class="smalltext">Category: Foundational SE Services </span>  </div>
+    <div class="popupbody oj-dialog-body">
+      <h4 style="color:#00758f;">Description</h4>
+      This Solution-Engineering-as-a-Service includes:
+      <ul>
+        <li>Quickly prepare and present a customized executive-facing overview regarding Oracle Cloud to your customer, focused on some of our top sales plays.  It is a vehicle that will enable you to highlight Oracle's Cloud strengths, present a compelling pricing picture, and help open the door for further customer data gathering so a final Oracle Cloud proposal and ordering document can be completed.</li>
+      </ul>
+      <h4 style="color:#00758f;">SE Role Engagement </h4>
+      <h5>Roles:</h5>
+      <ul>
+        <li>ECAs and/or Industry Advisors typically lead this engagement with direct support from Platform </li>
+      </ul>
+      <h4 style="color:#00758f;">How do you request this service? </h4>
+      <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
+      " target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+        Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+    </div>
   </div>
-</div>
-<!--Popups12 -->
-<div style="display:none" id="modalDialog12" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-     <h3>Deliver a Health Check </h3>
-      <span class="smalltext">Category: Foundational SE Services </span></div>
-  <div class="popupbody oj-dialog-body">
-    <h4 style="color:#00758f;">Description</h4>
-    This Solution-Engineering-as-a-Service includes:
-    <ul>
-      <li>Provide Health Check for service provided Health Checks </li>
-    </ul>
-    <h4 style="color:#00758f;">SE Role Engagement </h4>
-    <h5>Roles:</h5>
-    <ul>
-      <li>Customer Success Manager </li>
-    </ul>
-    <h4 style="color:#00758f;">How do you request this service? </h4>
-    <p>ECA request to CSM Management to assign and engage success services
- </p>
+  <!--Popups11 -->
+  <div style="display:none" id="modalDialog11" title="Build a Business Case"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+       <h3>Build a Business Case </h3>
+        <span class="smalltext">Category: Foundational SE Services </span>  </div>
+    <div class="popupbody oj-dialog-body">
+     <h4 style="color:#00758f;">Description</h4>
+      This Solution-Engineering-as-a-Service includes:
+      <ul>
+        <li>Develop an approach and outcome for creating a Business value case design and delivery </li>
+      </ul>
+      <h4 style="color:#00758f;">SE Role Engagement </h4>
+      <h5>Roles:</h5>
+      <ul>
+        <li>BVC (business Value Consultant) </li>
+      </ul>
+      <h4 style="color:#00758f;">How do you request this service? </h4>
+      <p>Initially this request will be initiated by CRP/ECA/CSM to PS Manager/Director
+  </p>
+    </div>
   </div>
-</div>
-<!--Popups13 --> 
-
-<div style="display:none" id="modalDialog13" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-     <h3>Customer Discovery </h3>
-      <span class="smalltext">Category: Foundational SE Services </span></div>
-  <div class="popupbody oj-dialog-body">
-    <h4>Description</h4>
-                      This Solution-Engineering-as-a-Service includes:
-                      <ul>
-                        <li>Collaboratively working with a customer to analyze specific business/technical use cases and associated opportunities and challenges. </li>
-                        <li>This process is highly consultative, focusing on the customer’s business/technical goals as well as existing processes, technologies, systems, personnel and business environment. </li>
-                        <li>This builds valuable customer trust, but also uniquely positions Oracle to business-justify and cost-justify immediate implementation of a solution &ndash; specifically immediate implementation of an Oracle Cloud solution. </li>
-                        <li>Deliverables include a presentation outlining use cases, goals, challenges, prescription analyses and benefits.  Deliverables also include a solution roadmap and Oracle sales proposal.</li>
-                      </ul>
-                      <h4>SE Role Engagement </h4>
-                      <h5>Roles:</h5>
-                      <ul>
-                        <li>ECAs lead initial steps in this engagement and are responsible for the majority of the early deliverables. </li>
-                        <li>Platform Specialists from the GEO Field support all phases closely, coordinating customer events and providing seamless handoff to solution and proposal. </li>
-                      </ul>
-                      <h4>How do you request this service? </h4>
-                      <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
-                        Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+  <!--Popups12 -->
+  <div style="display:none" id="modalDialog12" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+       <h3>Deliver a Health Check </h3>
+        <span class="smalltext">Category: Foundational SE Services </span></div>
+    <div class="popupbody oj-dialog-body">
+      <h4 style="color:#00758f;">Description</h4>
+      This Solution-Engineering-as-a-Service includes:
+      <ul>
+        <li>Provide Health Check for service provided Health Checks </li>
+      </ul>
+      <h4 style="color:#00758f;">SE Role Engagement </h4>
+      <h5>Roles:</h5>
+      <ul>
+        <li>Customer Success Manager </li>
+      </ul>
+      <h4 style="color:#00758f;">How do you request this service? </h4>
+      <p>ECA request to CSM Management to assign and engage success services
+   </p>
+    </div>
   </div>
-</div>
-
-<!--Popups14 --> 
-
-
-<div style="display:none" id="modalDialog14" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-     <h3>Platform Assessments </h3>
-      <span class="smalltext">Category: Foundational SE Services </span></div>
-  <div class="popupbody oj-dialog-body">
-    <h4>Description</h4>
-                      This Solution-Engineering-as-a-Service includes:
-                      <ul>
-                        <li>Working with a customer to analyze their current-state platform/system topology and environment.</li>
-                        <li>Identify challenges and problems and associated impacts/costs. </li>
-                        <li>Identify low-hanging-fruit opportunities for improvement as well as a full, future-state vision to address all platform needs. </li>
-                        <li>Define benefits, and provide cost justifications for short and long-term solutions. </li>
-                        <li>Provide a complete roadmap for platform rationalization. </li>
-                        <li>Perform all work required to produce the sales proposal, including physical architectures, sizing for current and future workloads, and phased implementation recommendations.</li>
-                      </ul>
-                      <h4>SE Role Engagement </h4>
-                      <h5>Roles:</h5>
-                      <ul>
-                        <li>Platform specialists from the GEO Field will lead these engagements working in conjunction with ECAs. </li>
-                        <li>Platform specialists will focus on specific sizing and implementation issues, supported where appropriate by Hub SEs. </li>
-                        <li>ECAs will focus on overall architectural design.</li>
-                      </ul>
-                      <h4>How do you request this service? </h4>
-                      <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
-                        Service based model in SCRM is target to be enabled on 12/1/2017. </p>
-  </div>
-</div>
-
-<!--Popups15 --> 
-
-
-<div style="display:none" id="modalDialog15" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-     <h3>Hands-on Workshops </h3>
-      <span class="smalltext">Category: Foundational SE Services </span></div>
-  <div class="popupbody oj-dialog-body">
-    <h4>Description</h4>
-                      This Solution-Engineering-as-a-Service includes:
-                      <ul>
-                        <li>Providing a technical hands-on experience to a customer’s technical personnel on a single or set of cloud services. </li>
-                        <li>Providing an intimate understanding of how the services work and what would be required to deploy and utilize them. </li>
-                        <li>Generating a vision of how the services would enable the customer to attain their specific business/technical goals. </li>
-                        <li>Hands-on Workshops may provide a less resource-intensive (but effective) alternative to POCs.</li>
-                      </ul>
-                      <h4>SE Role Engagement </h4>
-                      <h5>Roles:</h5>
-                      <ul>
-                        <li>Platform specialists from the GEO Field, at times working in conjunction with SE workshop developers and Hub SEs. </li>
-                        <li>Engagements will be at customer locations or Oracle locations or at time via remote delivery.</li>
-                      </ul>
-                      <h4>How do you request this service? </h4>
-                      <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
-                        Service based model in SCRM is target to be enabled on 12/1/2017. </p>
-  </div>
-</div>
-
-<!--Popups16 --> 
-
-
-<div style="display:none" id="modalDialog16" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-     <h3>Customer Demos </h3>
-      <span class="smalltext">Category: Foundational SE Services </span></div>
-  <div class="popupbody oj-dialog-body">
-    <h4>Description</h4>
-                      This Solution-Engineering-as-a-Service includes:
-                      <ul>
-                        <li>Demonstrating a cloud service or services to customer personnel.  The demonstration may depict business functionality and target LOB personnel as well as customer technical personnel. </li>
-                        <li>Alternatively, the demonstration may be appropriate for customer technical personnel only. </li>
-                        <li>The goal in all cases is to showcase how Oracle Cloud Services can address specific business/technical needs.</li>
-                      </ul>
-                      <h4>SE Role Engagement </h4>
-                      <p>Platform specialists from the GEO Field, at times working in conjunction with SE business or technical specialists and Hub SEs.  Engagements will be at customer locations or Oracle locations or at time via remote delivery.</p>
-                      <h4>How do you request this service? </h4>
-                      <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
-                        Service based model in SCRM is target to be enabled on 12/1/2017. </p>
-  </div>
-</div>
-
-<!--Popups17 --> 
-
-
-<div style="display:none" id="modalDialog17" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-     <h3>RFx Response Support</h3>
-      <span class="smalltext">Category: Foundational SE Services </span></div>
-  <div class="popupbody oj-dialog-body">
-       <h4>Description</h4>
-                      This Solution-Engineering-as-a-Service includes:
-                      <ul>
-                        <li>Collaborating with the sales rep to produce a highly effective RFx response for their customer. </li>
-                        <li>Engaging as early as possible to maximize response effectiveness, ideally while the customer is still developing the RFx in order to materially influence RFx content. </li>
-                        <li>Producing responses that not only address the customer’s requests, but also differentiate Oracle from its competitors in terms of capabilities to solve customer business/technical needs.</li>
-                      </ul>
-                      <h4>SE Role Engagement </h4>
-                      <h5>Roles:</h5>
-                      <ul>
-                        <li>ECAs and/or Industry Advisors typically lead this engagement with direct support from Platform Specialists from the GEO Field working with Hub SEs.</li>
-                      </ul>
-                      <h4>How do you request this service? </h4>
-                      <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
-                        Service based model in SCRM is target to be enabled on 12/1/2017. </p>
-  </div>
-</div>
-
-<!--Popups18 --> 
-
-
-<div style="display:none" id="modalDialog18" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-     <h3>Sizing, Quoting and Configuration Support </h3>
-      <span class="smalltext">Category: Foundational SE Services </span></div>
-  <div class="popupbody oj-dialog-body">
-       <h4>Description</h4>
-                      This Solution-Engineering-as-a-Service includes:
-                      <ul>
-                        <li>Working with the sales rep and their customer to produce accurate and professional sales proposals that reflect customer sizing needs and services requirements. </li>
-                        <li>Performing thorough sizing analyses against current and anticipated customer workloads. </li>
-                        <li>Evaluating all functional requirements present and future. </li>
-                        <li>Defining services as well as implementation requirements.</li>
-                      </ul>
-                      <h4>SE Role Engagement </h4>
-                      <h5>Roles:</h5>
-                      <ul>
-                        <li>Platform specialists from the GEO Field, at times working in conjunction with ECAs and Hub SEs. </li>
-                        <li>Engagements will include on-site customer meetings. </li>
-                      </ul>
-                      <h4>How do you request this service? </h4>
-                      <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
-                        Service based model in SCRM is target to be enabled on 12/1/2017. </p>
-  </div>
-</div>
-
-<!--Popups19 --> 
-
-
-<div style="display:none" id="modalDialog19" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-     <h3>Project  Management Support  </h3>
-      <span class="smalltext">Category: Foundational SE Services </span></div>
-  <div class="popupbody oj-dialog-body">
-       <h4>Description</h4>
-                      This Solution-Engineering-as-a-Service includes:
-                      <ul>
-                        <li>Provide project management support and guidelines </li>
-                      </ul>
-                      <h4>SE Role Engagement </h4>
-                      <h5>Roles:</h5>
-                      <ul>
-                        <li>Customer Success Manager </li>
-                      </ul>
-                      <h4>How do you request this service? </h4>
-                      <p>TBD </p>
-  </div>
-</div>
-
-<!--Popups20 --> 
-
-
-<div style="display:none" id="modalDialog20" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
-  <div class="popupheading">
-     <h3>Reusable Asset Harvesting </h3>
-      <span class="smalltext">Category: Foundational SE Services </span></div>
-  <div class="popupbody oj-dialog-body">
+  <!--Popups13 --> 
+  
+  <div style="display:none" id="modalDialog13" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+       <h3>Customer Discovery </h3>
+        <span class="smalltext">Category: Foundational SE Services </span></div>
+    <div class="popupbody oj-dialog-body">
       <h4>Description</h4>
-                      Harvesting on-field assets to re-use for other similar engagements
-                      <h4>SE Role Engagement </h4>
-                      <h5>Roles:</h5>
-                      <ul>
-                        <li>ECAs and/or Industry Advisor </li>
-                        <li>Customer Success Manager </li>
-                        <li>Platform/Hub Solution Engineers </li>
-                        <li>Business Value Consultant </li>
-                      </ul>
-                      <h4>How do you request this service? </h4>
-                      <p>Asset repository will be published to share successful content at <a href="http://solutionengineering.us.oracle.com">http://solutionengineering.us.oracle.com</a> website. </p>
+                        This Solution-Engineering-as-a-Service includes:
+                        <ul>
+                          <li>Collaboratively working with a customer to analyze specific business/technical use cases and associated opportunities and challenges. </li>
+                          <li>This process is highly consultative, focusing on the customer’s business/technical goals as well as existing processes, technologies, systems, personnel and business environment. </li>
+                          <li>This builds valuable customer trust, but also uniquely positions Oracle to business-justify and cost-justify immediate implementation of a solution &ndash; specifically immediate implementation of an Oracle Cloud solution. </li>
+                          <li>Deliverables include a presentation outlining use cases, goals, challenges, prescription analyses and benefits.  Deliverables also include a solution roadmap and Oracle sales proposal.</li>
+                        </ul>
+                        <h4>SE Role Engagement </h4>
+                        <h5>Roles:</h5>
+                        <ul>
+                          <li>ECAs lead initial steps in this engagement and are responsible for the majority of the early deliverables. </li>
+                          <li>Platform Specialists from the GEO Field support all phases closely, coordinating customer events and providing seamless handoff to solution and proposal. </li>
+                        </ul>
+                        <h4>How do you request this service? </h4>
+                        <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
+  " target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+                          Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+    </div>
   </div>
-</div>
+  
+  <!--Popups14 --> 
+  
+  
+  <div style="display:none" id="modalDialog14" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+       <h3>Platform Assessments </h3>
+        <span class="smalltext">Category: Foundational SE Services </span></div>
+    <div class="popupbody oj-dialog-body">
+      <h4>Description</h4>
+                        This Solution-Engineering-as-a-Service includes:
+                        <ul>
+                          <li>Working with a customer to analyze their current-state platform/system topology and environment.</li>
+                          <li>Identify challenges and problems and associated impacts/costs. </li>
+                          <li>Identify low-hanging-fruit opportunities for improvement as well as a full, future-state vision to address all platform needs. </li>
+                          <li>Define benefits, and provide cost justifications for short and long-term solutions. </li>
+                          <li>Provide a complete roadmap for platform rationalization. </li>
+                          <li>Perform all work required to produce the sales proposal, including physical architectures, sizing for current and future workloads, and phased implementation recommendations.</li>
+                        </ul>
+                        <h4>SE Role Engagement </h4>
+                        <h5>Roles:</h5>
+                        <ul>
+                          <li>Platform specialists from the GEO Field will lead these engagements working in conjunction with ECAs. </li>
+                          <li>Platform specialists will focus on specific sizing and implementation issues, supported where appropriate by Hub SEs. </li>
+                          <li>ECAs will focus on overall architectural design.</li>
+                        </ul>
+                        <h4>How do you request this service? </h4>
+                        <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
+  " target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+                          Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+    </div>
+  </div>
+  
+  <!--Popups15 --> 
+  
+  
+  <div style="display:none" id="modalDialog15" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+       <h3>Hands-on Workshops </h3>
+        <span class="smalltext">Category: Foundational SE Services </span></div>
+    <div class="popupbody oj-dialog-body">
+      <h4>Description</h4>
+                        This Solution-Engineering-as-a-Service includes:
+                        <ul>
+                          <li>Providing a technical hands-on experience to a customer’s technical personnel on a single or set of cloud services. </li>
+                          <li>Providing an intimate understanding of how the services work and what would be required to deploy and utilize them. </li>
+                          <li>Generating a vision of how the services would enable the customer to attain their specific business/technical goals. </li>
+                          <li>Hands-on Workshops may provide a less resource-intensive (but effective) alternative to POCs.</li>
+                        </ul>
+                        <h4>SE Role Engagement </h4>
+                        <h5>Roles:</h5>
+                        <ul>
+                          <li>Platform specialists from the GEO Field, at times working in conjunction with SE workshop developers and Hub SEs. </li>
+                          <li>Engagements will be at customer locations or Oracle locations or at time via remote delivery.</li>
+                        </ul>
+                        <h4>How do you request this service? </h4>
+                        <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
+  " target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+                          Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+    </div>
+  </div>
+  
+  <!--Popups16 --> 
+  
+  
+  <div style="display:none" id="modalDialog16" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+       <h3>Customer Demos </h3>
+        <span class="smalltext">Category: Foundational SE Services </span></div>
+    <div class="popupbody oj-dialog-body">
+      <h4>Description</h4>
+                        This Solution-Engineering-as-a-Service includes:
+                        <ul>
+                          <li>Demonstrating a cloud service or services to customer personnel.  The demonstration may depict business functionality and target LOB personnel as well as customer technical personnel. </li>
+                          <li>Alternatively, the demonstration may be appropriate for customer technical personnel only. </li>
+                          <li>The goal in all cases is to showcase how Oracle Cloud Services can address specific business/technical needs.</li>
+                        </ul>
+                        <h4>SE Role Engagement </h4>
+                        <p>Platform specialists from the GEO Field, at times working in conjunction with SE business or technical specialists and Hub SEs.  Engagements will be at customer locations or Oracle locations or at time via remote delivery.</p>
+                        <h4>How do you request this service? </h4>
+                        <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
+  " target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+                          Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+    </div>
+  </div>
+  
+  <!--Popups17 --> 
+  
+  
+  <div style="display:none" id="modalDialog17" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+       <h3>RFx Response Support</h3>
+        <span class="smalltext">Category: Foundational SE Services </span></div>
+    <div class="popupbody oj-dialog-body">
+         <h4>Description</h4>
+                        This Solution-Engineering-as-a-Service includes:
+                        <ul>
+                          <li>Collaborating with the sales rep to produce a highly effective RFx response for their customer. </li>
+                          <li>Engaging as early as possible to maximize response effectiveness, ideally while the customer is still developing the RFx in order to materially influence RFx content. </li>
+                          <li>Producing responses that not only address the customer’s requests, but also differentiate Oracle from its competitors in terms of capabilities to solve customer business/technical needs.</li>
+                        </ul>
+                        <h4>SE Role Engagement </h4>
+                        <h5>Roles:</h5>
+                        <ul>
+                          <li>ECAs and/or Industry Advisors typically lead this engagement with direct support from Platform Specialists from the GEO Field working with Hub SEs.</li>
+                        </ul>
+                        <h4>How do you request this service? </h4>
+                        <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
+  " target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+                          Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+    </div>
+  </div>
+  
+  <!--Popups18 --> 
+  
+  
+  <div style="display:none" id="modalDialog18" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+       <h3>Sizing, Quoting and Configuration Support </h3>
+        <span class="smalltext">Category: Foundational SE Services </span></div>
+    <div class="popupbody oj-dialog-body">
+         <h4>Description</h4>
+                        This Solution-Engineering-as-a-Service includes:
+                        <ul>
+                          <li>Working with the sales rep and their customer to produce accurate and professional sales proposals that reflect customer sizing needs and services requirements. </li>
+                          <li>Performing thorough sizing analyses against current and anticipated customer workloads. </li>
+                          <li>Evaluating all functional requirements present and future. </li>
+                          <li>Defining services as well as implementation requirements.</li>
+                        </ul>
+                        <h4>SE Role Engagement </h4>
+                        <h5>Roles:</h5>
+                        <ul>
+                          <li>Platform specialists from the GEO Field, at times working in conjunction with ECAs and Hub SEs. </li>
+                          <li>Engagements will include on-site customer meetings. </li>
+                        </ul>
+                        <h4>How do you request this service? </h4>
+                        <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
+  " target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+                          Service based model in SCRM is target to be enabled on 12/1/2017. </p>
+    </div>
+  </div>
+  
+  <!--Popups19 --> 
+  
+  
+  <div style="display:none" id="modalDialog19" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+       <h3>Project  Management Support  </h3>
+        <span class="smalltext">Category: Foundational SE Services </span></div>
+    <div class="popupbody oj-dialog-body">
+         <h4>Description</h4>
+                        This Solution-Engineering-as-a-Service includes:
+                        <ul>
+                          <li>Provide project management support and guidelines </li>
+                        </ul>
+                        <h4>SE Role Engagement </h4>
+                        <h5>Roles:</h5>
+                        <ul>
+                          <li>Customer Success Manager </li>
+                        </ul>
+                        <h4>How do you request this service? </h4>
+                        <p>TBD </p>
+    </div>
+  </div>
+  
+  <!--Popups20 --> 
+  
+  
+  <div style="display:none" id="modalDialog20" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+    <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
+    <div class="popupheading">
+       <h3>Reusable Asset Harvesting </h3>
+        <span class="smalltext">Category: Foundational SE Services </span></div>
+    <div class="popupbody oj-dialog-body">
+        <h4>Description</h4>
+                        Harvesting on-field assets to re-use for other similar engagements
+                        <h4>SE Role Engagement </h4>
+                        <h5>Roles:</h5>
+                        <ul>
+                          <li>ECAs and/or Industry Advisor </li>
+                          <li>Customer Success Manager </li>
+                          <li>Platform/Hub Solution Engineers </li>
+                          <li>Business Value Consultant </li>
+                        </ul>
+                        <h4>How do you request this service? </h4>
+                        <p>Asset repository will be published to share successful content at <a href="http://solutionengineering.us.oracle.com">http://solutionengineering.us.oracle.com</a> website. </p>
+    </div>
+  </div>

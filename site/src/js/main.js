@@ -8,6 +8,7 @@ var hubbaseurl="http://solutionengineering-devops.us.oracle.com:7003/ords/seaas/
 var ssoemail='';
 var usertype='';
 var uuid='';
+var isAdmin=false;
 /**
  * Example of Require.js boostrap javascript
  */

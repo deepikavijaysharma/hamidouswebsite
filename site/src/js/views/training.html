@@ -99,15 +99,15 @@
 </div>
 <div class="oj-row subnav">
   <div id="tabs-container">
-    <div id="tabs" data-bind="ojComponent:{component: 'ojTabs',orientation: 'horizontal', disabledTabs:[3,4]}"> 
+    <div id="tabs" data-bind="ojComponent:{component: 'ojTabs',orientation: 'horizontal', disabledTabs: disabledtab}"> 
       <!-- tab bar -->
       
       <ul class="hnav">
-        <li><img src="css/images/course-icon.jpg" align="middle">&nbsp;<span>Courses</span></li>
+        <li><img src="css/images/course-icon.jpg" align="middle">&nbsp;<span>Training Courses</span></li>
         <li><img src="css/images/community-calls-icon.jpg" align="middle">&nbsp;<span>Community Calls</span></li>
         <li style="display:none"><img src="css/images/offers-icon.jpg" align="middle">&nbsp;<span>Offers</span></li>
-        <li onclick="window.open('http://solutionengineering.us.oracle.com/site/?root=ecacertification')" align="middle"><img src="css/images/certificate-icon.jpg">&nbsp;<a href="#">ECA & CSM Certification</a></li>
-        <li onclick="window.open('http://solutionengineering.us.oracle.com/site/?root=ecaenablement')" align="middle"><img src="css/images/certificate-icon.jpg">&nbsp;<a href="#">ECA & CSM Enablement</a></li>
+        <li onclick="window.open('http://solutionengineering.us.oracle.com/site/?root=ecacertification')" align="middle"><img src="css/images/certificate-icon.jpg">&nbsp;<a href="#">ECA Certification</a></li>
+        <li onclick="window.open('http://solutionengineering.us.oracle.com/site/?root=ecaenablement')" align="middle"><img src="css/images/certificate-icon.jpg">&nbsp;<a href="#">ECA Enablement</a></li>
         <li><img src="css/images/admin-icon.jpg" align="middle">&nbsp;<span>Admin</span></li>
       </ul>
       
@@ -128,13 +128,6 @@
                   update : searchcourses
                 }" />
               </div>
-              <!-- <div class="oj-flex-item oj-sm-5 oj-md-2">
-                    <button id="search-button" onclick="searchcourses()" class="oj-button-confirm" data-bind="ojComponent: {
-                    component: 'ojButton',
-                    label: 'Search'},
-                    click: searchInput"> 
-                </button>
-                  </div> -->
               <div class="oj-flex-item oj-sm-7 oj-md-7 oj-lg-4 oj-xl-3 req_block" style="display:none">
                 <button id="trainingButton" class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
                   component: 'ojButton',
@@ -150,6 +143,7 @@
                 <div class="oj-flex-item refine">
                   <div class="title">Refine Courses</div>
                   <hr>
+
                   <!-- ~~~~~~~~~~~~~ CATEGORIES ~~~~~~~~~~~~~~ --> 
                   <!-- ko if: refinelist().length>0 -->
                   <div class="titlesmall">Categories</div>
@@ -168,6 +162,7 @@
                     </li>
                     <!-- /ko -->
                   </ul>
+                  
                   <!-- ~~~~~~~~~~~~~ PRODUCT TYPE ~~~~~~~~~~~~~~ --> 
                   <!-- ko if: producttype().length>0 -->
                   <div class="titlesmall">Product Type</div>
@@ -227,7 +222,7 @@
                       </div>
                     </li>
                    
-                    <!-- /ko -->
+                  <!-- /ko -->
                   </ul>
                   <!-- ~~~~~~~~~~~~~ CITIES ~~~~~~~~~~~~~~ --> 
                   <!-- ko if: cities().length>0 -->
@@ -320,6 +315,7 @@
             update : searchcommunitycalls
           }" />
               </div>
+              
               <div class="oj-flex-item oj-sm-7 oj-xl-3 req_block" style="display:none;">
                 <button class="reqtrain-button " data-bind="ojComponent: {
             component: 'ojButton',
@@ -360,7 +356,7 @@
                   </ul>
                   <!-- ~~~~~~~~~~~~~ CALL MODE ~~~~~~~~~~~~~~ -->
                   
-                  <div class="titlesmall">Call Mode</div>
+                  <div class="titlesmall">Call Type</div>
                   <ul class="refinelist">
                   
                     <li>
@@ -378,10 +374,10 @@
                     <div class="oj-flex">
                         <div class="oj-sm-1">
                           <label>
-                        <input type="checkbox" class="refine" name="communitymodes" value="hall" onchange="refineupdate(this)">
+                        <input type="checkbox" class="refine" name="communitymodes" value="town hall" onchange="refineupdate(this)">
                       </label>
                         </div>
-                        <div class="oj-sm-11"> <span>Townhall</span> </div>
+                        <div class="oj-sm-11"> <span>Town hall</span> </div>
                       </div>
                     
                     </li>
@@ -420,6 +416,7 @@
               </div>
           
             <div class="oj-flex-item oj-md-8 oj-lg-9 communitycall">
+                <Label class="required">Date-Time is in PST </Label>
               <div data-bind="foreach:communityCallList">
                 <div class="oj-flex oj-sm-12 ccrow">
                   <div class="oj-sm-12 oj-lg-2  oj-flex">
@@ -434,11 +431,11 @@
                       </div>
                       <div class="oj-sm-12 oj-lg-4 cccol">
                         <p><strong class="blue">Date</strong><br>
-                          <span data-bind="text:call_date"></span>&nbsp; <span data-bind="text:call_time"></span></p>
+                          <span data-bind="text:call_date"></span>&nbsp;<span data-bind="text:call_time"></span> - <span data-bind="text:callduration"></span></p>
                         <p><strong class="blue">Speaker</strong><br>
                           <span data-bind="text:speaker"></span><br>
                           <span data-bind="text:designation"></p>
-                        <p><strong class="blue">Mode of Call</strong><br>
+                        <p><strong class="blue">Call Type</strong><br>
                           <span data-bind="text:mode_of_call"></span></p>
                       </div>
                       <div class="oj-sm-12 oj-lg-3 cccol"> 
@@ -460,7 +457,7 @@
                         
                         <!-- ko if: description.length>0 -->
                         <p><strong class="blue">Description</strong><br>
-                          <span data-bind="html:description"></span></p>
+                          <span data-bind="html:subdescription"></span></p>
                         <!-- /ko --> 
                         
                         <!-- ko if: addl_link.length>0 -->
@@ -492,6 +489,7 @@
         <div class="container adminsection">
           <div class="oj-flex adminheading">
             <h1>Admin Settings</h1>
+            
           </div>
           <!-- <div id="vtabs" data-bind="ojComponent:{component: 'ojTabs', 
                             orientation: 'vertical', selected: 0}"> -->
@@ -503,13 +501,14 @@
           
           <!-- CREATE COMMUNITY CALL -->
           <div id="createcommunitycall" class="bgwhite admincontent">
-            <h1>Create Community Call</h1>
+            
+            <span><h1>Create Community Call</h1><span></span></span>
             <div class="oj-flex">
             <div class="oj-lg-6">
              <div class="oj-margin-right nomargin-md">
               <div class="oj-flex">
                 <div class="oj-sm-12">
-                  <label>Community Call Name</label>
+                  <label>Community Call Name </label><label class="required">*</label>
                 </div>
                 <div class="oj-sm-12">
                   <input required type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:callname}"
@@ -519,7 +518,7 @@
               <br>
               <div class="oj-flex">
                 <div class="oj-sm-12">
-                  <label>Who is the Speaker</label>
+                  <label>Who is the Speaker </label><label class="required">*</label>
                 </div>
                 <div class="oj-sm-12">
                   <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:callspkr}"
@@ -539,7 +538,7 @@
               <br>
               <div class="oj-flex">
                 <div class="oj-sm-12">
-                  <label>Select Roles</label>
+                  <label>Select Roles </label><label class="required">*</label>
                 </div>
                 <div class="oj-sm-12">
                   <select size=5 style="width:100%" multiple="true" data-bind="
@@ -554,10 +553,10 @@
               <br>
               <div class="oj-flex">
                 <div class="oj-sm-12">
-                  <label>Select Mode of calls</label>
+                  <label>Select Type of Calls </label><label class="required">*</label>
                 </div>
                 <div class="oj-sm-12">
-                  <select size=3 style="width:100%" multiple="true" data-bind="
+                  <select size=3 style="width:100%"  data-bind="
                     options: callmodes,
                     selectedOptions: selectedcallmode,
                     optionsCaption: 'Choose modes...'">
@@ -567,12 +566,13 @@
               <br>
               <div class="oj-flex">
                 <div class="oj-sm-12">
-                  <label>Date & Time</label>
+                  <label>Date</label>
                 </div>
                 <div class="oj-sm-12">
-                  <div id="inline" data-bind="ojComponent: {component: 'ojInputDateTime',converter: dateTimeConverter, 
-                                 value: value}"></div>
+                   <oj-input-date-time id="date" data-bind="value:starttime">
+                  </oj-input-date-time>
                 </div>
+                <h6 class="hinttext">select date & time in PST</h6>
               </div>
              </div>
               
@@ -594,6 +594,7 @@
                   <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:calllink}"
                         />
                 </div>
+                <h6 class="hinttext">prefix link with http/https</h6>
               </div>
               <br>
               <div class="oj-flex">
@@ -608,11 +609,12 @@
               <br>
               <div class="oj-flex">
                 <div class="oj-sm-12">
-                  <label>Description</label>
+                  <label>Description </label><label class="required">*</label>
                 </div>
                 <div class="oj-sm-12">
                   <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:calldesc}"></textarea>
                 </div>
+                
               </div>
               <br>
               <div class="oj-flex">
@@ -620,8 +622,9 @@
                   <label>Additional Links</label>
                 </div>
                 <div class="oj-sm-12">
-                  <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:reflink}"></textarea>
+                  <input type="text" placeholder=""  data-bind="ojComponent: {component: 'ojInputText',value:reflink}">                  
                 </div>
+                <h6 class="hinttext">prefix link with http/https</h6>
               </div>
               <br>
               <div class="oj-flex">
@@ -630,9 +633,22 @@
                 </div>
                 <div class="oj-sm-12">
                   <input type="text" placeholder=""  data-bind="ojComponent: {component: 'ojInputText',value:callrecordlink}">
+                </div>
+                <h6 class="hinttext">prefix link with http/https</h6>
+              </div>
+              <br>
+              <div class="oj-flex">
+                <div class="oj-sm-12">
+                  <label>Duration (in minutes) </label><label class="required">*</label>
+                </div>
+                <div class="oj-sm-12">
+                  <input type="text" placeholder=""  data-bind="ojComponent: {component: 'ojInputText',value:duration}">
                   </textarea>
                 </div>
+                <h6 class="hinttext">Please enter in minutes</h6>
               </div>
+              <br>
+               </div>
             </div>
             </div>
             </div>

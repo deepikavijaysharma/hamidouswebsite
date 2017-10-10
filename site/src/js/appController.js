@@ -81,7 +81,6 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       }
 
       initsso = function () {
-        alert("Clicked LOGIN");
         if (ssoemail.length == 0) {
           // document.getElementById('ssodialog').style.display = 'block';
           self.ssowindow = window.open("http://solutionengineering.us.oracle.com/seaas/");
@@ -112,26 +111,32 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         }
       }
 
-      getusertype = function () {
+      checkadmin=function(){
+        var checkurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/isAdmin";
         if (ssoemail.length > 0) {
-          $.getJSON(hubbaseurl + "GetEmployeeType/" + ssoemail).
-            then(function (hubs) {
-              $.each(hubs.items, function () {
-                //debuglog(this.type);
-                usertype = this.type;
-                uuid = this.uuid;
-                self.mentoringinterest = this.mentoring_interest.toLowerCase() === 'yes' ? true : false;
-              })
-            });
+          $.ajax({
+            url: checkurl,
+            method: 'GET',
+            headers: {
+                email: ssoemail
+            },
+            success: function (data) {
+              isAdmin=data.is_admin;
+            },
+            error: function (xhr) {
+                //alert(xhr);
+            }
+        });
         }
       }
 
       setInterval(function () {
         getemailfromcookie();
         isloggedin();
-        getusertype();
+        checkadmin();
       }, 500);
 
+ 
 
       // Drawer
       // Close offcanvas on medium and larger screens
@@ -162,7 +167,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       // User Info used in Global Navigation area
       self.userLogin = ko.observable("john.hancock@oracle.com");
       self.addActive = function (routername, pid) {
-        alert("s");
+        // alert("s");
         if (routername === pid) {
 
           return 'active';
@@ -179,7 +184,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
          new footerLink('Home', 'home', '?root=home'),
         new footerLink('ECAL Site', 'ecal', 'http://innovate.us.oracle.com/ecal/', '_blank'),
         new footerLink('Cloud Accelerate Site', 'cloudaccelerate', 'http://innovate.us.oracle.com/cloudaccelerate/', '_blank'),
-        new footerLink('Contact Us', 'contactus', 'mailto:heather.hughes@oracle.com'),
+        
       ]);
     }
 
