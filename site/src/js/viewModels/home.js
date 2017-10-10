@@ -235,13 +235,13 @@ update_pos = function()
        // alert(document.body.scrollTop);
 		  if (document.documentElement.scrollTop > mainBar_h || document.body.scrollTop > mainBar_h ||document.getElementById("globalBody").scrollTop )
         {
-            setupBar.style.position = "fixed";
-            setupBar.style.top = "0";
+            secnav.style.position = "fixed";
+            secnav.style.top = "0";
         }
         else
         {
-            setupBar.style.position = "relative";
-            setupBar.style.top = "";
+            secnav.style.position = "relative";
+            secnav.style.top = "";
 			
         }
         
