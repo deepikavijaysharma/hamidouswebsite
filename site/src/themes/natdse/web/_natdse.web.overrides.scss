@@ -2524,7 +2524,8 @@ font-weight:normal;
 p{
 margin-bottom:12px;}
 .bluebutton{
-display:inline-flex;}
+display:inline-flex;
+margin-top:10px;}
 ul{
 padding-left:15px;
 }
@@ -2605,4 +2606,12 @@ margin-bottom:20px;
     color: #969696;
     margin-left: 20px;
     margin-right: 20px;
+}
+
+.dottedline{
+	text-align:center;
+	color:$grey;}
+#loginbutton{
+	@media  #{$responsiveQueryLargeDown} {
+	color:#fff;}	
 }

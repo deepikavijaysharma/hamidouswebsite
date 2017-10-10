@@ -162,7 +162,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       // User Info used in Global Navigation area
       self.userLogin = ko.observable("john.hancock@oracle.com");
       self.addActive = function (routername, pid) {
-        
+        alert("s");
         if (routername === pid) {
 
           return 'active';
@@ -179,7 +179,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
          new footerLink('Home', 'home', '?root=home'),
         new footerLink('ECAL Site', 'ecal', 'http://innovate.us.oracle.com/ecal/', '_blank'),
         new footerLink('Cloud Accelerate Site', 'cloudaccelerate', 'http://innovate.us.oracle.com/cloudaccelerate/', '_blank'),
-        
+        new footerLink('Contact Us', 'contactus', 'mailto:heather.hughes@oracle.com'),
       ]);
     }
 
