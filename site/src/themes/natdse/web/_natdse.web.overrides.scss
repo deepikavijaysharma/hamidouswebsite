@@ -42,6 +42,9 @@ padding-bottom: 20px;
 @include shadowbottom;
 z-index:1;
 position:relative;
+@media  #{$responsiveQueryMediumDown} {
+	padding-top:20px;
+}
 }
 .logoblock{
 max-width:160px;
@@ -52,7 +55,7 @@ align-self: center;
 .oraclelogo img {
 max-width: 160px;
 margin-bottom:10px;
-@media  #{$responsiveQuerySmallOnly} {
+@media  #{$responsiveQueryMediumDown} {
 margin-bottom:0px;
 }
 }
@@ -89,7 +92,7 @@ margin-top: 25px;
 }
 .bgwhite{
 background:#fff;
-padding: 0 40px 40px;
+padding: 0 40px 20px;
 box-sizing:border-box;
 @media  #{$responsiveQuerySmallOnly} {
 padding: 0px;
@@ -688,9 +691,10 @@ box-sizing:border-box;
 li{
 list-style:none;
 text-align:center;
-display:inline-block;
+display:inline;
 margin-left:15px;
 margin-right:15px;
+
 @media  #{$responsiveQueryLargeOnly} {
 margin-left: 10px;
 margin-right: 10px;
@@ -700,11 +704,26 @@ margin-right: 10px;
 margin-top:10px;
 margin-bottom:10px;
 }
+@media  #{$responsiveQueryXlargemed} {
+margin-left: 9px;
+margin-right: 9px;
+}
+@media  #{$responsiveQueryXlargemed1} {
+margin-left: 9px;
+margin-right: 9px;
+}
+@media  #{$responsiveQueryMediumOnly} {
+margin-top:10px;
+display:inline-block;
+margin-bottom:10px;
+
+}
 @media  #{$responsiveQuerySmallOnly} {
 text-align:left;
 margin-bottom:10px;
 margin-left:10px;
 margin-right:10px;
+display:inline-block;
 }
 }
 li:last-child{
@@ -740,11 +759,13 @@ margin:0px;
 @include shadowbottom;
 .videoHamidou{
 width:100%;
-height:316px;
+height:276px;
 background:rgba(0, 0, 0, 0) url("images/hamidou_image.jpg") no-repeat scroll 0 0 / cover ;
 position:relative;
-background-position:top;
-
+background-position:center;
+@media  #{$responsiveQueryMediumOnly} {
+height:291px;
+}
 }
 .videoHamidoutitle{
 @include headings;
@@ -752,17 +773,24 @@ background-position:top;
 }
 .videoHamidoudesc{
 line-height:20px;
-@include greytranparent;
+@include greytranparentdarker;
 position:absolute;
 bottom:0px;
-padding: 30px 20px;
+padding: 10px;
 overflow:hidden;
 box-sizing: border-box;
 }
 .name{
-font-size:$largeFontSize;
+font-size:$mediumFontSize;
 color:$orange;
 }
+.playicon{
+	max-width:55px;
+	}
+.playblock{
+	display:flex;
+	justify-content:center;
+	align-items:center;}	
 .title{
 font-size:$smallestFontSize;
 color:#fff;
@@ -776,7 +804,7 @@ margin-right:0px;
 margin:0px;
 }
 @include shadowbottom;
-height: 95%;
+/*height: 95%;*/
 .visiontitle{
 @include headings;
 }
@@ -793,7 +821,7 @@ text-align:center;
 font-size:$smallFontSize;
 font-weight:bold;
 margin-bottom:0px;
-min-height:184px;
+min-height:154px;
 display:flex;
 align-items:center;
 justify-content: center;
@@ -844,7 +872,7 @@ a:hover{
 	}
 }
 .blocks_title{
-min-height:128px;
+min-height:116px;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -1043,7 +1071,7 @@ margin-bottom:10px;
 }
 .cTitle{
 color: $darkergrey;
-font-size:$smallFontSize;
+font-size:$smallestFontSize;
 align-items:center;
 @media  #{$responsiveQueryMediumDown} {
 margin-bottom:10px;
@@ -1072,7 +1100,7 @@ align-self:center;
 }
 p{
 margin-bottom:0px;
-line-height:20px;
+line-height:30px;
 }
 .calbutton{
 display:flex;
@@ -1108,6 +1136,13 @@ left: 10px;
 .my-filmstrip-item {
 box-sizing: border-box;
 width: 360px;
+
+@media  #{$responsiveQueryXlargemed} {
+width: 340px;
+}
+@media  #{$responsiveQueryXlargemed1} {
+width: 320px;
+}
 @media  #{$responsiveQuerySmallOnly} {
 width: 280px;
 }
@@ -1196,6 +1231,7 @@ left: 10px;
 }
 }
 }
+
 .my-filmstrip-item {
 box-sizing: border-box;
 width: 338px;
@@ -1204,10 +1240,13 @@ justify-content:center;
 align-items:center;
 text-align:center;
 font-size:$smallFontSize;
+@media  #{$responsiveQueryXlargemed} {
+width: 280px;
+}
 @media  #{$responsiveQuerySmallOnly} {
 width: 280px;
 }
-height: 280px;
+height: 230px;
 margin: 5px;
 
 background:$lightgrey;
@@ -1221,6 +1260,10 @@ background:$lightgrey;
 .my-filmstrip-item{
 width:500px;
 height:340px;
+@media  #{$responsiveQueryXlargemed} {
+width:50%;
+height:auto;
+}
 @media  #{$responsiveQueryLargeOnly} {
 width:100%;
 height:auto;
@@ -1273,13 +1316,13 @@ max-height:37px;
 @include yellowbadge;
 }
 .win_desc{
-background: rgba(0, 0, 0, 0) url("images/wins_bg.png") repeat scroll center center / cover ;
+background: rgba(0, 0, 0, 0) url("images/wins_bg.jpg") repeat scroll center center / cover ;
 height: auto;
 padding:20px;
 box-sizing:border-box;
 min-height:240px;
 color:#fff;
-@media  #{$responsiveQueryLargeDown} {
+@media  #{$responsiveQueryMediumDown} {
 min-height:350px;
 }
 }
@@ -1474,7 +1517,7 @@ border:none;
 overflow-x:visible;
 }
 .search{
-margin-top:20px;
+margin-top:15px;
 .labeldiv{
 background:$lightblue;
 color:#fff;
@@ -1565,10 +1608,10 @@ height:20px;
 }
 
 .blocksouter{
-margin-bottom:40px;
+margin-bottom:10px;
 }
 .coursesblock{
-margin-top:30px;
+margin-top:20px;
 .catheadings{
 padding: 5px 5px 5px 15px;
 background:$medblue;
@@ -2260,7 +2303,7 @@ opacity:0.6;
 
 .servicesblocksinner {
 	background: #eeeeee;
-	height: 150px;
+	height: 120px;
 	border: 1px solid #fff;
 	font-weight: bold;
 	position: relative;
@@ -2319,7 +2362,7 @@ opacity:0.6;
 	border: 1px solid #fff;
 	text-align: center;
 	font-size: 14px;
-	height: 144px;
+	height: 125px;
 }
 .seservice {
 	margin-top: 20px;
@@ -2342,6 +2385,12 @@ opacity:0.6;
 	}
 
 /*--------------------------------Our Orgnization------------------------------------*/
+.org_container{
+		@media  #{$responsiveQuerySmallOnly} {
+	padding:20px;
+	}	
+}
+
 .org_container_inner{
 /*justify-content:space-between;*/
 justify-content:center;
@@ -2351,10 +2400,10 @@ background:$lightgrey;
 display:flex;
 font-size:$smallestFontSize1;
 align-items:center;
-min-height:77px;
+min-height:60px;
 box-sizing:border-box;
 color:$grey;
-padding:20px;
+padding:10px 20px;
 a{
 	color:$grey;
 	}

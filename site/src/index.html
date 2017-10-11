@@ -33,13 +33,14 @@
 
 <!-- This is the main css file for the default Alta theme -->
 <!-- injector:theme -->
-<link rel="stylesheet" href="css/natdse/0.0.1/web/natdse.css" id="css" />
+<link rel="stylesheet" href="css/libs/oj/v3.2.0/alta/oj-alta-min.css" type="text/css"/>
 <!-- endinjector -->
 <link href="css/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <!-- This contains icon fonts used by the starter template -->
 <link rel="stylesheet" href="css/demo-alta-site-min.css" type="text/css"/>
 <link rel="stylesheet" href="css/styles.css" type="text/css"/>
-
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body class="oj-web-applayout-body">
 <!-- Template for rendering navigation items shared between nav bar and nav list --> 
@@ -81,6 +82,13 @@
                 ojComponent: {component:'ojButton', label: 'Application Navigation',
                 chroming: 'half', display: 'icons', icons: {start: 'fa fa-bars'}}"> </button>
         </div>
+        <div class="oj-flex-bar-end">
+        <a href="#" role="button" class="oj-navigationlist-focused-element oj-navigationlist-item-content oj-navigationlist-item-no-icon" aria-pressed="false" tabindex="-1" data-tabmod="-1">
+                <span>
+                 ss <span id="loginbutton" class="oj-navigationlist-item-label loginnav" style="display: block !important" data-bind="click:initsso">Login</span>
+                </span>
+              </a>
+              </div>
       </div>
 <!--       <div class="oj-flex">
         <div class="oj-flex-item oj-lg-11">
@@ -94,22 +102,24 @@
     <div class="logoBar" id="logoBar">
       <div class="container">
         <div class="oj-flex">
-          <div class="oj-sm-12 oj-md-12 oj-lg-5 oj-xl-5 oj-flex oraclelogo"><div class="oj-md-6 logoblock"><a href="?root=home"><img src="css/images/logo.png"></a></div><div class="oj-md-6 oraclelogotext"> <span class="">Solution Engineering</span></div></div>
-          <div class="oj-sm-12 oj-md-12 oj-lg-7 oj-xl-7 oj-flex-item topnav">
+          <div class="oj-sm-12 oj-md-12 oj-lg-5 oj-xl-4 oj-flex oraclelogo"><div class="oj-md-6 logoblock"><a href="?root=home"><img src="css/images/logo.png"></a></div><div class="oj-md-6 oraclelogotext"> <span class="">Solution Engineering</span></div></div>
+          <div class="oj-sm-12 oj-md-12 oj-lg-7 oj-xl-8 oj-flex-item topnav">
             <div role="navigation" class="oj-flex oj-lg-12 oj-flex-bar-end">
               <div data-bind="ojComponent: {component: 'ojNavigationList',
               navigationLevel: 'application',
               item: {template: 'navTemplate'}, data: navDataSource,
               selection: router.stateId, edge: 'top'}"
               class="oj-web-applayout-navbar oj-sm-only-hide oj-md-only-hide oj-lg-only-hide oj-sm-10">
-                
+                 
               </div>
               <!-- Login Button added to Navbar -->               
-              <div>
-                  <button id="loginbutton" class="oj-sm-align-center oj-flex orangebutton"  style="display:none;padding-bottom:5px" id="button" data-bind="click: initsso, 
-                  ojComponent: { component: 'ojButton', label: 'Login' }"> </button>
+             <div class="oj-flex oj-sm-only-hide oj-md-only-hide oj-lg-only-hide">
+        <a href="#" role="button" class="oj-navigationlist-focused-element oj-navigationlist-item-content oj-navigationlist-item-no-icon" aria-pressed="false" tabindex="-1" data-tabmod="-1">
+                <span>
+                  <span id="loginbutton" class="oj-navigationlist-item-label loginnav" style="display: none" data-bind="click:initsso">Login</span>
+                </span>
+              </a>
               </div>
-              
             </div>
           </div>
         </div>

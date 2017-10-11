@@ -184,6 +184,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
          new footerLink('Home', 'home', '?root=home'),
         new footerLink('ECAL Site', 'ecal', 'http://innovate.us.oracle.com/ecal/', '_blank'),
         new footerLink('Cloud Accelerate Site', 'cloudaccelerate', 'http://innovate.us.oracle.com/cloudaccelerate/', '_blank'),
+		new footerLink('Contact Us', 'contactus', 'mailto:heather.hughes@oracle.com'),
         
       ]);
     }

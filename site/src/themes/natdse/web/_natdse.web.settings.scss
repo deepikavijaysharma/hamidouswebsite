@@ -80,7 +80,7 @@ $responsiveQueryXSmallOnly:  "screen and (max-width: #{upper-bound($screenXSmall
 
 
 $screenXlargemedRange1: 1281px, 1366px !default;
-$responsiveQueryXlargemed1:   "screen and (max-width: #{lower-bound($screenXlargemedRange1)})" !default;
+$responsiveQueryXlargemed1:   "screen and (max-width: #{upper-bound($screenXlargemedRange1)})" !default;
 
 
 $screenXlargemedRange: 1367px, 1440px !default;
@@ -159,6 +159,9 @@ justify-content:center;
 
 @mixin greytranparent{
 background:rgba(0,0,0,0.3);
+}
+@mixin greytranparentdarker{
+background:rgba(0,0,0,0.6);
 }
 
 @mixin headings2 {
