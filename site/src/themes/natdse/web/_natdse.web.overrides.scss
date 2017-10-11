@@ -119,14 +119,7 @@ margin-right:10px;
 margin-left:10px;
 }
 :target:before {
-content:"";
-display:block;
-height:67px; /* fixed header height*/
-margin:-67px 0 0; /* negative fixed header height */
-@media  #{$responsiveQuerySmallOnly} {
-height:94px; /* fixed header height*/
-margin:-94px 0 0; /* negative fixed header height */
-}
+
 }
 .orange{
 	color:$orange;
@@ -340,7 +333,7 @@ html:not([dir="rtl"]) .oj-menu-text-only > .oj-menu-item.oj-focus > a,html:not([
 color:#fff;
 font-size: $largeFontSize1;
 }
-.demo-filmstrip-item {
+.item {
 box-sizing: border-box;
 width: 100%;
 text-align: center;
@@ -390,6 +383,20 @@ flex-basis: 100% !important;
 }
 }
 .homeslider {
+	.item {
+box-sizing: border-box;
+width: 100%;
+text-align: center;
+font-weight: bold;
+color: #333;
+font-size: 3rem;
+overflow: hidden;
+text-overflow: ellipsis;
+height: 275px;
+@media  #{$responsiveQueryMediumDown} {
+height: auto;
+}
+}
 .largeslide{
 height: 275px;
 @media  #{$responsiveQuerySmallOnly} {
@@ -517,7 +524,7 @@ li a:hover{
 
 }
 
-.demo-filmstrip-item {
+.item {
 color: #fff;
 font-weight: normal;
 }
@@ -643,11 +650,11 @@ width: 50%;
 
 }
 
-.oj-filmstrip-arrow.oj-end {
+.right.carousel-control {
 @include slidercursors;
 background: url(images/R-arrow.png);
 }
-.oj-filmstrip-arrow.oj-start {
+.left.carousel-control {
 @include slidercursors;
 background: url(images/L-arrow.png);
 }
@@ -2679,3 +2686,15 @@ margin-bottom:20px;
 	font-weight: bold;
 	margin:0px;
 }
+
+.governanceboard a{
+	color:$orange;
+	}
+
+.governanceboard a:hover{
+	opacity:0.7;
+	}	
+
+.governanceboard p{
+	margin-bottom:20px;
+	}	

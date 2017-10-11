@@ -6,7 +6,7 @@
  * Your about ViewModel code goes here
  */
  
-define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcontrol','ojs/ojradioset','ojs/ojtabs', 'ojs/ojconveyorbelt','ojs/ojbutton','ojs/ojpopup','ojs/ojdialog','ojs/ojanimation'],
+define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcontrol','ojs/ojradioset','ojs/ojtabs', 'ojs/ojconveyorbelt','ojs/ojbutton','ojs/ojpopup','ojs/ojdialog','ojs/ojanimation','bootstrap'],
  function(oj, ko, $) {
   
     function HomeViewModel() {
@@ -254,7 +254,7 @@ document.getElementById("globalBody").addEventListener("scroll", update_pos);
 
 
   // Add smooth scrolling to all links
-  $("a").on('click', function(event) {
+  $("#setupBar a").on('click', function(event) {
 
     // Make sure this.hash has a value before overriding default behavior
     if (this.hash !== "") {
@@ -282,8 +282,13 @@ document.getElementById("globalBody").addEventListener("scroll", update_pos);
     $(this).parent().addClass('active');
     } // End if
   });
-
+  
         });
+		
+		  $(document).ready(function() { 
+      $('#myCarousel').carousel({ interval: 5000, cycle: true });
+  }); 
+ $('#myCarousel').carousel();
 		
 		/******************************************FLIP*****************************************************/
 	  
