@@ -176,6 +176,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     alert("Please enter description");
                     return;
                 }
+                if (self.calldesc().length == 0) {
+                    
+                    alert("Select atleast one role");
+                    return;
+                }
+
                 if (self.callduration().length == 0) {
 
                     alert("Please enter duration");
@@ -202,7 +208,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     designation: self.calldesignation(),
                     call_date: self.date().split('T')[0],
                     call_time: self.starttime().split('T')[1],
-                    callduration:self.duration(),
+                    duration:self.callduration(),
                     locn: self.callvenue(),
                     meetinglink: self.calllink(),
                     dialin: self.calldialin(),
@@ -225,6 +231,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     data: ko.toJSON(call),
                     success: function (data) {
                         resetcall();
+                        loadCommunitycall();
+
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
@@ -658,30 +666,35 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                         case "category":
                             setuncheck('category');
                             desc.checked=true;
+                            self.refinecategories.removeAll();
                             self.refinecategories.push(desc.defaultValue);
                             break;
 
                         case "prodtype":
                             setuncheck('prodtype');
                             desc.checked=true;
+                            self.refineproducttype.removeAll();
                             self.refineproducttype.push(desc.defaultValue);
                             break;
 
                         case "traininglevel":
                             setuncheck('traininglevel');
                             desc.checked=true;
+                            self.refinetraininglevel.removeAll();
                             self.refinetraininglevel.push(desc.defaultValue);
                             break;
 
                         case "trainingtype":
                             setuncheck('trainingtype');
                             desc.checked=true;
+                            self.refinetrainingtype.removeAll();
                             self.refinetrainingtype.push(desc.defaultValue);
                             break;
 
                         case "cities":
                             setuncheck('cities');
                             desc.checked=true;
+                            self.refinecitis.removeAll();
                             self.refinecitis.push(desc.defaultValue);
                             break;
 
@@ -689,6 +702,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
                             setuncheck('roles');
                             desc.checked=true;
+                            self.refineroles.removeAll();
                             self.refineroles.push(desc.defaultValue);
                             break;
 
