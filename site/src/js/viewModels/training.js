@@ -648,6 +648,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 });
             }
 
+            // The method maintains the filters based on use selection
+            //  Method triggers on each option selection
             refineupdate = function (desc) {
                 var type = desc.name;
                 if (desc.checked) {
@@ -707,39 +709,39 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 } else {
                     switch (type) {
                         case "category":
-                            self.refinecategories.pop(desc.defaultValue);
+                            self.refinecategories.remove(desc.defaultValue);
                             break;
 
                         case "prodtype":
-                            self.refineproducttype.pop(desc.defaultValue);
+                            self.refineproducttype.remove(desc.defaultValue);
                             break;
 
                         case "traininglevel":
-                            self.refinetraininglevel.pop(desc.defaultValue);
+                            self.refinetraininglevel.remove(desc.defaultValue);
                             break;
 
                         case "trainingtype":
-                            self.refinetrainingtype.pop(desc.defaultValue);
+                            self.refinetrainingtype.remove(desc.defaultValue);
                             break;
 
                         case "cities":
-                            self.refinecitis.pop(desc.defaultValue);
+                            self.refinecitis.remove(desc.defaultValue);
                             break;
 
                         case "roles":
-                            self.refineroles.pop(desc.defaultValue);
+                            self.refineroles.remove(desc.defaultValue);
                             break;
 
                         case "community_roles":
-                            self.refinecommunitycallroles.pop(desc.defaultValue);
+                            self.refinecommunitycallroles.remove(desc.defaultValue);
                             break;
 
                         case "communitymodes":
-                            self.refinecommunitycallmodes.pop(desc.defaultValue);
+                            self.refinecommunitycallmodes.remove(desc.defaultValue);
                             break;
 
                         case "past":
-                            self.refinepastcalls.pop(desc.defaultValue);
+                            self.refinepastcalls.remove(desc.defaultValue);
                             break;
                     }
 
