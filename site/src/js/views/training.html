@@ -107,7 +107,7 @@
         <li><img src="css/images/community-calls-icon.jpg" align="middle">&nbsp;<span>Community Calls</span></li>
         <li style="display:none"><img src="css/images/offers-icon.jpg" align="middle">&nbsp;<span>Offers</span></li>
         <li onclick="window.open('http://solutionengineering.us.oracle.com/site/?root=ecacertification')" align="middle"><img src="css/images/certificate-icon.jpg">&nbsp;<a href="#">ECA & CSM Certification</a></li>
-        <li onclick="window.open('http://solutionengineering.us.oracle.com/site/?root=ecaenablement')" align="middle"><img src="css/images/enablement_icon.png">&nbsp;<a href="#">ECA & CSM Enablement</a></li>
+        <li onclick="window.open('http://solutionengineering.us.oracle.com/site/?root=ecaenablement')" align="middle"><img src="css/images/certificate-icon.jpg">&nbsp;<a href="#">ECA & CSM Enablement</a></li>
         <li><img src="css/images/admin-icon.jpg" align="middle">&nbsp;<span>Admin</span></li>
       </ul>
       
@@ -416,7 +416,7 @@
               </div>
           
             <div class="oj-flex-item oj-md-8 oj-lg-9 communitycall">
-                <Label class="required">Date-Time is in PST </Label>
+                <Label class="required smallinfotext">Date-Time is in PST </Label>
               <div data-bind="foreach:communityCallList">
                 <div class="oj-flex oj-sm-12 ccrow">
                   <div class="oj-sm-12 oj-lg-2  oj-flex">
@@ -439,7 +439,7 @@
                           <span data-bind="text:mode_of_call"></span></p>
                       </div>
                       <div class="oj-sm-12 oj-lg-3 cccol"> 
-                        <!-- ko if: addl_link.length>0 -->
+                        <!-- ko if: meetinglink.length>0 -->
                         <p><strong class="blue">Meeting Link</strong><br>
                           <a data-bind="attr:{href:meetinglink}">Click here</a></p>
                         <!-- /ko --> 
@@ -572,7 +572,7 @@
                    <oj-input-date-time id="date" data-bind="value:starttime">
                   </oj-input-date-time>
                 </div>
-                <h6 class="hinttext">select date & time in PST</h6>
+                <h6 class="hinttext">Select date & time in PST</h6>
               </div>
              </div>
               
@@ -690,8 +690,9 @@
         <h1>Product Type/Training Level/Training Type</h1>
         <p> <span data-bind="text:detailedprodcut_type"></span>/<span data-bind="text:detailedTrainingLevel"></span>/ <span
             data-bind="text:detailedTrainingType"></span> </p>
+        <!-- ko if: detailedClasses().length>0 -->
         <h1>Classes</h1>
-        
+        <!-- /ko -->
         <ul class="classes">
           <!-- ko foreach: detailedClasses -->
           <li>
