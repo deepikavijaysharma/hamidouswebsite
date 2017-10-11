@@ -409,6 +409,9 @@ min-height:350px;
 	display:flex;
 	align-items:center;
 	justify-content:center;
+	@media  #{$responsiveQuerySmallOnly} {
+		    min-height: 380px;
+	}
 	}
 .verticalcentertext{
 	width:100%;
