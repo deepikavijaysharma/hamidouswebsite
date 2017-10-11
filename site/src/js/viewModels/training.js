@@ -986,6 +986,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 self.refinecommunitycallmodes([]);
                 self.refinepastcalls([]);
                 searchcommunitycalls();
+                setuncheck("refine");
             }
             loadCommunitycall();
 
