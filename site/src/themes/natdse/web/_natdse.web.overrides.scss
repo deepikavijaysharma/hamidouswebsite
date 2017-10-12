@@ -92,7 +92,7 @@ margin-top: 25px;
 }
 .bgwhite{
 background:#fff;
-padding: 0 40px 20px;
+padding: 0 25px 25px;
 box-sizing:border-box;
 @media  #{$responsiveQuerySmallOnly} {
 padding: 0px;
@@ -412,6 +412,9 @@ min-height:350px;
 	@media  #{$responsiveQuerySmallOnly} {
 		    min-height: 380px;
 	}
+	@media  #{$responsiveQueryMediumOnly} {
+		    min-height: 300px;
+	}
 	}
 .verticalcentertext{
 	width:100%;
@@ -661,11 +664,11 @@ background: url(images/R-arrow.png);
 @include slidercursors;
 background: url(images/L-arrow.png);
 }
-.oj-filmstrip-arrow-icon.oj-end::before,
+/*.oj-filmstrip-arrow-icon.oj-end::before,
 .oj-filmstrip-arrow-icon.oj-end::before,
 .oj-filmstrip-arrow-icon.oj-start::before {
 content: none !important
-}
+}*/
 .oj-filmstrip-arrow.oj-active,
 .oj-filmstrip-arrow.oj-active.oj-hover,
 .oj-filmstrip-arrow.oj-hover {
@@ -674,6 +677,9 @@ background-color: transparent;
 border: none;
 border-color: transparent;
 opacity: 0.8;
+width:2.28571rem;
+height:2.28571rem;
+line-height:2.28571rem;
 }
 
 
@@ -923,7 +929,7 @@ left:5px;
 .row3{
 .services{
 background:#fff;
-padding:0px 40px 40px 40px;
+padding:0 25px 25px;
 box-sizing:border-box;}
 
 .servicesblock{
@@ -1025,10 +1031,10 @@ padding:0px;
 /*----------------------------------CALENDAR----------------------------------*/
 
 .row5 {
-margin-top: 50px;
+margin-top: 25px;
 .keydates {
 background:#fff;
-padding: 0 40px 40px;
+padding: 0 25px 25px;
 box-sizing:border-box;
 @media  #{$responsiveQueryXSmallOnly} {
 padding:0px 20px 20px;
@@ -1062,7 +1068,7 @@ h2{
 }
 .calrow{
 font-size:$largeFontSize;
-padding:20px 30px 20px 30px;
+padding:10px 20px;
 margin-bottom:0px;
 @media  #{$responsiveQueryXSmallOnly} {
 padding:10px;
@@ -1145,18 +1151,18 @@ left: 10px;
 }
 .my-filmstrip-item {
 box-sizing: border-box;
-width: 360px;
+width: 370px;
 
 @media  #{$responsiveQueryXlargemed} {
 width: 340px;
 }
 @media  #{$responsiveQueryXlargemed1} {
-width: 320px;
+width: 330px;
 }
 @media  #{$responsiveQuerySmallOnly} {
 width: 280px;
 }
-height: 280px;
+height: 245px;
 margin: 5px;
 border:1px solid $lightgrey3;
 background-repeat:no-repeat !important;
@@ -1167,7 +1173,7 @@ background-position:top center !important;
 .employee_c{
 
 width:100%;
-height:280px;
+height:245px;
 
 position:relative;
 }
@@ -1220,6 +1226,12 @@ box-sizing:border-box;
 .golivetitle {
 @include headings;
 }
+img{
+	max-width:200px;
+	}
+	p{
+		margin-bottom:0px;
+		}
 .oj-filmstrip-container{
 	justify-content:center;
 @media  #{$responsiveQuerySmallOnly} {
@@ -1244,7 +1256,7 @@ left: 10px;
 
 .my-filmstrip-item {
 box-sizing: border-box;
-width: 338px;
+width: 340px;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -1256,7 +1268,7 @@ width: 280px;
 @media  #{$responsiveQuerySmallOnly} {
 width: 280px;
 }
-height: 230px;
+height: 188px;
 margin: 5px;
 
 background:$lightgrey;
@@ -1269,7 +1281,7 @@ background:$lightgrey;
 }
 .my-filmstrip-item{
 width:500px;
-height:340px;
+height:294px;
 @media  #{$responsiveQueryXlargemed} {
 width:50%;
 height:auto;
@@ -1330,7 +1342,7 @@ background: rgba(0, 0, 0, 0) url("images/wins_bg.jpg") repeat scroll center cent
 height: auto;
 padding:20px;
 box-sizing:border-box;
-min-height:240px;
+min-height:227px;
 color:#fff;
 @media  #{$responsiveQueryMediumDown} {
 min-height:350px;
@@ -1357,7 +1369,7 @@ max-width:132px;
 bottom: 0;
 left: 0;
 overflow: hidden;
-padding: 20px 0;
+padding: 15px 0;
 position: absolute;
 right: 0;
 }
@@ -1385,14 +1397,17 @@ button{
 padding:10px 20px;
 box-sizing:border-box;
 margin: 0 auto;
-margin-top:20px;
+margin-top:0px;
+@media  #{$responsiveQueryMediumDown} {
+margin-bottom:10px;
+}
 }
 a{
 @include whiteTbutton;
 padding:10px 20px;
 box-sizing:border-box;
 margin: 0 auto;
-margin-top:20px;
+margin-top:0px;
 
 text-decoration:none;}
 }
@@ -2391,7 +2406,7 @@ opacity:0.6;
 	background-color:#537154;
 }
 .contactcontainer{
-	padding:40px 40px 0;
+	padding:0px 0px 0;
 	}
 
 /*--------------------------------Our Orgnization------------------------------------*/
