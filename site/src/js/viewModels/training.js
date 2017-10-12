@@ -113,10 +113,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             }
 
             //-----------------   COMMUNITY CALL   ------------------------//
-            this.patternValue = ko.observableArray(["dd-MMM-yy hh:mm:ss a Z"]);
+            this.patternValue = ko.observableArray(["dd-MMM-yy hh:mm"]);
             this.dateTimeConverter = oj.Validation.converterFactory(oj.ConverterFactory.CONVERTER_TYPE_DATETIME).
             createConverter({
-                pattern: "dd-MMM-yy hh:mm:ss a Z"
+                pattern: "dd-MMM-yy hh:mm"
             });
             self.callname = ko.observable('');
             self.callspkr = ko.observable('');
@@ -206,8 +206,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     name: self.callname(),
                     speaker: self.callspkr(),
                     designation: self.calldesignation(),
-                    call_date: self.date().split('T')[0],
-                    call_time: self.starttime().split('T')[1],
+                    call_date: self.date(),
+                    call_time: self.starttime().split('T')[1].substring(0,5),
                     duration:self.callduration(),
                     locn: self.callvenue(),
                     meetinglink: self.calllink(),
