@@ -70,13 +70,17 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         if (ssoemail.length > 0) {
 
           document.getElementById('loginbutton').style.display = 'none';
+          document.getElementById('loginbutton1').style.display = 'none';
 
           if (self.ssowindow != undefined) {
             console.log('closing sso window');
             self.ssowindow.close();
           }
         } else {
-          document.getElementById('loginbutton').style.display = 'inline-block';
+       
+          document.getElementById('loginbutton').style.display = 'block';
+          document.getElementById('loginbutton1').style.display = 'block';
+          
         }
       }
 
@@ -104,6 +108,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         var n = user.lastIndexOf("~");
 
         email = user.substr(n + 1, user.length);
+        
         if (email) {
           ssoemail = email;
         } else {
