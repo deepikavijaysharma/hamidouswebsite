@@ -42,7 +42,7 @@ padding-bottom: 20px;
 @include shadowbottom;
 z-index:1;
 position:relative;
-@media  #{$responsiveQueryMediumDown} {
+@media  #{$responsiveQueryLargeDown} {
 	padding-top:20px;
 }
 }
@@ -54,8 +54,8 @@ align-self: center;
 }
 .oraclelogo img {
 max-width: 160px;
-margin-bottom:10px;
-@media  #{$responsiveQueryMediumDown} {
+margin-bottom:0px;
+@media  #{$responsiveQueryLargeDown} {
 margin-bottom:0px;
 }
 }
@@ -342,7 +342,7 @@ color: #333;
 font-size: 3rem;
 overflow: hidden;
 text-overflow: ellipsis;
-height: 275px;
+
 @media  #{$responsiveQueryMediumDown} {
 height: auto;
 }
@@ -392,13 +392,13 @@ color: #333;
 font-size: 3rem;
 overflow: hidden;
 text-overflow: ellipsis;
-height: 275px;
+
 @media  #{$responsiveQueryMediumDown} {
 height: auto;
 }
 }
 .largeslide{
-height: 275px;
+
 @media  #{$responsiveQuerySmallOnly} {
 height: 100%;
 min-height:350px;
@@ -409,6 +409,7 @@ min-height:350px;
 	display:flex;
 	align-items:center;
 	justify-content:center;
+	height: 250px;
 	@media  #{$responsiveQuerySmallOnly} {
 		    min-height: 380px;
 	}
@@ -421,7 +422,7 @@ min-height:350px;
 	}	
 .slide3 {
 background: url(images/slide4bg.png);
-height: 275px;
+
 border: none;
 background-size:cover;
 display:flex;
@@ -437,7 +438,7 @@ padding:0px 10px ;
 }
 .slide2 {
 background: url(images/slide3bg.png);
-height: 275px;
+
 border: none;
 background-size:cover;
 @media  #{$responsiveQueryMediumDown} {
@@ -449,7 +450,7 @@ padding:0px 10px ;
 
 .slide4 {
 background: url(images/slide3bg.jpg);
-height: 275px;
+
 border: none;
 background-size:cover;
 .heading{
@@ -464,7 +465,7 @@ padding:0px 10px ;
 
 .slide5 {
 background: url(images/slide4bg.jpg);
-height: 275px;
+
 border: none;
 background-size:cover;
 @media  #{$responsiveQueryMediumDown} {
@@ -475,7 +476,7 @@ padding:0px 10px ;
 }
 .slide6 {
 background: url(images/slide5bg.jpg);
-height: 275px;
+
 border: none;
 background-size:cover;
 @media  #{$responsiveQueryMediumDown} {
@@ -487,7 +488,7 @@ padding:0px 10px ;
 
 .slide1 {
 background: url(images/slide2bg.jpg);
-height: 275px;
+
 border: none;
 background-size:cover;
 @media  #{$responsiveQuerySmallOnly} {
@@ -561,7 +562,7 @@ margin-right:auto;
 }
 .heading {
 font-size: $largeFontSize1;
-margin-bottom: 20px;
+margin-bottom: 15px;
 img{
 	margin-right:10px;
 	@media  #{$responsiveQuerySmallOnly} {
@@ -580,7 +581,7 @@ padding-top:10px;
 }
 .text {
 font-size: $smallestFontSize;
-margin-bottom: 20px;
+margin-bottom: 15px;
 @media  #{$responsiveQuerySmallOnly} {
 	width:80%;
 	margin-left: auto;
@@ -1214,7 +1215,10 @@ float:left;
 }
 .oj-pagingcontrol{
 margin:0 auto;
-}	
+}
+.oj-pagingcontrol-nav-pages-section{
+	line-height:unset;}	
+
 }
 .empf img{
 max-width:200px;
@@ -1431,7 +1435,7 @@ transform: rotateY(180deg);
 }
 .ani_container {
 min-height:300px;
-@media  #{$responsiveQueryLargeDown} {
+@media  #{$responsiveQueryMediumDown} {
 min-height:450px;
 }
 position: relative;
@@ -2716,3 +2720,40 @@ margin-bottom:20px;
 .governanceboard p{
 	margin-bottom:20px;
 	}	
+	
+/*--------------------------------New Tools ------------------------------*/	
+#tabs-tools{
+font-size:$smallestFontSize;
+.oj-tabs-panel{
+border:none;
+background:transparent;
+font-size:$smallestFontSize1;
+}
+.heading{
+font-weight:bold;
+background:$lightergrey;
+}
+.oj-conveyorbelt-item {
+a{
+color:$darkergrey;
+}
+}
+ul{
+margin-bottom:20px;
+}
+li.oj-selected{
+background:$red;
+color:#fff;
+border-radius:5px;
+padding:5px;
+border:none;
+color:#fff;
+.oj-tabs-gen-div{
+border:none;
+}
+a{
+color:#fff;
+padding:5px;
+}
+}
+}

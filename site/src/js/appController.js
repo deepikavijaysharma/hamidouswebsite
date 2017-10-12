@@ -67,9 +67,11 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
 
       // LOGIN INITIATION
       isloggedin = function () {
+		   
         if (ssoemail.length > 0) {
 
           document.getElementById('loginbutton').style.display = 'none';
+		   document.getElementById('loginbutton1').style.display = 'none';
 
           if (self.ssowindow != undefined) {
             console.log('closing sso window');
@@ -77,6 +79,8 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
           }
         } else {
           document.getElementById('loginbutton').style.display = 'inline-block';
+		   document.getElementById('loginbutton1').style.display = 'inline-block';
+		  
         }
       }
 
@@ -131,6 +135,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       }
 
       setInterval(function () {
+		 
         getemailfromcookie();
         isloggedin();
         checkadmin();
@@ -182,8 +187,8 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       }
       self.footerLinks = ko.observableArray([
          new footerLink('Home', 'home', '?root=home'),
-        new footerLink('ECAL Site', 'ecal', 'http://innovate.us.oracle.com/ecal/', '_blank'),
-        new footerLink('Cloud Accelerate Site', 'cloudaccelerate', 'http://innovate.us.oracle.com/cloudaccelerate/', '_blank'),
+        new footerLink('Our Method Site', 'ecal', 'http://innovate.us.oracle.com/ecal/', '_blank'),
+        new footerLink('Cloud Solution Hub Site', 'cloudhub', 'http://solutionengineering.us.oracle.com/site/', '_blank'),
 		new footerLink('Contact Us', 'contactus', 'mailto:heather.hughes@oracle.com'),
         
       ]);
