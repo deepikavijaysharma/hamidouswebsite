@@ -134,7 +134,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.selectedrole = ko.observableArray([]);
             self.selectedcallmode = ko.observableArray([]);
 
-            self.callmodes = ko.observableArray(['Virtual', 'Town hall']);
+            self.callmodes = ko.observableArray(['Virtual', 'Town Hall']);
 
             resetcall = function () {
                 self.callname('');
