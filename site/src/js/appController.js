@@ -71,27 +71,16 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         if (ssoemail.length > 0) {
 
           document.getElementById('loginbutton').style.display = 'none';
-<<<<<<< HEAD
 		   document.getElementById('loginbutton1').style.display = 'none';
-=======
-          document.getElementById('loginbutton1').style.display = 'none';
->>>>>>> 3e44d186350d47487aad75a8777803f289294876
 
           if (self.ssowindow != undefined) {
             console.log('closing sso window');
             self.ssowindow.close();
           }
         } else {
-<<<<<<< HEAD
           document.getElementById('loginbutton').style.display = 'inline-block';
 		   document.getElementById('loginbutton1').style.display = 'inline-block';
 		  
-=======
-       
-          document.getElementById('loginbutton').style.display = 'block';
-          document.getElementById('loginbutton1').style.display = 'block';
-          
->>>>>>> 3e44d186350d47487aad75a8777803f289294876
         }
       }
 
@@ -119,7 +108,6 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         var n = user.lastIndexOf("~");
 
         email = user.substr(n + 1, user.length);
-        
         if (email) {
           ssoemail = email;
         } else {
@@ -198,8 +186,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         this.linkTarget = linkTarget;
       }
       self.footerLinks = ko.observableArray([
-         new footerLink('Home', 'home', '?root=home'),
+        new footerLink('Home', 'home', '?root=home'),
         new footerLink('Our Method Site', 'ecal', 'http://innovate.us.oracle.com/ecal/', '_blank'),
+		 new footerLink('Cloud Accelerate Site', 'cloudaccelerate', 'http://innovate.us.oracle.com/cloudaccelerate/', '_blank'),
         new footerLink('Cloud Solution Hub Site', 'cloudhub', 'http://solutionengineering.us.oracle.com/site/', '_blank'),
 		new footerLink('Contact Us', 'contactus', 'mailto:heather.hughes@oracle.com'),
         
