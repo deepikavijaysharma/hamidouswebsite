@@ -940,7 +940,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                                 speaker: calls[i].speaker != undefined ? calls[i].speaker : '',
                                 designation: calls[i].designation != undefined ? calls[i].designation : '',
                                 call_date: calls[i].call_date != undefined ? calls[i].call_date.split('T')[0] : '',
-                                call_time: calls[i].call_time != undefined ? calls[i].call_time.substring(0,5) : '',
+                                call_time: calls[i].call_time != undefined ? calls[i].call_time.substring(0,5)+" PT" : '',
                                 callduration:calls[i].duration!= undefined ? calls[i].duration+" mins" : 'NA',
                                 location: calls[i].locn != undefined ? calls[i].locn : '',
                                 meetinglink: calls[i].meetinglink != undefined ? calls[i].meetinglink : '',
