@@ -9,6 +9,8 @@ var ssoemail='';
 var usertype='';
 var uuid='';
 var isAdmin=false;
+var newUserAdminCheck=false;
+
 /**
  * Example of Require.js boostrap javascript
  */

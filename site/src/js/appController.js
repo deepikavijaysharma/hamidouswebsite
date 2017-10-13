@@ -72,6 +72,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
 
           document.getElementById('loginbutton').style.display = 'none';
 		   document.getElementById('loginbutton1').style.display = 'none';
+		   if(!newUserAdminCheck){
+            checkadmin();
+          }
 
           if (self.ssowindow != undefined) {
             console.log('closing sso window');
@@ -117,7 +120,8 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
 
       checkadmin=function(){
         var checkurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/isAdmin";
-        if (ssoemail.length > 0) {
+         if (ssoemail.length > 0) {
+          console.log("Admin check commenced");
           $.ajax({
             url: checkurl,
             method: 'GET',
@@ -126,9 +130,11 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
             },
             success: function (data) {
               isAdmin=data.is_admin;
+              newUserAdminCheck=true;
             },
             error: function (xhr) {
                 //alert(xhr);
+                newUserAdminCheck=false;
             }
         });
         }
@@ -138,7 +144,6 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
 		 
         getemailfromcookie();
         isloggedin();
-        checkadmin();
       }, 500);
 
  
