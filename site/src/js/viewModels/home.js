@@ -255,7 +255,7 @@ document.getElementById("globalBody").addEventListener("scroll", update_pos);
 
   // In-Page Scroll Animation
 // ------------------------
-$('a[href^="#"]').on('click', function(e) {
+$('#setupBar a[href^="#"]').on('click', function(e) {
     var hash  = this.hash,
     	$hash = $(hash),
         addHash = function() {

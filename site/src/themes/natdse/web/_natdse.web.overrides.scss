@@ -1090,14 +1090,17 @@ margin-bottom:10px;
 color: $darkergrey;
 font-size:$smallestFontSize;
 align-items:center;
+justify-content:center;
 @media  #{$responsiveQueryMediumDown} {
 margin-bottom:10px;
+
 }
 
 }	
 .orangeBbutton{
 @include orangeBbutton;
 margin:0 auto;
+min-width:100px;
 }
 .orangeBbutton a:link,.orangeBbutton a:visited{
 color:$orange;
@@ -2728,10 +2731,12 @@ font-size:$smallestFontSize;
 border:none;
 background:transparent;
 font-size:$smallestFontSize1;
+padding:0px;
 }
 .heading{
 font-weight:bold;
 background:$lightergrey;
+border-top: 1px solid $lightgrey3;
 }
 .oj-conveyorbelt-item {
 a{
@@ -2756,4 +2761,13 @@ color:#fff;
 padding:5px;
 }
 }
+.toolscolleft{
+	border-bottom: 1px solid $lightgrey3;
+	border-left: 1px solid $lightgrey3;	
+	box-sizing: border-box;}
+.toolscolright{
+	border-bottom: 1px solid $lightgrey3;
+	border-left: 1px solid $lightgrey3;
+	border-right: 1px solid $lightgrey3;
+	box-sizing: border-box;}	
 }
