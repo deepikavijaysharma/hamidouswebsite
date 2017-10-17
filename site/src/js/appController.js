@@ -67,23 +67,24 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
 
       // LOGIN INITIATION
       isloggedin = function () {
-		   
         if (ssoemail.length > 0) {
 
           document.getElementById('loginbutton').style.display = 'none';
-		   document.getElementById('loginbutton1').style.display = 'none';
-		   if(!newUserAdminCheck){
-            checkadmin();
-          }
+          document.getElementById('loginbutton1').style.display = 'none';
+          // if(!newUserAdminCheck){
+          //   checkadmin();
+          // }
+
 
           if (self.ssowindow != undefined) {
             console.log('closing sso window');
             self.ssowindow.close();
           }
         } else {
-          document.getElementById('loginbutton').style.display = 'inline-block';
-		   document.getElementById('loginbutton1').style.display = 'inline-block';
-		  
+       
+          document.getElementById('loginbutton').style.display = 'block';
+          document.getElementById('loginbutton1').style.display = 'block';
+          
         }
       }
 
@@ -111,37 +112,38 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         var n = user.lastIndexOf("~");
 
         email = user.substr(n + 1, user.length);
+        
         if (email) {
           ssoemail = email;
         } else {
           ssoemail = "";
         }
       }
+      
 
-      checkadmin=function(){
-        var checkurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/isAdmin";
-         if (ssoemail.length > 0) {
-          console.log("Admin check commenced");
-          $.ajax({
-            url: checkurl,
-            method: 'GET',
-            headers: {
-                email: ssoemail
-            },
-            success: function (data) {
-              isAdmin=data.is_admin;
-              newUserAdminCheck=true;
-            },
-            error: function (xhr) {
-                //alert(xhr);
-                newUserAdminCheck=false;
-            }
-        });
-        }
-      }
+      // checkadmin=function(){
+      //   var checkurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/isAdmin";
+      //   if (ssoemail.length > 0) {
+      //     console.log("Admin check commenced");
+      //     $.ajax({
+      //       url: checkurl,
+      //       method: 'GET',
+      //       headers: {
+      //           email: ssoemail
+      //       },
+      //       success: function (data) {
+      //         isAdmin=data.is_admin;
+      //         newUserAdminCheck=true;
+      //       },
+      //       error: function (xhr) {
+      //           //alert(xhr);
+      //           newUserAdminCheck=false;
+      //       }
+      //   });
+      //   }
+      // }
 
       setInterval(function () {
-		 
         getemailfromcookie();
         isloggedin();
       }, 500);
@@ -191,10 +193,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         this.linkTarget = linkTarget;
       }
       self.footerLinks = ko.observableArray([
-        new footerLink('Home', 'home', '?root=home'),
-        new footerLink('Our Method Site', 'ecal', 'http://innovate.us.oracle.com/ecal/', '_blank'),
-		 new footerLink('Cloud Accelerate Site', 'cloudaccelerate', 'http://innovate.us.oracle.com/cloudaccelerate/', '_blank'),
-        new footerLink('Cloud Solution Hub Site', 'cloudhub', 'http://solutionengineering.us.oracle.com/site/', '_blank'),
+         new footerLink('Home', 'home', '?root=home'),
+        new footerLink('ECAL Site', 'ecal', 'http://innovate.us.oracle.com/ecal/', '_blank'),
+        new footerLink('Cloud Accelerate Site', 'cloudaccelerate', 'http://innovate.us.oracle.com/cloudaccelerate/', '_blank'),
 		new footerLink('Contact Us', 'contactus', 'mailto:heather.hughes@oracle.com'),
         
       ]);

@@ -857,6 +857,30 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
                 self.showingFront = !self.showingFront;
             };
+
+            checkadmin=function(){
+                var checkurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/isAdmin";
+                if (ssoemail.length > 0) {
+                  console.log("Admin check commenced");
+                  $.ajax({
+                    url: checkurl,
+                    method: 'GET',
+                    headers: {
+                        email: ssoemail
+                    },
+                    success: function (data) {
+                      isAdmin=data.is_admin;
+                      newUserAdminCheck=true;
+                    },
+                    error: function (xhr) {
+                        //alert(xhr);
+                        newUserAdminCheck=false;
+                    }
+                });
+                }
+              }
+
+
             self.showFront = function () {
 
                 var elem = document.getElementById('animatable');
@@ -981,6 +1005,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             }
 
             loadCommunitycall=function(){
+                checkadmin();
                 self.searchcallstext('');
                 self.refinecommunitycallroles([]);
                 self.refinecommunitycallmodes([]);
@@ -989,6 +1014,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 setuncheck("refine");
             }
             loadCommunitycall();
+
+
 
             setssostatus = function (selector, visibility) {
                 var nodes = document.querySelectorAll(selector),
