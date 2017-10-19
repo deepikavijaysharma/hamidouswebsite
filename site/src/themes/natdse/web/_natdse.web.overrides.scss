@@ -2765,9 +2765,14 @@ padding:5px;
 	border-bottom: 1px solid $lightgrey3;
 	border-left: 1px solid $lightgrey3;	
 	box-sizing: border-box;}
-.toolscolright{
+.toolscolmid{
 	border-bottom: 1px solid $lightgrey3;
 	border-left: 1px solid $lightgrey3;
 	border-right: 1px solid $lightgrey3;
 	box-sizing: border-box;}	
+.toolscolright{
+	border-bottom: 1px solid $lightgrey3;
+	border-right: 1px solid $lightgrey3;
+	box-sizing: border-box;
+	word-wrap: break-word;}	
 }
