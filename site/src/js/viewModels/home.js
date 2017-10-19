@@ -276,11 +276,11 @@ $('#setupBar a[href^="#"]').on('click', function(e) {
     e.preventDefault();// console.log(hash);
     if ( hash == "#v-vision")
     {
-        $('html,body').animate({ 'scrollTop': '-=' + 150 }, 800, addHash);
+        $('html,body').animate({ 'scrollTop': '-=' + secnav_h + 50 }, 800, addHash);
     }
     else
     {
-        $('html,body').animate({ 'scrollTop': '-=' + 100 }, 800, addHash);
+        $('html,body').animate({ 'scrollTop': '-=' + secnav_h }, 800, addHash);
     }
 });
   
