@@ -2764,15 +2764,18 @@ padding:5px;
 .toolscolleft{
 	border-bottom: 1px solid $lightgrey3;
 	border-left: 1px solid $lightgrey3;	
-	box-sizing: border-box;}
+	box-sizing: border-box;
+	word-wrap:break-word;}
 .toolscolmid{
 	border-bottom: 1px solid $lightgrey3;
 	border-left: 1px solid $lightgrey3;
 	border-right: 1px solid $lightgrey3;
-	box-sizing: border-box;}	
+	box-sizing: border-box;
+	word-wrap:break-word;}	
 .toolscolright{
 	border-bottom: 1px solid $lightgrey3;
 	border-right: 1px solid $lightgrey3;
 	box-sizing: border-box;
-	word-wrap: break-word;}	
+	word-wrap: break-word;
+	word-wrap:break-word;}	
 }
