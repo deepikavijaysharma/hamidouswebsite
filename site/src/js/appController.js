@@ -93,7 +93,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
 
       closesso = function () {
         if (ssoemail.length > 0) {
-          self.ssowindow = window.open("https://login-stage.oracle.com:443/oam/server/logout", target = "_self");
+          self.ssowindow = window.open("https://login-stage.oracle.com:443/oam/server/logout","_self");
         }
       }
 
