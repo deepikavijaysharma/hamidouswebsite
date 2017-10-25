@@ -13,7 +13,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
 
             var self = this;
-           
+            self.disabledtoolstab = ko.observable([1]);
+           	$( "#tabs-tools" ).ojTabs( { "disabledTabs": [2] } );
 
 
         }

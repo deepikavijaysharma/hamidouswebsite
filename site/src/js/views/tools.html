@@ -1,10 +1,11 @@
 <div class=" container">
   <div class="oj-flex  bgwhite tools">
-    <div id="tabs-tools" class="oj-sm-12" data-bind="ojComponent:{component: 'ojTabs',orientation: 'horizontal'}"> 
+    <div id="tabs-tools" class="oj-sm-12" data-bind="ojComponent:{component: 'ojTabs',orientation: 'horizontal', disabledTabs: disabledtoolstab}">
       <!-- tab bar -->
       
       <ul class="hnav">
         <li>Show All</li>
+        <li onclick="window.open('http://solutionengineering.us.oracle.com/site/?root=ecaenablement')" style="cursor: pointer;"><a href="#">ECA </a></li>
         <li>CSM </li>
         <li>Documentation </li>
         <li>Reference </li>
@@ -756,8 +757,12 @@
         </div>
       </div>
       <!--End of SHOW ALL -->
-       <!--CSM -->
+      <!--ECA -->
       <div id="tabs-2">
+      </div>
+      <!--End of ECA -->
+      <!--CSM -->
+      <div id="tabs-3">
         <div class="oj-flex">
           <div class="oj-sm-3 heading toolscolleft">
             <div class="oj-margin">Website Title</div>
@@ -860,7 +865,7 @@
       </div>
       <!--End of CSM -->
       <!--DOCUMENTATION -->
-      <div id="tabs-3">
+      <div id="tabs-4">
         <div class="oj-flex">
           <div class="oj-sm-3 heading toolscolleft">
             <div class="oj-margin">Website Title</div>
@@ -908,7 +913,7 @@
       </div>
       <!--End of DOCUMENTATION -->
       <!--REFERENCE-->
-      <div id="tabs-4">
+      <div id="tabs-5">
         <div class="oj-flex">
           <div class="oj-sm-3 heading toolscolleft">
             <div class="oj-margin">Website Title</div>
@@ -1132,7 +1137,7 @@
       </div>
       <!--End of REFERENCE -->
       <!--RESOURCE -->
-      <div id="tabs-5">
+      <div id="tabs-6">
         <div class="oj-flex">
           <div class="oj-sm-3 heading toolscolleft">
             <div class="oj-margin">Website Title</div>
@@ -1323,7 +1328,7 @@
       </div>
       <!--End of RESOURCE -->
       <!--TOOL-->
-      <div id="tabs-6">
+      <div id="tabs-7">
         <div class="oj-flex">
           <div class="oj-sm-3 heading toolscolleft">
             <div class="oj-margin">Website Title</div>
