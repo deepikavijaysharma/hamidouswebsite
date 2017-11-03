@@ -420,6 +420,40 @@ min-height:350px;
 .verticalcentertext{
 	width:100%;
 	}	
+	
+.genricslide1 {
+background: url(images/genric-bg_1.jpg);
+
+border: none;
+background-size:cover;
+display:flex;
+justify-content:center;
+align-items:center;
+.verticalcentertext{
+	width:auto;
+	}
+@media  #{$responsiveQueryMediumDown} {
+height: 100%;
+padding:0px 10px ;
+}
+}	
+
+.genricslide2 {
+background: url(images/genric-bg_2.jpg);
+
+border: none;
+background-size:cover;
+display:flex;
+justify-content:center;
+align-items:center;
+.verticalcentertext{
+	width:auto;
+	}
+@media  #{$responsiveQueryMediumDown} {
+height: 100%;
+padding:0px 10px ;
+}
+}
 .slide3 {
 background: url(images/slide4bg.png);
 
@@ -2745,6 +2779,18 @@ color:$darkergrey;
 }
 ul{
 margin-bottom:20px;
+}
+li{
+background:$lightergrey;
+border-radius:5px;
+padding:5px;
+border:none;
+.oj-tabs-gen-div{
+border:none;
+}
+a{
+	padding:5px;
+	}
 }
 li.oj-selected{
 background:$red;
