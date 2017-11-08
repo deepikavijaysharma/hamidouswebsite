@@ -982,6 +982,55 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             }
             // getCommunityCalls('GetCommunityCallDetails');
 
+            // SHOW DETAILED DESCRIPTION
+            self.ccName = ko.observable();
+            self.ccDate = ko.observable();
+            self.ccSpeaker = ko.observable();
+            self.ccDesignation = ko.observable();
+            self.ccCallType = ko.observable();
+            self.ccMeetingLink = ko.observable();
+            self.ccRoles = ko.observable();
+            self.ccDescription = ko.observable();
+            self.ccDialin = ko.observable();
+            self.ccAdditionalLinks = ko.observable();
+            self.ccRecordingLinks = ko.observable();
+
+
+            showcommunitycallsdetails = function (ccalls, param2) {
+
+            self.ccName('');
+            self.ccDate('');
+            self.ccSpeaker('');
+            self.ccDesignation('');
+            self.ccCallType('');
+            self.ccMeetingLink('');
+            self.ccRoles('');
+            self.ccDescription('');
+            self.ccDialin('');
+            self.ccAdditionalLinks('');
+            self.ccRecordingLinks('');
+
+            // SET NEW VALUE
+            self.ccName(ccalls.name);
+            self.ccDate(ccalls.call_date);
+            self.ccSpeaker(ccalls.speaker);
+            self.ccDesignation(ccalls.designation);
+            self.ccCallType(ccalls.mode_of_call);
+            self.ccMeetingLink(ccalls.meetinglink);
+            self.ccRoles(ccalls.role);
+            self.ccDescription(ccalls.subdescription);
+            self.ccDialin(ccalls.dialin);
+            self.ccAdditionalLinks(ccalls.addl_link);
+            self.ccRecordingLinks(ccalls.recording_link);
+            $("#communitycallsdetails").ojDialog("open");
+
+
+            }
+
+            self.closecommunitycallsdetails = function () {
+
+                $("#communitycallsdetails").ojDialog("close");
+            }
 
             self.resetsearch = function () {
                 getCommunityCalls('GetCommunityCallDetails');
@@ -1042,9 +1091,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             }
 
             
-            setInterval(function () {
+            // setInterval(function () {
                 checkadminrights();
-              }, 500);
+              // }, 500);
 
 
             // ENROLL EMPLOYEE FOR A COURSE

@@ -22,7 +22,7 @@
   </div>
 </div>
 <div id="trainingdialogWrapper">
-  <div style="display:none" id="trainingDialog" title="Request Training" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'icon',rootAttributes: { style: 'width: 70%; height: auto; min-width 240px; '}}">
+  <div id="trainingDialog" title="Request Training" data-bind="ojComponent:{component: 'ojDialog',cancelBehavior: 'icon',rootAttributes: { style: 'width: 70%; height: auto; min-width 240px; '}}">
     <div class="oj-dialog-body"> 
       <!-- FORM -->
       <div id="form-container" class="oj-form-layout reqtraining">
@@ -70,6 +70,27 @@
               </div>
             </div>
             <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6">
+              <div class="oj-margin oj-sm-12">
+                <div class="oj-flex-item oj-sm-12 formrow">
+                  <label for="input">Categories</label>
+                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
+                    <option value="value">value</option>
+                  </select>
+                </div>
+                <div class="oj-flex-item oj-sm-12 formrow">
+                  <label for="input">Manager Name</label>
+                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
+                    <option value="value">value</option>
+                  </select>
+                </div>
+                <div class="oj-flex-item oj-sm-12">
+                  <label for="input">Org Name</label>
+                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
+                    <option value="value">value</option>
+                  </select>
+                </div>
+              </div>
+<!--             <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6">
               <div class="oj-margin oj-sm-12 reqsummary">
                 <div class="bluet">Request Summary:</div>
                 <p>SaaS > Integration > PCS</p>
@@ -77,7 +98,7 @@
                 <b>Marc Asensio</b>
                 <p>PCS platform owner, Principle Sales Consultant</p>
               </div>
-            </div>
+            </div> -->
             <div class="oj-sm-12 footerbuttons">
               <div class="oj-md-6 oj-lg-4 oj-sm-float-end">
                 <div class="oj-flex oj-sm-12">
@@ -121,14 +142,14 @@
               <div class="oj-flex-item oj-sm-4 oj-md-2 oj-lg-2 labeldiv" style="display:none">
                 <label>Catalogue</label>
               </div>
-              <div class="oj-flex-item  oj-lg-12">
+              <div class="oj-flex-item  oj-lg-8">
                 <input id="search-input" placeholder="Search courses . . ." data-bind="ojComponent:{
                   component: 'ojInputSearch', 
                   value: searchtext,
                   update : searchcourses
                 }" />
               </div>
-              <div class="oj-flex-item oj-sm-7 oj-md-7 oj-lg-4 oj-xl-3 req_block" style="display:none">
+              <div class="oj-flex-item oj-sm-7 oj-md-7 oj-lg-4 oj-xl-3 req_block">
                 <button id="trainingButton" class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
                   component: 'ojButton',
                   chroming: 'full',
@@ -416,65 +437,42 @@
               </div>
           
             <div class="oj-flex-item oj-md-8 oj-lg-9 communitycall">
-                <Label class="required smallinfotext">Date-Time is in PST </Label>
-              <div data-bind="foreach:communityCallList">
+              <Label class="required smallinfotext">Date-Time is in PST </Label>
+              <!-- ko foreach:communityCallList -->
                 <div class="oj-flex oj-sm-12 ccrow">
-                  <div class="oj-sm-12 oj-lg-2  oj-flex">
+                  <div class="oj-sm-12 oj-lg-3  oj-flex">
                     <div class="oj-sm-12 bluebg oj-flex-item">
                       <p><span class="name" data-bind="text:name"></span></span> <br>
                     </div>
                   </div>
-                  <div class="oj-sm-12 oj-lg-10">
+                  <div class="oj-sm-12 oj-lg-9">
                     <div class="bgwhitesmall oj-flex oj-margin-left oj-sm-12">
                       <div class="oj-sm-12 oj-lg-1 infobox">
                         <div class="lgreybg"><span class="infotext">INFO</span></div>
                       </div>
-                      <div class="oj-sm-12 oj-lg-4 cccol">
-                        <p><strong class="blue">Date</strong><br>
-                          <span data-bind="text:call_date"></span>&nbsp;<span data-bind="text:call_time"></span> - <span data-bind="text:callduration"></span></p>
-                        <p><strong class="blue">Speaker</strong><br>
-                          <span data-bind="text:speaker"></span><br>
-                          <span data-bind="text:designation"></p>
-                        <p><strong class="blue">Call Type</strong><br>
-                          <span data-bind="text:mode_of_call"></span></p>
-                      </div>
-                      <div class="oj-sm-12 oj-lg-3 cccol"> 
-                        <!-- ko if: meetinglink.length>0 -->
-                        <p><strong class="blue">Meeting Link</strong><br>
-                          <a data-bind="attr:{href:meetinglink}" target="_blank">Click here</a></p>
-                        <!-- /ko --> 
-                        
-                        <!-- ko if: dialin.length>0 -->
-                        <p><strong class="blue">Dial-In</strong><br>
-                          <span data-bind="text:dialin"></span></p>
-                        <!-- /ko --> 
-                        <!-- ko if: role.length>0 -->
-                        <p><strong class="blue">Roles</strong><br>
-                          <span data-bind="text:role"></span></p>
-                        <!-- /ko --> 
-                      </div>
-                      <div class="oj-sm-12 oj-lg-4 cccol"> 
-                        
-                        <!-- ko if: description.length>0 -->
-                        <p><strong class="blue">Description</strong><br>
-                          <span data-bind="html:subdescription"></span></p>
-                        <!-- /ko --> 
-                        
-                        <!-- ko if: addl_link.length>0 -->
-                        <p><strong class="blue">Additional Links</strong><br>
-                          <a data-bind="attr:{href:addl_link}" target="_blank">Click here</a></p>
-                        <!-- /ko --> 
-                        
-                        <!-- ko if: recording_link.length>0 -->
-                        <p><strong class="blue">Recordings</strong><br>
-                          <a data-bind="attr:{href:recording_link}" target="_blank">Click here</a></p>
-                        <!-- /ko --> 
-                        
+                      <div class="oj-sm-12 oj-lg-11 oj-flex originfo">
+                        <div class="oj-sm-12 oj-lg-6">
+                          <p><strong class="blue">Date</strong><br>
+                            <span data-bind="text:call_date"></span>&nbsp;<span data-bind="text:call_time"></span> - <span data-bind="text:callduration"></span></p>
+                          <p><strong class="blue">Speaker</strong><br>
+                            <span data-bind="text:speaker"></span><br>
+                            <span data-bind="text:designation"></p>
+                        </div>
+<!--                         <div class="oj-sm-12 oj-lg-4">
+                          <p><strong class="blue">Speaker</strong><br>
+                            <span data-bind="text:speaker"></span><br>
+                            <span data-bind="text:designation"></p>
+                        </div> -->
+                        <div class="oj-sm-12 oj-lg-6">
+                          <p id="ccct"><strong class="blue">Call Type</strong><br>
+                            <span data-bind="text:mode_of_call"></span></p>
+                          <a data-bind="click:showcommunitycallsdetails" target="_blank" class="ccdetailsbutton">View Details</a>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </div> 
                 </div>
-              </div>
+              <!-- /ko -->
             </div>
           </div>
         </div>
@@ -706,16 +704,24 @@
           <li>
             <h2 data-bind="text:city"></h2>
             <p> <a data-bind="attr: { href: directURL}" target="_blank" class="bluebutton"> Click to Enroll </a></p>
-          </li>
+          <!-- </li> -->
           <!-- /ko -->
         </ul>
       </div>
     </div>
-    <div style="display:none" class="dialogbodymain" id="communitycallsdetails" title="Community Calls" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%'}}">
+    <div style="display:none;height:500px" class="dialogbodymain" id="communitycallsdetails" title="Community Calls" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%'}}">
       <div class="dialogbody">
-        <h1>Name</h1>
-        <p>Maecenas sed gravida dui. Aliquam pulvinar, lacus quis efficitur tempor, mi arcu euismod ante, at posuere massa urna
-          nec diam. Nulla sed purus at orci tincidunt tempor et vitae mi.</p>
+        <h1>Comunity Call Name</h1><p><span data-bind="text:ccName"></span></p>
+        <h1>Comunity Call Date</h1><p><span data-bind="text:ccDate"></span></p>
+        <h1>Comunity Call Speaker</h1><p><span data-bind="text:ccSpeaker"></span></p>
+        <h1>Comunity Call Speaker Designation</h1><p><span data-bind="text:ccDesignation"></span></p>
+        <h1>Comunity Call Call Type</h1><p><span data-bind="text:ccCallType"></span></p>
+        <h1>Comunity Call Meeting Link</h1><p><span data-bind="text:ccMeetingLink"></span></p>
+        <h1>Comunity Call Roles</h1><p><span data-bind="text:ccRoles"></span></p>
+        <h1>Comunity Call Description</h1><p><span data-bind="html:ccDescription"></span></p>
+        <h1>Comunity Call Dial-In</h1><p><span data-bind="html:ccDialin"></span></p>
+        <h1>Comunity Call Additional Links</h1><p><a data-bind="attr:{href:ccAdditionalLinks}" target="_blank">Click here</a></p>
+        <h1>Comunity Call Recording Links</h1><p><a data-bind="attr:{href:ccRecordingLinks}" target="_blank">Click here</a></p>
       </div>
     </div>
   </div>
