@@ -42,6 +42,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         },
         'admin': {
           label: 'Admin'
+        },
+		'archive': {
+          label: 'Archive'
         }
       });
       oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
@@ -68,11 +71,12 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       // LOGIN INITIATION
       isloggedin = function () {
         if (ssoemail.length > 0) {
-          document.getElementById('logoutbutton').style.display = 'block';
-          document.getElementById('logoutbutton1').style.display = 'block';
-          if(!newUserAdminCheck){
-            checkadmin();
-          }
+
+          document.getElementById('loginbutton').style.display = 'none';
+          document.getElementById('loginbutton1').style.display = 'none';
+          // if(!newUserAdminCheck){
+          //   checkadmin();
+          // }
 
 
           if (self.ssowindow != undefined) {
@@ -80,20 +84,17 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
             self.ssowindow.close();
           }
         } else {
-          document.getElementById('logoutbutton').style.display = 'block';
-          document.getElementById('logoutbutton1').style.display = 'block';          
+       
+          document.getElementById('loginbutton').style.display = 'block';
+          document.getElementById('loginbutton1').style.display = 'block';
+          
         }
       }
 
       initsso = function () {
         if (ssoemail.length == 0) {
+          // document.getElementById('ssodialog').style.display = 'block';
           self.ssowindow = window.open("http://solutionengineering.us.oracle.com/seaas/");
-        }
-      }
-
-      closesso = function () {
-        if (ssoemail.length > 0) {
-          self.ssowindow = window.open("https://login-stage.oracle.com:443/oam/server/logout","_self");
         }
       }
 
@@ -123,36 +124,34 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       }
       
 
-      checkadmin=function(){
-        var checkurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/isAdmin";
-        if (ssoemail.length > 0) {
-          console.log("Admin check commenced");
-          $.ajax({
-            url: checkurl,
-            method: 'GET',
-            headers: {
-                email: ssoemail
-            },
-            success: function (data) {
-              isAdmin=data.is_admin;
-              newUserAdminCheck=true;
-            },
-            error: function (xhr) {
-                //alert(xhr);
-                newUserAdminCheck=false;
-            }
-        });
-        }
-      }
+      // checkadmin=function(){
+      //   var checkurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/isAdmin";
+      //   if (ssoemail.length > 0) {
+      //     console.log("Admin check commenced");
+      //     $.ajax({
+      //       url: checkurl,
+      //       method: 'GET',
+      //       headers: {
+      //           email: ssoemail
+      //       },
+      //       success: function (data) {
+      //         isAdmin=data.is_admin;
+      //         newUserAdminCheck=true;
+      //       },
+      //       error: function (xhr) {
+      //           //alert(xhr);
+      //           newUserAdminCheck=false;
+      //       }
+      //   });
+      //   }
+      // }
 
-      // setInterval(function () {
-      //   getemailfromcookie();
-      //   isloggedin();
-      // }, 500);
+      setInterval(function () {
+        getemailfromcookie();
+        isloggedin();
+      }, 500);
 
-      isloggedin();
-      getemailfromcookie();
-      checkadmin();
+ 
 
       // Drawer
       // Close offcanvas on medium and larger screens

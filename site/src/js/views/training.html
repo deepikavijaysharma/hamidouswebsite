@@ -451,9 +451,8 @@
                         <div class="lgreybg"><span class="infotext">INFO</span></div>
                       </div>
                       <div class="oj-sm-12 oj-lg-11 oj-flex originfo">
-                        <div class="oj-sm-12 oj-lg-6">
-                          <p><strong class="blue">Date</strong><br>
-                            <span data-bind="text:call_date"></span>&nbsp;<span data-bind="text:call_time"></span> - <span data-bind="text:callduration"></span></p>
+                        <div class="oj-sm-12 oj-lg-4">
+                          
                           <p><strong class="blue">Speaker</strong><br>
                             <span data-bind="text:speaker"></span><br>
                             <span data-bind="text:designation"></p>
@@ -463,10 +462,18 @@
                             <span data-bind="text:speaker"></span><br>
                             <span data-bind="text:designation"></p>
                         </div> -->
-                        <div class="oj-sm-12 oj-lg-6">
-                          <p id="ccct"><strong class="blue">Call Type</strong><br>
+                        <div class="oj-sm-12 oj-lg-3">
+                          <p><strong class="blue">Date</strong><br>
+                            <span data-bind="text:call_date"></span><br><span data-bind="text:call_time"></span><br><span data-bind="text:callduration"></span></p>
+                        </div>
+                         <div class="oj-sm-12 oj-lg-3">
+                          <p id="ccct"><strong class="blue">Type</strong><br>
                             <span data-bind="text:mode_of_call"></span></p>
-                          <a data-bind="click:showcommunitycallsdetails" target="_blank" class="ccdetailsbutton">View Details</a>
+                         
+                        </div>
+                        <div class="oj-sm-12 oj-lg-2 details">
+                          
+                          <a data-bind="click:showcommunitycallsdetails" target="_blank" class="ccdetailsbutton">Details</a>
                         </div>
                       </div>
                     </div>

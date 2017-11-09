@@ -252,36 +252,36 @@ document.addEventListener("scroll", update_pos);
 document.getElementById("globalBody").addEventListener("scroll", update_pos);
 
 
-// $.fn.scrollBy = function (x,y) {
-//     return this.animate({
-//         scrollTop: '+=' + y
-//     });
-// };
-  // In-Page Scroll Animation
-// ------------------------
-$('#setupBar a[href^="#"]').on('click', function(e) {
-    var hash  = this.hash,
-    	$hash = $(hash),
-        addHash = function() {
-            window.location.hash = hash;
-        };
 
-    if ( hash !== '#header' ) {
-        // $hash.velocity('scroll', { duration: 500, offset: -50, complete: addHash }); // Velocity.js
-        $('html,body').animate({ 'scrollTop': $hash.offset().top -secnav_h }, 800, addHash);
-    } else {
-        // $hash.velocity('scroll', { duration: 500, offset: 0, complete: addHash }); // Velocity.js
-        $('html,body').animate({ 'scrollTop': $hash.offset().top }, 800, addHash);
-    }
-    if ( hash == "#v-vision")
-    {
-        $('html,body').animate({ 'scrollTop': '-=' + 150 }, 800, addHash);
-    }
-    else
-    {
-        $('html,body').animate({ 'scrollTop': '-=' + 100 }, 800, addHash);
-    }
-});
+  // Add smooth scrolling to all links
+  $("#setupBar a").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top 
+      }, 800, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+	  /* Remove active class on any li when an anchor is clicked */
+    
+    $('#setupBar ul').children().removeClass();
+    
+    /* Add active class to clicked anchor's parent li */
+        
+    $(this).parent().addClass('active');
+    } // End if
+  });
   
         });
 		
