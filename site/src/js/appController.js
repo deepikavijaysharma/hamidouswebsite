@@ -42,6 +42,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         },
         'admin': {
           label: 'Admin'
+        },
+		'archive': {
+          label: 'Archive'
         }
       });
       oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();

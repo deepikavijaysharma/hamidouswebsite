@@ -11,7 +11,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
         function DashboardViewModel() {
 
-
             var self = this;
             this.val = ko.observableArray();
             /*---------------------------------ADMIN----------------------------------*/
@@ -73,10 +72,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.callroles = ko.observable('');
             self.callmode = ko.observable('');
             self.communityCallList = ko.observableArray([]);
-
-
-
-
+            self.organizerEmail = ko.observable('');
+            self.topic = ko.observable('');
+            self.invite = ko.observable('');
 
             // EVENT HANDLER FOR ROLE SELECTION
             rolesselected = function (event, ui) {
@@ -113,6 +111,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             }
 
             //-----------------   COMMUNITY CALL   ------------------------//
+            //Development url for create, edit, clone and delete community call
+            var community_call_url = 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/COMMUNITY_CALLS';
+
             this.patternValue = ko.observableArray(["dd-MMM-yy hh:mm"]);
             this.dateTimeConverter = oj.Validation.converterFactory(oj.ConverterFactory.CONVERTER_TYPE_DATETIME).
             createConverter({
@@ -133,8 +134,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.callrecordlink = ko.observable('');
             self.selectedrole = ko.observableArray([]);
             self.selectedcallmode = ko.observableArray([]);
-
             self.callmodes = ko.observableArray(['Virtual', 'Town Hall']);
+            self.addiontal_link = ko.observable('');
+            self.organizerEmail = ko.observable('');
+            self.topic = ko.observable('');
+            self.invite = ko.observable('');
 
             resetcall = function () {
                 self.callname('');
@@ -152,6 +156,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 self.reflink('');
                 self.callrecordlink('');
                 self.selectedrole([]);
+                self.organizerEmail('');
+                self.topic('');
+                self.invite('');
+                self.addiontal_link('');
               
             }
 
@@ -201,7 +209,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 selectedrole = ko.toJSON(self.selectedrole()).replace('[', '').replace(']', '').replace(/"/g, '');
                 selectedcallmode = ko.toJSON(self.selectedcallmode()).replace('[', '').replace(']', '').replace(/"/g, '');
 
-
                 var call = {
                     name: self.callname(),
                     speaker: self.callspkr(),
@@ -217,14 +224,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     user: ssoemail,
                     recording_link: self.callrecordlink(),
                     mode_of_call: selectedcallmode,
-                    role: selectedrole
-                }
+                    role: selectedrole,
+                    addl_link: self.addiontal_link(),
+                    organizer_email:self.organizerEmail(),
+                    topic:self.topic(),
+                    invite:self.invite()
 
+                }
                 console.log(ko.toJSON(call));
-                var url = 'http://10.146.89.49:7003/ords/seaashm/seaashm/INS_COMMUNITY_CALLS';
 
                 $.ajax({
-                    url: url,
+                    url: community_call_url,
                     cache: false,
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
@@ -237,14 +247,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
                 });
-
+                    $("#createcommunitycall_id").ojDialog("close");
 
             }
 
             //----------------------- END OF COMMUNITY CALL  ---------------------//
 
-
-
+            openCommunityCallDialog = function() {
+                $('#createcommunitycall_id').ojDialog("open");
+            }
 
             //------------------   CATEGORY  -------------------//
 
@@ -954,7 +965,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             // GET THE LIST OF COMUNITY CALLS
             getCommunityCalls = function (texttosearch) {
                 console.log(texttosearch);
-                $.getJSON("http://10.146.89.49:7003/ords/seaashm/seaashm/" + texttosearch).then(function (data) {
+                $.getJSON("https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/" + texttosearch).then(function (data) {
                         var calls = data.items;
                         self.communityCallList([]);
                         self.searchcallstext([]);
@@ -974,7 +985,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                                 role:calls[i].role != undefined ? ko.toJSON(calls[i].role).replace('[', '').replace(']', '').replace(/"/g, '') : '',
                                 recording_link:calls[i].recording_link != undefined ? calls[i].recording_link : '',
                                 addl_link:calls[i].addl_link != undefined ? calls[i].addl_link : '',
-                                subdescription: calls[i].description != undefined ? calls[i].description.substring(0, 150) + '...' : ''
+                                subdescription: calls[i].description != undefined ? calls[i].description.substring(0, 150) + '...' : '',
+
+                                organizer_email:calls[i].organizer_email != undefined ? calls[i].organizer_email : '',
+                                topic:calls[i].topic != undefined ? calls[i].topic : '',
+                                invite: calls[i].invite != undefined ? calls[i].invite : '',
+                                call_id: calls[i].call_id != undefined ? calls[i].call_id : ''
                             });
                         }
                         // console.log(ko.toJSON(self.communityCallList()));
@@ -982,6 +998,71 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             }
             // getCommunityCalls('GetCommunityCallDetails');
 
+            // SHOW DETAILED DESCRIPTION
+            self.ccId = ko.observable();
+            self.ccName = ko.observable();
+            self.ccDate = ko.observable();
+            self.ccSpeaker = ko.observable();
+            self.ccDesignation = ko.observable();
+            self.ccCallType = ko.observable();
+            self.ccMeetingLink = ko.observable();
+            self.ccRoles = ko.observable();
+            self.ccDescription = ko.observable();
+            self.ccDialin = ko.observable();
+            self.ccAdditionalLinks = ko.observable();
+            self.ccRecordingLinks = ko.observable();
+
+            self.ccOrganizerEmail = ko.observable();
+            self.ccTopic = ko.observable();
+            self.ccInvite = ko.observable();
+
+
+
+            showcommunitycallsdetails = function (ccalls) {
+            self.ccName('');
+            self.ccDate('');
+            self.ccSpeaker('');
+            self.ccDesignation('');
+            self.ccCallType('');
+            self.ccMeetingLink('');
+            self.ccRoles('');
+            self.ccDescription('');
+            self.ccDialin('');
+            self.ccAdditionalLinks('');
+            self.ccRecordingLinks('');
+
+            self.ccOrganizerEmail('');
+            self.ccTopic('');
+            self.ccInvite('');            
+
+            // SET NEW VALUE
+            self.ccName(ccalls.name);
+            self.ccDate(ccalls.call_date);
+            self.ccSpeaker(ccalls.speaker);
+            self.ccDesignation(ccalls.designation);
+            self.ccCallType(ccalls.mode_of_call);
+            self.ccMeetingLink(ccalls.meetinglink);
+            self.ccRoles(ccalls.role);
+            self.ccDescription(ccalls.subdescription);
+            self.ccDialin(ccalls.dialin);
+            self.ccAdditionalLinks(ccalls.addl_link);
+            self.ccRecordingLinks(ccalls.recording_link);
+
+
+            self.ccOrganizerEmail(ccalls.organizer_email);
+            self.ccTopic(ccalls.topic);
+            self.ccInvite(ccalls.invite);
+            self.ccId(ccalls.call_id);
+            console.log("show addiontal_link"+ccalls.addl_link);
+            $("#communitycallsdetails").ojDialog("open");
+
+
+            }
+
+            self.closecommunitycallsdetails = function () {
+
+                $("#communitycallsdetails").ojDialog("close");
+            }
 
             self.resetsearch = function () {
                 getCommunityCalls('GetCommunityCallDetails');
@@ -992,7 +1073,321 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 setuncheck("refine");
             }
 
-          
+            self.editccName = ko.observable();
+            self.editccDate = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+            self.editccTime = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+            self.editccDuration = ko.observable();
+            self.editccVenue = ko.observable();
+            self.editccSpeaker = ko.observable();
+            self.editccDesignation = ko.observable();
+            self.editccCallType = ko.observableArray([]);
+            self.editccMeetingLink = ko.observable();
+            self.editccSelectedRoles = ko.observableArray([]);
+            self.editccDescription = ko.observable();
+            self.editccDialin = ko.observable();
+            self.editccAdditionalLinks = ko.observable();
+            self.editccRecordingLinks = ko.observable();
+
+            self.editccOrganizerEmail = ko.observable();
+            self.editccTopic = ko.observable();
+            self.editccInvite = ko.observable();
+            
+            var edit_call_id;
+            editcommunitycall = function (edit_calls, param2) {
+
+            self.editccName('');
+            self.editccDate('');
+            self.editccTime('');
+            self.editccDuration('');
+            self.editccVenue('');
+            self.editccSpeaker('');
+            self.editccDesignation('');
+            self.editccCallType([]);
+            self.editccMeetingLink('');
+            self.editccSelectedRoles([])
+            self.editccDescription('');
+            self.editccDialin('');
+            self.editccAdditionalLinks('');
+            self.editccRecordingLinks('');
+
+            self.editccOrganizerEmail('');
+            self.editccTopic('');
+            self.editccInvite('');
+
+            // SET NEW VALUE
+            self.editccName(edit_calls.name);
+            self.editccDate(edit_calls.call_date);
+            timeString = edit_calls.call_time.substring(0,5);
+            timeFormattedString = "T"+timeString+":00";
+            self.editccTime(timeFormattedString);
+            self.editccDuration(edit_calls.callduration);
+            self.editccVenue(edit_calls.location);
+            self.editccSpeaker(edit_calls.speaker);
+            self.editccDesignation(edit_calls.designation);
+            self.editccAdditionalLinks(edit_calls.addl_link);
+            var callTypeString = edit_calls.mode_of_call;
+            var callTypeArray = callTypeString.split(",");
+            self.editccCallType(callTypeArray);
+            self.editccMeetingLink(edit_calls.meetinglink);
+            var roleString = edit_calls.role;
+            var roleArray = [];
+            roleArray = roleString.split(",");
+            self.editccSelectedRoles(roleArray)
+            self.editccDescription(edit_calls.subdescription);
+            self.editccDialin(edit_calls.dialin);
+            self.editccRecordingLinks(edit_calls.recording_link);
+
+            self.editccOrganizerEmail(edit_calls.organizer_email);
+            self.editccTopic(edit_calls.topic);
+            self.editccInvite(edit_calls.invite);
+            edit_call_id = edit_calls.call_id;
+
+            $("#editcommunitycall_id").ojDialog("open");
+            }
+
+            editCommunityCallValues = function () {
+                editSelectedRole = ko.toJSON(self.editccSelectedRoles()).replace('[', '').replace(']', '').replace(/"/g, '');
+                editSelectedCallMode = ko.toJSON(self.editccCallType()).replace('[', '').replace(']', '').replace(/"/g, '');
+
+                var edit_community_call_data = {
+                    NAME: self.editccName(),
+                    speaker: self.editccSpeaker(),
+                    designation: self.editccDesignation(),
+                    call_date: self.editccDate(),
+                    call_time: self.editccTime().substring(1,6),
+                    duration:self.editccDuration().substring(0,2),
+                    locn: self.editccVenue(),
+                    meetinglink: self.editccMeetingLink(),
+                    dialin: self.editccDialin(),
+                    description: self.editccDescription(),
+                    user: ssoemail,
+                    recording_link: self.editccRecordingLinks(),
+                    mode_of_call: editSelectedCallMode,
+                    role: editSelectedRole,
+                    addl_link: self.editccAdditionalLinks(),
+                    organizer_email: self.editccOrganizerEmail(),
+                    topic: self.editccTopic(),
+                    invite: self.editccInvite(),
+                    call_id: edit_call_id
+
+                }
+                console.log("edit : "+ko.toJSON(edit_community_call_data));
+                $.ajax({
+                    url: community_call_url,
+                    cache: false,
+                    type: 'PUT',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(edit_community_call_data),
+                    success: function (data) {
+                        console.log("edit success");
+                        loadCommunitycall();
+
+                    },fail: function (xhr, textStatus, err) {
+                            console.log("failed"+err);
+                        },
+                        error: function (xhr, textStatus, err) {
+                            console.log("error"+err);
+                        }
+                });
+                $("#editcommunitycall_id").ojDialog("close");
+
+            }
+
+            openDeleteModal = function (delete_id) {
+                console.log("deleting id-"+delete_id);
+                var data_value = {
+                    "call_id" : delete_id
+                };
+                $("#delete_community_call").ojDialog("open");
+                $("#delete_com_call").click(function(){
+                    $.ajax({
+                        url: community_call_url,
+                        method: 'DELETE',
+                        contentType: 'application/json; charset=utf-8',
+                        data: ko.toJSON(data_value),
+                        success: function () {
+                            loadCommunitycall();
+                            closeDeleteModal();
+                            console.log("delete success");
+                        },
+                        fail: function (xhr, textStatus, err) {
+                            console.log(err);
+                        },
+                        error: function (xhr, textStatus, err) {
+                            console.log(err);
+                        }
+                    });
+                });
+
+            }
+
+            deleteCommunityCall = function (com_delete) {
+                openDeleteModal(com_delete.call_id);
+
+            }
+
+            closeDeleteModal = function () {
+                $("#delete_community_call").ojDialog("close");
+            }
+
+
+            // clone communitycallsdetails
+            self.cloneccName = ko.observable();
+            self.cloneccDate = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+            self.cloneccTime = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+            self.cloneccDuration = ko.observable();
+            self.cloneccVenue = ko.observable();
+            self.cloneccSpeaker = ko.observable();
+            self.cloneccDesignation = ko.observable();
+            self.cloneccCallType = ko.observableArray([]);
+            self.cloneccMeetingLink = ko.observable();
+            self.cloneccSelectedRoles = ko.observableArray([]);
+            self.cloneccDescription = ko.observable();
+            self.cloneccDialin = ko.observable();
+            self.cloneccAdditionalLinks = ko.observable();
+            self.cloneccRecordingLinks = ko.observable();
+
+            self.cloneccOrganizerEmail = ko.observable();
+            self.cloneccTopic = ko.observable();
+            self.cloneccInvite = ko.observable();
+
+            cloneCommunityCall = function (clone_calls, param2) {
+
+            self.cloneccName('');
+            self.cloneccDate('');
+            self.cloneccTime('');
+            self.cloneccDuration('');
+            self.cloneccVenue('');
+            self.cloneccSpeaker('');
+            self.cloneccDesignation('');
+            self.cloneccCallType([]);
+            self.cloneccMeetingLink('');
+            self.cloneccSelectedRoles([])
+            self.cloneccDescription('');
+            self.cloneccDialin('');
+            self.cloneccAdditionalLinks('');
+            self.cloneccRecordingLinks('');
+
+            self.cloneccOrganizerEmail('');
+            self.cloneccTopic('');
+            self.cloneccInvite('');
+
+            // SET NEW VALUE
+            self.cloneccName(clone_calls.name);
+            self.cloneccDate(clone_calls.call_date);
+            var timeString = clone_calls.call_time.substring(0,5);
+            var timeFormattedString = "T"+timeString+":00";
+            self.cloneccTime(timeFormattedString);
+            self.cloneccDuration(clone_calls.callduration);
+            self.cloneccVenue(clone_calls.location);
+            self.cloneccSpeaker(clone_calls.speaker);
+            self.cloneccDesignation(clone_calls.designation);
+            self.cloneccAdditionalLinks(clone_calls.addl_link);
+            var callTypeString = clone_calls.mode_of_call;
+            var callTypeArray = callTypeString.split(",");
+            self.cloneccCallType(callTypeArray);
+            self.cloneccMeetingLink(clone_calls.meetinglink);
+            var roleString = clone_calls.role;
+            var roleArray = [];
+            roleArray = roleString.split(",");
+            self.cloneccSelectedRoles(roleArray)
+            self.cloneccDescription(clone_calls.subdescription);
+            self.cloneccDialin(clone_calls.dialin);
+            self.cloneccRecordingLinks(clone_calls.recording_link);
+            
+            self.cloneccOrganizerEmail(clone_calls.organizer_email);
+            self.cloneccTopic(clone_calls.topic);
+            self.cloneccInvite(clone_calls.invite);
+
+            $("#clonecommunitycall_id").ojDialog("open");
+
+            }      
+
+
+            // CREATE COMMUNITY CALL
+            createclonecommunitycall = function () {
+                var selectedrole = '';
+                var selectedcallmode = '';
+
+                if (self.cloneccName().length == 0) {
+                    alert("Please enter Community call name");
+                    return;
+                }
+
+                if (self.cloneccSpeaker().length == 0) {
+                    alert("Please enter name of the speaker");
+                    return;
+                }
+
+
+                if (self.cloneccDescription().length == 0) {
+
+                    alert("Please enter description");
+                    return;
+                }
+                if (self.cloneccSelectedRoles().length == 0) {
+                    
+                    alert("Select atleast one role");
+                    return;
+                }
+
+                if (self.cloneccDuration().length == 0) {
+
+                    alert("Please enter duration");
+                    return;
+                }else if(typeof self.cloneccDuration() == 'number'){
+                    alert("Please enter valid duration in minute(s)");
+                    return;
+                }
+
+                if (self.cloneccCallType().length == 0) {
+                    alert("Please select mode of delivary");
+                }
+                cloneSelectedrole = ko.toJSON(self.cloneccSelectedRoles()).replace('[', '').replace(']', '').replace(/"/g, '');
+                cloneSelectedcallmode = ko.toJSON(self.cloneccCallType()).replace('[', '').replace(']', '').replace(/"/g, '');
+
+                var clone_call = {
+                    name: self.cloneccName(),
+                    speaker: self.cloneccSpeaker(),
+                    designation: self.cloneccDesignation(),
+                    call_date: self.cloneccDate(),
+                    call_time: self.cloneccTime().split('T')[1].substring(0,5),
+                    duration:self.cloneccDuration().substring(0,2),
+                    locn: self.cloneccVenue(),
+                    meetinglink: self.cloneccMeetingLink(),
+                    dialin: self.cloneccDialin(),
+                    description: self.cloneccDescription(),
+                    addl_link: self.cloneccAdditionalLinks(),
+                    user: ssoemail,
+                    recording_link: self.cloneccRecordingLinks(),
+                    mode_of_call: cloneSelectedcallmode,
+                    role: cloneSelectedrole,
+                    organizer_email:self.cloneccOrganizerEmail(),
+                    topic:self.cloneccTopic(),
+                    invite:self.cloneccInvite()
+
+                }
+
+                console.log("clone json data: "+ko.toJSON(clone_call));
+
+                $.ajax({
+                    url: community_call_url,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(clone_call),
+                    success: function (data) {
+                        loadCommunitycall();
+                        console.log("success")
+
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                     console.log("error during clone"+err);
+                });
+                    $("#clonecommunitycall_id").ojDialog("close");
+
+            }   
+
 
             self.searchcallstext = ko.observable('');
             //  SEARCH COMMUNITY CALLS
@@ -1015,9 +1410,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             }
             loadCommunitycall();
 
-
+            self.iseditpermitted = function () {
+                if (isAdmin) {
+                  setssostatus('.ssoenabled', 'inline-block');
+                } else {
+                  setssostatus('.ssoenabled', 'none');
+                }
+                
+              }
 
             setssostatus = function (selector, visibility) {
+                console.log("ssostaus");
                 var nodes = document.querySelectorAll(selector),
                   node,
                   styleProperty = function (a, b) {
@@ -1033,19 +1436,28 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
             // CHECK FOR ADMIN RIGHTS
             checkadminrights = function () {
-
                 if (isAdmin) {
+                    console.log(isAdmin)
                     $( "#tabs" ).ojTabs( { "disabledTabs": [3,4] } );
+                    $(".communityadmin").css("display", "inline-block");
+                    //setssostatus('.communityadmin', 'inline-block');
                   } else {
+                    // setssostatus('.communityadmin', 'none');
+                    $(".communityadmin").css("display", "none");
                     $( "#tabs" ).ojTabs( { "disabledTabs": [3,4,5] } );
                   }
+
+                  self.iseditpermitted();
             }
 
-            
-            setInterval(function () {
-                checkadminrights();
-              }, 500);
-
+            checkAdminPrivileges =  function() {
+               setTimeout(function(){ checkadminrights() }, 3000);
+            }
+            checkAdminPrivileges();
+    
+            // setInterval(function () {
+            //     checkadminrights();
+            // }, 1000);
 
             // ENROLL EMPLOYEE FOR A COURSE
             enrollemployee=function(p1,p2,p3){

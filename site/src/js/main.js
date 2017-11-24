@@ -23,6 +23,7 @@ requirejs.config(
   paths:
 //injector:mainReleasePaths
 
+
   {
     'knockout': 'libs/knockout/knockout-3.4.0.debug',
     'jquery': 'libs/jquery/jquery-3.1.1',
@@ -41,6 +42,7 @@ requirejs.config(
 	'bootstrap': 'libs/bootstrap/bootstrap.min'
   }
   
+
 //endinjector
   ,
   // Shim configurations for modules that do not expose AMD
