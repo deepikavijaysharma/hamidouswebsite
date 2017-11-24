@@ -422,7 +422,6 @@ min-height:350px;
 	}	
 	
 .genricslide1 {
-background: url(images/genric-bg_1.jpg);
 
 border: none;
 background-size:cover;
@@ -439,7 +438,7 @@ padding:0px 10px ;
 }	
 
 .genricslide2 {
-background: url(images/genric-bg_2.jpg);
+background: url(https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/homepage_image/10);
 
 border: none;
 background-size:cover;
@@ -455,7 +454,7 @@ padding:0px 10px ;
 }
 }
 .slide3 {
-background: url(images/slide41bg.jpg);
+background: url(https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/homepage_image/17);
 
 border: none;
 background-size:cover;
@@ -471,7 +470,7 @@ padding:0px 10px ;
 }
 }
 .slide2 {
-background: url(images/slide41bg.jpg);
+background: url(https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/homepage_image/17);
 
 border: none;
 background-size:cover;
@@ -483,7 +482,7 @@ padding:0px 10px ;
 }
 
 .slide4 {
-background: url(images/slide3bg.jpg);
+background: url(https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/homepage_image/13);
 
 border: none;
 background-size:cover;
@@ -498,7 +497,7 @@ padding:0px 10px ;
 }
 
 .slide5 {
-background: url(images/slide4bg.jpg);
+background: url(https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/homepage_image/14);
 
 border: none;
 background-size:cover;
@@ -509,7 +508,7 @@ padding:0px 10px ;
 
 }
 .slide6 {
-background: url(images/slide5bg.jpg);
+background: url(https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/homepage_image/15);
 
 border: none;
 background-size:cover;
@@ -520,8 +519,19 @@ padding:0px 10px ;
 
 }
 
+.slide7 {
+background: url(https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/homepage_image/17);
+
+border: none;
+background-size:cover;
+@media  #{$responsiveQueryMediumDown} {
+height: 100%;
+padding:0px 10px ;
+}
+
+}
 .slide1 {
-background: url(images/slide2bg.jpg);
+background: url(https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/homepage_image/12);
 
 border: none;
 background-size:cover;
@@ -1512,7 +1522,10 @@ justify-content:center;
 background:transparent;
 padding:10px;
 align-self: center;
-
+}
+.ccdetailsbutton{
+@include whitebutton;
+background:transparent;
 }
 }
 
@@ -1858,7 +1871,31 @@ left:0px;
 right:0px;
 width:90%;
 }
-
+.ccdetailsbutton{
+	@include whitebutton;
+padding:10px;
+margin:0 auto;
+margin-top:3%;
+margin-bottom:3%;
+bottom:10px;
+box-sizing:border-box;
+text-align:center;
+left:0px;
+right:0px;
+    cursor: pointer;
+    max-height: max-content;
+    max-width: max-content;
+    @media  #{$responsiveQueryLargeDown} {
+	    display: block;
+	    text-align: -webkit-center;	
+	        min-width: 100%;
+	}
+}
+.originfo{
+	@media  #{$responsiveQueryLargeDown} {
+		margin:10px;
+	}
+}
 }
 .communityblock{
 margin-top:20px;
@@ -2623,10 +2660,6 @@ margin-right:0px;
 }
 }
 
-.org_blocks_b img{
-	margin-right:20px;
-	}
-
 /*----------------------------------Our Orgnization--------------------------------------*/
 #ui-id-21{
 	/*background:#F8F8F8;
@@ -2892,6 +2925,76 @@ top: -30px;
 a{
 color:#fff;}
 a:hover{
-opacity:0.7}	
+opacity:0.7}
+
+
 }
 }
+
+.addslidelabel{
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+.asdialog{
+	padding:9px!important;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.buttonas{
+    border: 1px solid #324c5d;
+    font-size: 1.28571rem;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    background: #dfe4e7;
+    color: #324c5d;
+    text-transform: uppercase;
+    margin-top: 20px;	
+}
+
+#adns{
+	float:right;
+}
+
+.btn-info {
+    background: #dadada none repeat scroll 0 0;
+    border: 1px solid #ada9a9;
+    color: #444444;
+}
+
+.pull-right {
+    float: right;
+}
+
+.btn-xs {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+.btnaddnewref {
+max-height:22px;
+}
+#ccct{
+	margin-bottom:30px;
+}
+.image_picker_image{
+	max-width:100px!important;
+}
+
+.tpbutton {
+    background: #ffffff !important;
+    color: #000 !important;
+    border: 0.5px solid black !important;
+    font-size: 1.14286rem;
+    padding: 10px 20px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+

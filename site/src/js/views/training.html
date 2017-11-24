@@ -4,16 +4,18 @@
  -->
 
 <div id="dialogWrapper">
-  <div style="display:none" id="modalDialog1" title="Select your role" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'escape',rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+  <div id="modalDialog1" title="Select your role" onclick="getRoleData()" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'escape',rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
     <div class="oj-dialog-body roleWrapper">
       <form id="form1">
+        <!-- ko foreach: rolelist() -->
         <select id="basicSelect" data-bind="ojComponent: {
-          component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Select your role',
-          options: role,
-          value: selectedrole,
+          component: 'ojSelect',placeholder:'Select your role',
           rootAttributes: {style:'max-width:20em'}
         }">
+        <option value="[[value]]"><span data-bind="text: name"></span></option>
         </select>
+        <!-- /ko -->
+
         <div class="oj-dialog-footer">
           <button id="okButton" onclick="roleselected()" data-bind="ojComponent: {component: 'ojButton', label: 'Okay'},click:closeRole"> </button>
         </div>
@@ -38,8 +40,14 @@
             <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6 formrow">
               <div class="oj-margin oj-sm-12">
                 <label for="input">Role</label>
-                <input id="input" data-bind="ojComponent: 
-                   {component: 'ojInputText', value:'text', disabled: true}">
+                <select id="basicSelect" data-bind="ojComponent: {
+                  component: 'ojSelect',placeholder: 'Select your role',options: rolelist(),
+                  rootAttributes: {style:'max-width:20em'}
+                }">
+                <!-- ko foreach: rolelist() -->
+                  <option data-bind="text: name,value:name"></option>
+                <!-- /ko -->
+                </select>
               </div>
             </div>
           </div>
@@ -47,69 +55,27 @@
             <div class="oj-flex oj-flex-item oj-sm-12 oj-margin reqheading"> Request your course: </div>
           </div>
           <div class="oj-flex">
-            <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6">
+            <div class="oj-flex oj-flex-item oj-sm-12">
               <div class="oj-margin oj-sm-12">
-                <div class="oj-flex-item oj-sm-12 formrow">
-                  <label for="input">Pillar</label>
-                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
-                    <option value="value">value</option>
-                  </select>
-                </div>
-                <div class="oj-flex-item oj-sm-12 formrow">
-                  <label for="input">Platform</label>
-                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
-                    <option value="value">value</option>
-                  </select>
-                </div>
-                <div class="oj-flex-item oj-sm-12">
-                  <label for="input">Course Specifications</label>
-                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
-                    <option value="value">value</option>
-                  </select>
+                <div id="tree" style="width: 170px;height: auto;"
+                   data-bind="ojComponent:
+                   {
+                     component: 'ojTree',
+                     data: new oj.JsonTreeDataSource(catlist)
+                   }" >
                 </div>
               </div>
             </div>
-            <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6">
-              <div class="oj-margin oj-sm-12">
-                <div class="oj-flex-item oj-sm-12 formrow">
-                  <label for="input">Categories</label>
-                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
-                    <option value="value">value</option>
-                  </select>
-                </div>
-                <div class="oj-flex-item oj-sm-12 formrow">
-                  <label for="input">Manager Name</label>
-                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
-                    <option value="value">value</option>
-                  </select>
-                </div>
-                <div class="oj-flex-item oj-sm-12">
-                  <label for="input">Org Name</label>
-                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
-                    <option value="value">value</option>
-                  </select>
-                </div>
-              </div>
-<!--             <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6">
-              <div class="oj-margin oj-sm-12 reqsummary">
-                <div class="bluet">Request Summary:</div>
-                <p>SaaS > Integration > PCS</p>
-                <div class="bluet">Request sent to:</div>
-                <b>Marc Asensio</b>
-                <p>PCS platform owner, Principle Sales Consultant</p>
-              </div>
-            </div> -->
             <div class="oj-sm-12 footerbuttons">
-              <div class="oj-md-6 oj-lg-4 oj-sm-float-end">
+              <div class="oj-md-6 oj-lg-6 oj-sm-float-end">
                 <div class="oj-flex oj-sm-12">
-                <div class="oj-flex oj-md-6">
-                  <input id="reset" type="reset" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}" class="nobutton" />
+                  <div class="oj-flex oj-md-6">
+                    <input id="reset" type="reset" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}" class="nobutton" />
+                  </div>
+                  <div class="oj-flex oj-md-6">
+                    <button id="button" data-bind="ojComponent: { component: 'ojButton', label: 'Submit' }" class="bluebutton"></button>
+                  </div>
                 </div>
-                <div class="oj-flex oj-md-6">
-                <button id="button" data-bind="ojComponent: { component: 'ojButton', label: 'Submit' }" class="bluebutton">
-                </div>
-                </div>
-                </button>
               </div>
             </div>
           </div>

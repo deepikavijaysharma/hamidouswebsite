@@ -1,4 +1,41 @@
+<style type="text/css">
+  .avatarsimg{
+  width:100px;
+  height:18px;
+}
+#avatars{
+  width:100px;
+  height:18px;
+      margin-bottom: 50px;
+}
 
+#avatars>ul>li{
+display:inline-block;
+}
+
+.avatars > ul{
+  display: flex;
+}
+
+.avatars > input + img{
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.avatars > input:checked + img{
+  border: 6px solid red;
+}
+.org_blocks_b img{
+  margin-right:20px;
+  height: 58px!important;
+  width: 58px!important;
+  }
+
+</style>
+
+<div class="oj-row oj-sm-12">
+  <button class="btn btn-info btn-xs" data-toggle="modal" data-bind="click:openaddslidedialog">Add New Slide</button>
+</div>
 <div class="oj-row" id="mainBar">
   <div id="myCarousel" class="homeslider carousel slide" > 
     <!-- Indicators -->
@@ -10,155 +47,57 @@
       <li data-target="#myCarousel" data-slide-to="4"></li>
       <li data-target="#myCarousel" data-slide-to="5"></li>
       <li data-target="#myCarousel" data-slide-to="6"></li>
-      <li data-target="#myCarousel" data-slide-to="7"></li>
-      
+      <li data-target="#myCarousel" data-slide-to="7"></li>      
     </ol>
     
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
-    <div class="item active ">
-        <div class="slide genricslide1">
-          <div class="verticalcentertext">
+      <!-- ko foreach: sliderlist() -->
+        <!-- ko if: $index() == 0 -->
+        <div class="item active" data-bind="attr:{'id':sliderid}">
+          <div class="slide genricslide1" data-bind="style:{'background':sliderimg}">
             <div class="verticalcentertext">
-              <div class="verticalcentertextinner">
-                <div class="heading">Apps Unlimited on Oracle Cloud Infrastructure Events</div>
-               <div class="text">The North America Cloud Platform team is partnering with Oracle Applications Product Management to deliver a series of events across North America <br>December 6th – February 13th</div>
-               <div class="oj-sm-12 ">
-                  <div class=" buttons"><a href="http://retriever.us.oracle.com/apex/f?p=121:2:7203873549873320::::P2_FILE_ID:171630" target="_blank">Click here for more info.<span class="right-arrow"></span></a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-     <div class="item ">
-        <div class="slide slide3">
-          <div class="verticalcentertext">
-            <div class="verticalcentertext">
-              <div class="verticalcentertextinner">
-                <div class="heading">In Internal News</div>
-               <div class="text"><i>Oracle Cloud Solution Hubs Drive Transformation</i><br>HR COMPASS, November 2017<br>By Stacy Knight, Senior HR Business Partner</div>
-               <div class="oj-sm-12 ">
-                  <div class=" buttons"><a href="http://retriever.us.oracle.com/apex/f?p=121:2:3270862774709366::::P2_FILE_ID:171610" target="_blank">Click Here<span class="right-arrow"></span></a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    <div class="item">
-        <div class="slide genricslide2">
-          <div class="verticalcentertext">
-            <div class="verticalcentertext">
-              <div class="verticalcentertextinner">
-                <div class="heading">Announcing New ECA Enablement and ECA Certification Resources</div>
-                
-                <div class="buttons_c oj-rwow oj-flex">
-                  <div class="oj-sm-12 oj-lg-6 oj-xl-float-end">
-                    <div class=" buttons oj-lg-float-end"><a href="http://solutionengineering.us.oracle.com/hubs/?root=ecaenablement" target="_blank">ECA Enablement <span class="right-arrow"></span></a></div>
-                  </div>
-                  <div class="oj-sm-12 oj-lg-6 oj-xl-float-end">
-                    <div class=" buttons oj-lg-float-start"><a href="http://solutionengineering.us.oracle.com/hubs/?root=ecacertification" target="_blank">ECA Certification <span class="right-arrow"></span></a></div>
+              <div class="verticalcentertext">
+                <div class="verticalcentertextinner">
+                  <div class="heading" data-bind="text: slidertitle"></div>
+                  <div class="text" data-bind="text: sliderdesc"></div>
+                  <div class="buttons_c oj-rwow oj-flex">
+                    <div class="oj-sm-12 oj-lg-6 oj-xl-float-end">
+                      <div class=" buttons oj-lg-float-end"><a data-bind="attr:{'href':sliderlt1},text:sliderbl2" target="_blank"><span class="right-arrow"></span></a></div>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-6 oj-xl-float-end">
+                      <div class=" buttons oj-lg-float-start"><a ata-bind="attr:{'href':sliderlt2},text:sliderbl1" target="_blank"><span class="right-arrow"></span></a></div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="item">
-        <div class="slide genricslide1">
-          <div class="verticalcentertext">
+        <!-- /ko -->
+        <!-- ko if: $index() != 0 -->
+        <div class="item" data-bind="attr:{'id':sliderid}"> 
+          <div class="slide genricslide1" data-bind="style:{'background':sliderimg}">
             <div class="verticalcentertext">
-              <div class="verticalcentertextinner">
-                <div class="heading">Follow Up With Your Customers Today: Here's How</div>
-                <div class="text">Oracle OpenWorld and JavaOne</div>
-                <div class="buttons_c oj-rwow oj-flex">
-                  <div class="oj-sm-12 oj-lg-6 oj-xl-float-end">
-                    <div class=" buttons oj-lg-float-end"><a href="https://my.oracle.com/content/web/cnt2716058" target="_blank">Share Keynotes <span class="right-arrow"></span></a></div>
+              <div class="verticalcentertext">
+                <div class="verticalcentertextinner">
+                  <div class="heading" data-bind="text: slidertitle"></div>
+                  <div class="text" data-bind="text: sliderdesc"></div>
+                  <div class="buttons_c oj-rwow oj-flex">
+                    <div class="oj-sm-12 oj-lg-6 oj-xl-float-end">
+                      <div class=" buttons oj-lg-float-end"><a data-bind="attr:{'href':sliderlt1},text:sliderbl1" target="_blank"><span class="right-arrow"></span></a></div>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-6 oj-xl-float-end">
+                      <div class=" buttons oj-lg-float-start"><a ata-bind="attr:{'href':sliderlt2},text:sliderbl2" target="_blank"><span class="right-arrow"></span></a></div>
+                    </div>
                   </div>
-                  <div class="oj-sm-12 oj-lg-6 oj-xl-float-end">
-                    <div class=" buttons oj-lg-float-start"><a href="https://my.oracle.com/content/web/cnt2716062" target="_blank">Share Presentations <span class="right-arrow"></span></a></div>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="slide slide1">
-          <div class="verticalcentertext">
-            <div class="heading">NATD Solution Engineering and Customer Success<br>
-              Organizational Road  Show </div>
-            <div class="text">Listen in as Hamidou Dia and  the executive management team present<br>
-              the FY18 vision  for the organization and  address top questions. </div>
-            <div class="slidernav">
-              <ul>
-                <li><a href="https://otube.oracle.com/media/Solution+Engineering+Townhalll+-+Rich+Geraffo/0_kxtrumbd/3264" target="_blank">Rich Geraffo Presentation<span>&nbsp;&nbsp;<img src="css/images/aroow_right.png"></span></a></li>
-                <li class="oj-sm-only-hide">|</li>
-                <li><a href="https://otube.oracle.com/media/Solution+Engineering+Townhall+-+Hamidou+Dia/0_avsugpyl/3264" target="_blank">Hamidou Dia Presentation<span>&nbsp;&nbsp;<img src="css/images/aroow_right.png"></span></a></li>
-                <li class="oj-sm-only-hide">|</li>
-                <li><a href="https://otube.oracle.com/media/Solution+Engineering+TownhallA+Panel+Discussion+Part+1/0_nsg066tx/3264" target="_blank">Leadership Panel Part 1<span>&nbsp;&nbsp;<img src="css/images/aroow_right.png"></span></a></li>
-                <li class="oj-sm-only-hide">|</li>
-                <li><a href="https://otube.oracle.com/media/Solution+Engineering+Town+HallA+Panel+Discussion+Part+2+and+Q&A/0_s1q634j9/3264" target="_blank">Leadership Panel Part 2<span>&nbsp;&nbsp;<img src="css/images/aroow_right.png"></span></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="slide slide2">
-          <div class="verticalcentertext">
-            <div class="verticalcentertextinner">
-              <div class="heading">Announcing Universal Credits <br>
-                Flexibility and Choice</div>
-              <div class="text">To find out more about the roll out of Universal Credits, including weekly office hours, training resources, and replays, be sure to click here. </div>
-              <div class="buttons_c oj-rwow oj-flex">
-                <div class="oj-sm-12 ">
-                  <div class=" buttons"><a href="https://oradocs-corp.sites.us2.oraclecloud.com/authsite/cloud-na/" target="_blank">Open <span class="right-arrow"></span></a></div>
-                </div>
-                <div class="oj-sm-12 oj-xl-6 oj-xl-float-end"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="slide genricslide1">
-          <div class="verticalcentertext">
-            <div class="verticalcentertextinner">
-              <div class="heading">Q1 NATD SE and CS All Hand’s Call</div>
-              <div class="text">Organizational Update and Awards, June 27th</div>
-              <div class="buttons_c oj-rwow oj-flex">
-                <div class="oj-sm-12 ">
-                  <div class=" buttons"><a href="https://otube.oracle.com/media/Solutions+Engineer+and+Cloud+Customer+Success+All+Hands/0_w2kl22gc" target="_blank">Replay <span class="right-arrow"></span></a></div>
-                </div>
-                <div class="oj-sm-12 oj-xl-6 oj-xl-float-end"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-     
-      <div class="item">
-        <div class="slide slide4">
-          <div class="verticalcentertext">
-            <div class="verticalcentertextinner">
-              <div class="heading">NATD Cloud Customer Success Go Live: Gap Inc.&rsquo;s Transformational<br>
-                Journey on Oracle Cloud</div>
-              <div class="text">Listen into this podcast as Misha Logvinov, GVP, Customer Success, interviews Mark Carroll CSM and Jeff Wexler, ECA, on transforming business at Gap, Inc. </div>
-              <div class="buttons_c oj-rwow oj-flex">
-                <div class="oj-sm-12 ">
-                  <div class=" buttons"><a href="https://otube.oracle.com/media/GoLive_GAP_092517.mp4/0_9mo76xtq" target="_blank">Replay <span class="right-arrow"></span></a></div>
-                </div>
-                <div class="oj-sm-12 oj-xl-6 oj-xl-float-end"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-     
+        </div>  
+        <!-- /ko -->
+      <!-- /ko -->  
     </div>
     
     <!-- Left and right controls --> 
@@ -469,7 +408,7 @@
                   <div class="clicksection" data-bind="click:opendialog18"> <img src="css/images/tick_med.png"><br>
                     <br>
                     Sizing,
-                    Quoting & Config Support</div>
+                    Quoting &amp; Config Support</div>
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
@@ -497,130 +436,128 @@
   <div class="container">
     <div class="oj-sm-12 featured bgwhite">
       <div class="oj-sm-12 featuredtitle"><img src="css/images/our_org.png">&nbsp;Our Organization</div>
+      <button class="btn btn-info btn-xs btnaddneworg" data-toggle="modal" data-bind="click:openaddneworgdialog">Add New People</button>
       <div class="oj-flex oj-sm-12 org_container">
         <div class="oj-flex-item oj-sm-12 red">
-          <div class="oj-flex oj-sm-12">
-            <h1>Enterprise Cloud Architects</h1>
-          </div>
-          <div class="oj-flex oj-sm-12 org_container_inner">
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
-              <div class="oj-lg-margin-right oj-md-margin-right">
-                <div class=" org_blocks_b"> <img src="css/images/alanlevine.jpg">Alan Levine</div>
-                <div class=" org_blocks_t"> GVP, Retail and Healthcare</div>
+          <!-- ko foreach: organizationpeoplelist -->
+            <!-- ko if: orglob == "Enterprise Cloud Architect" -->
+            <div class="oj-flex oj-sm-12">
+              <h1 data-bind="text: orglob"></h1>
+            </div>
+            <div class="oj-flex oj-sm-12 org_container_inner">
+              <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
+                <div class="oj-lg-margin-right oj-md-margin-right">
+                  <div class=" org_blocks_b">
+                    <img data-bind="attr:{'src':orgimage,'id':orgempid}"><span data-bind="text: orgname"></span>
+                  </div>
+                  <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
+                </div>
               </div>
             </div>
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
-              <div class="oj-lg-margin-right oj-md-margin-right">
-                <div class=" org_blocks_b"> <img src="css/images/robinlink.jpg">Robin Link</div>
-                <div class=" org_blocks_t">GVP, Enterprise</div>
+            <!-- /ko -->
+          <!-- /ko -->
+          <!--<div class="oj-flex oj-sm-12">
+                <h1>Enterprise Cloud Architects</h1>
               </div>
-            </div>
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
-              <div class="oj-lg-margin-right">
-                <div class=" org_blocks_b"> <img src="css/images/larry_welles.jpg">Larry Welles </div>
-                <div class=" org_blocks_t">GVP, FSI and Telco</div>
-              </div>
-            </div>
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
-              <div class="oj-lg-margin-right oj-md-margin-right">
-                <div class=" org_blocks_b"> <img src="css/images/edwinupson.jpg">Edwin Upson</div>
-                <div class=" org_blocks_t">GVP, National</div>
-              </div>
-            </div>
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
-              <div class="oj-flex-item oj-sm-12 ">
-                <h1 class="oj-md-only-hide"><br>
-                </h1>
-              </div>
-              <div class="oj-lg-margin-right oj-md-margin-right">
-                <div class=" org_blocks_b"> <img src="css/images/aaroncornfeld.jpg">Aaron Cornfeld *</div>
-                <div class=" org_blocks_t">GVP, Public Sector </div>
-              </div>
-            </div>
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks yellow">
-              <div class="oj-flex-item oj-sm-12 ">
-                <h1><a href="https://my.oracle.com/site/nasc/Sales/Organizations/NAS/CloudPlatforms/index.html" target="_blank">Platform Specialists</a></h1>
-              </div>
-              <div class="oj-lg-margin-right">
-                <div class=" org_blocks_b"> <img src="css/images/joestrada.jpg">Joe Strada</div>
-                <div class=" org_blocks_t">GVP, Cloud Platform 
-                  Specialists</div>
-              </div>
-            </div>
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks yellow">
-              <div class="oj-flex-item oj-sm-12 ">
-                <h1><br>
-                </h1>
-              </div>
-              <div class="oj-lg-margin-right oj-md-margin-right">
-                <div class=" org_blocks_b"> <img src="css/images/adamdriver.jpg">Adam Driver *</div>
-                <div class=" org_blocks_t">GVP, Analytics 
-                  Specialists </div>
-              </div>
-            </div>
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks pink">
-              <div class="oj-flex-item oj-sm-12 ">
-                <h1>Hardware</h1>
-              </div>
-              <div class="oj-lg-margin-right oj-md-margin-right">
-                <div class=" org_blocks_b"> <img src="css/images/chrishause.jpg">Chris Hause *</div>
-                <div class=" org_blocks_t">GVP, Hardware
-                  Specialists </div>
-              </div>
-            </div>
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks green">
-              <div class="oj-flex-item oj-sm-12 ">
-                <h1>Oracle Digital</h1>
-              </div>
-              <div class="oj-lg-margin-right">
-                <div class=" org_blocks_b"> <img src="css/images/carlgriffin.jpg">Carl Griffin</div>
-                <div class=" org_blocks_t">GVP, Solution Engineering 
-                  Specialists</div>
-              </div>
-            </div>
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks blue">
-              <div class="oj-flex-item oj-sm-12 ">
-                <h1>SE Excellence</h1>
-              </div>
-              <div class="oj-lg-margin-right oj-md-margin-right">
-                <div class=" org_blocks_b"> <img src="css/images/timkelly.jpg">Tim Kelly</div>
-                <div class=" org_blocks_t">VP, SE Excellence
-                  Specialists </div>
-              </div>
-            </div>
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
-              <div class="oj-flex-item oj-sm-12 ">
-                <h1><a href="http://retriever.us.oracle.com/apex/f?p=121:22:2707052959961820::NO:RP:P22_CONTAINER_ID,P22_PREV_PAGE:80873,112
-" target="_blank">Industry Advisors</a></h1>
-              </div>
-              <div class="oj-lg-margin-right oj-md-margin-right">
-                <div class=" org_blocks_b"> <img src="css/images/jimmckeighan.jpg">Jim Mckeighan</div>
-                <div class=" org_blocks_t">VP, Industry Advisors 
-                  Specialists </div>
-              </div>
-            </div>
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks blue">
-              <div class="oj-flex-item oj-sm-12 ">
-                <h1>Cloud Solution Hubs</h1>
-              </div>
-              <div class="oj-lg-margin-right">
-                <div class=" org_blocks_b"> <img src="css/images/hamza.jpg">Hamza Jahangir</div>
-                <div class=" org_blocks_t">VP, Solution Engineering 
-                  Specialists</div>
-              </div>
-            </div>
-            <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks yellow">
-              <div class="oj-flex-item oj-sm-12 ">
-                <h1>Cloud Customer Success</h1>
-              </div>
-              <div class="oj-lg-margin-right">
-                <div class=" org_blocks_b"> <img src="css/images/misha.jpg">Misha Logvinov</div>
-                <div class=" org_blocks_t">GVP, Cloud Customer 
-                  Success </div>
-              </div>
-            </div>
-            <div class="oj-sm-12 dottedline"> <span class="">* Dotted Line Report</span> </div>
-          </div>
+              <div class="oj-flex oj-sm-12 org_container_inner">
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
+                  <div class="oj-lg-margin-right oj-md-margin-right">
+                    <div class=" org_blocks_b"><img src="css/images/alanlevine.jpg">Alan Levine</div>
+                    <div class=" org_blocks_t">GVP, Retail and Healthcare</div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
+                  <div class="oj-lg-margin-right oj-md-margin-right">
+                    <div class=" org_blocks_b"><img src="css/images/robinlink.jpg">Robin Link</div>
+                    <div class=" org_blocks_t">GVP, Enterprise</div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
+                  <div class="oj-lg-margin-right">
+                    <div class=" org_blocks_b"><img src="css/images/larry_welles.jpg">Larry Welles </div>
+                    <div class=" org_blocks_t">GVP, FSI and Telco</div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
+                  <div class="oj-lg-margin-right oj-md-margin-right">
+                    <div class=" org_blocks_b"><img src="css/images/edwinupson.jpg">Edwin Upson</div>
+                    <div class=" org_blocks_t">GVP, National</div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
+                  <div class="oj-flex-item oj-sm-12 "><h1 class="oj-md-only-hide"><br></h1></div>
+                  <div class="oj-lg-margin-right oj-md-margin-right">
+                    <div class=" org_blocks_b"><img src="css/images/aaroncornfeld.jpg">Aaron Cornfeld *</div>
+                    <div class=" org_blocks_t">GVP, Public Sector </div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks yellow">
+                  <div class="oj-flex-item oj-sm-12 ">
+                    <h1>
+                      <a href="https://my.oracle.com/site/nasc/Sales/Organizations/NAS/CloudPlatforms/index.html" target="_blank">Platform Specialists</a>
+                    </h1>
+                  </div>
+                  <div class="oj-lg-margin-right">
+                    <div class=" org_blocks_b"><img src="css/images/joestrada.jpg">Joe Strada</div>
+                    <div class=" org_blocks_t">GVP, Cloud Platform Specialists</div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks yellow">
+                  <div class="oj-flex-item oj-sm-12 "><h1><br></h1></div>
+                  <div class="oj-lg-margin-right oj-md-margin-right">
+                    <div class=" org_blocks_b"><img src="css/images/adamdriver.jpg">Adam Driver *</div>
+                    <div class=" org_blocks_t">GVP, Analytics Specialists</div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks pink">
+                  <div class="oj-flex-item oj-sm-12 "><h1>Hardware</h1></div>
+                  <div class="oj-lg-margin-right oj-md-margin-right">
+                    <div class=" org_blocks_b"> <img src="css/images/chrishause.jpg">Chris Hause *</div>
+                    <div class=" org_blocks_t">GVP, Hardware Specialists</div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks green">
+                  <div class="oj-flex-item oj-sm-12"><h1>Oracle Digital</h1></div>
+                  <div class="oj-lg-margin-right">
+                    <div class=" org_blocks_b"> <img src="css/images/carlgriffin.jpg">Carl Griffin</div>
+                    <div class=" org_blocks_t">GVP, Solution Engineering Specialists</div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks blue">
+                  <div class="oj-flex-item oj-sm-12 "><h1>SE Excellence</h1></div>
+                  <div class="oj-lg-margin-right oj-md-margin-right">
+                    <div class=" org_blocks_b"> <img src="css/images/timkelly.jpg">Tim Kelly</div>
+                    <div class=" org_blocks_t">VP, SE Excellence Specialists</div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks red">
+                  <div class="oj-flex-item oj-sm-12 ">
+                    <h1>
+                      <a href="http://retriever.us.oracle.com/apex/f?p=121:22:2707052959961820::NO:RP:P22_CONTAINER_ID,P22_PREV_PAGE:80873,112" target="_blank">Industry Advisors</a>
+                    </h1>
+                  </div>
+                  <div class="oj-lg-margin-right oj-md-margin-right">
+                    <div class=" org_blocks_b"><img src="css/images/jimmckeighan.jpg">Jim Mckeighan</div>
+                    <div class=" org_blocks_t">VP, Industry Advisors Specialists</div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks blue">
+                  <div class="oj-flex-item oj-sm-12 "><h1>Cloud Solution Hubs</h1></div>
+                  <div class="oj-lg-margin-right">
+                    <div class=" org_blocks_b"><img src="css/images/hamza.jpg">Hamza Jahangir</div>
+                    <div class=" org_blocks_t">VP, Solution Engineering Specialists</div>
+                  </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-md-4 oj-lg-3 org_blocks yellow">
+                  <div class="oj-flex-item oj-sm-12 "><h1>Cloud Customer Success</h1></div>
+                  <div class="oj-lg-margin-right">
+                    <div class=" org_blocks_b"> <img src="css/images/misha.jpg">Misha Logvinov</div>
+                    <div class=" org_blocks_t">GVP, Cloud Customer Success</div>
+                  </div>
+                </div>
+              </div> -->
+            <div class="oj-sm-12 dottedline"><span class="">* Dotted Line Report</span></div>
+
         </div>
         
         <!------------------------------------ROW3------------------------------------> 
@@ -731,19 +668,17 @@
         <div class="oj-sm-12 golivetitle"><img src="css/images/wins_large.png">&nbsp;Key Wins</div>
         <div class="oj-sm-12">
           <div class="oj-flex">
+            <button class="btn btn-info btn-xs btnaddnewref" data-toggle="modal" data-bind="click:openaddnewkeywinsdialog">Add New Key Wins</button>
             <div id="filmStripwins" class="oj-sm-12" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'visible',arrowplacement:'overlay'}"> <!-- block 1 -->
-              <div class="oj-panel oj-panel-alt2 my-filmstrip-item" 
-           data-bind="" >
+              <div class="oj-panel oj-panel-alt2 my-filmstrip-item" data-bind="">
                 <p><a href="https://fsn.oraclecorp.com/winref/faces/WinStory?winId=39215" target="_blank"><img src="css/images/signet_logo.png"></a><br>
                   ECA: Greg Jerry</p>
               </div>
-              <div class="oj-panel oj-panel-alt2 my-filmstrip-item" 
-           data-bind="" >
+              <div class="oj-panel oj-panel-alt2 my-filmstrip-item" data-bind="">
                 <p><a href="https://fsn.oraclecorp.com/winref/faces/WinStory?source=endeca&winId=55359" target="_blank"><img src="css/images/marvel_logo.png"></a><br>
                   CPS: Gordon Mccart</p>
               </div>
-              <div class="oj-panel oj-panel-alt2 my-filmstrip-item" 
-           data-bind="" >
+              <div class="oj-panel oj-panel-alt2 my-filmstrip-item" data-bind="">
                 <p><a href="https://fsn.oraclecorp.com/winref/faces/WinStory;jsessionid=GBrGsxkFH0kRJLyb6jVdSQzi5x8lV7U04giHZSX8qOdtcgHc3ZfR!-451785802?source=endeca&winId=50755" target="_blank"><img src="css/images/reinhart.png"></a><br>
                   CSM: Chris Fuller</p>
               </div>
@@ -779,7 +714,10 @@
                         <div class="oj-flex oj-sm-12 win_desc">
                           <p>Hear how the entire Oracle ecosystem came together to help Gap embark on a transformational Cloud journey.  Gap is increasing the sophistication of their business and becoming a very nimble retail company with Oracle Cloud. </p>
                           <div class="summaryButton oj-sm-12 oj-flex">
-                            <div class="oj-sm-12">
+                            <div class="oj-sm-12 oj-lg-6">
+                              <button class="oj-sm-align-center oj-flex" data-toggle="modal" data-bind="click:openaddgltextdialog">Edit</button>
+                            </div>
+                            <div class="oj-sm-12 oj-lg-6 oj-flex">
                               <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable2')">Back</button>
                             </div>
                           </div>
@@ -825,7 +763,10 @@
                         <div class="oj-flex oj-sm-12 win_desc">
                           <p>Hear how the extended Oracle team worked together to navigate some very tricky internal processes.  This tight collaboration resulted in a successful Cloud go-live for IKM and our first GoldenGate reference. </p>
                           <div class="summaryButton oj-sm-12 oj-flex">
-                            <div class="oj-sm-12">
+                            <div class="oj-sm-12 oj-lg-6">
+                              <button class="oj-sm-align-center oj-flex" data-toggle="modal" data-bind="click:openaddgltextdialog">Edit</button>
+                            </div>
+                            <div class="oj-sm-12 oj-lg-6 oj-flex">
                               <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable')">Back</button>
                             </div>
                           </div>
@@ -870,6 +811,9 @@
                         <div class="oj-flex oj-sm-12 win_desc">
                           <p>Hear how we got our foot in the door at Stanford to prove that our Oracle Management Cloud was a better alternative to Splunk.  This initial win led to a successful go live and an expansion at Stanford. </p>
                           <div class="summaryButton oj-sm-12 oj-flex">
+                            <div class="oj-sm-12 oj-lg-6">
+                              <button class="oj-sm-align-center oj-flex">Edit</button>
+                            </div>
                             <div class="oj-sm-12">
                               <button class="oj-sm-align-center oj-flex" data-bind="click: buttonClick.bind($data, 'animatable1')">Back</button>
                             </div>
@@ -921,6 +865,7 @@
         <div class="oj-sm-12 refertitle"><img src="css/images/references_icon_lg.png">&nbsp;References</div>
         <div class="oj-md-6  oj-flex">
           <div class="oj-flex oj-sm-12 oj-margin referencesblock">
+            <button class="btn btn-info btn-xs btnaddnewref" data-toggle="modal" data-bind="click:openaddnewrefdialog">Add New References</button>
             <div class="oj-flex oj-sm-12  logorow">
               <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/search/customers/_/N-p5vz?Nr=112&bcid=5508413926001" target="_blank"><img src="css/images/Exhibitor.png"></a></div>
               <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/corporate/pressrelease/oracle-rac-iaas-050917.html" target="_blank"><img src="css/images/ICAT-300x120.png"></a></div>
@@ -931,6 +876,7 @@
         </div>
         <div class="oj-md-6  oj-flex">
           <div class="oj-flex oj-sm-12 oj-margin referencesblock">
+            <button class="btn btn-info btn-xs btnaddnewref" data-toggle="modal" data-bind="click:openaddnewrefdialog">Add New References</button>
             <div class="oj-flex oj-sm-12  ">
               <div class="oj-flex oj-sm-12 logorow">
                 <div class="oj-sm-12 oj-lg-4"><a href="https://www.forbes.com/sites/oracle/2017/03/15/a-fintech-innovators-race-to-the-cloud/#18ac787315e5" target="_blank"><img src="css/images/calypso.png"></a></div>
@@ -957,6 +903,7 @@
     <div class="oj-sm-12 featured bgwhite">
       <div class="oj-flex">
         <div class="oj-sm-12 featuredtitle"><img src="css/images/emp_feature_lg.png">&nbsp;Employee Features</div>
+        <button class="btn btn-info btn-xs btnaddnewref" data-toggle="modal" data-bind="click:openaddnewefdialog">Add New Employee Feature</button>
         <div class="oj-sm-12">
           <div class="oj-flex">
             <div id="filmStripfeatured" class="" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'hidden'}"> <!-- block 1 -->
@@ -1570,5 +1517,251 @@
     </ul>
     <h4>How do you request this service? </h4>
     <p>Asset repository will be published to share successful content at <a href="http://solutionengineering.us.oracle.com">http://solutionengineering.us.oracle.com</a> website. </p>
+  </div>
+</div>
+
+<div style="display:none" id="addslidedialog" title="Add New Slide Details" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 600px;'}}">
+  <div class="oj-dialog-body asdialog">
+    <div class="oj-sm-12 oj-flex">
+      <div class="oj-sm-6">
+        <div class="form-group">
+          <label for="text-area1" class="addslidelabel">Title:</label>
+          <div class="input-group">
+            <textarea id="text-area1" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:sltitle,rootAttributes: {style:'max-width:15em'}}"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="oj-sm-6">
+        <div class="form-group">
+          <label for="text-area2" class="addslidelabel">Description:</label>
+          <div class="input-group">
+            <textarea id="text-area2" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:sldescription,rootAttributes: {style:'max-width:15em'}}"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="oj-sm-12 oj-flex">
+      <div class="oj-sm-6">
+        <div class="form-group">
+          <label class="addslidelabel">Primary Button:</label>
+          <div class="input-group">
+            <input class="form-control" placeholder="Label" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:slbuttonlabel1,rootAttributes: {style:'max-width:15em'}}">
+            <input class="form-control" placeholder="Link" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:sllinktext1, rootAttributes: {style:'max-width:15em'}}">
+          </div>
+        </div>
+      </div>
+      <div class="oj-sm-6">
+        <div class="form-group">
+          <label class="addslidelabel">Secondary Button:</label>
+          <div class="input-group">
+            <input class="form-control" placeholder="Label" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:slbuttonlabel2,rootAttributes: {style:'max-width:15em'}}">
+            <input class="form-control" placeholder="Link" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:sllinktext2, rootAttributes: {style:'max-width:15em'}}">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="addslidelabel">Banner Background:</label>
+      <div class="input-group">
+        <div id="avatars" class="oj-sm-6">
+          <ul style="display: flex;">
+            <div class="oj-flex oj-sm-12">
+            <!-- ko foreach: slimage() -->
+            <li class="avatars">
+              <input type="radio" name="avatar"/>
+              <img class="avatarsimg" data-bind="attr:{'src':source,'id':idimg}"/>
+            </li>
+            <!-- /ko -->
+            </div>
+          </ul>          
+        </div>
+      </div>
+      <div class="oj-md-6 oj-lg-4 oj-sm-float-end">
+        <button data-dismiss="modal" class="tpbutton">Reset</button>
+        <button data-dismiss="modal" class="bluebutton" data-bind="click: addslider">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="display:none" id="addgltextdialog" title="Add Go Lives" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+  <div class="oj-dialog-body">
+    <div class="form-group">
+      <label class="addslidelabel">Go Lives Logo:</label>
+      <div class="input-group">
+        <input class="form-control" class="buttons btn btn-default file" type="file">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="addslidelabel">Hosted By:</label>
+      <div class="input-group">
+        <input class="form-control" type="text">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="addslidelabel">This Episode's Guest:</label>
+      <div class="input-group">
+        <input class="form-control" type="text">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="addslidelabel">Listen to Interview Link:</label>
+      <div class="input-group">
+        <input class="form-control" type="text">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="addslidelabel">Go Lives Background:</label>
+      <div class="input-group">
+        <input class="form-control" class="buttons btn btn-default file" type="file">
+      </div>
+    </div>
+    <label class="addslidelabel">Go Lives Description:</label>
+    <textarea id="txt1" style="height:250px;width:100%" onfocus="clearContents(this);"></textarea><br><br>
+    <button id="okButton" data-dismiss="modal" class="bluebutton" data-bind="ojComponent: {component: 'ojButton', label: 'SAVE'}"> </button>
+  </div>
+</div>
+
+<div style="display:none" id="addnewrefdialog" title="Add New Reference" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 30%;'}}">
+  <div class="oj-dialog-body">
+    <div class="form-group">
+      <label class="addslidelabel">Refrences Logo:</label>
+      <div class="input-group">
+        <input class="form-control" class="buttons btn btn-default file" type="file">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="addslidelabel">References Link:</label>
+      <div class="input-group">
+        <input class="form-control" type="text">
+      </div>
+    </div>
+    <button id="okButton" data-dismiss="modal" class="bluebutton" data-bind="ojComponent: {component: 'ojButton', label: 'SAVE'}"> </button>
+  </div>
+</div>
+
+<div style="display:none" id="addnewkeywinsdialog" title="Add New Key Wins" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 30%;'}}">
+  <div class="oj-dialog-body">
+    <div class="form-group">
+      <label class="addslidelabel">Key Wins Logo:</label>
+      <div class="input-group">
+        <input class="form-control" class="buttons btn btn-default file" type="file">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="addslidelabel">Key Wins Link:</label>
+      <div class="input-group">
+        <input class="form-control" type="text">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="addslidelabel">Key Wins Text:</label>
+      <div class="input-group">
+        <input class="form-control" type="text">
+      </div>
+    </div>
+    <button id="okButton" data-dismiss="modal" class="bluebutton" data-bind="ojComponent: {component: 'ojButton', label: 'SAVE'}"> </button>
+  </div>
+</div>
+
+<div style="display:none" id="addnewkeywinsdialog" title="Add New Key Wins" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 30%;'}}">
+  <div class="oj-dialog-body">
+    <div class="form-group">
+      <label class="addslidelabel">Key Wins Logo:</label>
+      <div class="input-group">
+        <input class="form-control" class="buttons btn btn-default file" type="file">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="addslidelabel">Key Wins Link:</label>
+      <div class="input-group">
+        <input class="form-control" type="text">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="addslidelabel">Key Wins Text:</label>
+      <div class="input-group">
+        <input class="form-control" type="text">
+      </div>
+    </div>
+    <button id="okButton" data-dismiss="modal" class="bluebutton" data-bind="ojComponent: {component: 'ojButton', label: 'SAVE'}"> </button>
+  </div>
+</div>
+
+<div style="display:none" id="addnewefdialog" title="Add New Employee Features" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 30%;'}}">
+  <div class="oj-dialog-body">
+    <div class="form-group">
+      <label class="addslidelabel">Employee Features Background:</label>
+      <div class="input-group">
+        <input class="form-control" class="buttons btn btn-default file" type="file">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="addslidelabel">Employee Features Heading:</label>
+      <div class="input-group">
+        <input class="form-control" type="text">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="addslidelabel">Key Wins Text:</label>
+      <textarea id="txt2" style="height:250px;width:100%" onfocus="clearContents(this);"></textarea><br><br>
+    </div>
+    <button id="okButton" data-dismiss="modal" class="bluebutton" data-bind="ojComponent: {component: 'ojButton', label: 'SAVE'}"> </button>
+  </div>
+</div>
+
+<div style="display:none" id="addneworgdialog" title="Add New People to Organization" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 30%;'}}">
+  <div class="oj-dialog-body">
+    <div class="form-group">
+      <label class="addslidelabel">Organization:</label>
+      <div class="input-group">
+        <select id="basicSelect" data-bind="ojComponent: {
+          component: 'ojSelect',placeholder:'Select your Organization LOV',options: organizationlist(),
+          rootAttributes: {style:'max-width:20em'}
+        }">
+          <!-- ko foreach: organizationlist() -->
+          <option data-bind="text: orgname,value:orgname"></option>
+          <!-- /ko -->
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="addslidelabel">Name:</label>
+      <div class="input-group">
+        <input class="form-control" type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:orgpeoplename}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="addslidelabel">Designation:</label>
+      <div class="input-group">
+        <input class="form-control" type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:orgpeopledesignation}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="addslidelabel">Photo:</label>
+      <input class="btn btn-default file" id="input-1" type="file" onchange="imageselected(event)">
+    </div>
+  </div>
+  <div class="oj-sm-12 footerbuttons">
+    <div class="oj-md-6 oj-lg-6 oj-sm-float-end" style="margin-bottom: 15px;">
+      <div class="oj-flex oj-sm-12">
+        <div class="oj-flex oj-md-6">
+          <input id="resetorg" class="tpbutton" type="reset" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}" />
+        </div>
+        <div class="oj-flex oj-md-6">
+          <button id="okButtonorg" data-bind="ojComponent: { component: 'ojButton', label: 'Submit' }" class="bluebutton" onclick="addorgdialog()"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Organization Image Upload -->
+<div style="display:none" id="orgpeopleimagedialog" title="Upload Organization People Image" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 400px;'}}">
+  <div class="oj-dialog-body">
+    <div class="form-group">
+      <label class="control-label">Choose an Image</label>
+      <input class="btn btn-default file" id="input-1" type="file">
+    </div>
   </div>
 </div>

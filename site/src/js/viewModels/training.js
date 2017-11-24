@@ -5,8 +5,7 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs/ojconveyorbelt', 'ojs/ojcheckboxset', 'ojs/ojcollapsible', 'ojs/ojanimation', 'ojs/ojchart', 'ojs/ojbutton', 'ojs/ojinputtext', 'ojs/ojdialog', 'ojs/ojdatetimepicker',
-             'ojs/ojselectcombobox', 'ojs/ojtimezonedata',],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs/ojconveyorbelt', 'ojs/ojcheckboxset', 'ojs/ojcollapsible', 'ojs/ojanimation', 'ojs/ojchart', 'ojs/ojbutton', 'ojs/ojinputtext', 'ojs/ojdialog', 'ojs/ojdatetimepicker','ojs/ojselectcombobox', 'ojs/ojtimezonedata', 'ojs/ojtree', 'ojs/ojjsontreedatasource'],
     function (oj, ko, $) {
 
         function DashboardViewModel() {
@@ -74,10 +73,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.callmode = ko.observable('');
             self.communityCallList = ko.observableArray([]);
 
-
-
-
-
             // EVENT HANDLER FOR ROLE SELECTION
             rolesselected = function (event, ui) {
                 populateCategory(ui.value);
@@ -111,6 +106,26 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     }
                 }
             }
+
+            getRoleData = function () {
+                $.getJSON("https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/getFiltersV2").
+                then(function (reasons) {
+
+                    // Get Roles in select in REQUEST TRAINING
+                    self.rolelist([]);
+                    // console.log(reasons);
+                    var rolist = reasons.roles;
+                    for (var i = 0; i < rolist.length; i++) {
+
+                        self.rolelist.push({
+                            name: rolist[i].name,
+                            id: rolist[i].id
+                        })
+                    }// console.log(ko.toJSON(self.rolelist()));
+                });
+            }
+
+            getRoleData();
 
             //-----------------   COMMUNITY CALL   ------------------------//
             this.patternValue = ko.observableArray(["dd-MMM-yy hh:mm"]);
@@ -292,12 +307,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
             //  VARIABLES FOR LEFT PANEL CATEGORIES 
             self.refinelist = ko.observableArray([]);
+            self.catlist = ko.observableArray([]);
             self.producttype = ko.observableArray([]);
             self.training_levels = ko.observableArray([]);
             self.training_types = ko.observableArray([]);
             self.cities = ko.observableArray([]);
             self.roles = ko.observableArray([]);
             self.selectedcategories = ko.observableArray([]);
+            self.rl = ko.observableArray([]);
 
             getLeftpanelData = function () {
                 $.getJSON("https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/getFiltersV2").
@@ -305,7 +322,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
                     // CATEGORIES
                     self.refinelist([]);
+                    console.log(reasons);
                     var categorlist = reasons.categories;
+                    console.log(categorlist);
+                    self.catlist([])
+                    self.catlist.push(categorlist);
                     for (var i = 0; i < categorlist.length; i++) {
 
                         self.refinelist.push({
@@ -313,7 +334,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                             id: categorlist[i].id
                         })
                     }
-
                     // PRODUCT TYPE
                     self.producttype([]);
                     var product_typesList = reasons.product_types;
@@ -371,7 +391,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     }
 
 
-                    // console.log(ko.toJSON(self.refinelist()));
+                    console.log(self.refinelist());
+                    console.log(self.catlist());
                 });
             }
 
@@ -451,29 +472,53 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
             /*----------------------------------GET COURSES----------------------------------*/
             self.role = ko.observableArray([]);
-            self.getrole = function () {
-                $.getJSON(baseurl + "getCategories").then(function (roleslist) //CODE FOR THE ROLE POPUP
-                    {
-                        for (var i = 0; i < roleslist.roles.length; i++) {
-                            var filt = roleslist.roles[i].name;
-                            self.role.push({
-                                value: filt,
-                                label: filt
-                            });
-                        }
-                        var selectedrole = sessionStorage.getItem('role');
-                        if (selectedrole == null) {
-                            $("#modalDialog1").ojDialog("open");
-                        } else {
-                            self.selectedrole({
-                                selectedrole
-                            });
-                            self.fetchcourses();
-                        }
+            // self.getrole = function () {
+            //     $.getJSON(baseurl + "getCategories").then(function (roleslist) //CODE FOR THE ROLE POPUP
+            //         {
+            //             for (var i = 0; i < roleslist.roles.length; i++) {
+            //                 var filt = roleslist.roles[i].name;
+            //                 self.role.push({
+            //                     value: filt,
+            //                     label: filt
+            //                 });
+            //             }
+            //             var selectedrole = sessionStorage.getItem('role');
+            //             if (selectedrole == null) {
+            //                 $("#modalDialog1").ojDialog("open");
+            //             } else {
+            //                 self.selectedrole({
+            //                     selectedrole
+            //                 });
+            //                 self.fetchcourses();
+            //             }
 
-                    });
+            //         });
+            // }
+
+            // self.getrole();
+            self.rolelist = ko.observableArray([]);
+            getLeftpanelData = function () {
+                $.getJSON("https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/getFilters").
+                then(function (reasons) {
+
+                    // CATEGORIES
+                    self.rolelist([]);
+                    var categorlist = reasons.categories;
+                    for (var i = 0; i < categorlist.length; i++) {
+
+                        self.rolelist.push({
+                            name: categorlist[i].name,
+                            id: categorlist[i].id
+                        })
+                    }
+
+                    console.log(ko.toJSON(self.rolelist()));
+                });
             }
 
+            self.selectedrole = function () {
+                self.refinelist();
+            }
             self.closecoursedetails = function () {
 
                 $("#coursedetails").ojDialog("close");
@@ -1107,9 +1152,99 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.handleOKClose = function () {
                 document.querySelector("#coursedetails").close();
             };
-
-
+            console.log(jd);
+            $("#tree").on("ojoptionchange", function(e, ui) {
+                if (ui.option == "selection") {
+                    // show selected nodes
+                    var selected = _arrayToStr(ui.value) ;
+                    $("#results").html("<label> id = " + selected + "</label>");
+                }
+            });
         }
         return new DashboardViewModel();
     }
+
 );
+var jd = [
+     { 
+       "title": "News",
+       "attr": {"id": "news"}
+     },
+     { 
+       "title": "Blogs",
+       "attr": {"id": "blogs"},
+       "children": [ { "title": "Today",
+                       "attr": {"id": "today"}
+                     },
+                     { "title": "Yesterday",
+                       "attr": {"id": "yesterday"}
+                     },
+                     { "title": "Archive",
+                       "attr": {"id": "archive"}
+                     }
+                   ]
+     },
+     {
+       "title": "Links", 
+       "attr": {"id": "links"},
+       "children": [ { "title": "Oracle",
+                       "attr": {"id": "oracle"}
+                     },
+                     { "title": "IBM",
+                       "attr": {"id": "ibm"}
+                     },
+                     { "title": "Microsoft",
+                       "attr": {"id": "ms"},
+                       "children": [ { "title": "USA",
+                                       "attr": {"id": "msusa"},
+                                       "children": [ { "title": "North",
+                                                       "attr": {"id": "msusanorth"}
+                                                     },
+                                                     { "title": "South",
+                                                       "attr": {"id": "msusasouth"}
+                                                     },
+                                                     { "title": "East",
+                                                       "attr": {"id": "msusaeast"}
+                                                     },
+                                                     { "title": "West",
+                                                       "attr": {"id": "msusawest"}
+                                                     }
+                                                   ]
+                                     },
+                                     { "title": "Europe",
+                                       "attr": {"id": "msuerope"}
+                                     },
+                                     { "title": "Asia",
+                                       "attr": {"id": "msasia"},
+                                       "children": [ { "title": "Japan",
+                                                       "attr": {"id": "asiajap"}
+                                                     },
+                                                     { "title": "China",
+                                                       "attr": {"id": "asiachina"}
+                                                     },
+                                                     { "title": "India",
+                                                       "attr": {"id": "asiaindia"}
+                                                     }
+                                                   ]
+                                     }
+                                   ]
+                     }
+                   ]
+     }
+   ] ;
+
+
+// Convert a jQuery list of html element nodes to string containing node id's.
+function _arrayToStr(arr)
+{
+var s = "" ;
+$.each(arr, function(i, val)
+{
+  if (i) {
+    s += ", " ;
+  }
+  s += $(arr[i]).attr("id") ;
+}) ;
+
+return s ;
+};
