@@ -294,7 +294,7 @@
                   </div>
                 </div>
               </div>
-              <div class="oj-flex-item oj-md-8 oj-lg-9"> 
+              <div class="oj-flex-item oj-md-8 oj-lg-9 rightcoursesblock"> 
                 <!-- ko foreach: categories -->
                 <div class="oj-flex">
                   <div class="oj-sm-12 catheadings  ">
@@ -303,10 +303,16 @@
                   <div class="oj-flex oj-sm-12 blocksouter"> 
                     <!-- ko foreach: courses -->
                     <div class="oj-sm-12 oj-md-6 oj-lg-4 blocks oj-flex-item oj-margin"> 
+                    <div class="oj-sm-12 blocksinner"> 
                       <!-- <span class="badge">Mandatory Course</span> -->
-                      <div class="title" data-bind="text:name"></div>
-                      <div class="desc" data-bind="html:subdescription"></div>
-                      <a data-bind="click:showcoursedetails" target="_blank" style="cursor:pointer" class="whitebutton">View Details</a> </div>
+                      <div class="coursetitle" data-bind="text:name"></div>
+                      <!--<div class="desc" data-bind="html:subdescription"></div>-->
+                      <div class="desc" data-bind="">Subdescription here</div>
+                      <!--<a data-bind="click:showcoursedetails" target="_blank" style="cursor:pointer" class="whitebutton">View Details</a>-->
+                    </div>   <div class="middle">
+    <div class="text"><a data-bind="click:showcoursedetails" target="_blank" style="cursor:pointer">View More</a></div>
+  </div> 
+                       </div>
                     
                     <!-- /ko --> 
                   </div>
