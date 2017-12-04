@@ -45,6 +45,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         },
 		'archive': {
           label: 'Archive'
+        },
+		'empfeaturearchive': {
+          label: 'Employee Feature Archive'
         }
       });
       oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();

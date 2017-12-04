@@ -84,6 +84,9 @@ $screenXlargemedRange1: 1281px, 1366px !default;
 $responsiveQueryXlargemed1:   "screen and (max-width: #{upper-bound($screenXlargemedRange1)})" !default;
 
 
+$screenXlargemedRange2: 1281px, 1349px !default;
+$responsiveQueryXlargemed2:   "screen and (max-width: #{upper-bound($screenXlargemedRange2)})" !default;
+
 $screenXlargemedRange: 1367px, 1440px !default;
 $responsiveQueryXlargemed:   "screen and (max-width: #{upper-bound($screenXlargemedRange)})" !default;
 

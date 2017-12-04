@@ -15,7 +15,8 @@
         }">
         </select>
         <div class="oj-dialog-footer">
-          <button id="okButton" onclick="roleselected()" data-bind="ojComponent: {component: 'ojButton', label: 'Okay'},click:closeRole"> </button>
+          <button id="okButton" onclick="roleselected()" data-bind="ojComponent: {component: 'ojButton', label: 'Okay'},click:closeRole">
+          </button>
         </div>
       </form>
     </div>
@@ -23,7 +24,7 @@
 </div>
 <div id="trainingdialogWrappe4">
   <div id="trainingDialog" title="Request Training" data-bind="ojComponent:{component: 'ojDialog',cancelBehavior: 'icon',rootAttributes: { style: 'width: 70%; height: auto; min-width 240px; '}}">
-    <div class="oj-dialog-body"> 
+    <div class="oj-dialog-body">
       <!-- FORM -->
       <div id="form-container" class="oj-form-layout reqtraining">
         <div class="reqform">
@@ -102,12 +103,12 @@
               <div class="oj-sm-12 footerbuttons">
                 <div class="oj-md-6 oj-lg-4 oj-sm-float-end">
                   <div class="oj-flex oj-sm-12">
-                  <div class="oj-flex oj-md-6">
-                    <input id="reset" type="reset" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}" class="nobutton" />
-                  </div>
-                  <div class="oj-flex oj-md-6">
-                  <button id="button" data-bind="ojComponent: { component: 'ojButton', label: 'Submit' }" class="bluebutton">
-                  </div>
+                    <div class="oj-flex oj-md-6">
+                      <input id="reset" type="reset" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}" class="nobutton" />
+                    </div>
+                    <div class="oj-flex oj-md-6">
+                      <button id="button" data-bind="ojComponent: { component: 'ojButton', label: 'Submit' }" class="bluebutton">
+                    </div>
                   </div>
                   </button>
                 </div>
@@ -120,27 +121,48 @@
   </div>
   <div class="oj-row subnav">
     <div id="tabs-container">
-      <div id="tabs" data-bind="ojComponent:{component: 'ojTabs',orientation: 'horizontal', disabledTabs: disabledtab}"> 
+      <div id="tabs" data-bind="ojComponent:{component: 'ojTabs',orientation: 'horizontal', disabledTabs: disabledtab}">
         <!-- tab bar -->
-        
+
         <ul class="hnav">
-          <li><img src="css/images/course-icon.jpg" align="middle">&nbsp;<span>Training Courses</span></li>
-          <li><img src="css/images/community-calls-icon.jpg" align="middle">&nbsp;<span>Community Calls</span></li>
-          <li><img src="css/images/offer-icon.jpg" align="middle">&nbsp;<span>Offers</span></li>
-          <li><img src="css/images/offer-icon.jpg" align="middle">&nbsp;<span>Events</span></li>
-          <li onclick="window.open('http://solutionengineering.us.oracle.com/hubs/?root=ecacertification')" align="middle"><img src="css/images/certificate-icon.jpg">&nbsp;<a href="#">ECA Certification</a></li>
-          <li onclick="window.open('http://solutionengineering.us.oracle.com/hubs/?root=ecaenablement')" align="middle"><img src="css/images/enablement_icon.png">&nbsp;<a href="#">ECA Enablement</a></li>
-          <li><img src="css/images/admin-icon.jpg" align="middle">&nbsp;<span>Admin</span></li>
+          <li>
+            <img src="css/images/course-icon.jpg" align="middle">&nbsp;
+            <span>Training Courses</span>
+          </li>
+          <li>
+            <img src="css/images/community-calls-icon.jpg" align="middle">&nbsp;
+            <span>Community Calls</span>
+          </li>
+          <li>
+            <img src="css/images/offer-icon.jpg" align="middle">&nbsp;
+            <span>Offers</span>
+          </li>
+          <li>
+            <img src="css/images/offer-icon.jpg" align="middle">&nbsp;
+            <span>Events</span>
+          </li>
+          <li onclick="window.open('http://solutionengineering.us.oracle.com/hubs/?root=ecacertification')" align="middle">
+            <img src="css/images/certificate-icon.jpg">&nbsp;
+            <a href="#">ECA Certification</a>
+          </li>
+          <li onclick="window.open('http://solutionengineering.us.oracle.com/hubs/?root=ecaenablement')" align="middle">
+            <img src="css/images/enablement_icon.png">&nbsp;
+            <a href="#">ECA Enablement</a>
+          </li>
+          <li>
+            <img src="css/images/admin-icon.jpg" align="middle">&nbsp;
+            <span>Admin</span>
+          </li>
         </ul>
-        
+
         <!-- tab contents -->
-        
+
         <div id="tabs-1">
-          <div class="container"> 
+          <div class="container">
             <!-- SEARCH -->
             <form id="form1">
               <div class="search">
-                <button id="createTrainingButton" class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
+                <button id="createTrainingButton" class="reqtrain-button oj-xl-float-end communityadmin" data-bind="ojComponent: {
                       component: 'ojButton',
                       label: 'Create Course'},click:openCreatetraining"> </button>
               </div>
@@ -170,8 +192,8 @@
                   <div class="oj-flex-item refine">
                     <div class="title">Refine Courses</div>
                     <hr>
-                    
-                    <!-- ~~~~~~~~~~~~~ CATEGORIES ~~~~~~~~~~~~~~ --> 
+
+                    <!-- ~~~~~~~~~~~~~ CATEGORIES ~~~~~~~~~~~~~~ -->
                     <!-- ko if: refinelist().length>0 -->
                     <div class="titlesmall">Categories</div>
                     <!-- /ko -->
@@ -184,13 +206,15 @@
                               <input type="checkbox" class="category" name="category" data-bind="value: id" onchange="refineupdate(this)">
                             </label>
                           </div>
-                          <div class="oj-sm-11"> <span data-bind="text: name"></span> </div>
+                          <div class="oj-sm-11">
+                            <span data-bind="text: name"></span>
+                          </div>
                         </div>
                       </li>
                       <!-- /ko -->
                     </ul>
-                    
-                    <!-- ~~~~~~~~~~~~~ PRODUCT TYPE ~~~~~~~~~~~~~~ --> 
+
+                    <!-- ~~~~~~~~~~~~~ PRODUCT TYPE ~~~~~~~~~~~~~~ -->
                     <!-- ko if: producttype().length>0 -->
                     <div class="titlesmall">Product Type</div>
                     <!-- /ko -->
@@ -203,14 +227,16 @@
                               <input type="checkbox" class="prodtype" name="prodtype" data-bind="value: name" onchange="refineupdate(this)">
                             </label>
                           </div>
-                          <div class="oj-sm-11"> <span data-bind="text: name"></span> </div>
+                          <div class="oj-sm-11">
+                            <span data-bind="text: name"></span>
+                          </div>
                         </div>
                       </li>
-                      
+
                       <!-- /ko -->
                     </ul>
-                    
-                    <!-- ~~~~~~~~~~~~~ TRAINING LEVEL ~~~~~~~~~~~~~~ --> 
+
+                    <!-- ~~~~~~~~~~~~~ TRAINING LEVEL ~~~~~~~~~~~~~~ -->
                     <!-- ko if: training_levels().length>0 -->
                     <div class="titlesmall">Training Level</div>
                     <!-- /ko -->
@@ -223,13 +249,15 @@
                               <input type="checkbox" class="traininglevel" name="traininglevel" data-bind="value: name" onchange="refineupdate(this)">
                             </label>
                           </div>
-                          <div class="oj-sm-11"> <span data-bind="text: name"></span> </div>
+                          <div class="oj-sm-11">
+                            <span data-bind="text: name"></span>
+                          </div>
                         </div>
                       </li>
-                      
+
                       <!-- /ko -->
                     </ul>
-                    <!-- ~~~~~~~~~~~~~ TRAINING TYPE ~~~~~~~~~~~~~~ --> 
+                    <!-- ~~~~~~~~~~~~~ TRAINING TYPE ~~~~~~~~~~~~~~ -->
                     <!-- ko if: training_types().length>0 -->
                     <div class="titlesmall">Training Type</div>
                     <!-- /ko -->
@@ -242,13 +270,15 @@
                               <input type="checkbox" class="trainingtype" name="trainingtype" data-bind="value: name" onchange="refineupdate(this)">
                             </label>
                           </div>
-                          <div class="oj-sm-11"> <span data-bind="text: name"></span> </div>
+                          <div class="oj-sm-11">
+                            <span data-bind="text: name"></span>
+                          </div>
                         </div>
                       </li>
-                      
+
                       <!-- /ko -->
                     </ul>
-                    <!-- ~~~~~~~~~~~~~ CITIES ~~~~~~~~~~~~~~ --> 
+                    <!-- ~~~~~~~~~~~~~ CITIES ~~~~~~~~~~~~~~ -->
                     <!-- ko if: cities().length>0 -->
                     <div class="titlesmall">Cities</div>
                     <!-- /ko -->
@@ -261,14 +291,16 @@
                               <input type="checkbox" class="cities" name="cities" data-bind="value: name" onchange="refineupdate(this)">
                             </label>
                           </div>
-                          <div class="oj-sm-11"> <span data-bind="text: name"></span> </div>
+                          <div class="oj-sm-11">
+                            <span data-bind="text: name"></span>
+                          </div>
                         </div>
                       </li>
-                      
+
                       <!-- /ko -->
                     </ul>
-                    
-                    <!-- ~~~~~~~~~~~~~ ROLES ~~~~~~~~~~~~~~ --> 
+
+                    <!-- ~~~~~~~~~~~~~ ROLES ~~~~~~~~~~~~~~ -->
                     <!-- ko if: roles().length>0 -->
                     <div class="titlesmall">Roles</div>
                     <!-- /ko -->
@@ -281,10 +313,12 @@
                               <input type="checkbox" class="roles" name="roles" data-bind="value: id" onchange="refineupdate(this)">
                             </label>
                           </div>
-                          <div class="oj-sm-11"> <span data-bind="text: name"></span> </div>
+                          <div class="oj-sm-11">
+                            <span data-bind="text: name"></span>
+                          </div>
                         </div>
                       </li>
-                      
+
                       <!-- /ko -->
                     </ul>
                     <div class="oj-flex refinebuttons">
@@ -300,690 +334,707 @@
                   </div>
                 </div>
               </div>
-              <div class="oj-flex-item oj-md-8 oj-lg-9 rightcoursesblock"> 
+              <div class="oj-flex-item oj-md-8 oj-lg-9 rightcoursesblock">
                 <!-- ko foreach: categories -->
-                <div class="oj-flex">
+                <div class="oj-flex oj-margin">
                   <div class="oj-sm-12 catheadings  ">
                     <h4 class="oj-sm-12" data-bind="text:name"></h4>
                   </div>
-                  <div class="oj-flex oj-sm-12 blocksouter"> 
+                  <div class="oj-flex oj-sm-12 blocksouter">
                     <!-- ko foreach: courses -->
                     <div class="oj-sm-12 oj-md-6 oj-lg-4 blocks oj-flex-item oj-margin">
-                      <div class="oj-sm-12 blocksinner"> 
+                      <!--<span class="communityadmin" style="cursor: pointer;color: red;float: right" data-bind="click:function(){deletecourse(this)}">X</span>-->
+                      <div class="oj-sm-12 communityadmin" style="margin-bottom: 5px">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Edit community call"
+                          data-bind="click:edittraining" target="_blank"></i>
+                        <i class="fa fa-trash-o" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Delete Course" data-bind="click:function(){deletecourse(this)}"
+                          target="_blank"></i>
+                      </div>
+                      <div class="oj-sm-12 blocksinner">
                         <!-- <span class="badge">Mandatory Course</span> -->
                         <div class="coursetitle" data-bind="text:name"></div>
                         <!--<div class="desc" data-bind="html:subdescription"></div>-->
-                        <div class="desc">Type: <span class="desc" data-bind="text:training_type"></span> /
-                        Level: <span class="desc" data-bind="text:training_level"></span></div>
-                        <!--<a data-bind="click:showcoursedetails" target="_blank" style="cursor:pointer" class="whitebutton">View Details</a>--> 
+                        <div class="desc">Type:
+                          <span class="desc" data-bind="text:training_type"></span> / Level:
+                          <span class="desc" data-bind="text:training_level"></span>
+                        </div>
+                        <!--<a data-bind="click:showcoursedetails" target="_blank" style="cursor:pointer" class="whitebutton">View Details</a>-->
                       </div>
                       <div class="middle">
-                        <div class="text"><a data-bind="click:showcoursedetails" target="_blank" style="cursor:pointer">View More</a></div>
+                        <div class="text">
+                          <a data-bind="click:showcoursedetails" target="_blank" style="cursor:pointer">View More</a>
+                        </div>
                       </div>
                     </div>
-                    
-                    <!-- /ko --> 
+
+                    <!-- /ko -->
                   </div>
                 </div>
-                <!-- /ko --> 
+                <!-- /ko -->
               </div>
             </div>
           </div>
         </div>
-        
+
         <!--========================== COMMUNITY CALLS ==========================-->
         <div id="tabs-2" class="ccalls">
-          <div class="container"> 
-          <!-- modal for create community call -->
-          <div style="display:none" id="createcommunitycall_id" title="Create Community Call" 
-             data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-            <div class="oj-dialog-body">
-              <!-- body start -->
-              <div class="oj-flex">
-                <div class="oj-lg-6">
-                  <div class="oj-margin-right nomargin-md">
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Community Call Name </label><label class="required">*</label>
+          <div class="container">
+            <!-- modal for create community call -->
+            <div style="display:none" id="createcommunitycall_id" title="Create Community Call" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+              <div class="dialogbodymain">
+              <div class="dialogbody">
+                <!-- body start -->
+                <div class="oj-flex">
+                  <div class="oj-lg-6">
+                    <div class="oj-margin-right nomargin-md">
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Community Call Name </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input required type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:callname}" />
+                        </div>
                       </div>
-                      <div class="oj-sm-12">
-                        <input required type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:callname}"
-                              />
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Who is the Speaker </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:callspkr}" />
+                        </div>
                       </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Who is the Speaker </label><label class="required">*</label>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Designation</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:calldesignation}" />
+                        </div>
                       </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:callspkr}"
-                              />
-                      </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Designation</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:calldesignation}"
-                              />
-                      </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Select Roles </label><label class="required">*</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <select size=5 style="width:100%" multiple="true" data-bind="
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Select Roles </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <select size=5 style="width:100%" multiple="true" data-bind="
                           options: roles,
                           optionsText: 'name',
                           optionsValue: 'name',
                           selectedOptions: selectedrole">
-                        </select>
+                          </select>
+                        </div>
                       </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Select Call Type </label><label class="required">*</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <select size=3 style="width:100%"  data-bind="
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Select Call Type </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <select size=3 style="width:100%" data-bind="
                           options: callmodes,
                           selectedOptions: selectedcallmode">
-                        </select>
+                          </select>
+                        </div>
                       </div>
-                    </div>
-                    <br>  
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Date</label>
-                      </div>
-                      <div class="oj-sm-12">
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Date</label>
+                        </div>
+                        <div class="oj-sm-12">
                           <oj-input-date id="dateTime" value='{{date}}'>
                             </oj-input-date-time>
+                        </div>
                       </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Time</label>
-                      </div>
-                      <div class="oj-sm-12">
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Time</label>
+                        </div>
+                        <div class="oj-sm-12">
                           <oj-input-time id="Time" value='{{starttime}}'>
-                            </oj-input-time>
+                          </oj-input-time>
+                        </div>
+                        <h6 class="hinttext">Select time in PST</h6>
                       </div>
-                      <h6 class="hinttext">Select time in PST</h6>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Organizer Email</label>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Organizer Email</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:organizerEmail}" />
+                        </div>
                       </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:organizerEmail}"
-                              />
-                      </div>
-                    </div>
-                   
-                  </div>
-                </div>
 
-                <div class="oj-lg-6">   
-                  <div class="nomargin-md oj-margin-left">
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Venue</label>
+                    </div>
+                  </div>
+
+                  <div class="oj-lg-6">
+                    <div class="nomargin-md oj-margin-left">
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Venue</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:callvenue}" />
+                        </div>
                       </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:callvenue}"/>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Meeting Link</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:calllink}" />
+                        </div>
+                        <h6 class="hinttext">prefix link with http/https</h6>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Dial in details</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:calldialin}" />
+                        </div>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Description </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:calldesc}"></textarea>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Additional Links</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:addiontal_link}">
+                        </div>
+                        <h6 class="hinttext">prefix link with http/https</h6>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Recording Link</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:callrecordlink}">
+                        </div>
+                        <h6 class="hinttext">prefix link with http/https</h6>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Duration (in minutes) </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:callduration}">
+                          </textarea>
+                        </div>
+                        <h6 class="hinttext">Please enter in minutes</h6>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Invite </label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:invite}">
+                        </div>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Topic</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:topic}" />
+                        </div>
                       </div>
                     </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Meeting Link</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:calllink}"/>
-                      </div>
-                      <h6 class="hinttext">prefix link with http/https</h6>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Dial in details</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:calldialin}"/>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Description </label><label class="required">*</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:calldesc}"></textarea>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Additional Links</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder=""  data-bind="ojComponent: {component: 'ojInputText',value:addiontal_link}">                  
-                      </div>
-                      <h6 class="hinttext">prefix link with http/https</h6>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Recording Link</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder=""  data-bind="ojComponent: {component: 'ojInputText',value:callrecordlink}">
-                      </div>
-                      <h6 class="hinttext">prefix link with http/https</h6>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Duration (in minutes) </label><label class="required">*</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder=""  data-bind="ojComponent: {component: 'ojInputText',value:callduration}">
-                        </textarea>
-                      </div>
-                      <h6 class="hinttext">Please enter in minutes</h6>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Invite </label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder=""  data-bind="ojComponent: {component: 'ojInputText',value:invite}">
-                      </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Topic</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:topic}"
-                              />
-                      </div>
-                    </div>                    
                   </div>
                 </div>
-              </div>
-              <br>
-              <div class="oj-flex">
-                    <div class="oj-md-3">
-                    </div>
-                    <div class="oj-md-3">
-                      <button id="outlinedPush" class="bluebutton" onclick="createcommunitycall()" style="cursor: pointer" data-bind="ojComponent: {
+                <br>
+                <div class="oj-flex">
+                  
+                  <div class="oj-md-3">
+                    <button id="outlinedPush" class="bluebutton" onclick="createcommunitycall()" style="cursor: pointer" data-bind="ojComponent: {
                     component:'ojButton',
                     label: 'Create Community Call'}"> </button>
-                    </div>
-                    <div class="oj-md-3">
-                      <button id="outlinedPush" class="orangebutton" onclick="resetcall()" style="cursor: pointer" data-bind="ojComponent: {
+                  </div>
+                  <div class="oj-md-3">
+                    <button id="outlinedPush" class="orangebutton bluebutton" onclick="resetcall()" style="cursor: pointer" data-bind="ojComponent: {
                     component:'ojButton',  
                     label: 'Reset'}"> </button>
-                    </div>
-                    <div class="oj-flex-item"> </div>
-                    <div class="oj-flex-item"> </div>
+                  </div>
+                  
+                </div>
+
+                <!-- body end -->
               </div>
+              </div>
+            </div>
 
-              <!-- body end -->
-          </div>
-        </div>
-
-        <!-- edit modal start -->
-          <div style="display:none" id="editcommunitycall_id" title="Edit Community Call" 
-             data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-            <div class="oj-dialog-body">
-              <!-- body start -->
-              <div class="oj-flex">
-                <div class="oj-lg-6">
-                  <div class="oj-margin-right nomargin-md">
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Community Call Name </label><label class="required">*</label>
+            <!-- edit modal start -->
+            <div style="display:none" id="editcommunitycall_id" title="Edit Community Call" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+              <div class="dialogbodymain">
+              <div class="dialogbody">
+                <!-- body start -->
+                <div class="oj-flex">
+                  <div class="oj-lg-6">
+                    <div class="oj-margin-right nomargin-md">
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Community Call Name </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input required type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccName}" />
+                        </div>
                       </div>
-                      <div class="oj-sm-12">
-                        <input required type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccName}"
-                              />
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Who is the Speaker </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccSpeaker}" />
+                        </div>
                       </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Who is the Speaker </label><label class="required">*</label>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Designation</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccDesignation}" />
+                        </div>
                       </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccSpeaker}"
-                              />
-                      </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Designation</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccDesignation}"
-                              />
-                      </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Select Roles </label><label class="required">*</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <select size=5 style="width:100%" multiple="true" data-bind="
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Select Roles </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <select size=5 style="width:100%" multiple="true" data-bind="
                           options: roles,
                           optionsText: 'name',
                           optionsValue: 'name',
                           selectedOptions: editccSelectedRoles">
-                        </select>
+                          </select>
+                        </div>
                       </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Select Call Type </label><label class="required">*</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <select size=3 style="width:100%"  data-bind="
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Select Call Type </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <select size=3 style="width:100%" data-bind="
                           options: callmodes,
                           selectedOptions: editccCallType">
-                        </select>
+                          </select>
+                        </div>
                       </div>
-                    </div>
-                    <br>  
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Date</label>
-                      </div>
-                      <div class="oj-sm-12">
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Date</label>
+                        </div>
+                        <div class="oj-sm-12">
                           <oj-input-date id="dateTime" value='{{editccDate}}'>
-                            </oj-input-date>
+                          </oj-input-date>
+                        </div>
                       </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Time</label>
-                      </div>
-                      <div class="oj-sm-12">
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Time</label>
+                        </div>
+                        <div class="oj-sm-12">
                           <oj-input-time id="Time" value='{{editccTime}}'>
-                            </oj-input-time>
+                          </oj-input-time>
+                        </div>
+                        <h6 class="hinttext">Select time in PST</h6>
                       </div>
-                      <h6 class="hinttext">Select time in PST</h6>
-                    </div>
-                    <br>
-                  <div class="oj-flex">
-                    <div class="oj-sm-12">
-                      <label>Organizer Email</label>
-                    </div>
-                    <div class="oj-sm-12">
-                      <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccOrganizerEmail}"/>
-                    </div>
-                  </div>                    
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Organizer Email</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccOrganizerEmail}" />
+                        </div>
+                      </div>
 
+                    </div>
+                  </div>
+
+                  <div class="oj-lg-6">
+                    <div class="nomargin-md oj-margin-left">
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Venue</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccVenue}" />
+                        </div>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Meeting Link</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccMeetingLink}" />
+                        </div>
+                        <h6 class="hinttext">prefix link with http/https</h6>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Dial in details</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccDialin}" />
+                        </div>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Description </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccDescription}"></textarea>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Additional Links</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccAdditionalLinks}">
+                        </div>
+                        <h6 class="hinttext">prefix link with http/https</h6>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Recording Link</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccRecordingLinks}">
+                        </div>
+                        <h6 class="hinttext">prefix link with http/https</h6>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Duration (in minutes) </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccDuration}">
+                          </textarea>
+                        </div>
+                        <h6 class="hinttext">Please enter in minutes</h6>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Invite </label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccInvite}" />
+                        </div>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Topic</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccTopic}" />
+                        </div>
+                      </div>
+
+                    </div>
                   </div>
                 </div>
-
-                <div class="oj-lg-6">   
-                  <div class="nomargin-md oj-margin-left">
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Venue</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccVenue}"/>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Meeting Link</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccMeetingLink}"/>
-                      </div>
-                      <h6 class="hinttext">prefix link with http/https</h6>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Dial in details</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccDialin}"/>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Description </label><label class="required">*</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccDescription}"></textarea>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Additional Links</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder=""  data-bind="ojComponent: {component: 'ojInputText',value:editccAdditionalLinks}">                  
-                      </div>
-                      <h6 class="hinttext">prefix link with http/https</h6>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Recording Link</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder=""  data-bind="ojComponent: {component: 'ojInputText',value:editccRecordingLinks}">
-                      </div>
-                      <h6 class="hinttext">prefix link with http/https</h6>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Duration (in minutes) </label><label class="required">*</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder=""  data-bind="ojComponent: {component: 'ojInputText',value:editccDuration}">
-                        </textarea>
-                      </div>
-                      <h6 class="hinttext">Please enter in minutes</h6>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Invite </label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder=""  data-bind="ojComponent: {component: 'ojInputText',value:editccInvite}"/>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                    <div class="oj-sm-12">
-                      <label>Topic</label>
-                    </div>
-                    <div class="oj-sm-12">
-                      <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccTopic}"/>
-                    </div>
-                  </div>                    
-
-                  </div>
-                </div>
-              </div>
-              <br>
-              <div class="oj-flex">
-                    <div class="oj-md-3">
-                    </div>
-                    <div class="oj-md-3">
-                      <button class="bluebutton" onclick="editCommunityCallValues()" style="cursor: pointer" data-bind="ojComponent: {
+                <br>
+                <div class="oj-flex">
+                 
+                  <div class="oj-md-12">
+                    <button class="bluebutton" onclick="editCommunityCallValues()" style="cursor: pointer" data-bind="ojComponent: {
                     component:'ojButton',
                     label: 'Edit Community Call'}"> </button>
-                    </div>
-                    <!-- <div class="oj-md-3">
+                  </div>
+                  <!-- <div class="oj-md-3">
                       <button id="outlinedPush" class="orangebutton" onclick="resetcall()" style="cursor: pointer" data-bind="ojComponent: {
                     component:'ojButton',  
                     label: 'Reset'}"> </button>
                     </div> -->
-                    <div class="oj-flex-item"> </div>
-                    <div class="oj-flex-item"> </div>
+                  <div class="oj-flex-item"> </div>
+                  <div class="oj-flex-item"> </div>
+                </div>
+
+                <!-- body end -->
               </div>
-
-              <!-- body end -->
-          </div>
-        </div>
-        <!-- edit modal end -->
+              </div>
+            </div>
+            <!-- edit modal end -->
 
 
-        <!-- clone community call modal start -->
-          <div style="display:none" id="clonecommunitycall_id" title="Clone Community Call" 
-             data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-            <div class="oj-dialog-body">
-              <!-- body start -->
-              <div class="oj-flex">
-                <div class="oj-lg-6">
-                  <div class="oj-margin-right nomargin-md">
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Community Call Name </label><label class="required">*</label>
+            <!-- clone community call modal start -->
+            <div style="display:none" id="clonecommunitycall_id" title="Clone Community Call" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+              <div class="oj-dialog-body">
+                <!-- body start -->
+                <div class="oj-flex">
+                  <div class="oj-lg-6">
+                    <div class="oj-margin-right nomargin-md">
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Community Call Name </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input required type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccName}" />
+                        </div>
                       </div>
-                      <div class="oj-sm-12">
-                        <input required type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccName}"
-                              />
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Who is the Speaker </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccSpeaker}" />
+                        </div>
                       </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Who is the Speaker </label><label class="required">*</label>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Designation</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccDesignation}" />
+                        </div>
                       </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccSpeaker}"
-                              />
-                      </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Designation</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccDesignation}"
-                              />
-                      </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Select Roles </label><label class="required">*</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <select size=5 style="width:100%" multiple="true" data-bind="
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Select Roles </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <select size=5 style="width:100%" multiple="true" data-bind="
                           options: roles,
                           optionsText: 'name',
                           optionsValue: 'name',
                           selectedOptions: cloneccSelectedRoles">
-                        </select>
+                          </select>
+                        </div>
                       </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Select Call Type </label><label class="required">*</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <select size=3 style="width:100%"  data-bind="
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Select Call Type </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <select size=3 style="width:100%" data-bind="
                           options: callmodes,
                           selectedOptions: cloneccCallType">
-                        </select>
+                          </select>
+                        </div>
                       </div>
-                    </div>
-                    <br>  
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Date</label>
-                      </div>
-                      <div class="oj-sm-12">
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Date</label>
+                        </div>
+                        <div class="oj-sm-12">
                           <oj-input-date id="clone_date" value='{{cloneccDate}}'>
-                            </oj-input-date>
+                          </oj-input-date>
+                        </div>
                       </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Time</label>
-                      </div>
-                      <div class="oj-sm-12">
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Time</label>
+                        </div>
+                        <div class="oj-sm-12">
                           <oj-input-time id="Time" value='{{cloneccTime}}'>
-                            </oj-input-time>
+                          </oj-input-time>
+                        </div>
+                        <h6 class="hinttext">Select time in PST</h6>
                       </div>
-                      <h6 class="hinttext">Select time in PST</h6>
-                    </div><br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Organizer Email</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccOrganizerEmail}"/>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Organizer Email</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccOrganizerEmail}" />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="oj-lg-6">   
-                  <div class="nomargin-md oj-margin-left">
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Venue</label>
+                  <div class="oj-lg-6">
+                    <div class="nomargin-md oj-margin-left">
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Venue</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccVenue}" />
+                        </div>
                       </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccVenue}"/>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Meeting Link</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccMeetingLink}" />
+                        </div>
+                        <h6 class="hinttext">prefix link with http/https</h6>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Dial in details</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccDialin}" />
+                        </div>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Description </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccDescription}"></textarea>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Additional Links</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccAdditionalLinks}">
+                        </div>
+                        <h6 class="hinttext">prefix link with http/https</h6>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Recording Link</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccRecordingLinks}">
+                        </div>
+                        <h6 class="hinttext">prefix link with http/https</h6>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Duration (in minutes) </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccDuration}">
+                          </textarea>
+                        </div>
+                        <h6 class="hinttext">Please enter in minutes</h6>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Invite </label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccInvite}" />
+                        </div>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Topic</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccTopic}" />
+                        </div>
                       </div>
                     </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Meeting Link</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccMeetingLink}"/>
-                      </div>
-                      <h6 class="hinttext">prefix link with http/https</h6>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Dial in details</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccDialin}"/>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Description </label><label class="required">*</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccDescription}"></textarea>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Additional Links</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder=""  data-bind="ojComponent: {component: 'ojInputText',value:cloneccAdditionalLinks}">                  
-                      </div>
-                      <h6 class="hinttext">prefix link with http/https</h6>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Recording Link</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder=""  data-bind="ojComponent: {component: 'ojInputText',value:cloneccRecordingLinks}">
-                      </div>
-                      <h6 class="hinttext">prefix link with http/https</h6>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Duration (in minutes) </label><label class="required">*</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder=""  data-bind="ojComponent: {component: 'ojInputText',value:cloneccDuration}">
-                        </textarea>
-                      </div>
-                      <h6 class="hinttext">Please enter in minutes</h6>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Invite </label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder=""  data-bind="ojComponent: {component: 'ojInputText',value:cloneccInvite}"/>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="oj-flex">
-                      <div class="oj-sm-12">
-                        <label>Topic</label>
-                      </div>
-                      <div class="oj-sm-12">
-                        <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccTopic}"/>
-                      </div>
-                    </div>  
                   </div>
                 </div>
-              </div>
-              <br>
-              <div class="oj-flex">
-                    <div class="oj-md-3">
-                    </div>
-                    <div class="oj-md-3">
-                      <button id="outlinedPush" class="bluebutton" onclick="createclonecommunitycall()" style="cursor: pointer" data-bind="ojComponent: {
+                <br>
+                <div class="oj-flex">
+                  <div class="oj-md-3">
+                  </div>
+                  <div class="oj-md-3">
+                    <button id="outlinedPush" class="bluebutton" onclick="createclonecommunitycall()" style="cursor: pointer" data-bind="ojComponent: {
                     component:'ojButton',
                     label: 'Clone Community Call'}"> </button>
-                    </div>
-<!--                     <div class="oj-md-3">
+                  </div>
+                  <!--                     <div class="oj-md-3">
                       <button id="outlinedPush" class="orangebutton" onclick="resetcall()" style="cursor: pointer" data-bind="ojComponent: {
                     component:'ojButton',  
                     label: 'Reset'}"> </button>
                     </div> -->
-                    <div class="oj-flex-item"> </div>
-                    <div class="oj-flex-item"> </div>
-              </div>
+                  <div class="oj-flex-item"> </div>
+                  <div class="oj-flex-item"> </div>
+                </div>
 
-              <!-- body end -->
-          </div>
-        </div>
-        <!-- clone community call modal end -->         
-          <!-- SEARCH -->
-          <form id="form1">
-            <div class="oj-flex search">
-              <div class="oj-flex-item oj-sm-8">
-                <input id="search-input" style="margin-bottom: 10px" placeholder="Search speaker, community call, description. . ." data-bind="ojComponent:{
+                <!-- body end -->
+              </div>
+            </div>
+            <!-- clone community call modal end -->
+            <!-- SEARCH -->
+            <form id="form1">
+              <div class="oj-flex search">
+                <div class="oj-flex-item oj-sm-8">
+                  <input id="search-input" style="margin-bottom: 10px" placeholder="Search speaker, community call, description. . ." data-bind="ojComponent:{
             component: 'ojInputSearch', 
             value: searchcallstext,
             update : searchcommunitycalls
           }" />
-              </div>
-              
-              <div class="oj-flex-item oj-md-4 req_block">
-                <button class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
+                </div>
+
+                <div class="oj-flex-item oj-md-4 req_block">
+                  <button class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
             component: 'ojButton',
             chroming: 'full',
             label: 'Create Community Call'},click:openCommunityCallDialog"> </button>
+                </div>
               </div>
-            </div>
-          </form>
-            
+            </form>
+
             <!-- Repeat this -->
             <div class=" oj-flex coursesblock">
               <div class="oj-flex-item oj-md-4 oj-lg-3">
@@ -991,12 +1042,12 @@
                   <div class="oj-flex-item refine">
                     <div class="title">Refine Courses</div>
                     <hr>
-                    
-                    <!-- ~~~~~~~~~~~~~ ROLES ~~~~~~~~~~~~~~ --> 
+
+                    <!-- ~~~~~~~~~~~~~ ROLES ~~~~~~~~~~~~~~ -->
                     <!-- ko if: roles().length>0 -->
-                    
+
                     <div class="titlesmall">Roles</div>
-                    
+
                     <!-- /ko -->
                     <ul class="refinelist">
                       <!-- ko foreach: roles -->
@@ -1007,14 +1058,16 @@
                               <input type="checkbox" class="refine" name="community_roles" data-bind="value: name" onchange="refineupdate(this)">
                             </label>
                           </div>
-                          <div class="oj-sm-11"> <span data-bind="text: name"></span> </div>
+                          <div class="oj-sm-11">
+                            <span data-bind="text: name"></span>
+                          </div>
                         </div>
                       </li>
-                      
+
                       <!-- /ko -->
                     </ul>
                     <!-- ~~~~~~~~~~~~~ CALL MODE ~~~~~~~~~~~~~~ -->
-                    
+
                     <div class="titlesmall">Call Type</div>
                     <ul class="refinelist">
                       <li>
@@ -1024,7 +1077,9 @@
                               <input type="checkbox" class="refine" name="communitymodes" value="virtual" onchange="refineupdate(this)">
                             </label>
                           </div>
-                          <div class="oj-sm-11"> <span>Virtual</span> </div>
+                          <div class="oj-sm-11">
+                            <span>Virtual</span>
+                          </div>
                         </div>
                       </li>
                       <li>
@@ -1034,12 +1089,14 @@
                               <input type="checkbox" class="refine" name="communitymodes" value="Town Hall" onchange="refineupdate(this)">
                             </label>
                           </div>
-                          <div class="oj-sm-11"> <span>Town Hall</span> </div>
+                          <div class="oj-sm-11">
+                            <span>Town Hall</span>
+                          </div>
                         </div>
                       </li>
-                      <!-- </ul> --> 
-                      <!-- ~~~~~~~~~~~~~ PAST CALL ~~~~~~~~~~~~~~ --> 
-                      <!-- <div class="titlesmall">PAST CALLS</div> --> 
+                      <!-- </ul> -->
+                      <!-- ~~~~~~~~~~~~~ PAST CALL ~~~~~~~~~~~~~~ -->
+                      <!-- <div class="titlesmall">PAST CALLS</div> -->
                       <!-- <ul class="refinelist"> -->
                       <li>
                         <div class="oj-flex">
@@ -1048,7 +1105,9 @@
                               <input type="checkbox" class="refine" name="past" value="past" onchange="refineupdate(this)">
                             </label>
                           </div>
-                          <div class="oj-sm-11"> <span>Replay</span> </div>
+                          <div class="oj-sm-11">
+                            <span>Replay</span>
+                          </div>
                         </div>
                       </li>
                     </ul>
@@ -1070,48 +1129,72 @@
               </div>
               <div class="oj-flex-item oj-md-8 oj-lg-9 communitycall">
                 <Label class="required smallinfotext">Date-Time is in PST </Label>
-              <!-- ko foreach:communityCallList -->
+                <!-- ko foreach:communityCallList -->
                 <div class="oj-flex oj-sm-12 ccrow">
                   <div class="oj-sm-12 oj-lg-3  oj-flex">
                     <div class="oj-sm-12 bluebg oj-flex-item">
-                      <p><span class="name" data-bind="text:name"></span></span> <br>
+                      <p>
+                        <span class="name" data-bind="text:name"></span>
+                        </span>
+                        <br>
                     </div>
                   </div>
                   <div class="oj-sm-12 oj-lg-9">
                     <div class="bgwhitesmall oj-flex oj-margin-left oj-sm-12">
                       <div class="oj-sm-12 oj-lg-1 infobox">
-                        <div class="lgreybg"><span class="infotext">INFO</span></div>
+                        <div class="lgreybg">
+                          <span class="infotext">INFO</span>
+                        </div>
                       </div>
                       <div class="oj-sm-12 oj-lg-11 oj-flex originfo">
                         <div class="oj-sm-12 oj-lg-4">
-                          
-                          <p><strong class="blue">Speaker</strong><br>
-                            <span data-bind="text:speaker"></span><br>
-                            <span data-bind="text:designation"></p>
+
+                          <p>
+                            <strong class="blue">Speaker</strong>
+                            <br>
+                            <span data-bind="text:speaker"></span>
+                            <br>
+                            <span data-bind="text:designation">
+                          </p>
                         </div>
                         <div class="oj-sm-12 oj-lg-3">
-                          <p><strong class="blue">Date</strong><br>
-                            <span data-bind="text:call_date"></span><br><span data-bind="text:call_time"></span><br><span data-bind="text:callduration"></span></p>
+                          <p>
+                            <strong class="blue">Date</strong>
+                            <br>
+                            <span data-bind="text:call_date"></span>
+                            <br>
+                            <span data-bind="text:call_time"></span>
+                            <br>
+                            <span data-bind="text:callduration"></span>
+                          </p>
                         </div>
-                         <div class="oj-sm-12 oj-lg-3">
-                          <p id="ccct"><strong class="blue">Type</strong><br>
-                            <span data-bind="text:mode_of_call"></span></p>
-                         
+                        <div class="oj-sm-12 oj-lg-3">
+                          <p id="ccct">
+                            <strong class="blue">Type</strong>
+                            <br>
+                            <span data-bind="text:mode_of_call"></span>
+                          </p>
+
                         </div>
-                      <div class="oj-sm-12 oj-lg-2 details oj-flex">
-                        <div class="oj-sm-12 communityadmin">
-                          <i class="fa fa-files-o" aria-hidden="true" style="cursor: pointer" title="Duplicate community call" data-bind="click:cloneCommunityCall" target="_blank"></i> 
-                          <i class="fa fa-pencil-square-o" aria-hidden="true" style="cursor: pointer" title="Edit community call" data-bind="click:editcommunitycall" target="_blank"></i> 
-                          <i class="fa fa-trash-o" aria-hidden="true" style="cursor: pointer" title="Delete community call" data-bind="click:deleteCommunityCall" target="_blank"></i> 
-                        </div>
-                         <div class="oj-sm-12"> <a data-bind="click:showcommunitycallsdetails" target="_blank" class="ccdetailsbutton">Details</a></div>
+                        <div class="oj-sm-12 oj-lg-2 details oj-flex">
+                          <div class="oj-sm-12 communityadmin">
+                            <i class="fa fa-files-o" aria-hidden="true" style="cursor: pointer" title="Duplicate community call" data-bind="click:cloneCommunityCall"
+                              target="_blank"></i>
+                            <i class="fa fa-pencil-square-o" aria-hidden="true" style="cursor: pointer" title="Edit community call" data-bind="click:editcommunitycall"
+                              target="_blank"></i>
+                            <i class="fa fa-trash-o" aria-hidden="true" style="cursor: pointer" title="Delete community call" data-bind="click:deleteCommunityCall"
+                              target="_blank"></i>
+                          </div>
+                          <div class="oj-sm-12">
+                            <a data-bind="click:showcommunitycallsdetails" target="_blank" class="ccdetailsbutton">Details</a>
+                          </div>
                         </div>
 
                       </div>
                     </div>
-                  </div> 
+                  </div>
                 </div>
-              <!-- /ko -->
+                <!-- /ko -->
               </div>
             </div>
           </div>
@@ -1120,145 +1203,212 @@
           <div class="container">
             <div class="row">
               <div class="oj-flex offerrow">
-                <div class="oj-sm-12 oj-md-1 "> <div class="offerribbon">60% Offer</div> </div>
-                <div class="oj-sm-12 oj-md-11 oj-flex desccontainer">
-                <div class="oj-sm-12 oj-md-3 oj-lg-2"><img src="css/images/offer_image.jpg"></div>
-                <div class="oj-sm-12 oj-md-5 oj-md-5offerdesc"><div class="offerheading">Social Media Marketing</div><br><div>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </div></div>
-                <div class="oj-sm-12 oj-md-3 caldate"><img src="css/images/cal_offers_icon.png">Starts on 27 sep,2017 </div>
-                <div class="oj-sm-12 oj-md-12 oj-lg-2"><button class="enroll">Enroll</button></div>
+                <div class="oj-sm-12 oj-md-1 ">
+                  <div class="offerribbon">60% Offer</div>
                 </div>
-                
+                <div class="oj-sm-12 oj-md-11 oj-flex desccontainer">
+                  <div class="oj-sm-12 oj-md-3 oj-lg-2">
+                    <img src="css/images/offer_image.jpg">
+                  </div>
+                  <div class="oj-sm-12 oj-md-5 oj-md-5offerdesc">
+                    <div class="offerheading">Social Media Marketing</div>
+                    <br>
+                    <div>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </div>
+                  </div>
+                  <div class="oj-sm-12 oj-md-3 caldate">
+                    <img src="css/images/cal_offers_icon.png">Starts on 27 sep,2017 </div>
+                  <div class="oj-sm-12 oj-md-12 oj-lg-2">
+                    <button class="enroll">Enroll</button>
+                  </div>
+                </div>
+
               </div>
             </div>
             <div class="row">
               <div class="oj-flex offerrow">
-                <div class="oj-sm-12 oj-md-1 "> <div class="offerribbon">60% Offer</div> </div>
-                <div class="oj-sm-12 oj-md-11 oj-flex desccontainer">
-                <div class="oj-sm-12 oj-md-3 oj-lg-2"><img src="css/images/offer_image.jpg"></div>
-                <div class="oj-sm-12 oj-md-5 oj-md-5offerdesc"><div class="offerheading">Social Media Marketing</div><br><div>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </div></div>
-                <div class="oj-sm-12 oj-md-3 caldate"><img src="css/images/cal_offers_icon.png">Starts on 27 sep,2017 </div>
-                <div class="oj-sm-12 oj-md-12 oj-lg-2"><button class="enroll">Enroll</button></div>
+                <div class="oj-sm-12 oj-md-1 ">
+                  <div class="offerribbon">60% Offer</div>
                 </div>
-                
+                <div class="oj-sm-12 oj-md-11 oj-flex desccontainer">
+                  <div class="oj-sm-12 oj-md-3 oj-lg-2">
+                    <img src="css/images/offer_image.jpg">
+                  </div>
+                  <div class="oj-sm-12 oj-md-5 oj-md-5offerdesc">
+                    <div class="offerheading">Social Media Marketing</div>
+                    <br>
+                    <div>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </div>
+                  </div>
+                  <div class="oj-sm-12 oj-md-3 caldate">
+                    <img src="css/images/cal_offers_icon.png">Starts on 27 sep,2017 </div>
+                  <div class="oj-sm-12 oj-md-12 oj-lg-2">
+                    <button class="enroll">Enroll</button>
+                  </div>
+                </div>
+
               </div>
             </div>
             <div class="row">
               <div class="oj-flex offerrow">
-                <div class="oj-sm-12 oj-md-1 "> <div class="offerribbon">60% Offer</div> </div>
-                <div class="oj-sm-12 oj-md-11 oj-flex desccontainer">
-                <div class="oj-sm-12 oj-md-3 oj-lg-2"><img src="css/images/offer_image.jpg"></div>
-                <div class="oj-sm-12 oj-md-5 oj-md-5offerdesc"><div class="offerheading">Social Media Marketing</div><br><div>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </div></div>
-                <div class="oj-sm-12 oj-md-3 caldate"><img src="css/images/cal_offers_icon.png">Starts on 27 sep,2017 </div>
-                <div class="oj-sm-12 oj-md-12 oj-lg-2"><button class="enroll">Enroll</button></div>
+                <div class="oj-sm-12 oj-md-1 ">
+                  <div class="offerribbon">60% Offer</div>
                 </div>
-                
+                <div class="oj-sm-12 oj-md-11 oj-flex desccontainer">
+                  <div class="oj-sm-12 oj-md-3 oj-lg-2">
+                    <img src="css/images/offer_image.jpg">
+                  </div>
+                  <div class="oj-sm-12 oj-md-5 oj-md-5offerdesc">
+                    <div class="offerheading">Social Media Marketing</div>
+                    <br>
+                    <div>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </div>
+                  </div>
+                  <div class="oj-sm-12 oj-md-3 caldate">
+                    <img src="css/images/cal_offers_icon.png">Starts on 27 sep,2017 </div>
+                  <div class="oj-sm-12 oj-md-12 oj-lg-2">
+                    <button class="enroll">Enroll</button>
+                  </div>
+                </div>
+
               </div>
             </div>
             <div class="row">
               <div class="oj-flex offerrow">
-                <div class="oj-sm-12 oj-md-1 "> <div class="offerribbon">60% Offer</div> </div>
-                <div class="oj-sm-12 oj-md-11 oj-flex desccontainer">
-                <div class="oj-sm-12 oj-md-3 oj-lg-2"><img src="css/images/offer_image.jpg"></div>
-                <div class="oj-sm-12 oj-md-5 oj-md-5offerdesc"><div class="offerheading">Social Media Marketing</div><br><div>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </div></div>
-                <div class="oj-sm-12 oj-md-3 caldate"><img src="css/images/cal_offers_icon.png">Starts on 27 sep,2017 </div>
-                <div class="oj-sm-12 oj-md-12 oj-lg-2"><button class="enroll">Enroll</button></div>
+                <div class="oj-sm-12 oj-md-1 ">
+                  <div class="offerribbon">60% Offer</div>
                 </div>
-                
+                <div class="oj-sm-12 oj-md-11 oj-flex desccontainer">
+                  <div class="oj-sm-12 oj-md-3 oj-lg-2">
+                    <img src="css/images/offer_image.jpg">
+                  </div>
+                  <div class="oj-sm-12 oj-md-5 oj-md-5offerdesc">
+                    <div class="offerheading">Social Media Marketing</div>
+                    <br>
+                    <div>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </div>
+                  </div>
+                  <div class="oj-sm-12 oj-md-3 caldate">
+                    <img src="css/images/cal_offers_icon.png">Starts on 27 sep,2017 </div>
+                  <div class="oj-sm-12 oj-md-12 oj-lg-2">
+                    <button class="enroll">Enroll</button>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
         </div>
         <div id="tabs-5">
-         <div class="container row5">
-    <div class="oj-sm-12 keydates">
-      <div class="oj-flex">
-        <div class="oj-sm-12 keydatestitle"><br></div>
-        <div class="oj-sm-12">
-          <div class="oj-flex">
-            <div class="oj-sm-12">
-              <div class="oj-margin">
-               <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Wednesday, September 27th<br>
-                        &nbsp;</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Oracle Global Employee Summit</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end"><a href="https://my.oracle.com/site/mktg/creative/cnt2682607.html" target="_blank">Replay</a></div>
-                    </div>
-                  </div>
+          <div class="container row5">
+            <div class="oj-sm-12 keydates">
+              <div class="oj-flex">
+                <div class="oj-sm-12 keydatestitle">
+                  <br>
                 </div>
-                <div class="calrow">
+                <div class="oj-sm-12">
                   <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Wednesday, September 27th<br>
-                        &nbsp;</p>
+                    <div class="oj-sm-12">
+                      <div class="oj-margin">
+                        <div class="calrow">
+                          <div class="oj-flex">
+                            <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                              <p>
+                                <span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Wednesday, September 27th
+                                <br> &nbsp;
+                              </p>
+                            </div>
+                            <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Oracle Global Employee Summit</div>
+                            <div class="oj-sm-12 oj-lg-3 calbutton">
+                              <div class="orangeBbutton oj-lg-float-end">
+                                <a href="https://my.oracle.com/site/mktg/creative/cnt2682607.html" target="_blank">Replay</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="calrow">
+                          <div class="oj-flex">
+                            <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                              <p>
+                                <span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Wednesday, September 27th
+                                <br> &nbsp;
+                              </p>
+                            </div>
+                            <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Universal Credits & BYOL Overview and News</div>
+                            <div class="oj-sm-12 oj-lg-3 calbutton">
+                              <div class="orangeBbutton oj-lg-float-end">
+                                <a href="https://engage.vevent.com/rt/natd~09222017" target="_blank">Replay</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="calrow">
+                          <div class="oj-flex">
+                            <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                              <p>
+                                <span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tuesday, October 3rd
+                                <br> &nbsp;
+                              </p>
+                            </div>
+                            <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Open World Keynotes on Demand</div>
+                            <div class="oj-sm-12 oj-lg-3 calbutton">
+                              <div class="orangeBbutton oj-lg-float-end">
+                                <a href="https://www.oracle.com/openworld/on-demand.html" target="_blank">Replay</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="calrow">
+                          <div class="oj-flex">
+                            <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                              <p>
+                                <span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Monday, October 16
+                                <br>
+                                <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time: 13:00 PM PST</p>
+                            </div>
+                            <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Cloud Accelerate Community Call</div>
+                            <div class="oj-sm-12 oj-lg-3 calbutton">
+                              <div class="orangeBbutton oj-lg-float-end">
+                                <a href="https://oracle.webex.com/oracle/j.php?MTID=ma62b72471628b59ba30737ad332fd34a" target="_blank">Link</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="calrow">
+                          <div class="oj-flex">
+                            <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                              <p>
+                                <span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Friday, October 20
+                                <br>
+                                <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time: 12:00 PM PST</p>
+                            </div>
+                            <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">NATD Cloud Community Call</div>
+                            <div class="oj-sm-12 oj-lg-3 calbutton">
+                              <div class="orangeBbutton oj-lg-float-end">
+                                <a href="https://engage.vevent.com/rt/natd~10202017" target="_blank">Registration</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="oj-sm-12 oj-sm-center" style="display:none">
+                          <div class="oj-flex valign">
+                            <div class="oj-sm-12 oj-lg-4 oj-flex"></div>
+                            <div class="oj-sm-12 oj-lg-5 oj-flex">
+                              <button class="oj-sm-align-center oj-flex bluebutton ">See All</button>
+                            </div>
+                            <div class="oj-sm-12 oj-lg-3">
+                              <span class="oj-md-float-end">Missed out any course?
+                                <br>
+                                <a href="#">Checkout Archives</a>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Universal Credits & BYOL Overview and News</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end"><a href="https://engage.vevent.com/rt/natd~09222017" target="_blank">Replay</a></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tuesday, October 3rd<br>
-                        &nbsp;</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Open World Keynotes on Demand</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end"><a href="https://www.oracle.com/openworld/on-demand.html" target="_blank">Replay</a></div>
-                    </div>
-                  </div>
-                </div>
-               
-                <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Monday, October 16<br>
-                        <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time: 13:00 PM PST</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Cloud Accelerate Community Call</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end"><a href="https://oracle.webex.com/oracle/j.php?MTID=ma62b72471628b59ba30737ad332fd34a" target="_blank">Link</a></div>
-                    </div>
-                  </div>
-                </div>
-                 <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Friday, October 20<br>
-                        <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time: 12:00 PM PST</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">NATD Cloud Community Call</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end"><a href="https://engage.vevent.com/rt/natd~10202017" target="_blank">Registration</a></div>
-                    </div>
-                  </div>
-                </div>
-               
-                <div class="oj-sm-12 oj-sm-center" style="display:none">
-                  <div class="oj-flex valign">
-                    <div class="oj-sm-12 oj-lg-4 oj-flex"></div>
-                    <div class="oj-sm-12 oj-lg-5 oj-flex">
-                      <button class="oj-sm-align-center oj-flex bluebutton ">See All</button>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-3"><span class="oj-md-float-end">Missed out any course?<br>
-                      <a href="#">Checkout Archives</a></span></div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
         </div>
         <div></div>
         <div></div>
@@ -1271,15 +1421,17 @@
             <!-- <div id="vtabs" data-bind="ojComponent:{component: 'ojTabs', 
                             orientation: 'vertical', selected: 0}"> -->
             <ul>
-              <!-- <li><span>Manage Courses</span></li> --> 
-              <!-- <li><span>Create Community Call</span></li> --> 
+              <!-- <li><span>Manage Courses</span></li> -->
+              <!-- <li><span>Create Community Call</span></li> -->
               <!-- <li><span>Reports</span></li> -->
             </ul>
-            
+
             <!-- CREATE COMMUNITY CALL -->
-            <div id="createcommunitycall" class="bgwhite admincontent"> <span>
-              <h1>Create Community Call</h1>
-              <span></span> </span>
+            <div id="createcommunitycall" class="bgwhite admincontent">
+              <span>
+                <h1>Create Community Call</h1>
+                <span></span>
+              </span>
               <div class="oj-flex">
                 <div class="oj-lg-6">
                   <div class="oj-margin-right nomargin-md">
@@ -1346,7 +1498,7 @@
                       </div>
                       <div class="oj-sm-12">
                         <oj-input-date id="dateTime" value='{{date}}'>
-                        </oj-input-date-time>
+                          </oj-input-date-time>
                       </div>
                     </div>
                     <br>
@@ -1453,11 +1605,11 @@
               <div class="oj-flex-item"> </div>
             </div>
           </div>
-          <!-- END OF SECTIONS --> 
-          
-          <!-- END OF SECTIONS --> 
-          
-          <!-- </div> --> 
+          <!-- END OF SECTIONS -->
+
+          <!-- END OF SECTIONS -->
+
+          <!-- </div> -->
         </div>
       </div>
     </div>
@@ -1466,98 +1618,141 @@
 </div>
 </div>
 <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
-  <div id="dialogWrapper" >
+  <div id="dialogWrapper">
     <div style="display:none;height:500px" class="dialogbodymain" id="coursedetails" title="Course Details" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%'}}">
       <div class="dialogbody">
-      <div id="tabs-container" class="dialogtabs">
-  <div id="tabs" data-bind="ojComponent:{component: 'ojTabs', disabledTabs: [3]}">
-    <!-- tab bar -->
-    <ul>
-      <li><span>Course Details</span></li>
-      <li><span>Classes</span></li>
-      
-    </ul>
-
-    <!-- tab contents -->
-    <div id="tabs-1">
-     <div class="oj-sm-12 courserow oj-flex">
-          <div class="oj-sm-4 leftcoursetitle">Name</div>
-          <div class="oj-sm-8 rightcoursetitle">
-            <p> <span data-bind="text:detailedName"></span> </p>
-          </div>
-        </div>
-         <div class="oj-sm-12 courserow oj-flex">
-          <div class="oj-sm-4 leftcoursetitle">Description</div>
-          <div class="oj-sm-8 rightcoursetitle">
-           <p> <span data-bind="html:detailedDescription"></span> </p>
-          </div>
-        </div>
-        <div class="oj-sm-12 courserow oj-flex">
-          <div class="oj-sm-4 leftcoursetitle">Product Type/Training Level/Training Type</div>
-          <div class="oj-sm-8 rightcoursetitle">
-          <p> <span data-bind="text:detailedprodcut_type"></span>/ <span data-bind="text:detailedTrainingLevel"></span>/ <span data-bind="text:detailedTrainingType"></span> </p>
-          </div>
-        </div>
-    </div>
-    <div id="tabs-2">
-    <div class="classcontainer">
-     <ul class="classes">
-          <!-- ko foreach: detailedClasses -->
-          
-          <li><div class="oj-sm-12 courserow oj-flex">
-           <div class="oj-sm-4  leftcoursetitle"><h2 data-bind="text:city"></h2></div>
-          <div class="oj-sm-8 rightcoursetitle">
-          <!-- data-bind="attr: { href: directURL}" -->
-            <p> 
-              <!-- ko if: enrollment_status=="Approved" --> 
-              <abbr title="You're successfully enrolled!"> <img width="35px" height="35px" align="right" src="http://ngiphasile.co.za/wp-content/uploads/2017/02/cropped-Tick.png"> </abbr> 
-              <!-- /ko --> 
-              <!-- ko if: enrollment_status=="Waitlist" --> 
-              <abbr title="You've been Waitlisted!"> <img width="35px" height="35px" align="right" src="https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/da/59/f5/da59f574-9114-2382-296e-d8aab9aee65b/source/512x512bb.jpg"> </abbr> 
+        <div id="tabs-container" class="dialogtabs">
+          <div id="tabs" data-bind="ojComponent:{component: 'ojTabs', disabledTabs: [3]}">
+            <!-- tab bar -->
+            <ul>
+              <li>
+                <span>Course Details</span>
+              </li>
+              <!-- ko if: detailedClasses().length>0 -->
+              <li>
+                <span>Classes</span>
+              </li>
               <!-- /ko -->
-              <button class="bluebutton" style="cursor:pointer" data-bind="click:initEnroll,attr:{name:id}"> Click to Enroll </button>
-            </p>
-          </div>
-            
-            
+            </ul>
+
+            <!-- tab contents -->
+            <div id="tabs-1">
+              <p class="directlink communityadmin" style="color: blue"></p>
+              <div class="oj-sm-12 courserow oj-flex">
+                <div class="oj-sm-4 leftcoursetitle">Name</div>
+                <div class="oj-sm-8 rightcoursetitle">
+                  <p>
+                    <span data-bind="text:detailedName"></span>
+                  </p>
+                </div>
+              </div>
+              <div class="oj-sm-12 courserow oj-flex">
+                <div class="oj-sm-4 leftcoursetitle">Description</div>
+                <div class="oj-sm-8 rightcoursetitle">
+                  <p>
+                    <span data-bind="html:detailedDescription"></span>
+                  </p>
+                </div>
+              </div>
+              <div class="oj-sm-12 courserow oj-flex">
+                <div class="oj-sm-4 leftcoursetitle">Product Type/Training Level/Training Type</div>
+                <div class="oj-sm-8 rightcoursetitle">
+                  <p>
+                    <span data-bind="text:detailedprodcut_type"></span>/
+                    <span data-bind="text:detailedTrainingLevel"></span>/
+                    <span data-bind="text:detailedTrainingType"></span>
+                  </p>
+                </div>
+              </div>
             </div>
-            <!-- </li> --> 
-            
-            <!-- /ko -->
-        </ul>
-    </div>
-   </div>
-  </div>
-</div>
-        
-    
-       
+
+
+            <div id="tabs-2">
+              <div class="classcontainer">
+                <ul class="classes">
+                  <!-- ko foreach: detailedClasses -->
+                  <li>
+                    <div class="oj-sm-12 courserow oj-flex">
+                      <div class="oj-sm-4  leftcoursetitle">
+                        <h2 data-bind="text:city"></h2>
+                      </div>
+                      <div class="oj-sm-8 rightcoursetitle">
+                        <!-- data-bind="attr: { href: directURL}" -->
+                        <p>
+                          <!-- ko if: enrollment_status=="Approved" -->
+                          <abbr title="You're successfully enrolled!">
+                            <img width="35px" height="35px" align="right" src="http://ngiphasile.co.za/wp-content/uploads/2017/02/cropped-Tick.png"> </abbr>
+                          <!-- /ko -->
+                          <!-- ko if: enrollment_status=="Waitlist" -->
+                          <abbr title="You've been Waitlisted!">
+                            <img width="35px" height="35px" align="right" src="https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/da/59/f5/da59f574-9114-2382-296e-d8aab9aee65b/source/512x512bb.jpg"> </abbr>
+                          <!-- /ko -->
+                          <button class="bluebutton" style="cursor:pointer" data-bind="click:initEnroll,attr:{name:id}"> Click to Enroll </button>
+                        </p>
+                      </div>
+
+
+                    </div>
+                    <!-- </li> -->
+
+                    <!-- /ko -->
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+
       </div>
     </div>
     <div style="display:none;height:500px" class="dialogbodymain" id="communitycallsdetails" title="Community Calls" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%'}}">
       <div class="dialogbody">
         <h1>Name</h1>
-        <p> <span data-bind="text:ccName"></span> </p>
+        <p>
+          <span data-bind="text:ccName"></span>
+        </p>
         <h1>Date</h1>
-        <p> <span data-bind="text:ccDate"></span> </p>
+        <p>
+          <span data-bind="text:ccDate"></span>
+        </p>
         <h1>Speaker</h1>
-        <p> <span data-bind="text:ccSpeaker"></span> </p>
+        <p>
+          <span data-bind="text:ccSpeaker"></span>
+        </p>
         <h1>Speaker Designation</h1>
-        <p> <span data-bind="text:ccDesignation"></span> </p>
+        <p>
+          <span data-bind="text:ccDesignation"></span>
+        </p>
         <h1>Call Type</h1>
-        <p> <span data-bind="text:ccCallType"></span> </p>
+        <p>
+          <span data-bind="text:ccCallType"></span>
+        </p>
         <h1>Meeting Link</h1>
-        <p> <span data-bind="text:ccMeetingLink"></span> </p>
+        <p>
+          <span data-bind="text:ccMeetingLink"></span>
+        </p>
         <h1>Roles</h1>
-        <p> <span data-bind="text:ccRoles"></span> </p>
+        <p>
+          <span data-bind="text:ccRoles"></span>
+        </p>
         <h1>Description</h1>
-        <p> <span data-bind="html:ccDescription"></span> </p>
+        <p>
+          <span data-bind="html:ccDescription"></span>
+        </p>
         <h1>Dial-In</h1>
-        <p> <span data-bind="html:ccDialin"></span> </p>
+        <p>
+          <span data-bind="html:ccDialin"></span>
+        </p>
         <h1>Additional Links</h1>
-        <p> <a data-bind="attr:{href:ccAdditionalLinks}" target="_blank">Click here</a> </p>
+        <p>
+          <a data-bind="attr:{href:ccAdditionalLinks}" target="_blank">Click here</a>
+        </p>
         <h1>Recording Links</h1>
-        <p> <a data-bind="attr:{href:ccRecordingLinks}" target="_blank">Click here</a> </p>
+        <p>
+          <a data-bind="attr:{href:ccRecordingLinks}" target="_blank">Click here</a>
+        </p>
       </div>
     </div>
   </div>
@@ -1574,7 +1769,8 @@
 <div id="dialogWrapper1">
   <div style="display:none;" class="dialogbodymain" id="reportees" title="Enroll Reportees" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
     <div class="oj-dialog-footer">
-      <button id="okButton" onclick="sendErollmentRequest()" data-bind="ojComponent: {component: 'ojButton', label: 'Submit Enrollment'}"> </button>
+      <button id="okButton" onclick="sendErollmentRequest()" data-bind="ojComponent: {component: 'ojButton', label: 'Submit Enrollment'}">
+      </button>
     </div>
     <div class="dialogbody">
       <label for="multiselect">select reportee(s)</label>
@@ -1595,17 +1791,16 @@
   <div style="display:none" class="dialogbodymain" id="addclasstoclass" title="Add Class" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
     <div class="oj-dialog-footer" style="background-color: lightgray">
       <div class="oj-sm-8">
-        <button id="okButton" onclick="addClassTotheCourse()" data-bind="ojComponent: {component: 'ojButton', label: 'Add Class'}"> </button>
+        <button id="okButton" class="bluebutton" onclick="addClassTotheCourse()" data-bind="ojComponent: {component: 'ojButton', label: 'Add Class'}">
+        </button>
       </div>
     </div>
     <div class="dialogbody">
-      <div class="oj-flex"> 
-        
-        <!--  RIGHT PANEL -->
-        <div class="oj-flex-item"> 
-          
+      <div class="oj-flex">
+<div class="oj-md-6">
+<div class="oj-margin">
           <!-- COURSE DESCRIPTION -->
-          <div class="oj-flex oj-sm-12" data-bind="with:cclass">
+          <div class="oj-flex oj-sm-12 inputrow" data-bind="with:cclass">
             <div class="oj-sm-12">
               <label>Description</label>
             </div>
@@ -1613,11 +1808,10 @@
               <textarea rows="20" cols="100" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:description}"></textarea>
             </div>
           </div>
-          
-          <!-- SECTION 3 -->
-          <div class="oj-flex" data-bind="with:cclass"> 
+            <!-- SECTION 3 -->
+          <div class="oj-flex" data-bind="with:cclass">
             <!-- CONTACT EMAIL -->
-            <div class="oj-flex-item">
+           <div class="oj-flex oj-sm-12 inputrow">
               <div class="oj-sm-12">
                 <label>Class Size</label>
               </div>
@@ -1625,9 +1819,9 @@
                 <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:class_size}" />
               </div>
             </div>
-            
+
             <!-- ON PREMISE/CLOUD -->
-            <div class="oj-flex-item">
+           <div class="oj-flex oj-sm-12 inputrow">
               <div class="oj-sm-12">
                 <label>City</label>
               </div>
@@ -1636,21 +1830,20 @@
               </div>
             </div>
           </div>
-          
           <!-- SECTION 4 -->
-          <div class="oj-flex" data-bind="with:cclass"> 
+          <div class="oj-flex" data-bind="with:cclass">
             <!-- TRAINING LEVEL -->
-            <div class="oj-flex-item">
-              <div class="oj-sm-10">
+            <div class="oj-flex oj-sm-12 inputrow">
+               <div class="oj-sm-12">
                 <label>State</label>
               </div>
-              <div class="oj-sm-10">
+               <div class="oj-sm-12">
                 <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:state}" />
               </div>
             </div>
-            
+
             <!-- TRAINING TYPE -->
-            <div class="oj-flex-item">
+           <div class="oj-flex oj-sm-12 inputrow">
               <div class="oj-sm-12">
                 <label>Enrollment End Date</label>
               </div>
@@ -1659,24 +1852,15 @@
                                               value: enrollment_end_date}" />
               </div>
             </div>
-            <div class="oj-flex-item">
-              <div class="oj-sm-12">
-                <label>Class Schedules</label>
-              </div>
-              <div class="oj-sm-12">
-                <div class="oj-sm-10" id="schedulelist"> 
-                  <!-- ko foreach: schedules -->
-                  <p data-bind="text:start_date"></p>
-                  -
-                  <p data-bind="text:timezone"></p>
-                  <!-- /ko --> 
-                </div>
-              </div>
             </div>
+             
           </div>
-          <div class="oj-flex" data-bind="with:cclass"> 
+</div>
+<div class="oj-md-6">
+<div class="oj-margin">
+<div class="oj-flex" data-bind="with:cclass">
             <!-- CLASS STATUS -->
-            <div class="oj-flex-item">
+           <div class="oj-flex oj-sm-12 inputrow">
               <div class="oj-sm-12">
                 <label>Status</label>
               </div>
@@ -1689,18 +1873,32 @@
                   <option value="Under Development">Under Development</option>
                 </datalist>
               </div>
+           </div>
+           <div class="oj-flex oj-sm-12 inputrow">
+             <div class="oj-sm-12"> <label id="switchLabel" for="switch">Key Event</label></div>
+              <input id="switch" data-bind="ojComponent: {component: 'ojSwitch',value:keyevent}" />
+              </div>
             </div>
-          </div>
-          <hr>
-          <div class="oj-flex"> 
-            <!-- CLASS STATUS -->
-            <div class="oj-flex-item">
-              <div class="oj-sm-10">
+            <div class="oj-flex oj-sm-12 inputrow">
+         <div class="oj-sm-12">
+                <label>Class Schedules</label>
+              </div>
+              <div class="oj-sm-12">
+                <div class="oj-sm-10" id="schedulelist">
+                  <!-- ko foreach: schedules -->
+                  <p data-bind="text:start_date"></p>
+                  -
+                  <p data-bind="text:timezone"></p>
+                  <!-- /ko -->
+                </div>
+              </div>
+              </div>
+ <div class="oj-sm-12 inputrow">
                 <label>Schedule</label>
                 &nbsp;
                 <button onclick="addScheduleBlock()">+</button>
               </div>
-              <div class="oj-sm-10" > 
+              <div class="oj-sm-12 inputrow">
                 <!-- DIV BLOCK FOR ADDING SCHEDULE -->
                 <div id="scheduleblock" class="oj-flex fill">
                   <div class="addedschedule"></div>
@@ -1709,15 +1907,15 @@
                     <input data-bind="ojComponent: {component: 'ojInputDateTime', placeholder:'start date. . .',
           value: csdate}" />
                   </div>
-                  
+
                   <!-- END DATE -->
                   <div class="oj-sm-12 oj-flex-item">
                     <input data-bind="ojComponent: {component: 'ojInputDateTime',  placeholder:'end date. . .',
           value: cedate}" />
                   </div>
-                  
+
                   <!-- TIME ZONE -->
-                  <div class="oj-sm-10">
+                  <div class="oj-sm-12">
                     <input list="timezone" data-bind="ojComponent: {component: 'ojCombobox',placeholder:'select timezone. . .',
                                                  value: ctimezone,
                                                  rootAttributes: {style:''}}" />
@@ -1729,66 +1927,103 @@
                     </datalist>
                   </div>
                   <div class="oj-sm-12 oj-flex-item">
-                    <button onclick="addschedule()">Add</button>
+                    <button onclick="addschedule()" class="bluebutton">+ Add Schedule</button>
                   </div>
                 </div>
-                <!-- _______________________________________________________________________________  --> 
+                <!-- _______________________________________________________________________________  -->
               </div>
-            </div>
-          </div>
-        </div>
+</div>
+</div>
+        <!--  RIGHT PANEL -->
+       
       </div>
     </div>
   </div>
 </div>
 
 <!-- show community call start -->
-    <div style="display:none;height:500px" class="dialogbodymain" id="communitycallsdetails" title="Community Calls" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%'}}">
-      <div class="dialogbody">
-        <h1>Name</h1><p><span data-bind="text:ccName"></span></p>
-        <h1>Date</h1><p><span data-bind="text:ccDate"></span></p>
-        <h1>Speaker</h1><p><span data-bind="text:ccSpeaker"></span></p>
-        <h1>Speaker Designation</h1><p><span data-bind="text:ccDesignation"></span></p>
-        <h1>Call Type</h1><p><span data-bind="text:ccCallType"></span></p>
-        <h1>Meeting Link</h1><p><span data-bind="text:ccMeetingLink"></span></p>
-        <h1>Roles</h1><p><span data-bind="text:ccRoles"></span></p>
-        <h1>Description</h1><p><span data-bind="html:ccDescription"></span></p>
-        <h1>Dial-In</h1><p><span data-bind="html:ccDialin"></span></p>
-        <h1>Additional Links</h1><p><a data-bind="attr:{href:ccAdditionalLinks}" target="_blank">Click here</a></p>
-        <h1>Recording Links</h1><p><a data-bind="attr:{href:ccRecordingLinks}" target="_blank">Click here</a></p>
-      </div>
-    </div>
+<div style="display:none;height:500px" class="dialogbodymain" id="communitycallsdetails" title="Community Calls" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%'}}">
+  <div class="dialogbody">
+    <h1>Name</h1>
+    <p>
+      <span data-bind="text:ccName"></span>
+    </p>
+    <h1>Date</h1>
+    <p>
+      <span data-bind="text:ccDate"></span>
+    </p>
+    <h1>Speaker</h1>
+    <p>
+      <span data-bind="text:ccSpeaker"></span>
+    </p>
+    <h1>Speaker Designation</h1>
+    <p>
+      <span data-bind="text:ccDesignation"></span>
+    </p>
+    <h1>Call Type</h1>
+    <p>
+      <span data-bind="text:ccCallType"></span>
+    </p>
+    <h1>Meeting Link</h1>
+    <p>
+      <span data-bind="text:ccMeetingLink"></span>
+    </p>
+    <h1>Roles</h1>
+    <p>
+      <span data-bind="text:ccRoles"></span>
+    </p>
+    <h1>Description</h1>
+    <p>
+      <span data-bind="html:ccDescription"></span>
+    </p>
+    <h1>Dial-In</h1>
+    <p>
+      <span data-bind="html:ccDialin"></span>
+    </p>
+    <h1>Additional Links</h1>
+    <p>
+      <a data-bind="attr:{href:ccAdditionalLinks}" target="_blank">Click here</a>
+    </p>
+    <h1>Recording Links</h1>
+    <p>
+      <a data-bind="attr:{href:ccRecordingLinks}" target="_blank">Click here</a>
+    </p>
+  </div>
+</div>
 <!-- show community call end -->
-    <!-- delete community call confirmation start -->
-    <div id="dialogWrapper">
-      <div style="display:none" id="delete_community_call" title="Delete Confirmation" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'icon',rootAttributes: { style: 'width: 35%; height: auto; min-width 100px; '}}">
-        <div class="oj-dialog-body roleWrapper">
-          <h4>Are you sure,you want to delete this ? </h4>
-        </div>  
-        <div class="oj-dialog-footer">
-              <button id="okButton" style="cursor: pointer;" onclick="closeDeleteModal()" data-bind="ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
-
-              <button id="delete_com_call" style="background: #d9534f;color: white;cursor: pointer;" data-bind="ojComponent: {component: 'ojButton', label: 'Delete'}"> </button>
-        </div>
-      </div>
+<!-- delete community call confirmation start -->
+<div id="dialogWrapper">
+  <div style="display:none" id="delete_community_call" title="Delete Confirmation" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'icon',rootAttributes: { style: 'width: 35%; height: auto; min-width 100px; '}}">
+    <div class="oj-dialog-body roleWrapper">
+      <h4>Are you sure,you want to delete this ? </h4>
     </div>
-    <!-- delete community call confirmation end -->
-    
+    <div class="oj-dialog-footer">
+      <button id="okButton" style="cursor: pointer;" onclick="closeDeleteModal()" data-bind="ojComponent: {component: 'ojButton', label: 'Cancel'}">
+      </button>
+
+      <button id="delete_com_call" style="background: #d9534f;color: white;cursor: pointer;" data-bind="ojComponent: {component: 'ojButton', label: 'Delete'}">
+      </button>
+    </div>
+  </div>
+</div>
+<!-- delete community call confirmation end -->
+
 <!--  CREATE COURSE DIALOG   -->
 <div id="createCoursedialog" data-bind="with:createCourse">
   <div style="display:none" class="dialogbodymain" id="createcoursedialog" title="Create Course" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
     <div class="oj-dialog-footer" style="background-color: lightgray">
-     
+
       <div class="oj-sm-8">
-        <button class="bluebutton" id="okButton" data-bind="ojComponent: {component: 'ojButton', label: 'Create Course'},click:$parent.createcourse"> </button>
+        <button class="bluebutton " id="okButton" data-bind="ojComponent: {component: 'ojButton', label: 'Create Course'},click:$parent.createcourse">
+        </button>
       </div>
     </div>
     <div class="dialogbody">
-      <div class="oj-flex"> 
-       <!--  RIGHT PANEL -->
+      <div class="oj-flex">
+        <!--  RIGHT PANEL -->
         <div class="oj-flex-item oj-sm-7 ">
-          
-          <!-- COURSE NAME --> 
+
+          <!-- COURSE NAME -->
           <!-- SECTION 1 -->
           <div class="oj-flex oj-sm-12 inputrow">
             <div class="oj-sm-12">
@@ -1799,8 +2034,8 @@
               />
             </div>
           </div>
-          
-          <!-- COURSE DESCRIPTION --> 
+
+          <!-- COURSE DESCRIPTION -->
           <!-- SECTION 2 -->
           <div class="oj-flex oj-sm-12 inputrow">
             <div class="oj-sm-12">
@@ -1810,9 +2045,9 @@
               <textarea rows="20" cols="100" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:description}"></textarea>
             </div>
           </div>
-          
+
           <!-- SECTION 3 -->
-          <div class="oj-flex inputrow"> 
+          <div class="oj-flex inputrow">
             <!-- CONTACT EMAIL -->
             <div class="oj-flex-item">
               <div class="oj-sm-12">
@@ -1822,8 +2057,8 @@
                 <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:contact_email}" />
               </div>
             </div>
-             </div>
-             <div class="oj-flex inputrow"> 
+          </div>
+          <div class="oj-flex inputrow">
             <!-- ON PREMISE/CLOUD -->
             <div class="oj-flex-item">
               <div class="oj-sm-12">
@@ -1840,9 +2075,9 @@
               </div>
             </div>
           </div>
-          
+
           <!-- SECTION 4 -->
-          <div class="oj-flex inputrow"> 
+          <div class="oj-flex inputrow">
             <!-- TRAINING LEVEL -->
             <div class="oj-flex-item">
               <div class="oj-sm-12">
@@ -1859,8 +2094,8 @@
                 </datalist>
               </div>
             </div>
-             </div>
-             <div class="oj-flex inputrow">
+          </div>
+          <div class="oj-flex inputrow">
             <!-- TRAINING TYPE -->
             <div class="oj-flex-item">
               <div class="oj-sm-12">
@@ -1878,7 +2113,7 @@
               </div>
             </div>
           </div>
-          <div class="oj-flex inputrow"> 
+          <div class="oj-flex inputrow">
             <!-- COURSE STATUS -->
             <div class="oj-flex-item">
               <div class="oj-sm-12">
@@ -1894,41 +2129,205 @@
                 </datalist>
               </div>
             </div>
+
           </div>
-          
+
           <!-- ADD CLASS SECTION-->
           <hr>
-          <div class="oj-flex"> 
+          <div class="oj-flex">
             <!-- COURSE STATUS -->
             <div class="oj-flex-item">
-              <div class="oj-sm-10"> <a style="cursor: pointer" onclick="openaddsclasswindow()" class="bluebutton">+ Add a Class</a> </div>
+              <div class="oj-sm-10">
+                <a style="cursor: pointer" onclick="openaddsclasswindow()" class="bluebutton">+ Add a Class</a>
+              </div>
             </div>
           </div>
         </div>
-          <!--  SECTION SPACE -->
+        <!--  SECTION SPACE -->
         <div class="oj-flex-item oj-sm-1"></div>
         <!--  LEFT PANEL -->
         <div class="oj-flex-item oj-sm-4 ">
-        <label>Category<br></label>
-          <br><div id="tree" style="width: 180px;height: auto;" data-bind="ojComponent:
+          <label>Category
+            <br>
+          </label>
+          <br>
+          <div id="tree" style="width: 180px;height: auto;" data-bind="ojComponent:
           {
             component: 'ojTree',
             selectionMode: 'multiple',
             optionChange:categorySelected,
             data:$parent.categoryForUi
           }"> </div>
-         
-        <div class="oj-sm-12">
-         <br>
-        </div>
-        <input id="selectedcategory" data-bind="ojComponent: {component: 'ojCombobox',optionChange:selectedCategoryChanged, 
+
+          <div class="oj-sm-12">
+            <br>
+          </div>
+          <input id="selectedcategory" data-bind="ojComponent: {component: 'ojCombobox',optionChange:selectedCategoryChanged, 
       multiple: true, value: $parent.selectedCategoriesForUi,rootAttributes: {style:'font-size:9pt;min-width:100%'}}" />
-      
+<div class="classlist"></div>
         </div>
-        
-      
-        
-       
+      </div>
+    </div>
+  </div>
+  
+</div>
+<div id="" data-bind="with:createCourse">
+  <div style="display:none" class="dialogbodymain" id="edittraining" title="Edit Training" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+    <div class="oj-dialog-footer" style="background-color: lightgray">
+
+      <div class="oj-sm-8">
+        <button class="bluebutton " id="okButton" data-bind="ojComponent: {component: 'ojButton', label: 'Create Course'},click:$parent.createcourse">
+        </button>
+      </div>
+    </div>
+    <div class="dialogbody">
+      <div class="oj-flex">
+        <!--  RIGHT PANEL -->
+        <div class="oj-flex-item oj-sm-7 ">
+
+          <!-- COURSE NAME -->
+          <!-- SECTION 1 -->
+          <div class="oj-flex oj-sm-12 inputrow">
+            <div class="oj-sm-12">
+              <label>Course Name</label>
+            </div>
+            <div class="oj-sm-12">
+              <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:name ,rootAttributes: { style: 'width: 100%;'}}"
+              />
+            </div>
+          </div>
+
+          <!-- COURSE DESCRIPTION -->
+          <!-- SECTION 2 -->
+          <div class="oj-flex oj-sm-12 inputrow">
+            <div class="oj-sm-12">
+              <label>Description</label>
+            </div>
+            <div class="oj-sm-12">
+              <textarea rows="20" cols="100" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:description}"></textarea>
+            </div>
+          </div>
+
+          <!-- SECTION 3 -->
+          <div class="oj-flex inputrow">
+            <!-- CONTACT EMAIL -->
+            <div class="oj-flex-item">
+              <div class="oj-sm-12">
+                <label>Contact Email</label>
+              </div>
+              <div class="oj-sm-12">
+                <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:contact_email}" />
+              </div>
+            </div>
+          </div>
+          <div class="oj-flex inputrow">
+            <!-- ON PREMISE/CLOUD -->
+            <div class="oj-flex-item">
+              <div class="oj-sm-12">
+                <label>Cloud/On-Premise</label>
+              </div>
+              <div class="oj-sm-12">
+                <input id="combobox" list="deploytype" data-bind="ojComponent: {component: 'ojCombobox', 
+                                           value: cloud_onpremise,
+                                           rootAttributes: {style:''}}" />
+                <datalist id="deploytype">
+                  <option value="Cloud">Cloud</option>
+                  <option value="On Premise">On Premise</option>
+                </datalist>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 4 -->
+          <div class="oj-flex inputrow">
+            <!-- TRAINING LEVEL -->
+            <div class="oj-flex-item">
+              <div class="oj-sm-12">
+                <label>Training Level</label>
+              </div>
+              <div class="oj-sm-12">
+                <input id="trainingtype" list="tlevel" data-bind="ojComponent: {component: 'ojCombobox', 
+                    value: training_level,
+                    rootAttributes: {style:''}}" />
+                <datalist id="tlevel">
+                  <option value="Awareness">Awareness</option>
+                  <option value="Proficient">Proficient</option>
+                  <option value="Advanced">Advanced</option>
+                </datalist>
+              </div>
+            </div>
+          </div>
+          <div class="oj-flex inputrow">
+            <!-- TRAINING TYPE -->
+            <div class="oj-flex-item">
+              <div class="oj-sm-12">
+                <label>Training Type</label>
+              </div>
+              <div class="oj-sm-12">
+                <input id="trainingtype" list="ttype" data-bind="ojComponent: {component: 'ojCombobox', 
+                                             value: training_type,
+                                             rootAttributes: {style:''}}" />
+                <datalist id="ttype">
+                  <option value="Live on Site">Live on Site</option>
+                  <option value="Live Virtual">Live Virtual</option>
+                  <option value="On Demand">On Demand</option>
+                </datalist>
+              </div>
+            </div>
+          </div>
+          <div class="oj-flex inputrow">
+            <!-- COURSE STATUS -->
+            <div class="oj-flex-item">
+              <div class="oj-sm-12">
+                <label>Status</label>
+              </div>
+              <div class="oj-sm-12">
+                <input id="tstatus" list="status" data-bind="ojComponent: {component: 'ojCombobox', 
+                                                         value: status,
+                                                         rootAttributes: {style:''}}" />
+                <datalist id="status">
+                  <option value="Available">Available</option>
+                  <option value="Under Development">Under Development</option>
+                </datalist>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ADD CLASS SECTION-->
+          <hr>
+          <div class="oj-flex">
+            <!-- COURSE STATUS -->
+            <div class="oj-flex-item">
+              <div class="oj-sm-10">
+                <a style="cursor: pointer" onclick="openaddsclasswindow()" class="bluebutton">+ Add a Class</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  SECTION SPACE -->
+        <div class="oj-flex-item oj-sm-1"></div>
+        <!--  LEFT PANEL -->
+        <div class="oj-flex-item oj-sm-4 ">
+          <label>Category
+            <br>
+          </label>
+          <br>
+          <div id="tree" style="width: 180px;height: auto;" data-bind="ojComponent:
+          {
+            component: 'ojTree',
+            selectionMode: 'multiple',
+            optionChange:categorySelected,
+            data:$parent.categoryForUi
+          }"> </div>
+
+          <div class="oj-sm-12">
+            <br>
+          </div>
+          <input id="selectedcategory" data-bind="ojComponent: {component: 'ojCombobox',optionChange:selectedCategoryChanged, 
+      multiple: true, value: $parent.selectedCategoriesForUi,rootAttributes: {style:'font-size:9pt;min-width:100%'}}" />
+
+        </div>
       </div>
     </div>
   </div>
