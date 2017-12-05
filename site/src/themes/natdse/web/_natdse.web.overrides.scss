@@ -1125,6 +1125,7 @@ color: $darkergrey;
 font-size:$smallestFontSize;
 align-items:center;
 justify-content:center;
+text-align:center;
 @media  #{$responsiveQueryMediumDown} {
 margin-bottom:10px;
 
@@ -2758,7 +2759,7 @@ padding-left:0px;
 list-style:none;
 margin-top:0px;
 }
-.oj-inputtext,.oj-combobox,.oj-inputdatetime, .oj-inputdatetime-date-time, .oj-inputdatetime-date-only, .oj-inputdatetime-time-only,oj-inputtext oj-form-control oj-component oj-required,.oj-inputtext, .oj-inputpassword, .oj-textarea, .oj-inputtext-nocomp, .oj-inputpassword-nocomp, .oj-textarea-nocomp,oj-inputtext oj-form-control oj-component oj-required,.oj-inputtext, .oj-inputpassword, .oj-textarea, .oj-inputtext-nocomp, .oj-inputpassword-nocomp, .oj-textarea-nocomp{
+.oj-inputtext,.oj-combobox,.oj-inputdatetime, .oj-inputdatetime-date-time, .oj-inputdatetime-date-only, .oj-inputdatetime-time-only,oj-inputtext oj-form-control oj-component oj-required,.oj-inputtext, .oj-inputpassword, .oj-textarea, .oj-inputtext-nocomp, .oj-inputpassword-nocomp, .oj-textarea-nocomp,oj-inputtext oj-form-control oj-component oj-required,.oj-inputtext, .oj-inputpassword, .oj-textarea, .oj-inputtext-nocomp, .oj-inputpassword-nocomp, .oj-textarea-nocomp,.oj-combobox-input{
 max-width:100% !important;
 }
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -2789,7 +2790,10 @@ a .oj-clickable-icon, a.oj-clickable-icon, a.oj-clickable-icon-nocontext, a:visi
 	  color: rgb(204, 204, 204);
 font-size: 18px;
 	}
-	.oj-inputtext-input, .oj-inputpassword-input, .oj-inputtext-nocomp, .oj-inputpassword-nocomp,oj-inputdatetime-input oj-component-initnode,.oj-inputdatetime-input{
+	textarea{
+		height:100px;
+		}
+	.oj-inputtext-input, .oj-inputpassword-input, .oj-inputtext-nocomp, .oj-inputpassword-nocomp,oj-inputdatetime-input oj-component-initnode,.oj-inputdatetime-input,.oj-combobox-input{
 		 color: #555;
 font-size: 14px;
 font-style: normal;

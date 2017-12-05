@@ -6,7 +6,7 @@
  * Your dashboard ViewModel code goes here
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs/ojconveyorbelt', 'ojs/ojcheckboxset', 'ojs/ojanimation', 'ojs/ojbutton', 'ojs/ojinputtext', 'ojs/ojdialog', 'ojs/ojdatetimepicker',
-        'ojs/ojselectcombobox', 'ojs/ojtimezonedata','ojs/ojswitch', 'ojs/ojdialog', 'ojs/ojcollapsible', 'ojs/ojaccordion', 'ojs/ojtree'
+        'ojs/ojselectcombobox', 'ojs/ojtimezonedata', 'ojs/ojswitch', 'ojs/ojswitch', 'ojs/ojdialog', 'ojs/ojcollapsible', 'ojs/ojaccordion', 'ojs/ojtree'
     ],
     function (oj, ko, $) {
 
@@ -15,6 +15,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             var self = this;
             self.val = ko.observableArray();
+
 
             /*---------------------------------ADMIN----------------------------------*/
             // CREATE COURSE
@@ -125,7 +126,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 city: ko.observable(''),
                 state: ko.observable(''),
                 status: ko.observable(''),
-                keyevent:ko.observable('false'),
+                key_event: ko.observable(false),
                 schedules: ko.observableArray([])
             });
 
@@ -140,6 +141,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 training_level: ko.observable(''),
                 training_type: ko.observable(''),
                 status: ko.observable(''),
+                categories: ko.observableArray([]),
                 classes: ko.observableArray([])
             });
 
@@ -341,7 +343,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             // GET THE CATEGORIES
             getcategories = function () {
-                $.getJSON("https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/getCategories").
+                $.getJSON(trainingbaseurl + "getCategories").
                 then(function (reasons) {
                     self.categories([]);
                     self.subcategories([]);
@@ -390,7 +392,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.selectedcategories = ko.observableArray([]);
 
             getLeftpanelData = function () {
-                $.getJSON("https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/getFiltersV2").
+                $.getJSON(trainingbaseurl + "getFiltersV2").
                 then(function (reasons) {
 
                     // CATEGORIES
@@ -585,16 +587,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             // GET THE COURSE DETAILS FROM A LIST AND 
             self.getCourseDetailsAndShow = function (courseIdForDetails) {
+                showcoursedetails(findCourseById(courseIdForDetails), "");
+            }
 
+            // FIND COURSE BY COURSE ID
+            findCourseById = function (courseid) {
                 // ITERATE THROUGH THE LIST OF COURSES TO FIND A MATCH FOR THE COURSE ID
                 for (var i = 0; i < self.courselist.length; i++) {
                     var course = self.courselist[i];
                     console.log(course.id);
-                    if (course.id === courseIdForDetails) {
-                        showcoursedetails(course, "");
-                        break;
+                    if (course.id === courseid) {
+                        return course;
                     }
                 }
+
             }
 
 
@@ -619,7 +625,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.detailedstate = ko.observable();
             self.coursestatus = ko.observable();
             self.classstatus = ko.observable();
-            self.classKeyEvent=ko.observable();
+            self.classkey_event = ko.observable(false);
             self.enrollCount = ko.observable();
             self.waitlistcount = ko.observable();
             self.detailedSchedule = ko.observableArray([]);
@@ -648,7 +654,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.detailedClassSize('');
                 self.coursestatus('');
                 self.classstatus('');
-                self.classKeyEvent('false');
+                self.classkey_event(false);
                 self.detailedSchedule([]);
                 self.detailedEnrollstatus('');
 
@@ -965,6 +971,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }
                 }
                 // console.log(ko.toJSON(self.categories()));
+				checkadmin();
             }
 
 
@@ -1028,9 +1035,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             checkadmin = function () {
-                var checkurl = "https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/isAdmin";
+                console.log("Admin check commencing for " + ssoemail);
+                var checkurl = trainingbaseurl + "isAdmin";
                 if (ssoemail.length > 0) {
-                    console.log("Admin check commenced ... " + ssoemail);
+                    
                     $.ajax({
                         url: checkurl,
                         method: 'GET',
@@ -1049,6 +1057,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         }
                     });
                 } else {
+                    isAdmin=false;
                     checkadminrights();
                 }
             }
@@ -1296,13 +1305,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                 $("#editcommunitycall_id").ojDialog("open");
             }
-			
-			 edittraining = function () {
 
-                
 
-                $("#edittraining").ojDialog("open");
-            }
 
             editCommunityCallValues = function () {
                 editSelectedRole = ko.toJSON(self.editccSelectedRoles()).replace('[', '').replace(']', '').replace(/"/g, '');
@@ -1560,7 +1564,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             loadCommunitycall = function () {
-                checkadmin();
+                
                 self.searchcallstext('');
                 self.refinecommunitycallroles([]);
                 self.refinecommunitycallmodes([]);
@@ -1603,7 +1607,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             getReporteeByEmail = function () {
-                var checkurl = "https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/getOrganization";
+                var checkurl = trainingbaseurl + "getOrganization";
                 // ssoemail = "angan.sen@oracle.com";
                 if (ssoemail.length > 0) {
                     console.log("Getting reportees. . .");
@@ -1655,18 +1659,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             //checkadminrights();
-            checkAdminPrivileges = function () {
+            // checkAdminPrivileges = function () {
                 // setTimeout(function () {
                 //     checkadminrights()
                 // }, 3000);
 
-                window.setInterval(function () {
-                    checkadminrights();
-                }, 3000);
-            }
+            //     window.setInterval(function () {
+            //         checkadminrights();
+            //     }, 3000);
+            // }
 
 
             // checkAdminPrivileges();
+            checkadmin();
             getReporteeByEmail();
 
             enrollforCourse = function (emaillist) {
@@ -1689,7 +1694,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
 
-                    var enrollurl = "https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/enrollStudents";
+                    var enrollurl = trainingbaseurl + "enrollStudents";
                     console.log(ko.toJSON(enrollment));
                     $.ajax({
                         url: enrollurl,
@@ -1745,6 +1750,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             self.openCreatetraining = function () {
+                resetCourse();
                 $("#createcoursedialog").ojDialog("open");
             }
 
@@ -1757,6 +1763,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.createCourse().status([]);
                 self.createCourse().contact_email('');
                 self.createCourse().categories([]);
+                self.selectedCategoriesForUi([]);
                 resetClass();
             }
 
@@ -1767,7 +1774,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.cclass().city('');
                 self.cclass().state('');
                 self.cclass().status('');
-                self.cclass().keyevent('false');
+                self.cclass().key_event(false);
+                resetSchedule();
                 $(".classlist").empty();
             }
 
@@ -1805,7 +1813,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }
                 console.log(ko.toJSON(reqBody));
 
-                var url = "https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/createCourses";
+                var url = trainingbaseurl + "createCourses";
                 $.ajax({
                     url: url,
                     cache: false,
@@ -1814,7 +1822,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     data: ko.toJSON(reqBody),
                     success: function (data) {
                         self.showToastDialog("Course Successfully Created", true, 1000);
-                        $("#createCoursedialog").ojDialog("close");
+                        console.log("Course Successfully Created");
+                        $("#createcoursedialog").ojDialog("close");
                         resetCourse();
                         console.log(ko.toJSON(data));
 
@@ -1826,8 +1835,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             }
 
+
+            saveCourse = function () {
+
+            }
+
             getCategoryHierarchy = function () {
-                $.getJSON("https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/getCategories").
+                $.getJSON(trainingbaseurl + "getCategories").
                 then(function (response) {
                     var categoriesres = response.categories;
                     self.categoryForUi([]);
@@ -1912,12 +1926,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     end_date: Date.parse(self.cedate()).toString('dd MMM yyyy HH:mm'),
                     timezone: self.ctimezone()[0]
                 });
-                showblock();
+                showScheduleBlock();
                 console.log(ko.toJSON(self.cclass()));
                 // $('#scheduleblock').hide();
                 // resetSchedule();
             }
-            showblock = function () {
+            showScheduleBlock = function () {
                 var scheduledclass = "";
                 $(".addedschedule").empty();
                 for (var i = 0; i < self.cclass().schedules().length; i++) {
@@ -1950,7 +1964,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     enrollment_end_date: Date.parse(self.cclass().enrollment_end_date()).toString('dd MMM yyyy'),
                     city: self.cclass().city(),
                     state: self.cclass().state(),
-                    keyevent:self.cclass().keyevent(),
+                    key_event: self.cclass().key_event()!=true?'No':'Yes',
                     status: self.cclass().status()[0],
                     schedules: self.cclass().schedules()
                 });
@@ -1960,22 +1974,82 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             }
 
+            deleteClass = function () {
+                alert("Delete Class Id : ");
+            }
+			
+			editClass = function (classd) {
+				
+				console.log(classd);
+                 $("#ediclass").ojDialog("open");
+            }
+
             updateCourseClass = function () {
 
                 var htmlData = "";
                 $(".classlist").empty();
                 var classList = self.createCourse().classes();
-				
-                for (var i = 0; i < classList.length; i++) {
+			
+  for (var i = 0; i < classList.length; i++) {
+
                     htmlData += "<ul><li>";
+                    htmlData += "<i class=\"fa fa-trash-o\" style=\"cursor: pointer;float: right;margin-left: 5px\" title=\"Delete Course\" onclick=\"deleteClass()\" target=\"_blank\"></i><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\" style=\"cursor: pointer;float: right;margin-left: 5px\" title=\"Delete Course\" onclick=\'editClass("+JSON.stringify(classList)+")\' target=\"_blank\"></i>";
                     htmlData += "<p>City: " + classList[i].city + "</p>";
                     htmlData += "<P> Strength: " + classList[i].class_size + "</P>";
                     htmlData += "<P> Enroll By: " + classList[i].enrollment_end_date + "</P>";
-                    htmlData += "</li></ul>"
+                    // htmlData += "</li></ul>"
                 }
-               $(".classlist").append(htmlData);
-                
+                $(".classlist").append(htmlData);
             }
+
+
+            // EDIT EXISTING COURSE FOR TRAINING
+            edittraining = function (course) {
+                var courseid = course.courseid;
+
+                var courseToEdit = findCourseById(courseid);
+                resetCourse();
+
+                if (courseToEdit != undefined) {
+
+                    console.log(ko.toJSON(courseToEdit));
+                    self.createCourse().name(courseToEdit.name);
+                    self.createCourse().description(courseToEdit.description);
+                    self.createCourse().contact_email(courseToEdit.contact);
+                    self.createCourse().cloud_onpremise().push(courseToEdit.prodcut_type);
+                    self.createCourse().training_level().push(courseToEdit.training_level);
+                    self.createCourse().training_type().push(courseToEdit.training_type);
+                    self.createCourse().status().push(courseToEdit.status);
+                    self.createCourse().classes(courseToEdit.classes);
+                    self.createCourse().categories(courseToEdit.categories);
+
+                    // self.cclass(courseToEdit.classes);
+                    // RENDER MAPPED CATEGORY FOR THE COURSE
+                    renderCourseCategory();
+
+                    // RENDER CLASSES FOR THE COURSE
+                    renderCourseClasses()
+
+                    // SHOW THE EDIT WINDOW ONCE THE FORM IS POPULATED
+                    $("#edittraining").ojDialog("open");
+                }
+            }
+
+            renderCourseCategory = function () {
+
+                self.selectedCategoriesForUi([]);
+                for (var i = 0; i < self.createCourse().categories().length; i++) {
+                    self.selectedCategoriesForUi.push(self.createCourse().categories()[i].name);
+                    self.selectedCategoriesForCourse().push(self.createCourse().categories()[i]);
+
+                }
+
+            }
+
+            renderCourseClasses = function () {
+                updateCourseClass();
+            }
+
 
 
             //  DELETE A COURSE POST CONFIRMATION
@@ -1989,7 +2063,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         courses: course
                     }
                     console.log("Deleting courses. . . " + ko.toJSON(reqheader));
-                    var url = "https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/dropCourses";
+                    var url = trainingbaseurl + "dropCourses";
                     $.ajax({
                         url: url,
                         cache: false,
