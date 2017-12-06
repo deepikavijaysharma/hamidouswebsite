@@ -212,7 +212,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.organizerEmail = ko.observable('');
             self.topic = ko.observable('');
             self.invite = ko.observable('');
-            //self.keyevent = ko.observable('');
+            self.com_call_keyevent = ko.observable('');
 
             resetcall = function () {
                 self.callname('');
@@ -234,6 +234,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.topic('');
                 self.invite('');
                 self.addiontal_link('');
+                self.com_call_keyevent(false);
 
             }
 
@@ -293,7 +294,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     name: self.callname(),
                     speaker: self.callspkr(),
                     designation: self.calldesignation(),
-                    call_date: self.date(),
+                    call_date: self.date().split('T')[0],
                     call_time: self.starttime().split('T')[1].substring(0, 5),
                     duration: self.callduration(),
                     locn: self.callvenue(),
@@ -309,7 +310,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     organizer_email: self.organizerEmail(),
                     topic: self.topic(),
                     invite: self.invite(),
-                    keyevent: 'Yes'
+                    keyevent: self.com_call_keyevent()!=true?'No':'Yes' 
 
                 }
                 console.log(ko.toJSON(call));
@@ -1161,8 +1162,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             organizer_email: calls[i].organizer_email != undefined ? calls[i].organizer_email : '',
                             topic: calls[i].topic != undefined ? calls[i].topic : '',
                             invite: calls[i].invite != undefined ? calls[i].invite : '',
-                            call_id: calls[i].call_id != undefined ? calls[i].call_id : ''
+                            call_id: calls[i].call_id != undefined ? calls[i].call_id : '',
+                            key_event_value: calls[i].keyevent != 'No' ? true : false
                         });
+
                     }
                 });
             }
@@ -1252,6 +1255,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.editccOrganizerEmail = ko.observable();
             self.editccTopic = ko.observable();
             self.editccInvite = ko.observable();
+            self.edit_com_call_keyevent = ko.observable('');
 
             var edit_call_id;
             editcommunitycall = function (edit_calls, param2) {
@@ -1274,6 +1278,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.editccOrganizerEmail('');
                 self.editccTopic('');
                 self.editccInvite('');
+                self.edit_com_call_keyevent('');
 
                 // SET NEW VALUE
                 self.editccName(edit_calls.name);
@@ -1303,6 +1308,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.editccInvite(edit_calls.invite);
                 edit_call_id = edit_calls.call_id;
 
+                self.edit_com_call_keyevent(edit_calls.key_event_value);
                 $("#editcommunitycall_id").ojDialog("open");
             }
 
@@ -1331,7 +1337,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     organizer_email: self.editccOrganizerEmail(),
                     topic: self.editccTopic(),
                     invite: self.editccInvite(),
-                    call_id: edit_call_id
+                    call_id: edit_call_id,
+                    keyevent: self.edit_com_call_keyevent()!=true?'No':'Yes'
 
                 }
                 console.log("edit : " + ko.toJSON(edit_community_call_data));
@@ -1414,6 +1421,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.cloneccOrganizerEmail = ko.observable();
             self.cloneccTopic = ko.observable();
             self.cloneccInvite = ko.observable();
+            self.clone_com_call_keyevent = ko.observable('');
 
             cloneCommunityCall = function (clone_calls, param2) {
 
@@ -1435,6 +1443,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.cloneccOrganizerEmail('');
                 self.cloneccTopic('');
                 self.cloneccInvite('');
+                self.clone_com_call_keyevent('');
 
                 // SET NEW VALUE
                 self.cloneccName(clone_calls.name);
@@ -1462,6 +1471,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.cloneccOrganizerEmail(clone_calls.organizer_email);
                 self.cloneccTopic(clone_calls.topic);
                 self.cloneccInvite(clone_calls.invite);
+                self.clone_com_call_keyevent(clone_calls.key_event_value);
 
                 $("#clonecommunitycall_id").ojDialog("open");
 
@@ -1528,7 +1538,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     role: cloneSelectedrole,
                     organizer_email: self.cloneccOrganizerEmail(),
                     topic: self.cloneccTopic(),
-                    invite: self.cloneccInvite()
+                    invite: self.cloneccInvite(),
+                    keyevent: self.clone_com_call_keyevent()!=true?'No':'Yes'
+
 
                 }
 
