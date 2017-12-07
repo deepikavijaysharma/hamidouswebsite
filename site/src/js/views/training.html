@@ -341,7 +341,7 @@
                     <!-- ko foreach: courses -->
                     <div class="oj-sm-12 oj-md-6 oj-lg-4 blocks oj-flex-item oj-margin">
                       <!--<span class="communityadmin" style="cursor: pointer;color: red;float: right" data-bind="click:function(){deletecourse(this)}">X</span>-->
-                      <div class="oj-sm-12 communityadmin" style="margin-bottom: 5px">
+                      <div class="oj-sm-12 communityadmin" style="margin-bottom: 5px;position:relative;z-index:1000">
                         <i class="fa fa-pencil-square-o" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Edit Course"
                           data-bind="click:function(){edittraining(this)}" target="_blank"></i>
                         <i class="fa fa-trash-o" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Delete Course" data-bind="click:function(){deletecourse(this)}"
@@ -1444,7 +1444,11 @@
 
             <!-- tab contents -->
             <div id="tabs-1">
-              <p class="directlink communityadmin" style="color: blue"></p>
+             <div class="oj-sm-12 courserow oj-flex">
+                <p class="directlink communityadmin" style="color: blue"></p>
+               
+              </div>
+              
               <div class="oj-sm-12 courserow oj-flex">
                 <div class="oj-sm-4 leftcoursetitle">Name</div>
                 <div class="oj-sm-8 rightcoursetitle">
@@ -1480,9 +1484,18 @@
                   <!-- ko foreach: detailedClasses -->
                   <li>
                     <div class="oj-sm-12 courserow oj-flex">
-                      <div class="oj-sm-4  leftcoursetitle">
-                        <h2 data-bind="text:city"></h2>
+                      <div class="oj-flex oj-sm-4  leftcoursetitle">
+                       <div class="oj-sm-12">
+                       <b> <h2 data-bind="text:city"></h2></b>
+                        </div>
+                        <div class="oj-sm-12">
+                        <ul class="classschedule">
+                        <!-- ko foreach: schedule -->
+                        <li><p style="font-size: 10pt;margin: 0px"><span data-bind="text:start_date"></span> - <span data-bind="text:end_date"></span></p></li>
+                        <!-- /ko -->
+                        </ul>
                       </div>
+                       </div>
                       <div class="oj-sm-8 rightcoursetitle">
                         <!-- data-bind="attr: { href: directURL}" -->
                         <p>
@@ -1494,7 +1507,7 @@
                           <abbr title="You've been Waitlisted!">
                             <img width="35px" height="35px" align="right" src="https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/da/59/f5/da59f574-9114-2382-296e-d8aab9aee65b/source/512x512bb.jpg"> </abbr>
                           <!-- /ko -->
-                          <button class="bluebutton" style="cursor:pointer" data-bind="click:initEnroll,attr:{name:id}"> Click to Enroll </button>
+                          <button class="bluebutton" style="cursor:pointer" data-bind="click:initEnroll,attr:{name:class_id}"> Click to Enroll </button>
                         </p>
                       </div>
 
@@ -1749,10 +1762,10 @@
   </div>
 
   <!-- EDIT CLASS FOR COURSE -->
-  <div style="display:none" class="dialogbodymain" id="ediclass" title="Edit Class" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+  <div style="display:none" class="dialogbodymain" id="editclass" title="Edit Class" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
     <div class="oj-dialog-footer" style="background-color: lightgray">
       <div class="oj-sm-8">
-        <button id="okButton" class="bluebutton" onclick="addClassTotheCourse()" data-bind="ojComponent: {component: 'ojButton', label: 'Add Class'}">
+        <button id="okButton" class="bluebutton" onclick="saveClassTotheCourse()" data-bind="ojComponent: {component: 'ojButton', label: 'Save Class'}">
         </button>
       </div>
     </div>
@@ -1812,6 +1825,9 @@
                   <input id="date" data-bind="ojComponent: {component: 'ojInputDate', 
                                               value: enrollment_end_date}" />
                 </div>
+                <div class="oj-sm-12">
+                  <label data-bind="text:enrollment_end_date_view">Test</label>
+                </div>
               </div>
             </div>
 
@@ -1857,9 +1873,6 @@
               </div>
             </div>
             <div class="oj-sm-12 inputrow">
-              <label>Schedule</label>
-              &nbsp;
-              <button onclick="addScheduleBlock()">+</button>
             </div>
             <div class="oj-sm-12 inputrow">
               <!-- DIV BLOCK FOR ADDING SCHEDULE -->
@@ -2141,7 +2154,7 @@
     <div class="oj-dialog-footer" style="background-color: lightgray">
 
       <div class="oj-sm-8">
-        <button class="bluebutton " id="okButton" data-bind="ojComponent: {component: 'ojButton', label: 'Save Course'},click:$parent.saveCourse">
+        <button class="bluebutton " id="okButton" data-bind="ojComponent: {component: 'ojButton', label: 'Save Course'}" onclick="saveCourse()">
         </button>
       </div>
     </div>

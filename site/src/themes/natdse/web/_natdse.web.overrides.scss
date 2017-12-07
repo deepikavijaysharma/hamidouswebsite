@@ -2292,9 +2292,16 @@ border-right:none;
 }
 .originfo{
 padding-top:10px;	
+padding-bottom:10px;
 @media  #{$responsiveQueryMediumDown} {
 padding:10px;
 }
+.fa-calendar{
+	color: rgb(104, 184, 221);
+	}
+.topicclass{
+	padding-right:10px;
+	box-sizing:border-box;}	
 }
 .details{
 display: flex;
@@ -3121,6 +3128,9 @@ box-sizing:border-box;
 display:flex;
 align-items:center;
 color:$blue;
+.classschedule{
+	list-style:none;
+	}
 }
 .rightcoursetitle{
 background:#fff;

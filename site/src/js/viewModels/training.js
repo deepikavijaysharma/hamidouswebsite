@@ -120,9 +120,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             // CLASSES
             self.cclass = ko.observable();
             self.cclass({
+                class_id: ko.observable(''),
                 description: ko.observable(''),
                 class_size: ko.observable(''),
                 enrollment_end_date: ko.observable(''),
+                enrollment_end_date_view: ko.observable(''),
                 city: ko.observable(''),
                 state: ko.observable(''),
                 status: ko.observable(''),
@@ -134,6 +136,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             // COURSE
             self.createCourse = ko.observable();
             self.createCourse({
+                course_id: ko.observable(''),
                 name: ko.observable(''),
                 description: ko.observable(''),
                 contact_email: ko.observable(''),
@@ -544,7 +547,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             /*----------------------------------GET COURSES----------------------------------*/
             self.role = ko.observableArray([]);
             self.getrole = function () {
-                $.getJSON(baseurl + "getCategories").then(function (roleslist) //CODE FOR THE ROLE POPUP
+                $.getJSON(trainingbaseurl + "getCategories").then(function (roleslist) //CODE FOR THE ROLE POPUP
                     {
                         for (var i = 0; i < roleslist.roles.length; i++) {
                             var filt = roleslist.roles[i].name;
@@ -596,8 +599,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 // ITERATE THROUGH THE LIST OF COURSES TO FIND A MATCH FOR THE COURSE ID
                 for (var i = 0; i < self.courselist.length; i++) {
                     var course = self.courselist[i];
-                    console.log(course.id);
-                    if (course.id === courseid) {
+                    console.log(course.course_id);
+                    if (course.course_id === courseid) {
                         return course;
                     }
                 }
@@ -676,7 +679,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.enrollCount(course.enrollmentCount);
                 self.detailedEnrollstatus(course.enrollment_status);
                 self.waitlistcount(course.waitlistCount);
-                self.detailedCourseId(course.courseid);
+                self.detailedCourseId(course.course_id);
                 self.detailedClassId(course.class_id);
                 self.detailedCatId(course.category_id);
                 self.detailedSubCatId(course.subcat_id);
@@ -684,12 +687,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.detailedClassSize(course.class_size);
                 self.coursestatus(course.course_status);
                 self.classstatus(course.class_status);
-                self.detailedSchedule(course.schedule);
-                self.selectedcourseid = course.courseid;
+                self.detailedSchedule(course.schedules);
+                self.selectedcourseid = course.course_id;
 
                 // CREATE COURSE LINK
                 var courselink = window.location.href;
-                courselink += "#" + course.courseid;
+                courselink += "#" + course.course_id;
                 $(".directlink").empty();
                 if (true) {
                     $(".directlink").append("<b>Direct Link: <span>" + courselink + "</span></b>");
@@ -713,7 +716,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.searchtext = ko.observableArray([]);
             self.fetchcourses = function () {
                 $.ajax({
-                    url: baseurl + "getCoursesV2",
+                    url: trainingbaseurl + "getCoursesV2",
                     method: 'GET',
                     headers: {
                         free_text_search: '',
@@ -757,7 +760,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     //console.log("whoa", self.searchtext());
                     var text = self.searchtext().length > 0 ? self.searchtext() : '';
                     $.ajax({
-                        url: baseurl + "getCoursesV2",
+                        url: trainingbaseurl + "getCoursesV2",
                         method: 'GET',
                         headers: {
                             free_text_search: text,
@@ -791,7 +794,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     role_id: selectedroles
                 }
                 $.ajax({
-                    url: baseurl + "getCoursesV2",
+                    url: trainingbaseurl + "getCoursesV2",
                     method: 'GET',
                     headers: headerobj,
                     success: function (allcourses) {
@@ -957,8 +960,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                                 subcat_id: curcourse.subcat_id,
                                 start_date: startday == undefined ? "NA" : startday.start_date,
                                 directURL: curcourse.directURL,
-                                courseid: curcourse.id,
-                                classid: curcourse.class_id,
+                                course_id: curcourse.course_id,
+                                class_id: curcourse.class_id,
                                 contact_email: curcourse.contact,
                                 city: curcourse.city,
                                 state: curcourse.state,
@@ -966,7 +969,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                                 class_status: curcourse.class_status,
                                 enrollmentCount: curcourse.enrollmentCount,
                                 waitlistCount: curcourse.waitlistCount,
-                                schedule: curcourse.schedule
+                                schedules: curcourse.schedules
                             });
                         }
                     }
@@ -1606,9 +1609,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             // ENROLL EMPLOYEE FOR A COURSE
-            enrollemployee = function (p1, p2, p3) {
-                alert('Enroll');
-            }
+            // enrollemployee = function (p1, p2, p3) {
+            //     alert('Enroll');
+            // }
 
             redirecttotrainingapp = function () {
                 self.ssowindow = window.open("https://apex.oraclecorp.com/pls/apex/f?p=TRAINING_SCHEDULER:MANAGE_COURSE");
@@ -1643,7 +1646,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                         },
                         error: function (xhr) {
-                            alert(xhr);
+                            // alert(xhr);
                         }
                     });
 
@@ -1687,7 +1690,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             getReporteeByEmail();
 
             enrollforCourse = function (emaillist) {
-                alert(emaillist.length);
                 if (emaillist.length > 0) {
                     // CREATE THE CLASS BODY
                     var classbody = {
@@ -1744,7 +1746,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             initEnroll = function (param) {
                 self.selectreportees([]);
-                self.selectedclassid = param.id;
+                self.selectedclassid = param.class_id;
                 if (self.reporteelist().length > 1) {
                     $("#reportees").ojDialog("open");
                 } else {
@@ -1767,6 +1769,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             resetCourse = function () {
+                self.createCourse().course_id('');
                 self.createCourse().name('');
                 self.createCourse().description('');
                 self.createCourse().cloud_onpremise([]);
@@ -1780,9 +1783,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             resetClass = function () {
+                self.cclass().class_id('');
                 self.cclass().description('');
                 self.cclass().class_size('');
                 self.cclass().enrollment_end_date('');
+                self.cclass().enrollment_end_date_view('');
                 self.cclass().city('');
                 self.cclass().state('');
                 self.cclass().status('');
@@ -1800,7 +1805,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             // REQUEST COURSE CREATION BASED ON SAVED DATA
             self.createcourse = function () {
-                console.log("Saving course . . .");
+                console.log("Creating course . . .");
                 var mappedCategories = new Array();
                 self.selectedCategoriesForCourse().forEach(function (element) {
                     mappedCategories.push(element.id);
@@ -1848,9 +1853,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
 
-            saveCourse = function () {
 
-            }
 
             getCategoryHierarchy = function () {
                 $.getJSON(trainingbaseurl + "getCategories").
@@ -1914,6 +1917,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             openaddsclasswindow = function () {
+                resetClass();
                 $("#addclasstoclass").ojDialog("open");
             }
 
@@ -1940,17 +1944,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 });
                 showScheduleBlock();
                 console.log(ko.toJSON(self.cclass()));
-                // $('#scheduleblock').hide();
-                // resetSchedule();
+
             }
             showScheduleBlock = function () {
                 var scheduledclass = "";
                 $(".addedschedule").empty();
                 for (var i = 0; i < self.cclass().schedules().length; i++) {
-                    scheduledclass += "<li>" + self.cclass().schedules()[i].start_date + " to " + self.cclass().schedules()[i].end_date + " " + self.cclass().schedules()[i].timezone + " time </li>";
+                    scheduledclass += "<li>" + self.cclass().schedules()[i].start_date + " to " + self.cclass().schedules()[i].end_date + " " + self.cclass().schedules()[i].timezone + " time  <span style=\"color:red;cursor:pointer\" onclick=\"deleteSchedule(" + i + ")\">X</span></li>";
                 }
                 $(".addedschedule").append(scheduledclass);
                 resetSchedule();
+            }
+
+            deleteSchedule = function (index) {
+                self.cclass().schedules().splice(index, 1);
+                showScheduleBlock();
+                console.log(ko.toJSON(self.cclass()));
             }
 
             addClassTotheCourse = function () {
@@ -1986,14 +1995,155 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             }
 
-            deleteClass = function () {
-                alert("Delete Class Id : ");
+            saveClassTotheCourse = function () {
+                if (self.cclass().schedules().length < 1) {
+                    self.showToastDialog("Atleast create one schedule for the class", false, 0);
+                    return;
+                }
+
+                if (self.cclass().class_size().length < 1) {
+                    self.showToastDialog("Please enter valid class size.", false, 0);
+                    return;
+                }
+
+                if (self.cclass().city().length < 1) {
+                    self.showToastDialog("Please enter valid City.", false, 0);
+                    return;
+                }
+
+                self.cclass().enrollment_end_date(self.cclass().enrollment_end_date().length > 0 ? Date.parse(self.cclass().enrollment_end_date()).toString('dd MMM yyyy') : self.cclass().enrollment_end_date_view());
+
+                self.cclass().key_event(self.cclass().key_event()?'Yes':'No');
+                var classlist = new Array();
+                classlist.push(self.cclass());
+
+                var reqbody = {
+                    classes: classlist
+                }
+                console.log(ko.toJSON(reqbody));
+
+                var url = trainingbaseurl + "editClasses";
+                $.ajax({
+                    url: url,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(reqbody),
+                    success: function (data) {
+                        self.showToastDialog("Class Successfully Updated", true, 1000);
+                        console.log("Class Successfully Updated : " + ko.toJSON(data));
+                        $("#editclass").ojDialog("close");
+                        resetClass();
+                        // updateCourseClass();
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    // alert(err);
+                    self.showToastDialog("Class Failed Updated", true, 2000);
+                });
+
+
             }
-			
-			editClass = function (classd) {
-				
-				console.log(classd);
-                 $("#ediclass").ojDialog("open");
+
+            deleteClass = function () {
+                var classidtodel = self.createCourse().classes()[0].class_id;
+
+
+                var classobj = new Array();
+                classobj.push(classidtodel);
+
+                var body = {
+                    classes: classobj
+                }
+
+                console.log(">>>  " + ko.toJSON(body));
+
+                var url = trainingbaseurl + "dropClasses";
+                $.ajax({
+                    url: url,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(body),
+                    success: function (data) {
+                        self.showToastDialog("Class Successfully Deleted", true, 1000);
+                        console.log("Class Successfully Deleted");
+                        $("#editclass").ojDialog("close");
+                        resetCourse();
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    // alert(err);
+                    self.showToastDialog("Class Failed Updated", true, 2000);
+                });
+            }
+
+
+            saveCourse = function () {
+
+                console.log("saving course . . .");
+                var mappedCategories = new Array();
+                self.selectedCategoriesForCourse().forEach(function (element) {
+                    mappedCategories.push(element.category_id);
+                });
+                self.cclass().status(self.cclass().status()[0]);
+
+                var coursedata = {
+                    course_id: self.createCourse().course_id(),
+                    name: self.createCourse().name(),
+                    description: self.createCourse().description(),
+                    cloud_onpremise: self.createCourse().cloud_onpremise()[0],
+                    training_level: self.createCourse().training_level()[0],
+                    training_type: self.createCourse().training_type()[0],
+                    status: self.createCourse().status()[0],
+                    contact_email: self.createCourse().contact_email(),
+                    categories: mappedCategories,
+                    classes: self.createCourse().classes()
+                }
+                var courses = new Array();
+                courses.push(coursedata);
+
+                var reqBody = {
+                    courses: courses
+                }
+                console.log(ko.toJSON(reqBody));
+
+                var url = trainingbaseurl + "editCourses";
+                $.ajax({
+                    url: url,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(reqBody),
+                    success: function (data) {
+                        self.showToastDialog("Course Successfully Updated", true, 1000);
+                        console.log("Course Successfully Updated");
+                        $("#edittraining").ojDialog("close");
+                        resetCourse();
+                        self.fetchcourses();
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    // alert(err);
+                    self.showToastDialog("Update Failed!", true, 2000);
+                    self.fetchcourses();
+                });
+
+            }
+
+
+            editClass = function (class_to_edit) {
+                resetClass();
+                console.log(Date.parse(class_to_edit.enrollment_end_date).toString('dd MMM yyyy'));
+                self.cclass().class_id(class_to_edit.class_id);
+                self.cclass().description(class_to_edit.description);
+                self.cclass().class_size(class_to_edit.class_size);
+                self.cclass().enrollment_end_date();
+                self.cclass().enrollment_end_date_view(Date.parse(class_to_edit.enrollment_end_date).toString('dd MMM yyyy'));
+                self.cclass().city(class_to_edit.city);
+                self.cclass().state(class_to_edit.state);
+                self.cclass().status(class_to_edit.status);
+                self.cclass().key_event(class_to_edit.key_event == 'Yes' ? true : false);
+                self.cclass().schedules(class_to_edit.schedules);
+                showScheduleBlock();
+                $("#editclass").ojDialog("open");
             }
 
             updateCourseClass = function () {
@@ -2001,14 +2151,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var htmlData = "";
                 $(".classlist").empty();
                 var classList = self.createCourse().classes();
-			
-  for (var i = 0; i < classList.length; i++) {
+
+                for (var i = 0; i < classList.length; i++) {
 
                     htmlData += "<ul><li>";
-                    htmlData += "<i class=\"fa fa-trash-o\" style=\"cursor: pointer;float: right;margin-left: 5px\" title=\"Delete Course\" onclick=\"deleteClass()\" target=\"_blank\"></i><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\" style=\"cursor: pointer;float: right;margin-left: 5px\" title=\"Delete Course\" onclick=\'editClass("+JSON.stringify(classList)+")\' target=\"_blank\"></i>";
+                    htmlData += "<i class=\"fa fa-trash-o\" style=\"cursor: pointer;float: right;margin-left: 5px\" title=\"Delete Course\" onclick=\"deleteClass()\" target=\"_blank\"></i><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\" style=\"cursor: pointer;float: right;margin-left: 5px\" title=\"Edit Course\" onclick=\'editClass(" + JSON.stringify(classList[i]) + ")\' target=\"_blank\"></i>";
                     htmlData += "<p>City: " + classList[i].city + "</p>";
                     htmlData += "<P> Strength: " + classList[i].class_size + "</P>";
-                    htmlData += "<P> Enroll By: " + classList[i].enrollment_end_date + "</P>";
+                    htmlData += "<P> Enroll By: " + Date.parse(classList[i].enrollment_end_date).toString('dd MMM yyyy') + "</P>";
                     // htmlData += "</li></ul>"
                 }
                 $(".classlist").append(htmlData);
@@ -2017,7 +2167,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             // EDIT EXISTING COURSE FOR TRAINING
             edittraining = function (course) {
-                var courseid = course.courseid;
+                var courseid = course.course_id;
 
                 var courseToEdit = findCourseById(courseid);
                 resetCourse();
@@ -2025,6 +2175,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 if (courseToEdit != undefined) {
 
                     console.log(ko.toJSON(courseToEdit));
+                    self.createCourse().course_id(courseToEdit.course_id);
                     self.createCourse().name(courseToEdit.name);
                     self.createCourse().description(courseToEdit.description);
                     self.createCourse().contact_email(courseToEdit.contact);
@@ -2066,22 +2217,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             //  DELETE A COURSE POST CONFIRMATION
             deletecourse = function (coursedata) {
-                if (confirm("Do you really wish to delete the course : ?")) {
+                if (confirm("Do you really wish to delete the course?")) {
 
                     var course = new Array();
-                    course.push(coursedata.courseid);
+                    course.push(coursedata.course_id);
 
-                    var reqheader = {
+                    var body = {
                         courses: course
                     }
-                    console.log("Deleting courses. . . " + ko.toJSON(reqheader));
+                    console.log("Deleting courses. . . " + ko.toJSON(body));
                     var url = trainingbaseurl + "dropCourses";
                     $.ajax({
                         url: url,
                         cache: false,
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        headers: ko.toJSON(reqheader),
+                        data: ko.toJSON(body),
                         success: function (data) {
                             self.showToastDialog("Course Successfully deleted", true, 2000);
                             self.fetchcourses();
