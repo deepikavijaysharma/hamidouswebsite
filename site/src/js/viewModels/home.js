@@ -25,6 +25,8 @@ $("#empf2").ojDialog("open");
 $("#empf3").ojDialog("open");
 };
 
+
+
 closedialog=function(){
                                 
                                 $("#modalDialog1").ojDialog("close");
@@ -221,6 +223,9 @@ closedialog=function(){
      
 
     $(document).ready(function() {
+		if (window.location.href.indexOf("waleed") != -1){
+	$("#empf1").ojDialog("open");
+	}
 		function isIE(userAgent) {
   userAgent = userAgent || navigator.userAgent;
   return userAgent.indexOf("MSIE ") > -1 || userAgent.indexOf("Trident/") > -1 || userAgent.indexOf("Edge/") > -1;

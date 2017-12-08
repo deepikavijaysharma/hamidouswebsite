@@ -10,6 +10,9 @@ var usertype='';
 var uuid='';
 var isAdmin=false;
 var newUserAdminCheck=false;
+var trainingdevurl="https://apex.oraclecorp.com/pls/apex/training_app_dev/training/";
+var trainingprodurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/";
+var trainingbaseurl=trainingdevurl;
 /**
  * Example of Require.js boostrap javascript
  */
@@ -39,6 +42,7 @@ requirejs.config(
     'customElements': 'libs/webcomponents/CustomElements',
     'proj4': 'libs/proj4js/dist/proj4-src',
     'css': 'libs/require-css/css',
+    'date':'libs/date/date',
 	'bootstrap': 'libs/bootstrap/bootstrap.min'
   }
   
