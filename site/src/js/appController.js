@@ -77,12 +77,11 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       // LOGIN INITIATION
       isloggedin = function () {
         if (ssoemail.length > 0) {
-
-          document.getElementById('loginbutton').style.display = 'none';
-          document.getElementById('loginbutton1').style.display = 'none';
-          // if(!newUserAdminCheck){
-          //   checkadmin();
-          // }
+          document.getElementById('logoutbutton').style.display = 'block';
+          document.getElementById('logoutbutton1').style.display = 'block';
+          if(!newUserAdminCheck){
+            checkadmin();
+          }
 
 
           if (self.ssowindow != undefined) {
@@ -90,17 +89,20 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
             self.ssowindow.close();
           }
         } else {
-       
-          document.getElementById('loginbutton').style.display = 'block';
-          document.getElementById('loginbutton1').style.display = 'block';
-          
+          document.getElementById('logoutbutton').style.display = 'block';
+          document.getElementById('logoutbutton1').style.display = 'block';          
         }
       }
 
       initsso = function () {
         if (ssoemail.length == 0) {
-          // document.getElementById('ssodialog').style.display = 'block';
           self.ssowindow = window.open("http://solutionengineering.us.oracle.com/seaas/");
+        }
+      }
+
+      closesso = function () {
+        if (ssoemail.length > 0) {
+          self.ssowindow = window.open("https://login-stage.oracle.com:443/oam/server/logout", target = "_self");
         }
       }
 
@@ -117,6 +119,26 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
             a[b[0]] = b[1];
             return a;
           }, {})["ORA_UCM_INFO"];
+
+        // var w = document.cookie.trim().split(";");
+
+        // var arr = "";
+
+        // for (var j=0; j<w.length; j++) {
+        //     if (w[j].match("ORA_UCM_INFO")) 
+        //     {
+        //       arr = j;
+        //       break;    
+        //     }
+        // }
+
+        // var y = w[arr].split("~");
+
+        // for (var r=2; r<y.length-1; r++) {
+        //       var sname = y[r]+" ";
+        //       console.log(sname);
+        // }
+
         user = typeof user !== "undefined" ? user : "";
         var n = user.lastIndexOf("~");
 
@@ -124,9 +146,11 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         
         if (email) {
           ssoemail = email;
+          // ssoname = sname;
         } else {
           // ssoemail = "angan.sen@oracle.com";
           ssoemail = "";
+          // ssoname = "";
         }
       }
       

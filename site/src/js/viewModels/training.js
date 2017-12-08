@@ -6,7 +6,7 @@
  * Your dashboard ViewModel code goes here
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs/ojconveyorbelt', 'ojs/ojcheckboxset', 'ojs/ojanimation', 'ojs/ojbutton', 'ojs/ojinputtext', 'ojs/ojdialog', 'ojs/ojdatetimepicker',
-        'ojs/ojselectcombobox', 'ojs/ojtimezonedata', 'ojs/ojswitch', 'ojs/ojswitch', 'ojs/ojdialog', 'ojs/ojcollapsible', 'ojs/ojaccordion', 'ojs/ojtree'
+        'ojs/ojselectcombobox', 'ojs/ojtimezonedata', 'ojs/ojswitch', 'ojs/ojswitch', 'ojs/ojdialog', 'ojs/ojcollapsible', 'ojs/ojaccordion', 'ojs/ojtree','ojs/ojtabs'
     ],
     function (oj, ko, $) {
 
@@ -101,6 +101,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.categoryForUi = ko.observableArray([]);
 
 
+            //REQUEST TRAINING VARIABLES
+            self.rtrcategory = ko.observable('');
+            self.rtrname = ko.observable('');
+
             // CREATE COURSE MODEL
             self.selectedCategoriesForUi = ko.observableArray([]);
             self.selectedCategoriesForCourse = ko.observableArray([]);
@@ -149,7 +153,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             });
 
 
-
+            self.rolelist = ko.observableArray([]);
 
 
             // EVENT HANDLER FOR ROLE SELECTION
@@ -185,6 +189,26 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }
                 }
             }
+
+            getRoleData = function () {
+                $.getJSON("https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/getFiltersV2").
+                then(function (reasons) {
+
+                    // Get Roles in select in REQUEST TRAINING
+                    self.rolelist([]);
+                    // console.log(reasons);
+                    var rolist = reasons.roles;
+                    for (var i = 0; i < rolist.length; i++) {
+
+                        self.rolelist.push({
+                            name: rolist[i].name,
+                            id: rolist[i].id
+                        })
+                    }// console.log(ko.toJSON(self.rolelist()));
+                });
+            }
+
+            getRoleData();
 
             //-----------------   COMMUNITY CALL   ------------------------//
             //Development url for create, edit, clone and delete community call
@@ -388,12 +412,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             //  VARIABLES FOR LEFT PANEL CATEGORIES 
             self.refinelist = ko.observableArray([]);
+            self.catlist = ko.observableArray([]);
             self.producttype = ko.observableArray([]);
             self.training_levels = ko.observableArray([]);
             self.training_types = ko.observableArray([]);
             self.cities = ko.observableArray([]);
             self.roles = ko.observableArray([]);
             self.selectedcategories = ko.observableArray([]);
+            self.rl = ko.observableArray([]);
 
             getLeftpanelData = function () {
                 $.getJSON(trainingbaseurl + "getFiltersV2").
@@ -465,9 +491,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             id: stateList[i].id
                         })
                     }
-
-
-                    // console.log(ko.toJSON(self.refinelist()));
                 });
             }
 
@@ -2022,6 +2045,28 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }
                 console.log(ko.toJSON(reqbody));
 
+                requesttraining = function () 
+                {
+                    var rtr = {
+                      category: self.rtrcategory(),
+                      name: "Aditya Sharma",
+                      role: self.rolelist()[0].name
+                    }
+                    console.log(ko.toJSON(rtr));
+                    $.ajax({
+                      url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/RequestTraining',
+                      cache: false,
+                      type: 'POST',
+                      contentType: 'application/json; charset=utf-8',
+                      data: ko.toJSON(rtr),
+                      success: function (rtrdata) {
+                          console.log(ko.toJSON(rtrdata));
+                          alert("Training requested");
+                      }
+                  }).fail(function (xhr, textStatus, err) {
+                      alert(err);
+                  });
+                }
                 var url = trainingbaseurl + "editClasses";
                 $.ajax({
                     url: url,
@@ -2247,6 +2292,38 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             getCategoryHierarchy();
+            $("#tree").on("ojoptionchange", function(e, ui) 
+            {
+                if (ui.option == "selection") 
+                {
+                    // show selected nodes
+                    var selected = _arrayToStr(ui.value) ;
+                    $("#results").html("<label> id = " + selected + "</label>");
+                }
+            });
+            function _arrayToStr(arr)
+            {
+                var s = "" ;
+                $.each(arr, function(i, val)
+                {
+                    if (i) {s += ", " ;}
+                    console.log(val)
+                    s += $(arr[i]).attr("id") ;
+                }) ;
+                return s ;
+            };
+
+            categoryfamily = function (e, ui) 
+            {
+                console.log(ui.value[0].innerText);
+                // console.log(ui.value[0].parentNode);
+                populateSubcategory(ui,ui.value[0]);
+                //               $( ".oj-tree-title" )
+                // .parentsUntil( $( "tree" ), ".yes" )
+                // if (ui.value[0].id != undefined) {
+                //     self.rtrcategory.push({ui.value[0].innerText});
+                // }
+            }
         }
         return new DashboardViewModel();
     }

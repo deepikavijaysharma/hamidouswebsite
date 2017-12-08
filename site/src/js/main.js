@@ -6,6 +6,7 @@
 var baseurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/";
 var hubbaseurl="http://solutionengineering-devops.us.oracle.com:7003/ords/seaas/seaas/";
 var ssoemail='';
+var ssoname='';
 var usertype='';
 var uuid='';
 var isAdmin=false;
@@ -26,7 +27,6 @@ requirejs.config(
   paths:
 //injector:mainReleasePaths
 
-
   {
     'knockout': 'libs/knockout/knockout-3.4.0.debug',
     'jquery': 'libs/jquery/jquery-3.1.1',
@@ -43,7 +43,8 @@ requirejs.config(
     'proj4': 'libs/proj4js/dist/proj4-src',
     'css': 'libs/require-css/css',
     'date':'libs/date/date',
-	'bootstrap': 'libs/bootstrap/bootstrap.min'
+    'ojtreeview' : 'libs/oj/v3.2.0/debug/ojtreeview',
+    'bootstrap': 'libs/bootstrap/bootstrap.min'
   }
   
 
