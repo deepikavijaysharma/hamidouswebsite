@@ -76,7 +76,7 @@ display: none;
 }
 </style>
 
-<div class="oj-row oj-sm-12 addendsl homeadmin">
+<div class="oj-row oj-sm-12 addendsl admin">
   <button class="btn btn-info btn-xs" data-toggle="modal" data-bind="click:openaddslidedialog" style="float: right;">Add New Slide</button>
 </div>
 <div class="oj-row" id="mainBar">
@@ -99,8 +99,8 @@ display: none;
         <!-- ko if: $index() == 0 -->
         <div class="item active" data-bind="attr:{'id':sliderid}">
           <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
-            <i class="fa fa-pencil-square-o endsl homeadmin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider"></i>
-            <i class="fa fa-trash-o endsldel homeadmin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>  
+            <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider"></i>
+            <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>  
             <div class="verticalcentertext">
               <div class="verticalcentertext">
                 <div class="verticalcentertextinner">
@@ -124,8 +124,8 @@ display: none;
         <!-- ko if: $index() != 0 -->
         <div class="item" data-bind="attr:{'id':sliderid}"> 
           <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
-             <i class="fa fa-pencil-square-o endsl" aria-hidden="true" title="Edit Slider" data-bind="click:editslider" ></i>
-             <i class="fa fa-trash-o endsldel" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i> 
+             <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider" ></i>
+             <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i> 
             <div class="verticalcentertext">
               <div class="verticalcentertext">
                 <div class="verticalcentertextinner">
@@ -479,13 +479,13 @@ display: none;
     </div>
   </div>
 </div>
-<!------------------------------------Our Organization------------------------------------> 
+<!--Our Organization--> 
 <a class="anchor" id="organization"></a>
 <div class="oj-row row7 newrow">
   <div class="container">
     <div class="oj-sm-12 featured bgwhite">
       <div class="oj-sm-12 featuredtitle"><img src="css/images/our_org.png">&nbsp;Our Organization</div>
-      <button class="btn btn-info btn-xs btnaddneworg homeadmin" data-toggle="modal" data-bind="click:openaddneworgdialog">Add New People</button>
+      <button class="btn btn-info btn-xs btnaddneworg admin" data-toggle="modal" data-bind="click:openaddneworgdialog">Add New People</button>
       <div class="oj-flex oj-sm-12 org_container">
         <div class="oj-flex oj-sm-12 red org_container_inner">
 
@@ -499,8 +499,8 @@ display: none;
                   <!-- ko if: orgdotline == 'Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <i class="fa fa-pencil-square-o endorgdel admin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
+                  <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -515,8 +515,8 @@ display: none;
                   <!-- ko if: orgdotline == 'Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <i class="fa fa-pencil-square-o endorgdel admin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
+                  <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -534,8 +534,8 @@ display: none;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <i class="fa fa-pencil-square-o endorgdel admin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
+                  <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -550,8 +550,8 @@ display: none;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <i class="fa fa-pencil-square-o endorgdel admin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
+                  <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -569,8 +569,8 @@ display: none;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <i class="fa fa-pencil-square-o endorgdel admin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
+                  <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -585,8 +585,8 @@ display: none;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <i class="fa fa-pencil-square-o endorgdel admin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
+                  <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -604,8 +604,8 @@ display: none;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <i class="fa fa-pencil-square-o endorgdel admin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
+                  <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -620,8 +620,8 @@ display: none;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <i class="fa fa-pencil-square-o endorgdel admin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
+                  <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -639,8 +639,8 @@ display: none;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <i class="fa fa-pencil-square-o endorgdel admin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
+                  <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -655,8 +655,8 @@ display: none;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <i class="fa fa-pencil-square-o endorgdel admin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
+                  <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -674,8 +674,8 @@ display: none;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <i class="fa fa-pencil-square-o endorgdel admin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
+                  <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -690,8 +690,8 @@ display: none;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <i class="fa fa-pencil-square-o endorgdel admin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
+                  <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -709,8 +709,8 @@ display: none;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <i class="fa fa-pencil-square-o endorgdel admin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
+                  <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -725,8 +725,8 @@ display: none;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <i class="fa fa-pencil-square-o endorgdel admin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
+                  <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -744,8 +744,8 @@ display: none;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <i class="fa fa-pencil-square-o endorgdel admin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
+                  <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -760,8 +760,8 @@ display: none;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <i class="fa fa-pencil-square-o endorgdel admin editdis" aria-hidden="true" title="Edit Organization" data-bind="click:edituploadorgpeopleimage"></i>
+                  <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -894,12 +894,12 @@ display: none;
         <div class="oj-sm-12 golivetitle"><img src="css/images/wins_large.png">&nbsp;Key Wins</div>
         <div class="oj-sm-12">
           <div class="oj-flex">
-            <button class="btn btn-info btn-xs btnaddnewref homeadmin" data-toggle="modal" data-bind="click:openaddnewkeywinsdialog">Add New Key Wins</button>
+            <button class="btn btn-info btn-xs btnaddnewref admin" data-toggle="modal" data-bind="click:openaddnewkeywinsdialog">Add New Key Wins</button>
             <div id="filmStripwins" class="oj-sm-12" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'visible',arrowplacement:'overlay'}"> <!-- block 1 -->
               <!-- ko foreach: keywinslist --> 
               <div class="oj-panel oj-panel-alt2 my-filmstrip-item" data-bind="attr:{'id':keywid}">
-                <i class="fa fa-pencil-square-o endsl homeadmin editdis" aria-hidden="true" title="Edit Key Wins" data-bind="click:editkeywins"></i>
-                <i class="fa fa-trash-o endsldel homeadmin" aria-hidden="true" title="Delete Key Wins" data-bind="click:deletekeywins"></i> 
+                <i class="fa fa-pencil-square-o endsl admin editdis" aria-hidden="true" title="Edit Key Wins" data-bind="click:editkeywins"></i>
+                <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Key Wins" data-bind="click:deletekeywins"></i> 
                 <p>
                   <a data-bind="attr:{'href':keywlink}" target="_blank">
                     <img data-bind="attr:{'src':keywphoto,'id':keywid}">
@@ -925,7 +925,7 @@ display: none;
         <div class="oj-sm-12">
           <div class="oj-flex"> 
             <!-- filmstrip container -->
-            <button class="btn btn-info btn-xs btnaddneworg homeadmin editdis" data-toggle="modal" data-bind="click:openaddgltextdialog">Add New Go Lives</button>
+            <button class="btn btn-info btn-xs btnaddneworg admin editdis" data-toggle="modal" data-bind="click:openaddgltextdialog">Add New Go Lives</button>
             <div id="filmStripwins" class="oj-sm-12" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 2,arrowVisibility: 'visible'}">
               
               <div id="" class="my-filmstrip-item oj-flex-item oj-margin winsblock">
@@ -1084,7 +1084,7 @@ display: none;
         <div class="oj-sm-12 refertitle"><img src="css/images/references_icon_lg.png">&nbsp;References</div>
         <div class="oj-md-6  oj-flex">
           <div class="oj-flex oj-sm-12 oj-margin referencesblock">
-            <button class="btn btn-info btn-xs btnaddnewref homeadmin editdis" data-toggle="modal" data-bind="click:openaddnewrefdialog">Add New References</button>
+            <button class="btn btn-info btn-xs btnaddnewref admin editdis" data-toggle="modal" data-bind="click:openaddnewrefdialog">Add New References</button>
             <div class="oj-flex oj-sm-12  logorow">
               <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/search/customers/_/N-p5vz?Nr=112&bcid=5508413926001" target="_blank"><img src="css/images/Exhibitor.png"></a></div>
               <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/corporate/pressrelease/oracle-rac-iaas-050917.html" target="_blank"><img src="css/images/ICAT-300x120.png"></a></div>
@@ -1095,7 +1095,7 @@ display: none;
         </div>
         <div class="oj-md-6  oj-flex">
           <div class="oj-flex oj-sm-12 oj-margin referencesblock">
-            <button class="btn btn-info btn-xs btnaddnewref homeadmin editdis" data-toggle="modal" data-bind="click:openaddnewrefdialog">Add New References</button>
+            <button class="btn btn-info btn-xs btnaddnewref admin editdis" data-toggle="modal" data-bind="click:openaddnewrefdialog">Add New References</button>
             <div class="oj-flex oj-sm-12  ">
               <div class="oj-flex oj-sm-12 logorow">
                 <div class="oj-sm-12 oj-lg-4"><a href="https://www.forbes.com/sites/oracle/2017/03/15/a-fintech-innovators-race-to-the-cloud/#18ac787315e5" target="_blank"><img src="css/images/calypso.png"></a></div>
@@ -1122,7 +1122,7 @@ display: none;
     <div class="oj-sm-12 featured bgwhite">
       <div class="oj-flex">
         <div class="oj-sm-12 featuredtitle"><img src="css/images/emp_feature_lg.png">&nbsp;Employee Features</div>
-        <button class="btn btn-info btn-xs btnaddnewref homeadmin editdis" data-toggle="modal" data-bind="click:openaddnewefdialog">Add New Employee Feature</button>
+        <button class="btn btn-info btn-xs btnaddnewref admin editdis" data-toggle="modal" data-bind="click:openaddnewefdialog">Add New Employee Feature</button>
         <div class="oj-sm-12">
           <div class="oj-flex">
             <div id="filmStripfeatured" class="" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'hidden'}"> <!-- block 1 -->

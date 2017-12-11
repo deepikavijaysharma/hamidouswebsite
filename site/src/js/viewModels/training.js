@@ -1046,18 +1046,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             // CHECK FOR ADMIN RIGHTS
             checkadminrights = function () {
-                console.log("Is Admin: " + isAdmin);
+                
                 if (isAdmin) {
                     $("#tabs").ojTabs({
                         "disabledTabs": [5, 6]
                     });
-                    $(".communityadmin").css("display", "inline-block");
+                    console.log("Showing for admin");
+                    $(".admin").css("display", "inline-block");
 
                 } else {
                     $("#tabs").ojTabs({
                         "disabledTabs": [5, 6, 7]
                     });
-                    $(".communityadmin").css("display", "none");
+                    console.log("Hiding from user");
+                    $(".admin").css("display", "none");
                 }
             }
 

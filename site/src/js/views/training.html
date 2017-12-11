@@ -128,7 +128,7 @@
             <!-- SEARCH -->
             <form id="form1">
               <div class="search">
-                <button id="createTrainingButton" class="reqtrain-button oj-xl-float-end communityadmin" data-bind="ojComponent: {
+                <button id="createTrainingButton" class="reqtrain-button oj-xl-float-end admin" data-bind="ojComponent: {
                       component: 'ojButton',
                       label: 'Create Course'},click:openCreatetraining"> </button>
               </div>
@@ -309,8 +309,8 @@
                   <div class="oj-flex oj-sm-12 blocksouter">
                     <!-- ko foreach: courses -->
                     <div class="oj-sm-12 oj-md-6 oj-lg-4 blocks oj-flex-item oj-margin">
-                      <!--<span class="communityadmin" style="cursor: pointer;color: red;float: right" data-bind="click:function(){deletecourse(this)}">X</span>-->
-                      <div class="oj-sm-12 communityadmin" style="margin-bottom: 5px;position:relative;z-index:1000">
+                      <!--<span class="admin" style="cursor: pointer;color: red;float: right" data-bind="click:function(){deletecourse(this)}">X</span>-->
+                      <div class="oj-sm-12 admin" style="margin-bottom: 5px;position:relative;z-index:1000">
                         <i class="fa fa-pencil-square-o" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Edit Course"
                           data-bind="click:function(){edittraining(this)}" target="_blank"></i>
                         <i class="fa fa-trash-o" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Delete Course" data-bind="click:function(){deletecourse(this)}"
@@ -1013,7 +1013,7 @@
           }" />
                 </div>
 
-                <div class="oj-flex-item oj-md-4 req_block communityadmin">
+                <div class="oj-flex-item oj-md-4 req_block admin">
                   <button class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
             component: 'ojButton',
             chroming: 'full',
@@ -1150,11 +1150,11 @@
                         <div class="oj-sm-12 oj-lg-2 details oj-flex">
                           <div class="oj-sm-12">
                             <a class="cclink" data-bind="attr:{href:invite}" target="_blank"><i class="fa fa-calendar" aria-hidden="true" style="cursor: pointer" title="Link to community call" ></i></a>
-                            <i class="fa fa-files-o communityadmin" aria-hidden="true" style="cursor: pointer" title="Duplicate community call" data-bind="click:cloneCommunityCall"
+                            <i class="fa fa-files-o admin" aria-hidden="true" style="cursor: pointer" title="Duplicate community call" data-bind="click:cloneCommunityCall"
                               target="_blank"></i>
-                            <i class="fa fa-pencil-square-o communityadmin" aria-hidden="true" style="cursor: pointer" title="Edit community call" data-bind="click:editcommunitycall"
+                            <i class="fa fa-pencil-square-o admin" aria-hidden="true" style="cursor: pointer" title="Edit community call" data-bind="click:editcommunitycall"
                               target="_blank"></i>
-                            <i class="fa fa-trash-o communityadmin" aria-hidden="true" style="cursor: pointer" title="Delete community call" data-bind="click:deleteCommunityCall"
+                            <i class="fa fa-trash-o admin" aria-hidden="true" style="cursor: pointer" title="Delete community call" data-bind="click:deleteCommunityCall"
                               target="_blank"></i>
                           </div>
                           <div class="oj-sm-12">
@@ -1414,7 +1414,7 @@
             <!-- tab contents -->
             <div id="tabs-1">
              <div class="oj-sm-12 courserow oj-flex">
-                <p class="directlink communityadmin" style="color: blue"></p>
+                <p class="directlink admin" style="color: blue"></p>
                
               </div>
               

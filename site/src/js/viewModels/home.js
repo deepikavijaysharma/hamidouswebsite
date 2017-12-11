@@ -14,14 +14,16 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         // CHECK FOR ADMIN RIGHTS
         checkadminrights = function () {
-            console.log("Is Admin: " + isAdmin);
+            
             if (isAdmin) {
-                $(".homeadmin").css("display", "inline-block");
-
+                console.log("Showing for admin");
+                $(".admin").css("display", "inline-block");
             } else {
-                $(".homeadmin").css("display", "none");
+                console.log("Hiding for user");
+                $(".admin").css("display", "none");
             }
         }
+
 
         checkadmin = function () {
             console.log("Admin check commencing for " + ssoemail);
@@ -50,7 +52,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 checkadminrights();
             }
         }
-        checkadmin();
+        
         //CREATE SLIDER observables
         self.slimage = ko.observableArray([]);
         self.slid = ko.observable('');
@@ -1579,6 +1581,14 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         clearContents = function(element){
             element.value = '';
         }
+
+        
+
+        self.handleActivated = function(info) {
+            checkadmin();
+            checkadminrights();
+            // alert("loaded!");
+        };
 
     }
 
