@@ -713,6 +713,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                 // CREATE COURSE LINK
                 var courselink = window.location.href;
+                var first_param = "=training";
+                courselink = courselink.substr(0,courselink.indexOf(first_param)+first_param.length);
                 courselink += "#" + course.course_id;
                 $(".directlink").empty();
                 if (true) {

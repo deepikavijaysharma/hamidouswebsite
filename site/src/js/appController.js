@@ -79,9 +79,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         if (ssoemail.length > 0) {
           document.getElementById('logoutbutton').style.display = 'block';
           document.getElementById('logoutbutton1').style.display = 'block';
-          if(!newUserAdminCheck){
-            checkadmin();
-          }
+          // if(!newUserAdminCheck){
+          //   checkadmin();
+          // }
 
 
           if (self.ssowindow != undefined) {
