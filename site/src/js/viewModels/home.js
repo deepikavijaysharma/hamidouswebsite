@@ -50,6 +50,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 checkadminrights();
             }
         }
+        checkadmin();
         //CREATE SLIDER observables
         self.slimage = ko.observableArray([]);
         self.slid = ko.observable('');

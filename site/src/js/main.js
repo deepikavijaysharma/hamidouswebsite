@@ -14,6 +14,9 @@ var newUserAdminCheck=false;
 var trainingdevurl="https://apex.oraclecorp.com/pls/apex/training_app_dev/training/";
 var trainingprodurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/";
 var trainingbaseurl=trainingdevurl;
+var com_call_api = "https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/"; //Dev URL
+var community_call_url = com_call_api+"COMMUNITY_CALLS";
+var community_call_calendar_link = com_call_api+"get_ical";
 /**
  * Example of Require.js boostrap javascript
  */

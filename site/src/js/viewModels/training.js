@@ -212,8 +212,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             //-----------------   COMMUNITY CALL   ------------------------//
             //Development url for create, edit, clone and delete community call
-            var community_call_url = 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/COMMUNITY_CALLS';
-
             this.patternValue = ko.observableArray(["dd-MMM-yy hh:mm"]);
             this.dateTimeConverter = oj.Validation.converterFactory(oj.ConverterFactory.CONVERTER_TYPE_DATETIME).
             createConverter({
@@ -1158,13 +1156,30 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             /*----------------------------------SEARCH----------------------------------*/
+            function waitForElement(id, callback){
+                var wait_for_community_call = setInterval(function(){
+                    if(document.getElementById(id)){
+                        clearInterval(wait_for_community_call);
+                        callback();
+                    }
+                }, 100);
+            }
 
-
+            waitForElement("com_call_tab", function(){
+                var call_id_val1 = window.location.href;
+                var index_of = call_id_val1.indexOf("com_call_id");
+                var call_id_data1 = call_id_val1.substr(index_of+12);
+                if (call_id_data1*1 == call_id_data1){
+                    $('#com_call_tab').trigger('click');
+                }                
+               
+            });
             /* ---------------------   COMMUNITY CALLS  -------------------------*/
 
             // GET THE LIST OF COMUNITY CALLS
             getCommunityCalls = function (texttosearch) {
-                $.getJSON("https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/" + texttosearch).then(function (data) {
+                var get_com_call_link = com_call_api + texttosearch;
+                $.getJSON(get_com_call_link).then(function (data) {
                     var calls = data.items;
                     self.communityCallList([]);
                     self.searchcallstext([]);
@@ -1187,7 +1202,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             subdescription: calls[i].description != undefined ? calls[i].description.substring(0, 150) + '...' : '',
                             organizer_email: calls[i].organizer_email != undefined ? calls[i].organizer_email : '',
                             topic: calls[i].topic != undefined ? calls[i].topic : '',
-                            invite: calls[i].invite != undefined ? calls[i].invite : '',
+                            /*invite: calls[i].invite != undefined ? calls[i].invite : '',*/
+                            invite: calls[i].call_id != undefined ? community_call_calendar_link+"/"+calls[i].call_id : '',
                             call_id: calls[i].call_id != undefined ? calls[i].call_id : '',
                             key_event_value: calls[i].keyevent != 'No' ? true : false
                         });
@@ -1598,7 +1614,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var roles = '$-$' + ko.toJSON(self.refinecommunitycallroles()).replace('[', '').replace(']', '').replace(/"/g, '');
                 var callmodel = '$-$' + ko.toJSON(self.refinecommunitycallmodes()).replace('[', '').replace(']', '').replace(/"/g, '');
                 var past = '$-$' + ko.toJSON(self.refinepastcalls()).replace('[', '').replace(']', '').replace(/"/g, '');
-                getCommunityCalls('GetCommunityCallDetailsOnFreetextSearch/' + searchtext + '/' + past + '/' + callmodel + '/' + roles);
+                
+                var call_id_val = window.location.href;
+                var index_of = call_id_val.indexOf("com_call_id");
+                var call_id_data = call_id_val.substr(index_of+12);
+                if (call_id_data*1 != call_id_data){
+                    call_id_data = '$-$';
+                }
+                var apex_link = 'GetCommunityCallDetailsOnFreetextSearch/' + searchtext + '/' + past + '/' + callmodel + '/' + roles + '/' +call_id_data;
+                getCommunityCalls(apex_link);
+                
             }
 
             loadCommunitycall = function () {
