@@ -148,8 +148,8 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
           ssoemail = email;
           // ssoname = sname;
         } else {
-          // ssoemail = 'angan.sen@oracle.com';//"premraj.sahu@oracle.com";
           ssoemail = "";
+          // ssoemail = "premraj.sahu@oracle.com";
           
         }
       }

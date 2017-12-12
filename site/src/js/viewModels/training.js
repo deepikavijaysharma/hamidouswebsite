@@ -749,6 +749,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         self.courselist = allcourses.courses;
                         self.processCoursesFromService(allcourses);
                         self.getCourseIdFromUrl();
+                        
 
                     },
                     error: function (xhr) {
@@ -998,6 +999,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }
                 }
                 // console.log(ko.toJSON(self.categories()));
+                updateCourseClass();
 				checkadmin();
             }
 
@@ -2108,7 +2110,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         console.log("Class Successfully Updated : " + ko.toJSON(data));
                         $("#editclass").ojDialog("close");
                         resetClass();
-                        // updateCourseClass();
+                        self.fetchcourses();
+                        updateCourseClass();
+                        
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
@@ -2142,7 +2146,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         self.showToastDialog("Class Successfully Deleted", true, 1000);
                         console.log("Class Successfully Deleted");
                         $("#editclass").ojDialog("close");
-                        resetCourse();
+                        resetClass();
+                        self.fetchcourses();
+                        updateCourseClass();
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
