@@ -563,6 +563,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 populateSubcategory(ui.value);
             }
             self.openReqtraining = function () {
+                self.rtrname(ssoemail);
                 $("#trainingDialog").ojDialog("open");
             };
 
@@ -2077,30 +2078,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }
                 console.log(ko.toJSON(reqbody));
 
-                requesttraining = function () 
-                {
-                    self.rtrselected(self.rtrsel()[0].name);
-                    var rtr = {
-                      category: self.rtrcategory(),
-                      name: ssoemail,
-                      role: self.rtrselected()
-                    }
-                    console.log(ko.toJSON(rtr));
-                    $.ajax({
-                      url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/RequestTraining',
-                      cache: false,
-                      type: 'POST',
-                      contentType: 'application/json; charset=utf-8',
-                      data: ko.toJSON(rtr),
-                      success: function (rtrdata) {
-                          console.log(ko.toJSON(rtrdata));
-                          alert("Training requested");
-                          $("#trainingDialog").ojDialog("close");
-                      }
-                  }).fail(function (xhr, textStatus, err) {
-                      alert(err);
-                  });
-                }
+
                 var url = trainingbaseurl + "editClasses";
                 $.ajax({
                     url: url,
@@ -2123,6 +2101,32 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 });
 
 
+            }
+
+
+            requesttraining = function () 
+            {
+                    self.rtrselected(self.rtrsel()[0].name);
+                    var rtr = {
+                      category: self.rtrcategory(),
+                      name: ssoemail,
+                      role: self.rtrselected()
+                    }
+                    console.log(ko.toJSON(rtr));
+                    $.ajax({
+                      url: com_call_api+'RequestTraining',
+                      cache: false,
+                      type: 'POST',
+                      contentType: 'application/json; charset=utf-8',
+                      data: ko.toJSON(rtr),
+                      success: function (rtrdata) {
+                          console.log(ko.toJSON(rtrdata));
+                          alert("Training requested");
+                          $("#trainingDialog").ojDialog("close");
+                      }
+                  }).fail(function (xhr, textStatus, err) {
+                      alert(err);
+                  });
             }
 
             deleteClass = function () {
@@ -2353,16 +2357,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             categoryfamily = function (e, ui) 
             {
-                console.log(ui.value[0].innerText);
                 // return ui.value[0].innerText;
-                // self.rtrcategory.push(ui.value[0].innerText);
-                // console.log(ui.value[0].parentNode);
-                // populateSubcategory(ui,ui.value[0]);
-                //               $( ".oj-tree-title" )
-                // .parentsUntil( $( "tree" ), ".yes" )
-                // if (ui.value[0].id != undefined) {
-                //     self.rtrcategory.push({ui.value[0].innerText});
-                // }
+                if(ui.value[0].innerText!= undefined)
+                {
+                    console.log(ui.value[0].innerText);
+                    self.rtrcategory(ui.value[0].innerText);
+                }
             }
         }
         return new DashboardViewModel();
