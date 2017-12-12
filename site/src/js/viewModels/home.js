@@ -83,6 +83,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         self.organizationpeopleccslist = ko.observableArray([]);
         self.organizationpeoplehdwlist = ko.observableArray([]);
 
+        //KEY DATES observables
+        self.keydateslist= ko.observableArray([]);
 
         //KEY WINS observables
         self.kwlogo = ko.observableArray('');
@@ -101,6 +103,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
 
         //REFERENCES observables
+        self.refid = ko.observable('');
         self.reflogo = ko.observableArray([]);
         self.reflink = ko.observable('');
         self.refcloudtype = ko.observable('');
@@ -185,7 +188,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             // console.log(ko.toJSON(sl));
 
             $.ajax({
-                url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/home_screen_data',
+                url: homedevurl+'home_screen_data',
                 cache: false,
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
@@ -236,7 +239,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             self.editsllinktext1(edit_slider.sliderlt1);
             self.editsllinktext2(edit_slider.sliderlt2);
             $("#editslidedialog").ojDialog("open");
-            $.getJSON("https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/homepage_image_get_all").
+            $.getJSON(homedevurl+"homepage_image_get_all").
                 then(function (imgid) {
                 self.slimage([]);
                 for (var l = 0; l < imgid.items.length; l++) {
@@ -262,7 +265,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             }
             console.log("editing slider data : "+ko.toJSON(edit_slider_data));
             $.ajax({
-                url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/home_screen_data',
+                url: homedevurl+'home_screen_data',
                 cache: false,
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
@@ -296,7 +299,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#delete_carousel").click(function()
             {
                 $.ajax({
-                    url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/home_screen_data',
+                    url: homedevurl+'home_screen_data',
                     method: 'DELETE',
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(data_sl_value),
@@ -322,7 +325,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         fetchslider = function () 
         {
-            $.getJSON('https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/home_screen_data').then(function (fetchslider) 
+            $.getJSON(homedevurl+'home_screen_data').then(function (fetchslider) 
             {
                 // Fetch organization people details
                 self.sliderlist([]);
@@ -368,7 +371,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         
         /******************************************OUR ORGANIZATION***************************************************************/
 
-        $.getJSON('https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/GETORGLOV').then(function (orgtypes) 
+        $.getJSON(homedevurl+'GETORGLOV').then(function (orgtypes) 
         {
             // Get Organization type in select in ADD ORGANIZATION
             self.organizationlist([]);
@@ -407,7 +410,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
               var imagedata = reader.result.split('base64,')[1];// console.log(uploadheader,reader.result);
               // SEND TO SERVER
               $.ajax({
-                url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/employee_data/',
+                url: homedevurl+'employee_data/',
                 headers: uploadheader,
                 cache: false,
                 type: 'POST',
@@ -492,7 +495,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 console.log(uploadorgedheader,orgedreader.result);
               // SEND TO SERVER
               $.ajax({
-                url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/employee_data/',
+                url: homedevurl+'employee_data/',
                 headers: uploadorgedheader,
                 cache: false,
                 type: 'POST',
@@ -524,7 +527,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#delete_org").click(function()
             {
                 $.ajax({
-                    url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/employee_data/',
+                    url: homedevurl+'employee_data/',
                     method: 'DELETE',
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(data_org_value),
@@ -551,7 +554,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         fetchpeopleorg = function () 
         {
-            $.getJSON('https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/employee_data/').then(function (orgpeopledetails) 
+            $.getJSON(homedevurl+'employee_data/').then(function (orgpeopledetails) 
             {
                 // Fetch organization people details
                 self.organizationpeopleecalist([]);
@@ -663,6 +666,43 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
         /******************************************OUR ORGANIZATION ENDS*****************************************************/
         
+        /******************************************KEY DATES*****************************************************/
+        fetchkeydates = function () 
+        {
+            $.getJSON(homedevurl+'KeyDates').then(function (keydatesdetails) 
+            {
+                var homelink = window.location.href;
+                // var first_param = "=training";
+                // homelink = homelink.substr(0,homelink.indexOf(first_param)+first_param.length);
+                homelink += "?root=training#";
+                // Fetch key dates details
+                self.keydateslist([]);
+                var stdate,kstdate,endate,kendate;
+                var kdlist = keydatesdetails.items;
+                for (var b = 0; b < kdlist.length; b++) 
+                {
+                    kstdate = kdlist[b].start_date != undefined ? kdlist[b].start_date.split('T')[0] : '';
+                    stdate = new Date(kstdate);
+                    kendate = kdlist[b].end_date != undefined ? kdlist[b].end_date.split('T')[0] : '';
+                    endate = new Date(kendate);
+                    self.keydateslist.push({
+                        keydcid: kdlist[b].course_id,
+                        keydtype: kdlist[b].type,
+                        keydname: kdlist[b].name,
+                        keydhlink: homelink,
+                        keydstartdate: stdate.toDateString(),
+                        keydstarttime: kdlist[b].start_date != undefined ? kdlist[b].start_date.substring(11, 19) + " PT" : '',
+                        keydenddate: endate.toDateString(),
+                        keydendtime: kdlist[b].end_date != undefined ? kdlist[b].end_date.substring(11, 19) + " PT" : ''
+                    })
+                }
+                console.log(ko.toJSON(self.keydateslist()));
+            });
+        }
+        fetchkeydates();
+
+        /******************************************KEY DATES ENDS*****************************************************/
+
         /******************************************KEY WINS******************************************************************/
 
         var akwlogopath = "";
@@ -696,7 +736,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
               console.log(uploadakwheader,akwreader.result);
               // SEND TO SERVER
               $.ajax({
-                url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/KeyWins',
+                url: homedevurl+'KeyWins',
                 headers: uploadakwheader,
                 cache: false,
                 type: 'POST',
@@ -766,7 +806,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
               // SEND TO SERVER
               $.ajax({
-                url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/KeyWins',
+                url: homedevurl+'KeyWins',
                 headers: uploadekwheader,
                 cache: false,
                 type: 'POST',
@@ -794,7 +834,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                   console.log(uploadekwheader,ekwreader.result);
                   // SEND TO SERVER
                   $.ajax({
-                    url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/KeyWins',
+                    url: homedevurl+'KeyWins',
                     headers: uploadekwheader,
                     cache: false,
                     type: 'POST',
@@ -828,7 +868,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#delete_kw").click(function()
             {
                 $.ajax({
-                    url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/KeyWins',
+                    url: homedevurl+'KeyWins',
                     method: 'DELETE',
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(data_kw_value),
@@ -854,7 +894,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         fetchkeywins = function () 
         {
-            $.getJSON('https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/KeyWins').then(function (keywinsdetails) 
+            $.getJSON(homedevurl+'KeyWins').then(function (keywinsdetails) 
             {
                 // Fetch key wins details
                 self.keywinslist([]);
@@ -882,133 +922,135 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         /******************************************GO LIVES*************************************************************************/
 
-        //GO LIVES observables
-        // self.gllogo = ko.observableArray('');
-        // self.glhostedby = ko.observable('');
-        // self.glguest = ko.observable('');
-        // self.gllink = ko.observable('');
-        // self.glhostphoto = ko.observable('');
-        // self.gldiscussion = ko.observable('');
-        // self.goliveslist = ko.observableArray([]);
-        // var gllogopath = "";
-        // gllogoselected = function (event)
-        // {
-        //     gllogopath = event.target.files[0];
-        //     console.log("add go lives logo filename",gllogopath);
-        // }
-        // glphotoselected = function (event)
-        // {
-        //     glphotopath = event.target.files[0];
-        //     console.log("add go lives photo filename",glphotopath);
-        // }
-        // addgolives = function () 
-        // {
-        //     if (self.glhostedby().length == 0) {
-        //         alert("Please enter Go Lives Host Person");
-        //         return;
-        //     }
+        var gllogopath = "";
+        gllogoselected = function (event)
+        {
+            gllogopath = event.target.files[0];
+            console.log("add go lives logo filename",gllogopath);
+        }
+        glphotoselected = function (event)
+        {
+            glphotopath = event.target.files[0];
+            console.log("add go lives photo filename",glphotopath);
+        }
+        uploadlogogl = function (lheader,ldata)
+        {
+          $.ajax({
+            url: homedevurl+'GoLives',
+            headers: lheader,
+            cache: false,
+            type: 'PUT',
+            contentType: 'application/json; charset=utf-8',
+            data: ldata,
+            success: function (datalogogl) {
+              console.log(datalogogl);
+              alert("Go Lives logo added successfully!");
+              fetchgolives();
+            }
+          }).fail(function (xhr, textStatus, err) {
+            alert(err);
+          });
+        }
+        uploadphotogl = function (pheader,pdata)
+        {
+          $.ajax({
+            url: homedevurl+'GoLives',
+            headers: pheader,
+            cache: false,
+            type: 'PUT',
+            contentType: 'application/json; charset=utf-8',
+            data: pdata,
+            success: function (dataphotogl) {
+              console.log(dataphotogl);
+              alert("Go Lives presenter photo added successfully!");
+              fetchgolives();
+            }
+          }).fail(function (xhr, textStatus, err) {
+            alert(err);
+          });
+        }
+        addgolives = function () 
+        {
+            if (self.glhostedby().length == 0) {
+                alert("Please enter Go Lives Host Person");
+                return;
+            }
 
-        //     if (self.glguest().length == 0) {
-        //         alert("Please enter Go Lives Guest");
-        //         return;
-        //     }
+            if (self.glguest().length == 0) {
+                alert("Please enter Go Lives Guest");
+                return;
+            }
 
-        //     if (self.gllink().length == 0) {
-        //         alert("Please enter Go Lives Link");
-        //         return;
-        //     }
+            if (self.gllink().length == 0) {
+                alert("Please enter Go Lives Link");
+                return;
+            }
 
-        //     if (self.gldiscussion().length == 0) {
-        //         alert("Please enter Go Lives Summary");
-        //         return;
-        //     }
+            if (self.gldiscussion().length == 0) {
+                alert("Please enter Go Lives Summary");
+                return;
+            }
 
-        //     var glheader = {
-        //         hosted_by: self.glhostedby(),
-        //         episode_guest: self.glguest(),
-        //         link: self.gllink(),
-        //         go_live_description: self.gldiscussion()
-        //     }
-        //     console.log(ko.toJSON(glheader));
+            var glheader = {
+                hosted_by: self.glhostedby(),
+                episode_guest: self.glguest(),
+                link: self.gllink(),
+                go_live_description: self.gldiscussion()
+            }
+            console.log(ko.toJSON(glheader));
 
-        //     $.ajax({
-        //         url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/GoLives',
-        //         headers: glheader,
-        //         cache: false,
-        //         type: 'POST',
-        //         contentType: 'application/json; charset=utf-8',
-        //         success: function (gldata) {
-        //             console.log(ko.toJSON(gldata));
-        //             alert("go lives data uploaded");
+            $.ajax({
+                url: homedevurl+'GoLives',
+                headers: glheader,
+                cache: false,
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                success: function (gldata) {
+                    console.log(ko.toJSON(gldata));
+                    alert("go lives data uploaded");
 
-        //             //Logo Upload
-        //             var glreader = new FileReader();
-        //             glreader.onload = function () 
-        //             {
-        //               var uploadglheader = {
-        //                 "id": gldata.items.id,
-        //                 "logo_or_bg": "logo",
-        //                 "mimetype": gllogopath.type
-        //                 }
+                    //Logo Upload
+                    var glreader = new FileReader();
+                    glreader.onload = function () 
+                    {
+                      var uploadglheader = {
+                        "id": gldata.items.id,
+                        "logo_or_bg": "logo",
+                        "mimetype": gllogopath.type
+                        }
 
-        //               var gllogodata = glreader.result.split('base64,')[1];
+                      var gllogodata = glreader.result.split('base64,')[1];
 
-        //               console.log(uploadglheader,glreader.result);
-        //               // SEND TO SERVER
-        //               $.ajax({
-        //                 url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/GoLives',
-        //                 headers: uploadglheader,
-        //                 cache: false,
-        //                 type: 'PUT',
-        //                 contentType: 'application/json; charset=utf-8',
-        //                 data: gllogodata,
-        //                 success: function (datalogogl) {
-        //                   console.log(datalogogl);
-        //                   alert("Go Lives logo added successfully!");
-        //                   fetchgolives();
-        //                 }
-        //               }).fail(function (xhr, textStatus, err) {
-        //                 alert(err);
-        //               });
-        //             };
-        //             glreader.readAsDataURL(gllogopath);
+                      console.log(uploadglheader,glreader.result);
+                      // SEND TO SERVER
+                      uploadlogogl(uploadglheader,gllogodata);
+                    };
+                    glreader.readAsDataURL(gllogopath);
 
-        //             //Photo Upload
-        //             var glpreader = new FileReader();
-        //             glpreader.onload = function () 
-        //             {
-        //               var uploadglpheader = {
-        //                 "id": gldata.items.id,
-        //                 "logo_or_bg": "logo",
-        //                 "mimetype": glphotopath.type
-        //                 }
+                    //Photo Upload
+                    var glpreader = new FileReader();
+                    glpreader.onload = function () 
+                    {
+                      var uploadglpheader = {
+                        "id": gldata.items.id,
+                        "logo_or_bg": "background",
+                        "mimetype": glphotopath.type
+                        }
 
-        //               var glphotodata = glpreader.result.split('base64,')[1];
+                      var glphotodata = glpreader.result.split('base64,')[1];
 
-        //               console.log(uploadglpheader,glpreader.result);
-        //               // SEND TO SERVER
-        //               $.ajax({
-        //                 url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/GoLives',
-        //                 headers: uploadglpheader,
-        //                 cache: false,
-        //                 type: 'PUT',
-        //                 contentType: 'application/json; charset=utf-8',
-        //                 data: glphotodata,
-        //                 success: function (dataphotogl) {
-        //                   console.log(dataphotogl);
-        //                   alert("Go Lives presenter photo added successfully!");
-        //                   fetchgolives();
-        //                 }
-        //               }).fail(function (xhr, textStatus, err) {
-        //                 alert(err);
-        //               });
-        //             };
-        //             glpreader.readAsDataURL(glphotopath);
-        //         }
-        //     }).fail(function (xhr, textStatus, err) {
-        //         alert(err);
-        //     });
-        // }
+                      console.log(uploadgpheader,glpreader.result);
+                      // SEND TO SERVER
+
+                      uploadphotogl(uploadgpheader,glphotodata);
+                    };
+                    glpreader.readAsDataURL(glphotopath);
+                    closeaddgltextdialog()
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert(err);
+            });
+        }
 
         // deletegolives = function (golives_delete) 
         // {
@@ -1025,7 +1067,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         //     $("#delete_gl").click(function()
         //     {
         //         $.ajax({
-        //             url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/GoLives',
+        //             url: homedevurl+'GoLives',
         //             method: 'DELETE',
         //             contentType: 'application/json; charset=utf-8',
         //             data: ko.toJSON(data_gl_value),
@@ -1051,7 +1093,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         fetchgolives = function () 
         {
-            $.getJSON('https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/GoLives').then(function (golivesdetails) 
+            $.getJSON(homedevurl+'GoLives').then(function (golivesdetails) 
             {
                 // Fetch go lives details
                 self.goliveslist([]);
@@ -1075,67 +1117,107 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         /******************************************REFERENCES*************************************************************************/
 
-        // var reflogopath = "";
-        // reflogoselected = function (event)
-        // {
-        //     reflogopath = event.target.files[0];
-        //     console.log("add references logo filename",reflogopath);
-        // }
-        // self.addreferences = function () 
-        // {
-        //     if (self.reflink().length == 0) {
-        //         alert("Please enter references Link");
-        //         return;
-        //     }
+        var reflogopath = "";
+        reflogoselected = function (event)
+        {
+            reflogopath = event.target.files[0];
+            console.log("add references logo filename",reflogopath);
+        }
+        addreferences = function () 
+        {
+            var refreader = new FileReader();
+            refreader.onload = function () {
+              var uploadrefheader = {
+                "reference_link": self.reflink(),
+                "logo_mimetype": reflogopath.type
+                }
 
-        //     var refreader = new FileReader();
-        //     reader.onload = function () {
-        //       var uploadrefheader = {
-        //         "reflink": self.reflogo(),
-        //         "refctype": self.refcloudtype(),
-        //         "refphoto": reflogopath.type
-        //         }
+              var arefimagedata = refreader.result.split('base64,')[1];
 
-        //       var akwimagedata = refreader.result.split('base64,')[1];
+              console.log(uploadrefheader,refreader.result);
+              // SEND TO SERVER
+              $.ajax({
+                url: homedevurl+'Reference',
+                headers: uploadrefheader,
+                cache: false,
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: arefimagedata,
+                success: function (dataref) {
+                    // alert("References added successfully!");
+                    fetchreferences();
+                    closeaddnewrefdialog();
+                    resetreferences();
+                }
+              }).fail(function (xhr, textStatus, err) {
+                alert(err);
+              });
+            };
+            refreader.readAsDataURL(reflogopath);
+        }
 
-        //       console.log(uploadrefheader,refreader.result);
-        //       // SEND TO SERVER
-        //       $.ajax({
-        //         url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/employee_data/',
-        //         headers: uploadrefheader,
-        //         cache: false,
-        //         type: 'POST',
-        //         contentType: 'application/json; charset=utf-8',
-        //         data: akwimagedata,
-        //         success: function (dataref) {
-        //           console.log(dataref);
-        //           alert("References added successfully!");
-        //         }
-        //       }).fail(function (xhr, textStatus, err) {
-        //         alert(err);
-        //       });
-        //     };
-        //     refreader.readAsDataURL(reflogopath);
-        // }
+        deletereferences = function (ref_delete) 
+        {
+            console.log("delete reference",ref_delete);
+            openDeleteReferencesModal(ref_delete.refid);
+        }
 
-        // fetchreferences = function () 
-        // {
-        //     $.getJSON('https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/employee_data/').then(function (referencesdetails) 
-        //     {
-        //         // Fetch references details
-        //         self.reflist([]);
-        //         var relist = referencesdetails.items;
-        //         for (var b = 0; b < relist.length; b++) 
-        //         {
-        //             self.reflist.push({
-        //                 refrlink: relist[b].reflink,
-        //                 refrctype: relist[b].refctype,
-        //                 refrphoto: relist[b].refphoto
-        //             })
-        //         }// console.log(ko.toJSON(self.reflist()));
-        //     });
-        // }
-        // fetchreferences();
+        openDeleteReferencesModal = function (delete_ref_id) {
+            console.log("deleting id reference - "+delete_ref_id);
+            var data_ref_value = {
+                "id" : delete_ref_id
+            };
+            $("#delete_references").ojDialog("open");
+            $("#delete_ref").click(function()
+            {
+                $.ajax({
+                    url: homedevurl+'Reference',
+                    method: 'DELETE',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(data_ref_value),
+                    success: function () {
+                        console.log("delete success for references");
+                        closeDeleteReferencesModal();
+                        fetchreferences();
+                    },
+                    fail: function (xhr, textStatus, err) {
+                        console.log(err);
+                    },
+                    error: function (xhr, textStatus, err) {
+                        console.log(err);
+                    }
+                });
+            });
+
+        }
+
+        closeDeleteReferencesModal = function () {
+            $("#delete_references").ojDialog("close");
+        }
+
+        fetchreferences = function () 
+        {
+            $.getJSON(homedevurl+'Reference').then(function (referencesdetails) 
+            {
+                // Fetch references details
+                self.reflist([]);
+                var relist = referencesdetails.items;
+                for (var b = 0; b < relist.length; b++) 
+                {
+                    self.reflist.push({
+                        refid: relist[b].id,
+                        reflink: relist[b].reference_link,
+                        reflogo: relist[b].image
+                    })
+                }// console.log(ko.toJSON(self.reflist()));
+            });
+        }
+        fetchreferences();
+
+        resetreferences = function (){
+            self.reflink('');
+            document.getElementById("reflog").value = "";
+        }
 
         /******************************************REFERENCES ENDS********************************************************************/
 
@@ -1172,7 +1254,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         //       console.log(uploadefheader,efreader.result);
         //       // SEND TO SERVER
         //       $.ajax({
-        //         url: 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/employee_data/',
+        //         url: homedevurl+'employee_data/',
         //         headers: uploadefheader,
         //         cache: false,
         //         type: 'POST',
@@ -1191,7 +1273,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         // fetchempfeatures = function () 
         // {
-        //     $.getJSON('https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/employee_data/').then(function (employeefeaturesdetails) 
+        //     $.getJSON(homedevurl+'employee_data/').then(function (employeefeaturesdetails) 
         //     {
         //         // Fetch Employee features
         //         self.empfeatlist([]);
@@ -1520,7 +1602,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         openaddslidedialog = function () 
         {
             $("#addslidedialog").ojDialog("open");
-            $.getJSON("https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/homepage_image_get_all").
+            $.getJSON(homedevurl+"homepage_image_get_all").
                 then(function (imgid) {
                 self.slimage([]);
                 for (var l = 0; l < imgid.items.length; l++) {

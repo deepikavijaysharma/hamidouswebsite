@@ -479,7 +479,7 @@ display: none;
     </div>
   </div>
 </div>
-<!--Our Organization--> 
+<!------------------------------------Our Organization------------------------------------> 
 <a class="anchor" id="organization"></a>
 <div class="oj-row row7 newrow">
   <div class="container">
@@ -789,85 +789,28 @@ display: none;
           <div class="oj-flex">
             <div class="oj-sm-12">
               <div class="oj-margin">
-               <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Monday, December 11th<br>
-                        <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time: 1:00 PM PST
-                        &nbsp;</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">SE Community Call for Architects</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end"><a href="http://oukc.oracle.com/static12/opn/login/?t=livewebcast%7Cc=2072028089" target="_blank">Link</a></div>
-                    </div>
-                  </div>
-                </div>
+                <!-- ko foreach: keydateslist --> 
                 <div class="calrow">
                   <div class="oj-flex">
                     <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tueday, December 12th<br>
-                        <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time: 9:00 AM PST
-                        &nbsp;</p>
+                      <p><span class="oj-fwk-icon oj-fwk-icon-calendar" data-bind="text: keydstartdate">&nbsp;</span><br>
+                        &nbsp;Time: <span class="oj-fwk-icon oj-fwk-icon-clock" data-bind="text: keydstarttime"></span></p>
                     </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Developer Event: Oracle Code Online</div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex" data-bind="text: keydname"></div>
                     <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end"><a href="https://developer.oracle.com/code/online" target="_blank">Link</a></div>
+                      <!-- ko if: keydtype == 'COMMUNITY_CALLS' --> 
+                      <div class="orangeBbutton oj-lg-float-end"><a data-bind="attr:{'href':keydhlink+'com_call_id='+keydcid}" target="_blank">Link</a></div>
+                      <!-- /ko -->
+                      <!-- ko ifnot: keydtype == 'COMMUNITY_CALLS' -->
+                        <!-- ko if: keydtype == 'TRAINING' --> 
+                        <div class="orangeBbutton oj-lg-float-end"><a data-bind="attr:{'href':keydhlink+keydcid}" target="_blank">Link</a></div>
+                        <!-- /ko -->
+                      <!-- /ko -->
                     </div>
                   </div>
                 </div>
-                <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tueday, December 12th<br>
-                        <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time: 9:00 AM PST
-                        &nbsp;</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Oracle Cloud Platform PM Webcasts & Office Hours Series</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end"><a href="https://oraclemeetings.webex.com/mw3100/mywebex/default.do?nomenu=true&siteurl=oraclemeetings&service=6&rnd=0.6197750625103783&main_url=https%3A%2F%2Foraclemeetings.webex.com%2Fec3100%2Feventcenter%2Fevent%2FeventAction.do%3FtheAction%3Ddetail%26%26%26EMK%3D4832534b000000044a5627482191026cc38d4db81eee9448c877b9a131c6069b398fa2dc51861b1d%26siteurl%3Doraclemeetings%26confViewID%3D79499661190106377%26encryptTicket%3DSDJTSwAAAAT1PW_wWAsrI8hnAyqraK_1iTdX2xJbLnzhZblJUGpwzg2%26" target="_blank">Link</a></div>
-                    </div>
-                  </div>
-                </div>
-               
-                <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Monday, December 18th<br>
-                        <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time: 11:00 AM PST</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">New! SE Excellence CloudX Community Call</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end"><a href="http://oukc.oracle.com/static12/opn/login/?t=livewebcast%7Cc=2095944378" target="_blank">Link</a></div>
-                    </div>
-                  </div>
-                </div>
-                 <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Multiple<br>
-                        <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time: 8:30 AM PST</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">New! Soft Skill Training (multiple dates and locations)</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end"><a href="https://osan.netexam.com/?tkn=6C98077E-7488-4854-9691-89A9B9ACC72F#center-panel:main-ui-calendar" target="_blank">Link</a></div>
-                    </div>
-                  </div>
-                </div>
-                 <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Multiple<br>
-                        <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time: 11:00 AM PST</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Customer Event: Apps Unlimited on Oracle Infrastructure Live Events </div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end"><a href="http://retriever.us.oracle.com/apex/f?p=121:2:7203873549873320::::P2_FILE_ID:171630" target="_blank">Link</a></div>
-                    </div>
-                  </div>
-                </div>
+                <!-- /ko -->
+
                 <div class="oj-sm-12 oj-sm-center" >
                   <div class="oj-flex valign">
                     <div class="oj-sm-12 oj-lg-4 oj-flex"></div>
@@ -1084,18 +1027,18 @@ display: none;
         <div class="oj-sm-12 refertitle"><img src="css/images/references_icon_lg.png">&nbsp;References</div>
         <div class="oj-md-6  oj-flex">
           <div class="oj-flex oj-sm-12 oj-margin referencesblock">
-            <button class="btn btn-info btn-xs btnaddnewref admin editdis" data-toggle="modal" data-bind="click:openaddnewrefdialog">Add New References</button>
+            <button class="btn btn-info btn-xs btnaddnewref admin" data-toggle="modal" data-bind="click:openaddnewrefdialog">Add New References</button>
             <div class="oj-flex oj-sm-12  logorow">
-              <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/search/customers/_/N-p5vz?Nr=112&bcid=5508413926001" target="_blank"><img src="css/images/Exhibitor.png"></a></div>
-              <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/corporate/pressrelease/oracle-rac-iaas-050917.html" target="_blank"><img src="css/images/ICAT-300x120.png"></a></div>
-              <div class="oj-sm-12 oj-lg-4"><a href="https://www.oracle.com/customers/astute-1-storage-cl.html" target="_blank"><img src="css/images/astute.png"></a></div>
+              <!-- ko foreach: reflist --> 
+              <div class="oj-sm-12 oj-lg-4" data-bind="attr:{'id':refid}"><a data-bind="attr:{'href':reflink}" target="_blank"><img data-bind="attr:{'src':reflogo}"></a><i class="fa fa-trash-o " aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i> </div>
+                
+              <!-- /ko --> 
             </div>
             <div class="oj-sm-12 button oj-flex"><a  class="whitebutton" href="https://www.oracle.com/search/customers/_/N-1joZp5vz?Nr=112" target="_blank">Search for IaaS Customers</a></div>
           </div>
         </div>
         <div class="oj-md-6  oj-flex">
           <div class="oj-flex oj-sm-12 oj-margin referencesblock">
-            <button class="btn btn-info btn-xs btnaddnewref admin editdis" data-toggle="modal" data-bind="click:openaddnewrefdialog">Add New References</button>
             <div class="oj-flex oj-sm-12  ">
               <div class="oj-flex oj-sm-12 logorow">
                 <div class="oj-sm-12 oj-lg-4"><a href="https://www.forbes.com/sites/oracle/2017/03/15/a-fintech-innovators-race-to-the-cloud/#18ac787315e5" target="_blank"><img src="css/images/calypso.png"></a></div>
@@ -1893,36 +1836,36 @@ display: none;
     <div class="form-group">
       <label class="addslidelabel">Go Lives Logo:</label>
       <div class="input-group">
-        <input class="form-control" class="buttons btn btn-default file" type="file">
+        <input class="form-control" class="buttons btn btn-default file" type="file" onchange="gllogoselected(event)">
       </div>
     </div>
     <div class="form-group">
       <label class="addslidelabel">Hosted By:</label>
       <div class="input-group">
-        <input class="form-control" type="text">
+        <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:glhostedby}">
       </div>
     </div>
     <div class="form-group">
       <label class="addslidelabel">This Episode's Guest:</label>
       <div class="input-group">
-        <input class="form-control" type="text">
+        <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:glguest}">
       </div>
     </div>
     <div class="form-group">
       <label class="addslidelabel">Listen to Interview Link:</label>
       <div class="input-group">
-        <input class="form-control" type="text">
+        <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:gllink}">
       </div>
     </div>
     <div class="form-group">
       <label class="addslidelabel">Go Lives Host Photo:</label>
       <div class="input-group">
-        <input class="form-control" class="buttons btn btn-default file" type="file">
+        <input class="form-control" class="buttons btn btn-default file" type="file" onchange="glphotoselected(event)">
       </div>
     </div>
     <label class="addslidelabel">Go Lives Description:</label>
-    <textarea id="txt1" style="height:250px;width:100%" onfocus="clearContents(this);"></textarea><br><br>
-    <button id="okButton" data-dismiss="modal" class="bluebutton" data-bind="ojComponent: {component: 'ojButton', label: 'SAVE'}"> </button>
+    <textarea id="txt1" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:gldiscussion}"></textarea><br><br>
+    <button id="okButton" data-dismiss="modal" class="bluebutton" onfocus="addgolives();" data-bind="ojComponent: {component: 'ojButton', label: 'SAVE'}"> </button>
   </div>
 </div>
 
@@ -1931,35 +1874,49 @@ display: none;
     <div class="form-group">
       <label class="addslidelabel">Refrences Logo:</label>
       <div class="input-group">
-        <input class="form-control" class="buttons btn btn-default file" type="file">
+        <input class="form-control" id="reflog" class="buttons btn btn-default file" type="file" onchange="reflogoselected(event)">
       </div>
     </div>
     <div class="form-group">
       <label class="addslidelabel">References Link:</label>
       <div class="input-group">
-        <input class="form-control" type="text">
+        <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:reflink}">
       </div>
     </div>
-    <div class="form-group">
+<!--     <div class="form-group">
       <label class="addslidelabel">References Cloud Service Type:</label>
       <div class="input-group">
         <select name="cloudtype" class="form-control">
           <option value="IaaS">IAAS</option>
           <option value="PaaS">PAAS</option>
         </select>
-        <!-- <select id="basicSelect2" data-bind="ojComponent: {
+        <select id="basicSelect2" data-bind="ojComponent: {
           component: 'ojSelect',
           placeholder:'Select References Cloud Service Type',
           rootAttributes: {style:'max-width:20em'}
         }">
           <option data-bind="text: orgname,value:orgname">IAAS</option>
           <option data-bind="text: orgname,value:orgname">IAAS</option>
-        </select> -->
+        </select>
       </div>
-    </div>
-    <button id="okButton" data-dismiss="modal" class="bluebutton" data-bind="ojComponent: {component: 'ojButton', label: 'SAVE'}"> </button>
+    </div> -->
+    <button id="okButton" data-dismiss="modal" class="bluebutton" onclick="addreferences()" data-bind="ojComponent: {component: 'ojButton', label: 'SAVE'}"> </button>
   </div>
 </div>
+
+<!-- delete references confirmation start -->
+<div id="dialogWrapper1">
+  <div style="display:none" id="delete_references" title="Delete Confirmation" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'icon',rootAttributes: { style: 'width: 35%; height: auto; min-width 100px; '}}">
+    <div class="oj-dialog-body roleWrapper">
+      <h4>Are you sure,you want to delete this Reference?
+    <div class="oj-dialog-footer">
+          <button id="okButton" style="cursor: pointer;" onclick="closeDeleteReferencesModal()" data-bind="ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+
+          <button id="delete_ref" style="background: #d9534f;color: white;cursor: pointer;" data-bind="ojComponent: {component: 'ojButton', label: 'Delete'}"> </button>
+    </div>
+  </div>
+</div>
+<!-- delete key wins confirmation end -->
 
 <div style="display:none" id="addnewkeywinsdialog" title="Add New Key Wins" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 30%;'}}">
   <div class="oj-dialog-body">

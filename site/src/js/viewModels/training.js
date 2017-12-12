@@ -102,8 +102,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             //REQUEST TRAINING VARIABLES
+            self.rtrsel= ko.observable('');
             self.rtrcategory = ko.observable('');
             self.rtrname = ko.observable('');
+            self.rtrselected = ko.observable('');
 
             // CREATE COURSE MODEL
             self.selectedCategoriesForUi = ko.observableArray([]);
@@ -749,7 +751,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         self.courselist = allcourses.courses;
                         self.processCoursesFromService(allcourses);
                         self.getCourseIdFromUrl();
-                        
 
                     },
                     error: function (xhr) {
@@ -2078,10 +2079,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                 requesttraining = function () 
                 {
+                    self.rtrselected(self.rtrsel()[0].name);
                     var rtr = {
                       category: self.rtrcategory(),
-                      name: "Aditya Sharma",
-                      role: self.rolelist()[0].name
+                      name: ssoemail,
+                      role: self.rtrselected()
                     }
                     console.log(ko.toJSON(rtr));
                     $.ajax({
@@ -2093,6 +2095,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                       success: function (rtrdata) {
                           console.log(ko.toJSON(rtrdata));
                           alert("Training requested");
+                          $("#trainingDialog").ojDialog("close");
                       }
                   }).fail(function (xhr, textStatus, err) {
                       alert(err);
@@ -2327,32 +2330,34 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             getCategoryHierarchy();
-            $("#tree").on("ojoptionchange", function(e, ui) 
-            {
-                if (ui.option == "selection") 
-                {
-                    // show selected nodes
-                    var selected = _arrayToStr(ui.value) ;
-                    $("#results").html("<label> id = " + selected + "</label>");
-                }
-            });
-            function _arrayToStr(arr)
-            {
-                var s = "" ;
-                $.each(arr, function(i, val)
-                {
-                    if (i) {s += ", " ;}
-                    console.log(val)
-                    s += $(arr[i]).attr("id") ;
-                }) ;
-                return s ;
-            };
+            // $("#tree").on("ojoptionchange", function(e, ui) 
+            // {
+            //     if (ui.option == "selection") 
+            //     {
+            //         // show selected nodes
+            //         var selected = _arrayToStr(ui.value) ;
+            //         $("#results").html("<label> id = " + selected + "</label>");
+            //     }
+            // });
+            // function _arrayToStr(arr)
+            // {
+            //     var s = "" ;
+            //     $.each(arr, function(i, val)
+            //     {
+            //         if (i) {s += ", " ;}
+            //         console.log(val)
+            //         s += $(arr[i]).attr("id") ;
+            //     }) ;
+            //     return s ;
+            // };
 
             categoryfamily = function (e, ui) 
             {
                 console.log(ui.value[0].innerText);
+                // return ui.value[0].innerText;
+                // self.rtrcategory.push(ui.value[0].innerText);
                 // console.log(ui.value[0].parentNode);
-                populateSubcategory(ui,ui.value[0]);
+                // populateSubcategory(ui,ui.value[0]);
                 //               $( ".oj-tree-title" )
                 // .parentsUntil( $( "tree" ), ".yes" )
                 // if (ui.value[0].id != undefined) {
