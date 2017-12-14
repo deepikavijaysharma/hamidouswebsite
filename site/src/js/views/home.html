@@ -798,12 +798,21 @@ display: none;
                     </div>
                     <div class="oj-sm-12 oj-lg-5 cTitle oj-flex" data-bind="text: keydname"></div>
                     <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <!-- ko if: keydtype == 'COMMUNITY_CALLS' --> 
-                      <div class="orangeBbutton oj-lg-float-end"><a data-bind="attr:{'href':keydhlink+'com_call_id='+keydcid}" target="_blank">Link</a></div>
+                      <!-- ko if: keydtype == 'COMMUNITY_CALLS' -->
+                      <div class="orangeBbutton oj-lg-float-end">
+                        <a data-bind="attr:{'href':keydhlink+'com_call_id='+keydcid}" target="_blank">Link</a>
+                      </div>
                       <!-- /ko -->
                       <!-- ko ifnot: keydtype == 'COMMUNITY_CALLS' -->
-                        <!-- ko if: keydtype == 'TRAINING' --> 
-                        <div class="orangeBbutton oj-lg-float-end"><a data-bind="attr:{'href':keydhlink+keydcid}" target="_blank">Link</a></div>
+                        <!-- ko if: keydtype == 'TRAINING' -->
+                        <div class="orangeBbutton oj-lg-float-end">
+                          <a data-bind="attr:{'href':keydhlink+keydcid}" target="_blank">Link</a>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko ifnot: keydtype == 'TRAINING' -->
+                        <div class="orangeBbutton oj-lg-float-end">
+                          <a data-bind="attr:{'href':keydhlink+'event='+keydcid}" target="_blank">Link</a>
+                        </div>
                         <!-- /ko -->
                       <!-- /ko -->
                     </div>
@@ -1030,7 +1039,7 @@ display: none;
             <button class="btn btn-info btn-xs btnaddnewref admin" data-toggle="modal" data-bind="click:openaddnewrefdialog">Add New References</button>
             <div class="oj-flex oj-sm-12  logorow">
               <!-- ko foreach: reflist --> 
-              <div class="oj-sm-12 oj-lg-4" data-bind="attr:{'id':refid}"><a data-bind="attr:{'href':reflink}" target="_blank"><img data-bind="attr:{'src':reflogo}"></a><i class="fa fa-trash-o " aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i> </div>
+              <div class="oj-sm-12 oj-lg-4" data-bind="attr:{'id':refid}"><a data-bind="attr:{'href':reflink}" target="_blank"><img data-bind="attr:{'src':reflogo}"></a><i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i> </div>
                 
               <!-- /ko --> 
             </div>
