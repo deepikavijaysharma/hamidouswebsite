@@ -14,12 +14,14 @@ var newUserAdminCheck=false;
 var trainingdevurl="https://apex.oraclecorp.com/pls/apex/training_app_dev/training/";
 var homedevurl="https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/";//For Dev
 // var homedevurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/seaashm/";//For Production
-var trainingprodurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/";
-var trainingbaseurl=trainingprodurl;
-//var com_call_api = "https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/"; //Dev URL
-var com_call_api = "https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/seaashm/"; //Prod URL
+//var trainingprodurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/";
+var trainingbaseurl=trainingdevurl;
+var com_call_api = "https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/"; //Dev URL
+//var com_call_api = "https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/seaashm/"; //Prod URL
 var community_call_url = com_call_api+"COMMUNITY_CALLS";
 var community_call_calendar_link = com_call_api+"get_ical";
+var events_api = com_call_api+"GetKeyEvents";
+var create_event_api = com_call_api+"event";
 /**
  * Example of Require.js boostrap javascript
  */
