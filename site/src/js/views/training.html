@@ -1303,8 +1303,8 @@
     <div class="oj-sm-12 keydates">
       <div class="oj-flex">
         <div class="oj-sm-12 createeventbutton"><br>
-          <div>
-            <button id="outlinedPush" class="orangebutton admin" onclick="openCreateEventDialog()" style="cursor: pointer;float:right;" data-bind="ojComponent: {
+          <div class="admin">
+            <button class="orangebutton " onclick="openCreateEventDialog()" style="cursor: pointer;float:right;" data-bind="ojComponent: {
               component:'ojButton',  
               label: 'Create Event'}"> 
             </button>
@@ -1339,10 +1339,10 @@
         <p>
           <span data-bind="text:customerName"></span>
         </p>        
-        <h1>Event Feedback</h1>
+<!--         <h1>Event Feedback</h1>
         <p>
           <span data-bind="html:eventFeedback"></span>
-        </p>
+        </p> -->
         <h1>Event Lead</h1>
         <p>
           <span data-bind="text:eventLead"></span>
@@ -1427,15 +1427,7 @@
                           <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:partnerName}" />
                         </div>
                       </div>  
-                      <br>
-                      <div class="oj-flex">
-                        <div class="oj-sm-12">
-                          <label>Customer Name</label>
-                        </div>
-                        <div class="oj-sm-12">
-                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:customerName}" />
-                        </div>
-                      </div>                                          
+                                        
                     </div>
                   </div>
 
@@ -1457,7 +1449,7 @@
                           <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:event_description}"></textarea>
                         </div>
                       </div>
-                      <br>                      
+<!--                       <br>                      
                       <div class="oj-flex">
                         <div class="oj-sm-12">
                           <label>Event Feedback</label>
@@ -1465,7 +1457,7 @@
                         <div class="oj-sm-12">
                           <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:eventFeedback}"></textarea>
                         </div>
-                      </div>
+                      </div> -->
                       <br>
                       <div class="oj-flex">
                         <div class="oj-sm-12">
@@ -1476,6 +1468,15 @@
                         </div>
                         <h6 class="hinttext">prefix link with http / https</h6>
                       </div> 
+                     <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Customer Name</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:customerName}" />
+                        </div>
+                      </div>  
                    
                    </div>
                   </div>
@@ -1568,10 +1569,10 @@
                       <p><span class="event_date" data-bind="text:location"></span></p>
                     </div>
 
-                    <div class="oj-sm-12 oj-lg-1 editicons admin">
-                        <i class="fa fa-files-o" aria-hidden="true" style="cursor: pointer; font-size: 17px" title="Clone Event" data-bind="click:openCloneEventModal" target="_blank"></i> 
-                        <i class="fa fa-pencil-square-o" aria-hidden="true" style="cursor: pointer; font-size: 17px" title="Edit community call" data-bind="click:openEditEventModal" target="_blank"></i> 
-                        <i class="fa fa-trash-o" aria-hidden="true" style="cursor: pointer; font-size: 17px" title="Delete community call" data-bind="click:deleteEvent" target="_blank"></i><br>
+                    <div class="oj-sm-12 oj-lg-1 editicons ">
+                        <i class="fa fa-files-o admin" aria-hidden="true" style="cursor: pointer; font-size: 17px" title="Clone Event" data-bind="click:openCloneEventModal" target="_blank"></i> 
+                        <i class="fa fa-pencil-square-o admin" aria-hidden="true" style="cursor: pointer; font-size: 17px" title="Edit community call" data-bind="click:openEditEventModal" target="_blank"></i> 
+                        <i class="fa fa-trash-o admin" aria-hidden="true" style="cursor: pointer; font-size: 17px" title="Delete community call" data-bind="click:deleteEvent" target="_blank"></i><br>
                         <a data-bind="click:showEventDetails" target="_blank" class="ccdetailsbutton">Details</a>
                     </div>
 

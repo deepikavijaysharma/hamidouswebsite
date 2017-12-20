@@ -1173,7 +1173,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.event_endtime = ko.observable('');
             self.is_key_event = ko.observable('');
             self.customerName = ko.observable('');
-            self.eventFeedback = ko.observable('');
+            // self.eventFeedback = ko.observable('');
             self.eventLead = ko.observable('');
             self.partnerName = ko.observable('');
             self.registrationLink = ko.observable('');
@@ -1246,7 +1246,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                                 key_event_value_check: events[i].keyevent != 'No' ? true : false,
                                 start_time: events[i].start_time != undefined ? events[i].start_time : '',
                                 end_time: events[i].end_time != undefined ? events[i].end_time : '',
-                                event_feedback: events[i].event_feedback != undefined ? events[i].event_feedback : '',
+                                // event_feedback: events[i].event_feedback != undefined ? events[i].event_feedback : '',
                                 event_lead: events[i].event_lead != undefined ? events[i].event_lead : '',
                                 partner_name: events[i].partner_name != undefined ? events[i].partner_name : '',
                                 registration_link: events[i].link != undefined ? events[i].link : ''
@@ -1277,7 +1277,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     description: self.event_description(),
                     key_event: self.is_key_event()!=true?'No':'Yes',
                     customer_name:self.customerName(),
-                    event_feedback:self.eventFeedback(),
+                    // event_feedback:self.eventFeedback(),
                     event_lead: self.eventLead(),
                     partner_name: self.partnerName(),
                     link: self.registrationLink()
@@ -1318,7 +1318,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.event_endtime('');
             self.is_key_event('');
             self.customerName('');
-            self.eventFeedback('');
+            // self.eventFeedback('');
             self.eventLead('');
             self.partnerName('');
             self.registrationLink('');
@@ -1374,7 +1374,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     description: self.event_description(),
                     key_event: self.is_key_event()!=true?'No':'Yes',
                     customer_name:self.customerName(),
-                    event_feedback:self.eventFeedback(),
+                    // event_feedback:self.eventFeedback(),
                     event_lead: self.eventLead(),
                     partner_name: self.partnerName(),
                     link: self.registrationLink()
@@ -1404,7 +1404,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.event_endtime(clone_event.end_time);
                 self.is_key_event(clone_event.key_event_value_check);
                 self.customerName(clone_event.customer_name);
-                self.eventFeedback(clone_event.event_feedback);
+                // self.eventFeedback(clone_event.event_feedback);
                 self.eventLead(clone_event.event_lead);
                 self.partnerName(clone_event.partner_name);
                 self.registrationLink(clone_event.registration_link);
@@ -1423,7 +1423,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.event_endtime(edit_event.end_time);
                 self.is_key_event(edit_event.key_event_value_check);
                 self.customerName(edit_event.customer_name);
-                self.eventFeedback(edit_event.event_feedback);
+                // self.eventFeedback(edit_event.event_feedback);
                 self.eventLead(edit_event.event_lead);
                 self.partnerName(edit_event.partner_name);
                 self.registrationLink(edit_event.registration_link);
@@ -1451,7 +1451,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     description: self.event_description(),
                     key_event: self.is_key_event()!=true?'No':'Yes',
                     customer_name:self.customerName(),
-                    event_feedback:self.eventFeedback(),
+                    // event_feedback:self.eventFeedback(),
                     event_lead: self.eventLead(),
                     partner_name: self.partnerName(),
                     link: self.registrationLink()
@@ -1481,7 +1481,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.event_endtime(event_details.end_time);
                 self.is_key_event(event_details.key_event_value_check);
                 self.customerName(event_details.customer_name);
-                self.eventFeedback(event_details.event_feedback);
+                // self.eventFeedback(event_details.event_feedback);
                 self.eventLead(event_details.event_lead);
                 self.partnerName(event_details.partner_name);
                 self.registrationLink(event_details.registration_link);
