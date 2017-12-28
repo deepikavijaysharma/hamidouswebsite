@@ -3254,3 +3254,88 @@ color:$lightgrey;
 text-decoration:none;}
 }	
 }
+
+.endsl{
+    cursor: pointer;
+    float: right !important;
+    font-size: 16px !important;
+    position: absolute;
+    right: 30px;
+    top: 48px;
+}
+.endsldel{
+    cursor: pointer;
+    float: right !important;
+    font-size: 16px !important;
+    position: absolute;
+    right: 60px;
+    top: 48px;
+}
+.avatarsimg{
+  width:100px;
+  height:18px;
+}
+#avatars{
+  width:100px;
+  height:18px;
+      margin-bottom: 50px;
+}
+
+#avatars{
+	ul{
+		li{
+		display:inline-block;
+		}
+	}
+}
+
+.avatars {
+	ul{
+		display: flex;
+	}
+}
+
+.avatars > input + img{
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.avatars { 
+	input:checked + img{
+  		border: 6px solid red;
+	}
+}
+.org_blocks_b img{
+  margin-right:20px;
+  height: 58px !important;
+  width: 58px !important;
+  }
+
+.endorgdel{
+    cursor: pointer;
+    float: right!important;
+    font-size: 16px;
+}
+.addendsl{
+      position: absolute;
+    z-index: 1000;
+    right: 30px;
+    top: 110px;
+    width: 100%;
+    float: right;
+}
+.golive img{
+  max-height: 100px;
+}
+.editkw{
+  float: right;
+max-width: 100px;
+max-height: 50px;
+border: #000 solid 1px;
+}
+.org_container_inner {
+    justify-content: center!important;
+}
+.editdis{
+display: none;
+}

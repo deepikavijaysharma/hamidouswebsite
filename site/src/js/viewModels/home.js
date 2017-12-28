@@ -17,10 +17,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             
             if (isAdmin) {
                 console.log("Showing for admin");
-                $(".admin").css("display", "inline-block");
+                $(".homeadmin").css("display", "inline-block");
             } else {
                 console.log("Hiding for user");
-                $(".admin").css("display", "none");
+                $(".homeadmin").css("display", "none");
             }
         }
 
@@ -88,6 +88,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         //KEY WINS observables
         self.kwlogo = ko.observableArray('');
+        self.kwid = ko.observable('');
         self.kwlink = ko.observable('');
         self.kwtext = ko.observable('');
         self.keywinslist = ko.observableArray([]);
@@ -104,21 +105,41 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         //REFERENCES observables
         self.refid = ko.observable('');
+        self.reftype = ko.observable('');
         self.reflogo = ko.observableArray([]);
         self.reflink = ko.observable('');
         self.refcloudtype = ko.observable('');
         self.reflist = ko.observableArray([]);
 
         //EMPLOYEE FEATURES observables
+        self.empfeatid = ko.observable('');
         self.empfeatbg = ko.observableArray([]);
         self.empfeatheading = ko.observable('');
         self.empfeattext = ko.observable('');
         self.empfeatlist = ko.observableArray([]);
+        self.empdeatils=ko.observable('');
+        self.empdeatilsmatched = ko.observableArray([]);
 
         self.openVideo = function() { 
 			$("#modalDialog1").ojDialog("open");
 		};
-        self.empf1 = function() { 
+        empf1 = function(id) 
+        {
+            self.empdeatils(id);
+            self.empdeatilsmatched([]);
+            for (var b = 0; b < self.empfeatlist().length; b++) 
+            {
+                if (self.empfeatlist()[b].empfeaid == id)
+                {
+                    self.empdeatilsmatched.push({ 
+                        dempfeaid: self.empfeatlist()[b].empfeaid, 
+                        dempfeatext: self.empfeatlist()[b].empfeatext, 
+                        dempfeaheading: self.empfeatlist()[b].empfeaheading, 
+                        dempfeabg: self.empfeatlist()[b].empfeabg 
+                    });
+                    console.log(ko.toJSON(self.empdeatilsmatched));
+                }
+            }
             $("#empf1").ojDialog("open");
         };
         self.empf2 = function() { 
@@ -126,7 +147,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         };
         self.empf3 = function() { 
             $("#empf3").ojDialog("open");
-        };//console.log(ko.toJSON(self.sliderlist()));
+        };
 
         /******************************************SLIDER********************************************************************/
 
@@ -143,33 +164,33 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 return;
             }
 
-            if (self.sldescription().length == 0) {
-                alert("Please enter Banner Description");
-                return;
-            }
+            // if (self.sldescription().length == 0) {
+            //     alert("Please enter Banner Description");
+            //     return;
+            // }
 
 
-            if (self.slbuttonlabel1().length == 0) {
+            // if (self.slbuttonlabel1().length == 0) {
 
-                alert("Please enter Banner 1st Button Label");
-                return;
-            }
-            if (self.slbuttonlabel2().length == 0) {
+            //     alert("Please enter Banner 1st Button Label");
+            //     return;
+            // }
+            // if (self.slbuttonlabel2().length == 0) {
                 
-                alert("Please enter Banner 2nd Button Label");
-                return;
-            }
+            //     alert("Please enter Banner 2nd Button Label");
+            //     return;
+            // }
 
-            if (self.sllinktext1().length == 0 && self.sllinktext2().length == 0) {
+            // if (self.sllinktext1().length == 0 && self.sllinktext2().length == 0) {
 
-                alert("Please enter Banner 1st Link");
-                return;
-            }
+            //     alert("Please enter Banner 1st Link");
+            //     return;
+            // }
 
-            if (self.sllinktext2().length == 0) {
-                alert("Please enter Banner 2nd Link");
-                return;
-            }
+            // if (self.sllinktext2().length == 0) {
+            //     alert("Please enter Banner 2nd Link");
+            //     return;
+            // }
 
             selectedimageid = ko.toJSON(self.slimgid());
 
@@ -184,20 +205,16 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 image_id: self.slimgid()
             }
 
-            // console.log(self.slimage());
-            // console.log(ko.toJSON(sl));
-
             $.ajax({
-                url: homedevurl+'home_screen_data',
+                url: homebaseurl+'home_screen_data',
                 cache: false,
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
                 data: ko.toJSON(sl),
                 success: function (sldata) {
-                    // alert("slider data uploaded");
                     fetchslider();
                     closeaddslidedialog();
-                    resetslide();
+                    resetslider();
                 }
             }).fail(function (xhr, textStatus, err) {
                 alert(err);
@@ -239,7 +256,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             self.editsllinktext1(edit_slider.sliderlt1);
             self.editsllinktext2(edit_slider.sliderlt2);
             $("#editslidedialog").ojDialog("open");
-            $.getJSON(homedevurl+"homepage_image_get_all").
+            $.getJSON(homebaseurl+"homepage_image_get_all").
                 then(function (imgid) {
                 self.slimage([]);
                 for (var l = 0; l < imgid.items.length; l++) {
@@ -265,7 +282,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             }
             console.log("editing slider data : "+ko.toJSON(edit_slider_data));
             $.ajax({
-                url: homedevurl+'home_screen_data',
+                url: homebaseurl+'home_screen_data',
                 cache: false,
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
@@ -274,7 +291,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     fetchslider();
                     closeaddslidedialog();
                     $("#editslidedialog").ojDialog("close");
-                    resetslide();
+                    resetslider();
                 },fail: function (xhr, textStatus, err) {
                         console.log("failed"+err);
                     },
@@ -299,7 +316,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#delete_carousel").click(function()
             {
                 $.ajax({
-                    url: homedevurl+'home_screen_data',
+                    url: homebaseurl+'home_screen_data',
                     method: 'DELETE',
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(data_sl_value),
@@ -325,7 +342,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         fetchslider = function () 
         {
-            $.getJSON(homedevurl+'home_screen_data').then(function (fetchslider) 
+            $.getJSON(homebaseurl+'home_screen_data').then(function (fetchslider) 
             {
                 // Fetch organization people details
                 self.sliderlist([]);
@@ -371,7 +388,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         
         /******************************************OUR ORGANIZATION***************************************************************/
 
-        $.getJSON(homedevurl+'GETORGLOV').then(function (orgtypes) 
+        $.getJSON(homebaseurl+'GETORGLOV').then(function (orgtypes) 
         {
             // Get Organization type in select in ADD ORGANIZATION
             self.organizationlist([]);
@@ -410,7 +427,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
               var imagedata = reader.result.split('base64,')[1];// console.log(uploadheader,reader.result);
               // SEND TO SERVER
               $.ajax({
-                url: homedevurl+'employee_data/',
+                url: homebaseurl+'employee_data/',
                 headers: uploadheader,
                 cache: false,
                 type: 'POST',
@@ -438,19 +455,17 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         self.editorgdottedline = ko.observable('');
         self.editorgimage = ko.observable('');
 
-        edituploadorgpeopleimage = function (event) 
-        {
-            editorgdialog(event);
-        }
         var edemployeephotopath = "";
         editimageselected = function (event)
         {
             edemployeephotopath = event.target.files[0];
             console.log("filename for photo of edit org",edemployeephotopath);
+            console.log("edit key wins filename length ", edemployeephotopath.length);
+            $("#input-2").replaceWith($("#input-2").val('').clone(true));
         }
-        editorgdialog = function (edit_org, param2) 
-        {
-            self.editorgsel('');
+        openEditOrgModal = function (edit_org) {
+            $("#editorgdialog").ojDialog("open");
+            console.log(edit_org);
             self.editorganizationid('');
             self.editorganizationselected('');
             self.editorgpeoplename('');
@@ -458,7 +473,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             self.editorgdottedline('');
             self.editorgimage('');
 
-            console.log("filename for edit organization",edemployeephotopath);
             // SET NEW VALUE
             self.editorganizationid(edit_org.orgempid);
             self.editorganizationselected(edit_org.orglob);
@@ -466,8 +480,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             self.editorgpeopledesignation(edit_org.orgdesig);
             self.editorgdottedline(edit_org.orgdotline);
             self.editorgimage(edit_org.orgimage);
-            
-            $("#editorgdialog").ojDialog("open");
+        }
+        editorgdialog = function (edit_org, param2) 
+        {
+            // self.editorganizationselected(self.editorgsel()[0]);
             var edit_org_data = {
                 orgempid: self.editorganizationid(),
                 orglob: self.editorganizationselected(),
@@ -478,40 +494,77 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             }
 
             console.log("edit organization data: "+ko.toJSON(edit_org_data));
-
-            var orgedreader = new FileReader();
-            orgedreader.onload = function () {
-                self.editorganizationselected(self.editorgsel()[0]);
+            if (edemployeephotopath.length == 0){
                 var uploadorgedheader = {
                     "organization": self.editorganizationselected(),
                     "name": self.editorgpeoplename(),
                     "designation": self.editorgpeopledesignation(),
-                    "dot_line": self.editorgdottedline()!=true?'No':'Yes',
-                    "mimetype": edemployeephotopath.type
+                    "dot_line": self.editorgdottedline() != true ? 'No' : 'Yes'
                 }
 
-                var imageorgeddata = orgedreader.result.split('base64,')[1];
+                // SEND TO SERVER
+                $.ajax({
+                    url: homebaseurl + 'employee_data',
+                    headers: uploadorgedheader,
+                    cache: false,
+                    crossDomain: true,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (dataorg) 
+                    {
+                        alert("Organization people edited successfully!");
+                        fetchpeopleorg();
+                        closeEditOrgModal();
+                        resetorg();
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert("error in editing data",err);
+                });
+            } 
+            else
+            {
+                var orgedreader = new FileReader();
+                orgedreader.onload = function () 
+                {
+                    // self.editorganizationselected(self.editorgsel()[0]);
+                    var uploadorgedheader = 
+                    {
+                        "organization": self.editorganizationselected(),
+                        "name": self.editorgpeoplename(),
+                        "designation": self.editorgpeopledesignation(),
+                        "dot_line": self.editorgdottedline()!=true?'No':'Yes',
+                        "mimetype": edemployeephotopath.type
+                    }
 
-                console.log(uploadorgedheader,orgedreader.result);
-              // SEND TO SERVER
-              $.ajax({
-                url: homedevurl+'employee_data/',
-                headers: uploadorgedheader,
-                cache: false,
-                type: 'POST',
-                contentType: 'application/json; charset=utf-8',
-                data: imageorgeddata,
-                success: function (dataorg) {
-                  alert("Organization people edited successfully!");
-                  fetchpeopleorg();
-                }
-              }).fail(function (xhr, textStatus, err) {
-                alert(err);
-              });
-            };
-            orgedreader.readAsDataURL(edemployeephotopath);
+                    var imageorgeddata = orgedreader.result.split('base64,')[1];
+                    // SEND TO SERVER
+                    $.ajax({
+                        url: homebaseurl+'employee_data/',
+                        headers: uploadorgedheader,
+                        cache: false,
+                        crossDomain: true,
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        data: imageorgeddata,
+                        success: function (dataorg) 
+                        {
+                            alert("Organization people edited successfully!");
+                            fetchpeopleorg();
+                            closeEditOrgModal();
+                            resetorg();
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert("error in editing image data",err);
+                    });
+                };
+                orgedreader.readAsDataURL(edemployeephotopath);
+            }
+        }
+
+        closeEditOrgModal = function () {
             $("#editorgdialog").ojDialog("close");
         }
+
         deleteorg = function (org_delete) 
         {
             console.log("deleted organization data: ",org_delete);
@@ -527,7 +580,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#delete_org").click(function()
             {
                 $.ajax({
-                    url: homedevurl+'employee_data/',
+                    url: homebaseurl+'employee_data/',
                     method: 'DELETE',
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(data_org_value),
@@ -554,7 +607,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         fetchpeopleorg = function () 
         {
-            $.getJSON(homedevurl+'employee_data/').then(function (orgpeopledetails) 
+            $.getJSON(homebaseurl+'employee_data/').then(function (orgpeopledetails) 
             {
                 // Fetch organization people details
                 self.organizationpeopleecalist([]);
@@ -661,21 +714,23 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             self.orgpeoplename('');
             self.orgpeopledesignation('');
             self.orgdottedline('');
-            document.getElementById("input-1").value = "";
-            // $("#basicSelect").ojSelect("reset"); 
+            self.editorganizationselected('');
+            self.editorgpeoplename('');
+            self.editorgpeopledesignation('');
+            self.editorgdottedline('');
+            document.getElementById("input-2").value = "";
+            document.getElementById("edinput-2").value = ""; 
         }
         /******************************************OUR ORGANIZATION ENDS*****************************************************/
         
         /******************************************KEY DATES*****************************************************/
         fetchkeydates = function () 
         {
-            $.getJSON(homedevurl+'KeyDates').then(function (keydatesdetails) 
+            $.getJSON(homebaseurl+'KeyDates').then(function (keydatesdetails) 
             {
-                var homelink = window.location.href;
-                // var first_param = "=training";
-                // homelink = homelink.substr(0,homelink.indexOf(first_param)+first_param.length);
-                homelink += "?root=training#";
                 // Fetch key dates details
+                var homelink = window.location.href;
+                homelink += "?root=training#";
                 self.keydateslist([]);
                 var stdate,kstdate,endate,kendate;
                 var kdlist = keydatesdetails.items;
@@ -687,7 +742,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     endate = new Date(kendate);
                     self.keydateslist.push({
                         keydcid: kdlist[b].course_id,
-                        keydtype: kdlist[b].type,
+                        keydtype: kdlist[b].training_type,
                         keydname: kdlist[b].name,
                         keydhlink: homelink,
                         keydstartdate: stdate.toDateString(),
@@ -695,8 +750,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         keydenddate: endate.toDateString(),
                         keydendtime: kdlist[b].end_date != undefined ? kdlist[b].end_date.substring(11, 19) + " PT" : ''
                     })
-                }
-                console.log(ko.toJSON(self.keydateslist()));
+                }//console.log(ko.toJSON(self.keydateslist()));
             });
         }
         fetchkeydates();
@@ -732,22 +786,19 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 }
 
               var akwimagedata = akwreader.result.split('base64,')[1];
-
-              console.log(uploadakwheader,akwreader.result);
               // SEND TO SERVER
               $.ajax({
-                url: homedevurl+'KeyWins',
+                url: homebaseurl+'KeyWins',
                 headers: uploadakwheader,
                 cache: false,
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
                 data: akwimagedata,
                 success: function (dataakw) {
-                  console.log(dataakw);
                   alert("Key Wins added successfully!");
                   fetchkeywins();
-                  closeaddnewkeywinsdialog();
                   resetkeywins();
+                  closeaddnewkeywinsdialog();
                 }
               }).fail(function (xhr, textStatus, err) {
                 alert(err);
@@ -767,28 +818,12 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         {
             ekwlogopath = event.target.files[0];
             console.log("add key logo filename",ekwlogopath);
+            console.log("edit key wins filename length ", ekwlogopath.length);
+            $("#kwlogoeditupl").replaceWith($("#kwlogoeditupl").val('').clone(true));
         }
 
-        editkeywins = function (keywins_edit) 
+        editkeywins = function (edit_kw) 
         {
-            console.log("Edit key wins data",keywins_edit);
-            openEditKeyWinsModal(keywins_edit);
-        }
-
-        openEditKeyWinsModal = function (edit_kw, param2) 
-        {
-            self.editkwid('');
-            self.editkwlogo('');
-            self.editkwlink('');
-            self.editkwtext('');
-
-            // SET NEW VALUE
-            self.editkwid(edit_kw.keywid);
-            self.editkwlogo(edit_kw.keywphoto);
-            self.editkwlink(edit_kw.keywlink);
-            self.editkwtext(edit_kw.keywtext);
-            
-            $("#editkeywinsdialog").ojDialog("open");
             var edit_keywins_data = {
                 id: self.editkwid(),
                 image: self.editkwlogo(),
@@ -796,60 +831,86 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 text: self.editkwtext()
             }
 
-            console.log("edit key wins data: "+ko.toJSON(edit_keywins_data));
-            if(ekwlogopath.length == 0)
+            console.log("edit key wins data: " + ko.toJSON(edit_keywins_data));
+            if (ekwlogopath.length == 0) 
             {
-                var uploadekwheader = {
-                "text": self.kwtext(),
-                "link": self.kwlink()
+                var uploadekwheader = 
+                {
+                    "id": self.editkwid(),
+                    "text": self.editkwtext(),
+                    "link": self.editkwlink()
                 }
 
-              // SEND TO SERVER
-              $.ajax({
-                url: homedevurl+'KeyWins',
-                headers: uploadekwheader,
-                cache: false,
-                type: 'POST',
-                contentType: 'application/json; charset=utf-8',
-                success: function (dataakw) {
-                    console.log("edit success for keywins");
-                    fetchkeywins();
-                }
-              }).fail(function (xhr, textStatus, err) {
-                alert(err);
-              });
-            }
-            else
-            {
-                var ekwreader = new FileReader();
-                ekwreader.onload = function () {
-                  var uploadekwheader = {
-                    "text": self.kwtext(),
-                    "link": self.kwlink(),
-                    "mimetype": ekwlogopath.type
-                    }
-
-                  var ekwimagedata = ekwreader.result.split('base64,')[1];
-
-                  console.log(uploadekwheader,ekwreader.result);
-                  // SEND TO SERVER
-                  $.ajax({
-                    url: homedevurl+'KeyWins',
+                // SEND TO SERVER
+                $.ajax({
+                    url: homebaseurl + 'KeyWins',
                     headers: uploadekwheader,
                     cache: false,
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
-                    data: ekwimagedata,
                     success: function (dataakw) {
-                        console.log("edit success for keywins");
+                        console.log("Keywin edited successfully");
                         fetchkeywins();
+                        resetkeywins();
+                        closeEditKeyWinsModal();
                     }
-                  }).fail(function (xhr, textStatus, err) {
+                }).fail(function (xhr, textStatus, err) {
                     alert(err);
-                  });
+                });
+            }
+            else 
+            {
+                var ekwreader = new FileReader();
+                ekwreader.onload = function () 
+                {
+                    var uploadekwheader = 
+                    {
+                        "id": self.editkwid(),
+                        "text": self.editkwtext(),
+                        "link": self.editkwlink(),
+                        "mimetype": ekwlogopath.type
+                    }
+
+                    var ekwimagedata = ekwreader.result.split('base64,')[1];
+                    // SEND TO SERVER
+                    $.ajax({
+                        url: homebaseurl + 'KeyWins',
+                        headers: uploadekwheader,
+                        cache: false,
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        data: ekwimagedata,
+                        success: function (dataakw) {
+                            console.log("edit success for keywins");
+                            fetchkeywins();
+                            resetkeywins();
+                            closeEditKeyWinsModal();
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert(err);
+                    });
                 };
                 ekwreader.readAsDataURL(ekwlogopath);
             }            
+        }
+
+        openEditKeyWinsModal = function (editkeywins) 
+        {
+            $("#editkeywinsdialog").ojDialog("open");
+            console.log("Edit key wins data", editkeywins);
+            self.editkwid('');
+            self.editkwlogo('');
+            self.editkwlink('');
+            self.editkwtext('');
+
+            // SET NEW VALUE
+            self.editkwid(editkeywins.keywid);
+            self.editkwlogo(editkeywins.keywphoto);
+            self.editkwlink(editkeywins.keywlink);
+            self.editkwtext(editkeywins.keywtext);            
+        }
+
+        closeEditKeyWinsModal = function () {
             $("#editkeywinsdialog").ojDialog("close");
         }
 
@@ -868,7 +929,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#delete_kw").click(function()
             {
                 $.ajax({
-                    url: homedevurl+'KeyWins',
+                    url: homebaseurl+'KeyWins',
                     method: 'DELETE',
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(data_kw_value),
@@ -894,7 +955,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         fetchkeywins = function () 
         {
-            $.getJSON(homedevurl+'KeyWins').then(function (keywinsdetails) 
+            $.getJSON(homebaseurl+'KeyWins').then(function (keywinsdetails) 
             {
                 // Fetch key wins details
                 self.keywinslist([]);
@@ -915,60 +976,43 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         resetkeywins = function (){
             self.kwlink('');
             self.kwtext('');
+            self.editkwlink('');
+            self.editkwtext('');
             document.getElementById("kwlogoupl").value = "";
-            // $("#basicSelect").ojSelect("reset"); 
+            document.getElementById("kwlogoeditupl").value = "";
         }
         /******************************************KEY WINS ENDS********************************************************************/
 
         /******************************************GO LIVES*************************************************************************/
 
+        var gllogodata, glphotodata;
         var gllogopath = "";
+        var glphotopath = "";
         gllogoselected = function (event)
         {
+            console.log(event);
             gllogopath = event.target.files[0];
             console.log("add go lives logo filename",gllogopath);
+            var glreader = new FileReader();
+            glreader.onload = function () {
+                gllogodata = glreader.result.split('base64,')[1];
+            };
+            glreader.readAsDataURL(gllogopath);
+            // return gllogodata;
         }
         glphotoselected = function (event)
         {
+            console.log(event);
             glphotopath = event.target.files[0];
             console.log("add go lives photo filename",glphotopath);
+            var glpreader = new FileReader();
+            glpreader.onload = function () {
+                glphotodata = glpreader.result.split('base64,')[1];
+            };
+            glpreader.readAsDataURL(glphotopath);
+            // return glphotodata;
         }
-        uploadlogogl = function (lheader,ldata)
-        {
-          $.ajax({
-            url: homedevurl+'GoLives',
-            headers: lheader,
-            cache: false,
-            type: 'PUT',
-            contentType: 'application/json; charset=utf-8',
-            data: ldata,
-            success: function (datalogogl) {
-              console.log(datalogogl);
-              alert("Go Lives logo added successfully!");
-              fetchgolives();
-            }
-          }).fail(function (xhr, textStatus, err) {
-            alert(err);
-          });
-        }
-        uploadphotogl = function (pheader,pdata)
-        {
-          $.ajax({
-            url: homedevurl+'GoLives',
-            headers: pheader,
-            cache: false,
-            type: 'PUT',
-            contentType: 'application/json; charset=utf-8',
-            data: pdata,
-            success: function (dataphotogl) {
-              console.log(dataphotogl);
-              alert("Go Lives presenter photo added successfully!");
-              fetchgolives();
-            }
-          }).fail(function (xhr, textStatus, err) {
-            alert(err);
-          });
-        }
+
         addgolives = function () 
         {
             if (self.glhostedby().length == 0) {
@@ -991,109 +1035,85 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 return;
             }
 
-            var glheader = {
+            var glbody = {
                 hosted_by: self.glhostedby(),
                 episode_guest: self.glguest(),
                 link: self.gllink(),
-                go_live_description: self.gldiscussion()
+                go_live_description: self.gldiscussion(),
+                logo: [
+                    {
+                        logo: gllogoselected(),
+                        mime_type: gllogopath.type
+                    }
+                ],
+                background: [
+                    {
+                        bg: glphotoselected(),
+                        mime_type: glphotodata.type
+                    }
+                ]
             }
-            console.log(ko.toJSON(glheader));
 
+            console.log(glbody);
             $.ajax({
-                url: homedevurl+'GoLives',
-                headers: glheader,
+                url: homebaseurl +'test_go_lives',
                 cache: false,
                 type: 'POST',
+                body: glbody,
                 contentType: 'application/json; charset=utf-8',
                 success: function (gldata) {
                     console.log(ko.toJSON(gldata));
                     alert("go lives data uploaded");
-
-                    //Logo Upload
-                    var glreader = new FileReader();
-                    glreader.onload = function () 
-                    {
-                      var uploadglheader = {
-                        "id": gldata.items.id,
-                        "logo_or_bg": "logo",
-                        "mimetype": gllogopath.type
-                        }
-
-                      var gllogodata = glreader.result.split('base64,')[1];
-
-                      console.log(uploadglheader,glreader.result);
-                      // SEND TO SERVER
-                      uploadlogogl(uploadglheader,gllogodata);
-                    };
-                    glreader.readAsDataURL(gllogopath);
-
-                    //Photo Upload
-                    var glpreader = new FileReader();
-                    glpreader.onload = function () 
-                    {
-                      var uploadglpheader = {
-                        "id": gldata.items.id,
-                        "logo_or_bg": "background",
-                        "mimetype": glphotopath.type
-                        }
-
-                      var glphotodata = glpreader.result.split('base64,')[1];
-
-                      console.log(uploadgpheader,glpreader.result);
-                      // SEND TO SERVER
-
-                      uploadphotogl(uploadgpheader,glphotodata);
-                    };
-                    glpreader.readAsDataURL(glphotopath);
-                    closeaddgltextdialog()
+                    closeaddgltextdialog();
+                    resetgolives();                    
                 }
             }).fail(function (xhr, textStatus, err) {
                 alert(err);
             });
         }
 
-        // deletegolives = function (golives_delete) 
-        // {
-        //     console.log("fsdfsd",golives_delete);
-        //     openDeleteGoLivesModal(golives_delete.id);
-        // }
+        deletegolives = function (golives_delete) 
+        {
+            console.log("fsdfsd",golives_delete);
+            openDeleteGoLivesModal(golives_delete.id);
+        }
 
-        // openDeleteGoLivesModal = function (delete_golives_id) {
-        //     console.log("deleting id go lives - "+delete_golives_id);
-        //     var data_gl_value = {
-        //         "id" : delete_golives_id
-        //     };
-        //     $("#delete_golives").ojDialog("open");
-        //     $("#delete_gl").click(function()
-        //     {
-        //         $.ajax({
-        //             url: homedevurl+'GoLives',
-        //             method: 'DELETE',
-        //             contentType: 'application/json; charset=utf-8',
-        //             data: ko.toJSON(data_gl_value),
-        //             success: function () {
-        //                 closeDeleteGoLivesModal();
-        //                 console.log("delete success for go lives");
-        //                 fetchgolives();
-        //             },
-        //             fail: function (xhr, textStatus, err) {
-        //                 console.log(err);
-        //             },
-        //             error: function (xhr, textStatus, err) {
-        //                 console.log(err);
-        //             }
-        //         });
-        //     });
+        openDeleteGoLivesModal = function (delete_golives_id) {
+            console.log("deleting id go lives - "+delete_golives_id);
+            var data_gl_value = {
+                "id" : delete_golives_id
+            };
+            $("#delete_golives").ojDialog("open");
+            $("#delete_gl").click(function()
+            {
+                $.ajax({
+                    url: homebaseurl+'GoLives',
+                    method: 'DELETE',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(data_gl_value),
+                    success: function () {
+                        closeDeleteGoLivesModal();
+                        console.log("delete success for go lives");
+                        fetchgolives();
+                    },
+                    fail: function (xhr, textStatus, err) {
+                        console.log(err);
+                    },
+                    error: function (xhr, textStatus, err) {
+                        console.log(err);
+                    }
+                });
+            });
 
-        // }
+        }
 
-        // closeDeleteGoLivesModal = function () {
-        //     $("#delete_golives").ojDialog("close");
-        // }
+        closeDeleteGoLivesModal = function () {
+            $("#delete_golives").ojDialog("close");
+        }
 
         fetchgolives = function () 
         {
-            $.getJSON(homedevurl+'GoLives').then(function (golivesdetails) 
+            $.getJSON(homebaseurl+'GoLives').then(function (golivesdetails) 
             {
                 // Fetch go lives details
                 self.goliveslist([]);
@@ -1113,6 +1133,15 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             });
         }
         fetchgolives();
+
+        resetgolives = function (){
+            self.glhostedby('');
+            self.glguest('');
+            self.gllink('');
+            self.gldiscussion('');
+            document.getElementById("gllogo").value = "";
+            document.getElementById("glphoto").value = "";
+        }
         /******************************************GO LIVES END********************************************************************/
 
         /******************************************REFERENCES*************************************************************************/
@@ -1121,30 +1150,29 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         reflogoselected = function (event)
         {
             reflogopath = event.target.files[0];
-            console.log("add references logo filename",reflogopath);
+            console.log("add references logo iaas filename",reflogopath);
         }
         addreferences = function () 
         {
             var refreader = new FileReader();
             refreader.onload = function () {
               var uploadrefheader = {
+                "type": 'IAAS',
                 "reference_link": self.reflink(),
                 "logo_mimetype": reflogopath.type
                 }
 
               var arefimagedata = refreader.result.split('base64,')[1];
 
-              console.log(uploadrefheader,refreader.result);
               // SEND TO SERVER
               $.ajax({
-                url: homedevurl+'Reference',
+                url: homebaseurl+'Reference',
                 headers: uploadrefheader,
                 cache: false,
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
                 data: arefimagedata,
                 success: function (dataref) {
-                    // alert("References added successfully!");
                     fetchreferences();
                     closeaddnewrefdialog();
                     resetreferences();
@@ -1155,6 +1183,240 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             };
             refreader.readAsDataURL(reflogopath);
         }
+
+        var reflogopathpass = "";
+        reflogoselectedpass = function (event) {
+            reflogopathpass = event.target.files[0];
+            console.log("add references logo paas filename", reflogopathpass);
+        }
+        addreferencespaas = function () {
+            var refreaderpass = new FileReader();
+            refreaderpass.onload = function () {
+                var uploadrefheaderpass = {
+                    "type": 'PAAS',
+                    "reference_link": self.reflink(),
+                    "logo_mimetype": reflogopathpass.type
+                }
+
+                var arefimagedatapaas = refreaderpass.result.split('base64,')[1];
+                
+                // SEND TO SERVER
+                $.ajax({
+                    url: homebaseurl + 'Reference',
+                    headers: uploadrefheaderpass,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: arefimagedatapaas,
+                    success: function (datarefpaas) {
+                        // alert("References added successfully!");
+                        fetchreferences();
+                        closeaddnewrefdialogpaas();
+                        resetreferences();
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert(err);
+                });
+            };
+            refreaderpass.readAsDataURL(reflogopathpass);
+        }
+
+        //EDIT REFERENCES observables
+        self.editrefid = ko.observable('');
+        self.editreftype = ko.observable('');
+        self.editreflogo = ko.observable('');
+        self.editreflink = ko.observable('');
+
+        var edreflogopath = "";
+        editreflogoselected = function (event) {
+            edreflogopath = event.target.files[0];
+            console.log("filename for logo of edit refrences", edreflogopath);
+            console.log("edit refrences filename length ", edreflogopath.length);
+            $("#edreflog").replaceWith($("#edreflog").val('').clone(true));
+        }
+        editreferencesdialog = function () 
+        {
+            var edit_ref_data = {
+                refid: self.editrefid(),
+                reftype: self.editreftype(),
+                reflink: self.editreflink(),
+                reflogo: self.editreflogo()
+            }
+
+            console.log("edit references data: " + ko.toJSON(edit_ref_data));
+            if (edreflogopath.length == 0) 
+            {
+                var uploadrefedheader = {
+                    "id": self.editrefid(),
+                    "type": self.editreftype(),
+                    "reference_link": self.editreflink()
+                }
+
+                // SEND TO SERVER
+                $.ajax({
+                    url: homebaseurl + 'Reference',
+                    headers: uploadrefedheader,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (dataedref) {
+                        alert("Refrences edited successfully!");
+                        fetchreferences();
+                        closeReferencesModal();
+                        resetreferences();
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert(err);
+                });
+            }
+            else
+            {
+                var edrefreader = new FileReader();
+                edrefreader.onload = function () 
+                {
+                    var uploadrefedheader = 
+                    {
+                        "id": self.editrefid(),
+                        "type": self.editreftype(),
+                        "reference_link": self.editreflink(),
+                        "logo_mimetype": edreflogopath.type
+                    }
+
+                    var edarefimagedata = edrefreader.result.split('base64,')[1];
+
+                    // SEND TO SERVER
+                    $.ajax({
+                        url: homebaseurl + 'Reference',
+                        headers: uploadrefedheader,
+                        cache: false,
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        data: edarefimagedata,
+                        success: function (dataedref) {
+                            alert("Refrences edited successfully!");
+                            fetchreferences();
+                            closeReferencesModal();
+                            resetreferences();
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert(err);
+                    });
+                };
+                edrefreader.readAsDataURL(edreflogopath);
+            }
+        }
+
+        openReferencesModal = function (edit_ref) {
+            $("#editrefdialog").ojDialog("open");
+            console.log(edit_ref);
+            self.editrefid('');
+            self.editreftype('');
+            self.editreflogo('');
+            self.editreflink('');
+
+            // SET NEW VALUE
+            self.editrefid(edit_ref.refid);
+            self.editreftype(edit_ref.reftype);
+            self.editreflogo(edit_ref.reflogo);
+            self.editreflink(edit_ref.reflink);
+        }
+        closeReferencesModal = function () {
+            $("#editrefdialog").ojDialog("close");
+        }
+
+        var edpaasreflogopath = "";
+        edreflogoselectedpass = function (event) {
+            edpaasreflogopath = event.target.files[0];
+            console.log("filename for logo of edit refrences", edpaasreflogopath);
+            console.log("edit refrences filename length ", edpaasreflogopath.length);
+            $("#edreflogpass").replaceWith($("#edreflogpass").val('').clone(true));
+        }
+        editreferencespaasdialog = function () {
+            var edit_ref_data = {
+                refid: self.editrefid(),
+                reftype: self.editreftype(),
+                reflink: self.editreflink(),
+                reflogo: self.editreflogo()
+            }
+
+            console.log("edit references data: " + ko.toJSON(edit_ref_data));
+            if (edpaasreflogopath.length == 0) {
+                var uploadrefedheader = {
+                    "id": self.editrefid(),
+                    "type": self.editreftype(),
+                    "reference_link": self.editreflink()
+                }
+
+                // SEND TO SERVER
+                $.ajax({
+                    url: homebaseurl + 'Reference',
+                    headers: uploadrefedheader,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (dataedref) {
+                        alert("Refrences edited successfully!");
+                        fetchreferences();
+                        closeReferencesPaasModal();
+                        resetreferences();
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert(err);
+                });
+            }
+            else {
+                var edpaasrefreader = new FileReader();
+                edpaasrefreader.onload = function () {
+                    var uploadrefedheader =
+                        {
+                            "id": self.editrefid(),
+                            "type": self.editreftype(),
+                            "reference_link": self.editreflink(),
+                            "logo_mimetype": edpaasreflogopath.type
+                        }
+
+                    var edpaasarefimagedata = edpaasrefreader.result.split('base64,')[1];
+
+                    // SEND TO SERVER
+                    $.ajax({
+                        url: homebaseurl + 'Reference',
+                        headers: uploadrefedheader,
+                        cache: false,
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        data: edpaasarefimagedata,
+                        success: function (dataedref) {
+                            alert("Refrences edited successfully!");
+                            fetchreferences();
+                            closeReferencesPaasModal();
+                            resetreferences();
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert(err);
+                    });
+                };
+                edpaasrefreader.readAsDataURL(edpaasreflogopath);
+            }
+        }
+
+        openReferencesPaasModal = function (edit_ref) {
+            $("#editnewrefdialogpaas").ojDialog("open");
+            console.log(edit_ref);
+            self.editrefid('');
+            self.editreftype('');
+            self.editreflogo('');
+            self.editreflink('');
+
+            // SET NEW VALUE
+            self.editrefid(edit_ref.refid);
+            self.editreftype(edit_ref.reftype);
+            self.editreflogo(edit_ref.reflogo);
+            self.editreflink(edit_ref.reflink);
+        }
+        closeReferencesPaasModal = function () {
+            $("#editnewrefdialogpaas").ojDialog("close");
+        }
+
 
         deletereferences = function (ref_delete) 
         {
@@ -1171,7 +1433,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#delete_ref").click(function()
             {
                 $.ajax({
-                    url: homedevurl+'Reference',
+                    url: homebaseurl+'Reference',
                     method: 'DELETE',
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(data_ref_value),
@@ -1197,7 +1459,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         fetchreferences = function () 
         {
-            $.getJSON(homedevurl+'Reference').then(function (referencesdetails) 
+            $.getJSON(homebaseurl+'Reference').then(function (referencesdetails) 
             {
                 // Fetch references details
                 self.reflist([]);
@@ -1206,6 +1468,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 {
                     self.reflist.push({
                         refid: relist[b].id,
+                        reftype: relist[b].type,
                         reflink: relist[b].reference_link,
                         reflogo: relist[b].image
                     })
@@ -1216,80 +1479,236 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         resetreferences = function (){
             self.reflink('');
+            self.editreflink('');
             document.getElementById("reflog").value = "";
+            document.getElementById("edreflog").value = "";
+            document.getElementById("reflogpass").value = "";
+            document.getElementById("edreflogpass").value = "";
         }
 
         /******************************************REFERENCES ENDS********************************************************************/
 
         /******************************************EMPLOYEE FEATURES*************************************************************************/
 
-        // var empphotopath = "";
-        // empphotoselected = function (event)
-        // {
-        //     empphotopath = event.target.files[0];
-        //     console.log("add references logo filename",empphotopath);
-        // }
-        // self.addempfeatures = function () 
-        // {
-        //     if (self.empfeatheading().length == 0) {
-        //         alert("Please enter Employee Features Heading");
-        //         return;
-        //     }
+        var empphotopath = "";
+        empphotoselected = function (event)
+        {
+            empphotopath = event.target.files[0];
+            console.log("add employee features background filename",empphotopath);
+        }
+        addempfeatures = function () 
+        {
+            if (self.empfeatheading().length == 0) {
+                alert("Please enter Employee Features Heading");
+                return;
+            }
 
-        //     if (self.empfeattext().length == 0) {
-        //         alert("Please enter Employee Features Text");
-        //         return;
-        //     }
+            if (self.empfeattext().length == 0) {
+                alert("Please enter Employee Features Text");
+                return;
+            }
 
-        //     var efreader = new FileReader();
-        //     reader.onload = function () {
-        //       var uploadefheader = {
-        //         "efheading": self.empfeatheading(),
-        //         "eftext": self.empfeattext(),
-        //         "efbg": empphotopath.type
-        //         }
+            var efreader = new FileReader();
+            efreader.onload = function () {
+              var uploadefheader = {
+                "id": self.empfeatid(),
+                "features_heading": self.empfeatheading(),
+                "key_wins_text": self.empfeattext(),
+                "mimetype": empphotopath.type
+                }
 
-        //       var empfimagedata = efreader.result.split('base64,')[1];
+              var empfimagedata = efreader.result.split('base64,')[1];
 
-        //       console.log(uploadefheader,efreader.result);
-        //       // SEND TO SERVER
-        //       $.ajax({
-        //         url: homedevurl+'employee_data/',
-        //         headers: uploadefheader,
-        //         cache: false,
-        //         type: 'POST',
-        //         contentType: 'application/json; charset=utf-8',
-        //         data: empfimagedata,
-        //         success: function (dataempfeat) {
-        //           console.log(dataempfeat);
-        //           alert("Employee Features added successfully!");
-        //         }
-        //       }).fail(function (xhr, textStatus, err) {
-        //         alert(err);
-        //       });
-        //     };
-        //     efreader.readAsDataURL(empphotopath);
-        // }
+              // SEND TO SERVER
+              $.ajax({
+                url: homebaseurl +'employee_features',
+                headers: uploadefheader,
+                cache: false,
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: empfimagedata,
+                success: function (dataempfeat) {
+                    console.log(dataempfeat);
+                    // alert("Employee Features added successfully!");
+                    fetchempfeatures();
+                    closeaddnewefdialog();
+                    resetempfeatures();
+                }
+              }).fail(function (xhr, textStatus, err) {
+                alert(err);
+              });
+            };
+            efreader.readAsDataURL(empphotopath);
+        }
 
-        // fetchempfeatures = function () 
-        // {
-        //     $.getJSON(homedevurl+'employee_data/').then(function (employeefeaturesdetails) 
-        //     {
-        //         // Fetch Employee features
-        //         self.empfeatlist([]);
-        //         var eflist = employeefeaturesdetails.items;
-        //         for (var b = 0; b < eflist.length; b++) 
-        //         {
-        //             self.empfeatlist.push({
-        //                 empfeaheading: eflist[b].efheading,
-        //                 empfeatext: eflist[b].eftext,
-        //                 empfeabg: eflist[b].efbg
-        //             })
-        //         }// console.log(ko.toJSON(self.empfeatlist()));
-        //     });
-        // }
-        // fetchempfeatures();
+        //EDIT EMPLOYEE FEATURES observables
+        self.editempfeatid = ko.observable('');
+        self.editempfeatbg = ko.observable('');
+        self.editempfeatheading = ko.observable('');
+        self.editempfeattext = ko.observable('');
 
+        var eeflogopath = "";
+
+        eeflogoselected = function (event) 
+        {
+            eeflogopath = event.target.files[0];
+            console.log("add key logo filename", eeflogopath);
+            console.log("edit key wins filename length ", eeflogopath.length);
+            $("#edefbg").replaceWith($("#edefbg").val('').clone(true));
+        }
+
+        editemployeefeatures = function (edit_ef) {
+            var edit_empfeat_data = {
+                id: self.editempfeatid(),
+                image: self.editempfeatbg(),
+                heading: self.editempfeatheading(),
+                text: self.editempfeattext()
+            }
+
+            console.log("edit employee feature data: " + ko.toJSON(edit_empfeat_data));
+            if (eeflogopath.length == 0) 
+            {
+                var uploadeefheader = {
+                    "id": self.editempfeatid(),
+                    "key_wins_text": self.editempfeattext(),
+                    "features_heading": self.editempfeatheading()
+                }
+
+                // SEND TO SERVER
+                $.ajax({
+                    url: homebaseurl + 'employee_features',
+                    headers: uploadeefheader,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (dataeef) {
+                        console.log("edit success for employee features");
+                        fetchempfeatures();
+                        resetempfeatures();
+                        closeEditEmployeeFeaturesModal();
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert(err);
+                });
+            }
+            else 
+            {
+                var eefreader = new FileReader();
+                eefreader.onload = function () {
+                    var uploadeefheader = {
+                        "id": self.editempfeatid(),
+                        "key_wins_text": self.editempfeattext(),
+                        "features_heading": self.editempfeatheading(),
+                        "mimetype": eeflogopath.type
+                    }
+
+                    var eefimagedata = eefreader.result.split('base64,')[1];
+                    // SEND TO SERVER
+                    $.ajax({
+                        url: homebaseurl + 'employee_features',
+                        headers: uploadeefheader,
+                        cache: false,
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        data: eefimagedata,
+                        success: function (dataeef) {
+                            console.log("edit success for employee features");
+                            fetchempfeatures();
+                            resetempfeatures();
+                            closeEditEmployeeFeaturesModal();
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        alert(err);
+                    });
+                };
+                eefreader.readAsDataURL(eeflogopath);
+            }
+        }
+
+        openEditEmployeeFeaturesModal = function (editemployeefeatures) {
+            $("#editempfdialog").ojDialog("open");
+            console.log("Edit employee features data", editemployeefeatures);
+            self.editempfeatid('');
+            self.editempfeatbg('');
+            self.editempfeatheading('');
+            self.editempfeattext('');
+
+            // SET NEW VALUE
+            self.editempfeatid(editemployeefeatures.empfeaid);
+            self.editempfeatbg(editemployeefeatures.empfeabg);
+            self.editempfeatheading(editemployeefeatures.empfeaheading);
+            self.editempfeattext(editemployeefeatures.empfeatext);
+        }
+
+        closeEditEmployeeFeaturesModal = function () {
+            $("#editempfdialog").ojDialog("close");
+        }
+
+        deleteemployeefeatures = function (ef_delete) {
+            console.log("delete employee feature", ef_delete);
+            openDeleteEmployeeFeaturesModal(ef_delete.empfeaid);
+        }
+
+        openDeleteEmployeeFeaturesModal = function (delete_empf_id) {
+            console.log("deleting id employee feature - " + delete_empf_id);
+            var data_ef_value = {
+                "id": delete_empf_id
+            };
+            $("#delete_empfeat").ojDialog("open");
+            $("#delete_ef").click(function () {
+                $.ajax({
+                    url: homebaseurl + 'employee_features',
+                    method: 'DELETE',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(data_ef_value),
+                    success: function () {
+                        console.log("delete success for employee features");
+                        closeDeleteEmployeeFeaturesModal();
+                        fetchempfeatures();
+                    },
+                    fail: function (xhr, textStatus, err) {
+                        console.log(err);
+                    },
+                    error: function (xhr, textStatus, err) {
+                        console.log(err);
+                    }
+                });
+            });
+
+        }
+
+        closeDeleteEmployeeFeaturesModal = function () {
+            $("#delete_empfeat").ojDialog("close");
+        }
+
+        fetchempfeatures = function () 
+        {
+            $.getJSON(homebaseurl +'employee_features').then(function (employeefeaturesdetails) 
+            {
+                // Fetch Employee features
+                self.empfeatlist([]);
+                var eflist = employeefeaturesdetails.items;// console.log(eflist);
+                for (var b = 0; b < eflist.length; b++) 
+                {
+                    self.empfeatlist.push({
+                        empfeaid: eflist[b].id,
+                        empfeaheading: eflist[b].features_heading,
+                        empfeatext: eflist[b].key_wins_text,
+                        empfeabg: eflist[b].image
+                    })
+                }//console.log(ko.toJSON(self.empfeatlist()));
+            });
+        }
+        fetchempfeatures();
+
+        resetempfeatures = function(){
+            self.empfeatheading('');
+            self.empfeattext('');
+            self.editempfeatheading('');
+            self.editempfeattext('');
+            document.getElementById("efbg").value = "";
+            document.getElementById("edefbg").value = "";
+        }
         /******************************************EMPLOYEE FEATURES ENDS********************************************************************/
 
         closedialog=function(){                
@@ -1490,32 +1909,32 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             // Add smooth scrolling to all links
             $('#setupBar a[href^="#"]').on('click', function(e) {
 
-    // Make sure this.hash has a value before overriding default behavior
-    if (this.hash !== "") {
-      // Prevent default anchor click behavior
-      event.preventDefault();
+                // Make sure this.hash has a value before overriding default behavior
+                if (this.hash !== "") {
+                // Prevent default anchor click behavior
+                event.preventDefault();
 
-      // Store hash
-      var hash = this.hash;
+                // Store hash
+                var hash = this.hash;
 
-      // Using jQuery's animate() method to add smooth page scroll
-      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top 
-      }, 800, function(){
-   
-        // Add hash (#) to URL when done scrolling (default click behavior)
-        window.location.hash = hash;
-      });
-	  /* Remove active class on any li when an anchor is clicked */
-    
-    $('#setupBar ul').children().removeClass();
-    
-    /* Add active class to clicked anchor's parent li */
-        
-    $(this).parent().addClass('active');
-    } // End if
-  });
+                // Using jQuery's animate() method to add smooth page scroll
+                // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top 
+                }, 800, function(){
+            
+                    // Add hash (#) to URL when done scrolling (default click behavior)
+                    window.location.hash = hash;
+                });
+                /* Remove active class on any li when an anchor is clicked */
+                
+                $('#setupBar ul').children().removeClass();
+                
+                /* Add active class to clicked anchor's parent li */
+                    
+                $(this).parent().addClass('active');
+                } // End if
+            });
   
         });
 		
@@ -1602,7 +2021,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         openaddslidedialog = function () 
         {
             $("#addslidedialog").ojDialog("open");
-            $.getJSON(homedevurl+"homepage_image_get_all").
+            $.getJSON(homebaseurl+"homepage_image_get_all").
                 then(function (imgid) {
                 self.slimage([]);
                 for (var l = 0; l < imgid.items.length; l++) {
@@ -1629,6 +2048,13 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
         closeaddnewrefdialog = function () {
             $("#addnewrefdialog").ojDialog("close");
+        }
+
+        openaddnewrefdialogpaas = function () {
+            $("#addnewrefdialogpaas").ojDialog("open");
+        }
+        closeaddnewrefdialogpaas = function () {
+            $("#addnewrefdialogpaas").ojDialog("close");
         }
 
         openaddnewkeywinsdialog = function () {
