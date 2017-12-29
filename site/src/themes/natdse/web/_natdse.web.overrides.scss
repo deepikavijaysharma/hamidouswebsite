@@ -423,7 +423,6 @@ width:100%;
 
 .genricslide1 {
 background: url(images/genric-bg_1.jpg);
-
 border: none;
 background-size:cover;
 display:flex;
@@ -510,6 +509,17 @@ padding:0px 10px ;
 }
 .slide6 {
 background: url(images/slide5bg.jpg);
+
+border: none;
+background-size:cover;
+@media  #{$responsiveQueryMediumDown} {
+height: 100%;
+padding:0px 10px ;
+}
+
+}
+.slide7{
+background: url(images/slide6bg.jpg);
 
 border: none;
 background-size:cover;
@@ -1105,6 +1115,20 @@ h2{
 font-size:$largeFontSize;
 padding:10px 20px;
 margin-bottom:0px;
+a.ccdetailsbutton {
+    align-items: center;
+    border: 1px solid;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    font-size:$smallestFontSize1;
+}
+.editicons{
+	text-align:center;
+}
 @media  #{$responsiveQueryXSmallOnly} {
 padding:10px;
 }
@@ -2652,6 +2676,7 @@ font-size:$smallFontSize;
 }
 a{
 color:$yellow;
+display:inline-flex;
 }
 a:hover{
 opacity:0.7;

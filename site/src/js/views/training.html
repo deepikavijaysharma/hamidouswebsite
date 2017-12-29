@@ -24,23 +24,29 @@
 </div>
 <div id="trainingdialogWrappe4">
   <div id="trainingDialog" title="Request Training" data-bind="ojComponent:{component: 'ojDialog',cancelBehavior: 'icon',rootAttributes: { style: 'width: 70%; height: auto; min-width 240px; '}}">
-    <div class="oj-dialog-body">
+    <div class="oj-dialog-body"> 
       <!-- FORM -->
       <div id="form-container" class="oj-form-layout reqtraining">
         <div class="reqform">
           <div class="oj-flex">
             <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6 formrow">
               <div class="oj-margin oj-sm-12">
-                <label for="input">Name</label>
+                <label for="input">Email</label>
                 <input id="input" data-bind="ojComponent: 
-                   {component: 'ojInputText', value:'text', disabled: true}">
+                   {component: 'ojInputText', value:'text', disabled: true},value:rtrname">
               </div>
             </div>
             <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6 formrow">
               <div class="oj-margin oj-sm-12">
                 <label for="input">Role</label>
-                <input id="input" data-bind="ojComponent: 
-                   {component: 'ojInputText', value:'text', disabled: true}">
+                <select id="basicSelect" data-bind="ojComponent: {
+                  component: 'ojSelect',placeholder: 'Select your role',options: rolelist(),value: rtrsel,
+                  rootAttributes: {style:'max-width:20em'}
+                }">
+                <!-- ko foreach: rolelist() -->
+                  <option data-bind="text: name,value:name"></option>
+                <!-- /ko -->
+                </select>
               </div>
             </div>
           </div>
@@ -48,68 +54,35 @@
             <div class="oj-flex oj-flex-item oj-sm-12 oj-margin reqheading"> Request your course: </div>
           </div>
           <div class="oj-flex">
-            <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6">
+            <div class="oj-flex oj-flex-item oj-sm-12">
               <div class="oj-margin oj-sm-12">
-                <div class="oj-flex-item oj-sm-12 formrow">
-                  <label for="input">Pillar</label>
-                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
-                    <option value="value">value</option>
-                  </select>
+                <div class="oj-flex-item oj-sm-4 ">
+                  <label>Category
+                    <br>
+                  </label>
+                  <br>
+                  <div id="tree" style="width: 180px;height: auto;" data-bind="ojComponent:
+                    {
+                      component: 'ojTree',
+                      selectionMode: 'single',
+                      data:categoryForUi,
+                      optionChange:categoryfamily,
+                      value: rtrcategory
+                    }"> </div>
                 </div>
-                <div class="oj-flex-item oj-sm-12 formrow">
-                  <label for="input">Platform</label>
-                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
-                    <option value="value">value</option>
-                  </select>
-                </div>
-                <div class="oj-flex-item oj-sm-12">
-                  <label for="input">Course Specifications</label>
-                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
-                    <option value="value">value</option>
-                  </select>
-                </div>
+                <!-- <div id="results" style="width: 250px; height: 34px; border:1px solid gray;color:blue;font-size:14px;text-align:center;vertical-align:middle;line-height:34px; margin-left:10px;margin-bottom:12px;"></div> -->
               </div>
             </div>
-            <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6">
-              <div class="oj-margin oj-sm-12">
-                <div class="oj-flex-item oj-sm-12 formrow">
-                  <label for="input">Categories</label>
-                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
-                    <option value="value">value</option>
-                  </select>
-                </div>
-                <div class="oj-flex-item oj-sm-12 formrow">
-                  <label for="input">Manager Name</label>
-                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
-                    <option value="value">value</option>
-                  </select>
-                </div>
-                <div class="oj-flex-item oj-sm-12">
-                  <label for="input">Org Name</label>
-                  <select id="select2" class="oj-sm-12" data-bind="ojComponent: {component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Choose Options'}">
-                    <option value="value">value</option>
-                  </select>
-                </div>
-              </div>
-              <!--             <div class="oj-flex oj-flex-item oj-sm-12 oj-md-6">
-              <div class="oj-margin oj-sm-12 reqsummary">
-                <div class="bluet">Request Summary:</div>
-                <p>SaaS > Integration > PCS</p>
-                <div class="bluet">Request sent to:</div>
-                <b>Marc Asensio</b>
-                <p>PCS platform owner, Principle Sales Consultant</p>
-              </div>
-            </div> -->
-              <div class="oj-sm-12 footerbuttons">
-                <div class="oj-md-6 oj-lg-4 oj-sm-float-end">
-                  <div class="oj-flex oj-sm-12">
-                    <div class="oj-flex oj-md-6">
-                      <input id="reset" type="reset" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}" class="nobutton" />
-                    </div>
-                    <div class="oj-flex oj-md-6">
-                      <button id="button" data-bind="ojComponent: { component: 'ojButton', label: 'Submit' }" class="bluebutton">
-                    </div>
-                  </div>
+            <div class="oj-sm-12 footerbuttons">
+              <div class="oj-md-12 oj-lg-12 oj-sm-float-end">
+                <!-- <div class="oj-flex oj-sm-12"> -->
+                  <!-- <div class="oj-flex oj-md-6">
+                    <input id="reset" type="reset" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}" class="nobutton" />
+                  </div> -->
+                  <!-- <div class="oj-flex oj-md-6"> -->
+                  <button id="button" onclick="requesttraining()"  data-bind="ojComponent: { component: 'ojButton', label: 'Submit' }" class="bluebutton">
+<!--                   </div>
+                  </div> -->
                   </button>
                 </div>
               </div>
@@ -129,7 +102,7 @@
             <img src="css/images/course-icon.jpg" align="middle">&nbsp;
             <span>Training Courses</span>
           </li>
-          <li>
+          <li id="com_call_tab">
             <img src="css/images/community-calls-icon.jpg" align="middle">&nbsp;
             <span>Community Calls</span>
           </li>
@@ -159,7 +132,7 @@
             <!-- SEARCH -->
             <form id="form1">
               <div class="search">
-                <button id="createTrainingButton" class="reqtrain-button oj-xl-float-end communityadmin" data-bind="ojComponent: {
+                <button id="createTrainingButton" class="reqtrain-button oj-xl-float-end admin" data-bind="ojComponent: {
                       component: 'ojButton',
                       label: 'Create Course'},click:openCreatetraining"> </button>
               </div>
@@ -340,8 +313,8 @@
                   <div class="oj-flex oj-sm-12 blocksouter">
                     <!-- ko foreach: courses -->
                     <div class="oj-sm-12 oj-md-6 oj-lg-4 blocks oj-flex-item oj-margin">
-                      <!--<span class="communityadmin" style="cursor: pointer;color: red;float: right" data-bind="click:function(){deletecourse(this)}">X</span>-->
-                      <div class="oj-sm-12 communityadmin" style="margin-bottom: 5px;position:relative;z-index:1000">
+                      <!--<span class="admin" style="cursor: pointer;color: red;float: right" data-bind="click:function(){deletecourse(this)}">X</span>-->
+                      <div class="oj-sm-12 admin" style="margin-bottom: 5px;position:relative;z-index:1000">
                         <i class="fa fa-pencil-square-o" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Edit Course"
                           data-bind="click:function(){edittraining(this)}" target="_blank"></i>
                         <i class="fa fa-trash-o" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Delete Course" data-bind="click:function(){deletecourse(this)}"
@@ -691,6 +664,7 @@
                         </div>
                       <br>
                       <div class="oj-flex oj-sm-12 inputrow">
+
                         <div class="oj-sm-12">
                           <label id="switchLabel" for="switch">Key Event</label>
                         </div>
@@ -1044,7 +1018,7 @@
           }" />
                 </div>
 
-                <div class="oj-flex-item oj-md-4 req_block communityadmin">
+                <div class="oj-flex-item oj-md-4 req_block admin">
                   <button class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
             component: 'ojButton',
             chroming: 'full',
@@ -1166,32 +1140,46 @@
                       </div>
                       <div class="oj-sm-12 oj-lg-11 oj-flex originfo">
                         <div class="oj-sm-12 oj-lg-5 topicclass">
-                          <p><strong class="blue">Topic</strong><br>
-                            <span data-bind="text:topic"></span></p>
-                        </div>
+                        <p>
+                          <strong class="blue">Topic</strong>
+                          <br>
+                          <span data-bind="text:topic"></span>
+                        </p>
+                      </div>
                         <div class="oj-sm-12 oj-lg-3">
-                          <p><strong class="blue">Speaker</strong><br>
-                            <span data-bind="text:speaker"></span><br>
-                            <span data-bind="text:designation"></p>
+                        <p>
+                          <strong class="blue">Speaker</strong>
+                          <br>
+                          <span data-bind="text:speaker"></span>
+                          <br>
+                          <span data-bind="text:designation">
+                        </p>
                         </div>
                         <div class="oj-sm-12 oj-lg-2">
-                          <p><strong class="blue">Date</strong><br>
-                            <span data-bind="text:call_date"></span><br><span data-bind="text:call_time"></span></p>
+                        <p>
+                          <strong class="blue">Date</strong>
+                          <br>
+                          <span data-bind="text:call_date"></span>
+                          <br>
+                          <span data-bind="text:call_time"></span>
+                        </p>
                         </div>                        
                         <div class="oj-sm-12 oj-lg-2 details oj-flex">
                           <div class="oj-sm-12">
-                            <a class="cclink" data-bind="attr:{href:invite}" target="_blank"><i class="fa fa-calendar" aria-hidden="true" style="cursor: pointer" title="Link" ></i></a>
-                            <i class="fa fa-files-o communityadmin" aria-hidden="true" style="cursor: pointer" title="Duplicate community call" data-bind="click:cloneCommunityCall"
-                              target="_blank"></i>
-                            <i class="fa fa-pencil-square-o communityadmin" aria-hidden="true" style="cursor: pointer" title="Edit community call" data-bind="click:editcommunitycall"
-                              target="_blank"></i>
-                            <i class="fa fa-trash-o communityadmin" aria-hidden="true" style="cursor: pointer" title="Delete community call" data-bind="click:deleteCommunityCall"
-                              target="_blank"></i>
-                          </div>
-                          <div class="oj-sm-12">
-                            <a data-bind="click:showcommunitycallsdetails" target="_blank" class="ccdetailsbutton">Details</a>
-                          </div>
+                          <a class="cclink" data-bind="attr:{href:invite}" target="_blank">
+                            <i class="fa fa-calendar" aria-hidden="true" style="cursor: pointer" title="invite"></i>
+                          </a>
+                          <i class="fa fa-files-o admin" aria-hidden="true" style="cursor: pointer" title="Duplicate community call" data-bind="click:cloneCommunityCall"
+                            target="_blank"></i>
+                          <i class="fa fa-pencil-square-o admin" aria-hidden="true" style="cursor: pointer" title="Edit community call" data-bind="click:editcommunitycall"
+                            target="_blank"></i>
+                          <i class="fa fa-trash-o admin" aria-hidden="true" style="cursor: pointer" title="Delete community call" data-bind="click:deleteCommunityCall"
+                            target="_blank"></i>
                         </div>
+                        <div class="oj-sm-12">
+                          <a data-bind="click:showcommunitycallsdetails" target="_blank" class="ccdetailsbutton">Details</a>
+                        </div>
+                      </div>
 
                       </div>
                     </div>
@@ -1219,7 +1207,9 @@
                     <div>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </div>
                   </div>
                   <div class="oj-sm-12 oj-md-3 caldate">
-                  <p> <img src="css/images/cal_offers_icon.png" align="left">Starts on 27 sep,2017<br>Ends on 27 sep,2017</p>
+                  <p>
+                    <img src="css/images/cal_offers_icon.png" align="left">Starts on 27 sep,2017
+                    <br>Ends on 27 sep,2017</p>
                    </div>
                   <div class="oj-sm-12 oj-md-12 oj-lg-2">
                     <button class="enroll">Details</button>
@@ -1243,7 +1233,10 @@
                     <div>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </div>
                   </div>
                   <div class="oj-sm-12 oj-md-3 caldate">
-                    <p> <img src="css/images/cal_offers_icon.png" align="left">Starts on 27 sep,2017<br>Ends on 27 sep,2017</p></div>
+                  <p>
+                    <img src="css/images/cal_offers_icon.png" align="left">Starts on 27 sep,2017
+                    <br>Ends on 27 sep,2017</p>
+                </div>
                   <div class="oj-sm-12 oj-md-12 oj-lg-2">
                     <button class="enroll">Details</button>
                   </div>
@@ -1266,7 +1259,10 @@
                     <div>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </div>
                   </div>
                   <div class="oj-sm-12 oj-md-3 caldate">
-                     <p> <img src="css/images/cal_offers_icon.png" align="left">Starts on 27 sep,2017<br>Ends on 27 sep,2017</p></div>
+                  <p>
+                    <img src="css/images/cal_offers_icon.png" align="left">Starts on 27 sep,2017
+                    <br>Ends on 27 sep,2017</p>
+                </div>
                   <div class="oj-sm-12 oj-md-12 oj-lg-2">
                     <button class="enroll">Details</button>
                   </div>
@@ -1289,11 +1285,14 @@
                     <div>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </div>
                   </div>
                   <div class="oj-sm-12 oj-md-3 caldate">
-                     <p> <img src="css/images/cal_offers_icon.png" align="left">Starts on 27 sep,2017<br>Ends on 27 sep,2017</p> </div>
-                  <div class="oj-sm-12 oj-md-12 oj-lg-2">
-                    <button class="enroll">Details</button>
-                  </div>
+                  <p>
+                    <img src="css/images/cal_offers_icon.png" align="left">Starts on 27 sep,2017
+                    <br>Ends on 27 sep,2017</p>
                 </div>
+                <div class="oj-sm-12 oj-md-12 oj-lg-2">
+                  <button class="enroll">Details</button>
+                </div>
+              </div>
 
               </div>
             </div>
@@ -1310,87 +1309,91 @@
                   <div class="oj-flex">
                     <div class="oj-sm-12">
                       <div class="oj-margin">
-                        <div class="calrow">
-                          <div class="oj-flex">
-                            <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                              <p>
-                                <span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Wednesday, September 27th
-                                <br> &nbsp;
-                              </p>
-                            </div>
-                            <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Oracle Global Employee Summit</div>
-                            <div class="oj-sm-12 oj-lg-3 calbutton">
-                              <div class="orangeBbutton oj-lg-float-end">
-                                <a href="https://my.oracle.com/site/mktg/creative/cnt2682607.html" target="_blank">Replay</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="calrow">
-                          <div class="oj-flex">
-                            <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                              <p>
-                                <span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Wednesday, September 27th
-                                <br> &nbsp;
-                              </p>
-                            </div>
-                            <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Universal Credits & BYOL Overview and News</div>
-                            <div class="oj-sm-12 oj-lg-3 calbutton">
-                              <div class="orangeBbutton oj-lg-float-end">
-                                <a href="https://engage.vevent.com/rt/natd~09222017" target="_blank">Replay</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="calrow">
-                          <div class="oj-flex">
-                            <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                              <p>
-                                <span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tuesday, October 3rd
-                                <br> &nbsp;
-                              </p>
-                            </div>
-                            <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Open World Keynotes on Demand</div>
-                            <div class="oj-sm-12 oj-lg-3 calbutton">
-                              <div class="orangeBbutton oj-lg-float-end">
-                                <a href="https://www.oracle.com/openworld/on-demand.html" target="_blank">Replay</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="calrow">
-                          <div class="oj-flex">
-                            <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                              <p>
-                                <span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Monday, October 16
-                                <br>
-                                <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time: 13:00 PM PST</p>
-                            </div>
-                            <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Cloud Accelerate Community Call</div>
-                            <div class="oj-sm-12 oj-lg-3 calbutton">
-                              <div class="orangeBbutton oj-lg-float-end">
-                                <a href="https://oracle.webex.com/oracle/j.php?MTID=ma62b72471628b59ba30737ad332fd34a" target="_blank">Link</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="calrow">
-                          <div class="oj-flex">
-                            <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                              <p>
-                                <span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Friday, October 20
-                                <br>
-                                <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time: 12:00 PM PST</p>
-                            </div>
-                            <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">NATD Cloud Community Call</div>
-                            <div class="oj-sm-12 oj-lg-3 calbutton">
-                              <div class="orangeBbutton oj-lg-float-end">
-                                <a href="https://engage.vevent.com/rt/natd~10202017" target="_blank">Registration</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                      <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Multiple <br> <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;8:00:00 PT
+                        &nbsp;</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">ORACLE CODE EVENTS</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end">
+<a href="https://developer.oracle.com/code" target="_blank">Link</a></div>
+                    </div>
+                  </div>
+                </div>
+               
+                <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp; Tue Jan 30 2018<br> <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;9:00:00 PT
+                        &nbsp;</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">ORACLE CLOUD DAY – TORONTO </div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end">
+<a href="https://eventreg.oracle.com/profile/web/index.cfm?PKwebID=0x500556abcd&&source=NAMK170628P00113:OW:ES:LV" target="_blank">Link</a></div>
+                    </div>
+                  </div>
+                </div>
+                  <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Thu Feb 1 2018<br> <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;9:00:00 PT
+                        &nbsp;</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">ORACLE CLOUD DAY – SAN FRANCISCO </div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end">
+<a href="https://eventreg.oracle.com/profile/web/index.cfm?PKwebID=0x501411abcd&source=NAMK170629P00085:OW:ES:LV" target="_blank">Link</a></div>
+                    </div>
+                  </div>
+                </div>
+                 <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Thu Feb 8 2018<br> <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;9:00:00 PT
+                        &nbsp;</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">ORACLE CLOUD DAY – ATLANTA</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end">
+<a href="https://www.oracle.com/cloudworld/newyork/index.html" target="_blank">Link</a></div>
+                    </div>
+                  </div>
+                </div>
+                 <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Mon Feb 12 2018<br> <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;9:00:00 PT
+                        &nbsp;</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">ORACLE CLOUDWORLD – NEW YORK</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end">
+<a href="https://www.oracle.com/cloudworld/newyork/index.html" target="_blank">Link</a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tue Feb 27 2018<br> <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;8:00:00 PT
+                        &nbsp;</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">CALIFORNIA PUBLIC SECTOR – CIO ACADEMY</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end">
+<a href="http://www.govtech.com/events/California-Public-Sector-CIO-Academy.html" target="_blank">Link</a></div>
+                    </div>
+                  </div>
+                </div>
 
                         <div class="oj-sm-12 oj-sm-center" style="display:none">
                           <div class="oj-flex valign">
@@ -1445,7 +1448,7 @@
             <!-- tab contents -->
             <div id="tabs-1">
              <div class="oj-sm-12 courserow oj-flex">
-                <p class="directlink communityadmin" style="color: blue"></p>
+                <p class="directlink admin" style="color: blue"></p>
                
               </div>
               
@@ -1485,17 +1488,27 @@
                   <li>
                     <div class="oj-sm-12 courserow oj-flex">
                       <div class="oj-flex oj-sm-4  leftcoursetitle">
-                       <div class="oj-sm-12">
-                       <b> <h2 data-bind="text:city"></h2></b>
+                        <div class="oj-sm-12">
+                          <b>
+                            <h2 data-bind="text:city"></h2>
+                            <!-- ko if: key_event=='Yes' -->
+                            <h2 class="admin">(key event)</h2>
+                            <!-- /ko -->
+                          </b>
                         </div>
                         <div class="oj-sm-12">
-                        <ul class="classschedule">
-                        <!-- ko foreach: schedule -->
-                        <li><p style="font-size: 10pt;margin: 0px"><span data-bind="text:start_date"></span> - <span data-bind="text:end_date"></span></p></li>
-                        <!-- /ko -->
-                        </ul>
+                          <ul class="classschedule">
+                            <!-- ko foreach: schedules -->
+                            <li>
+                              <p style="font-size: 10pt;margin: 0px">
+                                <span data-bind="text:start_date"></span> -
+                                <span data-bind="text:end_date"></span>
+                              </p>
+                            </li>
+                            <!-- /ko -->
+                          </ul>
+                        </div>
                       </div>
-                       </div>
                       <div class="oj-sm-8 rightcoursetitle">
                         <!-- data-bind="attr: { href: directURL}" -->
                         <p>
@@ -2304,13 +2317,17 @@
           </div>
           <input id="selectedcategory" data-bind="ojComponent: {component: 'ojCombobox',optionChange:selectedCategoryChanged, 
       multiple: true, value: $parent.selectedCategoriesForUi,rootAttributes: {style:'font-size:9pt;min-width:100%'}}" />
-          <div class="classlist">
-            <!-- ko foreach: $parent.cclass -->
-            <!-- /ko -->
-          </div>
+
+          <fieldset>
+            <legend>Classes</legend>
+            <div class="classlist"></div>
+          </fieldset>
+          <!-- ko foreach: $parent.cclass -->
+          <!-- /ko -->
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>
 </div>

@@ -6,7 +6,7 @@
  * Your dashboard ViewModel code goes here
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs/ojconveyorbelt', 'ojs/ojcheckboxset', 'ojs/ojanimation', 'ojs/ojbutton', 'ojs/ojinputtext', 'ojs/ojdialog', 'ojs/ojdatetimepicker',
-        'ojs/ojselectcombobox', 'ojs/ojtimezonedata', 'ojs/ojswitch', 'ojs/ojswitch', 'ojs/ojdialog', 'ojs/ojcollapsible', 'ojs/ojaccordion', 'ojs/ojtree'
+        'ojs/ojselectcombobox', 'ojs/ojtimezonedata', 'ojs/ojswitch', 'ojs/ojswitch', 'ojs/ojdialog', 'ojs/ojcollapsible', 'ojs/ojaccordion', 'ojs/ojtree','ojs/ojtabs'
     ],
     function (oj, ko, $) {
 
@@ -101,6 +101,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.categoryForUi = ko.observableArray([]);
 
 
+            //REQUEST TRAINING VARIABLES
+            self.rtrsel= ko.observable('');
+            self.rtrcategory = ko.observable('');
+            self.rtrname = ko.observable('');
+            self.rtrselected = ko.observable('');
+
             // CREATE COURSE MODEL
             self.selectedCategoriesForUi = ko.observableArray([]);
             self.selectedCategoriesForCourse = ko.observableArray([]);
@@ -149,7 +155,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             });
 
 
-
+            self.rolelist = ko.observableArray([]);
 
 
             // EVENT HANDLER FOR ROLE SELECTION
@@ -186,10 +192,28 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }
             }
 
+            getRoleData = function () {
+                $.getJSON("https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/getFiltersV2").
+                then(function (reasons) {
+
+                    // Get Roles in select in REQUEST TRAINING
+                    self.rolelist([]);
+                    // console.log(reasons);
+                    var rolist = reasons.roles;
+                    for (var i = 0; i < rolist.length; i++) {
+
+                        self.rolelist.push({
+                            name: rolist[i].name,
+                            id: rolist[i].id
+                        })
+                    }// console.log(ko.toJSON(self.rolelist()));
+                });
+            }
+
+            getRoleData();
+
             //-----------------   COMMUNITY CALL   ------------------------//
             //Development url for create, edit, clone and delete community call
-            var community_call_url = 'https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/COMMUNITY_CALLS';
-
             this.patternValue = ko.observableArray(["dd-MMM-yy hh:mm"]);
             this.dateTimeConverter = oj.Validation.converterFactory(oj.ConverterFactory.CONVERTER_TYPE_DATETIME).
             createConverter({
@@ -388,12 +412,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             //  VARIABLES FOR LEFT PANEL CATEGORIES 
             self.refinelist = ko.observableArray([]);
+            self.catlist = ko.observableArray([]);
             self.producttype = ko.observableArray([]);
             self.training_levels = ko.observableArray([]);
             self.training_types = ko.observableArray([]);
             self.cities = ko.observableArray([]);
             self.roles = ko.observableArray([]);
             self.selectedcategories = ko.observableArray([]);
+            self.rl = ko.observableArray([]);
 
             getLeftpanelData = function () {
                 $.getJSON(trainingbaseurl + "getFiltersV2").
@@ -465,9 +491,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             id: stateList[i].id
                         })
                     }
-
-
-                    // console.log(ko.toJSON(self.refinelist()));
                 });
             }
 
@@ -540,6 +563,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 populateSubcategory(ui.value);
             }
             self.openReqtraining = function () {
+                self.rtrname(ssoemail);
                 $("#trainingDialog").ojDialog("open");
             };
 
@@ -692,6 +716,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                 // CREATE COURSE LINK
                 var courselink = window.location.href;
+                var first_param = "=training";
+                courselink = courselink.substr(0,courselink.indexOf(first_param)+first_param.length);
                 courselink += "#" + course.course_id;
                 $(".directlink").empty();
                 if (true) {
@@ -975,6 +1001,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }
                 }
                 // console.log(ko.toJSON(self.categories()));
+                updateCourseClass();
 				checkadmin();
             }
 
@@ -1023,18 +1050,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             // CHECK FOR ADMIN RIGHTS
             checkadminrights = function () {
-                console.log("Is Admin: " + isAdmin);
+                
                 if (isAdmin) {
                     $("#tabs").ojTabs({
                         "disabledTabs": [5, 6]
                     });
-                    $(".communityadmin").css("display", "inline-block");
+                    console.log("Showing for admin");
+                    $(".admin").css("display", "inline-block");
 
                 } else {
                     $("#tabs").ojTabs({
                         "disabledTabs": [5, 6, 7]
                     });
-                    $(".communityadmin").css("display", "none");
+                    console.log("Hiding from user");
+                    $(".admin").css("display", "none");
                 }
             }
 
@@ -1135,13 +1164,30 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             /*----------------------------------SEARCH----------------------------------*/
+            function waitForElement(id, callback){
+                var wait_for_community_call = setInterval(function(){
+                    if(document.getElementById(id)){
+                        clearInterval(wait_for_community_call);
+                        callback();
+                    }
+                }, 100);
+            }
 
-
+            waitForElement("com_call_tab", function(){
+                var call_id_val1 = window.location.href;
+                var index_of = call_id_val1.indexOf("com_call_id");
+                var call_id_data1 = call_id_val1.substr(index_of+12);
+                if (call_id_data1*1 == call_id_data1){
+                    $('#com_call_tab').trigger('click');
+                }                
+               
+            });
             /* ---------------------   COMMUNITY CALLS  -------------------------*/
 
             // GET THE LIST OF COMUNITY CALLS
             getCommunityCalls = function (texttosearch) {
-                $.getJSON("https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/" + texttosearch).then(function (data) {
+                var get_com_call_link = com_call_api + texttosearch;
+                $.getJSON(get_com_call_link).then(function (data) {
                     var calls = data.items;
                     self.communityCallList([]);
                     self.searchcallstext([]);
@@ -1164,7 +1210,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             subdescription: calls[i].description != undefined ? calls[i].description.substring(0, 150) + '...' : '',
                             organizer_email: calls[i].organizer_email != undefined ? calls[i].organizer_email : '',
                             topic: calls[i].topic != undefined ? calls[i].topic : '',
-                            invite: calls[i].invite != undefined ? calls[i].invite : '',
+                            /*invite: calls[i].invite != undefined ? calls[i].invite : '',*/
+                            invite: calls[i].call_id != undefined ? community_call_calendar_link+"/"+calls[i].call_id : '',
                             call_id: calls[i].call_id != undefined ? calls[i].call_id : '',
                             key_event_value: calls[i].keyevent != 'No' ? true : false
                         });
@@ -1575,7 +1622,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var roles = '$-$' + ko.toJSON(self.refinecommunitycallroles()).replace('[', '').replace(']', '').replace(/"/g, '');
                 var callmodel = '$-$' + ko.toJSON(self.refinecommunitycallmodes()).replace('[', '').replace(']', '').replace(/"/g, '');
                 var past = '$-$' + ko.toJSON(self.refinepastcalls()).replace('[', '').replace(']', '').replace(/"/g, '');
-                getCommunityCalls('GetCommunityCallDetailsOnFreetextSearch/' + searchtext + '/' + past + '/' + callmodel + '/' + roles);
+                
+                var call_id_val = window.location.href;
+                var index_of = call_id_val.indexOf("com_call_id");
+                var call_id_data = call_id_val.substr(index_of+12);
+                if (call_id_data*1 != call_id_data){
+                    call_id_data = '$-$';
+                }
+                var apex_link = 'GetCommunityCallDetailsOnFreetextSearch/' + searchtext + '/' + past + '/' + callmodel + '/' + roles + '/' +call_id_data;
+                getCommunityCalls(apex_link);
+                
             }
 
             loadCommunitycall = function () {
@@ -2022,6 +2078,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }
                 console.log(ko.toJSON(reqbody));
 
+
                 var url = trainingbaseurl + "editClasses";
                 $.ajax({
                     url: url,
@@ -2034,7 +2091,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         console.log("Class Successfully Updated : " + ko.toJSON(data));
                         $("#editclass").ojDialog("close");
                         resetClass();
-                        // updateCourseClass();
+                        self.fetchcourses();
+                        updateCourseClass();
+                        
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
@@ -2042,6 +2101,32 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 });
 
 
+            }
+
+
+            requesttraining = function () 
+            {
+                    self.rtrselected(self.rtrsel()[0].name);
+                    var rtr = {
+                      category: self.rtrcategory(),
+                      name: ssoemail,
+                      role: self.rtrselected()
+                    }
+                    console.log(ko.toJSON(rtr));
+                    $.ajax({
+                      url: com_call_api+'RequestTraining',
+                      cache: false,
+                      type: 'POST',
+                      contentType: 'application/json; charset=utf-8',
+                      data: ko.toJSON(rtr),
+                      success: function (rtrdata) {
+                          console.log(ko.toJSON(rtrdata));
+                          alert("Training requested");
+                          $("#trainingDialog").ojDialog("close");
+                      }
+                  }).fail(function (xhr, textStatus, err) {
+                      alert(err);
+                  });
             }
 
             deleteClass = function () {
@@ -2068,7 +2153,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         self.showToastDialog("Class Successfully Deleted", true, 1000);
                         console.log("Class Successfully Deleted");
                         $("#editclass").ojDialog("close");
-                        resetCourse();
+                        resetClass();
+                        self.fetchcourses();
+                        updateCourseClass();
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
@@ -2247,6 +2334,36 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             getCategoryHierarchy();
+            // $("#tree").on("ojoptionchange", function(e, ui) 
+            // {
+            //     if (ui.option == "selection") 
+            //     {
+            //         // show selected nodes
+            //         var selected = _arrayToStr(ui.value) ;
+            //         $("#results").html("<label> id = " + selected + "</label>");
+            //     }
+            // });
+            // function _arrayToStr(arr)
+            // {
+            //     var s = "" ;
+            //     $.each(arr, function(i, val)
+            //     {
+            //         if (i) {s += ", " ;}
+            //         console.log(val)
+            //         s += $(arr[i]).attr("id") ;
+            //     }) ;
+            //     return s ;
+            // };
+
+            categoryfamily = function (e, ui) 
+            {
+                // return ui.value[0].innerText;
+                if(ui.value[0].innerText!= undefined)
+                {
+                    console.log(ui.value[0].innerText);
+                    self.rtrcategory(ui.value[0].innerText);
+                }
+            }
         }
         return new DashboardViewModel();
     }
