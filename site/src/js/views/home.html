@@ -212,6 +212,37 @@ right: 4px;
 display: inline-block;
 height: 22px!important;
 }
+.org_blocks_b{
+position: relative;
+}
+.orgadm{
+  position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.orgadm i{
+margin-right: 5px;
+}
+.kwadmin{
+      position: absolute;
+    right: 0px;
+    /* top: -35px; */
+    bottom: 220px;
+}
+.kwadpar,.refadpar, .efadpar{
+position: relative;
+}
+.refadmin{
+position: absolute;
+}
+.efadmin{
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+.efadmin i{
+margin-right: 5px;
+}
 </style>
 <div class="oj-row oj-sm-12 addendsl homeadmin">
   <button class="btn btn-info btn-xs" data-toggle="modal" data-bind="click:openaddslidedialog" style="float: right;">Add New Slide</button>
@@ -689,8 +720,10 @@ height: 22px!important;
                   <!-- ko if: orgdotline == 'Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <div class="orgadm">
+                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel homeadmin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                  </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -705,8 +738,10 @@ height: 22px!important;
                   <!-- ko if: orgdotline == 'Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <div class="orgadm">
+                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                  </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -724,8 +759,10 @@ height: 22px!important;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <div class="orgadm">
+                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                  </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -740,8 +777,10 @@ height: 22px!important;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <div class="orgadm">
+                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                  </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -759,8 +798,10 @@ height: 22px!important;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <div class="orgadm">
+                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                  </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -775,8 +816,10 @@ height: 22px!important;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <div class="orgadm">
+                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                  </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -794,8 +837,10 @@ height: 22px!important;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <div class="orgadm">
+                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                  </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -810,8 +855,10 @@ height: 22px!important;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <div class="orgadm">
+                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                  </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -829,8 +876,10 @@ height: 22px!important;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <div class="orgadm">
+                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                  </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -845,8 +894,10 @@ height: 22px!important;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <div class="orgadm">
+                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                  </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -864,8 +915,10 @@ height: 22px!important;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <div class="orgadm">
+                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                  </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -880,8 +933,10 @@ height: 22px!important;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <div class="orgadm">
+                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                  </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -899,8 +954,10 @@ height: 22px!important;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <div class="orgadm">
+                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                  </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -915,8 +972,10 @@ height: 22px!important;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <div class="orgadm">
+                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                  </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -942,8 +1001,10 @@ height: 22px!important;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <div class="orgadm">
+                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                  </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -966,8 +1027,10 @@ height: 22px!important;
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
-                  <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
-                  <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i> 
+                  <div class="orgadm">
+                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                  </div> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -1012,7 +1075,7 @@ height: 22px!important;
                       <!-- ko ifnot: keydtype == 'COMMUNITY_CALLS' -->
                         <!-- ko if: keydtype == 'EVENT' -->
                         <div class="orangeBbutton oj-lg-float-end">
-                          <a data-bind="attr:{'href':keydhlink+'event='+keydcid}" target="_blank">Link</a>
+                          <a data-bind="attr:{'href':keydhlink}" target="_blank">Link</a>
                         </div>
                         <!-- /ko -->
                         <!-- ko ifnot: keydtype == 'EVENT' -->
@@ -1056,9 +1119,11 @@ height: 22px!important;
             <button class="btn btn-info btn-xs btnaddnewref homeadmin" data-toggle="modal" data-bind="click:openaddnewkeywinsdialog">Add New Key Wins</button>
             <div id="filmStripwins" class="oj-sm-12" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'visible',arrowplacement:'overlay'}"> <!-- block 1 -->
               <!-- ko foreach: keywinslist --> 
-              <div class="oj-panel oj-panel-alt2 my-filmstrip-item" data-bind="attr:{'id':keywid}">
-                <i class="fa fa-pencil-square-o endsl homeadmin" aria-hidden="true" title="Edit Key Wins" data-bind="click:openEditKeyWinsModal"></i>
-                <i class="fa fa-trash-o endsldel homeadmin" aria-hidden="true" title="Delete Key Wins" data-bind="click:deletekeywins"></i> 
+              <div class="oj-panel oj-panel-alt2 my-filmstrip-item kwadpar" data-bind="attr:{'id':keywid}">
+                <div class="kwadmin">
+                  <i class="fa fa-pencil-square-o endsl homeadmin" aria-hidden="true" title="Edit Key Wins" data-bind="click:openEditKeyWinsModal"></i>
+                  <i class="fa fa-trash-o endsldel homeadmin" aria-hidden="true" title="Delete Key Wins" data-bind="click:deletekeywins"></i>
+                </div>
                 <p>
                   <a data-bind="attr:{'href':keywlink}" target="_blank">
                     <img data-bind="attr:{'src':keywphoto,'id':keywid}">
@@ -1494,12 +1559,14 @@ height: 22px!important;
             <div class="oj-flex oj-sm-12  logorow">
               <!-- ko foreach: reflist -->
                 <!-- ko if: reftype == "IAAS"-->
-                <div class="oj-sm-12 oj-lg-4" data-bind="attr:{'id':refid}">
+                <div class="oj-sm-12 oj-lg-4 refadpar" data-bind="attr:{'id':refid}">
                   <a data-bind="attr:{'href':reflink}" target="_blank">
                     <img data-bind="attr:{'src':reflogo}">
                   </a>
-                  <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesModal"></i>
-                  <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i>
+                  <div class="refadmin">
+                    <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesModal"></i>
+                    <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i>
+                  </div>
                 </div>              
                 <!-- /ko -->
               <!-- /ko -->
@@ -1513,12 +1580,14 @@ height: 22px!important;
             <div class="oj-flex oj-sm-12 logorow">
               <!-- ko foreach: reflist -->
                 <!-- ko if: reftype == "PAAS"-->
-                <div class="oj-sm-12 oj-lg-4" data-bind="attr:{'id':refid}">
+                <div class="oj-sm-12 oj-lg-4 refadpar" data-bind="attr:{'id':refid}">
                   <a data-bind="attr:{'href':reflink}" target="_blank">
                     <img data-bind="attr:{'src':reflogo}">
                   </a>
-                  <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesPaasModal"></i>
-                  <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i>
+                  <div class="refadmin">
+                    <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesPaasModal"></i>
+                    <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i>
+                  </div>
                 </div>
                 <!-- /ko -->
               <!-- /ko -->
@@ -1548,9 +1617,11 @@ height: 22px!important;
             <div id="filmStripfeatured" class="" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'hidden'}"> <!-- block 1 -->
               <!-- ko foreach: empfeatlist -->
                 <!-- ko if: empfeaid =='321' -->
-                <div class="oj-panel oj-panel-alt2 my-filmstrip-item1" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
-                  <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
-                  <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
+                <div class="oj-panel oj-panel-alt2 my-filmstrip-item1 efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
+                  <div class="efadmin">
+                    <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
+                    <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
+                  </div>
                   <div class="employee_c" >
                     <div class="emp_details">
                       <div class="slash"></div>
@@ -1560,9 +1631,11 @@ height: 22px!important;
                 </div>
                 <!-- /ko -->
                 <!-- ko ifnot: empfeaid =='321' -->
-                <div class="oj-panel oj-panel-alt2 my-filmstrip-item" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
-                  <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
-                  <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
+                <div class="oj-panel oj-panel-alt2 my-filmstrip-item efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
+                  <div class="efadmin">
+                    <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
+                    <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
+                  </div>
                   <div class="employee_c">
                     <div class="emp_details">
                       <div class="slash"></div>
@@ -2171,59 +2244,63 @@ height: 22px!important;
 
 <!-- add slider confirmation start -->
 <div style="display:none" id="addslidedialog" title="Add New Slide Details" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="oj-dialog-body asdialog">
-    <div class="oj-sm-12 oj-flex">
-      <div class="oj-sm-6">
-        <div class="form-group">
-          <label for="text-area1" class="addslidelabel">Title:</label>
-          <div class="input-group">
-            <textarea id="text-area1" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:sltitle,rootAttributes: {style:'max-width:15em'}}"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="oj-sm-6">
-        <div class="form-group">
-          <label for="text-area2" class="addslidelabel">Description:</label>
-          <div class="input-group">
-            <textarea id="text-area2" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:sldescription,rootAttributes: {style:'max-width:15em'}}"></textarea>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="oj-sm-12 oj-flex">
-      <div class="oj-sm-6">
-        <div class="form-group">
-          <label class="addslidelabel">Primary Button:</label>
-          <div class="input-group">
-            <input class="form-control" placeholder="Label" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:slbuttonlabel1,rootAttributes: {style:'max-width:15em'}}">
-            <input class="form-control" placeholder="Link" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:sllinktext1, rootAttributes: {style:'max-width:15em'}}">
-          </div>
-        </div>
-      </div>
-      <div class="oj-sm-6">
-        <div class="form-group">
-          <label class="addslidelabel">Secondary Button:</label>
-          <div class="input-group">
-            <input class="form-control" placeholder="Label" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:slbuttonlabel2,rootAttributes: {style:'max-width:15em'}}">
-            <input class="form-control" placeholder="Link" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:sllinktext2, rootAttributes: {style:'max-width:15em'}}">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="addslidelabel">Banner Background:</label>
-      <div class="input-group">
-        <div id="avatars">
-          <ul style="display: flex;">
-            <div class="oj-flex oj-sm-12">
-              <!-- ko foreach: slimage() -->
-              <li class="avatars">
-                <input type="radio" data-bind="attr:{'id':idimg},value:idimg,checked: 10" name="avatar" onclick="idimage(value)" />
-                <img class="avatarsimg" data-bind="attr:{'src':source,'id':idimg,'name':idimg},value:idimg" />
-              </li>
-              <!-- /ko -->
+  <div class="oj-dialog-body asdialog popupfont">
+    <div class="oj-flex">
+      <div class="oj-lg-6">
+        <div class="oj-margin-right nomargin-md">
+
+          <div class="form-group">
+            <label for="text-area1" class="addslidelabel">Title:<label class="required">*</label></label>    
+            <div class="input-group">
+              <textarea id="text-area1" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:sltitle,rootAttributes: {style:'max-width:15em'}}"></textarea>
             </div>
-          </ul>
+          </div><br>
+
+          <div class="form-group">
+            <label class="addslidelabel">Primary Button:</label>
+            <div class="input-group">
+              <input class="form-control" placeholder="Label" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:slbuttonlabel1,rootAttributes: {style:'max-width:15em'}}">
+              <input class="form-control" placeholder="Link" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:sllinktext1, rootAttributes: {style:'max-width:15em'}}">
+            </div>
+          </div>
+              
+        </div>
+      </div><br>
+      <div class="oj-lg-6">
+        <div class="oj-margin-right nomargin-md">
+              
+          <div class="form-group">
+            <label for="text-area2" class="addslidelabel">Description:</label>
+            <div class="input-group">
+              <textarea id="text-area2" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:sldescription,rootAttributes: {style:'max-width:15em'}}"></textarea>
+            </div>
+          </div><br>
+
+          <div class="form-group">
+            <label class="addslidelabel">Secondary Button:</label>
+            <div class="input-group">
+              <input class="form-control" placeholder="Label" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:slbuttonlabel2,rootAttributes: {style:'max-width:15em'}}">
+              <input class="form-control" placeholder="Link" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:sllinktext2, rootAttributes: {style:'max-width:15em'}}">
+            </div>
+          </div>
+
+        </div>
+      </div><br>
+      <div class="form-group"><br>
+        <label class="addslidelabel">Banner Background:</label>
+        <div class="input-group">
+          <div id="avatars">
+            <ul style="display: flex;">
+              <div class="oj-flex oj-sm-12">
+                <!-- ko foreach: slimage() -->
+                <li class="avatars">
+                  <input type="radio" data-bind="attr:{'id':idimg},value:idimg,checked: 10" name="avatar" onclick="idimage(value)" />
+                  <img class="avatarsimg" data-bind="attr:{'src':source,'id':idimg,'name':idimg},value:idimg" />
+                </li>
+                <!-- /ko -->
+              </div>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -2237,63 +2314,67 @@ height: 22px!important;
 
 <!-- edit slider confirmation start -->
 <div style="display:none" id="editslidedialog" title="Edit Slide" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="oj-dialog-body asdialog">
-    <div class="oj-sm-12 oj-flex">
-      <div class="oj-sm-6">
-        <div class="form-group">
-          <label for="text-area1" class="addslidelabel">Title:</label>
-          <div class="input-group">
-            <textarea id="text-area1" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:editsltitle,rootAttributes: {style:'max-width:15em'}}"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="oj-sm-6">
-        <div class="form-group">
-          <label for="text-area2" class="addslidelabel">Description:</label>
-          <div class="input-group">
-            <textarea id="text-area2" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:editsldescription,rootAttributes: {style:'max-width:15em'}}"></textarea>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="oj-sm-12 oj-flex">
-      <div class="oj-sm-6">
-        <div class="form-group">
-          <label class="addslidelabel">Primary Button:</label>
-          <div class="input-group">
-            <input class="form-control" placeholder="Label" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:editslbuttonlabel1,rootAttributes: {style:'max-width:15em'}}">
-            <input class="form-control" placeholder="Link" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:editsllinktext1, rootAttributes: {style:'max-width:15em'}}">
-          </div>
-        </div>
-      </div>
-      <div class="oj-sm-6">
-        <div class="form-group">
-          <label class="addslidelabel">Secondary Button:</label>
-          <div class="input-group">
-            <input class="form-control" placeholder="Label" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:editslbuttonlabel2,rootAttributes: {style:'max-width:15em'}}">
-            <input class="form-control" placeholder="Link" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:editsllinktext2, rootAttributes: {style:'max-width:15em'}}">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="addslidelabel">Banner Background:</label>
-      <div class="input-group">
-        <div id="avatars">
-          <ul style="display: flex;">
-            <div class="oj-flex oj-sm-12">
-              <!-- ko foreach: slimage() -->
-              <li class="avatars">
-                <input type="radio" data-bind="attr:{'id':idimg},value:idimg,checked: $parent.editslimgid" name="avatar" onclick="idimage(value)"
-                />
-                <img class="avatarsimg" data-bind="attr:{'src':source,'id':idimg,'name':idimg},value:idimg" />
-              </li>
-              <!-- /ko -->
+  <div class="oj-dialog-body asdialog popupfont">
+    <div class="oj-flex">
+      <div class="oj-lg-6">
+        <div class="oj-margin-right nomargin-md">
+
+          <div class="form-group">
+            <label for="text-area1" class="addslidelabel">Title:<label class="required">*</label></label>
+            <div class="input-group">
+              <textarea id="text-area1" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:editsltitle,rootAttributes: {style:'max-width:15em'}}"></textarea>
             </div>
-          </ul>
+          </div><br>
+
+          <div class="form-group">
+            <label class="addslidelabel">Primary Button:</label>
+            <div class="input-group">
+              <input class="form-control" placeholder="Label" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:editslbuttonlabel1,rootAttributes: {style:'max-width:15em'}}">
+              <input class="form-control" placeholder="Link" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:editsllinktext1, rootAttributes: {style:'max-width:15em'}}">
+            </div>
+          </div>
+          
         </div>
+      </div><br>
+      <div class="oj-lg-6">
+        <div class="oj-margin-right nomargin-md">
+          
+          <div class="form-group">
+            <label for="text-area2" class="addslidelabel">Description:</label>
+            <div class="input-group">
+              <textarea id="text-area2" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:editsldescription,rootAttributes: {style:'max-width:15em'}}"></textarea>
+            </div>
+          </div><br>
+
+          <div class="form-group">
+            <label class="addslidelabel">Secondary Button:</label>
+            <div class="input-group">
+              <input class="form-control" placeholder="Label" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:editslbuttonlabel2,rootAttributes: {style:'max-width:15em'}}">
+              <input class="form-control" placeholder="Link" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:editsllinktext2, rootAttributes: {style:'max-width:15em'}}">
+            </div>
+          </div>
+
+        </div>
+      </div><br>
+      <div class="form-group"><br>
+        <label class="addslidelabel">Banner Background:</label>
+        <div class="input-group">
+          <div id="avatars">
+            <ul style="display: flex;">
+              <div class="oj-flex oj-sm-12">
+                <!-- ko foreach: slimage() -->
+                <li class="avatars">
+                  <input type="radio" data-bind="attr:{'id':idimg},value:idimg,checked: $parent.editslimgid" name="avatar" onclick="idimage(value)"
+                  />
+                  <img class="avatarsimg" data-bind="attr:{'src':source,'id':idimg,'name':idimg},value:idimg" />
+                </li>
+                <!-- /ko -->
+              </div>
+            </ul>
+          </div>
+        </div>
+        <br>
       </div>
-      <br>
     </div>
   </div>
   <div class="oj-dialog-footer footercss">
