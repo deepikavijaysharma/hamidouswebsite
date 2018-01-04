@@ -52,7 +52,28 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 checkadminrights();
             }
         }
+
+        self.currentNavArrowPlacement = ko.observable("adjacent");
+        self.currentNavArrowVisibility = ko.observable("auto");
+
+        // // getter
+        // var maxItemsPerPage = $("#filmStrip1").ojFilmStrip("option", "maxItemsPerPage");
+
+        //     // setter
+        //     $("#filmStrip1").ojFilmStrip("option", "maxItemsPerPage", 3);
+        // // getter
+        // var arrowPlacement = $("#filmStrip1").ojFilmStrip("option", "arrowPlacement");
+        // var arrowVisibility = $(".selector").ojFilmStrip("option", "arrowVisibility");
+        // // setter
+        // // $("#filmStrip1").ojFilmStrip("option", "arrowPlacement", "overlay");
+        // $("#filmStrip1").ojFilmStrip({ "arrowPlacement": "overlay" });
+        // $("#filmStrip1").ojFilmStrip("option", "arrowVisibility", "visible");
         
+        getItemInitialDisplay1 = function (index) {
+            return index < 2 ? '' : 'none';
+        };
+
+
         //CREATE SLIDER observables
         self.slimage = ko.observableArray([]);
         self.slid = ko.observable('');
@@ -136,8 +157,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         dempfeatext: self.empfeatlist()[b].empfeatext, 
                         dempfeaheading: self.empfeatlist()[b].empfeaheading, 
                         dempfeabg: self.empfeatlist()[b].empfeabg 
-                    });
-                    console.log(ko.toJSON(self.empdeatilsmatched));
+                    });//console.log(ko.toJSON(self.empdeatilsmatched));
                 }
             }
             $("#empf1").ojDialog("open");
@@ -163,34 +183,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 alert("Please enter Banner Title");
                 return;
             }
-
-            // if (self.sldescription().length == 0) {
-            //     alert("Please enter Banner Description");
-            //     return;
-            // }
-
-
-            // if (self.slbuttonlabel1().length == 0) {
-
-            //     alert("Please enter Banner 1st Button Label");
-            //     return;
-            // }
-            // if (self.slbuttonlabel2().length == 0) {
-                
-            //     alert("Please enter Banner 2nd Button Label");
-            //     return;
-            // }
-
-            // if (self.sllinktext1().length == 0 && self.sllinktext2().length == 0) {
-
-            //     alert("Please enter Banner 1st Link");
-            //     return;
-            // }
-
-            // if (self.sllinktext2().length == 0) {
-            //     alert("Please enter Banner 2nd Link");
-            //     return;
-            // }
 
             selectedimageid = ko.toJSON(self.slimgid());
 
@@ -259,12 +251,13 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $.getJSON(homebaseurl+"homepage_image_get_all").
                 then(function (imgid) {
                 self.slimage([]);
-                for (var l = 0; l < imgid.items.length; l++) {
+                for (var l = 0; l < imgid.items.length; l++) 
+                {
                     self.slimage.push({
-                            idimg: imgid.items[l].id,
-                            source: imgid.items[l].images
-                        })
-                }//console.log(ko.toJSON(self.slimage()));
+                        idimg: imgid.items[l].id,
+                        source: imgid.items[l].images
+                    })
+                }
             });
         }
 
@@ -298,7 +291,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     error: function (xhr, textStatus, err) {
                         console.log("error"+err);
                     }
-            });// $("#editslidedialog").ojDialog("close");
+            });
         }
 
         deleteslider = function (slider_delete) 
@@ -368,7 +361,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         sliderlt2: sllist[s].link_text2,
                         slidertitle: sllist[s].title
                     })
-                }//console.log("sdsdsd",ko.toJSON(self.sliderlist()));
+                }
             });
         }
         fetchslider();
@@ -460,8 +453,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         {
             edemployeephotopath = event.target.files[0];
             console.log("filename for photo of edit org",edemployeephotopath);
-            console.log("edit key wins filename length ", edemployeephotopath.length);
-            $("#input-2").replaceWith($("#input-2").val('').clone(true));
+            // console.log("edit key wins filename length ", edemployeephotopath.length);
+            // $("#input-2").replaceWith($("#input-2").val('').clone(true));
         }
         openEditOrgModal = function (edit_org) {
             $("#editorgdialog").ojDialog("open");
@@ -484,7 +477,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         editorgdialog = function (edit_org, param2) 
         {
             // self.editorganizationselected(self.editorgsel()[0]);
-            var edit_org_data = {
+            var edit_org_data = 
+            {
                 orgempid: self.editorganizationid(),
                 orglob: self.editorganizationselected(),
                 orgname: self.editorgpeoplename(),
@@ -494,8 +488,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             }
 
             console.log("edit organization data: "+ko.toJSON(edit_org_data));
-            if (edemployeephotopath.length == 0){
-                var uploadorgedheader = {
+            if (edemployeephotopath.length == 0)
+            {
+                var uploadorgedheader = 
+                {
+                    "empid": self.editorganizationid(),
                     "organization": self.editorganizationselected(),
                     "name": self.editorgpeoplename(),
                     "designation": self.editorgpeopledesignation(),
@@ -504,18 +501,20 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
                 // SEND TO SERVER
                 $.ajax({
-                    url: homebaseurl + 'employee_data',
+                    url: homebaseurl + 'employee_data/',
                     headers: uploadorgedheader,
                     cache: false,
-                    crossDomain: true,
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
+                    beforeSend: function (xhr) {
+                        xhr.withCredentials = true;
+                    },
                     success: function (dataorg) 
                     {
-                        alert("Organization people edited successfully!");
+                        console.log("Organization people edited successfully!");
+                        resetorg();
                         fetchpeopleorg();
                         closeEditOrgModal();
-                        resetorg();
                     }
                 }).fail(function (xhr, textStatus, err) {
                     alert("error in editing data",err);
@@ -526,9 +525,9 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 var orgedreader = new FileReader();
                 orgedreader.onload = function () 
                 {
-                    // self.editorganizationselected(self.editorgsel()[0]);
                     var uploadorgedheader = 
                     {
+                        "empid": self.editorganizationid(),
                         "organization": self.editorganizationselected(),
                         "name": self.editorgpeoplename(),
                         "designation": self.editorgpeopledesignation(),
@@ -542,16 +541,18 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         url: homebaseurl+'employee_data/',
                         headers: uploadorgedheader,
                         cache: false,
-                        crossDomain: true,
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
                         data: imageorgeddata,
+                        beforeSend: function (xhr) {
+                            xhr.withCredentials = true;
+                        },
                         success: function (dataorg) 
                         {
-                            alert("Organization people edited successfully!");
+                            console.log("Organization people edited successfully!");
+                            resetorg();
                             fetchpeopleorg();
                             closeEditOrgModal();
-                            resetorg();
                         }
                     }).fail(function (xhr, textStatus, err) {
                         alert("error in editing image data",err);
@@ -586,7 +587,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     data: ko.toJSON(data_org_value),
                     success: function () {
                         closeDeleteOrganizationModal();
-                        alert("delete success for organization");
+                        console.log("delete success for organization");
                         fetchpeopleorg();
                         resetorg();
                     },
@@ -607,7 +608,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         fetchpeopleorg = function () 
         {
-            $.getJSON(homebaseurl+'employee_data/').then(function (orgpeopledetails) 
+            $.getJSON(homebaseurl+'employee_data').then(function (orgpeopledetails) 
             {
                 // Fetch organization people details
                 self.organizationpeopleecalist([]);
@@ -718,8 +719,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             self.editorgpeoplename('');
             self.editorgpeopledesignation('');
             self.editorgdottedline('');
-            document.getElementById("input-2").value = "";
-            document.getElementById("edinput-2").value = ""; 
+            // document.getElementById("input-2").value = "";
+            // document.getElementById("edinput-2").value = ""; 
         }
         /******************************************OUR ORGANIZATION ENDS*****************************************************/
         
@@ -795,7 +796,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 contentType: 'application/json; charset=utf-8',
                 data: akwimagedata,
                 success: function (dataakw) {
-                  alert("Key Wins added successfully!");
+                  console.log("Key Wins added successfully!");
                   fetchkeywins();
                   resetkeywins();
                   closeaddnewkeywinsdialog();
@@ -818,8 +819,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         {
             ekwlogopath = event.target.files[0];
             console.log("add key logo filename",ekwlogopath);
-            console.log("edit key wins filename length ", ekwlogopath.length);
-            $("#kwlogoeditupl").replaceWith($("#kwlogoeditupl").val('').clone(true));
+            console.log("edit key wins filename length ", ekwlogopath.size);
+            // $("#kwlogoeditupl").replaceWith($("#kwlogoeditupl").val('').clone(true));
         }
 
         editkeywins = function (edit_kw) 
@@ -883,8 +884,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         success: function (dataakw) {
                             console.log("edit success for keywins");
                             fetchkeywins();
-                            resetkeywins();
                             closeEditKeyWinsModal();
+                            resetkeywins();
                         }
                     }).fail(function (xhr, textStatus, err) {
                         alert(err);
@@ -934,9 +935,9 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(data_kw_value),
                     success: function () {
+                        fetchkeywins();
                         closeDeleteSKeyWinsModal();
                         console.log("delete success for key wins");
-                        fetchkeywins();
                     },
                     fail: function (xhr, textStatus, err) {
                         console.log(err);
@@ -1059,7 +1060,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 url: homebaseurl +'test_go_lives',
                 cache: false,
                 type: 'POST',
-                body: glbody,
+                body: ko.toJSON(glbody),
                 contentType: 'application/json; charset=utf-8',
                 success: function (gldata) {
                     console.log(ko.toJSON(gldata));
@@ -1118,6 +1119,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 // Fetch go lives details
                 self.goliveslist([]);
                 var gllist = golivesdetails.items;
+                // console.log("hello", golivesdetails);
                 for (var b = 0; b < gllist.length; b++) 
                 {
                     self.goliveslist.push({
@@ -1127,9 +1129,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         gollink: gllist[b].link,
                         goldescription: gllist[b].go_live_description,
                         golbackground: gllist[b].background,
-                        gollogo: gllist[b].logo,
+                        gollogo: gllist[b].logo
                     })
-                }// console.log(ko.toJSON(self.goliveslist()));
+                }
+                // console.log(ko.toJSON(self.goliveslist()));
             });
         }
         fetchgolives();
@@ -1209,7 +1212,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     contentType: 'application/json; charset=utf-8',
                     data: arefimagedatapaas,
                     success: function (datarefpaas) {
-                        // alert("References added successfully!");
+                        console.log("References added successfully!");
                         fetchreferences();
                         closeaddnewrefdialogpaas();
                         resetreferences();
@@ -1231,8 +1234,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         editreflogoselected = function (event) {
             edreflogopath = event.target.files[0];
             console.log("filename for logo of edit refrences", edreflogopath);
-            console.log("edit refrences filename length ", edreflogopath.length);
-            $("#edreflog").replaceWith($("#edreflog").val('').clone(true));
+            console.log("edit refrences filename length ", edreflogopath.size);
+            // $("#edreflog").replaceWith($("#edreflog").val('').clone(true));
         }
         editreferencesdialog = function () 
         {
@@ -1260,7 +1263,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
                     success: function (dataedref) {
-                        alert("Refrences edited successfully!");
+                        console.log("Refrences edited successfully!");
                         fetchreferences();
                         closeReferencesModal();
                         resetreferences();
@@ -1293,7 +1296,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         contentType: 'application/json; charset=utf-8',
                         data: edarefimagedata,
                         success: function (dataedref) {
-                            alert("Refrences edited successfully!");
+                            console.log("Refrences edited successfully!");
                             fetchreferences();
                             closeReferencesModal();
                             resetreferences();
@@ -1328,8 +1331,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         edreflogoselectedpass = function (event) {
             edpaasreflogopath = event.target.files[0];
             console.log("filename for logo of edit refrences", edpaasreflogopath);
-            console.log("edit refrences filename length ", edpaasreflogopath.length);
-            $("#edreflogpass").replaceWith($("#edreflogpass").val('').clone(true));
+            console.log("edit refrences filename length ", edpaasreflogopath.size);
+            // $("#edreflogpass").replaceWith($("#edreflogpass").val('').clone(true));
         }
         editreferencespaasdialog = function () {
             var edit_ref_data = {
@@ -1355,7 +1358,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
                     success: function (dataedref) {
-                        alert("Refrences edited successfully!");
+                        console.log("Refrences edited successfully!");
                         fetchreferences();
                         closeReferencesPaasModal();
                         resetreferences();
@@ -1386,7 +1389,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         contentType: 'application/json; charset=utf-8',
                         data: edpaasarefimagedata,
                         success: function (dataedref) {
-                            alert("Refrences edited successfully!");
+                            console.log("Refrences edited successfully!");
                             fetchreferences();
                             closeReferencesPaasModal();
                             resetreferences();
@@ -1439,8 +1442,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     data: ko.toJSON(data_ref_value),
                     success: function () {
                         console.log("delete success for references");
-                        closeDeleteReferencesModal();
                         fetchreferences();
+                        closeDeleteReferencesModal();
                     },
                     fail: function (xhr, textStatus, err) {
                         console.log(err);
@@ -1529,7 +1532,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 data: empfimagedata,
                 success: function (dataempfeat) {
                     console.log(dataempfeat);
-                    // alert("Employee Features added successfully!");
+                    console.log("Employee Features added successfully!");
                     fetchempfeatures();
                     closeaddnewefdialog();
                     resetempfeatures();
@@ -1553,8 +1556,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         {
             eeflogopath = event.target.files[0];
             console.log("add key logo filename", eeflogopath);
-            console.log("edit key wins filename length ", eeflogopath.length);
-            $("#edefbg").replaceWith($("#edefbg").val('').clone(true));
+            console.log("edit key wins filename length ", eeflogopath.size);
+            // $("#edefbg").replaceWith($("#edefbg").val('').clone(true));
         }
 
         editemployeefeatures = function (edit_ef) {
@@ -1939,7 +1942,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         });
 		
 		  $(document).ready(function() { 
-      $('#myCarousel').carousel({ interval: 5000, cycle: true });
+      $('#myCarousel').carousel({interval: 50000000, cycle: false});
   }); 
  $('#myCarousel').carousel();
 		
@@ -2024,12 +2027,13 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $.getJSON(homebaseurl+"homepage_image_get_all").
                 then(function (imgid) {
                 self.slimage([]);
-                for (var l = 0; l < imgid.items.length; l++) {
+                for (var l = 0; l < imgid.items.length; l++) 
+                {
                     self.slimage.push({
-                            idimg: imgid.items[l].id,
-                            source: imgid.items[l].images
-                        })
-                }// console.log(ko.toJSON(self.slimage()));
+                        idimg: imgid.items[l].id,
+                        source: imgid.items[l].images
+                    })
+                }
             });
         }
         closeaddslidedialog = function () {
