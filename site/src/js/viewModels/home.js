@@ -11,6 +11,31 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
   
     function HomeViewModel() {
         var self = this;
+		
+		self.chemicals = [
+            { name: 'Hydrogen' },
+            { name: 'Helium' },
+            { name: 'Lithium' },
+            { name: 'Beryllium' },
+            { name: 'Boron' },
+            { name: 'Carbon' },
+            { name: 'Nitrogen' },
+            { name: 'Oxygen' },
+            { name: 'Fluorine' },
+            { name: 'Neon' },
+            { name: 'Sodium' },
+            { name: 'Magnesium' }
+        ];
+        console.log(self.chemicals);
+        self.currentNavArrowPlacement = ko.observable("adjacent");
+        self.currentNavArrowVisibility = ko.observable("auto");
+        
+        getItemInitialDisplay = function(index)
+        {
+          return index < 2 ? '' : 'none';
+        };
+     
+       
 
         // CHECK FOR ADMIN RIGHTS
         checkadminrights = function () {
@@ -1114,11 +1139,15 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         fetchgolives = function () 
         {
-            $.getJSON(homebaseurl+'GoLives').then(function (golivesdetails) 
-            {
-                // Fetch go lives details
-                self.goliveslist([]);
-                var gllist = golivesdetails.items;
+            
+			
+			 $.ajax({
+            url: homebaseurl+'GoLives',
+           dataType: 'json',
+			 async: false, 
+            success: function (golivesdetails) {
+				
+				var gllist = golivesdetails.items;
                 // console.log("hello", golivesdetails);
                 for (var b = 0; b < gllist.length; b++) 
                 {
@@ -1129,11 +1158,19 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         gollink: gllist[b].link,
                         goldescription: gllist[b].go_live_description,
                         golbackground: gllist[b].background,
-                        gollogo: gllist[b].logo
+                        gollogo: gllist[b].logo,
+                        
                     })
-                }
-                // console.log(ko.toJSON(self.goliveslist()));
-            });
+					
+					
+                }				
+	
+	}
+           
+          }).fail(function (xhr, textStatus, err) {
+            console.log(err);
+          });
+			
         }
         fetchgolives();
 
@@ -1983,13 +2020,9 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         self.pagingModel = null;
 		self.pagingModelfeatured = null;
 		self.pagingModelwins = null;
-		self.currentNavArrowPlacement = ko.observable("adjacent");
-        self.currentNavArrowVisibility = ko.observable("auto");
+		
         
-        getItemInitialDisplay = function(index)
-        { 
-          return index < 1 ? '' : 'none';
-        };
+        
 		
         getPagingModelslider = function()
         {
