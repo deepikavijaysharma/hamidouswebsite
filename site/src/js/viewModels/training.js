@@ -340,8 +340,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     keyevent: self.com_call_keyevent()!=true?'No':'Yes' 
 
                 }
-                console.log(ko.toJSON(call));
-
                 $.ajax({
                     url: community_call_url,
                     cache: false,
@@ -1162,8 +1160,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.buttonDisabled = ko.observable(true);
             self.searchInput = function () {};
 
-
-            /*----------------------------------SEARCH----------------------------------*/
             /* ---------------------   EVENTS TAB START  -------------------------*/
             self.event_no = ko.observable('');
             self.event_name = ko.observable('');
@@ -1264,9 +1260,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             var sdatetime;
             var edatetime;
             createEvent = function() {
-                eventValidation();
-                if(event_error_tracker > 0)
-                    return;
+                // eventValidation();
+                // if(event_error_tracker > 0)
+                //     return;
                 sdatetime = self.event_starttime().replace("T", " ")
                 edatetime = self.event_endtime().replace("T", " ")
                 var create_event_data = {
@@ -1361,9 +1357,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             cloneEvent = function () {
-                eventValidation();
-                if(event_error_tracker > 0)
-                    return;
+                // eventValidation();
+                // if(event_error_tracker > 0)
+                //     return;
                 sdatetime = self.event_starttime().replace("T", " ").replace("Z", "");
                 edatetime = self.event_endtime().replace("T", " ").replace("Z", "");
                 var clone_event_data = {
@@ -1379,7 +1375,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     partner_name: self.partnerName(),
                     link: self.registrationLink()
                 }
-                console.log("clone data : "+ko.toJSON(clone_event_data));
                 $.ajax({
                     url: create_event_api,
                     cache: false,
@@ -1437,9 +1432,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             editEvent = function () {
-                eventValidation();
-                if(event_error_tracker > 0)
-                    return;
+                // eventValidation();
+                // if(event_error_tracker > 0)
+                //     return;
                 sdatetime = self.event_starttime().replace("T", " ").replace("Z", "");
                 edatetime = self.event_endtime().replace("T", " ").replace("Z", "");
                 var edit_event_data = {
@@ -1456,7 +1451,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     partner_name: self.partnerName(),
                     link: self.registrationLink()
                 }
-                console.log("edit event data : "+ko.toJSON(edit_event_data));
                 $.ajax({
                     url: create_event_api,
                     cache: false,
@@ -1489,6 +1483,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }            
 
             /* ---------------------   EVENTS TAB END  -------------------------*/
+            /*----------------------------------SEARCH----------------------------------*/
             function waitForElement(id, callback){
                 var wait_for_community_call = setInterval(function(){
                     if(document.getElementById(id)){
@@ -1500,9 +1495,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             waitForElement("com_call_tab", function(){
                 var call_id_val1 = window.location.href;
-                var index_of = call_id_val1.indexOf("com_call_id");
-                var call_id_data1 = call_id_val1.substr(index_of+12);
-                if (call_id_data1*1 == call_id_data1){
+                // com_call_id is getting used to go directly to an old community call which doesnt 
+                //have a reply link. key_com_call is to navigate to key events com call from home page
+                var is_com_call_id_text_present = call_id_val1.indexOf("com_call_id");
+                var is_key_com_call_text_present = call_id_val1.indexOf("key_com_call");
+                if (is_com_call_id_text_present != -1 || is_key_com_call_text_present !=-1){
                     $('#com_call_tab').trigger('click');
                 }                
                
@@ -1588,7 +1585,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.ccCallType(ccalls.mode_of_call);
                 self.ccMeetingLink(ccalls.meetinglink);
                 self.ccRoles(ccalls.role);
-                self.ccDescription(ccalls.subdescription);
+                self.ccDescription(ccalls.description);
                 self.ccDialin(ccalls.dialin);
                 self.ccAdditionalLinks(ccalls.addl_link);
                 self.ccRecordingLinks(ccalls.recording_link);
@@ -1674,7 +1671,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var roleArray = [];
                 roleArray = roleString.split(",");
                 self.editccSelectedRoles(roleArray)
-                self.editccDescription(edit_calls.subdescription);
+                self.editccDescription(edit_calls.description);
                 self.editccDialin(edit_calls.dialin);
                 self.editccRecordingLinks(edit_calls.recording_link);
 
@@ -1716,7 +1713,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     keyevent: self.edit_com_call_keyevent()!=true?'No':'Yes'
 
                 }
-                console.log("edit : " + ko.toJSON(edit_community_call_data));
                 $.ajax({
                     url: community_call_url,
                     cache: false,
@@ -1839,7 +1835,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var roleArray = [];
                 roleArray = roleString.split(",");
                 self.cloneccSelectedRoles(roleArray)
-                self.cloneccDescription(clone_calls.subdescription);
+                self.cloneccDescription(clone_calls.description);
                 self.cloneccDialin(clone_calls.dialin);
                 self.cloneccRecordingLinks(clone_calls.recording_link);
 
@@ -1915,11 +1911,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     topic: self.cloneccTopic(),
                     invite: self.cloneccInvite(),
                     keyevent: self.clone_com_call_keyevent()!=true?'No':'Yes'
-
-
                 }
-
-                console.log("clone json data: " + ko.toJSON(clone_call));
 
                 $.ajax({
                     url: community_call_url,
@@ -1939,7 +1931,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             }
 
-
             self.searchcallstext = ko.observable('');
             //  SEARCH COMMUNITY CALLS
             searchcommunitycalls = function () {
@@ -1951,6 +1942,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var call_id_val = window.location.href;
                 var index_of = call_id_val.indexOf("com_call_id");
                 var call_id_data = call_id_val.substr(index_of+12);
+                var key_com_call_from_home = call_id_val.indexOf("key_com_call");
+                var call_id_data_from_home = call_id_val.substr(key_com_call_from_home+13);
+
                 if (call_id_data*1 != call_id_data){
                     call_id_data = '$-$';
                 }
@@ -1960,6 +1954,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 if (call_id_data != '$-$'){
                     apex_link = 'GetCommunityCallDetailsOnFreetextSearch/' + searchtext + '/' + 'other_than_$-$' + '/' + callmodel + '/' + roles + '/' +call_id_data;
                 }
+                if(key_com_call_from_home != -1){
+                    call_id_data = call_id_data_from_home;
+                    apex_link = 'GetCommunityCallDetailsOnFreetextSearch/$-$/$-$/$-$/$-$/' + call_id_data;     
+                }
+
+                console.log("apex_link : "+apex_link)
                 getCommunityCalls(apex_link);
                 
             }
