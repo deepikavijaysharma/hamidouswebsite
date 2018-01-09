@@ -93,7 +93,7 @@
   }
 
   .editdis {
-    display: none;
+    display: none!important;
   }
   .slidernavs {
     background: rgba(0, 68, 89, 0.7);
@@ -1029,7 +1029,7 @@ margin-right: 5px;
                       <!-- ko ifnot: keydtype == 'COMMUNITY_CALLS' -->
                         <!-- ko if: keydtype == 'EVENT' -->
                         <div class="orangeBbutton oj-lg-float-end">
-                          <a data-bind="attr:{'href':keydhlink}" target="_blank">Link</a>
+                          <a data-bind="attr:{'href':keydhevlink}" target="_blank">Link</a>
                         </div>
                         <!-- /ko -->
                         <!-- ko ifnot: keydtype == 'EVENT' -->
@@ -2086,7 +2086,7 @@ margin-right: 5px;
             <div class="oj-sm-12">
               <div class="input-group">
                 <select id="basicSelect1" data-bind="ojComponent: {
-                  component: 'ojSelect',placeholder:'Select your Organization LOB',options: organizationlist(),optionChange: editorgsel, 
+                  component: 'ojSelect',placeholder:'Select your Organization LOB',options: organizationlist(),optionChange: editorganizationselected, selectedOptions:editorganizationselected,
                   rootAttributes: {style:'max-width:20em'}
                 }">
                   <!-- ko foreach: organizationlist() -->
@@ -2280,89 +2280,152 @@ margin-right: 5px;
 <!-- GO LIVES POPUPS -->
 
 <!-- add go lives confirmation start -->
-<div style="display:none" id="addgltextdialog" title="Add Go Lives" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="oj-dialog-body">
-    <div class="form-group">
-      <label class="addslidelabel">Go Lives Logo:</label>
-      <br>
-      <input id="gllogo" class="buttons btn btn-default file" type="file" onchange="gllogoselected(event)">
-    </div>
-    <div class="form-group">
-      <label class="addslidelabel">Hosted By:</label>
-      <div class="input-group">
-        <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:glhostedby}">
+<div style="display:none" id="addgltextdialog" title="Add Go Lives" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}" class="dialogbodymain">
+  <div class="oj-dialog-body popupfont dialogbody">
+    <div class="oj-flex">
+
+      <div class="oj-lg-6">
+        <div class="oj-margin-right nomargin-md">
+          
+          <div class="form-group">
+            <label class="addslidelabel">Go Lives Logo:</label>
+            <label class="required">*</label>
+            <div class="input-group">
+              <input id="gllogo" class="buttons btn btn-default file" type="file" onchange="gllogoselected(event)">
+            </div>
+          </div><br>
+          <img class="editkw editorg" data-bind="attr:{'src':editgllogo,'id':editglid}">
+
+          <div class="form-group">
+            <label class="addslidelabel">Hosted By:</label>
+            <label class="required">*</label>
+            <div class="input-group">
+              <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:glhostedby}">
+            </div>
+          </div><br>
+
+          <div class="form-group">
+            <label class="addslidelabel">This Episode's Guest:</label>
+            <label class="required">*</label>
+            <div class="input-group">
+              <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:glguest}">
+            </div>
+          </div><br>
+
+          <div class="form-group">
+            <label class="addslidelabel">Listen to Interview Link:</label>
+            <div class="input-group">
+              <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:gllink}">
+            </div>
+          </div>
+
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="addslidelabel">This Episode's Guest:</label>
-      <div class="input-group">
-        <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:glguest}">
+
+      <div class="oj-lg-6">
+        <div class="oj-margin-right nomargin-md">
+
+          <div class="form-group">
+            <label class="addslidelabel">Go Lives Host Photo:</label>
+            <label class="required">*</label>
+            <div class="input-group">
+              <input id="glphoto" class="buttons btn btn-default file" type="file" onchange="glphotoselected(event)">
+            </div>
+          </div><br>
+          <img class="editkw editorg" data-bind="attr:{'src':editglhostphoto,'id':editglid}">
+
+          <div class="form-group">
+            <label class="addslidelabel">Go Lives Description:</label>
+            <div class="input-group">
+              <textarea id="txt1" style="height:168px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:gldiscussion}"></textarea>
+            </div>
+          </div>
+
+        </div>
       </div>
+
     </div>
-    <div class="form-group">
-      <label class="addslidelabel">Listen to Interview Link:</label>
-      <div class="input-group">
-        <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:gllink}">
-      </div>
+  </div>
+
+  <div class="oj-dialog-footer" style="background-color: lightgray">
+    <div>
+      <button id="resetglButton" data-dismiss="modal" class="orangebutton" onclick="resetgolives()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
+      <button id="okButton" data-dismiss="modal" class="bluebutton" onclick="addgolives()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"></button>
     </div>
-    <div class="form-group">
-      <label class="addslidelabel">Go Lives Host Photo:</label>
-      <br>
-      <input id="glphoto" class="buttons btn btn-default file" type="file" onchange="glphotoselected(event)">
-    </div>
-    <label class="addslidelabel">Go Lives Description:</label>
-    <br>
-    <textarea id="txt1" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:gldiscussion}"></textarea>
-    <br>
-    <br>
-    <br>
-    <button id="resetglButton" data-dismiss="modal" class="orangebutton" onclick="resetgolives()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
-    <button id="okButton" data-dismiss="modal" class="bluebutton" onclick="addgolives()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}">
-    </button>
   </div>
 </div>
 <!-- add go lives confirmation end -->
 
 <!-- edit go lives confirmation start -->
 <div style="display:none" id="editgltextdialog" title="Edit Go Lives" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="oj-dialog-body">
-    <div class="form-group">
-      <label class="addslidelabel">Go Lives Logo:</label><br>
-      <input id="edgllogo" class="buttons btn btn-default file" type="file" onchange="edgllogoselected(event)">
-    </div>
-    <img class="editgllogo editgl" data-bind="attr:{'src':editgllogo,'id':editglid}">
-    <div class="form-group">
-      <label class="addslidelabel">Hosted By:</label>
-      <div class="input-group">
-        <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editglhostedby}">
+  <div class="oj-dialog-body popupfont dialogbody">
+    <div class="oj-flex">
+
+      <div class="oj-lg-6">
+        <div class="oj-margin-right nomargin-md">
+
+          <div class="form-group">
+            <label class="addslidelabel">Go Lives Logo:</label>
+            <label class="required">*</label>
+            <div class="input-group">
+              <input id="edgllogo" class="buttons btn btn-default file" type="file" onchange="edgllogoselected(event)">
+            </div>
+          </div><br>
+
+          <img class="editgllogo editgl" data-bind="attr:{'src':editgllogo,'id':editglid}"><br>
+          <div class="form-group">
+            <label class="addslidelabel">Hosted By:</label>
+            <label class="required">*</label>
+            <div class="input-group">
+              <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editglhostedby}">
+            </div>
+          </div><br>
+
+          <div class="form-group">
+            <label class="addslidelabel">This Episode's Guest:</label>
+            <label class="required">*</label>
+            <div class="input-group">
+              <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editglguest}">
+            </div>
+          </div><br>
+
+          <div class="form-group">
+            <label class="addslidelabel">Listen to Interview Link:</label>
+            <div class="input-group">
+              <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editgllink}">
+            </div>
+          </div>
+
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="addslidelabel">This Episode's Guest:</label>
-      <div class="input-group">
-        <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editglguest}">
+
+      <div class="oj-lg-6">
+        <div class="oj-margin-right nomargin-md">
+
+          <div class="form-group">
+            <label class="addslidelabel">Go Lives Host Photo:</label><br>
+            <label class="required">*</label>
+            <input id="edglphoto" class="buttons btn btn-default file" type="file" onchange="edglphotoselected(event)">
+          </div>
+          <img class="editglphoto editgl" data-bind="attr:{'src':editglhostphoto,'id':editglid}"><br>
+
+          <div class="form-group">
+            <label class="addslidelabel">Go Lives Description:</label>
+            <div class="input-group">
+              <textarea id="txt1" style="height:168px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:editgldiscussion}"></textarea>
+            </div>
+          </div>
+          
+        </div>
       </div>
+
     </div>
-    <div class="form-group">
-      <label class="addslidelabel">Listen to Interview Link:</label>
-      <div class="input-group">
-        <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editgllink}">
-      </div>
+  </div>
+  <div class="oj-dialog-footer" style="background-color: lightgray">
+    <div>
+      <button id="resetedglButton" data-dismiss="modal" class="orangebutton" onclick="resetgolives()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
+      <button id="okedglButton" data-dismiss="modal" class="bluebutton" onclick="editgolives()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"></button>
     </div>
-    <div class="form-group">
-      <label class="addslidelabel">Go Lives Host Photo:</label><br>
-      <input id="edglphoto" class="buttons btn btn-default file" type="file" onchange="edglphotoselected(event)">
-    </div>
-    <img class="editglphoto editgl" data-bind="attr:{'src':editglhostphoto,'id':editglid}">
-    <label class="addslidelabel">Go Lives Description:</label>
-    <br>
-    <textarea id="txt1" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:editgldiscussion}"></textarea>
-    <br>
-    <br>
-    <br>
-    <button id="resetedglButton" data-dismiss="modal" class="orangebutton" onclick="resetgolives()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
-    <button id="okedglButton" data-dismiss="modal" class="bluebutton" onclick="editgolives()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}">
-    </button>
   </div>
 </div>
 <!-- edit go lives confirmation end -->
@@ -2420,10 +2483,10 @@ margin-right: 5px;
     </div>
   </div>
   <div class="oj-dialog-footer" style="background-color: lightgray">
-  <div>
-    <button id="resetrefButton" data-dismiss="modal" class="orangebutton" onclick="resetreferences()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
-    <button id="okButton" data-dismiss="modal" class="bluebutton" onclick="addreferences()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"></button>
-  </div>
+    <div>
+      <button id="resetrefButton" data-dismiss="modal" class="orangebutton" onclick="resetreferences()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
+      <button id="okButton" data-dismiss="modal" class="bluebutton" onclick="addreferences()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"></button>
+    </div>
   </div>
 </div>
 <!-- add IAAS references confirmation end -->
@@ -2461,10 +2524,10 @@ margin-right: 5px;
     </div>
   </div>
   <div class="oj-dialog-footer" style="background-color: lightgray">
-  <div>
-    <button id="resetedrefButton" data-dismiss="modal" class="orangebutton" onclick="resetreferences()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
-    <button id="okButton" data-dismiss="modal" class="bluebutton" onclick="editreferencesdialog()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"></button>
-  </div>
+    <div>
+      <button id="resetedrefButton" data-dismiss="modal" class="orangebutton" onclick="resetreferences()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
+      <button id="okButton" data-dismiss="modal" class="bluebutton" onclick="editreferencesdialog()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"></button>
+    </div>
   </div>
 </div>
 <!-- edit IAAS references confirmation end -->
@@ -2501,11 +2564,11 @@ margin-right: 5px;
     </div>
   </div>
   <div class="oj-dialog-footer" style="background-color: lightgray">
-  <div>
-    <button id="resetrefpaasButton" data-dismiss="modal" class="orangebutton" onclick="resetreferences()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
-    <button id="okButton" data-dismiss="modal" class="bluebutton" onclick="addreferencespaas()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"></button>
+    <div>
+      <button id="resetrefpaasButton" data-dismiss="modal" class="orangebutton" onclick="resetreferences()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
+      <button id="okButton" data-dismiss="modal" class="bluebutton" onclick="addreferencespaas()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"></button>
+    </div>
   </div>
-</div>
 </div>
 <!-- add PAAS references confirmation end -->
 
@@ -2541,11 +2604,11 @@ margin-right: 5px;
      
     </div>
   </div>
- <div class="oj-dialog-footer" style="background-color: lightgray">
-  <div>
-    <button id="resetedrefpaasButton" data-dismiss="modal" class="orangebutton" onclick="resetreferences()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
-    <button id="okpaasButton" data-dismiss="modal" class="bluebutton" onclick="editreferencespaasdialog()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"></button>
-  </div>
+  <div class="oj-dialog-footer" style="background-color: lightgray">
+    <div>
+      <button id="resetedrefpaasButton" data-dismiss="modal" class="orangebutton" onclick="resetreferences()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
+      <button id="okpaasButton" data-dismiss="modal" class="bluebutton" onclick="editreferencespaasdialog()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"></button>
+    </div>
   </div>
 </div>
 <!-- edit PAAS references confirmation end -->

@@ -730,7 +730,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $.getJSON(homebaseurl+'KeyDates').then(function (keydatesdetails) 
             {
                 // Fetch key dates details
-                var homelink = window.location.href;
+                var homelink;
+                homelink = window.location.href;
                 homelink += "?root=training#";
                 self.keydateslist([]);
                 var stdate,kstdate,endate,kendate;
@@ -746,6 +747,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         keydtype: kdlist[b].training_type,
                         keydname: kdlist[b].name,
                         keydhlink: homelink,
+                        keydhevlink: kdlist[b].link,
                         keydstartdate: stdate.toDateString(),
                         keydstarttime: kdlist[b].start_date != undefined ? kdlist[b].start_date.substring(11, 19) + " PT" : '',
                         keydenddate: endate.toDateString(),
@@ -1008,9 +1010,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 data: ldata,
                 success: function (datalogogl) {
                     console.log("Go Lives logo added successfully!");
-                    // fetchgolives();
-                    // resetgolives();
-                    // $("#editgltextdialog").ojDialog("close");
                 }
             }).fail(function (xhr, textStatus, err) {
                 alert(err);
@@ -1027,9 +1026,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 data: pdata,
                 success: function (dataphotogl) {
                     console.log("Go Lives presenter photo added successfully!");
-                    // fetchgolives();
-                    // resetgolives();
-                    // $("#editgltextdialog").ojDialog("close");
                 }
             }).fail(function (xhr, textStatus, err) {
                 alert(err);
@@ -1084,9 +1080,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         }
 
                         var gllogodata = glreader.result.split('base64,')[1];
-                        // var gllogodata = "logo";
 
-                        // console.log(uploadglheader, gllogodata);
                         // SEND TO SERVER
                         uploadlogogl(uploadglheader, gllogodata);
                     };
@@ -1103,9 +1097,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         }
 
                         var glphotodata = glpreader.result.split('base64,')[1];
-                        // var glphotodata = "photo";
 
-                        // console.log(uploadglpheader, glphotodata);
                         // SEND TO SERVER
 
                         uploadphotogl(uploadglpheader, glphotodata);
@@ -1193,7 +1185,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         var edglpreader = new FileReader();
                         edglpreader.onload = function () {
                             var eduploadglpheader = {
-                                "id": edgldata.return_id,
+                                "id": self.editglid(),
                                 "logo_or_bg": "background",
                                 "mimetype": edglphotopath.type
                             }
@@ -1208,7 +1200,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         fetchgolives();
                         $("#editgltextdialog").ojDialog("close");
                         resetgolives();
-
+                        location.reload();
                     }
                     else if (edglphotopath.length == 0 && edgllogopath.length != 0)
                     {
@@ -1217,7 +1209,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         var edglreader = new FileReader();
                         edglreader.onload = function () {
                             var eduploadglheader = {
-                                "id": edgldata.return_id,
+                                "id": self.editglid(),
                                 "logo_or_bg": "logo",
                                 "mimetype": edgllogopath.type
                             }
@@ -1243,7 +1235,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         var edglreader = new FileReader();
                         edglreader.onload = function () {
                             var eduploadglheader = {
-                                "id": edgldata.return_id,
+                                "id": self.editglid(),
                                 "logo_or_bg": "logo",
                                 "mimetype": edgllogopath.type
                             }
@@ -1260,7 +1252,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         var edglpreader = new FileReader();
                         edglpreader.onload = function () {
                             var eduploadglpheader = {
-                                "id": edgldata.return_id,
+                                "id": self.editglid(),
                                 "logo_or_bg": "background",
                                 "mimetype": edglphotopath.type
                             }
