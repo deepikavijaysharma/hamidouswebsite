@@ -11,31 +11,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
   
     function HomeViewModel() {
         var self = this;
-		
-		self.chemicals = [
-            { name: 'Hydrogen' },
-            { name: 'Helium' },
-            { name: 'Lithium' },
-            { name: 'Beryllium' },
-            { name: 'Boron' },
-            { name: 'Carbon' },
-            { name: 'Nitrogen' },
-            { name: 'Oxygen' },
-            { name: 'Fluorine' },
-            { name: 'Neon' },
-            { name: 'Sodium' },
-            { name: 'Magnesium' }
-        ];
-        console.log(self.chemicals);
-        self.currentNavArrowPlacement = ko.observable("adjacent");
-        self.currentNavArrowVisibility = ko.observable("auto");
-        
-        getItemInitialDisplay = function(index)
-        {
-          return index < 2 ? '' : 'none';
-        };
-     
-       
 
         // CHECK FOR ADMIN RIGHTS
         checkadminrights = function () {
@@ -521,7 +496,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     "organization": self.editorganizationselected(),
                     "name": self.editorgpeoplename(),
                     "designation": self.editorgpeopledesignation(),
-                    "dot_line": self.editorgdottedline() != true ? 'No' : 'Yes'
+                    "dot_line": self.editorgdottedline()
                 }
 
                 // SEND TO SERVER
@@ -556,7 +531,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         "organization": self.editorganizationselected(),
                         "name": self.editorgpeoplename(),
                         "designation": self.editorgpeopledesignation(),
-                        "dot_line": self.editorgdottedline()!=true?'No':'Yes',
+                        "dot_line": self.editorgdottedline(),
                         "mimetype": edemployeephotopath.type
                     }
 
@@ -776,7 +751,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         keydenddate: endate.toDateString(),
                         keydendtime: kdlist[b].end_date != undefined ? kdlist[b].end_date.substring(11, 19) + " PT" : ''
                     })
-                }//console.log(ko.toJSON(self.keydateslist()));
+                }
             });
         }
         fetchkeydates();
@@ -1011,34 +986,55 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         /******************************************GO LIVES*************************************************************************/
 
-        var gllogodata, glphotodata;
         var gllogopath = "";
         var glphotopath = "";
-        gllogoselected = function (event)
-        {
-            console.log(event);
-            gllogopath = event.target.files[0];
-            console.log("add go lives logo filename",gllogopath);
-            var glreader = new FileReader();
-            glreader.onload = function () {
-                gllogodata = glreader.result.split('base64,')[1];
-            };
-            glreader.readAsDataURL(gllogopath);
-            // return gllogodata;
-        }
-        glphotoselected = function (event)
-        {
-            console.log(event);
-            glphotopath = event.target.files[0];
-            console.log("add go lives photo filename",glphotopath);
-            var glpreader = new FileReader();
-            glpreader.onload = function () {
-                glphotodata = glpreader.result.split('base64,')[1];
-            };
-            glpreader.readAsDataURL(glphotopath);
-            // return glphotodata;
-        }
 
+        gllogoselected = function (event) {
+            gllogopath = event.target.files[0];
+            console.log("add go lives logo filename", gllogopath);
+        }
+        glphotoselected = function (event) {
+            glphotopath = event.target.files[0];
+            console.log("add go lives photo filename", glphotopath);
+        }
+        uploadlogogl = function (lheader, ldata) 
+        {
+            console.log(lheader);
+            $.ajax({
+                url: homedevurl + 'PutImagesGoLive',
+                headers: lheader,
+                type: 'PUT',
+                // contentType: 'application/json; charset=utf-8',
+                data: ldata,
+                success: function (datalogogl) {
+                    console.log("Go Lives logo added successfully!");
+                    // fetchgolives();
+                    // resetgolives();
+                    // $("#editgltextdialog").ojDialog("close");
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert(err);
+            });
+        }
+        uploadphotogl = function (pheader, pdata) 
+        {
+            console.log(pheader);
+            $.ajax({
+                url: homedevurl + 'PutImagesGoLive',
+                headers: pheader,
+                type: 'PUT',
+                // contentType: 'application/json; charset=utf-8',
+                data: pdata,
+                success: function (dataphotogl) {
+                    console.log("Go Lives presenter photo added successfully!");
+                    // fetchgolives();
+                    // resetgolives();
+                    // $("#editgltextdialog").ojDialog("close");
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert(err);
+            });
+        }
         addgolives = function () 
         {
             if (self.glhostedby().length == 0) {
@@ -1061,47 +1057,243 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 return;
             }
 
-            var glbody = {
+            var glheader = 
+            {
                 hosted_by: self.glhostedby(),
                 episode_guest: self.glguest(),
                 link: self.gllink(),
-                go_live_description: self.gldiscussion(),
-                logo: [
-                    {
-                        logo: gllogoselected(),
-                        mime_type: gllogopath.type
-                    }
-                ],
-                background: [
-                    {
-                        bg: glphotoselected(),
-                        mime_type: glphotodata.type
-                    }
-                ]
+                go_live_description: self.gldiscussion()
             }
+            console.log(ko.toJSON(glheader));
 
-            console.log(glbody);
             $.ajax({
-                url: homebaseurl +'test_go_lives',
-                cache: false,
+                url: homedevurl + 'GoLives',
+                headers: glheader,
                 type: 'POST',
-                body: ko.toJSON(glbody),
-                contentType: 'application/json; charset=utf-8',
-                success: function (gldata) {
-                    console.log(ko.toJSON(gldata));
-                    alert("go lives data uploaded");
-                    closeaddgltextdialog();
-                    resetgolives();                    
+                success: function (gldata) 
+                {
+                    console.log("go lives data uploaded");//console.log("id is:",gldata.return_id);
+                    //Logo Upload
+                    var glreader = new FileReader();
+                    glreader.onload = function () 
+                    {
+                        var uploadglheader = {
+                            "id": gldata.return_id,
+                            "logo_or_bg": "logo",
+                            "mimetype": gllogopath.type
+                        }
+
+                        var gllogodata = glreader.result.split('base64,')[1];
+                        // var gllogodata = "logo";
+
+                        // console.log(uploadglheader, gllogodata);
+                        // SEND TO SERVER
+                        uploadlogogl(uploadglheader, gllogodata);
+                    };
+                    glreader.readAsDataURL(gllogopath);
+
+                    //Photo Upload
+                    var glpreader = new FileReader();
+                    glpreader.onload = function () 
+                    {
+                        var uploadglpheader = {
+                            "id": gldata.return_id,
+                            "logo_or_bg": "background",
+                            "mimetype": glphotopath.type
+                        }
+
+                        var glphotodata = glpreader.result.split('base64,')[1];
+                        // var glphotodata = "photo";
+
+                        // console.log(uploadglpheader, glphotodata);
+                        // SEND TO SERVER
+
+                        uploadphotogl(uploadglpheader, glphotodata);
+                    };
+                    glpreader.readAsDataURL(glphotopath);
+                    fetchgolives();
+                    $("#editgltextdialog").ojDialog("close");
+                    // closeaddgltextdialog();
+                    resetgolives();
                 }
             }).fail(function (xhr, textStatus, err) {
+                console.log("error in sending data to service");
+                alert(err);
+            });
+        }
+
+        var edgllogodata, edglphotodata;
+        var edgllogopath = "";
+        var edglphotopath = "";
+
+        edgllogoselected = function (event) {
+            edgllogopath = event.target.files[0];
+            console.log("add go lives logo filename", edgllogopath);
+        }
+        edglphotoselected = function (event) {
+            edglphotopath = event.target.files[0];
+            console.log("add go lives photo filename", edglphotopath);
+        }
+
+        //GO LIVES observables
+        self.editglid = ko.observable('');
+        self.editgllogo = ko.observable('');
+        self.editglhostedby = ko.observable('');
+        self.editglguest = ko.observable('');
+        self.editgllink = ko.observable('');
+        self.editglhostphoto = ko.observable('');
+        self.editgldiscussion = ko.observable('');
+
+        openEditGoLiveslmodal = function (edit_gl) 
+        {
+            openeditgltextdialog();// console.log(edit_gl);
+
+            self.editglid('');
+            self.editgllogo('');
+            self.editglhostedby('');
+            self.editglguest('');
+            self.editgllink('');
+            self.editglhostphoto('');
+            self.editgldiscussion('');
+
+            // SET NEW VALUE
+            self.editglid(edit_gl.golid);
+            self.editgllogo(edit_gl.gollogo);
+            self.editglhostedby(edit_gl.golhostedby);
+            self.editglguest(edit_gl.golguest);
+            self.editgllink(edit_gl.gollink);
+            self.editglhostphoto(edit_gl.golbackground);
+            self.editgldiscussion(edit_gl.goldescription);
+        }
+
+        editgolives = function () 
+        {
+            var edglheader =
+            {
+                id: self.editglid(),
+                hosted_by: self.editglhostedby(),
+                episode_guest: self.editglguest(),
+                link: self.editgllink(),
+                go_live_description: self.editgldiscussion()
+            }
+
+            console.log(edglheader);
+            $.ajax({
+                url: homedevurl + 'GoLives',
+                headers: edglheader,
+                type: 'POST',
+                success: function (edgldata) 
+                {
+                    if (edgllogopath.length == 0 && edglphotopath.length != 0) 
+                    {
+                        //Logo Upload is not needed
+                        console.log("logo null");
+
+                        //Photo Upload
+                        var edglpreader = new FileReader();
+                        edglpreader.onload = function () {
+                            var eduploadglpheader = {
+                                "id": edgldata.return_id,
+                                "logo_or_bg": "background",
+                                "mimetype": edglphotopath.type
+                            }
+                            console.log(eduploadglpheader);
+
+                            var edglphotodata = edglpreader.result.split('base64,')[1];
+
+                            // SEND TO SERVER
+                            uploadphotogl(eduploadglpheader, edglphotodata);
+                        };
+                        edglpreader.readAsDataURL(edglphotopath);
+                        fetchgolives();
+                        $("#editgltextdialog").ojDialog("close");
+                        resetgolives();
+
+                    }
+                    else if (edglphotopath.length == 0 && edgllogopath.length != 0)
+                    {
+                        console.log("photo null");
+                        //Logo Upload
+                        var edglreader = new FileReader();
+                        edglreader.onload = function () {
+                            var eduploadglheader = {
+                                "id": edgldata.return_id,
+                                "logo_or_bg": "logo",
+                                "mimetype": edgllogopath.type
+                            }
+                            console.log(eduploadglheader);
+
+                            var edgllogodata = edglreader.result.split('base64,')[1];
+
+                            // SEND TO SERVER
+                            uploadlogogl(eduploadglheader, edgllogodata);
+                        };
+                        edglreader.readAsDataURL(edgllogopath);
+
+                        //Photo Upload is not needed
+
+                        fetchgolives();
+                        $("#editgltextdialog").ojDialog("close");
+                        resetgolives();
+                    }
+                    else if (edglphotopath.length != 0 && edgllogopath.length != 0) 
+                    {
+                        console.log("logo and photo present");
+                        //Logo Upload
+                        var edglreader = new FileReader();
+                        edglreader.onload = function () {
+                            var eduploadglheader = {
+                                "id": edgldata.return_id,
+                                "logo_or_bg": "logo",
+                                "mimetype": edgllogopath.type
+                            }
+                            console.log(eduploadglheader);
+
+                            var edgllogodata = edglreader.result.split('base64,')[1];
+
+                            // SEND TO SERVER
+                            uploadlogogl(eduploadglheader, edgllogodata);
+                        };
+                        edglreader.readAsDataURL(edgllogopath);
+
+                        //Photo Upload
+                        var edglpreader = new FileReader();
+                        edglpreader.onload = function () {
+                            var eduploadglpheader = {
+                                "id": edgldata.return_id,
+                                "logo_or_bg": "background",
+                                "mimetype": edglphotopath.type
+                            }
+                            console.log(eduploadglpheader);
+
+                            var edglphotodata = edglpreader.result.split('base64,')[1];
+
+                            // SEND TO SERVER
+                            uploadphotogl(eduploadglpheader, edglphotodata);
+                        };
+                        edglpreader.readAsDataURL(edglphotopath);
+                        fetchgolives();
+                        $("#editgltextdialog").ojDialog("close");
+                        resetgolives();
+                    }
+                    else
+                    {
+                        console.log("logo null photo null");
+                        fetchgolives();
+                        $("#editgltextdialog").ojDialog("close");
+                        resetgolives();
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                console.log("error in sending data to service in edit");
                 alert(err);
             });
         }
 
         deletegolives = function (golives_delete) 
         {
-            console.log("fsdfsd",golives_delete);
-            openDeleteGoLivesModal(golives_delete.id);
+            console.log("Deleted Go live",golives_delete);
+            openDeleteGoLivesModal(golives_delete.golid);
         }
 
         openDeleteGoLivesModal = function (delete_golives_id) {
@@ -1139,38 +1331,29 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         fetchgolives = function () 
         {
-            
-			
-			 $.ajax({
-            url: homebaseurl+'GoLives',
-           dataType: 'json',
-			 async: false, 
-            success: function (golivesdetails) {
-				
-				var gllist = golivesdetails.items;
-                // console.log("hello", golivesdetails);
-                for (var b = 0; b < gllist.length; b++) 
+            $.ajax({
+                url: homebaseurl + 'GoLives',
+                dataType: 'json',
+                async: false,
+                success: function (golivesdetails) 
                 {
-                    self.goliveslist.push({
-                        golid: gllist[b].id,
-                        golhostedby: gllist[b].hosted_by,
-                        golguest: gllist[b].episode_guest,
-                        gollink: gllist[b].link,
-                        goldescription: gllist[b].go_live_description,
-                        golbackground: gllist[b].background,
-                        gollogo: gllist[b].logo,
-                        
-                    })
-					
-					
-                }				
-	
-	}
-           
-          }).fail(function (xhr, textStatus, err) {
-            console.log(err);
-          });
-			
+                    var gllist = golivesdetails.items;
+                    for (var b = 0; b < gllist.length; b++) {
+                        self.goliveslist.push({
+                            golid: gllist[b].id,
+                            golhostedby: gllist[b].hosted_by,
+                            golguest: gllist[b].episode_guest,
+                            gollink: gllist[b].link,
+                            goldescription: gllist[b].go_live_description,
+                            golbackground: gllist[b].background,
+                            gollogo: gllist[b].logo,
+
+                        });
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) {
+                console.log(err);
+            });//console.log(ko.toJSON(self.goliveslist()));
         }
         fetchgolives();
 
@@ -1179,8 +1362,14 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             self.glguest('');
             self.gllink('');
             self.gldiscussion('');
-            document.getElementById("gllogo").value = "";
-            document.getElementById("glphoto").value = "";
+            self.editglhostedby('');
+            self.editglguest('');
+            self.editgllink('');
+            self.editgldiscussion('');
+            // document.getElementById("gllogo").value = "";
+            // document.getElementById("glphoto").value = "";
+            // document.getElementById("edgllogo").value = "";
+            // document.getElementById("edglphoto").value = "";
         }
         /******************************************GO LIVES END********************************************************************/
 
@@ -1978,10 +2167,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
   
         });
 		
-		  $(document).ready(function() { 
-      $('#myCarousel').carousel({interval: 50000000, cycle: false});
-  }); 
- $('#myCarousel').carousel();
+        $(document).ready(function() 
+        { 
+            $('#myCarousel').carousel({interval: 5000, cycle: true});
+        }); 
+        $('#myCarousel').carousel();
 		
 		/******************************************FLIP*****************************************************/
 	  
@@ -2013,16 +2203,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             { name: '<div class="verticalcentertext"><div class="verticalcentertextinner"><div class="heading">NATD Cloud Customer Success Go Live: Gap Inc.&rsquo;s Transformational<br>Journey on Oracle Cloud</div><div class="text">Listen into this podcast as Misha Logvinov, GVP, Customer Success, interviews Mark Carroll CSM and Jeff Wexler, ECA, on transforming business at Gap, Inc. </div><div class="buttons_c oj-rwow oj-flex"><div class="oj-sm-12 "><div class=" buttons"><a href="https://otube.oracle.com/media/GoLive_GAP_092517.mp4/0_9mo76xtq" target="_blank">Replay <span class="right-arrow"></span></a></div></div><div class="oj-sm-12 oj-xl-6 oj-xl-float-end"></div></div></div></div>',classname:'slide slide4' },
             { name: '<div class="verticalcentertext"><div class="verticalcentertextinner"><div class="container webcp"><div class="webc">Webcast</div></div><div class="heading">Run Oracle Cloud on Docker Containers</div><div class="text">Promote this webcast to your customers, featuring Ashutosh Tripathi,<br>Principal Cloud Platform Architect. </div><div class="buttons_c oj-rwow oj-flex"><div class="oj-sm-12 "><div class=" buttons"><a href="http://event.on24.com/eventRegistration/console/EventConsoleApollo.jsp?simulive=y&eventid=1498942&sessionid=1&username=&partnerref=&format=fhaudio&mobile=false&flashsupportedmobiledevice=false&helpcenter=false&key=3A12911539D711CAC159812BA42D71F8&text_language_id=en&playerwidth=1000&playerheight=650&overwritelobby=y&eventuserid=180099644&contenttype=A&mediametricsessionid=145331802&mediametricid=2150193&usercd=180099644&mode=launch" target="_blank">Click Here <span class="right-arrow"></span></a></div></div><div class="oj-sm-12 oj-xl-6 oj-xl-float-end"></div></div></div></div>',classname:'slide slide5' },
             { name: '<div class="verticalcentertext"><div class="verticalcentertextinner"><div class="heading">SE Excellence</div><div class="text">GSE Demos  with Jason</div><div class="buttons_c oj-rwow oj-flex"><div class="oj-sm-12 "><div class=" buttons"><a href="http://oukc.oracle.com/static12/opn/login/?t=checkusercookies%257Cr=-1%257Cc=2028346443" target="_blank">Click Here<span class="right-arrow"></span></a></div></div><div class="oj-sm-12 oj-xl-6 oj-xl-float-end"></div></div></div></div>',classname:'slide slide6' },
-            { name: '<div class="verticalcentertext"><div class="verticalcentertextinner"><div class="heading">Add a New Slide</div><div class="buttons_c oj-rwow oj-flex"><div class="oj-sm-12 "><div class=" buttons">Edit</div></div><div class="oj-sm-12 oj-xl-6 oj-xl-float-end"></div></div></div></div>',classname:'slide slide7' }    
-           
-            
+            { name: '<div class="verticalcentertext"><div class="verticalcentertextinner"><div class="heading">Add a New Slide</div><div class="buttons_c oj-rwow oj-flex"><div class="oj-sm-12 "><div class=" buttons">Edit</div></div><div class="oj-sm-12 oj-xl-6 oj-xl-float-end"></div></div></div></div>',classname:'slide slide7' }            
         ];
         self.pagingModel = null;
 		self.pagingModelfeatured = null;
 		self.pagingModelwins = null;
-		
-        
-        
 		
         getPagingModelslider = function()
         {
@@ -2079,7 +2264,14 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         closeaddgltextdialog = function () {
             $("#addgltextdialog").ojDialog("close");
         }
-		
+        
+        openeditgltextdialog = function () {
+            $("#editgltextdialog").ojDialog("open");
+        }
+        closeeditgltextdialog = function () {
+            $("#editgltextdialog").ojDialog("close");
+        }
+
         openaddnewrefdialog = function () {
             $("#addnewrefdialog").ojDialog("open");
         }

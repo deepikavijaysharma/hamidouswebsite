@@ -2789,7 +2789,7 @@ padding-left:0px;
 list-style:none;
 margin-top:0px;
 }
-.oj-inputtext,.oj-combobox,.oj-inputdatetime, .oj-inputdatetime-date-time, .oj-inputdatetime-date-only, .oj-inputdatetime-time-only,oj-inputtext oj-form-control oj-component oj-required,.oj-inputtext, .oj-inputpassword, .oj-textarea, .oj-inputtext-nocomp, .oj-inputpassword-nocomp, .oj-textarea-nocomp,oj-inputtext oj-form-control oj-component oj-required,.oj-inputtext, .oj-inputpassword, .oj-textarea, .oj-inputtext-nocomp, .oj-inputpassword-nocomp, .oj-textarea-nocomp,.oj-combobox-input{
+.oj-inputtext,.oj-combobox,.oj-inputdatetime, .oj-inputdatetime-date-time, .oj-inputdatetime-date-only, .oj-inputdatetime-time-only,oj-inputtext oj-form-control oj-component oj-required,.oj-inputtext, .oj-inputpassword, .oj-textarea, .oj-inputtext-nocomp, .oj-inputpassword-nocomp, .oj-textarea-nocomp,oj-inputtext oj-form-control oj-component oj-required,.oj-inputtext, .oj-inputpassword, .oj-textarea, .oj-inputtext-nocomp, .oj-inputpassword-nocomp, .oj-textarea-nocomp,.oj-combobox-input,.oj-textarea-input,.oj-select-choice,.oj-select{
 max-width:100% !important;
 }
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -2823,7 +2823,7 @@ font-size: 18px;
 	textarea{
 		height:100px;
 		}
-	.oj-inputtext-input, .oj-inputpassword-input, .oj-inputtext-nocomp, .oj-inputpassword-nocomp,oj-inputdatetime-input oj-component-initnode,.oj-inputdatetime-input,.oj-combobox-input{
+	.oj-inputtext-input, .oj-inputpassword-input, .oj-inputtext-nocomp, .oj-inputpassword-nocomp,oj-inputdatetime-input oj-component-initnode,.oj-inputdatetime-input,.oj-combobox-input,.oj-textarea-input,.oj-select-choice{
 		 color: #555;
 font-size: 14px;
 font-style: normal;
@@ -3283,6 +3283,8 @@ text-decoration:none;}
 
 #avatars{
 	ul{
+		padding-left:0px;
+		margin-top:20px;
 		li{
 		display:inline-block;
 		}
@@ -3309,6 +3311,7 @@ text-decoration:none;}
   margin-right:20px;
   height: 58px !important;
   width: 58px !important;
+  display:flex;
   }
 
 .endorgdel{
