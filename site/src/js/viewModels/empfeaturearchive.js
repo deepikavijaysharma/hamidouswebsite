@@ -14,10 +14,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojpopup','ojs/ojdialog'],
 	   self.empf1 = function() { 
 $("#empf1").ojDialog("open");
 };
-
-self.empf2 = function() { 
-$("#empf2").ojDialog("open");
-};
       self.handleActivated = function(info) {
         // Implement if needed
       };

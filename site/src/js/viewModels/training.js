@@ -340,8 +340,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     keyevent: self.com_call_keyevent()!=true?'No':'Yes' 
 
                 }
-                console.log(ko.toJSON(call));
-
                 $.ajax({
                     url: community_call_url,
                     cache: false,
@@ -1162,7 +1160,329 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.buttonDisabled = ko.observable(true);
             self.searchInput = function () {};
 
+            /* ---------------------   EVENTS TAB START  -------------------------*/
+            self.event_no = ko.observable('');
+            self.event_name = ko.observable('');
+            self.event_description = ko.observable('');
+            self.event_location = ko.observable('');
+            self.event_starttime = ko.observable('');
+            self.event_endtime = ko.observable('');
+            self.is_key_event = ko.observable('');
+            self.customerName = ko.observable('');
+            // self.eventFeedback = ko.observable('');
+            self.eventLead = ko.observable('');
+            self.partnerName = ko.observable('');
+            self.registrationLink = ko.observable('');
 
+            self.eventsList = ko.observableArray([]);
+
+            function ordinal_suffix_of(i) {
+                var j = i % 10,
+                    k = i % 100;
+                if (j == 1 && k != 11) {
+                    return i + "st";
+                }
+                if (j == 2 && k != 12) {
+                    return i + "nd";
+                }
+                if (j == 3 && k != 13) {
+                    return i + "rd";
+                }
+                return i + "th";
+            }
+
+            var monthNames = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"
+            ];      
+            var event_error_tracker;
+            eventValidation = function () {
+                event_error_tracker = 0;
+                if (self.event_name().length == 0) {
+                    event_error_tracker++;
+                    alert("Please enter name of event");
+                }
+                else if (self.event_location().length == 0) {
+                    event_error_tracker++;
+                    alert("Please enter location of event");
+                }
+                else if (self.event_starttime().length == 0) {
+                    event_error_tracker++;
+                    alert("Please enter start date and time of event");
+                }
+                else if (self.event_endtime().length == 0) {
+                    event_error_tracker++;
+                    alert("Please enter end date and time of event");
+                }
+            }
+
+            // GET EVENTS START
+            getAllEvents = function () {
+                var all_events = events_api + "/$-$";
+                $.getJSON(all_events).then(function (data) {
+                        var events = data.items;
+                        self.eventsList([]);
+                        var event_date;
+                        for (var i = 0; i < events.length; i++) {
+                            if (events[i].start_time != undefined){
+                                var date_number = events[i].start_time.split('T')[0].substring(8,10);
+                                var month_no = events[i].start_time.split('T')[0].substring(5,7);
+                                var month_name = monthNames[month_no-1];
+                                var year = events[i].start_time.split('T')[0].substring(0,4);
+                                event_date = ordinal_suffix_of(date_number)+" "+month_name+" "+year;
+                            }
+                            self.eventsList.push({
+                                event_no: events[i].event_no != undefined ? events[i].event_no : '',
+                                name: events[i].name != undefined ? events[i].name : '',
+                                description: events[i].description != undefined ? events[i].description : '',
+                                location: events[i].location != undefined ? events[i].location : '',
+                                date: event_date,
+                                time: events[i].start_time != undefined ? events[i].start_time.split('T')[1].substring(0,5) : '',
+                                //below fields are to get these data while clone,edit
+                                customer_name: events[i].customer_name != undefined ? events[i].customer_name : '',
+                                key_event_value_check: events[i].keyevent != 'No' ? true : false,
+                                start_time: events[i].start_time != undefined ? events[i].start_time : '',
+                                end_time: events[i].end_time != undefined ? events[i].end_time : '',
+                                // event_feedback: events[i].event_feedback != undefined ? events[i].event_feedback : '',
+                                event_lead: events[i].event_lead != undefined ? events[i].event_lead : '',
+                                partner_name: events[i].partner_name != undefined ? events[i].partner_name : '',
+                                registration_link: events[i].link != undefined ? events[i].link : ''
+
+                            });
+                        }
+                    });
+            }
+
+            getAllEvents();
+
+            // GET EVENTS END
+
+            //CREATE EVENTS START
+            var sdatetime;
+            var edatetime;
+            createEvent = function() {
+                // eventValidation();
+                // if(event_error_tracker > 0)
+                //     return;
+                sdatetime = self.event_starttime().replace("T", " ")
+                edatetime = self.event_endtime().replace("T", " ")
+                var create_event_data = {
+                    name: self.event_name(),
+                    location: self.event_location(),
+                    start_time: sdatetime,
+                    end_time: edatetime,
+                    description: self.event_description(),
+                    key_event: self.is_key_event()!=true?'No':'Yes',
+                    customer_name:self.customerName(),
+                    // event_feedback:self.eventFeedback(),
+                    event_lead: self.eventLead(),
+                    partner_name: self.partnerName(),
+                    link: self.registrationLink()
+                }
+                console.log("created data : "+ko.toJSON(create_event_data));
+                $.ajax({
+                    url: create_event_api,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(create_event_data),
+                    success: function (data) {
+                        getAllEvents();
+                        resetEvent();
+
+                    }
+                    }).fail(function (xhr, textStatus, err) {
+                });
+                $("#createevents_id").ojDialog("close");
+
+            }
+            //CREATE EVENTS END
+
+            openCreateEventDialog = function() {
+                resetEvent();
+                $('#clone_modal_footer').hide();
+                $('#edit_modal_footer').hide();
+                $('#create_modal_footer').show();
+                $("#createevents_id" ).ojDialog( {title: "Create Event" } );                
+                $('#createevents_id').ojDialog("open");
+            }
+
+            resetEvent = function(){
+            self.event_name('');
+            self.event_description('');
+            self.event_location('');
+            self.event_starttime('');
+            self.event_endtime('');
+            self.is_key_event('');
+            self.customerName('');
+            // self.eventFeedback('');
+            self.eventLead('');
+            self.partnerName('');
+            self.registrationLink('');
+            }
+          
+            eventDeleteConfimation = function (delete_id) {
+                console.log("deleting event-" + delete_id);
+                var data_value = {
+                    "event_no": delete_id
+                };
+                $("#delete_event_modal").ojDialog("open");
+                $("#delete_event_button").click(function () {
+                    $.ajax({
+                        url: create_event_api,
+                        method: 'DELETE',
+                        contentType: 'application/json; charset=utf-8',
+                        data: ko.toJSON(data_value),
+                        success: function () {
+                            getAllEvents();
+                            closeEventDeleteModal();
+                            console.log("delete success");
+                        },
+                        fail: function (xhr, textStatus, err) {
+                            console.log(err);
+                        },
+                        error: function (xhr, textStatus, err) {
+                            console.log(err);
+                        }
+                    });
+                });
+
+            }            
+
+            deleteEvent = function(event_delete){
+                eventDeleteConfimation(event_delete.event_no);
+            }            
+            
+            closeEventDeleteModal = function () {
+                $("#delete_event_modal").ojDialog("close");
+            }
+
+            cloneEvent = function () {
+                // eventValidation();
+                // if(event_error_tracker > 0)
+                //     return;
+                sdatetime = self.event_starttime().replace("T", " ").replace("Z", "");
+                edatetime = self.event_endtime().replace("T", " ").replace("Z", "");
+                var clone_event_data = {
+                    name: self.event_name(),
+                    location: self.event_location(),
+                    start_time: sdatetime,
+                    end_time: edatetime,
+                    description: self.event_description(),
+                    key_event: self.is_key_event()!=true?'No':'Yes',
+                    customer_name:self.customerName(),
+                    // event_feedback:self.eventFeedback(),
+                    event_lead: self.eventLead(),
+                    partner_name: self.partnerName(),
+                    link: self.registrationLink()
+                }
+                $.ajax({
+                    url: create_event_api,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(clone_event_data),
+                    success: function (data) {
+                        getAllEvents();
+                        resetEvent();
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    // alert(err);
+                });
+                $("#createevents_id").ojDialog("close");                
+            }
+            
+            openCloneEventModal = function (clone_event) {
+                self.event_name(clone_event.name);
+                self.event_description(clone_event.description);
+                self.event_location(clone_event.location);
+                self.event_starttime(clone_event.start_time);
+                self.event_endtime(clone_event.end_time);
+                self.is_key_event(clone_event.key_event_value_check);
+                self.customerName(clone_event.customer_name);
+                // self.eventFeedback(clone_event.event_feedback);
+                self.eventLead(clone_event.event_lead);
+                self.partnerName(clone_event.partner_name);
+                self.registrationLink(clone_event.registration_link);
+                $("#create_modal_footer").hide();
+                $("#edit_modal_footer").hide();
+                $("#clone_modal_footer").show();
+                $("#createevents_id" ).ojDialog( {title: "Clone Event" } );                
+                $("#createevents_id").ojDialog("open");
+            }
+            var event_no_for_edit;
+            openEditEventModal = function (edit_event) {
+                self.event_name(edit_event.name);
+                self.event_description(edit_event.description);
+                self.event_location(edit_event.location);
+                self.event_starttime(edit_event.start_time);
+                self.event_endtime(edit_event.end_time);
+                self.is_key_event(edit_event.key_event_value_check);
+                self.customerName(edit_event.customer_name);
+                // self.eventFeedback(edit_event.event_feedback);
+                self.eventLead(edit_event.event_lead);
+                self.partnerName(edit_event.partner_name);
+                self.registrationLink(edit_event.registration_link);
+                event_no_for_edit = edit_event.event_no;
+                $("#create_modal_footer").hide();
+                $("#clone_modal_footer").hide();
+                $("#edit_modal_footer").show();
+                $("#createevents_id" ).ojDialog( {title: "Edit Event" } );
+                $("#createevents_id").ojDialog("open");
+                
+            }
+
+            editEvent = function () {
+                // eventValidation();
+                // if(event_error_tracker > 0)
+                //     return;
+                sdatetime = self.event_starttime().replace("T", " ").replace("Z", "");
+                edatetime = self.event_endtime().replace("T", " ").replace("Z", "");
+                var edit_event_data = {
+                    event_no: event_no_for_edit,
+                    name: self.event_name(),
+                    location: self.event_location(),
+                    start_time: sdatetime,
+                    end_time: edatetime,
+                    description: self.event_description(),
+                    key_event: self.is_key_event()!=true?'No':'Yes',
+                    customer_name:self.customerName(),
+                    // event_feedback:self.eventFeedback(),
+                    event_lead: self.eventLead(),
+                    partner_name: self.partnerName(),
+                    link: self.registrationLink()
+                }
+                $.ajax({
+                    url: create_event_api,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(edit_event_data),
+                    success: function (data) {
+                        getAllEvents();
+                        resetEvent();
+                    }
+                    }).fail(function (xhr, textStatus, err) {
+                });
+                $("#createevents_id").ojDialog("close");                
+
+            }
+
+            showEventDetails = function (event_details) {
+                self.event_name(event_details.name);
+                self.event_description(event_details.description);
+                self.event_location(event_details.location);
+                self.event_starttime(event_details.start_time);
+                self.event_endtime(event_details.end_time);
+                self.is_key_event(event_details.key_event_value_check);
+                self.customerName(event_details.customer_name);
+                // self.eventFeedback(event_details.event_feedback);
+                self.eventLead(event_details.event_lead);
+                self.partnerName(event_details.partner_name);
+                self.registrationLink(event_details.registration_link);
+                $("#event_details_modal").ojDialog("open");
+            }            
+
+            /* ---------------------   EVENTS TAB END  -------------------------*/
             /*----------------------------------SEARCH----------------------------------*/
             function waitForElement(id, callback){
                 var wait_for_community_call = setInterval(function(){
@@ -1175,9 +1495,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             waitForElement("com_call_tab", function(){
                 var call_id_val1 = window.location.href;
-                var index_of = call_id_val1.indexOf("com_call_id");
-                var call_id_data1 = call_id_val1.substr(index_of+12);
-                if (call_id_data1*1 == call_id_data1){
+                // com_call_id is getting used to go directly to an old community call which doesnt 
+                //have a reply link. key_com_call is to navigate to key events com call from home page
+                var is_com_call_id_text_present = call_id_val1.indexOf("com_call_id");
+                var is_key_com_call_text_present = call_id_val1.indexOf("key_com_call");
+                if (is_com_call_id_text_present != -1 || is_key_com_call_text_present !=-1){
                     $('#com_call_tab').trigger('click');
                 }                
                
@@ -1263,7 +1585,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.ccCallType(ccalls.mode_of_call);
                 self.ccMeetingLink(ccalls.meetinglink);
                 self.ccRoles(ccalls.role);
-                self.ccDescription(ccalls.subdescription);
+                self.ccDescription(ccalls.description);
                 self.ccDialin(ccalls.dialin);
                 self.ccAdditionalLinks(ccalls.addl_link);
                 self.ccRecordingLinks(ccalls.recording_link);
@@ -1349,7 +1671,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var roleArray = [];
                 roleArray = roleString.split(",");
                 self.editccSelectedRoles(roleArray)
-                self.editccDescription(edit_calls.subdescription);
+                self.editccDescription(edit_calls.description);
                 self.editccDialin(edit_calls.dialin);
                 self.editccRecordingLinks(edit_calls.recording_link);
 
@@ -1391,7 +1713,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     keyevent: self.edit_com_call_keyevent()!=true?'No':'Yes'
 
                 }
-                console.log("edit : " + ko.toJSON(edit_community_call_data));
                 $.ajax({
                     url: community_call_url,
                     cache: false,
@@ -1514,7 +1835,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var roleArray = [];
                 roleArray = roleString.split(",");
                 self.cloneccSelectedRoles(roleArray)
-                self.cloneccDescription(clone_calls.subdescription);
+                self.cloneccDescription(clone_calls.description);
                 self.cloneccDialin(clone_calls.dialin);
                 self.cloneccRecordingLinks(clone_calls.recording_link);
 
@@ -1590,11 +1911,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     topic: self.cloneccTopic(),
                     invite: self.cloneccInvite(),
                     keyevent: self.clone_com_call_keyevent()!=true?'No':'Yes'
-
-
                 }
-
-                console.log("clone json data: " + ko.toJSON(clone_call));
 
                 $.ajax({
                     url: community_call_url,
@@ -1614,7 +1931,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             }
 
-
             self.searchcallstext = ko.observable('');
             //  SEARCH COMMUNITY CALLS
             searchcommunitycalls = function () {
@@ -1626,10 +1942,24 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var call_id_val = window.location.href;
                 var index_of = call_id_val.indexOf("com_call_id");
                 var call_id_data = call_id_val.substr(index_of+12);
+                var key_com_call_from_home = call_id_val.indexOf("key_com_call");
+                var call_id_data_from_home = call_id_val.substr(key_com_call_from_home+13);
+
                 if (call_id_data*1 != call_id_data){
                     call_id_data = '$-$';
                 }
-                var apex_link = 'GetCommunityCallDetailsOnFreetextSearch/' + searchtext + '/' + past + '/' + callmodel + '/' + roles + '/' +call_id_data;
+                var apex_link;
+                apex_link = 'GetCommunityCallDetailsOnFreetextSearch/' + searchtext + '/' + past + '/' + callmodel + '/' + roles + '/' +call_id_data;
+                //below apex_link is to get all past community call with and without replay link.
+                if (call_id_data != '$-$'){
+                    apex_link = 'GetCommunityCallDetailsOnFreetextSearch/' + searchtext + '/' + 'other_than_$-$' + '/' + callmodel + '/' + roles + '/' +call_id_data;
+                }
+                if(key_com_call_from_home != -1){
+                    call_id_data = call_id_data_from_home;
+                    apex_link = 'GetCommunityCallDetailsOnFreetextSearch/$-$/$-$/$-$/$-$/' + call_id_data;     
+                }
+
+                console.log("apex_link : "+apex_link)
                 getCommunityCalls(apex_link);
                 
             }

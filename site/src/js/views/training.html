@@ -475,7 +475,7 @@
                         <h6 class="hinttext">prefix link with http/https</h6>
                       </div>
                       <br>
-                      <div class="oj-flex">
+<!--                       <div class="oj-flex">
                         <div class="oj-sm-12">
                           <label>Invite </label>
                         </div>
@@ -484,7 +484,7 @@
                         </div>
                       </div>
                       <br>                      
-                      <div class="oj-flex">
+ -->                      <div class="oj-flex">
                         <div class="oj-sm-12">
                           <label>Dial in details</label>
                         </div>
@@ -664,7 +664,6 @@
                         </div>
                       <br>
                       <div class="oj-flex oj-sm-12 inputrow">
-
                         <div class="oj-sm-12">
                           <label id="switchLabel" for="switch">Key Event</label>
                         </div>
@@ -694,7 +693,7 @@
                           <h6 class="hinttext">prefix link with http/https</h6>
                         </div>
                         <br>
-                        <div class="oj-flex">
+<!--                         <div class="oj-flex">
                           <div class="oj-sm-12">
                             <label>Invite </label>
                           </div>
@@ -703,7 +702,7 @@
                           </div>
                         </div>
                         <br>                        
-                        <div class="oj-flex">
+ -->                        <div class="oj-flex">
                           <div class="oj-sm-12">
                             <label>Dial in details</label>
                           </div>
@@ -914,7 +913,7 @@
                         <h6 class="hinttext">prefix link with http/https</h6>
                       </div>
                       <br>
-                      <div class="oj-flex">
+<!--                       <div class="oj-flex">
                         <div class="oj-sm-12">
                           <label>Invite </label>
                         </div>
@@ -923,7 +922,7 @@
                         </div>
                       </div>
                       <br>                      
-                      <div class="oj-flex">
+ -->                      <div class="oj-flex">
                         <div class="oj-sm-12">
                           <label>Dial in details</label>
                         </div>
@@ -1298,103 +1297,291 @@
             </div>
           </div>
         </div>
+
         <div id="tabs-5">
-          <div class="container row5">
-            <div class="oj-sm-12 keydates">
-              <div class="oj-flex">
-                <div class="oj-sm-12 keydatestitle">
-                  <br>
-                </div>
-                <div class="oj-sm-12">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12">
-                      <div class="oj-margin">
-                      <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Multiple <br> <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;8:00:00 PT
-                        &nbsp;</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">ORACLE CODE EVENTS</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end">
-<a href="https://developer.oracle.com/code" target="_blank">Link</a></div>
+         <div class="container row5">
+    <div class="oj-sm-12 keydates">
+      <div class="oj-flex">
+        <div class="oj-sm-12 createeventbutton"><br>
+          <div class="admin" style="float:right;padding-right: 10px">
+            <button class="orangebutton " onclick="openCreateEventDialog()" style="cursor: pointer" data-bind="ojComponent: {
+              component:'ojButton',  
+              label: 'Create Event'}"> 
+            </button>
+          </div>
+        </div>
+      </div>
+
+<!-- show event details modal start -->
+    <div style="display:none;height:500px" class="dialogbodymain" id="event_details_modal" title="Event Details" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 60%'}}">
+      <div class="dialogbody">
+        <h1>Name</h1>
+        <p>
+          <span data-bind="text:event_name"></span>
+        </p>
+        <h1>Desciption</h1>
+        <p>
+          <span data-bind="html:event_description"></span>
+        </p>
+        <h1>Location</h1>
+        <p>
+          <span data-bind="text:event_location"></span>
+        </p>
+        <h1>Start Date and Time</h1>
+        <p>
+          <span data-bind="text:event_starttime"></span>
+        </p>
+        <h1>End Date and Time</h1>
+        <p>
+          <span data-bind="text:event_endtime"></span>
+        </p>
+        <h1>Customer Name</h1>
+        <p>
+          <span data-bind="text:customerName"></span>
+        </p>        
+<!--         <h1>Event Feedback</h1>
+        <p>
+          <span data-bind="html:eventFeedback"></span>
+        </p> -->
+        <h1>Event Lead</h1>
+        <p>
+          <span data-bind="text:eventLead"></span>
+        </p>
+        <h1>Partner Name</h1>
+        <p>
+          <span data-bind="text:partnerName"></span>
+        </p>
+        <h1>Link</h1>
+        <p>
+          <a data-bind="attr:{href:registrationLink}" target="_blank">Click here</a>
+        </p>
+      </div>
+    </div>
+<!-- show event details modal end -->
+        <!-- events modal start -->
+            <div style="display:none" id="createevents_id" title="Create an Event" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+              <div class="dialogbodymain">
+              <div class="dialogbody">
+                <!-- body start -->
+                <div class="oj-flex">
+                  <div class="oj-lg-6">
+                    <div class="oj-margin-right nomargin-md">
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Event Name </label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input required type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:event_name}" />
+                        </div>
+                      </div>
+
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Location</label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:event_location}" />
+                        </div>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Start Date and Time</label>
+                          <label class="required">*</label>
+
+                        </div>
+                        <div class="oj-sm-12">
+<!--                           <oj-input-date-time id="dateTime" value='{{event_starttime}}'>
+                            </oj-input-date-time> -->
+                        <input data-bind="ojComponent: {component: 'ojInputDateTime', value:event_starttime}" />    
+                        </div>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>End Date andTime</label>
+                          <label class="required">*</label>
+                        </div>
+                        <div class="oj-sm-12">
+                        <input data-bind="ojComponent: {component: 'ojInputDateTime', value:event_endtime}" />
+                        </div>
+                      </div>
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Event Lead </label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:eventLead}">
+                        </div>
+                      </div>
+                      <br>                      
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Partner Name</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:partnerName}" />
+                        </div>
+                      </div>  
+                                        
                     </div>
                   </div>
-                </div>
-               
-                <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp; Tue Jan 30 2018<br> <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;9:00:00 PT
-                        &nbsp;</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">ORACLE CLOUD DAY – TORONTO </div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end">
-<a href="https://eventreg.oracle.com/profile/web/index.cfm?PKwebID=0x500556abcd&&source=NAMK170628P00113:OW:ES:LV" target="_blank">Link</a></div>
-                    </div>
+
+                  <div class="oj-lg-6">
+                    <div class="nomargin-md oj-margin-left">
+                      <div class="oj-flex oj-sm-12 inputrow">
+                        <div class="oj-sm-12">
+                          <label id="switchLabel" for="switch">Key Event</label>
+                        </div>
+                        <input id="switch" data-bind="ojComponent: {component: 'ojSwitch', value:is_key_event}" />
+                      </div>
+
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Description </label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:event_description}"></textarea>
+                        </div>
+                      </div>
+<!--                       <br>                      
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Event Feedback</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:eventFeedback}"></textarea>
+                        </div>
+                      </div> -->
+                      <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Registration Link</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:registrationLink}" />
+                        </div>
+                        <h6 class="hinttext">prefix link with http / https</h6>
+                      </div> 
+                     <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Customer Name</label>
+                        </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:customerName}" />
+                        </div>
+                      </div>  
+                   
+                   </div>
                   </div>
                 </div>
-                  <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Thu Feb 1 2018<br> <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;9:00:00 PT
-                        &nbsp;</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">ORACLE CLOUD DAY – SAN FRANCISCO </div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end">
-<a href="https://eventreg.oracle.com/profile/web/index.cfm?PKwebID=0x501411abcd&source=NAMK170629P00085:OW:ES:LV" target="_blank">Link</a></div>
-                    </div>
+                <br>
+                <div id="create_modal_footer" class="oj-flex">
+                  <div class="oj-md-3">
+                    <button id="outlinedPush" class="bluebutton" style="cursor: pointer" data-bind="ojComponent: {
+                    component:'ojButton',
+                    label: 'Create Event'},click:createEvent"> </button>
                   </div>
-                </div>
-                 <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Thu Feb 8 2018<br> <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;9:00:00 PT
-                        &nbsp;</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">ORACLE CLOUD DAY – ATLANTA</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end">
-<a href="https://www.oracle.com/cloudworld/newyork/index.html" target="_blank">Link</a></div>
-                    </div>
+                  <div class="oj-md-3">
+                    <button id="outlinedPush" class="orangebutton bluebutton" onclick="resetEvent()" style="cursor: pointer" data-bind="ojComponent: {
+                    component:'ojButton',  
+                    label: 'Reset'}"> </button>
                   </div>
-                </div>
-                 <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Mon Feb 12 2018<br> <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;9:00:00 PT
-                        &nbsp;</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">ORACLE CLOUDWORLD – NEW YORK</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end">
-<a href="https://www.oracle.com/cloudworld/newyork/index.html" target="_blank">Link</a></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="calrow">
-                  <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span 
-     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tue Feb 27 2018<br> <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;8:00:00 PT
-                        &nbsp;</p>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">CALIFORNIA PUBLIC SECTOR – CIO ACADEMY</div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <div class="orangeBbutton oj-lg-float-end">
-<a href="http://www.govtech.com/events/California-Public-Sector-CIO-Academy.html" target="_blank">Link</a></div>
-                    </div>
-                  </div>
+                  <div class="oj-flex-item"> </div>
+                  <div class="oj-flex-item"> </div>
                 </div>
 
+                <div id="clone_modal_footer" class="oj-flex" style="display: none">
+                  <div class="oj-md-3">
+                    <button id="outlinedPush" class="bluebutton" style="cursor: pointer" data-bind="ojComponent: {
+                    component:'ojButton',
+                    label: 'Clone Event'},click:cloneEvent"> </button>
+                  </div>
+                  <div class="oj-md-3">
+                    <button id="outlinedPush" class="orangebutton bluebutton" onclick="resetEvent()" style="cursor: pointer" data-bind="ojComponent: {
+                    component:'ojButton',  
+                    label: 'Reset'}"> </button>
+                  </div>
+                  <div class="oj-flex-item"> </div>
+                  <div class="oj-flex-item"> </div>
+                </div>
+
+                <div id="edit_modal_footer" class="oj-flex" style="display: none">
+                  <div class="oj-md-3">
+                    <button id="outlinedPush" class="bluebutton" style="cursor: pointer" data-bind="ojComponent: {
+                    component:'ojButton',
+                    label: 'Edit Event'},click:editEvent"> </button>
+                  </div>
+                  <div class="oj-md-3">
+                    <button id="outlinedPush" class="orangebutton bluebutton" onclick="resetEvent()" style="cursor: pointer" data-bind="ojComponent: {
+                    component:'ojButton',  
+                    label: 'Reset'}"> </button>
+                  </div>
+                  <div class="oj-flex-item"> </div>
+                  <div class="oj-flex-item"> </div>
+                </div>
+
+                <!-- body end -->
+              </div>
+              </div>
+            </div>
+
+<!-- events modal end -->
+
+<!-- delete event start -->
+<div id="dialogWrapper">
+  <div style="display:none" id="delete_event_modal" title="Delete Confirmation" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'icon',rootAttributes: { style: 'width: 35%; height: auto; min-width 100px; '}}">
+    <div class="oj-dialog-body roleWrapper">
+      <h4>Are you sure,you want to delete this ? </h4>
+    </div>
+    <div class="oj-dialog-footer">
+      <button id="okButton" style="cursor: pointer;" onclick="closeEventDeleteModal()" data-bind="ojComponent: {component: 'ojButton', label: 'Cancel'}">
+      </button>
+
+      <button id="delete_event_button" style="background: #d9534f;color: white;cursor: pointer;" data-bind="ojComponent: {component: 'ojButton', label: 'Delete'}">
+      </button>
+    </div>
+  </div>
+</div>
+<!-- delete event end -->
+
+
+        <div class="oj-sm-12">
+          <div class="oj-flex">
+            <div class="oj-sm-12">
+              <div class="oj-margin">
+              <!-- ko foreach:eventsList -->
+               <div class="calrow">
+                  <div class="oj-flex">
+                     <div class="oj-sm-12 oj-lg-5 cTitle oj-flex"><span class="event_name" data-bind="text:name"></span></div>
+                    <div class="oj-sm-12 oj-lg-3 cDate">
+                      <p><span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;<span class="event_date" data-bind="text:date"></span></p>
+                        <p><span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;<span class="event_date" data-bind="text:time"></span></p>
+                    </div>
+                   
+                    <div class="oj-sm-12 oj-lg-3 cDate oj-flex">
+                      <p><span class="event_date" data-bind="text:location"></span></p>
+                    </div>
+
+                    <div class="oj-sm-12 oj-lg-1 editicons ">
+                          <a class="cclink" data-bind="attr:{href:registration_link}" target="_blank" style="text-decoration: none;">
+                            <i class="fa fa-calendar" aria-hidden="true" style="cursor: pointer; font-size: 17px" title="Link"></i>
+                          </a>
+                        <i class="fa fa-files-o admin" aria-hidden="true" style="cursor: pointer; font-size: 17px" title="Clone Event" data-bind="click:openCloneEventModal" target="_blank"></i> 
+                        <i class="fa fa-pencil-square-o admin" aria-hidden="true" style="cursor: pointer; font-size: 17px" title="Edit Event" data-bind="click:openEditEventModal" target="_blank"></i> 
+                        <i class="fa fa-trash-o admin" aria-hidden="true" style="cursor: pointer; font-size: 17px" title="Delete Event" data-bind="click:deleteEvent" target="_blank"></i><br>
+                        <a data-bind="click:showEventDetails" target="_blank" class="ccdetailsbutton">Details</a>
+                    </div>
+
+                  </div>
+                </div>
+              <!-- /ko -->
                         <div class="oj-sm-12 oj-sm-center" style="display:none">
                           <div class="oj-flex valign">
                             <div class="oj-sm-12 oj-lg-4 oj-flex"></div>
@@ -1542,6 +1729,8 @@
     </div>
     <div style="display:none;height:500px" class="dialogbodymain" id="communitycallsdetails" title="Community Calls" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%'}}">
       <div class="dialogbody">
+              <div class="oj-flex">
+        <div class="oj-lg-6">
         <h1>Name</h1>
         <p>
           <span data-bind="text:ccName"></span>
@@ -1564,15 +1753,11 @@
         </p>
         <h1>Meeting Link</h1>
         <p>
-          <span data-bind="text:ccMeetingLink"></span>
+          <a data-bind="attr:{href:ccMeetingLink}" target="_blank">Click here</a>
         </p>
         <h1>Roles</h1>
         <p>
           <span data-bind="text:ccRoles"></span>
-        </p>
-        <h1>Description</h1>
-        <p>
-          <span data-bind="html:ccDescription"></span>
         </p>
         <h1>Dial-In</h1>
         <p>
@@ -1586,6 +1771,13 @@
         <p>
           <a data-bind="attr:{href:ccRecordingLinks}" target="_blank">Click here</a>
         </p>
+      </div>
+      <div class="oj-lg-6">
+        <h1>Description</h1>
+        <p>
+          <span data-bind="html:ccDescription"></span>
+        </p>
+      </div>
       </div>
     </div>
   </div>
