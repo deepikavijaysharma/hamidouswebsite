@@ -43,13 +43,13 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         'admin': {
           label: 'Admin'
         },
-		'archive': {
+    'archive': {
           label: 'Archive'
         },
-		'empfeaturearchive': {
+    'empfeaturearchive': {
           label: 'Employee Feature Archive'
         },
-		'keydatesarchives': {
+    'keydatesarchives': {
           label: 'Key Dates Archive'
         }
       });
@@ -101,6 +101,11 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       }
 
       closesso = function () {
+        if (ssoemail.length > 0) {
+          self.ssowindow.close();
+        }
+      }
+      logoutUser = function () {
         if (ssoemail.length > 0) {
           self.ssowindow = window.open("https://login-stage.oracle.com:443/oam/server/logout", target = "_self");
         }
@@ -176,10 +181,12 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       //   });
       //   }
       // }
-
+      initsso();
+      
       setInterval(function () {
         getemailfromcookie();
         isloggedin();
+        closesso();
       }, 500);
 
  
@@ -230,7 +237,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
          new footerLink('Home', 'home', '?root=home'),
         new footerLink('ECAL Site', 'ecal', 'http://innovate.us.oracle.com/ecal/', '_blank'),
         new footerLink('Cloud Accelerate Site', 'cloudaccelerate', 'http://innovate.us.oracle.com/cloudaccelerate/', '_blank'),
-		new footerLink('Contact Us', 'contactus', 'mailto:heather.hughes@oracle.com'),
+    new footerLink('Contact Us', 'contactus', 'mailto:heather.hughes@oracle.com'),
         
       ]);
     }
