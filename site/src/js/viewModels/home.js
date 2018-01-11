@@ -55,24 +55,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         self.currentNavArrowPlacement = ko.observable("adjacent");
         self.currentNavArrowVisibility = ko.observable("auto");
-
-        // // getter
-        // var maxItemsPerPage = $("#filmStrip1").ojFilmStrip("option", "maxItemsPerPage");
-
-        //     // setter
-        //     $("#filmStrip1").ojFilmStrip("option", "maxItemsPerPage", 3);
-        // // getter
-        // var arrowPlacement = $("#filmStrip1").ojFilmStrip("option", "arrowPlacement");
-        // var arrowVisibility = $(".selector").ojFilmStrip("option", "arrowVisibility");
-        // // setter
-        // // $("#filmStrip1").ojFilmStrip("option", "arrowPlacement", "overlay");
-        // $("#filmStrip1").ojFilmStrip({ "arrowPlacement": "overlay" });
-        // $("#filmStrip1").ojFilmStrip("option", "arrowVisibility", "visible");
         
         getItemInitialDisplay1 = function (index) {
             return index < 2 ? '' : 'none';
         };
-
 
         //CREATE SLIDER observables
         self.slimage = ko.observableArray([]);
@@ -156,8 +142,9 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         dempfeaid: self.empfeatlist()[b].empfeaid, 
                         dempfeatext: self.empfeatlist()[b].empfeatext, 
                         dempfeaheading: self.empfeatlist()[b].empfeaheading, 
-                        dempfeabg: self.empfeatlist()[b].empfeabg 
-                    });//console.log(ko.toJSON(self.empdeatilsmatched));
+                        dempfeabg: self.empfeatlist()[b].empfeabg,
+                        dempfeaarchived: self.empfeatlist()[b].archived 
+                    });
                 }
             }
             $("#empf1").ojDialog("open");
@@ -294,6 +281,31 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             });
         }
 
+        archiveslider = function (slider_archive) 
+        {
+            console.log("Archived Slider", slider_archive.sliderid);
+            var data_sl_value = {
+                "id": slider_archive.sliderid,
+                "archived": "YES"
+            };
+            $.ajax({
+                url: homebaseurl + 'home_screen_data',
+                method: 'DELETE',
+                contentType: 'application/json; charset=utf-8',
+                data: ko.toJSON(data_sl_value),
+                success: function () {
+                    console.log("Slider Archived");
+                    fetchslider();
+                },
+                fail: function (xhr, textStatus, err) {
+                    console.log("Fail: ",err);
+                },
+                error: function (xhr, textStatus, err) {
+                    console.log("Error: ",err);
+                }
+            });
+        }
+
         deleteslider = function (slider_delete) 
         {
             console.log("Deleted Slider",slider_delete);
@@ -359,7 +371,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         sliderimg: sllist[s].image,
                         sliderlt1: sllist[s].link_text1,
                         sliderlt2: sllist[s].link_text2,
-                        slidertitle: sllist[s].title
+                        slidertitle: sllist[s].title,
+                        sliderarchived: sllist[s].archived
                     })
                 }
             });
@@ -1865,6 +1878,30 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#editempfdialog").ojDialog("close");
         }
 
+        archiveemployeefeatures = function (employeefeatures_archive) {
+            console.log("Archived Employee Features", employeefeatures_archive.empfeaid);
+            var data_ef_value = {
+                "id": employeefeatures_archive.empfeaid,
+                "archived": "YES"
+            };
+            $.ajax({
+                url: homebaseurl + 'employee_features',
+                method: 'DELETE',
+                contentType: 'application/json; charset=utf-8',
+                data: ko.toJSON(data_ef_value),
+                success: function () {
+                    console.log("Archive success for employee features");
+                    fetchempfeatures();
+                },
+                fail: function (xhr, textStatus, err) {
+                    console.log("Fail: ", err);
+                },
+                error: function (xhr, textStatus, err) {
+                    console.log("Error: ", err);
+                }
+            });
+        }
+
         deleteemployeefeatures = function (ef_delete) {
             console.log("delete employee feature", ef_delete);
             openDeleteEmployeeFeaturesModal(ef_delete.empfeaid);
@@ -1915,9 +1952,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         empfeaid: eflist[b].id,
                         empfeaheading: eflist[b].features_heading,
                         empfeatext: eflist[b].key_wins_text,
-                        empfeabg: eflist[b].image
+                        empfeabg: eflist[b].image,
+                        empfeaarchived: eflist[b].archived
                     })
-                }//console.log(ko.toJSON(self.empfeatlist()));
+                }
             });
         }
         fetchempfeatures();
@@ -2311,9 +2349,9 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             element.value = '';
         }
 
-        self.handleAttached=function(info) {
+        self.handleActivated = function(info) {
             checkadmin();
-            checkadminrights();
+            checkadminrights();        
         };
     }
 

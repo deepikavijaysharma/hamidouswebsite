@@ -221,6 +221,7 @@ position: absolute;
 }
 .efadmin{
     position: absolute;
+    z-index: 1000;
     right: 15px;
     top: 10px;
 }
@@ -237,11 +238,13 @@ margin-right: 5px;
     <!-- Indicators -->
     <ol class="carousel-indicators">
       <!-- ko foreach: sliderlist() -->
-        <!-- ko if: $index() == 0 -->
-        <li data-target="#myCarousel" data-bind="attr:{'data-slide-to':$index}" class="active"></li>
-        <!-- /ko -->
-        <!-- ko if: $index() != 0 -->
-        <li data-target="#myCarousel" data-bind="attr:{'data-slide-to':$index}"></li>
+        <!-- ko if: sliderarchived == "NO" -->
+          <!-- ko if: $index() == 0 -->
+          <li data-target="#myCarousel" data-bind="attr:{'data-slide-to':$index}" class="active"></li>
+          <!-- /ko -->
+          <!-- ko if: $index() != 0 -->
+          <li data-target="#myCarousel" data-bind="attr:{'data-slide-to':$index}"></li>
+          <!-- /ko -->
         <!-- /ko -->
       <!-- /ko -->      
     </ol>
@@ -249,109 +252,111 @@ margin-right: 5px;
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <!-- ko foreach: sliderlist() -->
-        <!-- ko if: $index() == 0 -->
-        <div class="item active" data-bind="attr:{'id':sliderid}">
-          <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
-            <i class="fa fa-pencil-square-o endsl homeadmin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider"></i>
-            <i class="fa fa-trash-o endsldel homeadmin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>
-            <i class="fa fa-share-square-o endslarc homeadmin editdis" aria-hidden="true" title="Archive Slider" data-bind=""></i>
-            <div class="verticalcentertext">
+        <!-- ko if: sliderarchived == "NO" -->
+          <!-- ko if: $index() == 0 -->
+          <div class="item active" data-bind="attr:{'id':sliderid}">
+            <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
+              <i class="fa fa-pencil-square-o endsl homeadmin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider"></i>
+              <i class="fa fa-trash-o endsldel homeadmin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>
+              <i class="fa fa-share-square-o endslarc homeadmin" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider"></i>
               <div class="verticalcentertext">
-                <div class="verticalcentertextinner">
-                  
-                  <div class="heading" data-bind="html: slidertitle"></div>
-                  <div class="text" data-bind="html: sliderdesc"></div>
-                  <div class="buttons_c oj-rwow oj-flex">
+                <div class="verticalcentertext">
+                  <div class="verticalcentertextinner">
+                    
+                    <div class="heading" data-bind="html: slidertitle"></div>
+                    <div class="text" data-bind="html: sliderdesc"></div>
+                    <div class="buttons_c oj-rwow oj-flex">
 
-                    <!-- ko if: (sliderbl1  && sliderlt1 &&  sliderbl2 && sliderlt2 )-->
-                    <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl1">
-                      <div class=" buttons oj-lg-float-end"><a data-bind="attr:{'href':sliderlt1},text:sliderbl1" target="_blank"></a><span class="right-arrow"></span></div>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl2">
-                      <div class=" buttons oj-lg-float-start"><a data-bind="attr:{'href':sliderlt2},text:sliderbl2" target="_blank"></a><span class="right-arrow"></span></div>
-                    </div>
-                    <!-- /ko -->
-                    <!-- ko ifnot: (sliderbl1  && sliderlt1  &&  sliderbl2  && sliderlt2)-->
-                      <!-- ko if: (sliderbl2 && sliderlt2)-->
-                      <div class="oj-sm-12 oj-lg-12 bl2">
-                        <div class="buttons">
-                          <a data-bind="attr:{'href':sliderlt2},text:sliderbl2" target="_blank"></a>
-                          <span class="right-arrow"></span>
-                        </div>
+                      <!-- ko if: (sliderbl1  && sliderlt1 &&  sliderbl2 && sliderlt2 )-->
+                      <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl1">
+                        <div class=" buttons oj-lg-float-end"><a data-bind="attr:{'href':sliderlt1},text:sliderbl1" target="_blank"></a><span class="right-arrow"></span></div>
+                      </div>
+                      <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl2">
+                        <div class=" buttons oj-lg-float-start"><a data-bind="attr:{'href':sliderlt2},text:sliderbl2" target="_blank"></a><span class="right-arrow"></span></div>
                       </div>
                       <!-- /ko -->
-                      <!-- ko ifnot: (sliderbl2 && sliderlt2)-->
-                        <!-- ko if: (sliderbl1 && sliderlt1)-->
-                        <div class="oj-sm-12 oj-lg-12 bl1">
+                      <!-- ko ifnot: (sliderbl1  && sliderlt1  &&  sliderbl2  && sliderlt2)-->
+                        <!-- ko if: (sliderbl2 && sliderlt2)-->
+                        <div class="oj-sm-12 oj-lg-12 bl2">
                           <div class="buttons">
-                            <a data-bind="attr:{'href':sliderlt1},text:sliderbl1" target="_blank"></a>
+                            <a data-bind="attr:{'href':sliderlt2},text:sliderbl2" target="_blank"></a>
                             <span class="right-arrow"></span>
                           </div>
                         </div>
                         <!-- /ko -->
+                        <!-- ko ifnot: (sliderbl2 && sliderlt2)-->
+                          <!-- ko if: (sliderbl1 && sliderlt1)-->
+                          <div class="oj-sm-12 oj-lg-12 bl1">
+                            <div class="buttons">
+                              <a data-bind="attr:{'href':sliderlt1},text:sliderbl1" target="_blank"></a>
+                              <span class="right-arrow"></span>
+                            </div>
+                          </div>
+                          <!-- /ko -->
+                        <!-- /ko -->
                       <!-- /ko -->
-                    <!-- /ko -->
 
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- /ko -->
-        <!-- ko if: $index() != 0 -->
-        <div class="item" data-bind="attr:{'id':sliderid}"> 
-          <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
-            <i class="fa fa-pencil-square-o endsl homeadmin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider" ></i>
-            <i class="fa fa-trash-o endsldel homeadmin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>
-            <i class="fa fa-share-square-o endslarc homeadmin editdis" aria-hidden="true" itle="Archive Slider" data-bind=""></i>
-            <div class="verticalcentertext">
+          <!-- /ko -->
+          <!-- ko if: $index() != 0 -->
+          <div class="item" data-bind="attr:{'id':sliderid}"> 
+            <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
+              <i class="fa fa-pencil-square-o endsl homeadmin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider" ></i>
+              <i class="fa fa-trash-o endsldel homeadmin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>
+              <i class="fa fa-share-square-o endslarc homeadmin" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider"></i>
               <div class="verticalcentertext">
-                <div class="verticalcentertextinner">
-                  
-                  <div class="heading" data-bind="html: slidertitle"></div>
-                  <div class="text" data-bind="html: sliderdesc"></div>
-                  <div class="buttons_c oj-rwow oj-flex">
-                    <!-- ko if: (sliderbl1  && sliderlt1 &&  sliderbl2 && sliderlt2 )-->
-                    <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl1">
-                      <div class=" buttons oj-lg-float-end">
-                        <a data-bind="attr:{'href':sliderlt1},text:sliderbl1" target="_blank"></a>
-                        <span class="right-arrow"></span>
+                <div class="verticalcentertext">
+                  <div class="verticalcentertextinner">
+                    
+                    <div class="heading" data-bind="html: slidertitle"></div>
+                    <div class="text" data-bind="html: sliderdesc"></div>
+                    <div class="buttons_c oj-rwow oj-flex">
+                      <!-- ko if: (sliderbl1  && sliderlt1 &&  sliderbl2 && sliderlt2 )-->
+                      <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl1">
+                        <div class=" buttons oj-lg-float-end">
+                          <a data-bind="attr:{'href':sliderlt1},text:sliderbl1" target="_blank"></a>
+                          <span class="right-arrow"></span>
+                        </div>
                       </div>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl2">
-                      <div class=" buttons oj-lg-float-start">
-                        <a data-bind="attr:{'href':sliderlt2},text:sliderbl2" target="_blank"></a>
-                        <span class="right-arrow"></span>
-                      </div>
-                    </div>
-                    <!-- /ko -->
-                    <!-- ko ifnot: (sliderbl1  && sliderlt1  &&  sliderbl2  && sliderlt2)-->
-                      <!-- ko if: (sliderbl2 && sliderlt2)-->
-                      <div class="oj-sm-12 oj-lg-12 bl2">
-                        <div class="buttons">
+                      <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl2">
+                        <div class=" buttons oj-lg-float-start">
                           <a data-bind="attr:{'href':sliderlt2},text:sliderbl2" target="_blank"></a>
                           <span class="right-arrow"></span>
                         </div>
                       </div>
                       <!-- /ko -->
-                      <!-- ko ifnot: (sliderbl2 && sliderlt2)-->
-                        <!-- ko if: (sliderbl1 && sliderlt1)-->
-                        <div class="oj-sm-12 oj-lg-12 bl1">
+                      <!-- ko ifnot: (sliderbl1  && sliderlt1  &&  sliderbl2  && sliderlt2)-->
+                        <!-- ko if: (sliderbl2 && sliderlt2)-->
+                        <div class="oj-sm-12 oj-lg-12 bl2">
                           <div class="buttons">
-                            <a data-bind="attr:{'href':sliderlt1},text:sliderbl1" target="_blank"></a>
+                            <a data-bind="attr:{'href':sliderlt2},text:sliderbl2" target="_blank"></a>
                             <span class="right-arrow"></span>
                           </div>
                         </div>
                         <!-- /ko -->
+                        <!-- ko ifnot: (sliderbl2 && sliderlt2)-->
+                          <!-- ko if: (sliderbl1 && sliderlt1)-->
+                          <div class="oj-sm-12 oj-lg-12 bl1">
+                            <div class="buttons">
+                              <a data-bind="attr:{'href':sliderlt1},text:sliderbl1" target="_blank"></a>
+                              <span class="right-arrow"></span>
+                            </div>
+                          </div>
+                          <!-- /ko -->
+                        <!-- /ko -->
                       <!-- /ko -->
-                    <!-- /ko -->
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>  
+          </div>  
+          <!-- /ko -->
         <!-- /ko -->
       <!-- /ko -->
 
@@ -656,6 +661,7 @@ margin-right: 5px;
     </div>
   </div>
 </div>
+
 <!------------------------------------Our Organization------------------------------------> 
 <a class="anchor" id="organization"></a>
 <div class="oj-row row7 newrow">
@@ -1001,6 +1007,7 @@ margin-right: 5px;
     </div>
   </div>
 </div>
+
 <!------------------------------------KEY DATES------------------------------------> 
 <a class="anchor" id="keydates"></a>
 <div class="oj-row row5 newrow">
@@ -1015,7 +1022,7 @@ margin-right: 5px;
                 <!-- ko foreach: keydateslist --> 
                 <div class="calrow">
                   <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-3 cDate oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
                       <p><span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;<span data-bind="text: keydstartdate"></span><br>
                        Time: <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;<span data-bind="text: keydstarttime"></span></p>
                     </div>
@@ -1036,11 +1043,10 @@ margin-right: 5px;
                         <div class="orangeBbutton oj-lg-float-end">
                           <a data-bind="attr:{'href':keydhlink+keydcid}" target="_blank">Link</a>
                         </div>
-                        <!-- /ko -->
-                        
+                        <!-- /ko -->                        
                       <!-- /ko -->
                     </div>
-                    <div class="oj-sm-12 oj-lg-1 cDate oj-flex"><i class="fa fa-share-square-o homeadmin editdis" aria-hidden="true" title="Archive Key Dates" data-bind=""></i></div>
+                    <!-- <div class="oj-sm-12 oj-lg-1 cDate oj-flex"><i class="fa fa-share-square-o homeadmin editdis" aria-hidden="true" title="Archive Key Dates" data-bind=""></i></div> -->
                   </div>
                 </div>
                 <!-- /ko -->
@@ -1063,6 +1069,8 @@ margin-right: 5px;
     </div>
   </div>
 </div>
+
+<!------------------------------------Key Wins------------------------------------>
 <a class="anchor" id="keywins"></a>
 <div class="oj-row row7 newrow">
   <div class="container">
@@ -1094,7 +1102,8 @@ margin-right: 5px;
     </div>
   </div>
 </div>
-<!------------------------------------Wins, Go-Lives and References------------------------------------> 
+
+<!------------------------------------Go-Lives------------------------------------> 
 <a class="anchor" id="golives"></a>
 <div class="oj-row row7 newrow">
   <div class="container">
@@ -1239,6 +1248,7 @@ margin-right: 5px;
     </div>
   </div>
 </div>
+
 <!------------------------------------Featured Stories------------------------------------> 
 <a class="anchor" id="empf"></a>
 <div class="oj-row row7 newrow">
@@ -1249,39 +1259,41 @@ margin-right: 5px;
         <button class="btn btn-info btn-xs btnaddnewref homeadmin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddnewefdialog">Add New Employee Feature</button>
         <div class="oj-sm-12">
           <div class="oj-flex">
-            <div id="filmStripfeatured" class="" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'hidden'}"> <!-- block 1 -->
+            <div id="filmStripfeatured" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'hidden'}">
               <!-- ko foreach: empfeatlist -->
-                <!-- ko if: empfeaid =='3' -->
-                <div class="oj-panel oj-panel-alt2 my-filmstrip-item1 efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
-                  <div class="efadmin">
-                    <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
-                    <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
-                    <i class="fa fa-share-square-o homeadmin editdis" aria-hidden="true" title="Archive Employee Features" data-bind=""></i>
-                  </div>
-                  <div class="employee_c" >
-                    <div class="emp_details">
-                      <div class="slash"></div>
-                      <a onclick="empf1(this.id)" data-bind="attr:{'id':empfeaid}"><span data-bind="text: empfeaheading"></span></a>
+                <!-- ko if: empfeaarchived == 'NO' -->
+                  <!-- ko if: empfeaid =='3' -->
+                  <div class="oj-panel oj-panel-alt2 my-filmstrip-item1 efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
+                    <div class="efadmin">
+                      <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
+                      <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
+                      <i class="fa fa-share-square-o homeadmin" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures"></i>
+                    </div>
+                    <div class="employee_c" >
+                      <div class="emp_details">
+                        <div class="slash"></div>
+                        <a onclick="empf1(this.id)" data-bind="attr:{'id':empfeaid}"><span data-bind="text: empfeaheading"></span></a>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <!-- /ko -->
-                <!-- ko ifnot: empfeaid =='3' -->
-                <div class="oj-panel oj-panel-alt2 my-filmstrip-item efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
-                  <div class="efadmin">
-                    <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
-                    <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
-                    <i class="fa fa-share-square-o homeadmin editdis" aria-hidden="true" title="Archive Employee Features" data-bind=""></i>
-                  </div>
-                  <div class="employee_c">
-                    <div class="emp_details">
-                      <div class="slash"></div>
-                      <a onclick="empf1(this.id)" data-bind="attr:{'id':empfeaid}">
-                        <span data-bind="text: empfeaheading"></span>
-                      </a>
+                  <!-- /ko -->
+                  <!-- ko ifnot: empfeaid =='3' -->
+                  <div class="oj-panel oj-panel-alt2 my-filmstrip-item efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
+                    <div class="efadmin">
+                      <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
+                      <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
+                      <i class="fa fa-share-square-o homeadmin" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures"></i>
+                    </div>
+                    <div class="employee_c">
+                      <div class="emp_details">
+                        <div class="slash"></div>
+                        <a onclick="empf1(this.id)" data-bind="attr:{'id':empfeaid}">
+                          <span data-bind="text: empfeaheading"></span>
+                        </a>
+                      </div>
                     </div>
                   </div>
-                </div>
+                  <!-- /ko -->
                 <!-- /ko -->
               <!-- /ko -->
             </div>
@@ -1302,6 +1314,8 @@ margin-right: 5px;
     </div>
   </div>
 </div>
+
+<!------------------------------------Governance Board------------------------------------>
 <div class="oj-row row7 newrow governanceboard">
   <div class="container">
     <div class="oj-sm-12 featured bgwhite">
@@ -1334,6 +1348,8 @@ margin-right: 5px;
     </div>
   </div>
 </div>
+
+<!-- Employee Details Popup -->
 <div id="empfwrapper">
   <!-- ko foreach: empdeatilsmatched -->
   <div style="display:none" id="empf1" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
@@ -1347,9 +1363,12 @@ margin-right: 5px;
   </div>
   <!-- /ko -->
 </div>
+<!-- Employee Details Popup End-->
+
+<!------------------------------------OUR SERVICES POPUPS------------------------------------>
+
 <!--Popups1 -->
-<div style="display:none" id="modalDialog1" title="Deliver a Cloud Day
-"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+<div style="display:none" id="modalDialog1" title="Deliver a Cloud Day" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
     <h3>Deliver a Cloud Day </h3>
@@ -1461,8 +1480,7 @@ margin-right: 5px;
       <li>Platform/Hub Solution Engineers </li>
     </ul>
     <h4 style="color:#00758f;">How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
       Service based model in SCRM is target to be enabled on 12/1/2017.
       Asset repository will be published to share successful content at <a href="http://solutionengineering.us.oracle.com">http://solutionengineering.us.oracle.com</a> website. </p>
   </div>
@@ -1627,7 +1645,6 @@ margin-right: 5px;
   </div>
 </div>
 <!--Popups13 -->
-
 <div style="display:none" id="modalDialog13" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
@@ -1649,14 +1666,11 @@ margin-right: 5px;
       <li>Platform Specialists from the GEO Field support all phases closely, coordinating customer events and providing seamless handoff to solution and proposal. </li>
     </ul>
     <h4>How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
       Service based model in SCRM is target to be enabled on 12/1/2017. </p>
   </div>
 </div>
-
 <!--Popups14 -->
-
 <div style="display:none" id="modalDialog14" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
@@ -1681,14 +1695,11 @@ margin-right: 5px;
       <li>ECAs will focus on overall architectural design.</li>
     </ul>
     <h4>How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
       Service based model in SCRM is target to be enabled on 12/1/2017. </p>
   </div>
 </div>
-
 <!--Popups15 -->
-
 <div style="display:none" id="modalDialog15" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
@@ -1710,14 +1721,11 @@ margin-right: 5px;
       <li>Engagements will be at customer locations or Oracle locations or at time via remote delivery.</li>
     </ul>
     <h4>How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
       Service based model in SCRM is target to be enabled on 12/1/2017. </p>
   </div>
 </div>
-
 <!--Popups16 -->
-
 <div style="display:none" id="modalDialog16" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
@@ -1734,14 +1742,11 @@ margin-right: 5px;
     <h4>SE Role Engagement </h4>
     <p>Platform specialists from the GEO Field, at times working in conjunction with SE business or technical specialists and Hub SEs.  Engagements will be at customer locations or Oracle locations or at time via remote delivery.</p>
     <h4>How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
       Service based model in SCRM is target to be enabled on 12/1/2017. </p>
   </div>
 </div>
-
 <!--Popups17 -->
-
 <div style="display:none" id="modalDialog17" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
@@ -1761,14 +1766,11 @@ margin-right: 5px;
       <li>ECAs and/or Industry Advisors typically lead this engagement with direct support from Platform Specialists from the GEO Field working with Hub SEs.</li>
     </ul>
     <h4>How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
       Service based model in SCRM is target to be enabled on 12/1/2017. </p>
   </div>
 </div>
-
 <!--Popups18 -->
-
 <div style="display:none" id="modalDialog18" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
@@ -1790,14 +1792,11 @@ margin-right: 5px;
       <li>Engagements will include on-site customer meetings. </li>
     </ul>
     <h4>How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
       Service based model in SCRM is target to be enabled on 12/1/2017. </p>
   </div>
 </div>
-
 <!--Popups19 -->
-
 <div style="display:none" id="modalDialog19" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
@@ -1818,9 +1817,7 @@ margin-right: 5px;
     <p>TBD </p>
   </div>
 </div>
-
 <!--Popups20 -->
-
 <div style="display:none" id="modalDialog20" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
@@ -1841,6 +1838,8 @@ margin-right: 5px;
     <p>Asset repository will be published to share successful content at <a href="http://solutionengineering.us.oracle.com">http://solutionengineering.us.oracle.com</a> website. </p>
   </div>
 </div>
+
+<!------------------------------------OUR SERVICES POPUPS ENDS------------------------------------>
 
 <!-- SLIDER POPUPS -->
 
@@ -2086,7 +2085,7 @@ margin-right: 5px;
             <div class="oj-sm-12">
               <div class="input-group">
                 <select id="basicSelect1" data-bind="ojComponent: {
-                  component: 'ojSelect',placeholder:'Select your Organization LOB',options: organizationlist(),optionChange: editorganizationselected, selectedOptions:editorganizationselected,
+                  component: 'ojSelect',placeholder:'Select your Organization LOB',options: organizationlist(),optionChange: editorganizationselected, value:editorganizationselected,
                   rootAttributes: {style:'max-width:20em'}
                 }">
                   <!-- ko foreach: organizationlist() -->
