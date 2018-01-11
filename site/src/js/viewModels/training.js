@@ -1156,6 +1156,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             
             self.handleAttached = function (info) {
                 checkadminrights();
+                getStates();
             };
 
             /*----------------------------------SEARCH----------------------------------*/
@@ -2242,7 +2243,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             }
 
-
+            
 
 
             getCategoryHierarchy = function () {
@@ -2304,6 +2305,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }
                     self.selectedCategoriesForCourse(temparray);
                 }
+            }
+
+            self.state=ko.observableArray([]);
+            getStates=function(){
+                $.getJSON(trainingbaseurl + "getStates").
+                then(function (response) {
+                    self.state(response.states);
+                });
             }
 
             openaddsclasswindow = function () {
@@ -2374,7 +2383,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     class_size: self.cclass().class_size(),
                     enrollment_end_date: Date.parse(self.cclass().enrollment_end_date()).toString('dd MMM yyyy'),
                     city: self.cclass().city(),
-                    state: self.cclass().state(),
+                    state: self.cclass().state()[0],
                     key_event: self.cclass().key_event()!=true?'No':'Yes',
                     status: self.cclass().status()[0],
                     schedules: self.cclass().schedules()
@@ -2506,7 +2515,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     mappedCategories.push(element.category_id);
                 });
                 self.cclass().status(self.cclass().status()[0]);
-
+                self.cclass().state(self.cclass().state()[0]);
                 var coursedata = {
                     course_id: self.createCourse().course_id(),
                     name: self.createCourse().name(),

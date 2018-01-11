@@ -94,22 +94,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         }
       }
 
-      initsso = function () {
-        if (ssoemail.length == 0) {
-          self.ssowindow = window.open("http://solutionengineering.us.oracle.com/seaas/");
-        }
-      }
-
-      closesso = function () {
-        if (ssoemail.length > 0) {
-          self.ssowindow.close();
-        }
-      }
-      logoutUser = function () {
-        if (ssoemail.length > 0) {
-          self.ssowindow = window.open("https://login-stage.oracle.com:443/oam/server/logout", target = "_self");
-        }
-      }
+     
 
       getemailfromcookie = function () {
 
@@ -134,11 +119,29 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
           // ssoname = sname;
         } else {
           ssoemail = "";
-          //ssoemail = "premraj.sahu@oracle.com";
+          // ssoemail = "premraj.sahu@oracle.com";
           
         }
       }
 
+      initsso = function () {
+        if (ssoemail.length == 0) {
+          self.ssowindow = window.open("http://solutionengineering.us.oracle.com/seaas/");
+        }
+      }
+
+      closesso = function () {
+        if (ssoemail.length > 0 && self.ssowindow!=undefined) {
+          self.ssowindow.close();
+        }
+      }
+      logoutUser = function () {
+        if (ssoemail.length > 0) {
+          self.ssowindow = window.open("https://login-stage.oracle.com:443/oam/server/logout", target = "_self");
+        }
+      }
+
+      getemailfromcookie();
       initsso();
       
       setInterval(function () {
