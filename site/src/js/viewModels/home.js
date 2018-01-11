@@ -2311,14 +2311,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             element.value = '';
         }
 
-        
-
-        self.handleActivated = function(info) {
+        self.handleAttached=function(info) {
             checkadmin();
             checkadminrights();
-            // alert("loaded!");
         };
-
     }
 
     /*
