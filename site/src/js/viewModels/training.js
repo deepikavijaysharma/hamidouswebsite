@@ -164,9 +164,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             //EVENT HANDLE FOR CATEGORY SELECTION
-            categorySelected = function (event, ui) {
-                populateSubcategory(ui.value);
-            }
+            // categorySelected = function (event, ui) {
+            //     populateSubcategory(ui.value);
+            // }
 
             // POPULLATE CATEGORY BASED ON ROLE
             populateCategory = function (role) {
@@ -548,18 +548,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             /*----------------------------------PLACEHOLDER SELECT ROLE POPUP----------------------------------*/
             self.emptyPlaceholder = ko.observable(false);
 
-            self.handleAttached = function (info) {
-                // Implement if needed
-            };
 
             self.closeRole = function () {
                 $("#modalDialog1").ojDialog("close")
             };
 
             //EVENT HANDLE FOR CATEGORY SELECTION
-            categorySelected = function (event, ui) {
-                populateSubcategory(ui.value);
-            }
             self.openReqtraining = function () {
                 self.rtrname(ssoemail);
                 $("#trainingDialog").ojDialog("open");
@@ -1048,7 +1042,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             // CHECK FOR ADMIN RIGHTS
             checkadminrights = function () {
-                
+                console.log('admin checked');
                 if (isAdmin) {
                     $("#tabs").ojTabs({
                         "disabledTabs": [5, 6]
@@ -1061,7 +1055,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         "disabledTabs": [5, 6, 7]
                     });
                     console.log("Hiding from user");
-                    $(".admin").css("display", "none");
+                    // $(".admin").css("display", "none");
+                    // $('.admin').hide();
+                    var appBanners = document.getElementsByClassName('admin'), i;
+                    
+                    for (var i = 0; i < appBanners.length; i ++) {
+                        appBanners[i].style.display = 'none';
+                    }
                 }
             }
 
@@ -1145,14 +1145,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             self.handleBindingsApplied = function (info) {
-                // Implement if needed
+                // checkadminrights();
             };
 
 
             self.handleDetached = function (info) {
-                // Implement if needed
+                // checkadminrights();
             };
 
+            
+            self.handleAttached = function (info) {
+                checkadminrights();
+            };
 
             /*----------------------------------SEARCH----------------------------------*/
             self.currentValue = ko.observableArray();
@@ -2113,7 +2117,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             $("#reportees").ojDialog("close");
                         }
                     }).fail(function (xhr, textStatus, err) {
-                        self.showToastDialog("Enrollment Failed.", true, 2000);
+                        self.showToastDialog("Enrollment Failed.", false, 2000);
                         console.log(ko.toJSON(err));
                     });
                 }
@@ -2224,16 +2228,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(reqBody),
                     success: function (data) {
-                        self.showToastDialog("Course Successfully Created", true, 1000);
+                        self.showToastDialog("Course Successfully Created", true, 2000);
                         console.log("Course Successfully Created");
+                        self.fetchcourses();
                         $("#createcoursedialog").ojDialog("close");
                         resetCourse();
                         console.log(ko.toJSON(data));
-
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
-                    self.showToastDialog("Course Creation Failed!", true, 2000);
+                    self.showToastDialog("Course Creation Failed!", false, 2000);
                 });
 
             }
@@ -2281,7 +2285,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                 if (ui.value[0].id != undefined) {
                     self.selectedCategoriesForCourse.push({
-                        id: ui.value[0].id,
+                        category_id: ui.value[0].id,
                         name: ui.value[0].innerText
                     });
                     self.selectedCategoriesForUi.push(ui.value[0].innerText);
@@ -2417,7 +2421,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(reqbody),
                     success: function (data) {
-                        self.showToastDialog("Class Successfully Updated", true, 1000);
+                        self.showToastDialog("Class Successfully Updated", true, 2000);
                         console.log("Class Successfully Updated : " + ko.toJSON(data));
                         $("#editclass").ojDialog("close");
                         resetClass();
@@ -2427,7 +2431,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
-                    self.showToastDialog("Class Failed Updated", true, 2000);
+                    self.showToastDialog("Class Failed Updated", false, 2000);
                 });
 
 
@@ -2480,7 +2484,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(body),
                     success: function (data) {
-                        self.showToastDialog("Class Successfully Deleted", true, 1000);
+                        self.showToastDialog("Class Successfully Deleted", true, 2000);
                         console.log("Class Successfully Deleted");
                         $("#editclass").ojDialog("close");
                         resetClass();
@@ -2496,7 +2500,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             saveCourse = function () {
 
-                console.log("saving course . . .");
+                console.log("saving course . . .: "+ko.toJSON(self.selectedCategoriesForCourse()));
                 var mappedCategories = new Array();
                 self.selectedCategoriesForCourse().forEach(function (element) {
                     mappedCategories.push(element.category_id);
@@ -2531,15 +2535,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(reqBody),
                     success: function (data) {
-                        self.showToastDialog("Course Successfully Updated", true, 1000);
+                        self.showToastDialog("Course Successfully Updated", true, 2000);
                         console.log("Course Successfully Updated");
+                        self.fetchcourses();
                         $("#edittraining").ojDialog("close");
                         resetCourse();
-                        self.fetchcourses();
+                       
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
-                    self.showToastDialog("Update Failed!", true, 2000);
+                    self.showToastDialog("Update Failed!", false, 2000);
                     self.fetchcourses();
                 });
 
@@ -2656,7 +2661,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         }
                     }).fail(function (xhr, textStatus, err) {
                         // alert(err);
-                        self.showToastDialog("Course Deletion Failed!", true, 2000);
+                        self.showToastDialog("Course Deletion Failed!", false, 2000);
                     });
 
                 }
