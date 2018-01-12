@@ -230,7 +230,7 @@ margin-right: 5px;
 }
 </style>
 <!------------------------------------SLIDER------------------------------------>
-<div class="oj-row oj-sm-12 addendsl homeadmin">
+<div class="oj-row oj-sm-12 addendsl admin">
   <button class="btn btn-info btn-xs" data-toggle="modal" data-bind="click:openaddslidedialog" style="float: right;">Add New Slide</button>
 </div>
 <div class="oj-row" id="mainBar">
@@ -256,9 +256,9 @@ margin-right: 5px;
           <!-- ko if: $index() == 0 -->
           <div class="item active" data-bind="attr:{'id':sliderid}">
             <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
-              <i class="fa fa-pencil-square-o endsl homeadmin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider"></i>
-              <i class="fa fa-trash-o endsldel homeadmin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>
-              <i class="fa fa-share-square-o endslarc homeadmin" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider"></i>
+              <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider"></i>
+              <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>
+              <i class="fa fa-share-square-o endslarc admin" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider"></i>
               <div class="verticalcentertext">
                 <div class="verticalcentertext">
                   <div class="verticalcentertextinner">
@@ -269,17 +269,17 @@ margin-right: 5px;
 
                       <!-- ko if: (sliderbl1  && sliderlt1 &&  sliderbl2 && sliderlt2 )-->
                       <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl1">
-                        <div class=" buttons oj-lg-float-end"><a data-bind="attr:{'href':sliderlt1},text:sliderbl1" target="_blank"></a><span class="right-arrow"></span></div>
+                        <div class="buttons oj-lg-float-end"><a data-bind="attr:{'href':sliderlt1},text:sliderbl1,click:analytics.bind($data,slidertitle,sliderbl1,'link','Homepage','Banner')" target="_blank"></a><span class="right-arrow"></span></div>
                       </div>
                       <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl2">
-                        <div class=" buttons oj-lg-float-start"><a data-bind="attr:{'href':sliderlt2},text:sliderbl2" target="_blank"></a><span class="right-arrow"></span></div>
+                        <div class="buttons oj-lg-float-start"><a data-bind="attr:{'href':sliderlt2},text:sliderbl2,click:analytics.bind($data,slidertitle,sliderbl2,'link','Homepage','Banner')" target="_blank"></a><span class="right-arrow"></span></div>
                       </div>
                       <!-- /ko -->
                       <!-- ko ifnot: (sliderbl1  && sliderlt1  &&  sliderbl2  && sliderlt2)-->
                         <!-- ko if: (sliderbl2 && sliderlt2)-->
                         <div class="oj-sm-12 oj-lg-12 bl2">
                           <div class="buttons">
-                            <a data-bind="attr:{'href':sliderlt2},text:sliderbl2" target="_blank"></a>
+                            <a data-bind="attr:{'href':sliderlt2},text:sliderbl2,click:analytics.bind($data,slidertitle,sliderbl2,'link','Homepage','Banner')" target="_blank"></a>
                             <span class="right-arrow"></span>
                           </div>
                         </div>
@@ -288,7 +288,7 @@ margin-right: 5px;
                           <!-- ko if: (sliderbl1 && sliderlt1)-->
                           <div class="oj-sm-12 oj-lg-12 bl1">
                             <div class="buttons">
-                              <a data-bind="attr:{'href':sliderlt1},text:sliderbl1" target="_blank"></a>
+                              <a data-bind="attr:{'href':sliderlt1},text:sliderbl1,click:analytics.bind($data,slidertitle,sliderbl1,'link','Homepage','Banner')" target="_blank"></a>
                               <span class="right-arrow"></span>
                             </div>
                           </div>
@@ -306,9 +306,9 @@ margin-right: 5px;
           <!-- ko if: $index() != 0 -->
           <div class="item" data-bind="attr:{'id':sliderid}"> 
             <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
-              <i class="fa fa-pencil-square-o endsl homeadmin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider" ></i>
-              <i class="fa fa-trash-o endsldel homeadmin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>
-              <i class="fa fa-share-square-o endslarc homeadmin" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider"></i>
+              <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider" ></i>
+              <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>
+              <i class="fa fa-share-square-o endslarc admin" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider"></i>
               <div class="verticalcentertext">
                 <div class="verticalcentertext">
                   <div class="verticalcentertextinner">
@@ -319,13 +319,13 @@ margin-right: 5px;
                       <!-- ko if: (sliderbl1  && sliderlt1 &&  sliderbl2 && sliderlt2 )-->
                       <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl1">
                         <div class=" buttons oj-lg-float-end">
-                          <a data-bind="attr:{'href':sliderlt1},text:sliderbl1" target="_blank"></a>
+                          <a data-bind="attr:{'href':sliderlt1},text:sliderbl1,click:analytics.bind($data,slidertitle,sliderbl1,'link','Homepage','Banner')" target="_blank"></a>
                           <span class="right-arrow"></span>
                         </div>
                       </div>
                       <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl2">
                         <div class=" buttons oj-lg-float-start">
-                          <a data-bind="attr:{'href':sliderlt2},text:sliderbl2" target="_blank"></a>
+                          <a data-bind="attr:{'href':sliderlt2},text:sliderbl2,click:analytics.bind($data,slidertitle,sliderbl2,'link','Homepage','Banner')" target="_blank"></a>
                           <span class="right-arrow"></span>
                         </div>
                       </div>
@@ -334,7 +334,7 @@ margin-right: 5px;
                         <!-- ko if: (sliderbl2 && sliderlt2)-->
                         <div class="oj-sm-12 oj-lg-12 bl2">
                           <div class="buttons">
-                            <a data-bind="attr:{'href':sliderlt2},text:sliderbl2" target="_blank"></a>
+                            <a data-bind="attr:{'href':sliderlt2},text:sliderbl2,click:analytics.bind($data,slidertitle,sliderbl2,'link','Homepage','Banner')" target="_blank"></a>
                             <span class="right-arrow"></span>
                           </div>
                         </div>
@@ -343,7 +343,7 @@ margin-right: 5px;
                           <!-- ko if: (sliderbl1 && sliderlt1)-->
                           <div class="oj-sm-12 oj-lg-12 bl1">
                             <div class="buttons">
-                              <a data-bind="attr:{'href':sliderlt1},text:sliderbl1" target="_blank"></a>
+                              <a data-bind="attr:{'href':sliderlt1},text:sliderbl1,click:analytics.bind($data,slidertitle,sliderbl1,'link','Homepage','Banner')" target="_blank"></a>
                               <span class="right-arrow"></span>
                             </div>
                           </div>
@@ -401,8 +401,9 @@ margin-right: 5px;
               <div class="oj-flex">
                 <div class="oj-sm-9"><span class="name">Senior Vice President,</span><br>
                   <span class="title">Solution Engineering and Customer Success</span></div>
-                <div class="oj-sm-3 playblock"><a href="https://otube.oracle.com/media/Solutions+Engineer+and+Cloud+Customer+Success+All+Hands/0_w2kl22gc/2977" target="_blank" title="Solutions Engineering and Cloud Customer Success All Hands Webcast from Oracle HQ on Tuesday, June 27, 2017"><img src="css/images/play_icon.png" class="img-responsive playicon" ></a></div>
-              </div>
+                <div class="oj-sm-3 playblock">
+                  <a onclick="analytics('Hamidou Dia','Video Link','link','Homepage','Hamidou Dia')" href="https://otube.oracle.com/media/Solutions+Engineer+and+Cloud+Customer+Success+All+Hands/0_w2kl22gc/2977" target="_blank" title="Solutions Engineering and Cloud Customer Success All Hands Webcast from Oracle HQ on Tuesday, June 27, 2017"><img src="css/images/play_icon.png" class="img-responsive playicon" ></a></div>
+                </div>
             </div>
           </div>
         </div>
@@ -418,19 +419,19 @@ margin-right: 5px;
               <div class="oj-flex-item blocks oj-sm-12 bg1">
                 <div class="blocks_icon_inner"><img src="css/images/icon1.png"></div>
               </div>
-              <div class="blocks_title_box1 blocks_title oj-flex-item oj-sm-12"><a href="http://innovate.us.oracle.com/cloudaccelerate/" target="_blank">Oracle Cloud <br>
+              <div class="blocks_title_box1 blocks_title oj-flex-item oj-sm-12"><a onclick="analyticsstatic(this,'Oracle Cloud Accelrate','Homepage>Top Initiatives - Solution Engineering Top Initiatives>Link')" href="http://innovate.us.oracle.com/cloudaccelerate/" target="_blank">Oracle Cloud <br>
                 Accelerate</a> </div>
             </div>
             <div class="oj-flex   oj-sm-12 oj-md-4">
               <div class="oj-flex-item blocks oj-sm-12 bg2">
                 <img src="css/images/OracleCloudSolutionHubs_Logo-wht.png">
               </div>
-              <div class="blocks_title_box2 blocks_title oj-flex-item oj-sm-12"><a href="http://solutionengineering.us.oracle.com/hubs/" target="_blank">Oracle Cloud <br>
+              <div class="blocks_title_box2 blocks_title oj-flex-item oj-sm-12"><a onclick="analyticsstatic(this,'Oracle Cloud Solution Hubs','Homepage>Top Initiatives - Solution Engineering Top Initiatives>Link')" href="http://solutionengineering.us.oracle.com/hubs/" target="_blank">Oracle Cloud <br>
                 Solution Hubs</a></div>
             </div>
             <div class="oj-flex   oj-sm-12 oj-md-4">
               <div class="oj-flex-item blocks oj-sm-12 bg3"><img src="css/images/ECAL_Logo_High_Res.png">  </div>
-              <div class="blocks_title_box3 blocks_title oj-flex-item oj-sm-12"><a href="http://innovate.us.oracle.com/ecal/" target="_blank">Enterprise Cloud<br>
+              <div class="blocks_title_box3 blocks_title oj-flex-item oj-sm-12"><a onclick="analyticsstatic(this,'Enterprise Cloud Adoption Lifecycle','Homepage>Top Initiatives - Solution Engineering Top Initiatives>Link')" href="http://innovate.us.oracle.com/ecal/" target="_blank">Enterprise Cloud<br>
                 Adoption Lifecycle</a></div>
             </div>
           </div>
@@ -668,7 +669,7 @@ margin-right: 5px;
   <div class="container">
     <div class="oj-sm-12 featured bgwhite">
       <div class="oj-sm-12 featuredtitle"><img src="css/images/our_org.png">&nbsp;Our Organization</div>
-      <button class="btn btn-info btn-xs btnaddneworg homeadmin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddneworgdialog">Add New People</button>
+      <button class="btn btn-info btn-xs btnaddneworg admin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddneworgdialog">Add New People</button>
       <div class="oj-flex oj-sm-12 org_container">
         <div class="oj-flex oj-sm-12 red org_container_inner">
 
@@ -683,8 +684,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -701,8 +702,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -722,8 +723,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -740,8 +741,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -761,8 +762,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -779,8 +780,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -800,8 +801,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -818,8 +819,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -839,8 +840,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -857,8 +858,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -878,8 +879,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -896,8 +897,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -917,8 +918,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -935,8 +936,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -964,8 +965,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -990,8 +991,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -1046,7 +1047,7 @@ margin-right: 5px;
                         <!-- /ko -->                        
                       <!-- /ko -->
                     </div>
-                    <!-- <div class="oj-sm-12 oj-lg-1 cDate oj-flex"><i class="fa fa-share-square-o homeadmin editdis" aria-hidden="true" title="Archive Key Dates" data-bind=""></i></div> -->
+                    <!-- <div class="oj-sm-12 oj-lg-1 cDate oj-flex"><i class="fa fa-share-square-o admin editdis" aria-hidden="true" title="Archive Key Dates" data-bind=""></i></div> -->
                   </div>
                 </div>
                 <!-- /ko -->
@@ -1079,13 +1080,13 @@ margin-right: 5px;
         <div class="oj-sm-12 golivetitle"><img src="css/images/wins_large.png">&nbsp;Key Wins</div>
         <div class="oj-sm-12">
           <div class="oj-flex">
-            <button class="btn btn-info btn-xs btnaddnewref homeadmin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddnewkeywinsdialog">Add New Key Wins</button>
+            <button class="btn btn-info btn-xs btnaddnewref admin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddnewkeywinsdialog">Add New Key Wins</button>
             <div id="filmStripwins" class="oj-sm-12" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'visible',arrowplacement:'overlay'}"> <!-- block 1 -->
               <!-- ko foreach: keywinslist --> 
               <div class="oj-panel oj-panel-alt2 my-filmstrip-item kwadpar" data-bind="attr:{'id':keywid}">
                 <div class="kwadmin">
-                  <i class="fa fa-pencil-square-o endsl homeadmin" aria-hidden="true" title="Edit Key Wins" data-bind="click:openEditKeyWinsModal"></i>
-                  <i class="fa fa-trash-o endsldel homeadmin" aria-hidden="true" title="Delete Key Wins" data-bind="click:deletekeywins"></i>
+                  <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Key Wins" data-bind="click:openEditKeyWinsModal"></i>
+                  <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Key Wins" data-bind="click:deletekeywins"></i>
                 </div>
                 <p>
                   <a data-bind="attr:{'href':keywlink}" target="_blank">
@@ -1113,7 +1114,7 @@ margin-right: 5px;
         <div class="oj-sm-12">
           <div class="oj-flex"> 
             <!-- filmstrip container -->
-            <button class="btn btn-info btn-xs btnaddneworg homeadmin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddgltextdialog">Add New Go Lives</button>
+            <button class="btn btn-info btn-xs btnaddneworg admin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddgltextdialog">Add New Go Lives</button>
             <div id="filmStripwins" class="oj-sm-12 oj-filmstrip oj-component oj-filmstrip-container oj-component-initnode" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 2,arrowVisibility: 'visible'}">
 
               <!-- ko foreach: goliveslist() -->
@@ -1141,8 +1142,8 @@ margin-right: 5px;
                     <div class="cardface">
                       <div class="wins_block oj-sm-12">
                         <div class="gladmin">
-                          <i class="fa fa-pencil-square-o endsl homeadmin" aria-hidden="true" title="Edit Go Lives" data-bind="click:openEditGoLiveslmodal"></i>
-                          <i class="fa fa-trash-o endsldel homeadmin" aria-hidden="true" title="Delete Go Lives" data-bind="click:deletegolives"></i>
+                          <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Go Lives" data-bind="click:openEditGoLiveslmodal"></i>
+                          <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Go Lives" data-bind="click:deletegolives"></i>
                         </div>
                         <div class="win_logo oj-sm-12">
                           <img data-bind="attr:{'src':gollogo}">
@@ -1199,7 +1200,7 @@ margin-right: 5px;
         <div class="oj-sm-12 refertitle"><img src="css/images/references_icon_lg.png">&nbsp;References</div>
         <div class="oj-md-6  oj-flex">
           <div class="oj-flex oj-sm-12 oj-margin referencesblock">
-            <button class="btn btn-info btn-xs btnaddnewref homeadmin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddnewrefdialog">Add New References</button>
+            <button class="btn btn-info btn-xs btnaddnewref admin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddnewrefdialog">Add New References</button>
             <div class="oj-flex oj-sm-12  logorow">
               <!-- ko foreach: reflist -->
                 <!-- ko if: reftype == "IAAS"-->
@@ -1208,8 +1209,8 @@ margin-right: 5px;
                     <img data-bind="attr:{'src':reflogo}">
                   </a>
                   <div class="refadmin">
-                    <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesModal"></i>
-                    <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i>
+                    <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesModal"></i>
+                    <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i>
                   </div>
                 </div>              
                 <!-- /ko -->
@@ -1220,7 +1221,7 @@ margin-right: 5px;
         </div>
         <div class="oj-md-6  oj-flex">
           <div class="oj-flex oj-sm-12 oj-margin referencesblock">
-            <button class="btn btn-info btn-xs btnaddnewref homeadmin" data-toggle="modal" data-bind="click:openaddnewrefdialogpaas">Add New References</button>
+            <button class="btn btn-info btn-xs btnaddnewref admin" data-toggle="modal" data-bind="click:openaddnewrefdialogpaas">Add New References</button>
             <div class="oj-flex oj-sm-12 logorow">
               <!-- ko foreach: reflist -->
                 <!-- ko if: reftype == "PAAS"-->
@@ -1229,8 +1230,8 @@ margin-right: 5px;
                     <img data-bind="attr:{'src':reflogo}">
                   </a>
                   <div class="refadmin">
-                    <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesPaasModal"></i>
-                    <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i>
+                    <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesPaasModal"></i>
+                    <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i>
                   </div>
                 </div>
                 <!-- /ko -->
@@ -1256,7 +1257,7 @@ margin-right: 5px;
     <div class="oj-sm-12 featured bgwhite">
       <div class="oj-flex">
         <div class="oj-sm-12 featuredtitle"><img src="css/images/emp_feature_lg.png">&nbsp;Employee Features</div>
-        <button class="btn btn-info btn-xs btnaddnewref homeadmin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddnewefdialog">Add New Employee Feature</button>
+        <button class="btn btn-info btn-xs btnaddnewref admin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddnewefdialog">Add New Employee Feature</button>
         <div class="oj-sm-12">
           <div class="oj-flex">
             <div id="filmStripfeatured" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'hidden'}">
@@ -1265,9 +1266,9 @@ margin-right: 5px;
                   <!-- ko if: empfeaid =='3' -->
                   <div class="oj-panel oj-panel-alt2 my-filmstrip-item1 efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
                     <div class="efadmin">
-                      <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
-                      <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
-                      <i class="fa fa-share-square-o homeadmin" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures"></i>
+                      <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
+                      <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
+                      <i class="fa fa-share-square-o admin" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures"></i>
                     </div>
                     <div class="employee_c" >
                       <div class="emp_details">
@@ -1280,9 +1281,9 @@ margin-right: 5px;
                   <!-- ko ifnot: empfeaid =='3' -->
                   <div class="oj-panel oj-panel-alt2 my-filmstrip-item efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
                     <div class="efadmin">
-                      <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
-                      <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
-                      <i class="fa fa-share-square-o homeadmin" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures"></i>
+                      <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
+                      <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
+                      <i class="fa fa-share-square-o admin" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures"></i>
                     </div>
                     <div class="employee_c">
                       <div class="emp_details">

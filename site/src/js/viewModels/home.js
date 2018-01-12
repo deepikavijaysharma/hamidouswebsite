@@ -14,13 +14,17 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         // CHECK FOR ADMIN RIGHTS
         checkadminrights = function () {
-            
+            console.log('admin checked');
             if (isAdmin) {
                 console.log("Showing for admin");
-                $(".homeadmin").css("display", "inline-block");
+                $(".admin").css("display", "inline-block");
             } else {
                 console.log("Hiding for user");
-                $(".homeadmin").css("display", "none");
+                // $(".admin").css("display", "none");
+                var appBanners = document.getElementsByClassName('admin'), i;
+                for (var i = 0; i < appBanners.length; i++) {
+                    appBanners[i].style.visibility = 'hidden';
+                }
             }
         }
 
@@ -391,6 +395,35 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
 
         /******************************************SLIDER ENDS********************************************************************/
+
+        /******************************************ANALYTICS********************************************************************/
+
+        analytics = function (itemtitle, itemname, itemtype, itemlevel1, itemlevel2) 
+        {
+            var analytics = {
+                "session_id": sessionid,
+                "email": ssoemail,
+                "event_description": itemtitle + " > " + itemname,
+                "event_type": itemtype,
+                "level_1": itemlevel1,
+                "level_2": itemlevel2,
+            };
+            console.log(analytics);
+            $.ajax({
+                url: homebaseurl + 'POST_EVENT_DATA',
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: ko.toJSON(analytics),
+                success: function (event) {
+                    console.log("Analytics of event sent.", event);
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert("Error in sending analytics", err);
+            });
+            return true;
+        }
+
+        /******************************************ANALYTICS ENDS***************************************************************/
         
         /******************************************OUR ORGANIZATION***************************************************************/
 
@@ -1019,7 +1052,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 url: homedevurl + 'PutImagesGoLive',
                 headers: lheader,
                 type: 'PUT',
-                // contentType: 'application/json; charset=utf-8',
                 data: ldata,
                 success: function (datalogogl) {
                     console.log("Go Lives logo added successfully!");
@@ -1035,7 +1067,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 url: homedevurl + 'PutImagesGoLive',
                 headers: pheader,
                 type: 'PUT',
-                // contentType: 'application/json; charset=utf-8',
                 data: pdata,
                 success: function (dataphotogl) {
                     console.log("Go Lives presenter photo added successfully!");
