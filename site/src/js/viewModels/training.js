@@ -2183,14 +2183,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.cclass().enrollment_end_date('');
                 self.cclass().enrollment_end_date_view('');
                 self.cclass().city('');
-                self.cclass().state('');
-                self.cclass().status('');
+                self.cclass().state([]);
+                self.cclass().status([]);
                 self.cclass().key_event(false);
                 resetSchedule();
-                $(".classlist").empty();
+                // $(".classlist").empty();
             }
 
             resetSchedule = function () {
+                self.cclass().schedules([]);
                 self.csdate('');
                 self.cedate('');
                 self.ctimezone([]);
@@ -2328,11 +2329,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 $('#scheduleblock').show();
             }
 
-            resetSchedule = function () {
-                self.schedule().start_date('');
-                self.schedule().end_date('');
-                self.schedule().timezone([]);
-            }
+            // resetSchedule = function () {
+            //     self.schedule().start_date('');
+            //     self.schedule().end_date('');
+            //     self.schedule().timezone([]);
+            // }
 
             addschedule = function () {
                 console.log(ko.toJSON(self.csdate()));
@@ -2355,7 +2356,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     scheduledclass += "<li>" + self.cclass().schedules()[i].start_date + " to " + self.cclass().schedules()[i].end_date + " " + self.cclass().schedules()[i].timezone + " time  <span style=\"color:red;cursor:pointer\" onclick=\"deleteSchedule(" + i + ")\">X</span></li>";
                 }
                 $(".addedschedule").append(scheduledclass);
-                resetSchedule();
+                // resetSchedule();
             }
 
             deleteSchedule = function (index) {
@@ -2564,7 +2565,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             editClass = function (class_to_edit) {
-                resetClass();
+                // resetClass();
                 console.log(Date.parse(class_to_edit.enrollment_end_date).toString('dd MMM yyyy'));
                 self.cclass().class_id(class_to_edit.class_id);
                 self.cclass().description(class_to_edit.description);
@@ -2582,19 +2583,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             updateCourseClass = function () {
 
-                var htmlData = "";
+                var htmlData = "<ul>";
                 $(".classlist").empty();
                 var classList = self.createCourse().classes();
 
                 for (var i = 0; i < classList.length; i++) {
 
-                    htmlData += "<ul><li>";
+                    htmlData += "<li>";
                     htmlData += "<i class=\"fa fa-trash-o\" style=\"cursor: pointer;float: right;margin-left: 5px\" title=\"Delete Course\" onclick=\"deleteClass()\" target=\"_blank\"></i><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\" style=\"cursor: pointer;float: right;margin-left: 5px\" title=\"Edit Course\" onclick=\'editClass(" + JSON.stringify(classList[i]) + ")\' target=\"_blank\"></i>";
                     htmlData += "<p>City: " + classList[i].city + "</p>";
                     htmlData += "<P> Strength: " + classList[i].class_size + "</P>";
                     htmlData += "<P> Enroll By: " + Date.parse(classList[i].enrollment_end_date).toString('dd MMM yyyy') + "</P>";
-                    // htmlData += "</li></ul>"
+                    htmlData += "</li>"
                 }
+                htmlData += "</ul>";
                 $(".classlist").append(htmlData);
             }
 
