@@ -9,6 +9,7 @@ var ssoemail='';
 var ssoname='';
 var usertype='';
 var uuid='';
+var sessionid = '';
 var isAdmin=false;
 var newUserAdminCheck=false;
 var homedevurl="https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/";//For Dev

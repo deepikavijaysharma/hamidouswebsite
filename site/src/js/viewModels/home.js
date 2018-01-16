@@ -396,34 +396,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         /******************************************SLIDER ENDS********************************************************************/
 
-        /******************************************ANALYTICS********************************************************************/
-
-        analytics = function (itemtitle, itemname, itemtype, itemlevel1, itemlevel2) 
-        {
-            var analytics = {
-                "session_id": sessionid,
-                "email": ssoemail,
-                "event_description": itemtitle + " > " + itemname,
-                "event_type": itemtype,
-                "level_1": itemlevel1,
-                "level_2": itemlevel2,
-            };
-            console.log(analytics);
-            $.ajax({
-                url: homebaseurl + 'POST_EVENT_DATA',
-                type: 'POST',
-                contentType: 'application/json; charset=utf-8',
-                data: ko.toJSON(analytics),
-                success: function (event) {
-                    console.log("Analytics of event sent.", event);
-                }
-            }).fail(function (xhr, textStatus, err) {
-                alert("Error in sending analytics", err);
-            });
-            return true;
-        }
-
-        /******************************************ANALYTICS ENDS***************************************************************/
         
         /******************************************OUR ORGANIZATION***************************************************************/
 
@@ -2001,12 +1973,76 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
         /******************************************EMPLOYEE FEATURES ENDS********************************************************************/
 
+
+        /******************************************ANALYTICS*********************************************************************************/
+
+        analytics = function (itemtitle, itemname, itemtype, itemlevel1, itemlevel2, itemlevel3) 
+        {
+            var itemdesc;
+            if(itemtitle != "" && itemname != "")
+            {
+                itemdesc = itemtitle + " > " + itemname;
+            }
+            else if (itemtitle == "" && itemname != "") 
+            {
+                itemdesc = itemname;
+            }
+            else if (itemtitle != "" && itemname == "") 
+            {
+                itemdesc = itemtitle;
+            }
+            else
+            {
+                itemdesc = "";
+            }
+            if(itemlevel3 == "")
+            {
+                var analytics = {
+                    "session_id": sessionid,
+                    "email": ssoemail,
+                    "event_description": itemdesc,
+                    "event_type": itemtype,
+                    "level_1": itemlevel1,
+                    "level_2": itemlevel2
+                };
+            }
+            else
+            {
+                var analytics = {
+                    "session_id": sessionid,
+                    "email": ssoemail,
+                    "event_description": itemdesc,
+                    "event_type": itemtype,
+                    "level_1": itemlevel1,
+                    "level_2": itemlevel2,
+                    "level_3": itemlevel3
+                };
+            }
+            console.log(analytics);
+            // $.ajax({
+            //     url: homebaseurl + 'POST_EVENT_DATA',
+            //     type: 'POST',
+            //     contentType: 'application/json; charset=utf-8',
+            //     data: ko.toJSON(analytics),
+            //     success: function (event) {
+            //         console.log("Analytics of event sent.", event);
+            //     }
+            // }).fail(function (xhr, textStatus, err) {
+            //     alert("Error in sending analytics", err);
+            // });
+            return true;
+        }
+
+        /******************************************ANALYTICS ENDS***************************************************************************/
+
+
         closedialog=function(){                
             $("#modalDialog1").ojDialog("close");
         }
 
         opendialog=function(){                
             $("#modalDialog1").ojDialog("open");
+            analytics('Awareness', 'Deliver a Cloud Day', 'View_details', 'Homepage', 'Our Services', 'Awareness');
         }
 
         closedialog2=function(){                
@@ -2015,6 +2051,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog2=function(){                
             $("#modalDialog2").ojDialog("open");
+            analytics('Demand', 'Develop a Cloud Vision', 'View_details', 'Homepage', 'Our Services', 'Demand');
         }
 
         closedialog3=function(){                
@@ -2023,6 +2060,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog3=function(){                
             $("#modalDialog3").ojDialog("open");
+            analytics('Opportunity', 'Design a Cloud Solution', 'View_details', 'Homepage', 'Our Services', 'Opportunity');
         }
 
         closedialog4=function(){                
@@ -2031,6 +2069,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog4=function(){                
             $("#modalDialog4").ojDialog("open");
+            analytics('Success', 'Adopt a Cloud Solution', 'View_details', 'Homepage', 'Our Services', 'Success');
         }
         closedialog5=function(){                
             $("#modalDialog4]5").ojDialog("close");
@@ -2038,6 +2077,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog5=function(){                
             $("#modalDialog5").ojDialog("open");
+            analytics('Awareness', 'Support a Marketing Event', 'View_details', 'Homepage', 'Our Services', 'Awareness');
         }
 
         closedialog6=function(){
@@ -2046,6 +2086,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog6=function(){                
             $("#modalDialog6").ojDialog("open");
+            analytics('Demand', 'Develop a Value Hypothesis', 'View_details', 'Homepage', 'Our Services', 'Demand');
         }
 
         closedialog7=function(){                
@@ -2054,6 +2095,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog7=function(){                
             $("#modalDialog7").ojDialog("open");
+            analytics('Opportunity', 'Build a POC', 'View_details', 'Homepage', 'Our Services', 'Opportunity');
         }
 
         closedialog8=function(){                
@@ -2062,6 +2104,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog8=function(){                
             $("#modalDialog8").ojDialog("open");
+            analytics('Success', 'Deliver a Support Onboarding', 'View_details', 'Homepage', 'Our Services', 'Success');
         }
 
         closedialog9=function(){                
@@ -2070,6 +2113,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog9=function(){                
             $("#modalDialog9").ojDialog("open");
+            analytics('Awareness', 'Build an Executive Briefing', 'View_details', 'Homepage', 'Our Services', 'Awareness');
         }
 
         closedialog10=function(){                
@@ -2078,6 +2122,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog10=function(){                
             $("#modalDialog10").ojDialog("open");
+            analytics('Demand', 'Create a Packaged Proposal', 'View_details', 'Homepage', 'Our Services', 'Demand');
         }
 
         closedialog11=function(){                
@@ -2086,6 +2131,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog11=function(){                
             $("#modalDialog11").ojDialog("open");
+            analytics('Opportunity', 'Build a Business Case', 'View_details', 'Homepage', 'Our Services', 'Opportunity');
         }
 
         closedialog12=function(){
@@ -2094,64 +2140,79 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog12=function(){                
             $("#modalDialog12").ojDialog("open");
+            analytics('Success', 'Deliver a Health Check', 'View_details', 'Homepage', 'Our Services', 'Success');
         }
 		
-		    closedialog13=function(){                
+		closedialog13=function(){                
             $("#modalDialog13").ojDialog("close");
         }
 
         opendialog13=function(){                
             $("#modalDialog13").ojDialog("open");
+            analytics('Account Planning', 'Customer Discovery', 'View_details', 'Homepage', 'Our Services', 'Account Planning');
         }
 		
-		    closedialog14=function(){                
+		closedialog14=function(){                
             $("#modalDialog14").ojDialog("close");
         }
 
         opendialog14=function(){                
             $("#modalDialog14").ojDialog("open");
+            analytics('Account Planning', 'Platform Assessments', 'View_details', 'Homepage', 'Our Services', 'Account Planning');
         }
-		    closedialog15=function(){                
+
+		closedialog15=function(){                
             $("#modalDialog15").ojDialog("close");
         }
 
         opendialog15=function(){                
             $("#modalDialog15").ojDialog("open");
+            analytics('Opportunity Planning', 'Hands-on Workshops', 'View_details', 'Homepage', 'Our Services', 'Opportunity Planning');
         }
-		    closedialog16=function(){                
+        
+        closedialog16=function(){                
             $("#modalDialog16").ojDialog("close");
         }
 
         opendialog16=function(){                
             $("#modalDialog16").ojDialog("open");
+            analytics('Opportunity Planning', 'Customer Demos', 'View_details', 'Homepage', 'Our Services', 'Opportunity Planning');
         }
-		    closedialog17=function(){                
+        
+        closedialog17=function(){                
             $("#modalDialog17").ojDialog("close");
         }
 
         opendialog17=function(){                
             $("#modalDialog17").ojDialog("open");
+            analytics('Sales to Success Planning', 'RFx Response Support', 'View_details', 'Homepage', 'Our Services', 'Sales to Success Planning');
         }
-		    closedialog18=function(){                
+        
+        closedialog18=function(){                
             $("#modalDialog18").ojDialog("close");
         }
 
         opendialog18=function(){                
             $("#modalDialog18").ojDialog("open");
+            analytics('Sales to Success Planning', 'Sizing, Quoting & Config Support', 'View_details', 'Homepage', 'Our Services', 'Sales to Success Planning');
         }
-		    closedialog19=function(){                
+        
+        closedialog19=function(){                
             $("#modalDialog19").ojDialog("close");
         }
 
         opendialog19=function(){                
             $("#modalDialog19").ojDialog("open");
+            analytics('Renewal Planning', 'Project Management Support', 'View_details', 'Homepage', 'Our Services', 'Renewal Planning');
         }
-		    closedialog20=function(){                
+        
+        closedialog20=function(){                
             $("#modalDialog20").ojDialog("close");
         }
 
         opendialog20=function(){                
             $("#modalDialog20").ojDialog("open");
+            analytics('Renewal Planning', 'Reusable Asset Harvesting', 'View_details', 'Homepage', 'Our Services', 'Renewal Planning');
         }    
      
         setcolor = function(){
