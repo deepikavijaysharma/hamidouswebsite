@@ -18,6 +18,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             /*---------------------------------ADMIN----------------------------------*/
+            // ADMIN VIEW
+            self.switchadminview=ko.observable(false);
             // CREATE COURSE
             self.coursetitle = ko.observable('');
             self.courselink = ko.observable('');
@@ -738,7 +740,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     method: 'GET',
                     headers: {
                         free_text_search: '',
-                        email: ssoemail
+                        email: ssoemail,
+                        admin_view:self.switchadminview()==true?'Yes':'No'
                     },
                     success: function (allcourses) {
                         self.courselist = allcourses.courses;
@@ -964,7 +967,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             categoryobj.courses.push({
                                 name: curcourse.name,
                                 description: curcourse.description,
-                                subdescription: curcourse.description.substring(0, 120) + '...',
+                                subdescription: curcourse.description!=undefined?curcourse.description.substring(0, 120) + '...':'',
                                 class_size: curcourse.class_size,
                                 prodcut_type: curcourse.prodcut_type,
                                 training_level: curcourse.training_level,
@@ -2707,6 +2710,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     console.log(ui.value[0].innerText);
                     self.rtrcategory(ui.value[0].innerText);
                 }
+            }
+
+            self.adminviewSelected=function(){
+                console.log("Admin Mode: "+self.switchadminview());
+                self.fetchcourses();
             }
         }
         return new DashboardViewModel();
