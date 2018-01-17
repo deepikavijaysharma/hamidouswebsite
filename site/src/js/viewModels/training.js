@@ -726,6 +726,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             searchcourses = function () {
+                if(self.switchadminview()){
+                    alert("This feature is diabled in Admin Mode");
+                    return;
+                }
                 self.searchfetchcourses();
             }
             /*-----------------------   GET COURSES LIST   ----------------------*/
@@ -745,7 +749,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     },
                     success: function (allcourses) {
                         self.courselist = allcourses.courses;
-                        self.processCoursesFromService(allcourses);
+                        self.processCoursesFromService(allcourses.courses);
                         self.getCourseIdFromUrl();
 
                     },
@@ -757,6 +761,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.fetchcourses();
 
             self.resetCourseFilters = function () {
+                if(self.switchadminview()){
+                    alert("This feature is diabled in Admin Mode");
+                    return;
+                }
                 setuncheck('category');
                 setuncheck('prodtype');
                 setuncheck('traininglevel');
@@ -789,7 +797,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         },
                         success: function (allcourses) {
                             self.courselist = allcourses.courses;
-                            self.processCoursesFromService(allcourses);
+                            self.processCoursesFromService(allcourses.courses);
                             self.getCourseIdFromUrl();
                         },
                         error: function (xhr) {
@@ -800,6 +808,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             self.refinecourses = function () {
+                if(self.switchadminview()){
+                    alert("This feature is diabled in Admin Mode");
+                    return;
+                }
                 var selectedcategories = ko.toJSON(self.refinecategories()).replace('[', '').replace(']', '').replace(/"/g, '');
                 var selectedproductypes = ko.toJSON(self.refineproducttype()).replace('[', '').replace(']', '').replace(/"/g, '');
                 var selectedtraininglevels = ko.toJSON(self.refinetraininglevel()).replace('[', '').replace(']', '').replace(/"/g, '');
@@ -819,7 +831,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     method: 'GET',
                     headers: headerobj,
                     success: function (allcourses) {
-                        self.processCoursesFromService(allcourses);
+                        self.processCoursesFromService(allcourses.courses);
                     },
                     error: function (xhr) {
                         // alert(xhr);
@@ -943,9 +955,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.processCoursesFromService = function (allcourses) {
 
                 self.categories([]);
-                for (var k = 0; k < allcourses.courses.length; k++) {
+                for (var k = 0; k < allcourses.length; k++) {
                     startday = ''; //allcourses.courses[k].schedule[0];
-                    var curcourse = allcourses.courses[k];
+                    var curcourse = allcourses[k];
                     var catagorylist = curcourse.categories;
                     var catlistString = ko.toJSON(self.refinecategories());
                     var enrolled = "";
@@ -2203,8 +2215,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 console.log("Creating course . . .");
                 var mappedCategories = new Array();
                 self.selectedCategoriesForCourse().forEach(function (element) {
-                    mappedCategories.push(element.id);
+                    mappedCategories.push(element.category_id);
                 });
+                self.cclass().status(self.cclass().status()[0]);
+                self.cclass().state(self.cclass().state()[0]);
 
                 var coursedata = {
                     name: self.createCourse().name(),
@@ -2439,7 +2453,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         $("#editclass").ojDialog("close");
                         resetClass();
                         self.fetchcourses();
-                        updateCourseClass();
+                        $("#edittraining").ojDialog("close");
+                        
+                        
+                    
                         
                     }
                 }).fail(function (xhr, textStatus, err) {
@@ -2502,7 +2519,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         $("#editclass").ojDialog("close");
                         resetClass();
                         self.fetchcourses();
-                        updateCourseClass();
+                        $("#edittraining").ojDialog("close");
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
@@ -2516,7 +2533,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 console.log("saving course . . .: "+ko.toJSON(self.selectedCategoriesForCourse()));
                 var mappedCategories = new Array();
                 self.selectedCategoriesForCourse().forEach(function (element) {
-                    mappedCategories.push(element.category_id);
+                    if(!mappedCategories.includes(element.category_id)){
+                        mappedCategories.push(element.category_id);
+                    }
                 });
                 self.cclass().status(self.cclass().status()[0]);
                 self.cclass().state(self.cclass().state()[0]);
@@ -2553,6 +2572,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         self.fetchcourses();
                         $("#edittraining").ojDialog("close");
                         resetCourse();
+                        
                        
                     }
                 }).fail(function (xhr, textStatus, err) {
@@ -2715,9 +2735,33 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             self.adminviewSelected=function(){
-                console.log("Admin Mode: "+self.switchadminview());
                 self.fetchcourses();
             }
+
+
+            self.searchcontent=function(elem,data){
+                
+                if(self.switchadminview()){
+                    console.log("typing . . .");
+                    filtercourse(data.value);
+                }
+            }
+
+
+            filtercourse=function(value){
+
+                // Store the courses in a temp variable
+                var temcourses=new Array();
+                for(var i=0;i<self.courselist.length;i++){
+                    var course=self.courselist[i];
+                    if(course!=undefined &&course.name!=undefined && course.name.toLowerCase().includes(value.toLowerCase())){
+                        temcourses.push(course);
+                    }
+                }
+                self.processCoursesFromService(temcourses);
+
+            }
+            
         }
         return new DashboardViewModel();
     }

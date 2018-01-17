@@ -14,17 +14,13 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         // CHECK FOR ADMIN RIGHTS
         checkadminrights = function () {
-            console.log('admin checked');
+            
             if (isAdmin) {
                 console.log("Showing for admin");
-                $(".admin").css("display", "inline-block");
+                $(".homeadmin").css("display", "inline-block");
             } else {
                 console.log("Hiding for user");
-                // $(".admin").css("display", "none");
-                var appBanners = document.getElementsByClassName('admin'), i;
-                for (var i = 0; i < appBanners.length; i++) {
-                    appBanners[i].style.visibility = 'hidden';
-                }
+                $(".homeadmin").css("display", "none");
             }
         }
 
@@ -59,10 +55,24 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         self.currentNavArrowPlacement = ko.observable("adjacent");
         self.currentNavArrowVisibility = ko.observable("auto");
+
+        // // getter
+        // var maxItemsPerPage = $("#filmStrip1").ojFilmStrip("option", "maxItemsPerPage");
+
+        //     // setter
+        //     $("#filmStrip1").ojFilmStrip("option", "maxItemsPerPage", 3);
+        // // getter
+        // var arrowPlacement = $("#filmStrip1").ojFilmStrip("option", "arrowPlacement");
+        // var arrowVisibility = $(".selector").ojFilmStrip("option", "arrowVisibility");
+        // // setter
+        // // $("#filmStrip1").ojFilmStrip("option", "arrowPlacement", "overlay");
+        // $("#filmStrip1").ojFilmStrip({ "arrowPlacement": "overlay" });
+        // $("#filmStrip1").ojFilmStrip("option", "arrowVisibility", "visible");
         
         getItemInitialDisplay1 = function (index) {
             return index < 2 ? '' : 'none';
         };
+
 
         //CREATE SLIDER observables
         self.slimage = ko.observableArray([]);
@@ -146,9 +156,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         dempfeaid: self.empfeatlist()[b].empfeaid, 
                         dempfeatext: self.empfeatlist()[b].empfeatext, 
                         dempfeaheading: self.empfeatlist()[b].empfeaheading, 
-                        dempfeabg: self.empfeatlist()[b].empfeabg,
-                        dempfeaarchived: self.empfeatlist()[b].archived 
-                    });
+                        dempfeabg: self.empfeatlist()[b].empfeabg 
+                    });//console.log(ko.toJSON(self.empdeatilsmatched));
                 }
             }
             $("#empf1").ojDialog("open");
@@ -285,31 +294,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             });
         }
 
-        archiveslider = function (slider_archive) 
-        {
-            console.log("Archived Slider", slider_archive.sliderid);
-            var data_sl_value = {
-                "id": slider_archive.sliderid,
-                "archived": "YES"
-            };
-            $.ajax({
-                url: homebaseurl + 'home_screen_data',
-                method: 'DELETE',
-                contentType: 'application/json; charset=utf-8',
-                data: ko.toJSON(data_sl_value),
-                success: function () {
-                    console.log("Slider Archived");
-                    fetchslider();
-                },
-                fail: function (xhr, textStatus, err) {
-                    console.log("Fail: ",err);
-                },
-                error: function (xhr, textStatus, err) {
-                    console.log("Error: ",err);
-                }
-            });
-        }
-
         deleteslider = function (slider_delete) 
         {
             console.log("Deleted Slider",slider_delete);
@@ -375,8 +359,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         sliderimg: sllist[s].image,
                         sliderlt1: sllist[s].link_text1,
                         sliderlt2: sllist[s].link_text2,
-                        slidertitle: sllist[s].title,
-                        sliderarchived: sllist[s].archived
+                        slidertitle: sllist[s].title
                     })
                 }
             });
@@ -395,7 +378,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
 
         /******************************************SLIDER ENDS********************************************************************/
-
         
         /******************************************OUR ORGANIZATION***************************************************************/
 
@@ -1024,6 +1006,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 url: homedevurl + 'PutImagesGoLive',
                 headers: lheader,
                 type: 'PUT',
+                // contentType: 'application/json; charset=utf-8',
                 data: ldata,
                 success: function (datalogogl) {
                     console.log("Go Lives logo added successfully!");
@@ -1039,6 +1022,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 url: homedevurl + 'PutImagesGoLive',
                 headers: pheader,
                 type: 'PUT',
+                // contentType: 'application/json; charset=utf-8',
                 data: pdata,
                 success: function (dataphotogl) {
                     console.log("Go Lives presenter photo added successfully!");
@@ -1881,30 +1865,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#editempfdialog").ojDialog("close");
         }
 
-        archiveemployeefeatures = function (employeefeatures_archive) {
-            console.log("Archived Employee Features", employeefeatures_archive.empfeaid);
-            var data_ef_value = {
-                "id": employeefeatures_archive.empfeaid,
-                "archived": "YES"
-            };
-            $.ajax({
-                url: homebaseurl + 'employee_features',
-                method: 'DELETE',
-                contentType: 'application/json; charset=utf-8',
-                data: ko.toJSON(data_ef_value),
-                success: function () {
-                    console.log("Archive success for employee features");
-                    fetchempfeatures();
-                },
-                fail: function (xhr, textStatus, err) {
-                    console.log("Fail: ", err);
-                },
-                error: function (xhr, textStatus, err) {
-                    console.log("Error: ", err);
-                }
-            });
-        }
-
         deleteemployeefeatures = function (ef_delete) {
             console.log("delete employee feature", ef_delete);
             openDeleteEmployeeFeaturesModal(ef_delete.empfeaid);
@@ -1955,10 +1915,9 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         empfeaid: eflist[b].id,
                         empfeaheading: eflist[b].features_heading,
                         empfeatext: eflist[b].key_wins_text,
-                        empfeabg: eflist[b].image,
-                        empfeaarchived: eflist[b].archived
+                        empfeabg: eflist[b].image
                     })
-                }
+                }//console.log(ko.toJSON(self.empfeatlist()));
             });
         }
         fetchempfeatures();
@@ -1973,76 +1932,12 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
         /******************************************EMPLOYEE FEATURES ENDS********************************************************************/
 
-
-        /******************************************ANALYTICS*********************************************************************************/
-
-        analytics = function (itemtitle, itemname, itemtype, itemlevel1, itemlevel2, itemlevel3) 
-        {
-            var itemdesc;
-            if(itemtitle != "" && itemname != "")
-            {
-                itemdesc = itemtitle + " > " + itemname;
-            }
-            else if (itemtitle == "" && itemname != "") 
-            {
-                itemdesc = itemname;
-            }
-            else if (itemtitle != "" && itemname == "") 
-            {
-                itemdesc = itemtitle;
-            }
-            else
-            {
-                itemdesc = "";
-            }
-            if(itemlevel3 == "")
-            {
-                var analytics = {
-                    "session_id": sessionid,
-                    "email": ssoemail,
-                    "event_description": itemdesc,
-                    "event_type": itemtype,
-                    "level_1": itemlevel1,
-                    "level_2": itemlevel2
-                };
-            }
-            else
-            {
-                var analytics = {
-                    "session_id": sessionid,
-                    "email": ssoemail,
-                    "event_description": itemdesc,
-                    "event_type": itemtype,
-                    "level_1": itemlevel1,
-                    "level_2": itemlevel2,
-                    "level_3": itemlevel3
-                };
-            }
-            console.log(analytics);
-            // $.ajax({
-            //     url: homebaseurl + 'POST_EVENT_DATA',
-            //     type: 'POST',
-            //     contentType: 'application/json; charset=utf-8',
-            //     data: ko.toJSON(analytics),
-            //     success: function (event) {
-            //         console.log("Analytics of event sent.", event);
-            //     }
-            // }).fail(function (xhr, textStatus, err) {
-            //     alert("Error in sending analytics", err);
-            // });
-            return true;
-        }
-
-        /******************************************ANALYTICS ENDS***************************************************************************/
-
-
         closedialog=function(){                
             $("#modalDialog1").ojDialog("close");
         }
 
         opendialog=function(){                
             $("#modalDialog1").ojDialog("open");
-            analytics('Awareness', 'Deliver a Cloud Day', 'View_details', 'Homepage', 'Our Services', 'Awareness');
         }
 
         closedialog2=function(){                
@@ -2051,7 +1946,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog2=function(){                
             $("#modalDialog2").ojDialog("open");
-            analytics('Demand', 'Develop a Cloud Vision', 'View_details', 'Homepage', 'Our Services', 'Demand');
         }
 
         closedialog3=function(){                
@@ -2060,7 +1954,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog3=function(){                
             $("#modalDialog3").ojDialog("open");
-            analytics('Opportunity', 'Design a Cloud Solution', 'View_details', 'Homepage', 'Our Services', 'Opportunity');
         }
 
         closedialog4=function(){                
@@ -2069,7 +1962,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog4=function(){                
             $("#modalDialog4").ojDialog("open");
-            analytics('Success', 'Adopt a Cloud Solution', 'View_details', 'Homepage', 'Our Services', 'Success');
         }
         closedialog5=function(){                
             $("#modalDialog4]5").ojDialog("close");
@@ -2077,7 +1969,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog5=function(){                
             $("#modalDialog5").ojDialog("open");
-            analytics('Awareness', 'Support a Marketing Event', 'View_details', 'Homepage', 'Our Services', 'Awareness');
         }
 
         closedialog6=function(){
@@ -2086,7 +1977,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog6=function(){                
             $("#modalDialog6").ojDialog("open");
-            analytics('Demand', 'Develop a Value Hypothesis', 'View_details', 'Homepage', 'Our Services', 'Demand');
         }
 
         closedialog7=function(){                
@@ -2095,7 +1985,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog7=function(){                
             $("#modalDialog7").ojDialog("open");
-            analytics('Opportunity', 'Build a POC', 'View_details', 'Homepage', 'Our Services', 'Opportunity');
         }
 
         closedialog8=function(){                
@@ -2104,7 +1993,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog8=function(){                
             $("#modalDialog8").ojDialog("open");
-            analytics('Success', 'Deliver a Support Onboarding', 'View_details', 'Homepage', 'Our Services', 'Success');
         }
 
         closedialog9=function(){                
@@ -2113,7 +2001,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog9=function(){                
             $("#modalDialog9").ojDialog("open");
-            analytics('Awareness', 'Build an Executive Briefing', 'View_details', 'Homepage', 'Our Services', 'Awareness');
         }
 
         closedialog10=function(){                
@@ -2122,7 +2009,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog10=function(){                
             $("#modalDialog10").ojDialog("open");
-            analytics('Demand', 'Create a Packaged Proposal', 'View_details', 'Homepage', 'Our Services', 'Demand');
         }
 
         closedialog11=function(){                
@@ -2131,7 +2017,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog11=function(){                
             $("#modalDialog11").ojDialog("open");
-            analytics('Opportunity', 'Build a Business Case', 'View_details', 'Homepage', 'Our Services', 'Opportunity');
         }
 
         closedialog12=function(){
@@ -2140,79 +2025,64 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         opendialog12=function(){                
             $("#modalDialog12").ojDialog("open");
-            analytics('Success', 'Deliver a Health Check', 'View_details', 'Homepage', 'Our Services', 'Success');
         }
 		
-		closedialog13=function(){                
+		    closedialog13=function(){                
             $("#modalDialog13").ojDialog("close");
         }
 
         opendialog13=function(){                
             $("#modalDialog13").ojDialog("open");
-            analytics('Account Planning', 'Customer Discovery', 'View_details', 'Homepage', 'Our Services', 'Account Planning');
         }
 		
-		closedialog14=function(){                
+		    closedialog14=function(){                
             $("#modalDialog14").ojDialog("close");
         }
 
         opendialog14=function(){                
             $("#modalDialog14").ojDialog("open");
-            analytics('Account Planning', 'Platform Assessments', 'View_details', 'Homepage', 'Our Services', 'Account Planning');
         }
-
-		closedialog15=function(){                
+		    closedialog15=function(){                
             $("#modalDialog15").ojDialog("close");
         }
 
         opendialog15=function(){                
             $("#modalDialog15").ojDialog("open");
-            analytics('Opportunity Planning', 'Hands-on Workshops', 'View_details', 'Homepage', 'Our Services', 'Opportunity Planning');
         }
-        
-        closedialog16=function(){                
+		    closedialog16=function(){                
             $("#modalDialog16").ojDialog("close");
         }
 
         opendialog16=function(){                
             $("#modalDialog16").ojDialog("open");
-            analytics('Opportunity Planning', 'Customer Demos', 'View_details', 'Homepage', 'Our Services', 'Opportunity Planning');
         }
-        
-        closedialog17=function(){                
+		    closedialog17=function(){                
             $("#modalDialog17").ojDialog("close");
         }
 
         opendialog17=function(){                
             $("#modalDialog17").ojDialog("open");
-            analytics('Sales to Success Planning', 'RFx Response Support', 'View_details', 'Homepage', 'Our Services', 'Sales to Success Planning');
         }
-        
-        closedialog18=function(){                
+		    closedialog18=function(){                
             $("#modalDialog18").ojDialog("close");
         }
 
         opendialog18=function(){                
             $("#modalDialog18").ojDialog("open");
-            analytics('Sales to Success Planning', 'Sizing, Quoting & Config Support', 'View_details', 'Homepage', 'Our Services', 'Sales to Success Planning');
         }
-        
-        closedialog19=function(){                
+		    closedialog19=function(){                
             $("#modalDialog19").ojDialog("close");
         }
 
         opendialog19=function(){                
             $("#modalDialog19").ojDialog("open");
-            analytics('Renewal Planning', 'Project Management Support', 'View_details', 'Homepage', 'Our Services', 'Renewal Planning');
         }
-        
-        closedialog20=function(){                
+		    closedialog20=function(){                
             $("#modalDialog20").ojDialog("close");
         }
 
         opendialog20=function(){                
             $("#modalDialog20").ojDialog("open");
-            analytics('Renewal Planning', 'Reusable Asset Harvesting', 'View_details', 'Homepage', 'Our Services', 'Renewal Planning');
         }    
      
         setcolor = function(){
@@ -2441,9 +2311,9 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             element.value = '';
         }
 
-        self.handleActivated = function(info) {
+        self.handleAttached=function(info) {
             checkadmin();
-            checkadminrights();        
+            checkadminrights();
         };
     }
 

@@ -4,66 +4,94 @@
  -->
 
 <div class="container">
-
   <div class="oj-sm-12 breadcrumbs">
     <ul>
-      <li><a href="?root=home">Home</a> ></li>
+      <li><a href="/?root=home">Home</a> ></li>
       <li>Key Dates Archives</li>
     </ul>
   </div>
-
-  <div class="oj-row row5 newrow">
-    <!-- <div class="container"> -->
-      <div class="oj-sm-12 keydates">
-        <div class="oj-flex">
+   <div class="oj-sm-12 row5 keydates bgwhitearchive">
+          <div class="oj-flex">
             <div class="oj-sm-12">
-              <div class="oj-flex">
-                <div class="oj-sm-12">
-                  <div class="oj-margin">
-                    
-                    <!-- ko foreach: keydateslist -->
-                    <div class="calrow">
-                      <div class="oj-flex">
-                        <div class="oj-sm-12 oj-lg-3 cDate oj-flex">
-                          <p>
-                            <span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;
-                            <span data-bind="text: keydstartdate"></span>
-                            <br> Time:
-                            <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;
-                            <span data-bind="text: keydstarttime"></span>
-                          </p>
-                        </div>
-                        <div class="oj-sm-12 oj-lg-6 cTitle oj-flex" data-bind="text: keydname"></div>
-                        <div class="oj-sm-12 oj-lg-3 calbutton">
-                          <!-- ko if: keydtype == 'COMMUNITY_CALLS' -->
-                          <div class="orangeBbutton oj-lg-float-end">
-                            <a data-bind="attr:{'href':keydhlink+'key_com_call='+keydcid}" target="_blank">Link</a>
-                          </div>
-                          <!-- /ko -->
-                          <!-- ko ifnot: keydtype == 'COMMUNITY_CALLS' -->
-                            <!-- ko if: keydtype == 'EVENT' -->
-                            <div class="orangeBbutton oj-lg-float-end">
-                              <a data-bind="attr:{'href':keydhevlink}" target="_blank">Link</a>
-                            </div>
-                            <!-- /ko -->
-                            <!-- ko ifnot: keydtype == 'EVENT' -->
-                            <div class="orangeBbutton oj-lg-float-end">
-                              <a data-bind="attr:{'href':keydhlink+keydcid}" target="_blank">Link</a>
-                            </div>
-                            <!-- /ko -->  
-                          <!-- /ko -->
-                        </div>
-                      </div>
+              <div class="oj-margin">
+               <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Wednesday, September 27th<br>
+                        &nbsp;</p>
                     </div>
-                    <!-- /ko -->
-
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Oracle Global Employee Summit</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end"><a href="https://my.oracle.com/site/mktg/creative/cnt2682607.html" target="_blank">Replay</a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Wednesday, September 27th<br>
+                        &nbsp;</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Universal Credits & BYOL Overview and News</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end"><a href="https://engage.vevent.com/rt/natd~09222017" target="_blank">Replay</a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span 
+     class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Tuesday, October 3rd<br>
+                        &nbsp;</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Open World Keynotes on Demand</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end"><a href="https://www.oracle.com/openworld/on-demand.html" target="_blank">Replay</a></div>
+                    </div>
+                  </div>
+                </div>
+               
+                <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Monday, October 16<br>
+                        <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time: 13:00 PM PST</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">Cloud Accelerate Community Call</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end"><a href="https://oracle.webex.com/oracle/j.php?MTID=ma62b72471628b59ba30737ad332fd34a" target="_blank">Link</a></div>
+                    </div>
+                  </div>
+                </div>
+                 <div class="calrow">
+                  <div class="oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
+                      <p><span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;Friday, October 20<br>
+                        <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;Time: 12:00 PM PST</p>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">NATD Cloud Community Call</div>
+                    <div class="oj-sm-12 oj-lg-3 calbutton">
+                      <div class="orangeBbutton oj-lg-float-end"><a href="https://engage.vevent.com/rt/natd~10202017" target="_blank">Registration</a></div>
+                    </div>
+                  </div>
+                </div>
+               
+                <div class="oj-sm-12 oj-sm-center" style="display:none">
+                  <div class="oj-flex valign">
+                    <div class="oj-sm-12 oj-lg-4 oj-flex"></div>
+                    <div class="oj-sm-12 oj-lg-5 oj-flex">
+                      <button class="oj-sm-align-center oj-flex bluebutton ">See All</button>
+                    </div>
+                    <div class="oj-sm-12 oj-lg-3"><span class="oj-md-float-end">Missed out any course?<br>
+                      <a href="#">Checkout Archives</a></span></div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
         </div>
-      </div>
-    <!-- </div> -->
-  </div>  
-
+  
 </div>

@@ -13,37 +13,6 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
       // Below are a subset of the ViewModel methods invoked by the ojModule binding
       // Please reference the ojModule jsDoc for additionaly available methods.
 
-      self.sliderlist = ko.observableArray([]);
-
-      fetchslider = function () {
-        $.getJSON(homebaseurl + 'home_screen_data').then(function (fetchslider) {
-          // Fetch organization people details
-          self.sliderlist([]);
-          var sllist = fetchslider.items;
-          for (var s = 0; s < sllist.length; s++) {
-            if (sllist[s].link_text1 == "" && sllist[s].button_label1 == "") {
-              $(".bl1").css("display", "none");
-            }
-            else if (sllist[s].link_text2 == "" && sllist[s].button_label2 == "") {
-              $(".bl2").css("display", "none");
-            }
-            self.sliderlist.push({
-              sliderbl1: sllist[s].button_label1,
-              sliderbl2: sllist[s].button_label2,
-              sliderdesc: sllist[s].description,
-              sliderid: sllist[s].id,
-              sliderimgid: sllist[s].image_id,
-              sliderimg: sllist[s].image,
-              sliderlt1: sllist[s].link_text1,
-              sliderlt2: sllist[s].link_text2,
-              slidertitle: sllist[s].title,
-              sliderarchived: sllist[s].archived
-            })
-          }
-        });
-      }
-      fetchslider();
-
       /**
        * Optional ViewModel method invoked when this ViewModel is about to be
        * used for the View transition.  The application can put data fetch logic
