@@ -6,10 +6,24 @@
 var baseurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/";
 var hubbaseurl="http://solutionengineering-devops.us.oracle.com:7003/ords/seaas/seaas/";
 var ssoemail='';
+var ssoname='';
 var usertype='';
 var uuid='';
 var isAdmin=false;
 var newUserAdminCheck=false;
+var homedevurl="https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/";//For Dev
+var homeprodurl = "https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/seaashm/";//For Production
+var homebaseurl = homedevurl;
+// var homebaseurl = homeprodurl;
+var trainingdevurl="https://apex.oraclecorp.com/pls/apex/training_app_dev/training/";
+var trainingprodurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/";
+var trainingbaseurl=trainingprodurl;
+var com_call_api = "https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/"; //Dev URL
+//var com_call_api = "https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/seaashm/"; //Prod URL
+var community_call_url = com_call_api+"COMMUNITY_CALLS";
+var community_call_calendar_link = com_call_api+"get_ical";
+var events_api = com_call_api+"GetKeyEvents";
+var create_event_api = com_call_api+"event";
 /**
  * Example of Require.js boostrap javascript
  */
@@ -38,9 +52,12 @@ requirejs.config(
     'customElements': 'libs/webcomponents/CustomElements',
     'proj4': 'libs/proj4js/dist/proj4-src',
     'css': 'libs/require-css/css',
-	'bootstrap': 'libs/bootstrap/bootstrap.min'
+    'date':'libs/date/date',
+    'ojtreeview' : 'libs/oj/v3.2.0/debug/ojtreeview',
+    'bootstrap': 'libs/bootstrap/bootstrap.min'
   }
   
+
 //endinjector
   ,
   // Shim configurations for modules that do not expose AMD

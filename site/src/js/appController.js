@@ -42,6 +42,15 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         },
         'admin': {
           label: 'Admin'
+        },
+    'archive': {
+          label: 'Archive'
+        },
+    'empfeaturearchive': {
+          label: 'Employee Feature Archive'
+        },
+    'keydatesarchives': {
+          label: 'Key Dates Archive'
         }
       });
       oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
@@ -68,9 +77,8 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       // LOGIN INITIATION
       isloggedin = function () {
         if (ssoemail.length > 0) {
-
-          document.getElementById('loginbutton').style.display = 'none';
-          document.getElementById('loginbutton1').style.display = 'none';
+          document.getElementById('logoutbutton').style.display = 'block';
+          document.getElementById('logoutbutton1').style.display = 'block';
           // if(!newUserAdminCheck){
           //   checkadmin();
           // }
@@ -81,19 +89,12 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
             self.ssowindow.close();
           }
         } else {
-       
-          document.getElementById('loginbutton').style.display = 'block';
-          document.getElementById('loginbutton1').style.display = 'block';
-          
+          document.getElementById('logoutbutton').style.display = 'block';
+          document.getElementById('logoutbutton1').style.display = 'block';          
         }
       }
 
-      initsso = function () {
-        if (ssoemail.length == 0) {
-          // document.getElementById('ssodialog').style.display = 'block';
-          self.ssowindow = window.open("http://solutionengineering.us.oracle.com/seaas/");
-        }
-      }
+     
 
       getemailfromcookie = function () {
 
@@ -115,37 +116,38 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         
         if (email) {
           ssoemail = email;
+          // ssoname = sname;
         } else {
           ssoemail = "";
+          ssoemail = "angan.sen@oracle.com";
+          
         }
       }
+
+      initsso = function () {
+        if (ssoemail.length == 0) {
+          self.ssowindow = window.open("http://solutionengineering.us.oracle.com/seaas/");
+        }
+      }
+
+      closesso = function () {
+        if (ssoemail.length > 0 && self.ssowindow!=undefined) {
+          self.ssowindow.close();
+        }
+      }
+      logoutUser = function () {
+        if (ssoemail.length > 0) {
+          self.ssowindow = window.open("https://login-stage.oracle.com:443/oam/server/logout", target = "_self");
+        }
+      }
+
+      getemailfromcookie();
+      initsso();
       
-
-      // checkadmin=function(){
-      //   var checkurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/isAdmin";
-      //   if (ssoemail.length > 0) {
-      //     console.log("Admin check commenced");
-      //     $.ajax({
-      //       url: checkurl,
-      //       method: 'GET',
-      //       headers: {
-      //           email: ssoemail
-      //       },
-      //       success: function (data) {
-      //         isAdmin=data.is_admin;
-      //         newUserAdminCheck=true;
-      //       },
-      //       error: function (xhr) {
-      //           //alert(xhr);
-      //           newUserAdminCheck=false;
-      //       }
-      //   });
-      //   }
-      // }
-
       setInterval(function () {
         getemailfromcookie();
         isloggedin();
+        closesso();
       }, 500);
 
  
@@ -196,7 +198,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
          new footerLink('Home', 'home', '?root=home'),
         new footerLink('ECAL Site', 'ecal', 'http://innovate.us.oracle.com/ecal/', '_blank'),
         new footerLink('Cloud Accelerate Site', 'cloudaccelerate', 'http://innovate.us.oracle.com/cloudaccelerate/', '_blank'),
-		new footerLink('Contact Us', 'contactus', 'mailto:heather.hughes@oracle.com'),
+    new footerLink('Contact Us', 'contactus', 'mailto:heather.hughes@oracle.com'),
         
       ]);
     }

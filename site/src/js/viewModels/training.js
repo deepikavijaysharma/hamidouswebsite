@@ -5,21 +5,26 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs/ojconveyorbelt', 'ojs/ojcheckboxset', 'ojs/ojcollapsible', 'ojs/ojanimation', 'ojs/ojchart', 'ojs/ojbutton', 'ojs/ojinputtext', 'ojs/ojdialog', 'ojs/ojdatetimepicker',
-             'ojs/ojselectcombobox', 'ojs/ojtimezonedata',],
+define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs/ojconveyorbelt', 'ojs/ojcheckboxset', 'ojs/ojanimation', 'ojs/ojbutton', 'ojs/ojinputtext', 'ojs/ojdialog', 'ojs/ojdatetimepicker',
+        'ojs/ojselectcombobox', 'ojs/ojtimezonedata', 'ojs/ojswitch', 'ojs/ojswitch', 'ojs/ojdialog', 'ojs/ojcollapsible', 'ojs/ojaccordion', 'ojs/ojtree','ojs/ojtabs'
+    ],
     function (oj, ko, $) {
 
         function DashboardViewModel() {
 
 
             var self = this;
-            this.val = ko.observableArray();
+            self.val = ko.observableArray();
+
+
             /*---------------------------------ADMIN----------------------------------*/
+            // ADMIN VIEW
+            self.switchadminview=ko.observable(false);
             // CREATE COURSE
             self.coursetitle = ko.observable('');
             self.courselink = ko.observable('');
             self.coursedesc = ko.observable('');
-            self.disabledtab = ko.observable([3,4]);
+            self.disabledtab = ko.observable([5, 6]);
 
             self.selectedrole = ko.observable('');
             self.selectedcategory = ko.observable('');
@@ -73,9 +78,86 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.callroles = ko.observable('');
             self.callmode = ko.observable('');
             self.communityCallList = ko.observableArray([]);
+            self.organizerEmail = ko.observable('');
+            self.topic = ko.observable('');
+            self.invite = ko.observable('');
+
+            self.courselist = ko.observableArray([]);
+            self.reporteelist = ko.observableArray([]);
 
 
+            // REPORTEE
+            self.selectreportees = ko.observableArray([]);
 
+            self.selectedcourseid = "";
+            self.selectedclassid = "";
+
+            // TOAST MESSAGE DIALOG
+            self.title = ko.observable("");
+            self.msg = ko.observable("");
+
+
+            // CREATE COURSE VARIABLES
+            self.course_name = ko.observable('');
+            self.course_description = ko.observable('');
+            self.categoryForUi = ko.observableArray([]);
+
+
+            //REQUEST TRAINING VARIABLES
+            self.rtrsel= ko.observable('');
+            self.rtrcategory = ko.observable('');
+            self.rtrname = ko.observable('');
+            self.rtrselected = ko.observable('');
+
+            // CREATE COURSE MODEL
+            self.selectedCategoriesForUi = ko.observableArray([]);
+            self.selectedCategoriesForCourse = ko.observableArray([]);
+
+            // CLASS SCHEDULES
+            self.schedule = ko.observable();
+            self.schedule({
+                start_date: ko.observable(),
+                end_date: ko.observable(),
+                timezone: ko.observable()
+            })
+
+            self.csdate = ko.observable('');
+            self.cedate = ko.observable('');
+            self.ctimezone = ko.observable('');
+
+            // CLASSES
+            self.cclass = ko.observable();
+            self.cclass({
+                class_id: ko.observable(''),
+                description: ko.observable(''),
+                class_size: ko.observable(''),
+                enrollment_end_date: ko.observable(''),
+                enrollment_end_date_view: ko.observable(''),
+                city: ko.observable(''),
+                state: ko.observable(''),
+                status: ko.observable(''),
+                key_event: ko.observable(false),
+                schedules: ko.observableArray([])
+            });
+
+
+            // COURSE
+            self.createCourse = ko.observable();
+            self.createCourse({
+                course_id: ko.observable(''),
+                name: ko.observable(''),
+                description: ko.observable(''),
+                contact_email: ko.observable(''),
+                cloud_onpremise: ko.observable(''),
+                training_level: ko.observable(''),
+                training_type: ko.observable(''),
+                status: ko.observable(''),
+                categories: ko.observableArray([]),
+                classes: ko.observableArray([])
+            });
+
+
+            self.rolelist = ko.observableArray([]);
 
 
             // EVENT HANDLER FOR ROLE SELECTION
@@ -84,9 +166,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             }
 
             //EVENT HANDLE FOR CATEGORY SELECTION
-            categorySelected = function (event, ui) {
-                populateSubcategory(ui.value);
-            }
+            // categorySelected = function (event, ui) {
+            //     populateSubcategory(ui.value);
+            // }
 
             // POPULLATE CATEGORY BASED ON ROLE
             populateCategory = function (role) {
@@ -112,7 +194,28 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 }
             }
 
+            getRoleData = function () {
+                $.getJSON("https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/getFiltersV2").
+                then(function (reasons) {
+
+                    // Get Roles in select in REQUEST TRAINING
+                    self.rolelist([]);
+                    // console.log(reasons);
+                    var rolist = reasons.roles;
+                    for (var i = 0; i < rolist.length; i++) {
+
+                        self.rolelist.push({
+                            name: rolist[i].name,
+                            id: rolist[i].id
+                        })
+                    }// console.log(ko.toJSON(self.rolelist()));
+                });
+            }
+
+            getRoleData();
+
             //-----------------   COMMUNITY CALL   ------------------------//
+            //Development url for create, edit, clone and delete community call
             this.patternValue = ko.observableArray(["dd-MMM-yy hh:mm"]);
             this.dateTimeConverter = oj.Validation.converterFactory(oj.ConverterFactory.CONVERTER_TYPE_DATETIME).
             createConverter({
@@ -133,8 +236,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.callrecordlink = ko.observable('');
             self.selectedrole = ko.observableArray([]);
             self.selectedcallmode = ko.observableArray([]);
-
             self.callmodes = ko.observableArray(['Virtual', 'Town Hall']);
+            self.addiontal_link = ko.observable('');
+            self.organizerEmail = ko.observable('');
+            self.topic = ko.observable('');
+            self.invite = ko.observable('');
+            self.com_call_keyevent = ko.observable('');
 
             resetcall = function () {
                 self.callname('');
@@ -152,8 +259,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 self.reflink('');
                 self.callrecordlink('');
                 self.selectedrole([]);
-              
+                self.organizerEmail('');
+                self.topic('');
+                self.invite('');
+                self.addiontal_link('');
+                self.com_call_keyevent(false);
+
             }
+
+
+
+
+            // showToastDialog("","");
+
 
             // CREATE COMMUNITY CALL
             createcommunitycall = function () {
@@ -177,7 +295,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     return;
                 }
                 if (self.calldesc().length == 0) {
-                    
+
                     alert("Select atleast one role");
                     return;
                 }
@@ -186,7 +304,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
                     alert("Please enter duration");
                     return;
-                }else if(typeof self.callduration() == 'number'){
+                } else if (typeof self.callduration() == 'number') {
                     alert("Please enter valid duration in minute(s)");
                     return;
                 }
@@ -201,14 +319,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 selectedrole = ko.toJSON(self.selectedrole()).replace('[', '').replace(']', '').replace(/"/g, '');
                 selectedcallmode = ko.toJSON(self.selectedcallmode()).replace('[', '').replace(']', '').replace(/"/g, '');
 
-
                 var call = {
                     name: self.callname(),
                     speaker: self.callspkr(),
                     designation: self.calldesignation(),
-                    call_date: self.date(),
-                    call_time: self.starttime().split('T')[1].substring(0,5),
-                    duration:self.callduration(),
+                    call_date: self.date().split('T')[0],
+                    call_time: self.starttime().split('T')[1].substring(0, 5),
+                    duration: self.callduration(),
                     locn: self.callvenue(),
                     meetinglink: self.calllink(),
                     dialin: self.calldialin(),
@@ -217,14 +334,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     user: ssoemail,
                     recording_link: self.callrecordlink(),
                     mode_of_call: selectedcallmode,
-                    role: selectedrole
+                    role: selectedrole,
+                    addl_link: self.addiontal_link(),
+                    organizer_email: self.organizerEmail(),
+                    topic: self.topic(),
+                    invite: self.invite(),
+                    keyevent: self.com_call_keyevent()!=true?'No':'Yes' 
+
                 }
-
-                console.log(ko.toJSON(call));
-                var url = 'http://10.146.89.49:7003/ords/seaashm/seaashm/INS_COMMUNITY_CALLS';
-
                 $.ajax({
-                    url: url,
+                    url: community_call_url,
                     cache: false,
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
@@ -237,13 +356,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
                 });
-
+                $("#createcommunitycall_id").ojDialog("close");
 
             }
 
             //----------------------- END OF COMMUNITY CALL  ---------------------//
-
-
+            openCommunityCallDialog = function () {
+                $('#createcommunitycall_id').ojDialog("open");
+            }
 
 
             //------------------   CATEGORY  -------------------//
@@ -251,7 +371,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
             // GET THE CATEGORIES
             getcategories = function () {
-                $.getJSON("https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/getCategories").
+                $.getJSON(trainingbaseurl + "getCategories").
                 then(function (reasons) {
                     self.categories([]);
                     self.subcategories([]);
@@ -292,15 +412,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
             //  VARIABLES FOR LEFT PANEL CATEGORIES 
             self.refinelist = ko.observableArray([]);
+            self.catlist = ko.observableArray([]);
             self.producttype = ko.observableArray([]);
             self.training_levels = ko.observableArray([]);
             self.training_types = ko.observableArray([]);
             self.cities = ko.observableArray([]);
             self.roles = ko.observableArray([]);
             self.selectedcategories = ko.observableArray([]);
+            self.rl = ko.observableArray([]);
 
             getLeftpanelData = function () {
-                $.getJSON("https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/getFiltersV2").
+                $.getJSON(trainingbaseurl + "getFiltersV2").
                 then(function (reasons) {
 
                     // CATEGORIES
@@ -369,14 +491,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                             id: stateList[i].id
                         })
                     }
-
-
-                    // console.log(ko.toJSON(self.refinelist()));
                 });
             }
 
             getLeftpanelData();
-            // getcategories();
 
             // RESET CATEGORY FIELD
             resetcat = function () {
@@ -432,19 +550,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             /*----------------------------------PLACEHOLDER SELECT ROLE POPUP----------------------------------*/
             self.emptyPlaceholder = ko.observable(false);
 
-            self.handleAttached = function (info) {
-                // Implement if needed
-            };
 
             self.closeRole = function () {
                 $("#modalDialog1").ojDialog("close")
             };
 
             //EVENT HANDLE FOR CATEGORY SELECTION
-            categorySelected = function (event, ui) {
-                populateSubcategory(ui.value);
-            }
             self.openReqtraining = function () {
+                self.rtrname(ssoemail);
                 $("#trainingDialog").ojDialog("open");
             };
 
@@ -452,7 +565,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             /*----------------------------------GET COURSES----------------------------------*/
             self.role = ko.observableArray([]);
             self.getrole = function () {
-                $.getJSON(baseurl + "getCategories").then(function (roleslist) //CODE FOR THE ROLE POPUP
+                $.getJSON(trainingbaseurl + "getCategories").then(function (roleslist) //CODE FOR THE ROLE POPUP
                     {
                         for (var i = 0; i < roleslist.roles.length; i++) {
                             var filt = roleslist.roles[i].name;
@@ -474,9 +587,42 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     });
             }
 
+            // CLOSE THE COURSE DETAILS SCREEN
             self.closecoursedetails = function () {
 
                 $("#coursedetails").ojDialog("close");
+            }
+
+            // READ THE COURSE IF FROM THE URL, IF EXIST WE NEED TO SHOW THE DETAILS SCREEN
+            self.getCourseIdFromUrl = function () {
+
+                var courseid = "";
+                if (window.location.hash) {
+                    courseid = window.location.hash.replace('#', '');
+                    if (courseid.trim().length > 0) {
+                        // alert(courseid);
+                        self.getCourseDetailsAndShow(courseid);
+                    }
+                }
+            }
+
+
+            // GET THE COURSE DETAILS FROM A LIST AND 
+            self.getCourseDetailsAndShow = function (courseIdForDetails) {
+                showcoursedetails(findCourseById(courseIdForDetails), "");
+            }
+
+            // FIND COURSE BY COURSE ID
+            findCourseById = function (courseid) {
+                // ITERATE THROUGH THE LIST OF COURSES TO FIND A MATCH FOR THE COURSE ID
+                for (var i = 0; i < self.courselist.length; i++) {
+                    var course = self.courselist[i];
+                    console.log(course.course_id);
+                    if (course.course_id === courseid) {
+                        return course;
+                    }
+                }
+
             }
 
 
@@ -490,16 +636,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.detailedSubCatName = ko.observable();
             self.detailedSubCatId = ko.observable();
             self.detailedRoles = ko.observable();
+            self.detailedEnrollstatus = ko.observable();
             self.detailedClassSize = ko.observable();
             self.detailedprodcut_type = ko.observable();
             self.detailedTrainingLevel = ko.observable();
             self.detailedTrainingType = ko.observable();
-            self.detailedClasses=ko.observableArray([]);
+            self.detailedClasses = ko.observableArray([]);
             self.detailedContact = ko.observable();
             self.detailedCity = ko.observable();
             self.detailedstate = ko.observable();
             self.coursestatus = ko.observable();
             self.classstatus = ko.observable();
+            self.classkey_event = ko.observable(false);
             self.enrollCount = ko.observable();
             self.waitlistcount = ko.observable();
             self.detailedSchedule = ko.observableArray([]);
@@ -528,7 +676,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 self.detailedClassSize('');
                 self.coursestatus('');
                 self.classstatus('');
+                self.classkey_event(false);
                 self.detailedSchedule([]);
+                self.detailedEnrollstatus('');
+
 
 
                 // SET NEW VALUE
@@ -544,6 +695,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 self.detailedCity(course.city);
                 self.detailedstate(course.state);
                 self.enrollCount(course.enrollmentCount);
+                self.detailedEnrollstatus(course.enrollment_status);
                 self.waitlistcount(course.waitlistCount);
                 self.detailedCourseId(course.course_id);
                 self.detailedClassId(course.class_id);
@@ -553,14 +705,31 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 self.detailedClassSize(course.class_size);
                 self.coursestatus(course.course_status);
                 self.classstatus(course.class_status);
-                self.detailedSchedule(course.schedule);
+                self.detailedSchedule(course.schedules);
+                self.selectedcourseid = course.course_id;
+
+                // CREATE COURSE LINK
+                var courselink = window.location.href;
+                var first_param = "=training";
+                courselink = courselink.substr(0,courselink.indexOf(first_param)+first_param.length);
+                courselink += "#" + course.course_id;
+                $(".directlink").empty();
+                if (true) {
+                    $(".directlink").append("<b>Direct Link: <span>" + courselink + "</span></b>");
+                }
+                console.log(courselink);
                 $("#coursedetails").ojDialog("open");
+
 
 
             }
 
 
             searchcourses = function () {
+                if(self.switchadminview()){
+                    alert("This feature is diabled in Admin Mode");
+                    return;
+                }
                 self.searchfetchcourses();
             }
             /*-----------------------   GET COURSES LIST   ----------------------*/
@@ -570,15 +739,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.schedules = ko.observableArray([]);
             self.searchtext = ko.observableArray([]);
             self.fetchcourses = function () {
-                // var text=self.searchtext.length>0?self.searchtext:'';
                 $.ajax({
-                    url: baseurl + "getCoursesV2",
+                    url: trainingbaseurl + "getCoursesV2",
                     method: 'GET',
                     headers: {
-                        free_text_search: ''
+                        free_text_search: '',
+                        email: ssoemail,
+                        admin_view:self.switchadminview()==true?'Yes':'No'
                     },
                     success: function (allcourses) {
-                        self.processCoursesFromService(allcourses);
+                        self.courselist = allcourses.courses;
+                        self.processCoursesFromService(allcourses.courses);
+                        self.getCourseIdFromUrl();
+
                     },
                     error: function (xhr) {
                         // alert(xhr);
@@ -587,7 +760,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             }
             self.fetchcourses();
 
-            self.resetCourseFilters=function(){
+            self.resetCourseFilters = function () {
+                if(self.switchadminview()){
+                    alert("This feature is diabled in Admin Mode");
+                    return;
+                }
                 setuncheck('category');
                 setuncheck('prodtype');
                 setuncheck('traininglevel');
@@ -612,13 +789,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     //console.log("whoa", self.searchtext());
                     var text = self.searchtext().length > 0 ? self.searchtext() : '';
                     $.ajax({
-                        url: baseurl + "getCoursesV2",
+                        url: trainingbaseurl + "getCoursesV2",
                         method: 'GET',
                         headers: {
-                            free_text_search: text
+                            free_text_search: text,
+                            email: ssoemail
                         },
                         success: function (allcourses) {
-                            self.processCoursesFromService(allcourses);
+                            self.courselist = allcourses.courses;
+                            self.processCoursesFromService(allcourses.courses);
+                            self.getCourseIdFromUrl();
                         },
                         error: function (xhr) {
                             alert(xhr);
@@ -628,6 +808,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             }
 
             self.refinecourses = function () {
+                if(self.switchadminview()){
+                    alert("This feature is diabled in Admin Mode");
+                    return;
+                }
                 var selectedcategories = ko.toJSON(self.refinecategories()).replace('[', '').replace(']', '').replace(/"/g, '');
                 var selectedproductypes = ko.toJSON(self.refineproducttype()).replace('[', '').replace(']', '').replace(/"/g, '');
                 var selectedtraininglevels = ko.toJSON(self.refinetraininglevel()).replace('[', '').replace(']', '').replace(/"/g, '');
@@ -642,13 +826,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     city: selectedcitis,
                     role_id: selectedroles
                 }
-                console.log(ko.toJSON(headerobj));
                 $.ajax({
-                    url: baseurl + "getCoursesV2",
+                    url: trainingbaseurl + "getCoursesV2",
                     method: 'GET',
                     headers: headerobj,
                     success: function (allcourses) {
-                        self.processCoursesFromService(allcourses);
+                        self.processCoursesFromService(allcourses.courses);
                     },
                     error: function (xhr) {
                         // alert(xhr);
@@ -665,35 +848,35 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     switch (type) {
                         case "category":
                             setuncheck('category');
-                            desc.checked=true;
+                            desc.checked = true;
                             self.refinecategories.removeAll();
                             self.refinecategories.push(desc.defaultValue);
                             break;
 
                         case "prodtype":
                             setuncheck('prodtype');
-                            desc.checked=true;
+                            desc.checked = true;
                             self.refineproducttype.removeAll();
                             self.refineproducttype.push(desc.defaultValue);
                             break;
 
                         case "traininglevel":
                             setuncheck('traininglevel');
-                            desc.checked=true;
+                            desc.checked = true;
                             self.refinetraininglevel.removeAll();
                             self.refinetraininglevel.push(desc.defaultValue);
                             break;
 
                         case "trainingtype":
                             setuncheck('trainingtype');
-                            desc.checked=true;
+                            desc.checked = true;
                             self.refinetrainingtype.removeAll();
                             self.refinetrainingtype.push(desc.defaultValue);
                             break;
 
                         case "cities":
                             setuncheck('cities');
-                            desc.checked=true;
+                            desc.checked = true;
                             self.refinecitis.removeAll();
                             self.refinecitis.push(desc.defaultValue);
                             break;
@@ -701,7 +884,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                         case "roles":
 
                             setuncheck('roles');
-                            desc.checked=true;
+                            desc.checked = true;
                             self.refineroles.removeAll();
                             self.refineroles.push(desc.defaultValue);
                             break;
@@ -762,57 +945,71 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 }
             }
 
-            setuncheck=function(classname){
+            setuncheck = function (classname) {
                 var x = document.getElementsByClassName(classname);
-                for(var i=0;i<x.length;i++){
-                    x[i].checked=false;
+                for (var i = 0; i < x.length; i++) {
+                    x[i].checked = false;
                 }
             }
 
             self.processCoursesFromService = function (allcourses) {
-                //console.log(ko.toJSON(allcourses));
+
                 self.categories([]);
-                for (var k = 0; k < allcourses.courses.length; k++) {
-                    startday = '';//allcourses.courses[k].schedule[0];
-                    var curcourse = allcourses.courses[k];
-                    var catagorylist=curcourse.categories;
-                    var catlistString=ko.toJSON(self.refinecategories());
-                        for(var i=0;i<catagorylist.length;i++){
-                            var categoryname = catagorylist[i].name;
-                            var catid=catagorylist[i].id;
-                            if(catlistString.length==2||catlistString.indexOf(catid)!=-1){
-                                var categoryobj = self.getcategorybyname(categoryname);
-                                categoryobj.courses.push({
-                                    name: curcourse.name,
-                                    description: curcourse.description,
-                                    subdescription: curcourse.description.substring(0, 120) + '...',
-                                    class_size: curcourse.class_size,
-                                    prodcut_type: curcourse.prodcut_type,
-                                    training_level: curcourse.training_level,
-                                    training_type: curcourse.training_type,
-                                    category_name: curcourse.category_name,
-                                    categoryid: curcourse.category_id,
-                                    subcat_name: curcourse.subcat_name,
-                                    classes:curcourse.classes,
-                                    roles: curcourse.roles,
-                                    subcat_id: curcourse.subcat_id,
-                                    start_date: startday == undefined ? "NA" : startday.start_date,
-                                    directURL: curcourse.directURL,
-                                    courseid: curcourse.course_id,
-                                    classid: curcourse.class_id,
-                                    contact_email: curcourse.contact,
-                                    city: curcourse.city,
-                                    state: curcourse.state,
-                                    course_status: curcourse.course_status,
-                                    class_status: curcourse.class_status,
-                                    enrollmentCount: curcourse.enrollmentCount,
-                                    waitlistCount: curcourse.waitlistCount,
-                                    schedule: curcourse.schedule
-                                });
+                for (var k = 0; k < allcourses.length; k++) {
+                    startday = ''; //allcourses.courses[k].schedule[0];
+                    var curcourse = allcourses[k];
+                    var catagorylist = curcourse.categories;
+                    var catlistString = ko.toJSON(self.refinecategories());
+                    var enrolled = "";
+                    if (curcourse.classes.length > 0) {
+                        var classCount = curcourse.classes.length;
+                        for (var i = 0; i < classCount; i++) {
+                            if (curcourse.classes[i].enrollment_status != "Not Enrolled") {
+                                enrolled = curcourse.classes[i].enrollment_status;
+                                break;
                             }
+                        }
+                    }
+
+                    for (var i = 0; i < catagorylist.length; i++) {
+                        var categoryname = catagorylist[i].name;
+                        var catid = catagorylist[i].id;
+                        if (catlistString.length == 2 || catlistString.indexOf(catid) != -1) {
+                            var categoryobj = self.getcategorybyname(categoryname);
+                            categoryobj.courses.push({
+                                name: curcourse.name,
+                                description: curcourse.description,
+                                subdescription: curcourse.description!=undefined?curcourse.description.substring(0, 120) + '...':'',
+                                class_size: curcourse.class_size,
+                                prodcut_type: curcourse.prodcut_type,
+                                training_level: curcourse.training_level,
+                                training_type: curcourse.training_type,
+                                category_name: curcourse.category_name,
+                                categoryid: curcourse.category_id,
+                                subcat_name: curcourse.subcat_name,
+                                classes: curcourse.classes,
+                                roles: curcourse.roles,
+                                isenrolled: enrolled,
+                                subcat_id: curcourse.subcat_id,
+                                start_date: startday == undefined ? "NA" : startday.start_date,
+                                directURL: curcourse.directURL,
+                                course_id: curcourse.course_id,
+                                class_id: curcourse.class_id,
+                                contact_email: curcourse.contact,
+                                city: curcourse.city,
+                                state: curcourse.state,
+                                course_status: curcourse.course_status,
+                                class_status: curcourse.class_status,
+                                enrollmentCount: curcourse.enrollmentCount,
+                                waitlistCount: curcourse.waitlistCount,
+                                schedules: curcourse.schedules
+                            });
+                        }
                     }
                 }
-                // console.log(ko.toJSON(self.categories ()));
+                // console.log(ko.toJSON(self.categories()));
+                updateCourseClass();
+				checkadmin();
             }
 
 
@@ -858,27 +1055,60 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 self.showingFront = !self.showingFront;
             };
 
-            checkadmin=function(){
-                var checkurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/isAdmin";
-                if (ssoemail.length > 0) {
-                  console.log("Admin check commenced");
-                  $.ajax({
-                    url: checkurl,
-                    method: 'GET',
-                    headers: {
-                        email: ssoemail
-                    },
-                    success: function (data) {
-                      isAdmin=data.is_admin;
-                      newUserAdminCheck=true;
-                    },
-                    error: function (xhr) {
-                        //alert(xhr);
-                        newUserAdminCheck=false;
+            // CHECK FOR ADMIN RIGHTS
+            checkadminrights = function () {
+                console.log('admin checked');
+                if (isAdmin) {
+                    $("#tabs").ojTabs({
+                        "disabledTabs": [5, 6]
+                    });
+                    console.log("Showing for admin");
+                    $(".admin").css("display", "inline-block");
+
+                } else {
+                    $("#tabs").ojTabs({
+                        "disabledTabs": [5, 6, 7]
+                    });
+                    console.log("Hiding from user");
+                    // $(".admin").css("display", "none");
+                    // $('.admin').hide();
+                    var appBanners = document.getElementsByClassName('admin'), i;
+                    
+                    for (var i = 0; i < appBanners.length; i ++) {
+                        appBanners[i].style.display = 'none';
                     }
-                });
                 }
-              }
+            }
+
+            checkadmin = function () {
+                console.log("Admin check commencing for " + ssoemail);
+                var checkurl = trainingbaseurl + "isAdmin";
+                if (ssoemail.length > 0) {
+                    
+                    $.ajax({
+                        url: checkurl,
+                        method: 'GET',
+                        headers: {
+                            email: ssoemail
+                        },
+                        success: function (data) {
+                            isAdmin = data.is_admin;
+                            newUserAdminCheck = true;
+                            checkadminrights();
+                        },
+                        error: function (xhr) {
+                            //alert(xhr);
+                            newUserAdminCheck = false;
+                            checkadminrights();
+                        }
+                    });
+                } else {
+                    isAdmin=false;
+                    checkadminrights();
+                }
+            }
+
+
 
 
             self.showFront = function () {
@@ -930,14 +1160,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
 
             self.handleBindingsApplied = function (info) {
-                // Implement if needed
+                // checkadminrights();
             };
 
 
             self.handleDetached = function (info) {
-                // Implement if needed
+                // checkadminrights();
             };
 
+            
+            self.handleAttached = function (info) {
+                checkadminrights();
+                getStates();
+            };
 
             /*----------------------------------SEARCH----------------------------------*/
             self.currentValue = ko.observableArray();
@@ -945,43 +1180,445 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             self.buttonDisabled = ko.observable(true);
             self.searchInput = function () {};
 
+            /* ---------------------   EVENTS TAB START  -------------------------*/
+            self.event_no = ko.observable('');
+            self.event_name = ko.observable('');
+            self.event_description = ko.observable('');
+            self.event_location = ko.observable('');
+            self.event_starttime = ko.observable('');
+            self.event_endtime = ko.observable('');
+            self.is_key_event = ko.observable('');
+            self.customerName = ko.observable('');
+            // self.eventFeedback = ko.observable('');
+            self.eventLead = ko.observable('');
+            self.partnerName = ko.observable('');
+            self.registrationLink = ko.observable('');
 
+            self.eventsList = ko.observableArray([]);
+
+            function ordinal_suffix_of(i) {
+                var j = i % 10,
+                    k = i % 100;
+                if (j == 1 && k != 11) {
+                    return i + "st";
+                }
+                if (j == 2 && k != 12) {
+                    return i + "nd";
+                }
+                if (j == 3 && k != 13) {
+                    return i + "rd";
+                }
+                return i + "th";
+            }
+
+            var monthNames = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"
+            ];      
+            var event_error_tracker;
+            eventValidation = function () {
+                event_error_tracker = 0;
+                if (self.event_name().length == 0) {
+                    event_error_tracker++;
+                    alert("Please enter name of event");
+                }
+                else if (self.event_location().length == 0) {
+                    event_error_tracker++;
+                    alert("Please enter location of event");
+                }
+                else if (self.event_starttime().length == 0) {
+                    event_error_tracker++;
+                    alert("Please enter start date and time of event");
+                }
+                else if (self.event_endtime().length == 0) {
+                    event_error_tracker++;
+                    alert("Please enter end date and time of event");
+                }
+            }
+
+            // GET EVENTS START
+            getAllEvents = function () {
+                var all_events = events_api + "/$-$";
+                $.getJSON(all_events).then(function (data) {
+                        var events = data.items;
+                        self.eventsList([]);
+                        var event_date;
+                        for (var i = 0; i < events.length; i++) {
+                            if (events[i].start_time != undefined){
+                                var date_number = events[i].start_time.split('T')[0].substring(8,10);
+                                var month_no = events[i].start_time.split('T')[0].substring(5,7);
+                                var month_name = monthNames[month_no-1];
+                                var year = events[i].start_time.split('T')[0].substring(0,4);
+                                event_date = ordinal_suffix_of(date_number)+" "+month_name+" "+year;
+                            }
+                            self.eventsList.push({
+                                event_no: events[i].event_no != undefined ? events[i].event_no : '',
+                                name: events[i].name != undefined ? events[i].name : '',
+                                description: events[i].description != undefined ? events[i].description : '',
+                                location: events[i].location != undefined ? events[i].location : '',
+                                date: event_date,
+                                time: events[i].start_time != undefined ? events[i].start_time.split('T')[1].substring(0,5) : '',
+                                //below fields are to get these data while clone,edit
+                                customer_name: events[i].customer_name != undefined ? events[i].customer_name : '',
+                                key_event_value_check: events[i].keyevent != 'No' ? true : false,
+                                start_time: events[i].start_time != undefined ? events[i].start_time : '',
+                                end_time: events[i].end_time != undefined ? events[i].end_time : '',
+                                // event_feedback: events[i].event_feedback != undefined ? events[i].event_feedback : '',
+                                event_lead: events[i].event_lead != undefined ? events[i].event_lead : '',
+                                partner_name: events[i].partner_name != undefined ? events[i].partner_name : '',
+                                registration_link: events[i].link != undefined ? events[i].link : ''
+
+                            });
+                        }
+                    });
+            }
+
+            getAllEvents();
+
+            // GET EVENTS END
+
+            //CREATE EVENTS START
+            var sdatetime;
+            var edatetime;
+            createEvent = function() {
+                // eventValidation();
+                // if(event_error_tracker > 0)
+                //     return;
+                sdatetime = self.event_starttime().replace("T", " ")
+                edatetime = self.event_endtime().replace("T", " ")
+                var create_event_data = {
+                    name: self.event_name(),
+                    location: self.event_location(),
+                    start_time: sdatetime,
+                    end_time: edatetime,
+                    description: self.event_description(),
+                    key_event: self.is_key_event()!=true?'No':'Yes',
+                    customer_name:self.customerName(),
+                    // event_feedback:self.eventFeedback(),
+                    event_lead: self.eventLead(),
+                    partner_name: self.partnerName(),
+                    link: self.registrationLink()
+                }
+                console.log("created data : "+ko.toJSON(create_event_data));
+                $.ajax({
+                    url: create_event_api,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(create_event_data),
+                    success: function (data) {
+                        getAllEvents();
+                        resetEvent();
+
+                    }
+                    }).fail(function (xhr, textStatus, err) {
+                });
+                $("#createevents_id").ojDialog("close");
+
+            }
+            //CREATE EVENTS END
+
+            openCreateEventDialog = function() {
+                resetEvent();
+                $('#clone_modal_footer').hide();
+                $('#edit_modal_footer').hide();
+                $('#create_modal_footer').show();
+                $("#createevents_id" ).ojDialog( {title: "Create Event" } );                
+                $('#createevents_id').ojDialog("open");
+            }
+
+            resetEvent = function(){
+            self.event_name('');
+            self.event_description('');
+            self.event_location('');
+            self.event_starttime('');
+            self.event_endtime('');
+            self.is_key_event('');
+            self.customerName('');
+            // self.eventFeedback('');
+            self.eventLead('');
+            self.partnerName('');
+            self.registrationLink('');
+            }
+          
+            eventDeleteConfimation = function (delete_id) {
+                console.log("deleting event-" + delete_id);
+                var data_value = {
+                    "event_no": delete_id
+                };
+                $("#delete_event_modal").ojDialog("open");
+                $("#delete_event_button").click(function () {
+                    $.ajax({
+                        url: create_event_api,
+                        method: 'DELETE',
+                        contentType: 'application/json; charset=utf-8',
+                        data: ko.toJSON(data_value),
+                        success: function () {
+                            getAllEvents();
+                            closeEventDeleteModal();
+                            console.log("delete success");
+                        },
+                        fail: function (xhr, textStatus, err) {
+                            console.log(err);
+                        },
+                        error: function (xhr, textStatus, err) {
+                            console.log(err);
+                        }
+                    });
+                });
+
+            }            
+
+            deleteEvent = function(event_delete){
+                eventDeleteConfimation(event_delete.event_no);
+            }            
+            
+            closeEventDeleteModal = function () {
+                $("#delete_event_modal").ojDialog("close");
+            }
+
+            cloneEvent = function () {
+                // eventValidation();
+                // if(event_error_tracker > 0)
+                //     return;
+                sdatetime = self.event_starttime().replace("T", " ").replace("Z", "");
+                edatetime = self.event_endtime().replace("T", " ").replace("Z", "");
+                var clone_event_data = {
+                    name: self.event_name(),
+                    location: self.event_location(),
+                    start_time: sdatetime,
+                    end_time: edatetime,
+                    description: self.event_description(),
+                    key_event: self.is_key_event()!=true?'No':'Yes',
+                    customer_name:self.customerName(),
+                    // event_feedback:self.eventFeedback(),
+                    event_lead: self.eventLead(),
+                    partner_name: self.partnerName(),
+                    link: self.registrationLink()
+                }
+                $.ajax({
+                    url: create_event_api,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(clone_event_data),
+                    success: function (data) {
+                        getAllEvents();
+                        resetEvent();
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    // alert(err);
+                });
+                $("#createevents_id").ojDialog("close");                
+            }
+            
+            openCloneEventModal = function (clone_event) {
+                self.event_name(clone_event.name);
+                self.event_description(clone_event.description);
+                self.event_location(clone_event.location);
+                self.event_starttime(clone_event.start_time);
+                self.event_endtime(clone_event.end_time);
+                self.is_key_event(clone_event.key_event_value_check);
+                self.customerName(clone_event.customer_name);
+                // self.eventFeedback(clone_event.event_feedback);
+                self.eventLead(clone_event.event_lead);
+                self.partnerName(clone_event.partner_name);
+                self.registrationLink(clone_event.registration_link);
+                $("#create_modal_footer").hide();
+                $("#edit_modal_footer").hide();
+                $("#clone_modal_footer").show();
+                $("#createevents_id" ).ojDialog( {title: "Clone Event" } );                
+                $("#createevents_id").ojDialog("open");
+            }
+            var event_no_for_edit;
+            openEditEventModal = function (edit_event) {
+                self.event_name(edit_event.name);
+                self.event_description(edit_event.description);
+                self.event_location(edit_event.location);
+                self.event_starttime(edit_event.start_time);
+                self.event_endtime(edit_event.end_time);
+                self.is_key_event(edit_event.key_event_value_check);
+                self.customerName(edit_event.customer_name);
+                // self.eventFeedback(edit_event.event_feedback);
+                self.eventLead(edit_event.event_lead);
+                self.partnerName(edit_event.partner_name);
+                self.registrationLink(edit_event.registration_link);
+                event_no_for_edit = edit_event.event_no;
+                $("#create_modal_footer").hide();
+                $("#clone_modal_footer").hide();
+                $("#edit_modal_footer").show();
+                $("#createevents_id" ).ojDialog( {title: "Edit Event" } );
+                $("#createevents_id").ojDialog("open");
+                
+            }
+
+            editEvent = function () {
+                // eventValidation();
+                // if(event_error_tracker > 0)
+                //     return;
+                sdatetime = self.event_starttime().replace("T", " ").replace("Z", "");
+                edatetime = self.event_endtime().replace("T", " ").replace("Z", "");
+                var edit_event_data = {
+                    event_no: event_no_for_edit,
+                    name: self.event_name(),
+                    location: self.event_location(),
+                    start_time: sdatetime,
+                    end_time: edatetime,
+                    description: self.event_description(),
+                    key_event: self.is_key_event()!=true?'No':'Yes',
+                    customer_name:self.customerName(),
+                    // event_feedback:self.eventFeedback(),
+                    event_lead: self.eventLead(),
+                    partner_name: self.partnerName(),
+                    link: self.registrationLink()
+                }
+                $.ajax({
+                    url: create_event_api,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(edit_event_data),
+                    success: function (data) {
+                        getAllEvents();
+                        resetEvent();
+                    }
+                    }).fail(function (xhr, textStatus, err) {
+                });
+                $("#createevents_id").ojDialog("close");                
+
+            }
+
+            showEventDetails = function (event_details) {
+                self.event_name(event_details.name);
+                self.event_description(event_details.description);
+                self.event_location(event_details.location);
+                self.event_starttime(event_details.start_time);
+                self.event_endtime(event_details.end_time);
+                self.is_key_event(event_details.key_event_value_check);
+                self.customerName(event_details.customer_name);
+                // self.eventFeedback(event_details.event_feedback);
+                self.eventLead(event_details.event_lead);
+                self.partnerName(event_details.partner_name);
+                self.registrationLink(event_details.registration_link);
+                $("#event_details_modal").ojDialog("open");
+            }            
+
+            /* ---------------------   EVENTS TAB END  -------------------------*/
             /*----------------------------------SEARCH----------------------------------*/
+            function waitForElement(id, callback){
+                var wait_for_community_call = setInterval(function(){
+                    if(document.getElementById(id)){
+                        clearInterval(wait_for_community_call);
+                        callback();
+                    }
+                }, 100);
+            }
 
-
+            waitForElement("com_call_tab", function(){
+                var call_id_val1 = window.location.href;
+                // com_call_id is getting used to go directly to an old community call which doesnt 
+                //have a reply link. key_com_call is to navigate to key events com call from home page
+                var is_com_call_id_text_present = call_id_val1.indexOf("com_call_id");
+                var is_key_com_call_text_present = call_id_val1.indexOf("key_com_call");
+                if (is_com_call_id_text_present != -1 || is_key_com_call_text_present !=-1){
+                    $('#com_call_tab').trigger('click');
+                }                
+               
+            });
             /* ---------------------   COMMUNITY CALLS  -------------------------*/
 
             // GET THE LIST OF COMUNITY CALLS
             getCommunityCalls = function (texttosearch) {
-                console.log(texttosearch);
-                $.getJSON("http://10.146.89.49:7003/ords/seaashm/seaashm/" + texttosearch).then(function (data) {
-                        var calls = data.items;
-                        self.communityCallList([]);
-                        self.searchcallstext([]);
-                        for (var i = 0; i < calls.length; i++) {
-                            self.communityCallList.push({
-                                name: calls[i].name != undefined ? calls[i].name : '',
-                                speaker: calls[i].speaker != undefined ? calls[i].speaker : '',
-                                designation: calls[i].designation != undefined ? calls[i].designation : '',
-                                call_date: calls[i].call_date != undefined ? calls[i].call_date.split('T')[0] : '',
-                                call_time: calls[i].call_time != undefined ? calls[i].call_time.substring(0,5)+" PT" : '',
-                                callduration:calls[i].duration!= undefined ? calls[i].duration+" mins" : 'NA',
-                                location: calls[i].locn != undefined ? calls[i].locn : '',
-                                meetinglink: calls[i].meetinglink != undefined ? calls[i].meetinglink : '',
-                                dialin: calls[i].dialin != undefined ? calls[i].dialin : '',
-                                description: calls[i].description != undefined ? calls[i].description : '',
-                                mode_of_call:calls[i].mode_of_call != undefined ? calls[i].mode_of_call.replace('$',',') : '',
-                                role:calls[i].role != undefined ? ko.toJSON(calls[i].role).replace('[', '').replace(']', '').replace(/"/g, '') : '',
-                                recording_link:calls[i].recording_link != undefined ? calls[i].recording_link : '',
-                                addl_link:calls[i].addl_link != undefined ? calls[i].addl_link : '',
-                                subdescription: calls[i].description != undefined ? calls[i].description.substring(0, 150) + '...' : ''
-                            });
-                        }
-                        // console.log(ko.toJSON(self.communityCallList()));
-                    });
-            }
-            // getCommunityCalls('GetCommunityCallDetails');
+                var get_com_call_link = com_call_api + texttosearch;
+                $.getJSON(get_com_call_link).then(function (data) {
+                    var calls = data.items;
+                    self.communityCallList([]);
+                    self.searchcallstext([]);
+                    for (var i = 0; i < calls.length; i++) {
+                        self.communityCallList.push({
+                            name: calls[i].name != undefined ? calls[i].name : '',
+                            speaker: calls[i].speaker != undefined ? calls[i].speaker : '',
+                            designation: calls[i].designation != undefined ? calls[i].designation : '',
+                            call_date: calls[i].call_date != undefined ? calls[i].call_date.split('T')[0] : '',
+                            call_time: calls[i].call_time != undefined ? calls[i].call_time.substring(0, 5) + " PT" : '',
+                            callduration: calls[i].duration != undefined ? calls[i].duration + " mins" : 'NA',
+                            location: calls[i].locn != undefined ? calls[i].locn : '',
+                            meetinglink: calls[i].meetinglink != undefined ? calls[i].meetinglink : '',
+                            dialin: calls[i].dialin != undefined ? calls[i].dialin : '',
+                            description: calls[i].description != undefined ? calls[i].description : '',
+                            mode_of_call: calls[i].mode_of_call != undefined ? calls[i].mode_of_call.replace('$', ',') : '',
+                            role: calls[i].role != undefined ? ko.toJSON(calls[i].role).replace('[', '').replace(']', '').replace(/"/g, '') : '',
+                            recording_link: calls[i].recording_link != undefined ? calls[i].recording_link : '',
+                            addl_link: calls[i].addl_link != undefined ? calls[i].addl_link : '',
+                            subdescription: calls[i].description != undefined ? calls[i].description.substring(0, 150) + '...' : '',
+                            organizer_email: calls[i].organizer_email != undefined ? calls[i].organizer_email : '',
+                            topic: calls[i].topic != undefined ? calls[i].topic : '',
+                            /*invite: calls[i].invite != undefined ? calls[i].invite : '',*/
+                            invite: calls[i].call_id != undefined ? community_call_calendar_link+"/"+calls[i].call_id : '',
+                            call_id: calls[i].call_id != undefined ? calls[i].call_id : '',
+                            key_event_value: calls[i].keyevent != 'No' ? true : false
+                        });
 
+                    }
+                });
+            }
+
+
+            // SHOW DETAILED DESCRIPTION
+            self.ccId = ko.observable();
+            self.ccName = ko.observable();
+            self.ccDate = ko.observable();
+            self.ccSpeaker = ko.observable();
+            self.ccDesignation = ko.observable();
+            self.ccCallType = ko.observable();
+            self.ccMeetingLink = ko.observable();
+            self.ccRoles = ko.observable();
+            self.ccDescription = ko.observable();
+            self.ccDialin = ko.observable();
+            self.ccAdditionalLinks = ko.observable();
+            self.ccRecordingLinks = ko.observable();
+            self.ccOrganizerEmail = ko.observable();
+            self.ccTopic = ko.observable();
+            self.ccInvite = ko.observable();
+
+
+            showcommunitycallsdetails = function (ccalls) {
+                self.ccName('');
+                self.ccDate('');
+                self.ccSpeaker('');
+                self.ccDesignation('');
+                self.ccCallType('');
+                self.ccMeetingLink('');
+                self.ccRoles('');
+                self.ccDescription('');
+                self.ccDialin('');
+                self.ccAdditionalLinks('');
+                self.ccRecordingLinks('');
+                self.ccOrganizerEmail('');
+                self.ccTopic('');
+                self.ccInvite('');
+
+                // SET NEW VALUE
+                self.ccName(ccalls.name);
+                self.ccDate(ccalls.call_date);
+                self.ccSpeaker(ccalls.speaker);
+                self.ccDesignation(ccalls.designation);
+                self.ccCallType(ccalls.mode_of_call);
+                self.ccMeetingLink(ccalls.meetinglink);
+                self.ccRoles(ccalls.role);
+                self.ccDescription(ccalls.description);
+                self.ccDialin(ccalls.dialin);
+                self.ccAdditionalLinks(ccalls.addl_link);
+                self.ccRecordingLinks(ccalls.recording_link);
+                self.ccOrganizerEmail(ccalls.organizer_email);
+                self.ccTopic(ccalls.topic);
+                self.ccInvite(ccalls.invite);
+                self.ccId(ccalls.call_id);
+                $("#communitycallsdetails").ojDialog("open");
+            }
+
+            self.closecommunitycallsdetails = function () {
+                $("#communitycallsdetails").ojDialog("close");
+            }
 
             self.resetsearch = function () {
                 getCommunityCalls('GetCommunityCallDetails');
@@ -992,7 +1629,327 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 setuncheck("refine");
             }
 
-          
+            self.editccName = ko.observable();
+            self.editccDate = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+            self.editccTime = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+            self.editccDuration = ko.observable();
+            self.editccVenue = ko.observable();
+            self.editccSpeaker = ko.observable();
+            self.editccDesignation = ko.observable();
+            self.editccCallType = ko.observableArray([]);
+            self.editccMeetingLink = ko.observable();
+            self.editccSelectedRoles = ko.observableArray([]);
+            self.editccDescription = ko.observable();
+            self.editccDialin = ko.observable();
+            self.editccAdditionalLinks = ko.observable();
+            self.editccRecordingLinks = ko.observable();
+
+            self.editccOrganizerEmail = ko.observable();
+            self.editccTopic = ko.observable();
+            self.editccInvite = ko.observable();
+            self.edit_com_call_keyevent = ko.observable('');
+
+            var edit_call_id;
+            editcommunitycall = function (edit_calls, param2) {
+
+                self.editccName('');
+                self.editccDate('');
+                self.editccTime('');
+                self.editccDuration('');
+                self.editccVenue('');
+                self.editccSpeaker('');
+                self.editccDesignation('');
+                self.editccCallType([]);
+                self.editccMeetingLink('');
+                self.editccSelectedRoles([])
+                self.editccDescription('');
+                self.editccDialin('');
+                self.editccAdditionalLinks('');
+                self.editccRecordingLinks('');
+
+                self.editccOrganizerEmail('');
+                self.editccTopic('');
+                self.editccInvite('');
+                self.edit_com_call_keyevent('');
+
+                // SET NEW VALUE
+                self.editccName(edit_calls.name);
+                self.editccDate(edit_calls.call_date);
+                timeString = edit_calls.call_time.substring(0, 5);
+                timeFormattedString = "T" + timeString + ":00";
+                self.editccTime(timeFormattedString);
+                self.editccDuration(edit_calls.callduration);
+                self.editccVenue(edit_calls.location);
+                self.editccSpeaker(edit_calls.speaker);
+                self.editccDesignation(edit_calls.designation);
+                self.editccAdditionalLinks(edit_calls.addl_link);
+                var callTypeString = edit_calls.mode_of_call;
+                var callTypeArray = callTypeString.split(",");
+                self.editccCallType(callTypeArray);
+                self.editccMeetingLink(edit_calls.meetinglink);
+                var roleString = edit_calls.role;
+                var roleArray = [];
+                roleArray = roleString.split(",");
+                self.editccSelectedRoles(roleArray)
+                self.editccDescription(edit_calls.description);
+                self.editccDialin(edit_calls.dialin);
+                self.editccRecordingLinks(edit_calls.recording_link);
+
+                self.editccOrganizerEmail(edit_calls.organizer_email);
+                self.editccTopic(edit_calls.topic);
+                self.editccInvite(edit_calls.invite);
+                edit_call_id = edit_calls.call_id;
+
+                self.edit_com_call_keyevent(edit_calls.key_event_value);
+                $("#editcommunitycall_id").ojDialog("open");
+            }
+
+
+
+            editCommunityCallValues = function () {
+                editSelectedRole = ko.toJSON(self.editccSelectedRoles()).replace('[', '').replace(']', '').replace(/"/g, '');
+                editSelectedCallMode = ko.toJSON(self.editccCallType()).replace('[', '').replace(']', '').replace(/"/g, '');
+
+                var edit_community_call_data = {
+                    NAME: self.editccName(),
+                    speaker: self.editccSpeaker(),
+                    designation: self.editccDesignation(),
+                    call_date: self.editccDate(),
+                    call_time: self.editccTime().substring(1, 6),
+                    duration: self.editccDuration().substring(0, 2),
+                    locn: self.editccVenue(),
+                    meetinglink: self.editccMeetingLink(),
+                    dialin: self.editccDialin(),
+                    description: self.editccDescription(),
+                    user: ssoemail,
+                    recording_link: self.editccRecordingLinks(),
+                    mode_of_call: editSelectedCallMode,
+                    role: editSelectedRole,
+                    addl_link: self.editccAdditionalLinks(),
+                    organizer_email: self.editccOrganizerEmail(),
+                    topic: self.editccTopic(),
+                    invite: self.editccInvite(),
+                    call_id: edit_call_id,
+                    keyevent: self.edit_com_call_keyevent()!=true?'No':'Yes'
+
+                }
+                $.ajax({
+                    url: community_call_url,
+                    cache: false,
+                    type: 'PUT',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(edit_community_call_data),
+                    success: function (data) {
+                        console.log("edit success");
+                        loadCommunitycall();
+
+                    },
+                    fail: function (xhr, textStatus, err) {
+                        console.log("failed" + err);
+                    },
+                    error: function (xhr, textStatus, err) {
+                        console.log("error" + err);
+                    }
+                });
+                $("#editcommunitycall_id").ojDialog("close");
+
+            }
+
+            openDeleteModal = function (delete_id) {
+                console.log("deleting id-" + delete_id);
+                var data_value = {
+                    "call_id": delete_id
+                };
+                $("#delete_community_call").ojDialog("open");
+                $("#delete_com_call").click(function () {
+                    $.ajax({
+                        url: community_call_url,
+                        method: 'DELETE',
+                        contentType: 'application/json; charset=utf-8',
+                        data: ko.toJSON(data_value),
+                        success: function () {
+                            loadCommunitycall();
+                            closeDeleteModal();
+                            console.log("delete success");
+                        },
+                        fail: function (xhr, textStatus, err) {
+                            console.log(err);
+                        },
+                        error: function (xhr, textStatus, err) {
+                            console.log(err);
+                        }
+                    });
+                });
+
+            }
+
+            deleteCommunityCall = function (com_delete) {
+                openDeleteModal(com_delete.call_id);
+
+            }
+
+            closeDeleteModal = function () {
+                $("#delete_community_call").ojDialog("close");
+            }
+
+
+            // clone communitycallsdetails
+            self.cloneccName = ko.observable();
+            self.cloneccDate = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+            self.cloneccTime = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+            self.cloneccDuration = ko.observable();
+            self.cloneccVenue = ko.observable();
+            self.cloneccSpeaker = ko.observable();
+            self.cloneccDesignation = ko.observable();
+            self.cloneccCallType = ko.observableArray([]);
+            self.cloneccMeetingLink = ko.observable();
+            self.cloneccSelectedRoles = ko.observableArray([]);
+            self.cloneccDescription = ko.observable();
+            self.cloneccDialin = ko.observable();
+            self.cloneccAdditionalLinks = ko.observable();
+            self.cloneccRecordingLinks = ko.observable();
+
+            self.cloneccOrganizerEmail = ko.observable();
+            self.cloneccTopic = ko.observable();
+            self.cloneccInvite = ko.observable();
+            self.clone_com_call_keyevent = ko.observable('');
+
+            cloneCommunityCall = function (clone_calls, param2) {
+
+                self.cloneccName('');
+                self.cloneccDate('');
+                self.cloneccTime('');
+                self.cloneccDuration('');
+                self.cloneccVenue('');
+                self.cloneccSpeaker('');
+                self.cloneccDesignation('');
+                self.cloneccCallType([]);
+                self.cloneccMeetingLink('');
+                self.cloneccSelectedRoles([])
+                self.cloneccDescription('');
+                self.cloneccDialin('');
+                self.cloneccAdditionalLinks('');
+                self.cloneccRecordingLinks('');
+
+                self.cloneccOrganizerEmail('');
+                self.cloneccTopic('');
+                self.cloneccInvite('');
+                self.clone_com_call_keyevent('');
+
+                // SET NEW VALUE
+                self.cloneccName(clone_calls.name);
+                self.cloneccDate(clone_calls.call_date);
+                var timeString = clone_calls.call_time.substring(0, 5);
+                var timeFormattedString = "T" + timeString + ":00";
+                self.cloneccTime(timeFormattedString);
+                self.cloneccDuration(clone_calls.callduration);
+                self.cloneccVenue(clone_calls.location);
+                self.cloneccSpeaker(clone_calls.speaker);
+                self.cloneccDesignation(clone_calls.designation);
+                self.cloneccAdditionalLinks(clone_calls.addl_link);
+                var callTypeString = clone_calls.mode_of_call;
+                var callTypeArray = callTypeString.split(",");
+                self.cloneccCallType(callTypeArray);
+                self.cloneccMeetingLink(clone_calls.meetinglink);
+                var roleString = clone_calls.role;
+                var roleArray = [];
+                roleArray = roleString.split(",");
+                self.cloneccSelectedRoles(roleArray)
+                self.cloneccDescription(clone_calls.description);
+                self.cloneccDialin(clone_calls.dialin);
+                self.cloneccRecordingLinks(clone_calls.recording_link);
+
+                self.cloneccOrganizerEmail(clone_calls.organizer_email);
+                self.cloneccTopic(clone_calls.topic);
+                self.cloneccInvite(clone_calls.invite);
+                self.clone_com_call_keyevent(clone_calls.key_event_value);
+
+                $("#clonecommunitycall_id").ojDialog("open");
+
+            }
+
+
+            // CREATE CLONE COMMUNITY CALL
+            createclonecommunitycall = function () {
+                var selectedrole = '';
+                var selectedcallmode = '';
+
+                if (self.cloneccName().length == 0) {
+                    alert("Please enter Community call name");
+                    return;
+                }
+
+                if (self.cloneccSpeaker().length == 0) {
+                    alert("Please enter name of the speaker");
+                    return;
+                }
+
+
+                if (self.cloneccDescription().length == 0) {
+
+                    alert("Please enter description");
+                    return;
+                }
+                if (self.cloneccSelectedRoles().length == 0) {
+
+                    alert("Select atleast one role");
+                    return;
+                }
+
+                if (self.cloneccDuration().length == 0) {
+
+                    alert("Please enter duration");
+                    return;
+                } else if (typeof self.cloneccDuration() == 'number') {
+                    alert("Please enter valid duration in minute(s)");
+                    return;
+                }
+
+                if (self.cloneccCallType().length == 0) {
+                    alert("Please select mode of delivary");
+                }
+                cloneSelectedrole = ko.toJSON(self.cloneccSelectedRoles()).replace('[', '').replace(']', '').replace(/"/g, '');
+                cloneSelectedcallmode = ko.toJSON(self.cloneccCallType()).replace('[', '').replace(']', '').replace(/"/g, '');
+
+                var clone_call = {
+                    name: self.cloneccName(),
+                    speaker: self.cloneccSpeaker(),
+                    designation: self.cloneccDesignation(),
+                    call_date: self.cloneccDate(),
+                    call_time: self.cloneccTime().split('T')[1].substring(0, 5),
+                    duration: self.cloneccDuration().substring(0, 2),
+                    locn: self.cloneccVenue(),
+                    meetinglink: self.cloneccMeetingLink(),
+                    dialin: self.cloneccDialin(),
+                    description: self.cloneccDescription(),
+                    addl_link: self.cloneccAdditionalLinks(),
+                    user: ssoemail,
+                    recording_link: self.cloneccRecordingLinks(),
+                    mode_of_call: cloneSelectedcallmode,
+                    role: cloneSelectedrole,
+                    organizer_email: self.cloneccOrganizerEmail(),
+                    topic: self.cloneccTopic(),
+                    invite: self.cloneccInvite(),
+                    keyevent: self.clone_com_call_keyevent()!=true?'No':'Yes'
+                }
+
+                $.ajax({
+                    url: community_call_url,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(clone_call),
+                    success: function (data) {
+                        loadCommunitycall();
+                        console.log("success")
+
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    console.log("error during clone" + err);
+                });
+                $("#clonecommunitycall_id").ojDialog("close");
+
+            }
 
             self.searchcallstext = ko.observable('');
             //  SEARCH COMMUNITY CALLS
@@ -1001,11 +1958,34 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 var roles = '$-$' + ko.toJSON(self.refinecommunitycallroles()).replace('[', '').replace(']', '').replace(/"/g, '');
                 var callmodel = '$-$' + ko.toJSON(self.refinecommunitycallmodes()).replace('[', '').replace(']', '').replace(/"/g, '');
                 var past = '$-$' + ko.toJSON(self.refinepastcalls()).replace('[', '').replace(']', '').replace(/"/g, '');
-                getCommunityCalls('GetCommunityCallDetailsOnFreetextSearch/' + searchtext + '/' + past + '/' + callmodel + '/' + roles);
+                
+                var call_id_val = window.location.href;
+                var index_of = call_id_val.indexOf("com_call_id");
+                var call_id_data = call_id_val.substr(index_of+12);
+                var key_com_call_from_home = call_id_val.indexOf("key_com_call");
+                var call_id_data_from_home = call_id_val.substr(key_com_call_from_home+13);
+
+                if (call_id_data*1 != call_id_data){
+                    call_id_data = '$-$';
+                }
+                var apex_link;
+                apex_link = 'GetCommunityCallDetailsOnFreetextSearch/' + searchtext + '/' + past + '/' + callmodel + '/' + roles + '/' +call_id_data;
+                //below apex_link is to get all past community call with and without replay link.
+                if (call_id_data != '$-$'){
+                    apex_link = 'GetCommunityCallDetailsOnFreetextSearch/' + searchtext + '/' + 'other_than_$-$' + '/' + callmodel + '/' + roles + '/' +call_id_data;
+                }
+                if(key_com_call_from_home != -1){
+                    call_id_data = call_id_data_from_home;
+                    apex_link = 'GetCommunityCallDetailsOnFreetextSearch/$-$/$-$/$-$/$-$/' + call_id_data;     
+                }
+
+                console.log("apex_link : "+apex_link)
+                getCommunityCalls(apex_link);
+                
             }
 
-            loadCommunitycall=function(){
-                checkadmin();
+            loadCommunitycall = function () {
+                
                 self.searchcallstext('');
                 self.refinecommunitycallroles([]);
                 self.refinecommunitycallmodes([]);
@@ -1019,38 +1999,25 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
             setssostatus = function (selector, visibility) {
                 var nodes = document.querySelectorAll(selector),
-                  node,
-                  styleProperty = function (a, b) {
-                    return window.getComputedStyle ? window.getComputedStyle(a).getPropertyValue(b) : a.currentStyle[b];
-                  };
-        
+                    node,
+                    styleProperty = function (a, b) {
+                        return window.getComputedStyle ? window.getComputedStyle(a).getPropertyValue(b) : a.currentStyle[b];
+                    };
+
                 [].forEach.call(nodes, function (a, b) {
-                  node = a;
-        
-                  node.style.display = visibility;
+                    node = a;
+
+                    node.style.display = visibility;
                 });
-              }
-
-            // CHECK FOR ADMIN RIGHTS
-            checkadminrights = function () {
-
-                if (isAdmin) {
-                    $( "#tabs" ).ojTabs( { "disabledTabs": [3,4] } );
-                  } else {
-                    $( "#tabs" ).ojTabs( { "disabledTabs": [3,4,5] } );
-                  }
             }
 
-            
-            setInterval(function () {
-                checkadminrights();
-              }, 500);
+
 
 
             // ENROLL EMPLOYEE FOR A COURSE
-            enrollemployee=function(p1,p2,p3){
-                alert('Enroll');
-            }
+            // enrollemployee = function (p1, p2, p3) {
+            //     alert('Enroll');
+            // }
 
             redirecttotrainingapp = function () {
                 self.ssowindow = window.open("https://apex.oraclecorp.com/pls/apex/f?p=TRAINING_SCHEDULER:MANAGE_COURSE");
@@ -1060,6 +2027,741 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             };
 
 
+            getReporteeByEmail = function () {
+                var checkurl = trainingbaseurl + "getOrganization";
+                // ssoemail = "angan.sen@oracle.com";
+                if (ssoemail.length > 0) {
+                    console.log("Getting reportees. . .");
+                    $.ajax({
+                        url: checkurl,
+                        method: 'GET',
+                        headers: {
+                            email: ssoemail,
+                            level: 1000
+                        },
+                        success: function (data) {
+                            var report = {
+                                email: data.email,
+                                first_name: data.first_name,
+                                last_name: data.last_name
+                            }
+                            self.reporteelist.push(report);
+                            if (data.directs.length > 0) {
+                                getEmployeeFromReportees(data.directs);
+                            }
+
+                        },
+                        error: function (xhr) {
+                            // alert(xhr);
+                        }
+                    });
+
+                }
+            }
+
+            //  CONVERTING HIERARCHICAL ORAGINAZATION DATA TO LINEAR LIST OF EMPLOYEES
+            function getEmployeeFromReportees(data) {
+                self.reporteelist([]);
+                for (var index = 0; index < data.length; index++) {
+                    var report = {
+                        email: data[index].email,
+                        name: data[index].first_name + " " + data[index].last_name
+                    }
+
+                    self.reporteelist.push(report);
+                    if (data[index].directs.lenght > 0) {
+                        getEmployeeFromReportees(data[index]().directs);
+                    }
+
+                }
+
+            }
+
+
+
+            //checkadminrights();
+            // checkAdminPrivileges = function () {
+                // setTimeout(function () {
+                //     checkadminrights()
+                // }, 3000);
+
+            //     window.setInterval(function () {
+            //         checkadminrights();
+            //     }, 3000);
+            // }
+
+
+            // checkAdminPrivileges();
+            checkadmin();
+            getReporteeByEmail();
+
+            enrollforCourse = function (emaillist) {
+                if (emaillist.length > 0) {
+                    // CREATE THE CLASS BODY
+                    var classbody = {
+                        course_id: self.selectedcourseid,
+                        class_id: self.selectedclassid,
+                        enrolled_by: ssoemail,
+                        students: emaillist
+                    };
+
+                    var classarray = new Array();
+                    classarray.push(classbody);
+
+                    var enrollment = {
+                        enrollments: classarray
+                    }
+
+
+
+                    var enrollurl = trainingbaseurl + "enrollStudents";
+                    console.log(ko.toJSON(enrollment));
+                    $.ajax({
+                        url: enrollurl,
+                        cache: false,
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        data: ko.toJSON(enrollment),
+                        success: function (data) {
+                            console.log(ko.toJSON(data));
+                            if (self.searchtext().length == 0) {
+                                self.fetchcourses();
+                            } else {
+                                self.searchfetchcourses();
+                            }
+                            self.showToastDialog("Successfully Enrolled.", true, 2000);
+                            $("#reportees").ojDialog("close");
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        self.showToastDialog("Enrollment Failed.", false, 2000);
+                        console.log(ko.toJSON(err));
+                    });
+                }
+
+            }
+
+            self.showToastDialog = function (msg, autoclose, timeinmillisec) {
+                self.msg(msg);
+                $("#toastdiv").ojDialog("open");
+                if (autoclose) {
+                    setTimeout(function () {
+                        $("#toastdiv").ojDialog("close");
+                    }, timeinmillisec);
+                }
+            }
+
+            initEnroll = function (param) {
+                self.selectreportees([]);
+                self.selectedclassid = param.class_id;
+                if (self.reporteelist().length > 1) {
+                    $("#reportees").ojDialog("open");
+                } else {
+                    if (ssoemail.length > 0) {
+                        self.selectreportees().push(ssoemail);
+                        enrollforCourse(self.selectreportees());
+                    } else {
+
+                        self.showToastDialog("Please login to enroll", false, 2000);
+                    }
+                }
+            }
+            sendErollmentRequest = function () {
+                enrollforCourse(self.selectreportees());
+            }
+
+            self.openCreatetraining = function () {
+                resetCourse();
+                $("#createcoursedialog").ojDialog("open");
+            }
+
+            resetCourse = function () {
+                self.createCourse().course_id('');
+                self.createCourse().name('');
+                self.createCourse().description('');
+                self.createCourse().cloud_onpremise([]);
+                self.createCourse().training_level([]);
+                self.createCourse().training_type([]);
+                self.createCourse().status([]);
+                self.createCourse().contact_email('');
+                self.createCourse().categories([]);
+                self.selectedCategoriesForUi([]);
+                resetClass();
+            }
+
+            resetClass = function () {
+                self.cclass().class_id('');
+                self.cclass().description('');
+                self.cclass().class_size('');
+                self.cclass().enrollment_end_date('');
+                self.cclass().enrollment_end_date_view('');
+                self.cclass().city('');
+                self.cclass().state([]);
+                self.cclass().status([]);
+                self.cclass().key_event(false);
+                resetSchedule();
+                // $(".classlist").empty();
+            }
+
+            resetSchedule = function () {
+                self.cclass().schedules([]);
+                self.csdate('');
+                self.cedate('');
+                self.ctimezone([]);
+                $(".addedschedule").empty();
+            }
+
+            // REQUEST COURSE CREATION BASED ON SAVED DATA
+            self.createcourse = function () {
+                console.log("Creating course . . .");
+                var mappedCategories = new Array();
+                self.selectedCategoriesForCourse().forEach(function (element) {
+                    mappedCategories.push(element.category_id);
+                });
+                self.cclass().status(self.cclass().status()[0]);
+                self.cclass().state(self.cclass().state()[0]);
+
+                var coursedata = {
+                    name: self.createCourse().name(),
+                    description: self.createCourse().description(),
+                    cloud_onpremise: self.createCourse().cloud_onpremise()[0],
+                    training_level: self.createCourse().training_level()[0],
+                    training_type: self.createCourse().training_type()[0],
+                    status: self.createCourse().status()[0],
+                    contact_email: self.createCourse().contact_email(),
+                    categories: mappedCategories,
+                    classes: self.createCourse().classes()
+                }
+                var courses = new Array();
+                courses.push(coursedata);
+
+                var reqBody = {
+                    courses: courses
+                }
+                console.log(ko.toJSON(reqBody));
+
+                var url = trainingbaseurl + "createCourses";
+                $.ajax({
+                    url: url,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(reqBody),
+                    success: function (data) {
+                        self.showToastDialog("Course Successfully Created", true, 2000);
+                        console.log("Course Successfully Created");
+                        self.fetchcourses();
+                        $("#createcoursedialog").ojDialog("close");
+                        resetCourse();
+                        console.log(ko.toJSON(data));
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    // alert(err);
+                    self.showToastDialog("Course Creation Failed!", false, 2000);
+                });
+
+            }
+
+            
+
+
+            getCategoryHierarchy = function () {
+                $.getJSON(trainingbaseurl + "getCategories").
+                then(function (response) {
+                    var categoriesres = response.categories;
+                    self.categoryForUi([]);
+                    if (categoriesres.length > 0) {
+                        processCategoryList(categoriesres, self.categoryForUi());
+                    }
+                    // console.log(ko.toJSON(self.categoryForUi()));
+                });
+            }
+
+            processCategoryList = function (categories, childarray) {
+                for (var i = 0; i < categories.length; i++) {
+                    var item = {
+                        title: categories[i].name,
+                        attr: {
+                            id: categories[i].id
+                        }
+                    }
+                    if (categories[i].categories != undefined && categories[i].categories.length > 0) {
+                        item.children = new Array();
+                        processCategoryList(categories[i].categories, item.children);
+
+                    }
+                    childarray.push(item);
+                }
+            }
+
+
+            function getJson(node) {
+                return self.categoryForUi();
+            };
+
+
+
+            categorySelected = function (e, ui) {
+
+                if (ui.value[0].id != undefined) {
+                    self.selectedCategoriesForCourse.push({
+                        category_id: ui.value[0].id,
+                        name: ui.value[0].innerText
+                    });
+                    self.selectedCategoriesForUi.push(ui.value[0].innerText);
+                    self.selectedCategoriesForUi.id = ui.value[0].innerText;
+
+                }
+            }
+
+            selectedCategoryChanged = function (e, ui) {
+                if (ui.previousValue != undefined && ui.previousValue.length > ui.value.length) {
+                    var temparray = new Array();
+                    for (var i = 0; i < self.selectedCategoriesForCourse().length; i++) {
+                        if (ui.value.includes(self.selectedCategoriesForCourse()[i].name)) {
+                            temparray.push(self.selectedCategoriesForCourse()[i]);
+                        }
+                    }
+                    self.selectedCategoriesForCourse(temparray);
+                }
+            }
+
+            self.state=ko.observableArray([]);
+            getStates=function(){
+                $.getJSON(trainingbaseurl + "getStates").
+                then(function (response) {
+                    self.state(response.states);
+                });
+            }
+
+            openaddsclasswindow = function () {
+                resetClass();
+                $("#addclasstoclass").ojDialog("open");
+            }
+
+            addScheduleBlock = function () {
+                $('#schedule').append($('#scheduleblock'));
+                $('#scheduleblock').show();
+            }
+
+            // resetSchedule = function () {
+            //     self.schedule().start_date('');
+            //     self.schedule().end_date('');
+            //     self.schedule().timezone([]);
+            // }
+
+            addschedule = function () {
+                console.log(ko.toJSON(self.csdate()));
+                console.log(ko.toJSON(self.cedate()));
+                console.log(ko.toJSON(self.ctimezone()));
+
+                self.cclass().schedules().push({
+                    start_date: Date.parse(self.csdate()).toString('dd MMM yyyy HH:mm'),
+                    end_date: Date.parse(self.cedate()).toString('dd MMM yyyy HH:mm'),
+                    timezone: self.ctimezone()[0]
+                });
+                showScheduleBlock();
+                console.log(ko.toJSON(self.cclass()));
+
+            }
+            showScheduleBlock = function () {
+                var scheduledclass = "";
+                $(".addedschedule").empty();
+                for (var i = 0; i < self.cclass().schedules().length; i++) {
+                    scheduledclass += "<li>" + self.cclass().schedules()[i].start_date + " to " + self.cclass().schedules()[i].end_date + " " + self.cclass().schedules()[i].timezone + " time  <span style=\"color:red;cursor:pointer\" onclick=\"deleteSchedule(" + i + ")\">X</span></li>";
+                }
+                $(".addedschedule").append(scheduledclass);
+                // resetSchedule();
+            }
+
+            deleteSchedule = function (index) {
+                self.cclass().schedules().splice(index, 1);
+                showScheduleBlock();
+                console.log(ko.toJSON(self.cclass()));
+            }
+
+            addClassTotheCourse = function () {
+                if (self.cclass().schedules().length < 1) {
+                    self.showToastDialog("Atleast create one schedule for the class", false, 0);
+                    return;
+                }
+
+                if (self.cclass().class_size().length < 1) {
+                    self.showToastDialog("Please enter valid class size.", false, 0);
+                    return;
+                }
+
+                if (self.cclass().city().length < 1) {
+                    self.showToastDialog("Please enter valid City.", false, 0);
+                    return;
+                }
+
+
+                self.createCourse().classes().push({
+                    description: self.cclass().description(),
+                    class_size: self.cclass().class_size(),
+                    enrollment_end_date: Date.parse(self.cclass().enrollment_end_date()).toString('dd MMM yyyy'),
+                    city: self.cclass().city(),
+                    state: self.cclass().state()[0],
+                    key_event: self.cclass().key_event()!=true?'No':'Yes',
+                    status: self.cclass().status()[0],
+                    schedules: self.cclass().schedules()
+                });
+                $("#addclasstoclass").ojDialog("close");
+                updateCourseClass();
+                //resetClass();
+
+            }
+
+            saveClassTotheCourse = function () {
+                if (self.cclass().schedules().length < 1) {
+                    self.showToastDialog("Atleast create one schedule for the class", false, 0);
+                    return;
+                }
+
+                if (self.cclass().class_size().length < 1) {
+                    self.showToastDialog("Please enter valid class size.", false, 0);
+                    return;
+                }
+
+                if (self.cclass().city().length < 1) {
+                    self.showToastDialog("Please enter valid City.", false, 0);
+                    return;
+                }
+
+                self.cclass().enrollment_end_date(self.cclass().enrollment_end_date().length > 0 ? Date.parse(self.cclass().enrollment_end_date()).toString('dd MMM yyyy') : self.cclass().enrollment_end_date_view());
+
+                self.cclass().key_event(self.cclass().key_event()?'Yes':'No');
+                var classlist = new Array();
+                classlist.push(self.cclass());
+
+                var reqbody = {
+                    classes: classlist
+                }
+                console.log(ko.toJSON(reqbody));
+
+
+                var url = trainingbaseurl + "editClasses";
+                $.ajax({
+                    url: url,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(reqbody),
+                    success: function (data) {
+                        self.showToastDialog("Class Successfully Updated", true, 2000);
+                        console.log("Class Successfully Updated : " + ko.toJSON(data));
+                        $("#editclass").ojDialog("close");
+                        resetClass();
+                        self.fetchcourses();
+                        $("#edittraining").ojDialog("close");
+                        
+                        
+                    
+                        
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    // alert(err);
+                    self.showToastDialog("Class Failed Updated", false, 2000);
+                });
+
+
+            }
+
+
+            requesttraining = function () 
+            {
+                    self.rtrselected(self.rtrsel()[0].name);
+                    var rtr = {
+                      category: self.rtrcategory(),
+                      name: ssoemail,
+                      role: self.rtrselected()
+                    }
+                    console.log(ko.toJSON(rtr));
+                    $.ajax({
+                      url: com_call_api+'RequestTraining',
+                      cache: false,
+                      type: 'POST',
+                      contentType: 'application/json; charset=utf-8',
+                      data: ko.toJSON(rtr),
+                      success: function (rtrdata) {
+                          console.log(ko.toJSON(rtrdata));
+                          alert("Training requested");
+                          $("#trainingDialog").ojDialog("close");
+                      }
+                  }).fail(function (xhr, textStatus, err) {
+                      alert(err);
+                  });
+            }
+
+            deleteClass = function () {
+                var classidtodel = self.createCourse().classes()[0].class_id;
+
+
+                var classobj = new Array();
+                classobj.push(classidtodel);
+
+                var body = {
+                    classes: classobj
+                }
+
+                console.log(">>>  " + ko.toJSON(body));
+
+                var url = trainingbaseurl + "dropClasses";
+                $.ajax({
+                    url: url,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(body),
+                    success: function (data) {
+                        self.showToastDialog("Class Successfully Deleted", true, 2000);
+                        console.log("Class Successfully Deleted");
+                        $("#editclass").ojDialog("close");
+                        resetClass();
+                        self.fetchcourses();
+                        $("#edittraining").ojDialog("close");
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    // alert(err);
+                    self.showToastDialog("Class Failed Updated", true, 2000);
+                });
+            }
+
+
+            saveCourse = function () {
+
+                console.log("saving course . . .: "+ko.toJSON(self.selectedCategoriesForCourse()));
+                var mappedCategories = new Array();
+                self.selectedCategoriesForCourse().forEach(function (element) {
+                    if(!mappedCategories.includes(element.category_id)){
+                        mappedCategories.push(element.category_id);
+                    }
+                });
+                self.cclass().status(self.cclass().status()[0]);
+                self.cclass().state(self.cclass().state()[0]);
+                var coursedata = {
+                    course_id: self.createCourse().course_id(),
+                    name: self.createCourse().name(),
+                    description: self.createCourse().description(),
+                    cloud_onpremise: self.createCourse().cloud_onpremise()[0],
+                    training_level: self.createCourse().training_level()[0],
+                    training_type: self.createCourse().training_type()[0],
+                    status: self.createCourse().status()[0],
+                    contact_email: self.createCourse().contact_email(),
+                    categories: mappedCategories,
+                    classes: self.createCourse().classes()
+                }
+                var courses = new Array();
+                courses.push(coursedata);
+
+                var reqBody = {
+                    courses: courses
+                }
+                console.log(ko.toJSON(reqBody));
+
+                var url = trainingbaseurl + "editCourses";
+                $.ajax({
+                    url: url,
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(reqBody),
+                    success: function (data) {
+                        self.showToastDialog("Course Successfully Updated", true, 2000);
+                        console.log("Course Successfully Updated");
+                        self.fetchcourses();
+                        $("#edittraining").ojDialog("close");
+                        resetCourse();
+                        
+                       
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    // alert(err);
+                    self.showToastDialog("Update Failed!", false, 2000);
+                    self.fetchcourses();
+                });
+
+            }
+
+
+            editClass = function (class_to_edit) {
+                // resetClass();
+                console.log(Date.parse(class_to_edit.enrollment_end_date).toString('dd MMM yyyy'));
+                self.cclass().class_id(class_to_edit.class_id);
+                self.cclass().description(class_to_edit.description);
+                self.cclass().class_size(class_to_edit.class_size);
+                self.cclass().enrollment_end_date();
+                self.cclass().enrollment_end_date_view(Date.parse(class_to_edit.enrollment_end_date).toString('dd MMM yyyy'));
+                self.cclass().city(class_to_edit.city);
+                self.cclass().state(class_to_edit.state);
+                self.cclass().status(class_to_edit.status);
+                self.cclass().key_event(class_to_edit.key_event == 'Yes' ? true : false);
+                self.cclass().schedules(class_to_edit.schedules);
+                showScheduleBlock();
+                $("#editclass").ojDialog("open");
+            }
+
+            updateCourseClass = function () {
+
+                var htmlData = "<ul>";
+                $(".classlist").empty();
+                var classList = self.createCourse().classes();
+
+                for (var i = 0; i < classList.length; i++) {
+
+                    htmlData += "<li>";
+                    htmlData += "<i class=\"fa fa-trash-o\" style=\"cursor: pointer;float: right;margin-left: 5px\" title=\"Delete Course\" onclick=\"deleteClass()\" target=\"_blank\"></i><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\" style=\"cursor: pointer;float: right;margin-left: 5px\" title=\"Edit Course\" onclick=\'editClass(" + JSON.stringify(classList[i]) + ")\' target=\"_blank\"></i>";
+                    htmlData += "<p>City: " + classList[i].city + "</p>";
+                    htmlData += "<P> Strength: " + classList[i].class_size + "</P>";
+                    htmlData += "<P> Enroll By: " + Date.parse(classList[i].enrollment_end_date).toString('dd MMM yyyy') + "</P>";
+                    htmlData += "</li>"
+                }
+                htmlData += "</ul>";
+                $(".classlist").append(htmlData);
+            }
+
+
+            // EDIT EXISTING COURSE FOR TRAINING
+            edittraining = function (course) {
+                var courseid = course.course_id;
+
+                var courseToEdit = findCourseById(courseid);
+                resetCourse();
+
+                if (courseToEdit != undefined) {
+
+                    console.log(ko.toJSON(courseToEdit));
+                    self.createCourse().course_id(courseToEdit.course_id);
+                    self.createCourse().name(courseToEdit.name);
+                    self.createCourse().description(courseToEdit.description);
+                    self.createCourse().contact_email(courseToEdit.contact);
+                    self.createCourse().cloud_onpremise().push(courseToEdit.prodcut_type);
+                    self.createCourse().training_level().push(courseToEdit.training_level);
+                    self.createCourse().training_type().push(courseToEdit.training_type);
+                    self.createCourse().status().push(courseToEdit.status);
+                    self.createCourse().classes(courseToEdit.classes);
+                    self.createCourse().categories(courseToEdit.categories);
+
+                    // self.cclass(courseToEdit.classes);
+                    // RENDER MAPPED CATEGORY FOR THE COURSE
+                    renderCourseCategory();
+
+                    // RENDER CLASSES FOR THE COURSE
+                    renderCourseClasses()
+
+                    // SHOW THE EDIT WINDOW ONCE THE FORM IS POPULATED
+                    $("#edittraining").ojDialog("open");
+                }
+            }
+
+            renderCourseCategory = function () {
+
+                self.selectedCategoriesForUi([]);
+                for (var i = 0; i < self.createCourse().categories().length; i++) {
+                    self.selectedCategoriesForUi.push(self.createCourse().categories()[i].name);
+                    self.selectedCategoriesForCourse().push(self.createCourse().categories()[i]);
+
+                }
+
+            }
+
+            renderCourseClasses = function () {
+                updateCourseClass();
+            }
+
+
+
+            //  DELETE A COURSE POST CONFIRMATION
+            deletecourse = function (coursedata) {
+                if (confirm("Do you really wish to delete the course?")) {
+
+                    var course = new Array();
+                    course.push(coursedata.course_id);
+
+                    var body = {
+                        courses: course
+                    }
+                    console.log("Deleting courses. . . " + ko.toJSON(body));
+                    var url = trainingbaseurl + "dropCourses";
+                    $.ajax({
+                        url: url,
+                        cache: false,
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        data: ko.toJSON(body),
+                        success: function (data) {
+                            self.showToastDialog("Course Successfully deleted", true, 2000);
+                            self.fetchcourses();
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        // alert(err);
+                        self.showToastDialog("Course Deletion Failed!", false, 2000);
+                    });
+
+                }
+
+            }
+
+            getCategoryHierarchy();
+            // $("#tree").on("ojoptionchange", function(e, ui) 
+            // {
+            //     if (ui.option == "selection") 
+            //     {
+            //         // show selected nodes
+            //         var selected = _arrayToStr(ui.value) ;
+            //         $("#results").html("<label> id = " + selected + "</label>");
+            //     }
+            // });
+            // function _arrayToStr(arr)
+            // {
+            //     var s = "" ;
+            //     $.each(arr, function(i, val)
+            //     {
+            //         if (i) {s += ", " ;}
+            //         console.log(val)
+            //         s += $(arr[i]).attr("id") ;
+            //     }) ;
+            //     return s ;
+            // };
+
+            categoryfamily = function (e, ui) 
+            {
+                // return ui.value[0].innerText;
+                if(ui.value[0].innerText!= undefined)
+                {
+                    console.log(ui.value[0].innerText);
+                    self.rtrcategory(ui.value[0].innerText);
+                }
+            }
+
+            self.adminviewSelected=function(){
+                self.fetchcourses();
+            }
+
+
+            self.searchcontent=function(elem,data){
+                
+                if(self.switchadminview()){
+                    console.log("typing . . .");
+                    filtercourse(data.value);
+                }
+            }
+
+
+            filtercourse=function(value){
+
+                // Store the courses in a temp variable
+                var temcourses=new Array();
+                for(var i=0;i<self.courselist.length;i++){
+                    var course=self.courselist[i];
+                    if(course!=undefined &&course.name!=undefined && course.name.toLowerCase().includes(value.toLowerCase())){
+                        temcourses.push(course);
+                    }
+                }
+                self.processCoursesFromService(temcourses);
+
+            }
+            
         }
         return new DashboardViewModel();
     }
