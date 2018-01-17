@@ -195,7 +195,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             getRoleData = function () {
-                $.getJSON("https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/getFiltersV2").
+                $.getJSON(trainingbaseurl + "getFiltersV2").
                 then(function (reasons) {
 
                     // Get Roles in select in REQUEST TRAINING
@@ -213,6 +213,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             getRoleData();
+
+// froala editor start
+            $(function() {
+                $('#communitycall_text, #edit_com_call_editor, \
+                    #clone_com_call_editor, #event_editor, #course_editor, \
+                    #add_class_editor, #edit_course_editor, #edit_class_editor'
+                    ).froalaEditor({      
+                             //toolbarButtons: ['undo', 'redo' , 'bold', 'italic', 'underline','color']
+              })
+            });            
+// froala editor end
 
             //-----------------   COMMUNITY CALL   ------------------------//
             //Development url for create, edit, clone and delete community call
@@ -289,12 +300,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }
 
 
-                if (self.calldesc().length == 0) {
+                // if (self.calldesc().length == 0) {
 
-                    alert("Please enter description");
-                    return;
-                }
-                if (self.calldesc().length == 0) {
+                //     alert("Please enter description");
+                //     return;
+                // }
+                if ($('#communitycall_text').val() == 0) {
 
                     alert("Select atleast one role");
                     return;
@@ -329,7 +340,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     locn: self.callvenue(),
                     meetinglink: self.calllink(),
                     dialin: self.calldialin(),
-                    description: self.calldesc(),
+                    description: $('#communitycall_text').val(),
                     reflink: self.reflink(),
                     user: ssoemail,
                     recording_link: self.callrecordlink(),
@@ -1290,7 +1301,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     location: self.event_location(),
                     start_time: sdatetime,
                     end_time: edatetime,
-                    description: self.event_description(),
+                    description: $('#event_editor').val(), //self.event_description(),
                     key_event: self.is_key_event()!=true?'No':'Yes',
                     customer_name:self.customerName(),
                     // event_feedback:self.eventFeedback(),
@@ -1387,7 +1398,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     location: self.event_location(),
                     start_time: sdatetime,
                     end_time: edatetime,
-                    description: self.event_description(),
+                    description: $('#event_editor').val(),//self.event_description(),
                     key_event: self.is_key_event()!=true?'No':'Yes',
                     customer_name:self.customerName(),
                     // event_feedback:self.eventFeedback(),
@@ -1413,7 +1424,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             
             openCloneEventModal = function (clone_event) {
                 self.event_name(clone_event.name);
-                self.event_description(clone_event.description);
+                //self.event_description(clone_event.description);
+                $('#event_editor').froalaEditor('html.set', clone_event.description);
                 self.event_location(clone_event.location);
                 self.event_starttime(clone_event.start_time);
                 self.event_endtime(clone_event.end_time);
@@ -1432,7 +1444,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             var event_no_for_edit;
             openEditEventModal = function (edit_event) {
                 self.event_name(edit_event.name);
-                self.event_description(edit_event.description);
+                //self.event_description(edit_event.description);
+                $('#event_editor').froalaEditor('html.set', edit_event.description);
                 self.event_location(edit_event.location);
                 self.event_starttime(edit_event.start_time);
                 self.event_endtime(edit_event.end_time);
@@ -1463,7 +1476,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     location: self.event_location(),
                     start_time: sdatetime,
                     end_time: edatetime,
-                    description: self.event_description(),
+                    description: $('#event_editor').val(),//self.event_description(),
                     key_event: self.is_key_event()!=true?'No':'Yes',
                     customer_name:self.customerName(),
                     // event_feedback:self.eventFeedback(),
@@ -1558,7 +1571,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             key_event_value: calls[i].keyevent != 'No' ? true : false
                         });
 
-                    }
+                    }checkadminrights();
                 });
             }
 
@@ -1650,8 +1663,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.edit_com_call_keyevent = ko.observable('');
 
             var edit_call_id;
-            editcommunitycall = function (edit_calls, param2) {
-
+            editcommunitycall = function (edit_calls, param) {
                 self.editccName('');
                 self.editccDate('');
                 self.editccTime('');
@@ -1692,9 +1704,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 roleArray = roleString.split(",");
                 self.editccSelectedRoles(roleArray)
                 self.editccDescription(edit_calls.description);
+                $('#edit_com_call_editor').froalaEditor('html.set', edit_calls.description);
                 self.editccDialin(edit_calls.dialin);
                 self.editccRecordingLinks(edit_calls.recording_link);
-
                 self.editccOrganizerEmail(edit_calls.organizer_email);
                 self.editccTopic(edit_calls.topic);
                 self.editccInvite(edit_calls.invite);
@@ -1702,15 +1714,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                 self.edit_com_call_keyevent(edit_calls.key_event_value);
                 $("#editcommunitycall_id").ojDialog("open");
+                
             }
-
-
 
             editCommunityCallValues = function () {
                 editSelectedRole = ko.toJSON(self.editccSelectedRoles()).replace('[', '').replace(']', '').replace(/"/g, '');
                 editSelectedCallMode = ko.toJSON(self.editccCallType()).replace('[', '').replace(']', '').replace(/"/g, '');
-
+                var editor_data = $('#edit_com_call_editor').val();
                 var edit_community_call_data = {
+
                     NAME: self.editccName(),
                     speaker: self.editccSpeaker(),
                     designation: self.editccDesignation(),
@@ -1720,7 +1732,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     locn: self.editccVenue(),
                     meetinglink: self.editccMeetingLink(),
                     dialin: self.editccDialin(),
-                    description: self.editccDescription(),
+                    description: editor_data,//self.editccDescription(),
                     user: ssoemail,
                     recording_link: self.editccRecordingLinks(),
                     mode_of_call: editSelectedCallMode,
@@ -1856,6 +1868,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 roleArray = roleString.split(",");
                 self.cloneccSelectedRoles(roleArray)
                 self.cloneccDescription(clone_calls.description);
+                $('#clone_com_call_editor').froalaEditor('html.set', clone_calls.description);
                 self.cloneccDialin(clone_calls.dialin);
                 self.cloneccRecordingLinks(clone_calls.recording_link);
 
@@ -1910,7 +1923,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }
                 cloneSelectedrole = ko.toJSON(self.cloneccSelectedRoles()).replace('[', '').replace(']', '').replace(/"/g, '');
                 cloneSelectedcallmode = ko.toJSON(self.cloneccCallType()).replace('[', '').replace(']', '').replace(/"/g, '');
-
+                var clone_editor_data = $('#clone_com_call_editor').val();
                 var clone_call = {
                     name: self.cloneccName(),
                     speaker: self.cloneccSpeaker(),
@@ -1921,7 +1934,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     locn: self.cloneccVenue(),
                     meetinglink: self.cloneccMeetingLink(),
                     dialin: self.cloneccDialin(),
-                    description: self.cloneccDescription(),
+                    description: clone_editor_data,//self.cloneccDescription(),
                     addl_link: self.cloneccAdditionalLinks(),
                     user: ssoemail,
                     recording_link: self.cloneccRecordingLinks(),
@@ -1932,7 +1945,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     invite: self.cloneccInvite(),
                     keyevent: self.clone_com_call_keyevent()!=true?'No':'Yes'
                 }
-
                 $.ajax({
                     url: community_call_url,
                     cache: false,
@@ -1981,7 +1993,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                 console.log("apex_link : "+apex_link)
                 getCommunityCalls(apex_link);
-                
+
             }
 
             loadCommunitycall = function () {
@@ -2222,7 +2234,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                 var coursedata = {
                     name: self.createCourse().name(),
-                    description: self.createCourse().description(),
+                    description: $('#course_editor').val(),//self.createCourse().description(),
                     cloud_onpremise: self.createCourse().cloud_onpremise()[0],
                     training_level: self.createCourse().training_level()[0],
                     training_type: self.createCourse().training_type()[0],
@@ -2237,7 +2249,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var reqBody = {
                     courses: courses
                 }
-                console.log(ko.toJSON(reqBody));
+                console.log("course data : "+ko.toJSON(reqBody));
 
                 var url = trainingbaseurl + "createCourses";
                 $.ajax({
@@ -2397,7 +2409,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
                 self.createCourse().classes().push({
-                    description: self.cclass().description(),
+                    description: $('#add_class_editor').val(),//self.cclass().description(),
                     class_size: self.cclass().class_size(),
                     enrollment_end_date: Date.parse(self.cclass().enrollment_end_date()).toString('dd MMM yyyy'),
                     city: self.cclass().city(),
@@ -2431,6 +2443,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.cclass().enrollment_end_date(self.cclass().enrollment_end_date().length > 0 ? Date.parse(self.cclass().enrollment_end_date()).toString('dd MMM yyyy') : self.cclass().enrollment_end_date_view());
 
                 self.cclass().key_event(self.cclass().key_event()?'Yes':'No');
+                self.cclass().description($('#edit_class_editor').val());
+
                 var classlist = new Array();
                 classlist.push(self.cclass());
 
@@ -2542,7 +2556,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var coursedata = {
                     course_id: self.createCourse().course_id(),
                     name: self.createCourse().name(),
-                    description: self.createCourse().description(),
+                    description: $('#edit_course_editor').val(),//self.createCourse().description(),
                     cloud_onpremise: self.createCourse().cloud_onpremise()[0],
                     training_level: self.createCourse().training_level()[0],
                     training_type: self.createCourse().training_type()[0],
@@ -2588,7 +2602,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 // resetClass();
                 console.log(Date.parse(class_to_edit.enrollment_end_date).toString('dd MMM yyyy'));
                 self.cclass().class_id(class_to_edit.class_id);
-                self.cclass().description(class_to_edit.description);
+                //self.cclass().description(class_to_edit.description);
+                $('#edit_class_editor').froalaEditor('html.set', class_to_edit.description);
                 self.cclass().class_size(class_to_edit.class_size);
                 self.cclass().enrollment_end_date();
                 self.cclass().enrollment_end_date_view(Date.parse(class_to_edit.enrollment_end_date).toString('dd MMM yyyy'));
@@ -2633,7 +2648,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     console.log(ko.toJSON(courseToEdit));
                     self.createCourse().course_id(courseToEdit.course_id);
                     self.createCourse().name(courseToEdit.name);
-                    self.createCourse().description(courseToEdit.description);
+                    //self.createCourse().description(courseToEdit.description);
+                    $('#edit_course_editor').froalaEditor('html.set', courseToEdit.description);
                     self.createCourse().contact_email(courseToEdit.contact);
                     self.createCourse().cloud_onpremise().push(courseToEdit.prodcut_type);
                     self.createCourse().training_level().push(courseToEdit.training_level);

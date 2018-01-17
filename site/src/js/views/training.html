@@ -2,7 +2,8 @@
  Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  The Universal Permissive License (UPL), Version 1.0
  -->
-
+<link rel="stylesheet" href="../../css/froala_editor.pkgd.min.css" type="text/css"/>
+<link rel="stylesheet" href="../../css/froala_style.min.css" type="text/css"/>
 <div id="dialogWrapper3">
   <div style="display:none" id="modalDialog1" title="Select your role" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'escape',rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
     <div class="oj-dialog-body roleWrapper">
@@ -483,17 +484,7 @@
                         <h6 class="hinttext">prefix link with http/https</h6>
                       </div>
                       <br>
-                      <!--                       <div class="oj-flex">
-                        <div class="oj-sm-12">
-                          <label>Invite </label>
-                        </div>
-                        <div class="oj-sm-12">
-                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:invite}">
-                        </div>
-                      </div>
-                      <br>                      
- -->
-                      <div class="oj-flex">
+                     <div class="oj-flex">
                         <div class="oj-sm-12">
                           <label>Dial in details</label>
                         </div>
@@ -517,7 +508,7 @@
                           <label class="required">*</label>
                         </div>
                         <div class="oj-sm-12">
-                          <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:calldesc}"></textarea>
+                          <textarea id="communitycall_text" rows="6" cols="50" placeholder="" data-bind="value:calldesc"></textarea>
                         </div>
                       </div>
                       <br>
@@ -736,7 +727,7 @@
                           <label class="required">*</label>
                         </div>
                         <div class="oj-sm-12">
-                          <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:editccDescription}"></textarea>
+                          <textarea id="edit_com_call_editor" rows="6" cols="50" placeholder="" data-bind="value: editccDescription"></textarea>
                         </div>
                       </div>
                       <br>
@@ -957,7 +948,7 @@
                         <label class="required">*</label>
                       </div>
                       <div class="oj-sm-12">
-                        <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:cloneccDescription}"></textarea>
+                          <textarea id="clone_com_call_editor" rows="6" cols="50" placeholder="" data-bind="value:cloneccDescription"></textarea>
                       </div>
                     </div>
                     <br>
@@ -1003,15 +994,10 @@
                   <button id="outlinedPush" class="bluebutton" onclick="createclonecommunitycall()" style="cursor: pointer" data-bind="ojComponent: {
                     component:'ojButton',
                     label: 'Clone Community Call'}"> </button>
+                  </div>
+                  <div class="oj-flex-item"> </div>
+                  <div class="oj-flex-item"> </div>
                 </div>
-                <!--                     <div class="oj-md-3">
-                      <button id="outlinedPush" class="orangebutton" onclick="resetcall()" style="cursor: pointer" data-bind="ojComponent: {
-                    component:'ojButton',  
-                    label: 'Reset'}"> </button>
-                    </div> -->
-                <div class="oj-flex-item"> </div>
-                <div class="oj-flex-item"> </div>
-              </div>
 
               <!-- body end -->
             </div>
@@ -1260,7 +1246,7 @@
                 <div class="offerribbon">60% Offer</div>
               </div>
               <div class="oj-sm-12 oj-md-11 oj-flex desccontainer">
-                <div class="oj-sm-12 oj-md-3 oj-lg-2">
+                  <div class="oj-sm-12 oj-md-3 oj-lg-2">
                   <img src="css/images/offer_image.jpg">
                 </div>
                 <div class="oj-sm-12 oj-md-5 oj-md-5offerdesc">
@@ -1327,13 +1313,11 @@
             <!-- show event details modal start -->
             <div style="display:none;height:500px" class="dialogbodymain" id="event_details_modal" title="Event Details" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 60%'}}">
               <div class="dialogbody">
+        <div class="oj-flex">
+        <div class="oj-lg-6">
                 <h1>Name</h1>
                 <p>
                   <span data-bind="text:event_name"></span>
-                </p>
-                <h1>Desciption</h1>
-                <p>
-                  <span data-bind="html:event_description"></span>
                 </p>
                 <h1>Location</h1>
                 <p>
@@ -1351,10 +1335,6 @@
                 <p>
                   <span data-bind="text:customerName"></span>
                 </p>
-                <!--         <h1>Event Feedback</h1>
-        <p>
-          <span data-bind="html:eventFeedback"></span>
-        </p> -->
                 <h1>Event Lead</h1>
                 <p>
                   <span data-bind="text:eventLead"></span>
@@ -1368,7 +1348,15 @@
                   <a data-bind="attr:{href:registrationLink}" target="_blank">Click here</a>
                 </p>
               </div>
-            </div>
+      <div class="oj-lg-6">
+        <h1>Desciption</h1>
+        <p>
+          <span data-bind="html:event_description"></span>
+        </p>
+      </div>
+      </div>
+      </div>
+    </div>
             <!-- show event details modal end -->
             <!-- events modal start -->
             <div style="display:none" id="createevents_id" title="Create an Event" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
@@ -1458,45 +1446,36 @@
                             <label>Description </label>
                           </div>
                           <div class="oj-sm-12">
-                            <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:event_description}"></textarea>
-                          </div>
+                          <textarea id="event_editor" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:event_description}"></textarea>
                         </div>
-                        <!--                       <br>                      
+                      </div>
+                      <br>
                       <div class="oj-flex">
                         <div class="oj-sm-12">
-                          <label>Event Feedback</label>
+                          <label>Registration Link</label>
                         </div>
                         <div class="oj-sm-12">
-                          <textarea rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:eventFeedback}"></textarea>
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:registrationLink}" />
                         </div>
-                      </div> -->
-                        <br>
-                        <div class="oj-flex">
-                          <div class="oj-sm-12">
-                            <label>Registration Link</label>
-                          </div>
-                          <div class="oj-sm-12">
-                            <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:registrationLink}" />
-                          </div>
-                          <h6 class="hinttext">prefix link with http / https</h6>
+                        <h6 class="hinttext">prefix link with http / https</h6>
+                      </div> 
+                     <br>
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <label>Customer Name</label>
                         </div>
-                        <br>
-                        <div class="oj-flex">
-                          <div class="oj-sm-12">
-                            <label>Customer Name</label>
-                          </div>
-                          <div class="oj-sm-12">
-                            <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:customerName}" />
-                          </div>
+                        <div class="oj-sm-12">
+                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:customerName}" />
                         </div>
-
-                      </div>
-                    </div>
+                      </div>  
+                   
+                   </div>
                   </div>
-                  <br>
-                  <div id="create_modal_footer" class="oj-flex">
-                    <div class="oj-md-3">
-                      <button id="outlinedPush" class="bluebutton" style="cursor: pointer" data-bind="ojComponent: {
+                </div>
+                <br>
+                <div id="create_modal_footer" class="oj-flex">
+                  <div class="oj-md-3">
+                    <button id="outlinedPush" class="bluebutton" style="cursor: pointer" data-bind="ojComponent: {
                     component:'ojButton',
                     label: 'Create Event'},click:createEvent"> </button>
                     </div>
@@ -1856,7 +1835,7 @@
                   <label>Description</label>
                 </div>
                 <div class="oj-sm-12">
-                  <textarea rows="20" cols="100" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:description}"></textarea>
+                <textarea id="add_class_editor" rows="20" cols="100" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:description}"></textarea>
                 </div>
               </div>
               <!-- SECTION 3 -->
@@ -2018,7 +1997,7 @@
                   <label>Description</label>
                 </div>
                 <div class="oj-sm-12">
-                  <textarea rows="20" cols="100" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:description}"></textarea>
+                  <textarea id="edit_class_editor" rows="20" cols="100" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:description}"></textarea>
                 </div>
               </div>
               <!-- SECTION 3 -->
@@ -2265,7 +2244,7 @@
                 <label>Description</label>
               </div>
               <div class="oj-sm-12">
-                <textarea rows="20" cols="100" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:description}"></textarea>
+              <textarea id="course_editor" rows="20" cols="100" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:description}"></textarea>
               </div>
             </div>
 
@@ -2429,7 +2408,7 @@
                 <label>Description</label>
               </div>
               <div class="oj-sm-12">
-                <textarea rows="20" cols="100" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:description}"></textarea>
+              <textarea id="edit_course_editor" rows="20" cols="100" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:description}"></textarea>
               </div>
             </div>
 
