@@ -119,7 +119,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
           // ssoname = sname;
         } else {
           ssoemail = "";
-          ssoemail = "angan.sen@oracle.com";
+          //ssoemail = "angan.sen@oracle.com";
           
         }
       }
@@ -150,7 +150,20 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         closesso();
       }, 500);
 
- 
+      //Generating a Unique ID for the session to be used for ANALYTICS
+      uniqueidgen = function () {
+        $.ajax({
+          url: homebaseurl + 'GEN_UNIQUE_ID',
+          type: 'PUT',
+          success: function (uniqueidgen) {
+            sessionid = uniqueidgen.uniq_id;
+            //console.log("Session ID is :", sessionid);
+          }
+        }).fail(function (xhr, textStatus, err) {
+          alert(err);
+        });
+      }
+      uniqueidgen();
 
       // Drawer
       // Close offcanvas on medium and larger screens

@@ -2,67 +2,76 @@
  Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  The Universal Permissive License (UPL), Version 1.0
  -->
+<style>
+  .featured .my-filmstrip-item1 {
+    box-sizing: border-box;
+    width: 370px;
+    height: 245px;
+    margin: 5px;
+    border: 1px solid #cfcfcf;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    background-position: top center !important;
+  }
+</style>
+<div id="empfwrapper">
+  <!-- ko foreach: empdeatilsmatched -->
+  <div style="display:none" id="empf1" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
+    <div class="oj-dialog-header oj-helper-clearfix">
+      <span id="dialogTitleId" class="oj-dialog-title" data-bind="attr: {id: dempfeaid}, text:dempfeaheading"></span>
+    </div>
+    <div class="oj-dialog-body empf">
+      <img data-bind="attr:{'src':dempfeabg}" align="right">
+      <div data-bind="html:dempfeatext"></div>
+    </div>
+  </div>
+  <!-- /ko -->
+</div>
 
 <div class="container">
+
   <div class="oj-sm-12 breadcrumbs">
     <ul>
-      <li><a href="/?root=home">Home</a> ></li>
+      <li><a href="?root=home">Home</a> ></li>
       <li>Employee Feature Archives</li>
     </ul>
   </div>
-  <div class="emparchive oj-flex">
-   <div class="oj-md-4 emparchiveblock" 
-           data-bind="" style="background:url(css/images/JMinter_small.jpg);">
-                <div class="employee_c" >
+
+  <div class="oj-sm-12 featured">
+    <div class="oj-sm-12">
+      <div class="oj-flex">
+        <div id="filmStripfeatured" class="" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'hidden'}">
+          <!-- ko foreach: empfeatlist -->
+            <!-- ko if: empfeaarchived == 'YES' -->
+              <!-- ko if: empfeaid =='3' -->
+              <div class="oj-panel oj-panel-alt2 my-filmstrip-item1 efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
+                <div class="employee_c">
                   <div class="emp_details">
                     <div class="slash"></div>
-                    <a data-bind="click:empf1">ORACLE'S GOT TALENT: It’s All in the Family - Elite Athletes</a></div>
+                    <a onclick="empf1(this.id)" data-bind="attr:{'id':empfeaid}">
+                      <span data-bind="text: empfeaheading"></span>
+                    </a>
+                  </div>
                 </div>
               </div>
-              
-  
-</div>
-</div>
-<div id="empfwrapper">
-  <div style="display:none" id="empf1" title="TECH TALENT FEATURE: It’s All in the Family - Elite Athletes" 
-       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
-    <div class="oj-dialog-body empf">
-      <p><img src="css/images/JMinter_small.jpg" align="right">Our “Tech Talent” feature for October is Dustin Minter, Cloud Customer Success Manager, Public Sector/Enterprise.  Dustin has some mighty fine DNA.  His grandpa, Harry Minter, played for the Philadelphia Phillies baseball team, his father, Mike Minter, was on the NBA D-League team for the Dallas Mavericks, Dustin reached the Final Four of the Elite Eight Basketball tournament at Tarleton State University 2003-2006, his middle brother, Kyle, played soccer at the University of Memphis, and his youngest brother, <a href="http://www.uslsoccer.com/chase-minter" target="_blank">Chase</a>, is playing soccer in the MLS for Real Monarchs Salt Lake City. Dustin’s talents are a great addition to the Oracle Solution Engineering team as he brings to bear his winning and competitive legacy to help our customers succeed in the cloud. </p>
-    </div>
-  </div>
-  <div style="display:none" id="empf2" title="Giving Back: Oracle d.Tech Coach Inspires Teenage Girls" 
-       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
-    <div class="oj-dialog-body empf">
-      <p><img src="css/images/BellaDosovitsky_Picture.jpg" align="right">Bella Dosovitsky volunteered for a two-week d.Tech high school inter-session through the <a href="http://www.oraclefoundation.org/" target="_blank">Oracle Education Foundation</a>. She coached a 3D printing class of 25 girls, who went through explorative learning of the 3D Printing industry, the fabrication process, and turning their ideas into real-life designs using CAD software and 3D Printers.</p>
-      <p>Bella also got to present to the students our personal and professional journeys, lessons learned, and informal conversations about: self-esteem, women in technology, personal development, juggling our desires with our parents’ pressure, and choosing a profession. </p>
-      <p><strong>Why Give Back?</strong> – Bella emphatically said that it was “Surely, the single most inspiring things I’ve done at Oracle so far.”</p>
-    </div>
-  </div>
-  <div style="display:none" id="empf3" title="Innovator Interview: Chip Baber, Solution Engineer" 
-       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
-    <div class="oj-dialog-body empf">
-      <p align="center">"It ain't bragging, if you can do it."<br>
-        -Skeeter Fore, Fuqua School Football Coach </p>
-      <p><b>Chip Baber, Solution Engineer, although a very humble guy, could do some “braggin” about his 17-year career at Oracle, as he has been a great innovator for the corporation.</b> </p>
-      <ul>
-        <li>
-          <p><img src="css/images/InnovatorInterview_ChipBaber.png" align="right"><b>1.   What does innovation mean to you?</b><br>
-            Innovation is the courage to respectfully show others a new way to experience the world. Its' success lies in the eyes of the viewer, not the solution created. True Innovation speaks to the viewer emotionally first, then carries the emotional reaction through the message it serves to convey. </p>
-        </li>
-        <li>
-          <p><b>2.  What are some of the innovations that you have contributed to for Solution Engineering?</b><br>
-            The Cloud Accelerate program is by far the most innovative program I have had the opportunity to participate in at Oracle. It is truly a new way to speak, show, and engage our customers. A close second, is the creation of the Online Interactive Lab Guide framework for all our OPC workshops. It pulls customers into our OPC technical content inside Hands on Labs. Programmatically, I had a chance to create the demonstrations and build the companies first public parallax based web experience in an experiment with marketing during 2014.  Last but not least, I had the opportunity to be the lead solution engineer on the original Marvel/Oracle Ironman partnership. We created a 3-part animated series showing Oracle software inside the world of Marvel. </p>
-        </li>
-        <li>
-          <p><b>3.  What are some of the new innovations that you will be bringing to SE this year?</b><br>
-            In FY18, our team is squarely focused on re-engaging the developer community. We are looking to create new engagement channels, innovative assets, and find ways to emotional capture the ever- elusive eyes, ears, and hearts of developers. <br>
-            Technically speaking, if I could build anything in the coming year, it would be a Cloud Native Blockchain Development experience. Specifically, I would introduce and demystify the world of autonomous contracts to our user base and development community, then provide them a path inside our PaaS offering to foster future development. </p>
-        </li>
-        <li>
-          <p><b>4. Who are some of your favorite innovators? Why?</b></br>
-            The inventors of Draft Kings (Jason Robins, Matthew Kalish, and Paul Liberman) are at the top of my list.  These guys, basically, invented a way to transform and monetize the world of fantasy sports. The way they took a human experience that existed for 10+ years and found a way to leverage technology to enhance, extend, and most importantly make profitable the experience. This is an example of innovation in its' purest form. </p>
-        </li>
-      </ul>
+              <!-- /ko -->
+              <!-- ko ifnot: empfeaid =='3' -->
+              <div class="oj-panel oj-panel-alt2 my-filmstrip-item efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
+                <div class="employee_c">
+                  <div class="emp_details">
+                    <div class="slash"></div>
+                    <a onclick="empf1(this.id)" data-bind="attr:{'id':empfeaid}">
+                      <span data-bind="text: empfeaheading"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <!-- /ko -->
+            <!-- /ko -->
+          <!-- /ko -->
+        </div>
+
+      </div>
     </div>
   </div>
 </div>

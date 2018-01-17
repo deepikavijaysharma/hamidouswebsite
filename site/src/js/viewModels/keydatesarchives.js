@@ -12,7 +12,36 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
       var self = this;
       // Below are a subset of the ViewModel methods invoked by the ojModule binding
       // Please reference the ojModule jsDoc for additionaly available methods.
-
+      self.keydateslist = ko.observableArray([]);
+      fetchkeydates = function () {
+        $.getJSON(homebaseurl + 'key_dates_archive').then(function (keydatesdetails) {
+          // Fetch key dates details
+          var homelink;
+          homelink = window.location.href;
+          homelink += "?root=training#";
+          self.keydateslist([]);
+          var stdate, kstdate, endate, kendate;
+          var kdlist = keydatesdetails.items;
+          for (var b = 0; b < kdlist.length; b++) {
+            kstdate = kdlist[b].start_date != undefined ? kdlist[b].start_date.split('T')[0] : '';
+            stdate = new Date(kstdate);
+            kendate = kdlist[b].end_date != undefined ? kdlist[b].end_date.split('T')[0] : '';
+            endate = new Date(kendate);
+            self.keydateslist.push({
+              keydcid: kdlist[b].course_id,
+              keydtype: kdlist[b].training_type,
+              keydname: kdlist[b].name,
+              keydhlink: homelink,
+              keydhevlink: kdlist[b].link,
+              keydstartdate: stdate.toDateString(),
+              keydstarttime: kdlist[b].start_date != undefined ? kdlist[b].start_date.substring(11, 19) + " PT" : '',
+              keydenddate: endate.toDateString(),
+              keydendtime: kdlist[b].end_date != undefined ? kdlist[b].end_date.substring(11, 19) + " PT" : ''
+            })
+          }
+        });
+      }
+      fetchkeydates();
       /**
        * Optional ViewModel method invoked when this ViewModel is about to be
        * used for the View transition.  The application can put data fetch logic

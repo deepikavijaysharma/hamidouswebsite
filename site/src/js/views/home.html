@@ -221,27 +221,34 @@ position: absolute;
 }
 .efadmin{
     position: absolute;
+    z-index: 1000;
     right: 15px;
     top: 10px;
 }
-.efadmin i{
-margin-right: 5px;
+.efadmin i, .refadmin i {
+	margin-right: 5px;
+	cursor: pointer;
+}
+.admin{
+display:none;
 }
 </style>
 <!------------------------------------SLIDER------------------------------------>
-<div class="oj-row oj-sm-12 addendsl homeadmin">
-  <button class="btn btn-info btn-xs" data-toggle="modal" data-bind="click:openaddslidedialog" style="float: right;">Add New Slide</button>
+<div class="oj-row oj-sm-12 addendsl admin">
+  <button class="btn btn-info btn-xs admin" data-toggle="modal" data-bind="click:openaddslidedialog" style="float: right;">Add New Slide</button>
 </div>
 <div class="oj-row" id="mainBar">
   <div id="myCarousel" class="homeslider carousel slide" > 
     <!-- Indicators -->
     <ol class="carousel-indicators">
       <!-- ko foreach: sliderlist() -->
-        <!-- ko if: $index() == 0 -->
-        <li data-target="#myCarousel" data-bind="attr:{'data-slide-to':$index}" class="active"></li>
-        <!-- /ko -->
-        <!-- ko if: $index() != 0 -->
-        <li data-target="#myCarousel" data-bind="attr:{'data-slide-to':$index}"></li>
+        <!-- ko if: sliderarchived == "NO" -->
+          <!-- ko if: $index() == 0 -->
+          <li data-target="#myCarousel" data-bind="attr:{'data-slide-to':$index}" class="active"></li>
+          <!-- /ko -->
+          <!-- ko if: $index() != 0 -->
+          <li data-target="#myCarousel" data-bind="attr:{'data-slide-to':$index}"></li>
+          <!-- /ko -->
         <!-- /ko -->
       <!-- /ko -->      
     </ol>
@@ -249,109 +256,111 @@ margin-right: 5px;
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <!-- ko foreach: sliderlist() -->
-        <!-- ko if: $index() == 0 -->
-        <div class="item active" data-bind="attr:{'id':sliderid}">
-          <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
-            <i class="fa fa-pencil-square-o endsl homeadmin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider"></i>
-            <i class="fa fa-trash-o endsldel homeadmin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>
-            <i class="fa fa-share-square-o endslarc homeadmin editdis" aria-hidden="true" title="Archive Slider" data-bind=""></i>
-            <div class="verticalcentertext">
+        <!-- ko if: sliderarchived == "NO" -->
+          <!-- ko if: $index() == 0 -->
+          <div class="item active" data-bind="attr:{'id':sliderid}">
+            <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
+              <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider"></i>
+              <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>
+              <i class="fa fa-share-square-o endslarc admin" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider"></i>
               <div class="verticalcentertext">
-                <div class="verticalcentertextinner">
-                  
-                  <div class="heading" data-bind="html: slidertitle"></div>
-                  <div class="text" data-bind="html: sliderdesc"></div>
-                  <div class="buttons_c oj-rwow oj-flex">
+                <div class="verticalcentertext">
+                  <div class="verticalcentertextinner">
+                    
+                    <div class="heading" data-bind="html: slidertitle"></div>
+                    <div class="text" data-bind="html: sliderdesc"></div>
+                    <div class="buttons_c oj-rwow oj-flex">
 
-                    <!-- ko if: (sliderbl1  && sliderlt1 &&  sliderbl2 && sliderlt2 )-->
-                    <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl1">
-                      <div class=" buttons oj-lg-float-end"><a data-bind="attr:{'href':sliderlt1},text:sliderbl1" target="_blank"></a><span class="right-arrow"></span></div>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl2">
-                      <div class=" buttons oj-lg-float-start"><a data-bind="attr:{'href':sliderlt2},text:sliderbl2" target="_blank"></a><span class="right-arrow"></span></div>
-                    </div>
-                    <!-- /ko -->
-                    <!-- ko ifnot: (sliderbl1  && sliderlt1  &&  sliderbl2  && sliderlt2)-->
-                      <!-- ko if: (sliderbl2 && sliderlt2)-->
-                      <div class="oj-sm-12 oj-lg-12 bl2">
-                        <div class="buttons">
-                          <a data-bind="attr:{'href':sliderlt2},text:sliderbl2" target="_blank"></a>
-                          <span class="right-arrow"></span>
-                        </div>
+                      <!-- ko if: (sliderbl1  && sliderlt1 &&  sliderbl2 && sliderlt2 )-->
+                      <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl1">
+                        <div class="buttons oj-lg-float-end"><a data-bind="attr:{'href':sliderlt1},text:sliderbl1,click:analytics.bind($data,slidertitle,sliderbl1,'link','Homepage','Banner','')" target="_blank"></a><span class="right-arrow"></span></div>
+                      </div>
+                      <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl2">
+                        <div class="buttons oj-lg-float-start"><a data-bind="attr:{'href':sliderlt2},text:sliderbl2,click:analytics.bind($data,slidertitle,sliderbl2,'link','Homepage','Banner','')" target="_blank"></a><span class="right-arrow"></span></div>
                       </div>
                       <!-- /ko -->
-                      <!-- ko ifnot: (sliderbl2 && sliderlt2)-->
-                        <!-- ko if: (sliderbl1 && sliderlt1)-->
-                        <div class="oj-sm-12 oj-lg-12 bl1">
+                      <!-- ko ifnot: (sliderbl1  && sliderlt1  &&  sliderbl2  && sliderlt2)-->
+                        <!-- ko if: (sliderbl2 && sliderlt2)-->
+                        <div class="oj-sm-12 oj-lg-12 bl2">
                           <div class="buttons">
-                            <a data-bind="attr:{'href':sliderlt1},text:sliderbl1" target="_blank"></a>
+                            <a data-bind="attr:{'href':sliderlt2},text:sliderbl2,click:analytics.bind($data,slidertitle,sliderbl2,'link','Homepage','Banner','')" target="_blank"></a>
                             <span class="right-arrow"></span>
                           </div>
                         </div>
                         <!-- /ko -->
+                        <!-- ko ifnot: (sliderbl2 && sliderlt2)-->
+                          <!-- ko if: (sliderbl1 && sliderlt1)-->
+                          <div class="oj-sm-12 oj-lg-12 bl1">
+                            <div class="buttons">
+                              <a data-bind="attr:{'href':sliderlt1},text:sliderbl1,click:analytics.bind($data,slidertitle,sliderbl1,'link','Homepage','Banner','')" target="_blank"></a>
+                              <span class="right-arrow"></span>
+                            </div>
+                          </div>
+                          <!-- /ko -->
+                        <!-- /ko -->
                       <!-- /ko -->
-                    <!-- /ko -->
 
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- /ko -->
-        <!-- ko if: $index() != 0 -->
-        <div class="item" data-bind="attr:{'id':sliderid}"> 
-          <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
-            <i class="fa fa-pencil-square-o endsl homeadmin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider" ></i>
-            <i class="fa fa-trash-o endsldel homeadmin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>
-            <i class="fa fa-share-square-o endslarc homeadmin editdis" aria-hidden="true" itle="Archive Slider" data-bind=""></i>
-            <div class="verticalcentertext">
+          <!-- /ko -->
+          <!-- ko if: $index() != 0 -->
+          <div class="item" data-bind="attr:{'id':sliderid}"> 
+            <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
+              <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider" ></i>
+              <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>
+              <i class="fa fa-share-square-o endslarc admin" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider"></i>
               <div class="verticalcentertext">
-                <div class="verticalcentertextinner">
-                  
-                  <div class="heading" data-bind="html: slidertitle"></div>
-                  <div class="text" data-bind="html: sliderdesc"></div>
-                  <div class="buttons_c oj-rwow oj-flex">
-                    <!-- ko if: (sliderbl1  && sliderlt1 &&  sliderbl2 && sliderlt2 )-->
-                    <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl1">
-                      <div class=" buttons oj-lg-float-end">
-                        <a data-bind="attr:{'href':sliderlt1},text:sliderbl1" target="_blank"></a>
-                        <span class="right-arrow"></span>
+                <div class="verticalcentertext">
+                  <div class="verticalcentertextinner">
+                    
+                    <div class="heading" data-bind="html: slidertitle"></div>
+                    <div class="text" data-bind="html: sliderdesc"></div>
+                    <div class="buttons_c oj-rwow oj-flex">
+                      <!-- ko if: (sliderbl1  && sliderlt1 &&  sliderbl2 && sliderlt2 )-->
+                      <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl1">
+                        <div class=" buttons oj-lg-float-end">
+                          <a data-bind="attr:{'href':sliderlt1},text:sliderbl1,click:analytics.bind($data,slidertitle,sliderbl1,'link','Homepage','Banner','')" target="_blank"></a>
+                          <span class="right-arrow"></span>
+                        </div>
                       </div>
-                    </div>
-                    <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl2">
-                      <div class=" buttons oj-lg-float-start">
-                        <a data-bind="attr:{'href':sliderlt2},text:sliderbl2" target="_blank"></a>
-                        <span class="right-arrow"></span>
-                      </div>
-                    </div>
-                    <!-- /ko -->
-                    <!-- ko ifnot: (sliderbl1  && sliderlt1  &&  sliderbl2  && sliderlt2)-->
-                      <!-- ko if: (sliderbl2 && sliderlt2)-->
-                      <div class="oj-sm-12 oj-lg-12 bl2">
-                        <div class="buttons">
-                          <a data-bind="attr:{'href':sliderlt2},text:sliderbl2" target="_blank"></a>
+                      <div class="oj-sm-12 oj-lg-6 oj-xl-float-end bl2">
+                        <div class=" buttons oj-lg-float-start">
+                          <a data-bind="attr:{'href':sliderlt2},text:sliderbl2,click:analytics.bind($data,slidertitle,sliderbl2,'link','Homepage','Banner','')" target="_blank"></a>
                           <span class="right-arrow"></span>
                         </div>
                       </div>
                       <!-- /ko -->
-                      <!-- ko ifnot: (sliderbl2 && sliderlt2)-->
-                        <!-- ko if: (sliderbl1 && sliderlt1)-->
-                        <div class="oj-sm-12 oj-lg-12 bl1">
+                      <!-- ko ifnot: (sliderbl1  && sliderlt1  &&  sliderbl2  && sliderlt2)-->
+                        <!-- ko if: (sliderbl2 && sliderlt2)-->
+                        <div class="oj-sm-12 oj-lg-12 bl2">
                           <div class="buttons">
-                            <a data-bind="attr:{'href':sliderlt1},text:sliderbl1" target="_blank"></a>
+                            <a data-bind="attr:{'href':sliderlt2},text:sliderbl2,click:analytics.bind($data,slidertitle,sliderbl2,'link','Homepage','Banner','')" target="_blank"></a>
                             <span class="right-arrow"></span>
                           </div>
                         </div>
                         <!-- /ko -->
+                        <!-- ko ifnot: (sliderbl2 && sliderlt2)-->
+                          <!-- ko if: (sliderbl1 && sliderlt1)-->
+                          <div class="oj-sm-12 oj-lg-12 bl1">
+                            <div class="buttons">
+                              <a data-bind="attr:{'href':sliderlt1},text:sliderbl1,click:analytics.bind($data,slidertitle,sliderbl1,'link','Homepage','Banner','')" target="_blank"></a>
+                              <span class="right-arrow"></span>
+                            </div>
+                          </div>
+                          <!-- /ko -->
+                        <!-- /ko -->
                       <!-- /ko -->
-                    <!-- /ko -->
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>  
+          </div>  
+          <!-- /ko -->
         <!-- /ko -->
       <!-- /ko -->
 
@@ -396,8 +405,9 @@ margin-right: 5px;
               <div class="oj-flex">
                 <div class="oj-sm-9"><span class="name">Senior Vice President,</span><br>
                   <span class="title">Solution Engineering and Customer Success</span></div>
-                <div class="oj-sm-3 playblock"><a href="https://otube.oracle.com/media/Solutions+Engineer+and+Cloud+Customer+Success+All+Hands/0_w2kl22gc/2977" target="_blank" title="Solutions Engineering and Cloud Customer Success All Hands Webcast from Oracle HQ on Tuesday, June 27, 2017"><img src="css/images/play_icon.png" class="img-responsive playicon" ></a></div>
-              </div>
+                <div class="oj-sm-3 playblock">
+                  <a onclick="analytics('Hamidou Dia','Video Link','link','Homepage','Hamidou Dia','')" href="https://otube.oracle.com/media/Solutions+Engineer+and+Cloud+Customer+Success+All+Hands/0_w2kl22gc/2977" target="_blank" title="Solutions Engineering and Cloud Customer Success All Hands Webcast from Oracle HQ on Tuesday, June 27, 2017"><img src="css/images/play_icon.png" class="img-responsive playicon" ></a></div>
+                </div>
             </div>
           </div>
         </div>
@@ -413,19 +423,19 @@ margin-right: 5px;
               <div class="oj-flex-item blocks oj-sm-12 bg1">
                 <div class="blocks_icon_inner"><img src="css/images/icon1.png"></div>
               </div>
-              <div class="blocks_title_box1 blocks_title oj-flex-item oj-sm-12"><a href="http://innovate.us.oracle.com/cloudaccelerate/" target="_blank">Oracle Cloud <br>
+              <div class="blocks_title_box1 blocks_title oj-flex-item oj-sm-12"><a onclick="analytics('','Oracle Cloud Accelrate','link','Homepage','Top Initiatives','')" href="http://innovate.us.oracle.com/cloudaccelerate/" target="_blank">Oracle Cloud <br>
                 Accelerate</a> </div>
             </div>
             <div class="oj-flex   oj-sm-12 oj-md-4">
               <div class="oj-flex-item blocks oj-sm-12 bg2">
                 <img src="css/images/OracleCloudSolutionHubs_Logo-wht.png">
               </div>
-              <div class="blocks_title_box2 blocks_title oj-flex-item oj-sm-12"><a href="http://solutionengineering.us.oracle.com/hubs/" target="_blank">Oracle Cloud <br>
+              <div class="blocks_title_box2 blocks_title oj-flex-item oj-sm-12"><a onclick="analytics('','Oracle Cloud Solution Hubs','link','Homepage','Top Initiatives','')" href="http://solutionengineering.us.oracle.com/hubs/" target="_blank">Oracle Cloud <br>
                 Solution Hubs</a></div>
             </div>
             <div class="oj-flex   oj-sm-12 oj-md-4">
               <div class="oj-flex-item blocks oj-sm-12 bg3"><img src="css/images/ECAL_Logo_High_Res.png">  </div>
-              <div class="blocks_title_box3 blocks_title oj-flex-item oj-sm-12"><a href="http://innovate.us.oracle.com/ecal/" target="_blank">Enterprise Cloud<br>
+              <div class="blocks_title_box3 blocks_title oj-flex-item oj-sm-12"><a onclick="analytics('','Enterprise Cloud Adoption Lifecycle','link','Homepage','Top Initiatives','')" href="http://innovate.us.oracle.com/ecal/" target="_blank">Enterprise Cloud<br>
                 Adoption Lifecycle</a></div>
             </div>
           </div>
@@ -587,34 +597,22 @@ margin-right: 5px;
               <div  id="btnGo2"></div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
                 <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog13"> <img src="css/images/tick_med.png"><br>
-                    <br>
-                    Customer
-                    Discovery</div>
+                  <div class="clicksection" data-bind="click:opendialog13"><img src="css/images/tick_med.png"><br><br>Customer Discovery</div>
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
                 <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog14"> <img src="css/images/tick_med.png"><br>
-                    <br>
-                    Platform
-                    Assessments</div>
+                  <div class="clicksection" data-bind="click:opendialog14"><img src="css/images/tick_med.png"><br><br>Platform Assessments</div>
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
                 <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog15"> <img src="css/images/tick_med.png"><br>
-                    <br>
-                    Hands-on
-                    Workshops</div>
+                  <div class="clicksection" data-bind="click:opendialog15"><img src="css/images/tick_med.png"><br><br>Hands-on Workshops</div>
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
                 <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog16"> <img src="css/images/tick_med.png"><br>
-                    <br>
-                    Customer
-                    Demos</div>
+                  <div class="clicksection" data-bind="click:opendialog16"><img src="css/images/tick_med.png"><br><br>Customer Demos</div>
                 </div>
               </div>
             </div>
@@ -623,30 +621,22 @@ margin-right: 5px;
             <div class="oj-flex">
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
                 <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog17"> <img src="css/images/tick_med.png"><br>
-                    <br>
-                    RFx
-                    Response Support</div>
+                  <div class="clicksection" data-bind="click:opendialog17"> <img src="css/images/tick_med.png"><br><br>RFx Response Support</div>
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
                 <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog18"> <img src="css/images/tick_med.png"><br>
-                    <br>
-                    Sizing,
-                    Quoting &amp; Config Support</div>
+                  <div class="clicksection" data-bind="click:opendialog18"> <img src="css/images/tick_med.png"><br><br>Sizing, Quoting &amp; Config Support</div>
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
                 <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog19"> Project Management Support</div>
+                  <div class="clicksection" data-bind="click:opendialog19">Project Management Support</div>
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock reusuable" >
                 <div class="centerelement">
-                  <div class="clicksection" data-bind="click:opendialog20"> Reusable
-                    Asset
-                    Harvesting</div>
+                  <div class="clicksection" data-bind="click:opendialog20">Reusable Asset Harvesting</div>
                 </div>
               </div>
             </div>
@@ -656,13 +646,14 @@ margin-right: 5px;
     </div>
   </div>
 </div>
+
 <!------------------------------------Our Organization------------------------------------> 
 <a class="anchor" id="organization"></a>
 <div class="oj-row row7 newrow">
   <div class="container">
     <div class="oj-sm-12 featured bgwhite">
       <div class="oj-sm-12 featuredtitle"><img src="css/images/our_org.png">&nbsp;Our Organization</div>
-      <button class="btn btn-info btn-xs btnaddneworg homeadmin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddneworgdialog">Add New People</button>
+      <button class="btn btn-info btn-xs btnaddneworg admin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddneworgdialog">Add New People</button>
       <div class="oj-flex oj-sm-12 org_container">
         <div class="oj-flex oj-sm-12 red org_container_inner">
 
@@ -677,8 +668,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -695,8 +686,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -716,8 +707,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -734,8 +725,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -755,8 +746,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -773,8 +764,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -794,8 +785,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -812,8 +803,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -833,8 +824,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -851,8 +842,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -872,8 +863,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -890,8 +881,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -911,8 +902,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -929,8 +920,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -946,7 +937,7 @@ margin-right: 5px;
                 <h1 data-bind="text: orglob"></h1>
                 <div class=" org_blocks_b">
                   <!-- ko if: orgname =='Misha Logvinov' -->
-                  <a data-bind="attr:{'href':'https://stbeehive.oracle.com/content/dav/st/NATD%20CSM%20Website/Public%20Documents/webportal/index.html#/?_k=drzbas'}" target="_blank">
+                  <a data-bind="attr:{'href':'https://stbeehive.oracle.com/content/dav/st/NATD%20CSM%20Website/Public%20Documents/webportal/index.html#/?_k=drzbas'},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
                   <!-- /ko -->
@@ -958,8 +949,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -972,7 +963,7 @@ margin-right: 5px;
                 <h1><br></h1>
                 <div class=" org_blocks_b">
                   <!-- ko if: orgname =='Misha Logvinov' -->
-                  <a data-bind="attr:{'href':'https://stbeehive.oracle.com/content/dav/st/NATD%20CSM%20Website/Public%20Documents/webportal/index.html#/?_k=drzbas'}">
+                  <a data-bind="attr:{'href':'https://stbeehive.oracle.com/content/dav/st/NATD%20CSM%20Website/Public%20Documents/webportal/index.html#/?_k=drzbas'},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
                   <!-- /ko -->
@@ -984,8 +975,8 @@ margin-right: 5px;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel homeadmin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel homeadmin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
                   </div> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -1001,6 +992,7 @@ margin-right: 5px;
     </div>
   </div>
 </div>
+
 <!------------------------------------KEY DATES------------------------------------> 
 <a class="anchor" id="keydates"></a>
 <div class="oj-row row5 newrow">
@@ -1015,7 +1007,7 @@ margin-right: 5px;
                 <!-- ko foreach: keydateslist --> 
                 <div class="calrow">
                   <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-3 cDate oj-flex">
+                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
                       <p><span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;<span data-bind="text: keydstartdate"></span><br>
                        Time: <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;<span data-bind="text: keydstarttime"></span></p>
                     </div>
@@ -1023,24 +1015,23 @@ margin-right: 5px;
                     <div class="oj-sm-12 oj-lg-3 calbutton">
                       <!-- ko if: keydtype == 'COMMUNITY_CALLS' -->
                       <div class="orangeBbutton oj-lg-float-end">
-                        <a data-bind="attr:{'href':keydhlink+'key_com_call='+keydcid}" target="_blank">Link</a>
+                        <a data-bind="attr:{'href':keydhlink+'key_com_call='+keydcid},click:analytics.bind($data,keydtype,keydname,'link','Homepage','Key Dates','')" target="_blank">Link</a>
                       </div>
                       <!-- /ko -->
                       <!-- ko ifnot: keydtype == 'COMMUNITY_CALLS' -->
                         <!-- ko if: keydtype == 'EVENT' -->
                         <div class="orangeBbutton oj-lg-float-end">
-                          <a data-bind="attr:{'href':keydhevlink}" target="_blank">Link</a>
+                          <a data-bind="attr:{'href':keydhevlink},click:analytics.bind($data,keydtype,keydname,'link','Homepage','Key Dates','')" target="_blank">Link</a>
                         </div>
                         <!-- /ko -->
                         <!-- ko ifnot: keydtype == 'EVENT' -->
                         <div class="orangeBbutton oj-lg-float-end">
-                          <a data-bind="attr:{'href':keydhlink+keydcid}" target="_blank">Link</a>
+                          <a data-bind="attr:{'href':keydhlink+keydcid},click:analytics.bind($data,keydtype,keydname,'link','Homepage','Key Dates','')" target="_blank">Link</a>
                         </div>
-                        <!-- /ko -->
-                        
+                        <!-- /ko -->                        
                       <!-- /ko -->
                     </div>
-                    <div class="oj-sm-12 oj-lg-1 cDate oj-flex"><i class="fa fa-share-square-o homeadmin editdis" aria-hidden="true" title="Archive Key Dates" data-bind=""></i></div>
+                    <!-- <div class="oj-sm-12 oj-lg-1 cDate oj-flex"><i class="fa fa-share-square-o admin editdis" aria-hidden="true" title="Archive Key Dates" data-bind=""></i></div> -->
                   </div>
                 </div>
                 <!-- /ko -->
@@ -1063,6 +1054,8 @@ margin-right: 5px;
     </div>
   </div>
 </div>
+
+<!------------------------------------Key Wins------------------------------------>
 <a class="anchor" id="keywins"></a>
 <div class="oj-row row7 newrow">
   <div class="container">
@@ -1071,16 +1064,16 @@ margin-right: 5px;
         <div class="oj-sm-12 golivetitle"><img src="css/images/wins_large.png">&nbsp;Key Wins</div>
         <div class="oj-sm-12">
           <div class="oj-flex">
-            <button class="btn btn-info btn-xs btnaddnewref homeadmin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddnewkeywinsdialog">Add New Key Wins</button>
+            <button class="btn btn-info btn-xs btnaddnewref admin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddnewkeywinsdialog">Add New Key Wins</button>
             <div id="filmStripwins" class="oj-sm-12" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'visible',arrowplacement:'overlay'}"> <!-- block 1 -->
               <!-- ko foreach: keywinslist --> 
               <div class="oj-panel oj-panel-alt2 my-filmstrip-item kwadpar" data-bind="attr:{'id':keywid}">
                 <div class="kwadmin">
-                  <i class="fa fa-pencil-square-o endsl homeadmin" aria-hidden="true" title="Edit Key Wins" data-bind="click:openEditKeyWinsModal"></i>
-                  <i class="fa fa-trash-o endsldel homeadmin" aria-hidden="true" title="Delete Key Wins" data-bind="click:deletekeywins"></i>
+                  <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Key Wins" data-bind="click:openEditKeyWinsModal"></i>
+                  <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Key Wins" data-bind="click:deletekeywins"></i>
                 </div>
                 <p>
-                  <a data-bind="attr:{'href':keywlink}" target="_blank">
+                  <a data-bind="attr:{'href':keywlink},click:analytics.bind($data,'',keywtext,'link','Homepage','Key Wins','')" target="_blank">
                     <img data-bind="attr:{'src':keywphoto,'id':keywid}">
                   </a><br>
                   <span data-bind="text:keywtext"></span>
@@ -1094,7 +1087,8 @@ margin-right: 5px;
     </div>
   </div>
 </div>
-<!------------------------------------Wins, Go-Lives and References------------------------------------> 
+
+<!------------------------------------Go-Lives------------------------------------> 
 <a class="anchor" id="golives"></a>
 <div class="oj-row row7 newrow">
   <div class="container">
@@ -1104,7 +1098,7 @@ margin-right: 5px;
         <div class="oj-sm-12">
           <div class="oj-flex"> 
             <!-- filmstrip container -->
-            <button class="btn btn-info btn-xs btnaddneworg homeadmin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddgltextdialog">Add New Go Lives</button>
+            <button class="btn btn-info btn-xs btnaddneworg admin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddgltextdialog">Add New Go Lives</button>
             <div id="filmStripwins" class="oj-sm-12 oj-filmstrip oj-component oj-filmstrip-container oj-component-initnode" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 2,arrowVisibility: 'visible'}">
 
               <!-- ko foreach: goliveslist() -->
@@ -1132,8 +1126,8 @@ margin-right: 5px;
                     <div class="cardface">
                       <div class="wins_block oj-sm-12">
                         <div class="gladmin">
-                          <i class="fa fa-pencil-square-o endsl homeadmin" aria-hidden="true" title="Edit Go Lives" data-bind="click:openEditGoLiveslmodal"></i>
-                          <i class="fa fa-trash-o endsldel homeadmin" aria-hidden="true" title="Delete Go Lives" data-bind="click:deletegolives"></i>
+                          <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Go Lives" data-bind="click:openEditGoLiveslmodal"></i>
+                          <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Go Lives" data-bind="click:deletegolives"></i>
                         </div>
                         <div class="win_logo oj-sm-12">
                           <img data-bind="attr:{'src':gollogo}">
@@ -1159,7 +1153,7 @@ margin-right: 5px;
                               <button class="oj-sm-align-center oj-flex" data-bind="click: $parent.buttonClick.bind($data, 'wins'+golid)">Quick Summary</button>
                             </div>
                             <div class="oj-sm-12 oj-lg-6 oj-flex">
-                              <a data-bind="attr:{'href':gollink}" target="_blank">Listen to Interview</a>
+                              <a data-bind="attr:{'href':gollink},click:analytics.bind($data,'',golguest,'link','Homepage','Go Lives','')" target="_blank">Listen to Interview</a>
                             </div>
                           </div>
                         </div>
@@ -1190,55 +1184,56 @@ margin-right: 5px;
         <div class="oj-sm-12 refertitle"><img src="css/images/references_icon_lg.png">&nbsp;References</div>
         <div class="oj-md-6  oj-flex">
           <div class="oj-flex oj-sm-12 oj-margin referencesblock">
-            <button class="btn btn-info btn-xs btnaddnewref homeadmin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddnewrefdialog">Add New References</button>
+            <button class="btn btn-info btn-xs btnaddnewref admin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddnewrefdialog">Add New References</button>
             <div class="oj-flex oj-sm-12  logorow">
               <!-- ko foreach: reflist -->
                 <!-- ko if: reftype == "IAAS"-->
                 <div class="oj-sm-12 oj-lg-4 refadpar" data-bind="attr:{'id':refid}">
-                  <a data-bind="attr:{'href':reflink}" target="_blank">
+                  <a data-bind="attr:{'href':reflink},click:analytics.bind($data,reftype,reflink,'link','Homepage','References',reftype)" target="_blank">
                     <img data-bind="attr:{'src':reflogo}">
                   </a>
                   <div class="refadmin">
-                    <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesModal"></i>
-                    <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i>
+                    <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesModal"></i>
+                    <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i>
                   </div>
                 </div>              
                 <!-- /ko -->
               <!-- /ko -->
             </div>
-            <div class="oj-sm-12 button oj-flex"><a  class="whitebutton" href="https://www.oracle.com/search/customers/_/N-1joZp5vz?Nr=112" target="_blank">Search for IaaS Customers</a></div>
+            <div class="oj-sm-12 button oj-flex"><a onclick="analytics('IAAS','Search for IaaS Customers','link','Homepage','References','IAAS')" class="whitebutton" href="https://www.oracle.com/search/customers/_/N-1joZp5vz?Nr=112" target="_blank">Search for IaaS Customers</a></div>
           </div>
         </div>
         <div class="oj-md-6  oj-flex">
           <div class="oj-flex oj-sm-12 oj-margin referencesblock">
-            <button class="btn btn-info btn-xs btnaddnewref homeadmin" data-toggle="modal" data-bind="click:openaddnewrefdialogpaas">Add New References</button>
+            <button class="btn btn-info btn-xs btnaddnewref admin" data-toggle="modal" data-bind="click:openaddnewrefdialogpaas">Add New References</button>
             <div class="oj-flex oj-sm-12 logorow">
               <!-- ko foreach: reflist -->
                 <!-- ko if: reftype == "PAAS"-->
                 <div class="oj-sm-12 oj-lg-4 refadpar" data-bind="attr:{'id':refid}">
-                  <a data-bind="attr:{'href':reflink}" target="_blank">
+                  <a data-bind="attr:{'href':reflink},click:analytics.bind($data,reftype,reflink,'link','Homepage','References',reftype)" target="_blank">
                     <img data-bind="attr:{'src':reflogo}">
                   </a>
                   <div class="refadmin">
-                    <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesPaasModal"></i>
-                    <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i>
+                    <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesPaasModal"></i>
+                    <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i>
                   </div>
                 </div>
                 <!-- /ko -->
               <!-- /ko -->
             </div>
-            <div class="oj-sm-12 button oj-flex"><a class="whitebutton" href="https://www.oracle.com/search/customers/_/N-1joZp5wb?Nr=112" target="_blank">Search for PaaS Customers</a></div>
+            <div class="oj-sm-12 button oj-flex"><a onclick="analytics('PAAS','Search for PaaS Customers','link','Homepage','References','PAAS')" class="whitebutton" href="https://www.oracle.com/search/customers/_/N-1joZp5wb?Nr=112" target="_blank">Search for PaaS Customers</a></div>
           </div>
         </div>
         <div class="oj-sm-12 oj-sm-center">
-          <div class="oj-flex-item"> <a href="http://gcp.oraclecorp.com/ocpwb/f?p=144:2060:17175260936151" target="_blank">
-            <button  class="oj-sm-align-center oj-flex bluebutton"> Request a Reference</button>
+          <div class="oj-flex-item"> <a onclick="analytics('Request a Reference','','link','Homepage','References','')" href="http://gcp.oraclecorp.com/ocpwb/f?p=144:2060:17175260936151" target="_blank">
+            <button class="oj-sm-align-center oj-flex bluebutton">Request a Reference</button>
             </a> </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 <!------------------------------------Featured Stories------------------------------------> 
 <a class="anchor" id="empf"></a>
 <div class="oj-row row7 newrow">
@@ -1246,42 +1241,44 @@ margin-right: 5px;
     <div class="oj-sm-12 featured bgwhite">
       <div class="oj-flex">
         <div class="oj-sm-12 featuredtitle"><img src="css/images/emp_feature_lg.png">&nbsp;Employee Features</div>
-        <button class="btn btn-info btn-xs btnaddnewref homeadmin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddnewefdialog">Add New Employee Feature</button>
+        <button class="btn btn-info btn-xs btnaddnewref admin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddnewefdialog">Add New Employee Feature</button>
         <div class="oj-sm-12">
           <div class="oj-flex">
-            <div id="filmStripfeatured" class="" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'hidden'}"> <!-- block 1 -->
+            <div id="filmStripfeatured" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'hidden'}">
               <!-- ko foreach: empfeatlist -->
-                <!-- ko if: empfeaid =='3' -->
-                <div class="oj-panel oj-panel-alt2 my-filmstrip-item1 efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
-                  <div class="efadmin">
-                    <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
-                    <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
-                    <i class="fa fa-share-square-o homeadmin editdis" aria-hidden="true" title="Archive Employee Features" data-bind=""></i>
-                  </div>
-                  <div class="employee_c" >
-                    <div class="emp_details">
-                      <div class="slash"></div>
-                      <a onclick="empf1(this.id)" data-bind="attr:{'id':empfeaid}"><span data-bind="text: empfeaheading"></span></a>
+                <!-- ko if: empfeaarchived == 'NO' -->
+                  <!-- ko if: empfeaid =='3' -->
+                  <div class="oj-panel oj-panel-alt2 my-filmstrip-item1 efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
+                    <div class="efadmin">
+                      <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
+                      <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
+                      <i class="fa fa-share-square-o admin" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures"></i>
+                    </div>
+                    <div class="employee_c" >
+                      <div class="emp_details">
+                        <div class="slash"></div>
+                        <a onclick="empf1(this.id)" data-bind="attr:{'id':empfeaid}"><span data-bind="text: empfeaheading"></span></a>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <!-- /ko -->
-                <!-- ko ifnot: empfeaid =='3' -->
-                <div class="oj-panel oj-panel-alt2 my-filmstrip-item efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
-                  <div class="efadmin">
-                    <i class="fa fa-pencil-square-o homeadmin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
-                    <i class="fa fa-trash-o homeadmin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
-                    <i class="fa fa-share-square-o homeadmin editdis" aria-hidden="true" title="Archive Employee Features" data-bind=""></i>
-                  </div>
-                  <div class="employee_c">
-                    <div class="emp_details">
-                      <div class="slash"></div>
-                      <a onclick="empf1(this.id)" data-bind="attr:{'id':empfeaid}">
-                        <span data-bind="text: empfeaheading"></span>
-                      </a>
+                  <!-- /ko -->
+                  <!-- ko ifnot: empfeaid =='3' -->
+                  <div class="oj-panel oj-panel-alt2 my-filmstrip-item efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
+                    <div class="efadmin">
+                      <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
+                      <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
+                      <i class="fa fa-share-square-o admin" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures"></i>
+                    </div>
+                    <div class="employee_c">
+                      <div class="emp_details">
+                        <div class="slash"></div>
+                        <a onclick="empf1(this.id)" data-bind="attr:{'id':empfeaid}">
+                          <span data-bind="text: empfeaheading"></span>
+                        </a>
+                      </div>
                     </div>
                   </div>
-                </div>
+                  <!-- /ko -->
                 <!-- /ko -->
               <!-- /ko -->
             </div>
@@ -1302,6 +1299,8 @@ margin-right: 5px;
     </div>
   </div>
 </div>
+
+<!------------------------------------Governance Board------------------------------------>
 <div class="oj-row row7 newrow governanceboard">
   <div class="container">
     <div class="oj-sm-12 featured bgwhite">
@@ -1334,6 +1333,8 @@ margin-right: 5px;
     </div>
   </div>
 </div>
+
+<!-- Employee Details Popup -->
 <div id="empfwrapper">
   <!-- ko foreach: empdeatilsmatched -->
   <div style="display:none" id="empf1" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
@@ -1347,9 +1348,12 @@ margin-right: 5px;
   </div>
   <!-- /ko -->
 </div>
+<!-- Employee Details Popup End-->
+
+<!------------------------------------OUR SERVICES POPUPS------------------------------------>
+
 <!--Popups1 -->
-<div style="display:none" id="modalDialog1" title="Deliver a Cloud Day
-"  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+<div style="display:none" id="modalDialog1" title="Deliver a Cloud Day" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
     <h3>Deliver a Cloud Day </h3>
@@ -1461,8 +1465,7 @@ margin-right: 5px;
       <li>Platform/Hub Solution Engineers </li>
     </ul>
     <h4 style="color:#00758f;">How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
       Service based model in SCRM is target to be enabled on 12/1/2017.
       Asset repository will be published to share successful content at <a href="http://solutionengineering.us.oracle.com">http://solutionengineering.us.oracle.com</a> website. </p>
   </div>
@@ -1627,7 +1630,6 @@ margin-right: 5px;
   </div>
 </div>
 <!--Popups13 -->
-
 <div style="display:none" id="modalDialog13" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
@@ -1649,14 +1651,11 @@ margin-right: 5px;
       <li>Platform Specialists from the GEO Field support all phases closely, coordinating customer events and providing seamless handoff to solution and proposal. </li>
     </ul>
     <h4>How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
       Service based model in SCRM is target to be enabled on 12/1/2017. </p>
   </div>
 </div>
-
 <!--Popups14 -->
-
 <div style="display:none" id="modalDialog14" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
@@ -1681,14 +1680,11 @@ margin-right: 5px;
       <li>ECAs will focus on overall architectural design.</li>
     </ul>
     <h4>How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
       Service based model in SCRM is target to be enabled on 12/1/2017. </p>
   </div>
 </div>
-
 <!--Popups15 -->
-
 <div style="display:none" id="modalDialog15" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
@@ -1710,14 +1706,11 @@ margin-right: 5px;
       <li>Engagements will be at customer locations or Oracle locations or at time via remote delivery.</li>
     </ul>
     <h4>How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
       Service based model in SCRM is target to be enabled on 12/1/2017. </p>
   </div>
 </div>
-
 <!--Popups16 -->
-
 <div style="display:none" id="modalDialog16" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
@@ -1734,14 +1727,11 @@ margin-right: 5px;
     <h4>SE Role Engagement </h4>
     <p>Platform specialists from the GEO Field, at times working in conjunction with SE business or technical specialists and Hub SEs.  Engagements will be at customer locations or Oracle locations or at time via remote delivery.</p>
     <h4>How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
       Service based model in SCRM is target to be enabled on 12/1/2017. </p>
   </div>
 </div>
-
 <!--Popups17 -->
-
 <div style="display:none" id="modalDialog17" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
@@ -1761,14 +1751,11 @@ margin-right: 5px;
       <li>ECAs and/or Industry Advisors typically lead this engagement with direct support from Platform Specialists from the GEO Field working with Hub SEs.</li>
     </ul>
     <h4>How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
       Service based model in SCRM is target to be enabled on 12/1/2017. </p>
   </div>
 </div>
-
 <!--Popups18 -->
-
 <div style="display:none" id="modalDialog18" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
@@ -1790,14 +1777,11 @@ margin-right: 5px;
       <li>Engagements will include on-site customer meetings. </li>
     </ul>
     <h4>How do you request this service? </h4>
-    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824
-" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
+    <p>Initially this request will be initiated by ECA via <a href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824" target="_blank">https://apex.oraclecorp.com/pls/apex/f?p=21625:1:100420461220824</a><br>
       Service based model in SCRM is target to be enabled on 12/1/2017. </p>
   </div>
 </div>
-
 <!--Popups19 -->
-
 <div style="display:none" id="modalDialog19" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
@@ -1818,9 +1802,7 @@ margin-right: 5px;
     <p>TBD </p>
   </div>
 </div>
-
 <!--Popups20 -->
-
 <div style="display:none" id="modalDialog20" title="Deliver a Health Check "  data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="closebar oj-dialog-header oj-helper-clearfix ui-draggable-handle"> </div>
   <div class="popupheading">
@@ -1841,6 +1823,8 @@ margin-right: 5px;
     <p>Asset repository will be published to share successful content at <a href="http://solutionengineering.us.oracle.com">http://solutionengineering.us.oracle.com</a> website. </p>
   </div>
 </div>
+
+<!------------------------------------OUR SERVICES POPUPS ENDS------------------------------------>
 
 <!-- SLIDER POPUPS -->
 
@@ -2086,7 +2070,7 @@ margin-right: 5px;
             <div class="oj-sm-12">
               <div class="input-group">
                 <select id="basicSelect1" data-bind="ojComponent: {
-                  component: 'ojSelect',placeholder:'Select your Organization LOB',options: organizationlist(),optionChange: editorganizationselected, selectedOptions:editorganizationselected,
+                  component: 'ojSelect',placeholder:'Select your Organization LOB',options: organizationlist(),optionChange: editorganizationselected, value:editorganizationselected,
                   rootAttributes: {style:'max-width:20em'}
                 }">
                   <!-- ko foreach: organizationlist() -->
@@ -2277,76 +2261,68 @@ margin-right: 5px;
 <!-- END OF KEY WINS POPUPS -->
 
 
-<!-- GO LIVES POPUPS -->
+<!-- GO LIVES POPUPS --> 
 
 <!-- add go lives confirmation start -->
 <div style="display:none" id="addgltextdialog" title="Add Go Lives" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}" class="dialogbodymain">
   <div class="oj-dialog-body popupfont dialogbody">
     <div class="oj-flex">
-
       <div class="oj-lg-6">
         <div class="oj-margin-right nomargin-md">
-          
           <div class="form-group">
             <label class="addslidelabel">Go Lives Logo:</label>
             <label class="required">*</label>
             <div class="input-group">
               <input id="gllogo" class="buttons btn btn-default file" type="file" onchange="gllogoselected(event)">
             </div>
-          </div><br>
+          </div>
+          <br>
           <img class="editkw editorg" data-bind="attr:{'src':editgllogo,'id':editglid}">
-
           <div class="form-group">
             <label class="addslidelabel">Hosted By:</label>
             <label class="required">*</label>
             <div class="input-group">
               <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:glhostedby}">
             </div>
-          </div><br>
-
+          </div>
+          <br>
           <div class="form-group">
             <label class="addslidelabel">This Episode's Guest:</label>
             <label class="required">*</label>
             <div class="input-group">
               <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:glguest}">
             </div>
-          </div><br>
-
+          </div>
+          <br>
           <div class="form-group">
             <label class="addslidelabel">Listen to Interview Link:</label>
             <div class="input-group">
               <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:gllink}">
             </div>
           </div>
-
         </div>
       </div>
-
       <div class="oj-lg-6">
         <div class="oj-margin-right nomargin-md">
-
           <div class="form-group">
             <label class="addslidelabel">Go Lives Host Photo:</label>
             <label class="required">*</label>
             <div class="input-group">
               <input id="glphoto" class="buttons btn btn-default file" type="file" onchange="glphotoselected(event)">
             </div>
-          </div><br>
+          </div>
+          <br>
           <img class="editkw editorg" data-bind="attr:{'src':editglhostphoto,'id':editglid}">
-
           <div class="form-group">
             <label class="addslidelabel">Go Lives Description:</label>
             <div class="input-group">
               <textarea id="txt1" style="height:168px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:gldiscussion}"></textarea>
             </div>
           </div>
-
         </div>
       </div>
-
     </div>
   </div>
-
   <div class="oj-dialog-footer" style="background-color: lightgray">
     <div>
       <button id="resetglButton" data-dismiss="modal" class="orangebutton" onclick="resetgolives()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
@@ -2354,16 +2330,15 @@ margin-right: 5px;
     </div>
   </div>
 </div>
-<!-- add go lives confirmation end -->
+<!-- add go lives confirmation end --> 
 
 <!-- edit go lives confirmation start -->
-<div style="display:none" id="editgltextdialog" title="Edit Go Lives" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+<div style="display:none" id="editgltextdialog" title="Edit Go Lives" class="dialogbodymain" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="oj-dialog-body popupfont dialogbody">
     <div class="oj-flex">
-
       <div class="oj-lg-6">
         <div class="oj-margin-right nomargin-md">
-
+          <img class="editgllogo editgl" data-bind="attr:{'src':editgllogo,'id':editglid}">
           <div class="form-group">
             <label class="addslidelabel">Go Lives Logo:</label>
             <label class="required">*</label>
@@ -2371,8 +2346,6 @@ margin-right: 5px;
               <input id="edgllogo" class="buttons btn btn-default file" type="file" onchange="edgllogoselected(event)">
             </div>
           </div><br>
-
-          <img class="editgllogo editgl" data-bind="attr:{'src':editgllogo,'id':editglid}"><br>
           <div class="form-group">
             <label class="addslidelabel">Hosted By:</label>
             <label class="required">*</label>
@@ -2380,7 +2353,6 @@ margin-right: 5px;
               <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editglhostedby}">
             </div>
           </div><br>
-
           <div class="form-group">
             <label class="addslidelabel">This Episode's Guest:</label>
             <label class="required">*</label>
@@ -2388,37 +2360,32 @@ margin-right: 5px;
               <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editglguest}">
             </div>
           </div><br>
-
           <div class="form-group">
             <label class="addslidelabel">Listen to Interview Link:</label>
             <div class="input-group">
               <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editgllink}">
             </div>
           </div>
-
         </div>
       </div>
-
       <div class="oj-lg-6">
-        <div class="oj-margin-right nomargin-md">
-
+        <div class="oj-margin-right nomargin-md"> 
+          <img class="editglphoto editgl" data-bind="attr:{'src':editglhostphoto,'id':editglid}">
           <div class="form-group">
-            <label class="addslidelabel">Go Lives Host Photo:</label><br>
+            <label class="addslidelabel">Go Lives Host Photo:</label>
             <label class="required">*</label>
-            <input id="edglphoto" class="buttons btn btn-default file" type="file" onchange="edglphotoselected(event)">
-          </div>
-          <img class="editglphoto editgl" data-bind="attr:{'src':editglhostphoto,'id':editglid}"><br>
-
+            <div class="input-group">
+              <input id="edglphoto" class="buttons btn btn-default file" type="file" onchange="edglphotoselected(event)">
+            </div>
+          </div><br>
           <div class="form-group">
             <label class="addslidelabel">Go Lives Description:</label>
             <div class="input-group">
               <textarea id="txt1" style="height:168px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:editgldiscussion}"></textarea>
             </div>
           </div>
-          
         </div>
       </div>
-
     </div>
   </div>
   <div class="oj-dialog-footer" style="background-color: lightgray">
@@ -2428,7 +2395,7 @@ margin-right: 5px;
     </div>
   </div>
 </div>
-<!-- edit go lives confirmation end -->
+<!-- edit go lives confirmation end --> 
 
 <!-- delete golives confirmation start -->
 <div id="dialogWrapper">
@@ -2437,16 +2404,14 @@ margin-right: 5px;
       <h4>Are you sure,you want to delete this Go Lives? </h4>
     </div>
     <div class="oj-dialog-footer">
-      <button id="okButton" data-dismiss="modal" style="cursor: pointer;" onclick="closeDeleteGoLivesModal()" data-bind="ojComponent: {component: 'ojButton', label: 'Cancel'}">
-      </button>
-      <button id="delete_gl" data-dismiss="modal" style="background: #d9534f;color: white;cursor: pointer;" data-bind="ojComponent: { component: 'ojButton', label: 'Delete' }">
-      </button>
+      <button id="okButton" data-dismiss="modal" style="cursor: pointer;" onclick="closeDeleteGoLivesModal()" data-bind="ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+      <button id="delete_gl" data-dismiss="modal" style="background: #d9534f;color: white;cursor: pointer;" data-bind="ojComponent: { component: 'ojButton', label: 'Delete' }"> </button>
     </div>
   </div>
 </div>
-<!-- delete golives confirmation end -->
+<!-- delete golives confirmation end --> 
 
-<!-- END OF GO LIVES POPUPS -->
+<!-- END OF GO LIVES POPUPS --> 
 
 
 <!-- REFERENCES POPUPS -->
@@ -2635,65 +2600,92 @@ margin-right: 5px;
 <!-- EMPLOYEE FEATURES POPUPS -->
 
 <!-- add employee features confirmation start -->
-<div style="display:none" id="addnewefdialog" title="Add New Employee Features" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 30%;'}}">
+<div style="display:none" id="addnewefdialog" title="Add New Employee Features" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
   <div class="oj-dialog-body">
-    <div class="form-group">
-      <label class="addslidelabel">Employee Features Background:</label>
-      <div class="input-group">
-        <input class="form-control" id="efbg" class="buttons btn btn-default file" type="file" onchange="empphotoselected(event)">
+    <div class="oj-flex">
+      <div class="oj-lg-6">
+        <div class="oj-margin-right nomargin-md">
+          <div class="form-group">
+            <label class="addslidelabel">Employee Features Background:</label>
+            <div class="input-group">
+              <input class="form-control" id="efbg" class="buttons btn btn-default file" type="file" onchange="empphotoselected(event)">
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label class="addslidelabel">Employee Features Heading:</label>
+            <div class="input-group">
+              <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:empfeatheading}">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="oj-lg-6">
+        <div class="oj-margin-right nomargin-md">
+          <div class="form-group">
+            <label class="addslidelabel">Employee Features Text:</label>
+            <br>
+            <textarea id="txt2" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:empfeattext}"></textarea>
+            <br>
+            <br>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="form-group">
-      <label class="addslidelabel">Employee Features Heading:</label>
-      <div class="input-group">
-        <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:empfeatheading}">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="addslidelabel">Employee Features Text:</label>
-      <br>
-      <textarea id="txt2" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:empfeattext}"></textarea>
-      <br>
-      <br>
-    </div>
-    <br>
-    <button id="resetefButton" data-dismiss="modal" class="orangebutton" onclick="resetempfeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'RESET'}"></button>
-    <button id="okButton" data-dismiss="modal" class="bluebutton" onclick="addempfeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'SAVE'}">
-    </button>
+    <br>     
   </div>
+   <div class="oj-dialog-footer" style="background-color: lightgray">
+    <div>
+    <button id="resetefButton" data-dismiss="modal" class="orangebutton" onclick="resetempfeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'RESET'}"></button>
+    <button id="okButton" data-dismiss="modal" class="bluebutton" onclick="addempfeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'SAVE'}"> </button>
+    </div>
+    </div>
 </div>
-<!-- add employee features confirmation end -->
+<!-- add employee features confirmation end --> 
 
 <!-- edit employee features confirmation start -->
-<div style="display:none" id="editempfdialog" title="Edit Employee Features" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 30%;'}}">
-  <div class="oj-dialog-body">
-    <div class="form-group">
-      <label class="addslidelabel">Employee Features Background:</label>
-      <div class="input-group">
-        <input class="form-control" id="edefbg" class="buttons btn btn-default file" type="file" onchange="eeflogoselected(event)">
-        <img class="editkw" data-bind="attr:{'src':editempfeatbg,'id':editempfeatid}">
+<div style="display:none" id="editempfdialog" title="Edit Employee Features" class="dialogbodymain" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+  <div class="oj-dialog-body dialogbody">
+    <div class="oj-flex">
+      <div class="oj-lg-6">
+        <div class="oj-margin-right nomargin-md">
+          <div class="form-group">
+            <label class="addslidelabel">Employee Features Background:</label>
+            <div class="input-group">
+              <input class="form-control" id="edefbg" class="buttons btn btn-default file" type="file" onchange="eeflogoselected(event)">
+              <img class="editkw" data-bind="attr:{'src':editempfeatbg,'id':editempfeatid}"> </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label class="addslidelabel">Employee Features Heading:</label>
+            <div class="input-group">
+              <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editempfeatheading}">
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="addslidelabel">Employee Features Heading:</label>
-      <div class="input-group">
-        <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editempfeatheading}">
+      <div class="oj-lg-6">
+        <div class="oj-margin-right nomargin-md">
+          <div class="form-group">
+            <label class="addslidelabel">Employee Features Text:</label>
+            <br>
+            <textarea id="txt2" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:editempfeattext}"></textarea>
+            <br>
+            <br>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="addslidelabel">Employee Features Text:</label>
-      <br>
-      <textarea id="txt2" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:editempfeattext}"></textarea>
-      <br>
-      <br>
     </div>
     <br>
-    <button id="reseteditefButton" data-dismiss="modal" class="orangebutton" onclick="resetempfeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'RESET'}"></button>
-    <button id="okeditefButton" data-dismiss="modal" class="bluebutton" onclick="editemployeefeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'SAVE'}">
-    </button>
+  </div>
+  <div class="oj-dialog-footer" style="background-color: lightgray">
+    <div>
+      <button id="reseteditefButton" data-dismiss="modal" class="orangebutton" onclick="resetempfeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'RESET'}"></button>
+      <button id="okeditefButton" data-dismiss="modal" class="bluebutton" onclick="editemployeefeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'SAVE'}"> </button>
+    </div>
   </div>
 </div>
-<!-- edit employee features confirmation end -->
+<!-- edit employee features confirmation end --> 
 
 <!-- delete employee features confirmation start -->
 <div id="dialogWrapper1">
@@ -2702,13 +2694,11 @@ margin-right: 5px;
       <h4>Are you sure,you want to delete this Employee Feature? </h4>
     </div>
     <div class="oj-dialog-footer">
-      <button id="okButton" style="cursor: pointer;" onclick="closeDeleteEmployeeFeaturesModal()" data-bind="ojComponent: {component: 'ojButton', label: 'Cancel'}">
-      </button>
-      <button id="delete_ef" style="background: #d9534f;color: white;cursor: pointer;" data-bind="ojComponent: {component: 'ojButton', label: 'Delete'}">
-      </button>
+      <button id="okButton" style="cursor: pointer;" onclick="closeDeleteEmployeeFeaturesModal()" data-bind="ojComponent: {component: 'ojButton', label: 'Cancel'}"> </button>
+      <button id="delete_ef" style="background: #d9534f;color: white;cursor: pointer;" data-bind="ojComponent: {component: 'ojButton', label: 'Delete'}"> </button>
     </div>
   </div>
 </div>
 <!-- delete employee features confirmation end -->
 
-<!-- END OF REFRENCES POPUPS -->
+<!-- END OF EMPLOYEE FEATURES POPUPS -->
