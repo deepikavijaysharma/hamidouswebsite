@@ -975,6 +975,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     if (curcourse.classes.length > 0) {
                         var classCount = curcourse.classes.length;
                         for (var i = 0; i < classCount; i++) {
+                            if(curcourse.classes[i].enrollment_status==undefined){
+                                curcourse.classes[i].enrollment_status="Not Enrolled";
+                            }
                             if (curcourse.classes[i].enrollment_status != "Not Enrolled") {
                                 enrolled = curcourse.classes[i].enrollment_status;
                                 break;
