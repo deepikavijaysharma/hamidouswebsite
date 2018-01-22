@@ -43,20 +43,24 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         'admin': {
           label: 'Admin'
         },
-    'archive': {
+        'archive': {
           label: 'Archive'
         },
-    'empfeaturearchive': {
+        'empfeaturearchive': {
           label: 'Employee Feature Archive'
         },
-    'keydatesarchives': {
+        'keydatesarchives': {
           label: 'Key Dates Archive'
+        },
+        'reports': {
+          label: 'Reports'
         }
       });
       oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
 
       // Navigation setup
-      var navData = [{
+      var navData = [
+        {
           name: 'Home',
           id: 'home'
         },
@@ -67,8 +71,11 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         {
           name: 'Tools and Resources',
           id: 'tools'
+        },
+        {
+          name: 'Reports',
+          id: 'reports'
         }
-
       ];
       self.navDataSource = new oj.ArrayTableDataSource(navData, {
         idAttribute: 'id'

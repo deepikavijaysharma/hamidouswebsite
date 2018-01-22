@@ -161,6 +161,16 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#empf3").ojDialog("open");
         };
 
+        // froala editor start
+        $(function () {
+            // $('#text-area1, #text-area2, #edittext-area1, #edittext-area2, #addefheading, #txt2, #editefheading, #edtxt2').froalaEditor({
+            //     toolbarButtons: ['undo', 'redo' , 'bold', 'italic', 'underline','color']
+            // })
+            $('#text-area1, #text-area2, #edittext-area1, #edittext-area2, #txt2, #edtxt2').froalaEditor({
+            })
+        });
+        // froala editor end
+
         /******************************************SLIDER********************************************************************/
 
         idimage = function (event) 
@@ -233,8 +243,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             self.editslimgid(edit_slider.sliderimgid);
             self.editslimage(edit_slider.sliderimg);
             self.editslid(edit_slider.sliderid);
-            self.editsltitle(edit_slider.slidertitle);
-            self.editsldescription(edit_slider.sliderdesc);
+            // self.editsltitle(edit_slider.slidertitle);
+            $('#edittext-area1').froalaEditor('html.set', edit_slider.slidertitle);
+            // self.editsldescription(edit_slider.sliderdesc);
+            $('#edittext-area2').froalaEditor('html.set', edit_slider.sliderdesc);
             self.editslbuttonlabel1(edit_slider.sliderbl1);
             self.editslbuttonlabel2(edit_slider.sliderbl2);
             self.editsllinktext1(edit_slider.sliderlt1);
@@ -254,11 +266,14 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
 
         editslidervalues = function () {
-
+            var editor_title_data = $('#edittext-area1').val();
+            var editor_desc_data = $('#edittext-area2').val();
             var edit_slider_data = {
                 id: self.editslid(),
-                title: self.editsltitle(),
-                description: self.editsldescription(),
+                // title: self.editsltitle(),
+                // description: self.editsldescription(),
+                title: editor_title_data,
+                description: editor_desc_data,
                 button_label1: self.editslbuttonlabel1(),
                 button_label2:self.editslbuttonlabel2(),
                 link_text1: self.editsllinktext1(),
@@ -1750,8 +1765,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             efreader.onload = function () {
               var uploadefheader = {
                 "id": self.empfeatid(),
-                "features_heading": self.empfeatheading(),
-                "key_wins_text": self.empfeattext(),
+                "features_heading": self.empfeatheading(),//$('#addefheading').val(),
+                "key_wins_text": $('#txt2').val(),//self.empfeattext(),
                 "mimetype": empphotopath.type
                 }
 
@@ -1796,11 +1811,13 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
 
         editemployeefeatures = function (edit_ef) {
+            // var editor_heading_data = $('#editefheading').val();
+            var editor_text_data = $('#edtxt2').val();
             var edit_empfeat_data = {
                 id: self.editempfeatid(),
                 image: self.editempfeatbg(),
-                heading: self.editempfeatheading(),
-                text: self.editempfeattext()
+                heading: self.editempfeatheading(),//editor_heading_data,
+                text: editor_text_data//self.editempfeattext()
             }
 
             console.log("edit employee feature data: " + ko.toJSON(edit_empfeat_data));
@@ -1808,8 +1825,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             {
                 var uploadeefheader = {
                     "id": self.editempfeatid(),
-                    "key_wins_text": self.editempfeattext(),
-                    "features_heading": self.editempfeatheading()
+                    "key_wins_text": $('#edtxt2').val(),//self.editempfeattext(),
+                    "features_heading": self.editempfeatheading()//$('#editefheading').val(),
                 }
 
                 // SEND TO SERVER
@@ -1835,8 +1852,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 eefreader.onload = function () {
                     var uploadeefheader = {
                         "id": self.editempfeatid(),
-                        "key_wins_text": self.editempfeattext(),
-                        "features_heading": self.editempfeatheading(),
+                        "key_wins_text": $('#edtxt2').val(),//self.editempfeattext(),
+                        "features_heading": self.editempfeatheading(),//$('#editefheading').val(),
                         "mimetype": eeflogopath.type
                     }
 
@@ -1875,7 +1892,9 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             self.editempfeatid(editemployeefeatures.empfeaid);
             self.editempfeatbg(editemployeefeatures.empfeabg);
             self.editempfeatheading(editemployeefeatures.empfeaheading);
-            self.editempfeattext(editemployeefeatures.empfeatext);
+            // self.editempfeattext(editemployeefeatures.empfeatext);
+            // $('#editefheading').froalaEditor('html.set', editemployeefeatures.empfeaheading);
+            $('#edtxt2').froalaEditor('html.set', editemployeefeatures.empfeatext);
         }
 
         closeEditEmployeeFeaturesModal = function () {
@@ -1991,6 +2010,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         analytics = function (itemtitle, itemname, itemtype, itemlevel1, itemlevel2, itemlevel3) 
         {
             var itemdesc;
+            if(ssoemail == "")
+            {
+                ssoemail = "test@oracle.com";
+            }
             if(itemtitle != "" && itemname != "")
             {
                 itemdesc = itemtitle + " > " + itemname;
@@ -2031,17 +2054,17 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 };
             }
             console.log(analytics);
-            // $.ajax({
-            //     url: homebaseurl + 'POST_EVENT_DATA',
-            //     type: 'POST',
-            //     contentType: 'application/json; charset=utf-8',
-            //     data: ko.toJSON(analytics),
-            //     success: function (event) {
-            //         console.log("Analytics of event sent.", event);
-            //     }
-            // }).fail(function (xhr, textStatus, err) {
-            //     alert("Error in sending analytics", err);
-            // });
+            $.ajax({
+                url: homebaseurl + 'POST_EVENT_DATA',
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: ko.toJSON(analytics),
+                success: function (event) {
+                    console.log("Analytics of event sent.", event);
+                }
+            }).fail(function (xhr, textStatus, err) {
+                alert("Error in sending analytics", err);
+            });
             return true;
         }
 
