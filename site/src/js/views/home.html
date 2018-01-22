@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../../css/froala_editor.pkgd.min.css" type="text/css" />
+<link rel="stylesheet" href="../../css/froala_style.min.css" type="text/css" />
 <style type="text/css">
   .avatarsimg {
     width: 100px;
@@ -231,6 +233,9 @@ position: absolute;
 }
 .admin{
 display:none;
+}
+.fr-box.fr-basic .fr-element {
+    font-size: 14px;
 }
 </style>
 <!------------------------------------SLIDER------------------------------------>
@@ -1257,7 +1262,9 @@ display:none;
                     <div class="employee_c" >
                       <div class="emp_details">
                         <div class="slash"></div>
-                        <a onclick="empf1(this.id)" data-bind="attr:{'id':empfeaid}"><span data-bind="text: empfeaheading"></span></a>
+                        <a onclick="empf1(this.id)" data-bind="attr:{'id':empfeaid}">
+                          <span data-bind="html: empfeaheading"></span>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -1339,9 +1346,9 @@ display:none;
   <!-- ko foreach: empdeatilsmatched -->
   <div style="display:none" id="empf1" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
     <div class="oj-dialog-header oj-helper-clearfix">
-      <span id="dialogTitleId" class="oj-dialog-title" data-bind="attr: {id: dempfeaid}, text:dempfeaheading"></span>
+      <span id="dialogTitleId" class="oj-dialog-title" data-bind="attr: {id: dempfeaid}, html:dempfeaheading"></span>
     </div>
-    <div class="oj-dialog-body empf">
+    <div class="oj-dialog-body empf dialogbody">
       <img data-bind="attr:{'src':dempfeabg}" align="right">
       <div data-bind="html:dempfeatext"></div>
     </div>
@@ -1908,9 +1915,9 @@ display:none;
         <div class="oj-margin-right nomargin-md">
 
           <div class="form-group">
-            <label for="text-area1" class="addslidelabel">Title:<label class="required">*</label></label>
+            <label for="edittext-area1" class="addslidelabel">Title:<label class="required">*</label></label>
             <div class="input-group">
-              <textarea id="text-area1" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:editsltitle,rootAttributes: {style:'max-width:15em'}}"></textarea>
+              <textarea id="edittext-area1" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:editsltitle,rootAttributes: {style:'max-width:15em'}}"></textarea>
             </div>
           </div><br>
 
@@ -1928,9 +1935,9 @@ display:none;
         <div class="oj-margin-right nomargin-md">
           
           <div class="form-group">
-            <label for="text-area2" class="addslidelabel">Description:</label>
+            <label for="edittext-area2" class="addslidelabel">Description:</label>
             <div class="input-group">
-              <textarea id="text-area2" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:editsldescription,rootAttributes: {style:'max-width:15em'}}"></textarea>
+              <textarea id="edittext-area2" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:editsldescription,rootAttributes: {style:'max-width:15em'}}"></textarea>
             </div>
           </div><br>
 
@@ -2601,7 +2608,7 @@ display:none;
 
 <!-- add employee features confirmation start -->
 <div style="display:none" id="addnewefdialog" title="Add New Employee Features" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="oj-dialog-body">
+  <div class="oj-dialog-body dialogbody">
     <div class="oj-flex">
       <div class="oj-lg-6">
         <div class="oj-margin-right nomargin-md">
@@ -2615,7 +2622,8 @@ display:none;
           <div class="form-group">
             <label class="addslidelabel">Employee Features Heading:</label>
             <div class="input-group">
-              <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:empfeatheading}">
+              <!-- <input id="addefheading" class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:empfeatheading}"> -->
+              <textarea id="addefheading" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojTextArea',value:empfeatheading}"></textarea>
             </div>
           </div>
         </div>
@@ -2623,23 +2631,19 @@ display:none;
       <div class="oj-lg-6">
         <div class="oj-margin-right nomargin-md">
           <div class="form-group">
-            <label class="addslidelabel">Employee Features Text:</label>
-            <br>
-            <textarea id="txt2" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:empfeattext}"></textarea>
-            <br>
-            <br>
+            <label class="addslidelabel">Employee Features Text:</label><br>
+            <textarea id="txt2" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:empfeattext}"></textarea><br><br>
           </div>
         </div>
       </div>
-    </div>
-    <br>     
+    </div><br>     
   </div>
-   <div class="oj-dialog-footer" style="background-color: lightgray">
+  <div class="oj-dialog-footer" style="background-color: lightgray">
     <div>
-    <button id="resetefButton" data-dismiss="modal" class="orangebutton" onclick="resetempfeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'RESET'}"></button>
-    <button id="okButton" data-dismiss="modal" class="bluebutton" onclick="addempfeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'SAVE'}"> </button>
+      <button id="resetefButton" data-dismiss="modal" class="orangebutton" onclick="resetempfeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
+      <button id="okButton" data-dismiss="modal" class="bluebutton" onclick="addempfeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
     </div>
-    </div>
+  </div>
 </div>
 <!-- add employee features confirmation end --> 
 
@@ -2654,12 +2658,12 @@ display:none;
             <div class="input-group">
               <input class="form-control" id="edefbg" class="buttons btn btn-default file" type="file" onchange="eeflogoselected(event)">
               <img class="editkw" data-bind="attr:{'src':editempfeatbg,'id':editempfeatid}"> </div>
-          </div>
-          <br>
+          </div><br>
           <div class="form-group">
             <label class="addslidelabel">Employee Features Heading:</label>
             <div class="input-group">
-              <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editempfeatheading}">
+              <!-- <input id="editefheading" class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editempfeatheading}"> -->
+              <textarea id="editefheading" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojTextArea',value:editempfeatheading}"></textarea>
             </div>
           </div>
         </div>
@@ -2667,21 +2671,17 @@ display:none;
       <div class="oj-lg-6">
         <div class="oj-margin-right nomargin-md">
           <div class="form-group">
-            <label class="addslidelabel">Employee Features Text:</label>
-            <br>
-            <textarea id="txt2" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:editempfeattext}"></textarea>
-            <br>
-            <br>
+            <label class="addslidelabel">Employee Features Text:</label><br>
+            <textarea id="edtxt2" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:editempfeattext}"></textarea><br><br>
           </div>
         </div>
       </div>
-    </div>
-    <br>
+    </div><br>
   </div>
   <div class="oj-dialog-footer" style="background-color: lightgray">
     <div>
-      <button id="reseteditefButton" data-dismiss="modal" class="orangebutton" onclick="resetempfeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'RESET'}"></button>
-      <button id="okeditefButton" data-dismiss="modal" class="bluebutton" onclick="editemployeefeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'SAVE'}"> </button>
+      <button id="reseteditefButton" data-dismiss="modal" class="orangebutton" onclick="resetempfeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
+      <button id="okeditefButton" data-dismiss="modal" class="bluebutton" onclick="editemployeefeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
     </div>
   </div>
 </div>
