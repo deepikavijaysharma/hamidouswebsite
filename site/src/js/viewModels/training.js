@@ -153,6 +153,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 training_type: ko.observable(''),
                 status: ko.observable(''),
                 categories: ko.observableArray([]),
+                categories_all:ko.observableArray([]),
                 classes: ko.observableArray([])
             });
 
@@ -628,7 +629,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 // ITERATE THROUGH THE LIST OF COURSES TO FIND A MATCH FOR THE COURSE ID
                 for (var i = 0; i < self.courselist.length; i++) {
                     var course = self.courselist[i];
-                    console.log(course.course_id);
+                    // console.log(course.course_id);
                     if (course.course_id === courseid) {
                         return course;
                     }
@@ -970,6 +971,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     startday = ''; //allcourses.courses[k].schedule[0];
                     var curcourse = allcourses[k];
                     var catagorylist = curcourse.categories;
+                    var category_all_List=curcourse.categories_all;
                     var catlistString = ko.toJSON(self.refinecategories());
                     var enrolled = "";
                     if (curcourse.classes.length > 0) {
@@ -988,6 +990,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     for (var i = 0; i < catagorylist.length; i++) {
                         var categoryname = catagorylist[i].name;
                         var catid = catagorylist[i].id;
+                        var categoryAllId=category_all_List[i].category_id;
+                        var categoryAllName=category_all_List[i].name;
                         if (catlistString.length == 2 || catlistString.indexOf(catid) != -1) {
                             var categoryobj = self.getcategorybyname(categoryname);
                             categoryobj.courses.push({
@@ -2199,6 +2203,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.createCourse().status([]);
                 self.createCourse().contact_email('');
                 self.createCourse().categories([]);
+                self.createCourse().categories_all([]);
                 self.selectedCategoriesForUi([]);
                 resetClass();
             }
@@ -2660,6 +2665,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     self.createCourse().status().push(courseToEdit.status);
                     self.createCourse().classes(courseToEdit.classes);
                     self.createCourse().categories(courseToEdit.categories);
+                    self.createCourse().categories_all(courseToEdit.categories_all);
 
                     // self.cclass(courseToEdit.classes);
                     // RENDER MAPPED CATEGORY FOR THE COURSE
@@ -2676,9 +2682,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             renderCourseCategory = function () {
 
                 self.selectedCategoriesForUi([]);
-                for (var i = 0; i < self.createCourse().categories().length; i++) {
-                    self.selectedCategoriesForUi.push(self.createCourse().categories()[i].name);
-                    self.selectedCategoriesForCourse().push(self.createCourse().categories()[i]);
+                for (var i = 0; i < self.createCourse().categories_all().length; i++) {
+                    self.selectedCategoriesForUi.push(self.createCourse().categories_all()[i].name);
+                    self.selectedCategoriesForCourse().push(self.createCourse().categories_all()[i]);
 
                 }
 
