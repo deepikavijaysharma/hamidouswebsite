@@ -61,30 +61,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.subcategory = ko.observable('');
 
             // CREATE COMMUNITY CALL
-            self.calltitle = ko.observable('');
-            self.callspkr = ko.observable('');
-            self.calldesignation = ko.observable('');
-            self.date = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
-            self.starttime = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
-            self.callduration = ko.observable('');
-            self.callsdate = ko.observable('');
-            self.calltime = ko.observable('');
-            self.callvenue = ko.observable('');
-            self.calllink = ko.observable('');
-            self.calldialin = ko.observable('');
-            self.calldesc = ko.observable('');
-            self.reflink = ko.observable('');
-            self.callrecordinglink = ko.observable('');
-            self.callroles = ko.observable('');
-            self.callmode = ko.observable('');
             self.communityCallList = ko.observableArray([]);
-            self.organizerEmail = ko.observable('');
-            self.topic = ko.observable('');
-            self.invite = ko.observable('');
 
             self.courselist = ko.observableArray([]);
             self.reporteelist = ko.observableArray([]);
-
+            var sdatetime;
+            var edatetime;
 
             // REPORTEE
             self.selectreportees = ko.observableArray([]);
@@ -220,6 +202,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     #clone_com_call_editor, #event_editor, #course_editor, \
                     #add_class_editor, #edit_course_editor, #edit_class_editor'
                     ).froalaEditor({      
+                        height: 427,
+                        heightMin: 300,
+                        heightMax: 500,
                              //toolbarButtons: ['undo', 'redo' , 'bold', 'italic', 'underline','color']
               })
             });            
@@ -227,55 +212,29 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             //-----------------   COMMUNITY CALL   ------------------------//
             //Development url for create, edit, clone and delete community call
-            this.patternValue = ko.observableArray(["dd-MMM-yy hh:mm"]);
-            this.dateTimeConverter = oj.Validation.converterFactory(oj.ConverterFactory.CONVERTER_TYPE_DATETIME).
-            createConverter({
-                pattern: "dd-MMM-yy hh:mm"
-            });
             self.callname = ko.observable('');
-            self.callspkr = ko.observable('');
-            self.calldesignation = ko.observable('');
-            self.starttime = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
             self.callduration = ko.observable('');
-            self.date = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
-            self.callsdate = ko.observable('');
-            self.calltime = ko.observable('');
-            self.callvenue = ko.observable('');
-            self.calllink = ko.observable('');
-            self.calldialin = ko.observable('');
+            self.comCallDate = ko.observable();
             self.calldesc = ko.observable('');
             self.callrecordlink = ko.observable('');
             self.selectedrole = ko.observableArray([]);
             self.selectedcallmode = ko.observableArray([]);
             self.callmodes = ko.observableArray(['Virtual', 'Town Hall']);
-            self.addiontal_link = ko.observable('');
             self.organizerEmail = ko.observable('');
             self.topic = ko.observable('');
-            self.invite = ko.observable('');
             self.com_call_keyevent = ko.observable('');
 
             resetcall = function () {
                 self.callname('');
-                self.callspkr('');
-                self.calldesignation('');
-                self.starttime(oj.IntlConverterUtils.dateToLocalIso(new Date()));
-                self.callduration('');
-                self.date(oj.IntlConverterUtils.dateToLocalIso(new Date()));
-                self.callsdate('');
-                self.calltime('');
-                self.callvenue('');
-                self.calllink('');
-                self.calldialin('');
+                self.comCallDate('');
                 self.calldesc('');
-                self.reflink('');
                 self.callrecordlink('');
                 self.selectedrole([]);
                 self.organizerEmail('');
                 self.topic('');
-                self.invite('');
-                self.addiontal_link('');
                 self.com_call_keyevent(false);
-
+                self.selectedcallmode('');
+                self.callduration('');
             }
 
 
@@ -293,66 +252,54 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     alert("Please enter Community call name");
                     return;
                 }
-
-                if (self.callspkr().length == 0) {
-                    alert("Please enter name of the speaker");
+                if (self.topic().length == 0) {
+                    alert("Please enter topic");
                     return;
                 }
-
-
-                // if (self.calldesc().length == 0) {
-
-                //     alert("Please enter description");
-                //     return;
-                // }
-                if ($('#communitycall_text').val() == 0) {
-
-                    alert("Select atleast one role");
-                    return;
+                if (self.selectedrole().length == 0) {
+                    alert("Please select role");
+                }                
+                if (self.selectedcallmode().length == 0) {
+                    alert("Please select mode of delivary");
                 }
-
                 if (self.callduration().length == 0) {
 
                     alert("Please enter duration");
                     return;
-                } else if (typeof self.callduration() == 'number') {
-                    alert("Please enter valid duration in minute(s)");
+                }      
+                if (self.comCallDate().length == 0) {
+
+                    alert("Please date and time");
                     return;
-                }
+                }   
+                if (self.organizerEmail().length == 0) {
 
-                if (self.selectedrole().length == 0) {
-                    alert("Please select role");
-                }
+                    alert("Please organizer email");
+                    return;
+                }   
+                if (self.callrecordlink().length == 0) {
 
-                if (self.selectedcallmode().length == 0) {
-                    alert("Please select mode of delivary");
-                }
+                    alert("Please enter recording link");
+                    return;
+                }   
+
                 selectedrole = ko.toJSON(self.selectedrole()).replace('[', '').replace(']', '').replace(/"/g, '');
                 selectedcallmode = ko.toJSON(self.selectedcallmode()).replace('[', '').replace(']', '').replace(/"/g, '');
-
+                var com_call_dt = self.comCallDate().replace("T", " ");
                 var call = {
                     name: self.callname(),
-                    speaker: self.callspkr(),
-                    designation: self.calldesignation(),
-                    call_date: self.date().split('T')[0],
-                    call_time: self.starttime().split('T')[1].substring(0, 5),
-                    duration: self.callduration(),
-                    locn: self.callvenue(),
-                    meetinglink: self.calllink(),
-                    dialin: self.calldialin(),
-                    description: $('#communitycall_text').val(),
-                    reflink: self.reflink(),
-                    user: ssoemail,
-                    recording_link: self.callrecordlink(),
-                    mode_of_call: selectedcallmode,
-                    role: selectedrole,
-                    addl_link: self.addiontal_link(),
-                    organizer_email: self.organizerEmail(),
                     topic: self.topic(),
-                    invite: self.invite(),
-                    keyevent: self.com_call_keyevent()!=true?'No':'Yes' 
-
+                    role: selectedrole,
+                    mode_of_call: selectedcallmode,
+                    call_date: com_call_dt,//self.date().split('T')[0],
+                    duration: self.callduration(),
+                    organizer_email: self.organizerEmail(),
+                    recording_link: self.callrecordlink(),
+                    keyevent: self.com_call_keyevent()!=true?'No':'Yes' ,
+                    description: $('#communitycall_text').val(),
+                    user: ssoemail
                 }
+                console.log("create com call : "+ko.toJSON(call));
                 $.ajax({
                     url: community_call_url,
                     cache: false,
@@ -1291,8 +1238,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             // GET EVENTS END
 
             //CREATE EVENTS START
-            var sdatetime;
-            var edatetime;
             createEvent = function() {
                 // eventValidation();
                 // if(event_error_tracker > 0)
@@ -1554,7 +1499,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             name: calls[i].name != undefined ? calls[i].name : '',
                             speaker: calls[i].speaker != undefined ? calls[i].speaker : '',
                             designation: calls[i].designation != undefined ? calls[i].designation : '',
-                            call_date: calls[i].call_date != undefined ? calls[i].call_date.split('T')[0] : '',
+                            call_date: calls[i].call_date != undefined ? calls[i].call_date : '',
                             call_time: calls[i].call_time != undefined ? calls[i].call_time.substring(0, 5) + " PT" : '',
                             callduration: calls[i].duration != undefined ? calls[i].duration + " mins" : 'NA',
                             location: calls[i].locn != undefined ? calls[i].locn : '',
@@ -1568,6 +1513,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             subdescription: calls[i].description != undefined ? calls[i].description.substring(0, 150) + '...' : '',
                             organizer_email: calls[i].organizer_email != undefined ? calls[i].organizer_email : '',
                             topic: calls[i].topic != undefined ? calls[i].topic : '',
+                            com_call_home_datetime : calls[i].call_date != undefined ? calls[i].call_date.replace("T"," ").replace("Z","") : '',
                             /*invite: calls[i].invite != undefined ? calls[i].invite : '',*/
                             invite: calls[i].call_id != undefined ? community_call_calendar_link+"/"+calls[i].call_id : '',
                             call_id: calls[i].call_id != undefined ? calls[i].call_id : '',
@@ -1598,37 +1544,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             showcommunitycallsdetails = function (ccalls) {
-                self.ccName('');
-                self.ccDate('');
-                self.ccSpeaker('');
-                self.ccDesignation('');
-                self.ccCallType('');
-                self.ccMeetingLink('');
-                self.ccRoles('');
-                self.ccDescription('');
-                self.ccDialin('');
-                self.ccAdditionalLinks('');
-                self.ccRecordingLinks('');
-                self.ccOrganizerEmail('');
-                self.ccTopic('');
-                self.ccInvite('');
-
                 // SET NEW VALUE
-                self.ccName(ccalls.name);
-                self.ccDate(ccalls.call_date);
-                self.ccSpeaker(ccalls.speaker);
-                self.ccDesignation(ccalls.designation);
-                self.ccCallType(ccalls.mode_of_call);
-                self.ccMeetingLink(ccalls.meetinglink);
-                self.ccRoles(ccalls.role);
                 self.ccDescription(ccalls.description);
-                self.ccDialin(ccalls.dialin);
-                self.ccAdditionalLinks(ccalls.addl_link);
-                self.ccRecordingLinks(ccalls.recording_link);
-                self.ccOrganizerEmail(ccalls.organizer_email);
-                self.ccTopic(ccalls.topic);
-                self.ccInvite(ccalls.invite);
-                self.ccId(ccalls.call_id);
                 $("#communitycallsdetails").ojDialog("open");
             }
 
@@ -1646,73 +1563,45 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             self.editccName = ko.observable();
-            self.editccDate = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
-            self.editccTime = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+            self.editccDate = ko.observable();
             self.editccDuration = ko.observable();
-            self.editccVenue = ko.observable();
-            self.editccSpeaker = ko.observable();
-            self.editccDesignation = ko.observable();
             self.editccCallType = ko.observableArray([]);
-            self.editccMeetingLink = ko.observable();
             self.editccSelectedRoles = ko.observableArray([]);
             self.editccDescription = ko.observable();
-            self.editccDialin = ko.observable();
-            self.editccAdditionalLinks = ko.observable();
             self.editccRecordingLinks = ko.observable();
-
             self.editccOrganizerEmail = ko.observable();
             self.editccTopic = ko.observable();
-            self.editccInvite = ko.observable();
             self.edit_com_call_keyevent = ko.observable('');
 
             var edit_call_id;
             editcommunitycall = function (edit_calls, param) {
                 self.editccName('');
                 self.editccDate('');
-                self.editccTime('');
                 self.editccDuration('');
-                self.editccVenue('');
-                self.editccSpeaker('');
-                self.editccDesignation('');
                 self.editccCallType([]);
-                self.editccMeetingLink('');
                 self.editccSelectedRoles([])
                 self.editccDescription('');
-                self.editccDialin('');
-                self.editccAdditionalLinks('');
                 self.editccRecordingLinks('');
-
                 self.editccOrganizerEmail('');
                 self.editccTopic('');
-                self.editccInvite('');
                 self.edit_com_call_keyevent('');
 
                 // SET NEW VALUE
                 self.editccName(edit_calls.name);
                 self.editccDate(edit_calls.call_date);
-                timeString = edit_calls.call_time.substring(0, 5);
-                timeFormattedString = "T" + timeString + ":00";
-                self.editccTime(timeFormattedString);
                 self.editccDuration(edit_calls.callduration);
-                self.editccVenue(edit_calls.location);
-                self.editccSpeaker(edit_calls.speaker);
-                self.editccDesignation(edit_calls.designation);
-                self.editccAdditionalLinks(edit_calls.addl_link);
                 var callTypeString = edit_calls.mode_of_call;
                 var callTypeArray = callTypeString.split(",");
                 self.editccCallType(callTypeArray);
-                self.editccMeetingLink(edit_calls.meetinglink);
                 var roleString = edit_calls.role;
                 var roleArray = [];
                 roleArray = roleString.split(",");
                 self.editccSelectedRoles(roleArray)
                 self.editccDescription(edit_calls.description);
                 $('#edit_com_call_editor').froalaEditor('html.set', edit_calls.description);
-                self.editccDialin(edit_calls.dialin);
                 self.editccRecordingLinks(edit_calls.recording_link);
                 self.editccOrganizerEmail(edit_calls.organizer_email);
                 self.editccTopic(edit_calls.topic);
-                self.editccInvite(edit_calls.invite);
                 edit_call_id = edit_calls.call_id;
 
                 self.edit_com_call_keyevent(edit_calls.key_event_value);
@@ -1724,30 +1613,24 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 editSelectedRole = ko.toJSON(self.editccSelectedRoles()).replace('[', '').replace(']', '').replace(/"/g, '');
                 editSelectedCallMode = ko.toJSON(self.editccCallType()).replace('[', '').replace(']', '').replace(/"/g, '');
                 var editor_data = $('#edit_com_call_editor').val();
+                
                 var edit_community_call_data = {
 
                     NAME: self.editccName(),
-                    speaker: self.editccSpeaker(),
-                    designation: self.editccDesignation(),
-                    call_date: self.editccDate(),
-                    call_time: self.editccTime().substring(1, 6),
+                    call_date: self.editccDate().replace("T", " ").replace("Z",""),
                     duration: self.editccDuration().substring(0, 2),
-                    locn: self.editccVenue(),
-                    meetinglink: self.editccMeetingLink(),
-                    dialin: self.editccDialin(),
                     description: editor_data,//self.editccDescription(),
                     user: ssoemail,
                     recording_link: self.editccRecordingLinks(),
                     mode_of_call: editSelectedCallMode,
                     role: editSelectedRole,
-                    addl_link: self.editccAdditionalLinks(),
                     organizer_email: self.editccOrganizerEmail(),
                     topic: self.editccTopic(),
-                    invite: self.editccInvite(),
                     call_id: edit_call_id,
                     keyevent: self.edit_com_call_keyevent()!=true?'No':'Yes'
 
                 }
+                console.log("edit data : "+ko.toJSON(edit_community_call_data));
                 $.ajax({
                     url: community_call_url,
                     cache: false,
@@ -1833,35 +1716,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                 self.cloneccName('');
                 self.cloneccDate('');
-                self.cloneccTime('');
                 self.cloneccDuration('');
-                self.cloneccVenue('');
-                self.cloneccSpeaker('');
-                self.cloneccDesignation('');
                 self.cloneccCallType([]);
-                self.cloneccMeetingLink('');
                 self.cloneccSelectedRoles([])
                 self.cloneccDescription('');
-                self.cloneccDialin('');
-                self.cloneccAdditionalLinks('');
                 self.cloneccRecordingLinks('');
-
                 self.cloneccOrganizerEmail('');
                 self.cloneccTopic('');
-                self.cloneccInvite('');
                 self.clone_com_call_keyevent('');
 
                 // SET NEW VALUE
                 self.cloneccName(clone_calls.name);
                 self.cloneccDate(clone_calls.call_date);
-                var timeString = clone_calls.call_time.substring(0, 5);
-                var timeFormattedString = "T" + timeString + ":00";
-                self.cloneccTime(timeFormattedString);
                 self.cloneccDuration(clone_calls.callduration);
-                self.cloneccVenue(clone_calls.location);
                 self.cloneccSpeaker(clone_calls.speaker);
-                self.cloneccDesignation(clone_calls.designation);
-                self.cloneccAdditionalLinks(clone_calls.addl_link);
                 var callTypeString = clone_calls.mode_of_call;
                 var callTypeArray = callTypeString.split(",");
                 self.cloneccCallType(callTypeArray);
@@ -1872,12 +1740,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.cloneccSelectedRoles(roleArray)
                 self.cloneccDescription(clone_calls.description);
                 $('#clone_com_call_editor').froalaEditor('html.set', clone_calls.description);
-                self.cloneccDialin(clone_calls.dialin);
                 self.cloneccRecordingLinks(clone_calls.recording_link);
-
                 self.cloneccOrganizerEmail(clone_calls.organizer_email);
                 self.cloneccTopic(clone_calls.topic);
-                self.cloneccInvite(clone_calls.invite);
                 self.clone_com_call_keyevent(clone_calls.key_event_value);
 
                 $("#clonecommunitycall_id").ojDialog("open");
@@ -1894,12 +1759,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     alert("Please enter Community call name");
                     return;
                 }
-
-                if (self.cloneccSpeaker().length == 0) {
-                    alert("Please enter name of the speaker");
-                    return;
-                }
-
 
                 if (self.cloneccDescription().length == 0) {
 
@@ -1929,25 +1788,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var clone_editor_data = $('#clone_com_call_editor').val();
                 var clone_call = {
                     name: self.cloneccName(),
-                    speaker: self.cloneccSpeaker(),
-                    designation: self.cloneccDesignation(),
-                    call_date: self.cloneccDate(),
-                    call_time: self.cloneccTime().split('T')[1].substring(0, 5),
+                    call_date: self.cloneccDate().replace("T", " ").replace("Z",""),
                     duration: self.cloneccDuration().substring(0, 2),
-                    locn: self.cloneccVenue(),
-                    meetinglink: self.cloneccMeetingLink(),
-                    dialin: self.cloneccDialin(),
                     description: clone_editor_data,//self.cloneccDescription(),
-                    addl_link: self.cloneccAdditionalLinks(),
                     user: ssoemail,
                     recording_link: self.cloneccRecordingLinks(),
                     mode_of_call: cloneSelectedcallmode,
                     role: cloneSelectedrole,
                     organizer_email: self.cloneccOrganizerEmail(),
                     topic: self.cloneccTopic(),
-                    invite: self.cloneccInvite(),
                     keyevent: self.clone_com_call_keyevent()!=true?'No':'Yes'
                 }
+                console.log("clone data : "+ko.toJSON(clone_call));
                 $.ajax({
                     url: community_call_url,
                     cache: false,
