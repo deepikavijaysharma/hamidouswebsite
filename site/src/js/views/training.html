@@ -1414,7 +1414,17 @@
               </div>
 
               <div class="oj-sm-12 courserow oj-flex">
-                <div class="oj-sm-4 leftcoursetitle">Name</div>
+                <!-- <div class="oj-sm-4 leftcoursetitle">Product Type/Training Level/Training Type</div> -->
+                <div class="oj-sm-8 rightcoursetitle">
+                  <p>
+                    <span data-bind="text:detailedprodcut_type"></span>/
+                    <span data-bind="text:detailedTrainingLevel"></span>/
+                    <span data-bind="text:detailedTrainingType"></span>
+                  </p>
+                </div>
+              </div>
+              <div class="oj-sm-12 courserow oj-flex">
+                <!-- <div class="oj-sm-4 leftcoursetitle">Name</div> -->
                 <div class="oj-sm-8 rightcoursetitle">
                   <p>
                     <span data-bind="text:detailedName"></span>
@@ -1422,20 +1432,10 @@
                 </div>
               </div>
               <div class="oj-sm-12 courserow oj-flex">
-                <div class="oj-sm-4 leftcoursetitle">Description</div>
+                <!-- <div class="oj-sm-4 leftcoursetitle">Description</div> -->
                 <div class="oj-sm-8 rightcoursetitle">
                   <p>
                     <span data-bind="html:detailedDescription"></span>
-                  </p>
-                </div>
-              </div>
-              <div class="oj-sm-12 courserow oj-flex">
-                <div class="oj-sm-4 leftcoursetitle">Product Type/Training Level/Training Type</div>
-                <div class="oj-sm-8 rightcoursetitle">
-                  <p>
-                    <span data-bind="text:detailedprodcut_type"></span>/
-                    <span data-bind="text:detailedTrainingLevel"></span>/
-                    <span data-bind="text:detailedTrainingType"></span>
                   </p>
                 </div>
               </div>
