@@ -1082,50 +1082,16 @@
             <!-- show event details modal start -->
             <div style="display:none;height:500px" class="dialogbodymain" id="event_details_modal" title="Event Details" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 60%'}}">
               <div class="dialogbody">
-        <div class="oj-flex">
-        <div class="oj-lg-6">
-                <h1>Name</h1>
-                <p>
-                  <span data-bind="text:event_name"></span>
-                </p>
-                <h1>Location</h1>
-                <p>
-                  <span data-bind="text:event_location"></span>
-                </p>
-                <h1>Start Date and Time</h1>
-                <p>
-                  <span data-bind="text:event_starttime"></span>
-                </p>
-                <h1>End Date and Time</h1>
-                <p>
-                  <span data-bind="text:event_endtime"></span>
-                </p>
-                <h1>Customer Name</h1>
-                <p>
-                  <span data-bind="text:customerName"></span>
-                </p>
-                <h1>Event Lead</h1>
-                <p>
-                  <span data-bind="text:eventLead"></span>
-                </p>
-                <h1>Partner Name</h1>
-                <p>
-                  <span data-bind="text:partnerName"></span>
-                </p>
-                <h1>Link</h1>
-                <p>
-                  <a data-bind="attr:{href:registrationLink}" target="_blank">Click here</a>
-                </p>
+                <div class="oj-flex">
+                  <div class="oj-lg-12">
+                    <h1>Desciption</h1>
+                    <p>
+                      <span data-bind="html:event_description"></span>
+                    </p>
+                  </div>
+                </div>
               </div>
-      <div class="oj-lg-6">
-        <h1>Desciption</h1>
-        <p>
-          <span data-bind="html:event_description"></span>
-        </p>
-      </div>
-      </div>
-      </div>
-    </div>
+            </div>
             <!-- show event details modal end -->
             <!-- events modal start -->
             <div style="display:none" id="createevents_id" title="Create an Event" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
@@ -1188,37 +1154,6 @@
                           </div>
                         </div>
                         <br>
-                        <div class="oj-flex">
-                          <div class="oj-sm-12">
-                            <label>Partner Name</label>
-                          </div>
-                          <div class="oj-sm-12">
-                            <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:partnerName}" />
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-
-                    <div class="oj-lg-6">
-                      <div class="nomargin-md oj-margin-left">
-                        <div class="oj-flex oj-sm-12 inputrow">
-                          <div class="oj-sm-12">
-                            <label id="switchLabel" for="switch">Key Event</label>
-                          </div>
-                          <input id="switch" data-bind="ojComponent: {component: 'ojSwitch', value:is_key_event}" />
-                        </div>
-
-                        <br>
-                        <div class="oj-flex">
-                          <div class="oj-sm-12">
-                            <label>Description </label>
-                          </div>
-                          <div class="oj-sm-12">
-                          <textarea id="event_editor" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:event_description}"></textarea>
-                        </div>
-                      </div>
-                      <br>
                       <div class="oj-flex">
                         <div class="oj-sm-12">
                           <label>Registration Link</label>
@@ -1228,13 +1163,26 @@
                         </div>
                         <h6 class="hinttext">prefix link with http / https</h6>
                       </div> 
-                     <br>
-                      <div class="oj-flex">
-                        <div class="oj-sm-12">
-                          <label>Customer Name</label>
+                      <br>
+                        <div class="oj-flex oj-sm-12 inputrow">
+                          <div class="oj-sm-12">
+                            <label id="switchLabel" for="switch">Key Event</label>
+                          </div>
+                          <input id="switch" data-bind="ojComponent: {component: 'ojSwitch', value:is_key_event}" />
                         </div>
-                        <div class="oj-sm-12">
-                          <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:customerName}" />
+
+                      </div>
+                    </div>
+
+                    <div class="oj-lg-6">
+                      <div class="nomargin-md oj-margin-left">
+
+                        <div class="oj-flex">
+                          <div class="oj-sm-12">
+                            <label>Description </label>
+                          </div>
+                          <div class="oj-sm-12">
+                          <textarea id="event_editor" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:event_description}"></textarea>
                         </div>
                       </div>  
                    
