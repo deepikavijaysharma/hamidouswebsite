@@ -200,13 +200,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 // froala editor start
             $(function() {
                 $('#communitycall_text, #edit_com_call_editor, \
-                    #clone_com_call_editor, #event_editor, #course_editor, \
+                    #clone_com_call_editor, #course_editor, \
                     #add_class_editor, #edit_course_editor, #edit_class_editor'
                     ).froalaEditor({      
                         height: 427,
                         heightMin: 300,
                         heightMax: 500,
-                             //toolbarButtons: ['undo', 'redo' , 'bold', 'italic', 'underline','color']
+              })
+            });  
+           $(function() {
+                $('#event_editor'
+                    ).froalaEditor({      
+                        height: 290,
+                        heightMin: 300,
+                        heightMax: 500,
               })
             });            
 // froala editor end
@@ -1233,7 +1240,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                                 registration_link: events[i].link != undefined ? events[i].link : ''
 
                             });
-                        }
+                        }checkadminrights();
                     });
             }
 
@@ -1358,6 +1365,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     partner_name: self.partnerName(),
                     link: self.registrationLink()
                 }
+                console.log("clone event data : "+ko.toJSON(clone_event_data));
                 $.ajax({
                     url: create_event_api,
                     cache: false,
@@ -1436,6 +1444,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     partner_name: self.partnerName(),
                     link: self.registrationLink()
                 }
+                console.log("edit event data : "+ko.toJSON(edit_event_data));
                 $.ajax({
                     url: create_event_api,
                     cache: false,
