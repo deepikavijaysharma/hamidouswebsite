@@ -888,7 +888,7 @@
               <Label class="required smallinfotext">Date-Time is in PST </Label>
               <!-- ko foreach:communityCallList -->
               <div class="oj-flex oj-sm-12 ccrow">
-                <div class="oj-sm-12 oj-lg-3  oj-flex">
+                <div class="oj-sm-12 oj-lg-4  oj-flex">
                   <div class="oj-sm-12 bluebg oj-flex-item">
                     <p>
                       <span class="name" data-bind="text:name"></span>
@@ -896,7 +896,7 @@
                       <br>
                   </div>
                 </div>
-                <div class="oj-sm-12 oj-lg-9">
+                <div class="oj-sm-12 oj-lg-8">
                   <div class="bgwhitesmall oj-flex oj-margin-left oj-sm-12">
                     <div class="oj-sm-12 oj-lg-1 infobox">
                       <div class="lgreybg">
@@ -904,14 +904,14 @@
                       </div>
                     </div>
                     <div class="oj-sm-12 oj-lg-11 oj-flex originfo">
-                      <div class="oj-sm-12 oj-lg-5 topicclass">
+                      <div class="oj-sm-12 oj-lg-7 topicclass">
                         <p>
                           <strong class="blue">Topic</strong>
                           <br>
                           <span data-bind="text:topic"></span>
                         </p>
                       </div>
-                      <div class="oj-sm-12 oj-lg-3">
+<!--                       <div class="oj-sm-12 oj-lg-3">
                         <p>
                           <strong class="blue">Speaker</strong>
                           <br>
@@ -919,16 +919,17 @@
                           <br>
                           <span data-bind="text:designation">
                         </p>
-                      </div>
+                      </div> -->
                       <div class="oj-sm-12 oj-lg-2">
                         <p>
                           <strong class="blue">Date</strong>
                           <br>
                           <span data-bind="text:com_call_home_datetime"></span>
-<!--                           <br>
-                          <span data-bind="text:call_time"></span>
- -->                        </p>
+                       </p>
                       </div>
+                      <div class="oj-sm-12 oj-lg-1">
+                      </div>
+      
                       <div class="oj-sm-12 oj-lg-2 details oj-flex">
                         <div class="oj-sm-12">
                           <a class="cclink" data-bind="attr:{href:invite}" target="_blank">
@@ -940,10 +941,11 @@
                             target="_blank"></i>
                           <i class="fa fa-trash-o admin" aria-hidden="true" style="cursor: pointer" title="Delete community call" data-bind="click:deleteCommunityCall"
                             target="_blank"></i>
-                        </div>
-                        <div class="oj-sm-12">
+                          <div class="oj-sm-12">
                           <a data-bind="click:showcommunitycallsdetails" target="_blank" class="ccdetailsbutton">Details</a>
                         </div>
+                        </div>
+
                       </div>
 
                     </div>
@@ -1289,13 +1291,13 @@
 
                         <div class="oj-sm-12 oj-lg-1 editicons ">
                           <a class="cclink" data-bind="attr:{href:registration_link}" target="_blank" style="text-decoration: none;">
-                            <i class="fa fa-calendar" aria-hidden="true" style="cursor: pointer; font-size: 17px" title="Link"></i>
+                            <i class="fa fa-calendar" aria-hidden="true" style="cursor: pointer; font-size: 14px" title="Link"></i>
                           </a>
-                          <i class="fa fa-files-o admin" aria-hidden="true" style="cursor: pointer; font-size: 17px" title="Clone Event" data-bind="click:openCloneEventModal"
+                          <i class="fa fa-files-o admin" aria-hidden="true" style="cursor: pointer; font-size: 14px" title="Clone Event" data-bind="click:openCloneEventModal"
                             target="_blank"></i>
-                          <i class="fa fa-pencil-square-o admin" aria-hidden="true" style="cursor: pointer; font-size: 17px" title="Edit Event" data-bind="click:openEditEventModal"
+                          <i class="fa fa-pencil-square-o admin" aria-hidden="true" style="cursor: pointer; font-size: 14px" title="Edit Event" data-bind="click:openEditEventModal"
                             target="_blank"></i>
-                          <i class="fa fa-trash-o admin" aria-hidden="true" style="cursor: pointer; font-size: 17px" title="Delete Event" data-bind="click:deleteEvent"
+                          <i class="fa fa-trash-o admin" aria-hidden="true" style="cursor: pointer; font-size: 14px" title="Delete Event" data-bind="click:deleteEvent"
                             target="_blank"></i>
                           <br>
                           <a data-bind="click:showEventDetails" target="_blank" class="ccdetailsbutton">Details</a>
