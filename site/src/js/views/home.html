@@ -237,6 +237,17 @@ display:none;
 .fr-box.fr-basic .fr-element {
     font-size: 14px;
 }
+.adminvisible{
+display:inline-block;
+}
+.adminhide{
+display:none;
+}
+.shadowcont{
+  -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2) !important;
+  -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2) !important;
+}
 </style>
 <!------------------------------------SLIDER------------------------------------>
 <div class="oj-row oj-sm-12 addendsl admin">
@@ -265,9 +276,12 @@ display:none;
           <!-- ko if: $index() == 0 -->
           <div class="item active" data-bind="attr:{'id':sliderid}">
             <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
-              <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider"></i>
+              <!-- <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider"></i>
               <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>
-              <i class="fa fa-share-square-o endslarc admin" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider"></i>
+              <i class="fa fa-share-square-o endslarc admin" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider"></i> -->
+              <i class="fa fa-pencil-square-o endsl " aria-hidden="true" title="Edit Slider"  data-bind="click:editslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+              <i class="fa fa-trash-o endsldel " aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+              <i class="fa fa-share-square-o endslarc" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
               <div class="verticalcentertext">
                 <div class="verticalcentertext">
                   <div class="verticalcentertextinner">
@@ -315,9 +329,12 @@ display:none;
           <!-- ko if: $index() != 0 -->
           <div class="item" data-bind="attr:{'id':sliderid}"> 
             <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
-              <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider" ></i>
+              <!-- <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider" ></i>
               <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>
-              <i class="fa fa-share-square-o endslarc admin" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider"></i>
+              <i class="fa fa-share-square-o endslarc admin" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider"></i> -->
+              <i class="fa fa-pencil-square-o endsl " aria-hidden="true" title="Edit Slider" data-bind="click:editslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+              <i class="fa fa-trash-o endsldel " aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+              <i class="fa fa-share-square-o endslarc" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
               <div class="verticalcentertext">
                 <div class="verticalcentertext">
                   <div class="verticalcentertextinner">
@@ -408,8 +425,7 @@ display:none;
           <div class="videoHamidou">
             <div class="oj-sm-12 videoHamidoudesc">
               <div class="oj-flex">
-                <div class="oj-sm-9"><span class="name">Senior Vice President,</span><br>
-                  <span class="title">Solution Engineering and Customer Success</span></div>
+                <div class="oj-sm-9"><span class="name">Senior Vice President,</span><br><span class="title">Solution Engineering and Customer Success</span></div>
                 <div class="oj-sm-3 playblock">
                   <a onclick="analytics('Hamidou Dia','Video Link','link','Homepage','Hamidou Dia','')" href="https://otube.oracle.com/media/Solutions+Engineer+and+Cloud+Customer+Success+All+Hands/0_w2kl22gc/2977" target="_blank" title="Solutions Engineering and Cloud Customer Success All Hands Webcast from Oracle HQ on Tuesday, June 27, 2017"><img src="css/images/play_icon.png" class="img-responsive playicon" ></a></div>
                 </div>
@@ -453,7 +469,7 @@ display:none;
 <!------------------------------------SERVICES------------------------------------> 
 <a class="anchor" id="services"></a>
 <div class="oj-row row3 newrow" id="services_sec">
-  <div class="container">
+  <div class="container shadowcont">
     <div class="oj-sm-12 services "  >
       <div class="oj-flex">
         <div class="oj-lg-12 oj-sm-12 servicestitle"><img src="css/images/services_icon_lg.png">&nbsp;Our Services - Solution Engineering-as-a-Service</div>
@@ -655,7 +671,7 @@ display:none;
 <!------------------------------------Our Organization------------------------------------> 
 <a class="anchor" id="organization"></a>
 <div class="oj-row row7 newrow">
-  <div class="container">
+  <div class="container shadowcont">
     <div class="oj-sm-12 featured bgwhite">
       <div class="oj-sm-12 featuredtitle"><img src="css/images/our_org.png">&nbsp;Our Organization</div>
       <button class="btn btn-info btn-xs btnaddneworg admin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddneworgdialog">Add New People</button>
@@ -668,13 +684,23 @@ display:none;
               <div class="oj-lg-margin-right oj-md-margin-right">
                 <h1 data-bind="text: orglob"></h1>
                 <div class=" org_blocks_b">
-                  <img data-bind="attr:{'src':orgimage,'id':orgempid}"><span data-bind="text: orgname"></span>
+                  <!-- ko if: orgweb -->
+                  <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  </a>
+                  <!-- /ko -->
+                  <!-- ko ifnot: orgweb -->
+                  <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  <!-- /ko -->
+                  <span data-bind="text: orgname"></span>
                   <!-- ko if: orgdotline == 'Yes' -->
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
+                    <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -686,14 +712,23 @@ display:none;
               <div class="oj-lg-margin-right oj-md-margin-right">
                 <h1><br></h1>
                 <div class=" org_blocks_b">
-                  <img data-bind="attr:{'src':orgimage,'id':orgempid}"><span data-bind="text: orgname"></span>
+                  <!-- ko if: orgweb -->
+                  <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  </a>
+                  <!-- /ko -->
+                  <!-- ko ifnot: orgweb -->
+                  <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  <!-- /ko -->
+                  <span data-bind="text: orgname"></span>
                   <!-- ko if: orgdotline == 'Yes' -->
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
-                  </div>
+                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
+                    <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>                  </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
               </div>
@@ -707,13 +742,23 @@ display:none;
               <div class="oj-lg-margin-right oj-md-margin-right">
                 <h1 data-bind="text: orglob"></h1>
                 <div class=" org_blocks_b">
-                  <img data-bind="attr:{'src':orgimage,'id':orgempid}"><span data-bind="text: orgname"></span>
+                  <!-- ko if: orgweb -->
+                  <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  </a>
+                  <!-- /ko -->
+                  <!-- ko ifnot: orgweb -->
+                  <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  <!-- /ko -->
+                  <span data-bind="text: orgname"></span>
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
+                    <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -725,13 +770,23 @@ display:none;
               <div class="oj-lg-margin-right oj-md-margin-right">
                 <h1><br></h1>
                 <div class=" org_blocks_b">
-                  <img data-bind="attr:{'src':orgimage,'id':orgempid}"><span data-bind="text: orgname"></span>
+                  <!-- ko if: orgweb -->
+                  <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  </a>
+                  <!-- /ko -->
+                  <!-- ko ifnot: orgweb -->
+                  <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  <!-- /ko -->
+                  <span data-bind="text: orgname"></span>
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
+                    <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -746,13 +801,23 @@ display:none;
               <div class="oj-lg-margin-right oj-md-margin-right">
                 <h1 data-bind="text: orglob"></h1>
                 <div class=" org_blocks_b">
-                  <img data-bind="attr:{'src':orgimage,'id':orgempid}"><span data-bind="text: orgname"></span>
+                  <!-- ko if: orgweb -->
+                  <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  </a>
+                  <!-- /ko -->
+                  <!-- ko ifnot: orgweb -->
+                  <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  <!-- /ko -->
+                  <span data-bind="text: orgname"></span>
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
+                    <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -764,13 +829,23 @@ display:none;
               <div class="oj-lg-margin-right oj-md-margin-right">
                 <h1><br></h1>
                 <div class=" org_blocks_b">
-                  <img data-bind="attr:{'src':orgimage,'id':orgempid}"><span data-bind="text: orgname"></span>
+                  <!-- ko if: orgweb -->
+                  <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  </a>
+                  <!-- /ko -->
+                  <!-- ko ifnot: orgweb -->
+                  <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  <!-- /ko -->
+                  <span data-bind="text: orgname"></span>
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
+                    <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -785,13 +860,23 @@ display:none;
               <div class="oj-lg-margin-right oj-md-margin-right">
                 <h1 data-bind="text: orglob"></h1>
                 <div class=" org_blocks_b">
-                  <img data-bind="attr:{'src':orgimage,'id':orgempid}"><span data-bind="text: orgname"></span>
+                  <!-- ko if: orgweb -->
+                  <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  </a>
+                  <!-- /ko -->
+                  <!-- ko ifnot: orgweb -->
+                  <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  <!-- /ko -->
+                  <span data-bind="text: orgname"></span>
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
+                    <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -803,13 +888,23 @@ display:none;
               <div class="oj-lg-margin-right oj-md-margin-right">
                 <h1><br></h1>
                 <div class=" org_blocks_b">
-                  <img data-bind="attr:{'src':orgimage,'id':orgempid}"><span data-bind="text: orgname"></span>
+                  <!-- ko if: orgweb -->
+                  <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  </a>
+                  <!-- /ko -->
+                  <!-- ko ifnot: orgweb -->
+                  <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  <!-- /ko -->
+                  <span data-bind="text: orgname"></span>
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
+                    <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -824,13 +919,23 @@ display:none;
               <div class="oj-lg-margin-right oj-md-margin-right">
                 <h1 data-bind="text: orglob"></h1>
                 <div class=" org_blocks_b">
-                  <img data-bind="attr:{'src':orgimage,'id':orgempid}"><span data-bind="text: orgname"></span>
+                  <!-- ko if: orgweb -->
+                  <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  </a>
+                  <!-- /ko -->
+                  <!-- ko ifnot: orgweb -->
+                  <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  <!-- /ko -->
+                  <span data-bind="text: orgname"></span>
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
+                    <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -842,13 +947,23 @@ display:none;
               <div class="oj-lg-margin-right oj-md-margin-right">
                 <h1><br></h1>
                 <div class=" org_blocks_b">
-                  <img data-bind="attr:{'src':orgimage,'id':orgempid}"><span data-bind="text: orgname"></span>
+                  <!-- ko if: orgweb -->
+                  <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  </a>
+                  <!-- /ko -->
+                  <!-- ko ifnot: orgweb -->
+                  <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  <!-- /ko -->
+                  <span data-bind="text: orgname"></span>
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
+                    <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -863,13 +978,23 @@ display:none;
               <div class="oj-lg-margin-right oj-md-margin-right">
                 <h1 data-bind="text: orglob"></h1>
                 <div class=" org_blocks_b">
-                  <img data-bind="attr:{'src':orgimage,'id':orgempid}"><span data-bind="text: orgname"></span>
+                  <!-- ko if: orgweb -->
+                  <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  </a>
+                  <!-- /ko -->
+                  <!-- ko ifnot: orgweb -->
+                  <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  <!-- /ko -->
+                  <span data-bind="text: orgname"></span>
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
+                    <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -881,13 +1006,23 @@ display:none;
               <div class="oj-lg-margin-right oj-md-margin-right">
                 <h1><br></h1>
                 <div class=" org_blocks_b">
-                  <img data-bind="attr:{'src':orgimage,'id':orgempid}"><span data-bind="text: orgname"></span>
+                  <!-- ko if: orgweb -->
+                  <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  </a>
+                  <!-- /ko -->
+                  <!-- ko ifnot: orgweb -->
+                  <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  <!-- /ko -->
+                  <span data-bind="text: orgname"></span>
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
+                    <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -902,13 +1037,23 @@ display:none;
               <div class="oj-lg-margin-right oj-md-margin-right">
                 <h1 data-bind="text: orglob"></h1>
                 <div class=" org_blocks_b">
-                  <img data-bind="attr:{'src':orgimage,'id':orgempid}"><span data-bind="text: orgname"></span>
+                  <!-- ko if: orgweb -->
+                  <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  </a>
+                  <!-- /ko -->
+                  <!-- ko ifnot: orgweb -->
+                  <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  <!-- /ko -->
+                  <span data-bind="text: orgname"></span>
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
+                    <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -920,13 +1065,24 @@ display:none;
               <div class="oj-lg-margin-right oj-md-margin-right">
                 <h1><br></h1>
                 <div class=" org_blocks_b">
-                  <img data-bind="attr:{'src':orgimage,'id':orgempid}"><span data-bind="text: orgname"></span>
+                  <!-- ko if: orgweb -->
+                  <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  </a>
+                  <!-- /ko -->
+                  <!-- ko ifnot: orgweb -->
+                  <img data-bind="attr:{'src':orgimage,'id':orgempid}">
+                  <!-- /ko -->                  
+                  <span data-bind="text: orgname"></span>
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
                     <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
+                    <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -941,12 +1097,12 @@ display:none;
               <div class="oj-lg-margin-right oj-md-margin-right">
                 <h1 data-bind="text: orglob"></h1>
                 <div class=" org_blocks_b">
-                  <!-- ko if: orgname =='Misha Logvinov' -->
-                  <a data-bind="attr:{'href':'https://stbeehive.oracle.com/content/dav/st/NATD%20CSM%20Website/Public%20Documents/webportal/index.html#/?_k=drzbas'},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                  <!-- ko if: orgweb -->
+                  <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
                   <!-- /ko -->
-                  <!-- ko ifnot: orgname =='Misha Logvinov' -->
+                  <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   <!-- /ko -->
                   <span data-bind="text: orgname"></span>
@@ -954,8 +1110,10 @@ display:none;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
+                    <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -967,12 +1125,12 @@ display:none;
               <div class="oj-lg-margin-right oj-md-margin-right">
                 <h1><br></h1>
                 <div class=" org_blocks_b">
-                  <!-- ko if: orgname =='Misha Logvinov' -->
-                  <a data-bind="attr:{'href':'https://stbeehive.oracle.com/content/dav/st/NATD%20CSM%20Website/Public%20Documents/webportal/index.html#/?_k=drzbas'},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                  <!-- ko if: orgweb -->
+                  <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
                   <!-- /ko -->
-                  <!-- ko ifnot: orgname =='Misha Logvinov' -->
+                  <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   <!-- /ko -->
                   <span data-bind="text: orgname"></span>
@@ -980,8 +1138,10 @@ display:none;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i>
+                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
+                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
+                    <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div> 
                 </div>
                 <div class=" org_blocks_t" data-bind="text: orgdesig"></div>
@@ -1001,7 +1161,7 @@ display:none;
 <!------------------------------------KEY DATES------------------------------------> 
 <a class="anchor" id="keydates"></a>
 <div class="oj-row row5 newrow">
-  <div class="container">
+  <div class="container shadowcont">
     <div class="oj-sm-12 keydates">
       <div class="oj-flex">
         <div class="oj-sm-12 keydatestitle"><img src="css/images/sekeydates_icon_lg.png">&nbsp;Key Dates</div>
@@ -1063,7 +1223,7 @@ display:none;
 <!------------------------------------Key Wins------------------------------------>
 <a class="anchor" id="keywins"></a>
 <div class="oj-row row7 newrow">
-  <div class="container">
+  <div class="container shadowcont">
     <div class="oj-sm-12 golive bgwhite">
       <div class="oj-flex">
         <div class="oj-sm-12 golivetitle"><img src="css/images/wins_large.png">&nbsp;Key Wins</div>
@@ -1074,8 +1234,10 @@ display:none;
               <!-- ko foreach: keywinslist --> 
               <div class="oj-panel oj-panel-alt2 my-filmstrip-item kwadpar" data-bind="attr:{'id':keywid}">
                 <div class="kwadmin">
-                  <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Key Wins" data-bind="click:openEditKeyWinsModal"></i>
-                  <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Key Wins" data-bind="click:deletekeywins"></i>
+                  <!-- <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Key Wins" data-bind="click:openEditKeyWinsModal"></i>
+                  <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Key Wins" data-bind="click:deletekeywins"></i> -->
+                  <i class="fa fa-pencil-square-o endsl" aria-hidden="true" title="Edit Key Wins" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                  <i class="fa fa-trash-o endsldel" aria-hidden="true" title="Delete Key Wins" data-bind="click:deletekeywins,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 </div>
                 <p>
                   <a data-bind="attr:{'href':keywlink},click:analytics.bind($data,'',keywtext,'link','Homepage','Key Wins','')" target="_blank">
@@ -1096,7 +1258,7 @@ display:none;
 <!------------------------------------Go-Lives------------------------------------> 
 <a class="anchor" id="golives"></a>
 <div class="oj-row row7 newrow">
-  <div class="container">
+  <div class="container shadowcont">
     <div class="oj-sm-12 wins bgwhite">
       <div class="oj-flex">
         <div class="oj-sm-12 winstitle"><img src="css/images/featured_icon_lg.png">&nbsp;Featured Go-Lives</div>
@@ -1131,8 +1293,10 @@ display:none;
                     <div class="cardface">
                       <div class="wins_block oj-sm-12">
                         <div class="gladmin">
-                          <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Go Lives" data-bind="click:openEditGoLiveslmodal"></i>
-                          <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Go Lives" data-bind="click:deletegolives"></i>
+                          <!-- <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Go Lives" data-bind="click:openEditGoLiveslmodal"></i>
+                          <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Go Lives" data-bind="click:deletegolives"></i> -->
+                          <i class="fa fa-pencil-square-o endsl" aria-hidden="true" title="Edit Go Lives" data-bind="click:openEditGoLiveslmodal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                          <i class="fa fa-trash-o endsldel" aria-hidden="true" title="Delete Go Lives" data-bind="click:deletegolives,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                         </div>
                         <div class="win_logo oj-sm-12">
                           <img data-bind="attr:{'src':gollogo}">
@@ -1147,7 +1311,7 @@ display:none;
                                 <br>
                                 <span class="largetext" data-bind="html:golhostedby"></span>
                               </p>
-                              <p>This episode’s guest :
+                              <p>This episode's guest :
                                 <br>
                                 <span class="largetext" data-bind="html:golguest"></span>
                               </p>
@@ -1183,7 +1347,7 @@ display:none;
 <!------------------------------------References------------------------------------> 
 <a class="anchor" id="references"></a>
 <div class="oj-row row6 newrow">
-  <div class="container">
+  <div class="container shadowcont">
     <div class="oj-sm-12 references  bgwhite">
       <div class="oj-flex">
         <div class="oj-sm-12 refertitle"><img src="css/images/references_icon_lg.png">&nbsp;References</div>
@@ -1198,8 +1362,10 @@ display:none;
                     <img data-bind="attr:{'src':reflogo}">
                   </a>
                   <div class="refadmin">
-                    <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesModal"></i>
-                    <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i>
+                    <!-- <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesModal"></i>
+                    <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i> -->
+                    <i class="fa fa-pencil-square-o" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-trash-o" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
                 </div>              
                 <!-- /ko -->
@@ -1219,8 +1385,10 @@ display:none;
                     <img data-bind="attr:{'src':reflogo}">
                   </a>
                   <div class="refadmin">
-                    <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesPaasModal"></i>
-                    <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i>
+                    <!-- <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesPaasModal"></i>
+                    <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i> -->
+                    <i class="fa fa-pencil-square-o" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesPaasModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                    <i class="fa fa-trash-o" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
                 </div>
                 <!-- /ko -->
@@ -1242,7 +1410,7 @@ display:none;
 <!------------------------------------Featured Stories------------------------------------> 
 <a class="anchor" id="empf"></a>
 <div class="oj-row row7 newrow">
-  <div class="container">
+  <div class="container shadowcont">
     <div class="oj-sm-12 featured bgwhite">
       <div class="oj-flex">
         <div class="oj-sm-12 featuredtitle"><img src="css/images/emp_feature_lg.png">&nbsp;Employee Features</div>
@@ -1255,9 +1423,12 @@ display:none;
                   <!-- ko if: empfeaid =='3' -->
                   <div class="oj-panel oj-panel-alt2 my-filmstrip-item1 efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
                     <div class="efadmin">
-                      <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
+                      <!-- <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
                       <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
-                      <i class="fa fa-share-square-o admin" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures"></i>
+                      <i class="fa fa-share-square-o admin" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures"></i> -->
+                      <i class="fa fa-pencil-square-o" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                      <i class="fa fa-trash-o" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                      <i class="fa fa-share-square-o" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     </div>
                     <div class="employee_c" >
                       <div class="emp_details">
@@ -1272,15 +1443,18 @@ display:none;
                   <!-- ko ifnot: empfeaid =='3' -->
                   <div class="oj-panel oj-panel-alt2 my-filmstrip-item efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
                     <div class="efadmin">
-                      <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
+                      <!-- <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
                       <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
-                      <i class="fa fa-share-square-o admin" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures"></i>
+                      <i class="fa fa-share-square-o admin" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures"></i> -->
+                      <i class="fa fa-pencil-square-o" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                      <i class="fa fa-trash-o" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                      <i class="fa fa-share-square-o" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     </div>
                     <div class="employee_c">
                       <div class="emp_details">
                         <div class="slash"></div>
                         <a onclick="empf1(this.id)" data-bind="attr:{'id':empfeaid}">
-                          <span data-bind="text: empfeaheading"></span>
+                          <span data-bind="html: empfeaheading"></span>
                         </a>
                       </div>
                     </div>
@@ -1309,7 +1483,7 @@ display:none;
 
 <!------------------------------------Governance Board------------------------------------>
 <div class="oj-row row7 newrow governanceboard">
-  <div class="container">
+  <div class="container shadowcont">
     <div class="oj-sm-12 featured bgwhite">
       <div class="oj-sm-12 featuredtitle"><img src="css/images/contact_icon_lg.png">&nbsp;Solution Engineering Website Governance Board</div>
       <div class="oj-sm-12">
@@ -1319,14 +1493,14 @@ display:none;
             <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:226352333084512" target="_blank">Heather Hughes</a></span>: SE Excellence Website Lead, Announcements, Employee Features, Key Dates</p>
             <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:315985946465432" target="_blank">Kaushik Kundu</a></span>: SE Excellence Enablement Page Lead</p>
              <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:520401307863468" target="_blank">Gary DeYoung</a></span>: SE Excellence Enablement Contributor</p>
-            <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:581203040684912" target="_blank">Maharshi Desai</a></span>: Oracle Cloud Hubs Website Lead, SE-as-a-Service,  ECAL – Method, ECA Certification, ECA Enablement Web Site Lead </p>
+            <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:581203040684912" target="_blank">Maharshi Desai</a></span>: Oracle Cloud Hubs Website Lead, SE-as-a-Service,  ECAL â€“ Method, ECA Certification, ECA Enablement Web Site Lead </p>
             <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:111797086113117" target="_blank">Bridget Guiley</a></span>: Go Lives, Wins, and References</p>
             </div>
           </div>
           <div class="oj-sm-12 oj-md-12 oj-lg-5">
           <div class="oj-margin">
             <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:916952584278634" target="_blank">Nick Donatone</a></span>: Cloud Customer Success, Links and Resources Page Lead </p>
-            <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:215930508555983" target="_blank">Al Kiessel</a></span>: ECAL – Method, ECA Certification, ECA Enablement Content Lead </p>
+            <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:215930508555983" target="_blank">Al Kiessel</a></span>: ECAL â€“ Method, ECA Certification, ECA Enablement Content Lead </p>
             <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:111850427926188" target="_blank">Bella Dosovitsky</a></span>: Platform Specialist Team</p>
             <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:729524033994280" target="_blank">Souvik Sadhu</a></span>: Bangalore Hub Design Agency</p>
             </p>
@@ -1369,7 +1543,7 @@ display:none;
     <h4 style="color:#00758f;">Description</h4>
     This Solution-Engineering-as-a-Service includes:
     <ul>
-      <li>Participate in an <u>Oracle cloud day</u> where pre-scheduled events provide a forum and community to learn and engage on the value of Oracle Cloud technology and services.  When ready engage your customer by preparing and conducting a <u>Customer Cloud Day</u> to focus on the Customer’s and Oracle’s Cloud strategy together.</li>
+      <li>Participate in an <u>Oracle cloud day</u> where pre-scheduled events provide a forum and community to learn and engage on the value of Oracle Cloud technology and services.  When ready engage your customer by preparing and conducting a <u>Customer Cloud Day</u> to focus on the Customer's and Oracle's Cloud strategy together.</li>
     </ul>
     <h4 style="color:#00758f;" >SE Role Engagement </h4>
     <h5>Roles:</h5>
@@ -1393,7 +1567,7 @@ display:none;
     <h4 style="color:#00758f;">Description</h4>
     This Solution-Engineering-as-a-Service includes:
     <ul>
-      <li>Participate in an Oracle cloud day where pre-scheduled events provide a forum and community to learn and engage on the value of Oracle Cloud technology and services.  When ready engage your customer by preparing and conducting a Customer Cloud Day to focus on the Customer’s and Oracle’s Cloud strategy together.</li>
+      <li>Participate in an Oracle cloud day where pre-scheduled events provide a forum and community to learn and engage on the value of Oracle Cloud technology and services.  When ready engage your customer by preparing and conducting a Customer Cloud Day to focus on the Customer's and Oracle's Cloud strategy together.</li>
     </ul>
     <h4 style="color:#00758f;" >SE Role Engagement </h4>
     <h5>Roles:</h5>
@@ -1647,7 +1821,7 @@ display:none;
     This Solution-Engineering-as-a-Service includes:
     <ul>
       <li>Collaboratively working with a customer to analyze specific business/technical use cases and associated opportunities and challenges. </li>
-      <li>This process is highly consultative, focusing on the customer’s business/technical goals as well as existing processes, technologies, systems, personnel and business environment. </li>
+      <li>This process is highly consultative, focusing on the customer's business/technical goals as well as existing processes, technologies, systems, personnel and business environment. </li>
       <li>This builds valuable customer trust, but also uniquely positions Oracle to business-justify and cost-justify immediate implementation of a solution &ndash; specifically immediate implementation of an Oracle Cloud solution. </li>
       <li>Deliverables include a presentation outlining use cases, goals, challenges, prescription analyses and benefits.  Deliverables also include a solution roadmap and Oracle sales proposal.</li>
     </ul>
@@ -1701,7 +1875,7 @@ display:none;
     <h4>Description</h4>
     This Solution-Engineering-as-a-Service includes:
     <ul>
-      <li>Providing a technical hands-on experience to a customer’s technical personnel on a single or set of cloud services. </li>
+      <li>Providing a technical hands-on experience to a customer's technical personnel on a single or set of cloud services. </li>
       <li>Providing an intimate understanding of how the services work and what would be required to deploy and utilize them. </li>
       <li>Generating a vision of how the services would enable the customer to attain their specific business/technical goals. </li>
       <li>Hands-on Workshops may provide a less resource-intensive (but effective) alternative to POCs.</li>
@@ -1750,7 +1924,7 @@ display:none;
     <ul>
       <li>Collaborating with the sales rep to produce a highly effective RFx response for their customer. </li>
       <li>Engaging as early as possible to maximize response effectiveness, ideally while the customer is still developing the RFx in order to materially influence RFx content. </li>
-      <li>Producing responses that not only address the customer’s requests, but also differentiate Oracle from its competitors in terms of capabilities to solve customer business/technical needs.</li>
+      <li>Producing responses that not only address the customer's requests, but also differentiate Oracle from its competitors in terms of capabilities to solve customer business/technical needs.</li>
     </ul>
     <h4>SE Role Engagement </h4>
     <h5>Roles:</h5>
@@ -2042,6 +2216,14 @@ display:none;
       <div class="oj-lg-6">
         <div class="oj-margin-right nomargin-md">
           <div class="form-group">
+            <label class="addslidelabel">Website:</label>
+            <label class="required">*</label>
+            <div class="input-group">
+              <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:orgwebsite}">
+            </div>
+            <br>
+          </div>
+          <div class="form-group">
             <div class="input-group">
               <label for="switch">Dotted Line Report</label>
               <input id="switch" data-bind="ojComponent: {component: 'ojSwitch', value: orgdottedline}"/><span data-bind="text: ((orgdottedline()) ? 'Yes' : 'No')"></span>
@@ -2108,6 +2290,14 @@ display:none;
       </div>
       <div class="oj-lg-6">
         <div class="oj-margin-right nomargin-md">
+          <div class="form-group">
+            <label class="addslidelabel">Website:</label>
+            <label class="required">*</label>
+            <div class="input-group">
+              <input class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editorgwebsite}">
+            </div>
+            <br>
+          </div>
           <div class="form-group">
             <div class="input-group">
               <label for="switch">Dotted Line Report</label>
