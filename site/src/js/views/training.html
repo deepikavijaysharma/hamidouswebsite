@@ -5,23 +5,25 @@
 <link rel="stylesheet" href="../../css/froala_editor.pkgd.min.css" type="text/css"/>
 <link rel="stylesheet" href="../../css/froala_style.min.css" type="text/css"/>
 <div id="dialogWrapper3">
-  <div style="display:none" id="modalDialog1" title="Select your role" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'escape',rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+  <!--     create com call ckeditor modal workaround start -->
+
+        <div style="display:none" class="dialogbodymain" id="modaldesc" title="Community call Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
     <div class="oj-dialog-body roleWrapper">
-      <form id="form1">
-        <select id="basicSelect" data-bind="ojComponent: {
-          component: 'ojSelect',placeholder: emptyPlaceholder() ? '' : 'Select your role',
-          options: role,
-          value: selectedrole,
-          rootAttributes: {style:''}
-        }">
-        </select>
-        <div class="oj-dialog-footer">
-          <button id="okButton" onclick="roleselected()" data-bind="ojComponent: {component: 'ojButton', label: 'Okay'},click:closeRole">
-          </button>
+      <div class="nomargin-md oj-margin-left">
+        <div class="oj-flex">
+          <div class="oj-sm-12">
+            <label>Description </label>
+            <label class="required">*</label>
+          </div>
+          <div class="oj-sm-12">
+            <textarea id="communitycall_text" rows="6" cols="50" placeholder="" data-bind="value:calldesc"></textarea>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
+    <!-- create com call ckeditor modal workaround end -->  
+
 </div>
 <div id="trainingdialogWrappe4">
   <div id="trainingDialog" title="Request Training" data-bind="ojComponent:{component: 'ojDialog',cancelBehavior: 'icon',rootAttributes: { style: 'width: 70%; height: auto; min-width 240px; '}}">
@@ -356,6 +358,8 @@
       </div>
 
       <!--========================== COMMUNITY CALLS ==========================-->
+
+
       <div id="tabs-2" class="ccalls">
         <div class="container">
           <!-- modal for create community call -->
@@ -422,7 +426,23 @@
                             <input data-bind="ojComponent: {component: 'ojInputDateTime', value:comCallDate}" />                            
                         </div>
                       </div>
-                      <br>
+
+
+                    </div>
+                  </div>
+
+                  <div class="oj-lg-6">
+                    <div class="nomargin-md oj-margin-left">
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <button onclick="opendescriptionmodal()">Add Description</button>
+                          <label class="required">*</label>
+                        </div>
+<!--                         <div class="oj-sm-12">
+                          <button onclick="opendescriptionmodal()">View Description</button>
+                        </div>
+ -->                      </div>
+                       <br>
                       <div class="oj-flex">
                         <div class="oj-sm-12">
                           <label>Duration (in minutes) </label>
@@ -434,7 +454,9 @@
                         </div>
                         <h6 class="hinttext">Please enter in minutes</h6>
                       </div>
-                      <div class="oj-flex">
+                      <br>
+
+                                            <div class="oj-flex">
                         <div class="oj-sm-12">
                           <label>Organizer Email</label>
                         </div>
@@ -460,20 +482,6 @@
                         <input id="switch" data-bind="ojComponent: {component: 'ojSwitch', value:com_call_keyevent}" />
                       </div>
 
-                    </div>
-                  </div>
-
-                  <div class="oj-lg-6">
-                    <div class="nomargin-md oj-margin-left">
-                      <div class="oj-flex">
-                        <div class="oj-sm-12">
-                          <label>Description </label>
-                          <label class="required">*</label>
-                        </div>
-                        <div class="oj-sm-12">
-                          <textarea id="communitycall_text" rows="6" cols="50" placeholder="" data-bind="value:calldesc"></textarea>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>

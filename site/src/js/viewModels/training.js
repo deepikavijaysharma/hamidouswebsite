@@ -143,6 +143,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.rolelist = ko.observableArray([]);
 
             var editor_instance;
+            //below variable stores data in modal ..it gets updated on desc modal close
+            var editor_instance_data;
 
             // EVENT HANDLER FOR ROLE SELECTION
             rolesselected = function (event, ui) {
@@ -292,7 +294,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     organizer_email: self.organizerEmail(),
                     recording_link: self.callrecordlink(),
                     keyevent: self.com_call_keyevent()!=true?'No':'Yes' ,
-                    description: desc_data,//$('#communitycall_text').val(),
+                    description: editor_instance_data,//$('#communitycall_text').val(),
                     user: ssoemail
                 }
                 console.log("create com call : "+ko.toJSON(call));
@@ -314,6 +316,30 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             }
 
+            opendescriptionmodal=function(){
+                   editor_instance = CKEDITOR.instances.communitycall_text;
+                   //using below variable to restore data of desc field on modal close(secondary modal)
+                   var intermediate_data;
+                    if (editor_instance) {
+                        intermediate_data = editor_instance_data;
+                        editor_instance.destroy(true); 
+                    }   
+
+                    CKEDITOR.replace('communitycall_text', {
+                        uiColor: '#D3D3D3',
+                        height: 500,
+                        removePlugins: 'maximize'
+                    });  
+                    $( "#modaldesc" ).on( "ojbeforeclose", function( event, ui )
+                    {
+                        editor_instance_data = CKEDITOR.instances.communitycall_text.getData();
+                    } );
+
+                CKEDITOR.instances.communitycall_text.setData(intermediate_data);
+                $("#modaldesc").ojDialog("open");
+                                   
+            }
+
             //----------------------- END OF COMMUNITY CALL  ---------------------//
             openCommunityCallDialog = function () {
                 //CKEDITOR.replace('communitycall_text'); 
@@ -323,18 +349,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 //     height: 500
                 // }); 
 
-                //below code is used to dynamically destroy attached instance
+                //below code is used to clear the desc field on main modal of create com call
                 editor_instance = CKEDITOR.instances.communitycall_text;
 
                     if (editor_instance) {
                         editor_instance.destroy(true); 
                     }   
 
-                    CKEDITOR.replace('communitycall_text', {
-                        uiColor: '#9AB8F3',
-                        height: 500,
-                        removePlugins: 'maximize'
-                    });  
+                //     CKEDITOR.replace('communitycall_text', {
+                //         uiColor: '#9AB8F3',
+                //         height: 500,
+                //         //removePlugins: 'maximize'
+                //     });  
                 $('#createcommunitycall_id').ojDialog("open");
 
             }
