@@ -7,7 +7,7 @@
 <div id="dialogWrapper3">
   <!--     create com call ckeditor modal workaround start -->
 
-        <div style="display:none" class="dialogbodymain" id="modaldesc" title="Community call Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+  <div style="display:none" class="dialogbodymain" id="modaldesc" title="Community call Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
     <div class="oj-dialog-body roleWrapper">
       <div class="nomargin-md oj-margin-left">
         <div class="oj-flex">
@@ -24,6 +24,62 @@
   </div>
     <!-- create com call ckeditor modal workaround end -->  
 
+  <!--     edit com call ckeditor modal workaround start -->
+
+  <div style="display:none" class="dialogbodymain" id="editcomcall_desc_modal" title="Community call Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+    <div class="oj-dialog-body roleWrapper">
+      <div class="nomargin-md oj-margin-left">
+        <div class="oj-flex">
+          <div class="oj-sm-12">
+            <label>Description </label>
+            <label class="required">*</label>
+          </div>
+          <div class="oj-sm-12">
+            <textarea id="edit_com_call_editor" rows="6" cols="50" placeholder="" data-bind="value:editccDescription"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- edit com call ckeditor modal workaround end -->      
+  
+  <!--     clone com call ckeditor modal workaround start -->
+
+  <div style="display:none" class="dialogbodymain" id="clonecomcall_desc_modal" title="Community call Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+    <div class="oj-dialog-body roleWrapper">
+      <div class="nomargin-md oj-margin-left">
+        <div class="oj-flex">
+          <div class="oj-sm-12">
+            <label>Description </label>
+            <label class="required">*</label>
+          </div>
+          <div class="oj-sm-12">
+            <textarea id="clone_com_call_editor" rows="6" cols="50" placeholder="" data-bind="value:cloneccDescription"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- clone com call ckeditor modal workaround end --> 
+
+  <!--     event ckeditor modal workaround start -->
+
+  <div style="display:none" class="dialogbodymain" id="event_desc_modal" title="Event Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+    <div class="oj-dialog-body roleWrapper">
+      <div class="nomargin-md oj-margin-left">
+        <div class="oj-flex">
+          <div class="oj-sm-12">
+            <label>Description </label>
+            <label class="required">*</label>
+          </div>
+          <div class="oj-sm-12">
+            <textarea id="event_editor" rows="6" cols="50" placeholder="" data-bind="value:event_description"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- event ckeditor modal workaround end -->  
 </div>
 <div id="trainingdialogWrappe4">
   <div id="trainingDialog" title="Request Training" data-bind="ojComponent:{component: 'ojDialog',cancelBehavior: 'icon',rootAttributes: { style: 'width: 70%; height: auto; min-width 240px; '}}">
@@ -456,7 +512,7 @@
                       </div>
                       <br>
 
-                                            <div class="oj-flex">
+                      <div class="oj-flex">
                         <div class="oj-sm-12">
                           <label>Organizer Email</label>
                         </div>
@@ -568,10 +624,26 @@
                           <label>Date and Time</label>
                         </div>
                         <div class="oj-sm-12">
-                            <input data-bind="ojComponent: {component: 'ojInputDateTime', value:editccDate}" />                          
+                            <input data-bind="ojComponent: {component: 'ojInputDateTime', value:editccDate}" />                            
                         </div>
                       </div>
-                      <br>
+
+
+                    </div>
+                  </div>
+
+                  <div class="oj-lg-6">
+                    <div class="nomargin-md oj-margin-left">
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <button onclick="openEditComCallDescriptionModal()">Edit Description</button>
+                          <label class="required">*</label>
+                        </div>
+<!--                         <div class="oj-sm-12">
+                          <button onclick="opendescriptionmodal()">View Description</button>
+                        </div>
+ -->                      </div>
+                       <br>
                       <div class="oj-flex">
                         <div class="oj-sm-12">
                           <label>Duration (in minutes) </label>
@@ -583,6 +655,8 @@
                         </div>
                         <h6 class="hinttext">Please enter in minutes</h6>
                       </div>
+                      <br>
+
                       <div class="oj-flex">
                         <div class="oj-sm-12">
                           <label>Organizer Email</label>
@@ -611,23 +685,9 @@
 
                     </div>
                   </div>
-
-                  <div class="oj-lg-6">
-                    <div class="nomargin-md oj-margin-left">
-                      <div class="oj-flex">
-                        <div class="oj-sm-12">
-                          <label>Description </label>
-                          <label class="required">*</label>
-                        </div>
-                        <div class="oj-sm-12">
-                          <textarea id="edit_com_call_editor" rows="6" cols="50" placeholder="" data-bind="value:editccDescription"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 <br>
-                
+
                 <div class="oj-flex">
                   <div class="oj-md-12">
                     <button class="bluebutton" onclick="editCommunityCallValues()" style="cursor: pointer" data-bind="ojComponent: {
@@ -648,7 +708,7 @@
           <!-- clone community call modal start -->
           <div style="display:none" id="clonecommunitycall_id" title="Clone Community Call" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
             <div class="oj-dialog-body">
-              <!-- body start -->
+                <!-- body start -->
                 <div class="oj-flex">
                   <div class="oj-lg-6">
                     <div class="oj-margin-right nomargin-md">
@@ -705,10 +765,26 @@
                           <label>Date and Time</label>
                         </div>
                         <div class="oj-sm-12">
-                          <input data-bind="ojComponent: {component: 'ojInputDateTime', value:cloneccDate}" />                            
+                            <input data-bind="ojComponent: {component: 'ojInputDateTime', value:cloneccDate}" />                            
                         </div>
                       </div>
-                      <br>
+
+
+                    </div>
+                  </div>
+
+                  <div class="oj-lg-6">
+                    <div class="nomargin-md oj-margin-left">
+                      <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <button onclick="openCloneComCallDescriptionModal()">Edit Description</button>
+                          <label class="required">*</label>
+                        </div>
+<!--                         <div class="oj-sm-12">
+                          <button onclick="opendescriptionmodal()">View Description</button>
+                        </div>
+ -->                      </div>
+                       <br>
                       <div class="oj-flex">
                         <div class="oj-sm-12">
                           <label>Duration (in minutes) </label>
@@ -720,6 +796,8 @@
                         </div>
                         <h6 class="hinttext">Please enter in minutes</h6>
                       </div>
+                      <br>
+
                       <div class="oj-flex">
                         <div class="oj-sm-12">
                           <label>Organizer Email</label>
@@ -748,22 +826,9 @@
 
                     </div>
                   </div>
-
-                  <div class="oj-lg-6">
-                    <div class="nomargin-md oj-margin-left">
-                      <div class="oj-flex">
-                        <div class="oj-sm-12">
-                          <label>Description </label>
-                          <label class="required">*</label>
-                        </div>
-                        <div class="oj-sm-12">
-                          <textarea id="clone_com_call_editor" rows="6" cols="50" placeholder="" data-bind="value:cloneccDescription"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 <br>
+
               <div class="oj-flex">
                 <div class="oj-md-3">
                 </div>
@@ -1154,6 +1219,22 @@
                             <input data-bind="ojComponent: {component: 'ojInputDateTime', value:event_endtime}" />
                           </div>
                         </div>
+
+
+                      </div>
+                    </div>
+
+                    <div class="oj-lg-6">
+                      <div class="nomargin-md oj-margin-left">
+
+                        <div class="oj-flex">
+                        <div class="oj-sm-12">
+                          <button id="add_desc_event" onclick="openEventDescriptionModal()">Add Description</button>
+                          <button id="edit_desc_event" onclick="openEventDescriptionModal()">Edit Description</button>
+                          <label class="required">*</label>
+                        </div>
+                      </div>  
+
                         <br>
                         <div class="oj-flex">
                           <div class="oj-sm-12">
@@ -1180,21 +1261,6 @@
                           </div>
                           <input id="switch" data-bind="ojComponent: {component: 'ojSwitch', value:is_key_event}" />
                         </div>
-
-                      </div>
-                    </div>
-
-                    <div class="oj-lg-6">
-                      <div class="nomargin-md oj-margin-left">
-
-                        <div class="oj-flex">
-                          <div class="oj-sm-12">
-                            <label>Description </label>
-                          </div>
-                          <div class="oj-sm-12">
-                          <textarea id="event_editor" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:event_description}"></textarea>
-                        </div>
-                      </div>  
                    
                    </div>
                   </div>
