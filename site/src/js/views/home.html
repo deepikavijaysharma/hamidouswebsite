@@ -248,6 +248,9 @@ display:none;
   -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2) !important;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2) !important;
 }
+.ojDialogWrapper-modaleditdescempf_layer{
+  z-index: 1051;
+}
 </style>
 <!------------------------------------SLIDER------------------------------------>
 <div class="oj-row oj-sm-12 addendsl admin">
@@ -2016,12 +2019,17 @@ display:none;
       <div class="oj-lg-6">
         <div class="oj-margin-right nomargin-md">
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="text-area1" class="addslidelabel">Title:<label class="required">*</label></label>    
             <div class="input-group">
               <textarea id="text-area1" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:sltitle,rootAttributes: {style:'max-width:15em'}}"></textarea>
             </div>
-          </div><br>
+          </div><br> -->
+          <br>
+          <div class="oj-sm-12">
+            <button onclick="openslidertitlemodal()">Add Banner Title</button>
+            <label class="required">*</label>
+          </div><br><br>
 
           <div class="form-group">
             <label class="addslidelabel">Primary Button:</label>
@@ -2036,12 +2044,17 @@ display:none;
       <div class="oj-lg-6">
         <div class="oj-margin-right nomargin-md">
               
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="text-area2" class="addslidelabel">Description:</label>
             <div class="input-group">
               <textarea id="text-area2" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:sldescription,rootAttributes: {style:'max-width:15em'}}"></textarea>
             </div>
-          </div><br>
+          </div><br> -->
+          <br>
+          <div class="oj-sm-12">
+            <button onclick="opensliderdescriptionmodal()">Add Banner Description</button>
+            <label class="required">*</label>
+          </div><br><br>
 
           <div class="form-group">
             <label class="addslidelabel">Secondary Button:</label>
@@ -2082,18 +2095,23 @@ display:none;
 <!-- add slider confirmation end -->
 
 <!-- edit slider confirmation start -->
-<div style="display:none" id="editslidedialog" title="Edit Slide" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}" class="dialogbodymain">
+<div style="display:none" id="editslidedialog" title="Edit Slider" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}" class="dialogbodymain">
   <div class="oj-dialog-body asdialog popupfont dialogbody">
     <div class="oj-flex">
       <div class="oj-lg-6">
         <div class="oj-margin-right nomargin-md">
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="edittext-area1" class="addslidelabel">Title:<label class="required">*</label></label>
             <div class="input-group">
-              <textarea id="edittext-area1" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:editsltitle,rootAttributes: {style:'max-width:15em'}}"></textarea>
+              <input class="form-control" placeholder="Enter Title" id="edittext-area1" type="text" data-bind="ojComponent:{component: 'ojInputText',value:editsltitle,rootAttributes: {style:'max-width:15em'}}">
             </div>
-          </div><br>
+          </div><br> -->
+          <br>
+          <div class="oj-sm-12">
+            <button onclick="openeditslidertitlemodal()">Add Banner Title</button>
+            <label class="required">*</label>
+          </div><br><br>
 
           <div class="form-group">
             <label class="addslidelabel">Primary Button:</label>
@@ -2108,12 +2126,17 @@ display:none;
       <div class="oj-lg-6">
         <div class="oj-margin-right nomargin-md">
           
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="edittext-area2" class="addslidelabel">Description:</label>
             <div class="input-group">
               <textarea id="edittext-area2" class="form-control" data-bind="ojComponent: {component: 'ojTextArea',value:editsldescription,rootAttributes: {style:'max-width:15em'}}"></textarea>
             </div>
-          </div><br>
+          </div><br> -->
+          <br>
+          <div class="oj-sm-12">
+            <button onclick="openeditsliderdescriptionmodal()">Add Banner Description</button>
+            <label class="required">*</label>
+          </div><br><br>
 
           <div class="form-group">
             <label class="addslidelabel">Secondary Button:</label>
@@ -2170,6 +2193,81 @@ display:none;
   </div>
 </div>
 <!-- delete slider confirmation end -->
+
+<!-- Add Slider Title ckeditor modal workaround start -->
+<div style="display:none" class="dialogbodymain" id="modaltitleslider" title="Add Slider Title" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+  <div class="oj-dialog-body roleWrapper">
+    <div class="nomargin-md oj-margin-left">
+      <div class="oj-flex">
+        <div class="oj-sm-12">
+          <label>Enter Banner Title: </label>
+          <label class="required">*</label>
+        </div>
+        <div class="oj-sm-12">
+          <textarea id="sltextarea1" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:sldescription}"></textarea>
+        </div><br>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Slider Title ckeditor modal workaround end -->
+
+<!-- Add Slider Description ckeditor modal workaround start -->
+<div style="display:none" class="dialogbodymain" id="modaldescslider" title="Add Slider Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+  <div class="oj-dialog-body roleWrapper">
+    <div class="nomargin-md oj-margin-left">
+      <div class="oj-flex">
+        <div class="oj-sm-12">
+          <label>Enter Banner Description: </label>
+          <label class="required">*</label>
+        </div>
+        <div class="oj-sm-12">
+          <!-- <textarea id="communitycall_text" rows="6" cols="50" placeholder="" data-bind="value:calldesc"></textarea> -->
+          <textarea id="sltextarea2" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:sldescription}"></textarea>
+        </div><br>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Slider Description ckeditor modal workaround end -->
+
+<!-- Edit Slider Title ckeditor modal workaround start -->
+<div style="display:none" class="dialogbodymain" id="modaledittitleslider" title="Add Slider Title" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+  <div class="oj-dialog-body roleWrapper">
+    <div class="nomargin-md oj-margin-left">
+      <div class="oj-flex">
+        <div class="oj-sm-12">
+          <label>Enter Banner Title: </label>
+          <label class="required">*</label>
+        </div>
+        <div class="oj-sm-12">
+          <textarea id="sledittextarea1" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:editsltitle}"></textarea>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Edit Slider Title ckeditor modal workaround end -->
+
+<!-- Edit Slider Description ckeditor modal workaround start -->
+<div style="display:none" class="dialogbodymain" id="modaleditdescslider" title="Add Slider Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+  <div class="oj-dialog-body roleWrapper">
+    <div class="nomargin-md oj-margin-left">
+      <div class="oj-flex">
+        <div class="oj-sm-12">
+          <label>Enter Banner Description: </label>
+          <label class="required">*</label>
+        </div>
+        <div class="oj-sm-12">
+          <textarea id="sledittextarea2" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:editsldescription}"></textarea>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Edit Slider Description ckeditor modal workaround end -->
 
 <!-- END OF SLIDER POPUPS -->
 
@@ -2812,19 +2910,24 @@ display:none;
           <div class="form-group">
             <label class="addslidelabel">Employee Features Heading:</label>
             <div class="input-group">
-              <!-- <input id="addefheading" class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:empfeatheading}"> -->
-              <textarea id="addefheading" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojTextArea',value:empfeatheading}"></textarea>
+              <input id="addefheading" class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:empfeatheading}">
+              <!-- <textarea id="addefheading" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojTextArea',value:empfeatheading}"></textarea> -->
             </div>
           </div>
         </div>
       </div>
       <div class="oj-lg-6">
-        <div class="oj-margin-right nomargin-md">
+        <!-- <div class="oj-margin-right nomargin-md">
           <div class="form-group">
             <label class="addslidelabel">Employee Features Text:</label><br>
             <textarea id="txt2" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:empfeattext}"></textarea><br><br>
           </div>
-        </div>
+        </div> -->
+        <br>
+        <div class="oj-sm-12">
+          <button onclick="openempfdescriptionmodal()">Add Employee Features Text</button>
+          <label class="required">*</label>
+        </div><br><br>
       </div>
     </div><br>     
   </div>
@@ -2852,19 +2955,24 @@ display:none;
           <div class="form-group">
             <label class="addslidelabel">Employee Features Heading:</label>
             <div class="input-group">
-              <!-- <input id="editefheading" class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editempfeatheading}"> -->
-              <textarea id="editefheading" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojTextArea',value:editempfeatheading}"></textarea>
+              <input id="editefheading" class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editempfeatheading}">
+              <!-- <textarea id="editefheading" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojTextArea',value:editempfeatheading}"></textarea> -->
             </div>
           </div>
         </div>
       </div>
       <div class="oj-lg-6">
-        <div class="oj-margin-right nomargin-md">
+        <!-- <div class="oj-margin-right nomargin-md">
           <div class="form-group">
             <label class="addslidelabel">Employee Features Text:</label><br>
             <textarea id="edtxt2" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:editempfeattext}"></textarea><br><br>
           </div>
-        </div>
+        </div> -->
+        <br>
+        <div class="oj-sm-12">
+          <button onclick="openeditempfdescriptionmodal()">Edit Employee Features Text</button>
+          <label class="required">*</label>
+        </div><br><br>
       </div>
     </div><br>
   </div>
@@ -2890,5 +2998,43 @@ display:none;
   </div>
 </div>
 <!-- delete employee features confirmation end -->
+
+<!-- Add Employee Features Description ckeditor modal workaround start -->
+<div style="display:none" class="dialogbodymain" id="modaldescempf" title="Add Employee Feature Text" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+  <div class="oj-dialog-body roleWrapper">
+    <div class="nomargin-md oj-margin-left">
+      <div class="oj-flex">
+        <div class="oj-sm-12">
+          <label>Enter Employee Feature Text: </label>
+          <label class="required">*</label>
+        </div>
+        <div class="oj-sm-12">
+          <textarea id="txt2" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:empfeattext}"></textarea>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Employee Features Description ckeditor modal workaround end -->
+
+<!-- Edit Employee Features Description ckeditor modal workaround start -->
+<div style="display:none" class="dialogbodymain" id="modaleditdescempf" title="Edit Employee Feature Text" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+  <div class="oj-dialog-body roleWrapper">
+    <div class="nomargin-md oj-margin-left">
+      <div class="oj-flex">
+        <div class="oj-sm-12">
+          <label>Enter Employee Feature Text: </label>
+          <label class="required">*</label>
+        </div>
+        <div class="oj-sm-12">
+          <textarea id="edtxt2" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:editempfeattext}"></textarea>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Edit Employee Features Description ckeditor modal workaround end -->
 
 <!-- END OF EMPLOYEE FEATURES POPUPS -->
