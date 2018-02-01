@@ -194,18 +194,23 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         };
 
 
-        $('#text-area1, #text-area2, #edittext-area1, #edittext-area2, #addefheading, #txt2, #editefheading, #edtxt2').froalaEditor('paragraphFormat.apply', 'div');
+        // $('#text-area1, #text-area2, #edittext-area1, #edittext-area2, #addefheading, #txt2, #editefheading, #edtxt2').froalaEditor('paragraphFormat.apply', 'div');
         
         // froala editor start
-        $(function () 
-        {
-            $('#text-area1, #text-area2, #edittext-area1, #edittext-area2, #addefheading, #txt2, #editefheading, #edtxt2').froalaEditor({
-            })
-        });
+        // $(function () 
+        // {
+        //     $('#text-area1, #text-area2, #edittext-area1, #edittext-area2, #addefheading, #txt2, #editefheading, #edtxt2').froalaEditor({
+        //     })
+        // });
         // froala editor end
 
         /******************************************SLIDER********************************************************************/
 
+        var editor_instance_slider;
+        var editor_instance_slider_data;//this variable stores data in modal ..it gets updated on desc modal close
+        var editor_instance_title_slider;
+        var editor_instance_title_slider_data;//this variable stores data in modal ..it gets updated on desc modal close
+        
         idimage = function (event) 
         {
             self.slimgid(event);
@@ -223,8 +228,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
             var sl = {
                 id: self.slid(),
-                title: self.sltitle(),
-                description: self.sldescription(),
+                // title: self.sltitle(),
+                title: editor_instance_title_slider_data,
+                // description: self.sldescription(),
+                description: editor_instance_slider_data,
                 button_label1: self.slbuttonlabel1(),
                 button_label2: self.slbuttonlabel2(),
                 link_text1:self.sllinktext1(),
@@ -248,6 +255,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             });
         }
 
+        var editor_instance_edit_slider;
+        var editor_instance_edit_slider_data;//this variable stores data in modal ..it gets updated on desc modal close
+        var editor_instance_edit_title_slider;
+        var editor_instance_edit_title_slider_data;//this variable stores data in modal ..it gets updated on desc modal close
+        
         //EDIT SLIDER observables
         self.editslimage = ko.observableArray([]);
         self.editslimgid = ko.observable('');
@@ -276,10 +288,14 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             self.editslimgid(edit_slider.sliderimgid);
             self.editslimage(edit_slider.sliderimg);
             self.editslid(edit_slider.sliderid);
-            // self.editsltitle(edit_slider.slidertitle);
-            $('#edittext-area1').froalaEditor('html.set', edit_slider.slidertitle);
-            // self.editsldescription(edit_slider.sliderdesc);
-            $('#edittext-area2').froalaEditor('html.set', edit_slider.sliderdesc);
+            self.editsltitle(edit_slider.slidertitle);
+            self.editsldescription(edit_slider.sliderdesc);
+            editor_instance_edit_title_slider_data = edit_slider.slidertitle;
+            editor_instance_edit_slider_data = edit_slider.sliderdesc;
+            // self.editsltitle(editor_instance_edit_title_slider_data);
+            // self.editsldescription(editor_instance_edit_slider_data);
+            // $('#edittext-area1').froalaEditor('html.set', edit_slider.slidertitle);
+            // $('#edittext-area2').froalaEditor('html.set', edit_slider.sliderdesc);
             self.editslbuttonlabel1(edit_slider.sliderbl1);
             self.editslbuttonlabel2(edit_slider.sliderbl2);
             self.editsllinktext1(edit_slider.sliderlt1);
@@ -299,8 +315,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
 
         editslidervalues = function () {
-            var editor_title_data = $('#edittext-area1').val();
-            var editor_desc_data = $('#edittext-area2').val();
+            // var editor_title_data = $('#edittext-area1').val();
+            // var editor_desc_data = $('#edittext-area2').val();
+            var editor_title_data = editor_instance_edit_title_slider_data;
+            var editor_desc_data = editor_instance_edit_slider_data;
             var edit_slider_data = {
                 id: self.editslid(),
                 // title: self.editsltitle(),
@@ -443,6 +461,98 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
              self.slimgid('');
         }
 
+        openslidertitlemodal = function () 
+        {
+            editor_instance_title_slider = CKEDITOR.instances.sltextarea2;
+            var intermediate_data;
+            if (editor_instance_title_slider) {
+                intermediate_data = editor_instance_title_slider_data;
+                editor_instance_title_slider.destroy(true);
+            }
+
+            CKEDITOR.replace('sltextarea1', {
+                uiColor: '#D3D3D3',
+                height: 500,
+                removePlugins: 'maximize'
+            });
+
+            $("#modaltitleslider").on("ojbeforeclose", function (event, ui) {
+                editor_instance_title_slider_data = CKEDITOR.instances.sltextarea1.getData();
+            });
+
+            CKEDITOR.instances.sltextarea1.setData(intermediate_data);
+            $("#modaltitleslider").ojDialog("open");
+        }
+
+        opensliderdescriptionmodal = function () 
+        {
+            editor_instance_slider = CKEDITOR.instances.sltextarea2;
+            var intermediate_data;
+            if (editor_instance_slider) 
+            {
+                intermediate_data = editor_instance_slider_data;
+                editor_instance_slider.destroy(true);
+            }
+
+            CKEDITOR.replace('sltextarea2', {
+                uiColor: '#D3D3D3',
+                height: 500,
+                removePlugins: 'maximize'
+            });
+
+            $("#modaldescslider").on("ojbeforeclose", function (event, ui) 
+            {
+                editor_instance_slider_data = CKEDITOR.instances.sltextarea2.getData();
+            });
+
+            CKEDITOR.instances.sltextarea2.setData(intermediate_data);
+            $("#modaldescslider").ojDialog("open");
+        }
+
+        openeditslidertitlemodal = function () 
+        {
+            editor_instance_edit_title_slider = CKEDITOR.instances.sledittextarea1;
+            var intermediate_data;
+            if (editor_instance_edit_title_slider) {
+                intermediate_data = editor_instance_edit_title_slider_data;
+                editor_instance_edit_title_slider.destroy(true);
+            }
+
+            CKEDITOR.replace('sledittextarea1', {
+                uiColor: '#D3D3D3',
+                height: 500,
+                removePlugins: 'maximize'
+            });
+
+            $("#modaledittitleslider").on("ojbeforeclose", function (event, ui) {
+                editor_instance_edit_title_slider_data = CKEDITOR.instances.sledittextarea1.getData();
+            });
+
+            CKEDITOR.instances.sledittextarea1.setData(intermediate_data);
+            $("#modaledittitleslider").ojDialog("open");
+        }
+
+        openeditsliderdescriptionmodal = function () {
+            editor_instance_edit_slider = CKEDITOR.instances.sledittextarea2;
+            var intermediate_data;
+            if (editor_instance_edit_slider) {
+                intermediate_data = editor_instance_edit_slider_data;
+                editor_instance_edit_slider.destroy(true);
+            }
+
+            CKEDITOR.replace('sledittextarea2', {
+                uiColor: '#D3D3D3',
+                height: 500,
+                removePlugins: 'maximize'
+            });
+
+            $("#modaleditdescslider").on("ojbeforeclose", function (event, ui) {
+                editor_instance_edit_slider_data = CKEDITOR.instances.sledittextarea2.getData();
+            });
+
+            CKEDITOR.instances.sledittextarea2.setData(intermediate_data);
+            $("#modaleditdescslider").ojDialog("open");
+        }
         /******************************************SLIDER ENDS********************************************************************/
 
         
@@ -1793,7 +1903,56 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         /******************************************EMPLOYEE FEATURES*************************************************************************/
 
+        var editor_instance_empf;
+        var editor_instance_empf_data;//this variable stores data in modal ..it gets updated on desc modal close
+        var editor_instance_edit_empf;
+        var editor_instance_edit_empf_data;//this variable stores data in modal ..it gets updated on desc modal close
         var empphotopath = "";
+
+        openempfdescriptionmodal = function () 
+        {
+            editor_instance_empf = CKEDITOR.instances.txt2;
+            var intermediate_data;
+            console.log(editor_instance_empf);
+            if (editor_instance_empf) {
+                intermediate_data = editor_instance_empf_data;
+                editor_instance_empf.destroy(true);
+            }
+            CKEDITOR.replace('txt2', {
+                uiColor: '#D3D3D3',
+                height: 500,
+                removePlugins: 'maximize'
+            });
+
+            $("#modaldescempf").on("ojbeforeclose", function (event, ui) {
+                editor_instance_empf_data = CKEDITOR.instances.txt2.getData();
+            });
+            // console.log("--------" + editor_instance_empf_data);
+            CKEDITOR.instances.txt2.setData(intermediate_data);
+            $("#modaldescempf").ojDialog("open");
+        }
+
+        openeditempfdescriptionmodal = function () 
+        {
+            editor_instance_edit_empf = CKEDITOR.instances.edtxt2;
+            var intermediate_data;
+            if (editor_instance_edit_empf) {
+                intermediate_data = editor_instance_edit_empf_data;
+                editor_instance_edit_empf.destroy(true);
+            }
+            CKEDITOR.replace('edtxt2', {
+                uiColor: '#D3D3D3',
+                height: 500,
+                removePlugins: 'maximize'
+            });
+
+            $("#modaleditdescempf").on("ojbeforeclose", function (event, ui) {
+                editor_instance_edit_empf_data = CKEDITOR.instances.edtxt2.getData();
+            });
+            CKEDITOR.instances.edtxt2.setData(intermediate_data);
+            $("#modaleditdescempf").ojDialog("open");
+        }
+
         empphotoselected = function (event)
         {
             empphotopath = event.target.files[0];
@@ -1806,17 +1965,17 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 return;
             }
 
-            if (self.empfeattext().length == 0) {
-                alert("Please enter Employee Features Text");
-                return;
-            }
-
+            // if (self.empfeattext().length == 0) {
+            //     alert("Please enter Employee Features Text");
+            //     return;
+            // }
+            var editor_text_data = editor_instance_empf_data;
             var efreader = new FileReader();
             efreader.onload = function () {
               var uploadefheader = {
                 "id": self.empfeatid(),
-                "features_heading": $('#addefheading').val(),//self.empfeatheading(),
-                "key_wins_text": $('#txt2').val(),//self.empfeattext(),
+                "features_heading": self.empfeatheading(),//$('#addefheading').val(),
+                "key_wins_text": editor_text_data,//self.empfeattext(),//$('#txt2').val(),
                 "mimetype": empphotopath.type
                 }
 
@@ -1861,22 +2020,22 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
 
         editemployeefeatures = function (edit_ef) {
-            var editor_heading_data = $('#editefheading').val();
-            var editor_text_data = $('#edtxt2').val();
+            // var editor_heading_data = $('#editefheading').val();
+            // var editor_text_data = $('#edtxt2').val();
             var edit_empfeat_data = {
                 id: self.editempfeatid(),
                 image: self.editempfeatbg(),
-                heading: editor_heading_data,//self.editempfeatheading(),
-                text: editor_text_data//self.editempfeattext()
+                heading: self.editempfeatheading(),//editor_heading_data,
+                text: self.editempfeattext()//editor_text_data
             }
-
+            var editor_edit_text_data = editor_instance_edit_empf_data;
             console.log("edit employee feature data: " + ko.toJSON(edit_empfeat_data));
             if (eeflogopath.length == 0) 
             {
                 var uploadeefheader = {
                     "id": self.editempfeatid(),
-                    "key_wins_text": $('#edtxt2').val(),//self.editempfeattext(),
-                    "features_heading": $('#editefheading').val()//self.editempfeatheading(),
+                    "key_wins_text": editor_edit_text_data,//self.editempfeattext(),//$('#edtxt2').val(),
+                    "features_heading": self.editempfeatheading(),//$('#editefheading').val()
                 }
 
                 // SEND TO SERVER
@@ -1902,8 +2061,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 eefreader.onload = function () {
                     var uploadeefheader = {
                         "id": self.editempfeatid(),
-                        "key_wins_text": $('#edtxt2').val(),//self.editempfeattext(),
-                        "features_heading": $('#editefheading').val(),//self.editempfeatheading(),
+                        "key_wins_text": editor_edit_text_data,//self.editempfeattext(),//$('#edtxt2').val(),
+                        "features_heading": self.editempfeatheading(),//$('#editefheading').val(),
                         "mimetype": eeflogopath.type
                     }
 
@@ -1941,10 +2100,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             // SET NEW VALUE
             self.editempfeatid(editemployeefeatures.empfeaid);
             self.editempfeatbg(editemployeefeatures.empfeabg);
-            // self.editempfeatheading(editemployeefeatures.empfeaheading);
-            // self.editempfeattext(editemployeefeatures.empfeatext);
-            $('#editefheading').froalaEditor('html.set', editemployeefeatures.empfeaheading);
-            $('#edtxt2').froalaEditor('html.set', editemployeefeatures.empfeatext);
+            self.editempfeatheading(editemployeefeatures.empfeaheading);
+            self.editempfeattext(editemployeefeatures.empfeatext);
+            editor_instance_edit_empf_data = editemployeefeatures.empfeatext;
+            // $('#editefheading').froalaEditor('html.set', editemployeefeatures.empfeaheading);
+            // $('#edtxt2').froalaEditor('html.set', editemployeefeatures.empfeatext);
         }
 
         closeEditEmployeeFeaturesModal = function () {
