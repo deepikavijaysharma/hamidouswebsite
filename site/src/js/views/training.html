@@ -63,7 +63,6 @@
     <!-- clone com call ckeditor modal workaround end --> 
 
   <!--     event ckeditor modal workaround start -->
-
   <div style="display:none" class="dialogbodymain" id="event_desc_modal" title="Event Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
     <div class="oj-dialog-body roleWrapper">
       <div class="nomargin-md oj-margin-left">
@@ -80,6 +79,83 @@
     </div>
   </div>
     <!-- event ckeditor modal workaround end -->  
+
+  <!--  course modal workaround start -->
+
+  <div style="display:none" class="dialogbodymain" id="course_modal" title="Course Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+    <div class="oj-dialog-body roleWrapper">
+      <div class="nomargin-md oj-margin-left">
+        <div class="oj-flex">
+          <div class="oj-sm-12">
+            <label>Description </label>
+            <label class="required">*</label>
+          </div>
+          <div class="oj-sm-12">
+            <textarea id="course_editor" rows="6" cols="50" placeholder=""></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- course modal workaround end -->  
+
+  <!--  class modal workaround start -->
+
+  <div style="display:none" class="dialogbodymain" id="add_class_modal" title="Class Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+    <div class="oj-dialog-body roleWrapper">
+      <div class="nomargin-md oj-margin-left">
+        <div class="oj-flex">
+          <div class="oj-sm-12">
+            <label>Description </label>
+            <label class="required">*</label>
+          </div>
+          <div class="oj-sm-12">
+            <textarea id="add_class_editor" rows="6" cols="50" placeholder=""></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   <!--  class modal workaround end -->
+    
+    <!-- edit course modal workaround start -->      
+
+  <div style="display:none" class="dialogbodymain" id="edit_course_modal" title="Course Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+    <div class="oj-dialog-body roleWrapper">
+      <div class="nomargin-md oj-margin-left">
+        <div class="oj-flex">
+          <div class="oj-sm-12">
+            <label>Description </label>
+            <label class="required">*</label>
+          </div>
+          <div class="oj-sm-12">
+            <textarea id="edit_course_editor" rows="6" cols="50" placeholder=""></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- edit course modal workaround end -->     
+
+    <!-- edit class modal workaround start -->      
+
+  <div style="display:none" class="dialogbodymain" id="edit_class_modal" title="Class Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+    <div class="oj-dialog-body roleWrapper">
+      <div class="nomargin-md oj-margin-left">
+        <div class="oj-flex">
+          <div class="oj-sm-12">
+            <label>Description </label>
+            <label class="required">*</label>
+          </div>
+          <div class="oj-sm-12">
+            <textarea id="edit_class_editor" rows="6" cols="50" placeholder=""></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- edit class modal workaround end -->      
+
 </div>
 <div id="trainingdialogWrappe4">
   <div id="trainingDialog" title="Request Training" data-bind="ojComponent:{component: 'ojDialog',cancelBehavior: 'icon',rootAttributes: { style: 'width: 70%; height: auto; min-width 240px; '}}">
@@ -1580,15 +1656,6 @@
         <div class="oj-flex">
           <div class="oj-md-6">
             <div class="oj-margin">
-              <!-- COURSE DESCRIPTION -->
-              <div class="oj-flex oj-sm-12 inputrow" data-bind="with:cclass">
-                <div class="oj-sm-12">
-                  <label>Description</label>
-                </div>
-                <div class="oj-sm-12">
-                <textarea id="add_class_editor" rows="20" cols="100" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:description}"></textarea>
-                </div>
-              </div>
               <!-- SECTION 3 -->
               <div class="oj-flex" data-bind="with:cclass">
                 <!-- CONTACT EMAIL -->
@@ -1641,6 +1708,11 @@
                                               value: enrollment_end_date}" />
                   </div>
                 </div>
+                <br>
+                <div class="oj-sm-12">
+                  <button onclick="openAddClassDescriptionModal()">Add Description</button>
+                  <label class="required">*</label>
+                </div>
               </div>
 
             </div>
@@ -1648,6 +1720,8 @@
           <div class="oj-md-6">
             <div class="oj-margin">
               <div class="oj-flex" data-bind="with:cclass">
+
+
                 <!-- CLASS STATUS -->
                 <div class="oj-flex oj-sm-12 inputrow">
                   <div class="oj-sm-12">
@@ -1742,15 +1816,6 @@
         <div class="oj-flex">
           <div class="oj-md-6">
             <div class="oj-margin">
-              <!-- COURSE DESCRIPTION -->
-              <div class="oj-flex oj-sm-12 inputrow" data-bind="with:cclass">
-                <div class="oj-sm-12">
-                  <label>Description</label>
-                </div>
-                <div class="oj-sm-12">
-                  <textarea id="edit_class_editor" rows="20" cols="100" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:description}"></textarea>
-                </div>
-              </div>
               <!-- SECTION 3 -->
               <div class="oj-flex" data-bind="with:cclass">
                 <!-- CONTACT EMAIL -->
@@ -1806,6 +1871,12 @@
                     <label data-bind="text:enrollment_end_date_view">Test</label>
                   </div>
                 </div>
+                <br>
+                <div class="oj-sm-12">
+                  <button onclick="openEditClassDescriptionModal()">Edit Description</button>
+                  <label class="required">*</label>
+                </div>
+
               </div>
 
             </div>
@@ -1988,17 +2059,6 @@
               </div>
             </div>
 
-            <!-- COURSE DESCRIPTION -->
-            <!-- SECTION 2 -->
-            <div class="oj-flex oj-sm-12 inputrow">
-              <div class="oj-sm-12">
-                <label>Description</label>
-              </div>
-              <div class="oj-sm-12">
-              <textarea id="course_editor" rows="20" cols="100" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:description}"></textarea>
-              </div>
-            </div>
-
             <!-- SECTION 3 -->
             <div class="oj-flex inputrow">
               <!-- CONTACT EMAIL -->
@@ -2099,6 +2159,13 @@
           <div class="oj-flex-item oj-sm-1"></div>
           <!--  LEFT PANEL -->
           <div class="oj-flex-item oj-sm-4 ">
+
+            <div class="oj-sm-12">
+              <button onclick="openCourseDescriptionModal()">Add Description</button>
+              <label class="required">*</label>
+            </div>
+            <br>
+
             <label>Category
               <br>
             </label>
@@ -2154,7 +2221,7 @@
 
             <!-- COURSE DESCRIPTION -->
             <!-- SECTION 2 -->
-            <div class="oj-flex oj-sm-12 inputrow">
+<!--             <div class="oj-flex oj-sm-12 inputrow">
               <div class="oj-sm-12">
                 <label>Description</label>
               </div>
@@ -2162,7 +2229,7 @@
               <textarea id="edit_course_editor" rows="20" cols="100" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:description}"></textarea>
               </div>
             </div>
-
+ -->
             <!-- SECTION 3 -->
             <div class="oj-flex inputrow">
               <!-- CONTACT EMAIL -->
@@ -2264,6 +2331,12 @@
           <div class="oj-flex-item oj-sm-1"></div>
           <!--  LEFT PANEL -->
           <div class="oj-flex-item oj-sm-4 ">
+
+            <div class="oj-sm-12">
+              <button onclick="openEditCourseDescriptionModal()">Edit Description</button>
+              <label class="required">*</label>
+            </div>
+            <br>
             <label>Category
               <br>
             </label>

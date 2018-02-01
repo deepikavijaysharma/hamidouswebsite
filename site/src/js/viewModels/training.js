@@ -146,7 +146,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             //below variable stores data in modal ..it gets updated on desc modal close
             var editor_instance_data;
 
-            var intermediate_data;
+            var intermediate_data;        
+            var intermediate_data1 = "";
+            var editor_instance_data1 = "";  
+            var intermediate_data2 = "";
+            var editor_instance_data2 = "";
+            var intermediate_data3 = "";
+            var editor_instance_data3 = "";          
+            var intermediate_data4 = "";
+            var editor_instance_data4 = "";
+
 
             // EVENT HANDLER FOR ROLE SELECTION
             rolesselected = function (event, ui) {
@@ -201,18 +210,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             getRoleData();
-
-// froala editor start
-            $(function() {
-                $('#course_editor, #add_class_editor, #edit_course_editor, #edit_class_editor'
-                    ).froalaEditor({      
-                        height: 427,
-                        heightMin: 300,
-                        heightMax: 500,
-              })
-            });  
-         
-// froala editor end
 
             //-----------------   COMMUNITY CALL   ------------------------//
             //Development url for create, edit, clone and delete community call
@@ -409,8 +406,105 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     CKEDITOR.instances.event_editor.setData(intermediate_data);
                     $("#event_desc_modal").ojDialog("open");
                                    
-            }                 
-                    
+            }      
+
+                openCourseDescriptionModal = function () {
+
+                   //var editor_instance2 = CKEDITOR.instances.course_editor;
+
+                   if(CKEDITOR.instances.course_editor){
+                    intermediate_data2 = editor_instance_data2;
+                    CKEDITOR.instances.course_editor.destroy(true);
+                   }
+                   
+                    //using below variable to restore data of desc field on modal close(secondary modal)
+                    // if (editor_instance2) {
+                    //     intermediate_data2 = editor_instance_data2;
+                    //     editor_instance2.destroy(true); 
+                    // }   
+                    intermediate_data2 = editor_instance_data2;
+                    CKEDITOR.replace('course_editor', {
+                        uiColor: '#D3D3D3',
+                        height: 500,
+                        removePlugins: 'maximize'
+                    });  
+                    $( "#course_modal" ).on( "ojbeforeclose", function( event, ui )
+                    {
+                        //alert("--------");
+                        editor_instance_data2 = CKEDITOR.instances.course_editor.getData();
+                    } );
+                    CKEDITOR.instances.course_editor.setData(intermediate_data2);
+                    $("#course_modal").ojDialog("open");
+                                   
+                }      
+
+                openAddClassDescriptionModal = function () {
+
+                    //using below variable to restore data of desc field on modal close(secondary modal)
+                    if (CKEDITOR.instances.add_class_editor) {
+                        intermediate_data1 = editor_instance_data1;
+                        CKEDITOR.instances.add_class_editor.destroy(true); 
+                    }   
+                    intermediate_data1 = editor_instance_data1;
+
+                    CKEDITOR.replace('add_class_editor', {
+                        uiColor: '#D3D3D3',
+                        height: 500,
+                        removePlugins: 'maximize'
+                    });  
+                    $( "#add_class_modal" ).on( "ojbeforeclose", function( event, ui )
+                    {
+                        editor_instance_data1 = CKEDITOR.instances.add_class_editor.getData();
+                    } );
+                    CKEDITOR.instances.add_class_editor.setData(intermediate_data1);
+                    $("#add_class_modal").ojDialog("open");
+                                   
+            }   
+
+                openEditCourseDescriptionModal = function () {
+
+                   if(CKEDITOR.instances.edit_course_editor){
+                    intermediate_data3 = editor_instance_data3;
+                    CKEDITOR.instances.edit_course_editor.destroy(true);
+                   }
+                   
+                    intermediate_data3 = editor_instance_data3;
+                    CKEDITOR.replace('edit_course_editor', {
+                        uiColor: '#D3D3D3',
+                        height: 500,
+                        removePlugins: 'maximize'
+                    });  
+                    $( "#edit_course_modal" ).on( "ojbeforeclose", function( event, ui )
+                    {
+                        //alert("--------");
+                        editor_instance_data3 = CKEDITOR.instances.edit_course_editor.getData();
+                    } );
+                    CKEDITOR.instances.edit_course_editor.setData(intermediate_data3);
+                    $("#edit_course_modal").ojDialog("open");
+                                   
+            }  
+            openEditClassDescriptionModal = function () {
+
+                    //using below variable to restore data of desc field on modal close(secondary modal)
+                    if (CKEDITOR.instances.edit_class_editor) {
+                        intermediate_data4 = editor_instance_data4;
+                        CKEDITOR.instances.edit_class_editor.destroy(true); 
+                    }   
+                    intermediate_data4 = editor_instance_data4;
+
+                    CKEDITOR.replace('edit_class_editor', {
+                        uiColor: '#D3D3D3',
+                        height: 500,
+                        removePlugins: 'maximize'
+                    });  
+                    $( "#edit_class_modal" ).on( "ojbeforeclose", function( event, ui )
+                    {
+                        editor_instance_data4 = CKEDITOR.instances.edit_class_editor.getData();
+                    } );
+                    CKEDITOR.instances.edit_class_editor.setData(intermediate_data4);
+                    $("#edit_class_modal").ojDialog("open");
+                                   
+            } 
 
             //----------------------- END OF COMMUNITY CALL  ---------------------//
             openCommunityCallDialog = function () {
@@ -2196,6 +2290,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             self.openCreatetraining = function () {
+                editor_instance = CKEDITOR.instances.course_editor;
+
+                    if (editor_instance) {
+                        editor_instance.destroy(true); 
+                    }
+                    editor_instance_data = "";                   
+
                 resetCourse();
                 $("#createcoursedialog").ojDialog("open");
             }
@@ -2249,7 +2350,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                 var coursedata = {
                     name: self.createCourse().name(),
-                    description: $('#course_editor').val(),//self.createCourse().description(),
+                    description: editor_instance_data2,//editor_instance_data,//$('#course_editor').val(),//self.createCourse().description(),
                     cloud_onpremise: self.createCourse().cloud_onpremise()[0],
                     training_level: self.createCourse().training_level()[0],
                     training_type: self.createCourse().training_type()[0],
@@ -2285,6 +2386,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     // alert(err);
                     self.showToastDialog("Course Creation Failed!", false, 2000);
                 });
+
+                editor_instance_data2 = "";
 
             }
 
@@ -2361,6 +2464,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             openaddsclasswindow = function () {
+                editor_instance = CKEDITOR.instances.add_class_editor;
+
+                    if (editor_instance) {
+                        editor_instance.destroy(true); 
+                    }
+                    editor_instance_data = "";  
+
                 resetClass();
                 $("#addclasstoclass").ojDialog("open");
             }
@@ -2424,7 +2534,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
                 self.createCourse().classes().push({
-                    description: $('#add_class_editor').val(),//self.cclass().description(),
+                    description: editor_instance_data1,//$('#add_class_editor').val(),//self.cclass().description(),
                     class_size: self.cclass().class_size(),
                     enrollment_end_date: Date.parse(self.cclass().enrollment_end_date()).toString('dd MMM yyyy'),
                     city: self.cclass().city(),
@@ -2436,6 +2546,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 $("#addclasstoclass").ojDialog("close");
                 updateCourseClass();
                 //resetClass();
+                editor_instance_data1 = "";
 
             }
 
@@ -2458,7 +2569,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.cclass().enrollment_end_date(self.cclass().enrollment_end_date().length > 0 ? Date.parse(self.cclass().enrollment_end_date()).toString('dd MMM yyyy') : self.cclass().enrollment_end_date_view());
 
                 self.cclass().key_event(self.cclass().key_event()?'Yes':'No');
-                self.cclass().description($('#edit_class_editor').val());
+                self.cclass().description(editor_instance_data4);
 
                 var classlist = new Array();
                 classlist.push(self.cclass());
@@ -2492,7 +2603,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     // alert(err);
                     self.showToastDialog("Class Failed Updated", false, 2000);
                 });
-
+                editor_instance_data4 = "";
 
             }
 
@@ -2571,7 +2682,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var coursedata = {
                     course_id: self.createCourse().course_id(),
                     name: self.createCourse().name(),
-                    description: $('#edit_course_editor').val(),//self.createCourse().description(),
+                    description: editor_instance_data3,//$('#edit_course_editor').val(),//self.createCourse().description(),
                     cloud_onpremise: self.createCourse().cloud_onpremise()[0],
                     training_level: self.createCourse().training_level()[0],
                     training_type: self.createCourse().training_type()[0],
@@ -2609,16 +2720,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     self.showToastDialog("Update Failed!", false, 2000);
                     self.fetchcourses();
                 });
-
+                editor_instance_data3 = ""
             }
 
 
             editClass = function (class_to_edit) {
+               if (CKEDITOR.instances.edit_class_editor) {
+                    CKEDITOR.instances.edit_class_editor.destroy(true); 
+                } 
                 // resetClass();
                 console.log(Date.parse(class_to_edit.enrollment_end_date).toString('dd MMM yyyy'));
                 self.cclass().class_id(class_to_edit.class_id);
                 //self.cclass().description(class_to_edit.description);
-                $('#edit_class_editor').froalaEditor('html.set', class_to_edit.description);
+                //$('#edit_class_editor').froalaEditor('html.set', class_to_edit.description);
+                editor_instance_data4 = class_to_edit.description;
                 self.cclass().class_size(class_to_edit.class_size);
                 self.cclass().enrollment_end_date();
                 self.cclass().enrollment_end_date_view(Date.parse(class_to_edit.enrollment_end_date).toString('dd MMM yyyy'));
@@ -2653,6 +2768,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             // EDIT EXISTING COURSE FOR TRAINING
             edittraining = function (course) {
+               if (CKEDITOR.instances.edit_course_editor) {
+                    CKEDITOR.instances.edit_course_editor.destroy(true); 
+                } 
                 var courseid = course.course_id;
 
                 var courseToEdit = findCourseById(courseid);
@@ -2664,7 +2782,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     self.createCourse().course_id(courseToEdit.course_id);
                     self.createCourse().name(courseToEdit.name);
                     //self.createCourse().description(courseToEdit.description);
-                    $('#edit_course_editor').froalaEditor('html.set', courseToEdit.description);
+                    //$('#edit_course_editor').froalaEditor('html.set', courseToEdit.description);
+                    editor_instance_data3 = courseToEdit.description;
                     self.createCourse().contact_email(courseToEdit.contact);
                     self.createCourse().cloud_onpremise().push(courseToEdit.prodcut_type);
                     self.createCourse().training_level().push(courseToEdit.training_level);
