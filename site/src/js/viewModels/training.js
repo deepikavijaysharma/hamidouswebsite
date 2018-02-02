@@ -325,7 +325,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }   
 
                     CKEDITOR.replace('communitycall_text', {
-                        uiColor: '#D3D3D3',
                         height: 500,
                         removePlugins: 'maximize'
                     });  
@@ -349,7 +348,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }   
 
                     CKEDITOR.replace('edit_com_call_editor', {
-                        uiColor: '#D3D3D3',
                         height: 500,
                         removePlugins: 'maximize'
                     });  
@@ -372,7 +370,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }   
 
                     CKEDITOR.replace('clone_com_call_editor', {
-                        uiColor: '#D3D3D3',
                         height: 500,
                         removePlugins: 'maximize'
                     });  
@@ -395,7 +392,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }   
 
                     CKEDITOR.replace('event_editor', {
-                        uiColor: '#D3D3D3',
                         height: 500,
                         removePlugins: 'maximize'
                     });  
@@ -417,16 +413,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     CKEDITOR.instances.course_editor.destroy(true);
                    }
                    
-                    //using below variable to restore data of desc field on modal close(secondary modal)
-                    // if (editor_instance2) {
-                    //     intermediate_data2 = editor_instance_data2;
-                    //     editor_instance2.destroy(true); 
-                    // }   
                     intermediate_data2 = editor_instance_data2;
                     CKEDITOR.replace('course_editor', {
-                        uiColor: '#D3D3D3',
                         height: 500,
                         removePlugins: 'maximize'
+                        
                     });  
                     $( "#course_modal" ).on( "ojbeforeclose", function( event, ui )
                     {
@@ -448,7 +439,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     intermediate_data1 = editor_instance_data1;
 
                     CKEDITOR.replace('add_class_editor', {
-                        uiColor: '#D3D3D3',
                         height: 500,
                         removePlugins: 'maximize'
                     });  
@@ -470,7 +460,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                    
                     intermediate_data3 = editor_instance_data3;
                     CKEDITOR.replace('edit_course_editor', {
-                        uiColor: '#D3D3D3',
                         height: 500,
                         removePlugins: 'maximize'
                     });  
@@ -493,7 +482,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     intermediate_data4 = editor_instance_data4;
 
                     CKEDITOR.replace('edit_class_editor', {
-                        uiColor: '#D3D3D3',
                         height: 500,
                         removePlugins: 'maximize'
                     });  

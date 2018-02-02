@@ -2001,6 +2001,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
               });
             };
             efreader.readAsDataURL(empphotopath);
+            editor_instance_empf_data = "";
         }
 
         //EDIT EMPLOYEE FEATURES observables
@@ -2676,6 +2677,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
 
         openaddnewefdialog = function () {
+            if (CKEDITOR.instances.txt2) {
+                CKEDITOR.instances.txt2.destroy(true); 
+            }
+            editor_instance_empf = "";   
+
             $("#addnewefdialog").ojDialog("open");
         }
         closeaddnewefdialog= function () {
