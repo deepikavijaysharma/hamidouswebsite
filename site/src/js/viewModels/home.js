@@ -2003,7 +2003,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
               });
             };
             efreader.readAsDataURL(empphotopath);
-            editor_instance_empf_data = "";
         }
 
         //EDIT EMPLOYEE FEATURES observables
