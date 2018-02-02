@@ -145,11 +145,11 @@ right: 4px;
 .wins .winsblock {
     position: relative;
 }
-.wins .my-filmstrip-item {
+/*.wins .my-filmstrip-item {
     width: 500px;
     height: 294px;
 }
-
+*/
 
 #ojChoiceId_basicSelect{
   max-width: 100%!important;
@@ -248,8 +248,13 @@ display:none;
   -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2) !important;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2) !important;
 }
-.ojDialogWrapper-modaleditdescempf_layer{
+/* .ojDialogWrapper-modaleditdescempf_layer{
   z-index: 1051;
+} */
+#ojDialogWrapper-modaltitleslider_layer,#ojDialogWrapper-modaleditdescempf_layer,
+#ojDialogWrapper-modaldescempf_layer,#ojDialogWrapper-modaldescslider_layer,
+#ojDialogWrapper-modaledittitleslider_layer,#ojDialogWrapper-modaleditdescslider_layer{
+  z-index: 1052;
 }
 </style>
 <!------------------------------------SLIDER------------------------------------>
@@ -1423,7 +1428,6 @@ display:none;
             <div id="filmStripfeatured" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'hidden'}">
               <!-- ko foreach: empfeatlist -->
                 <!-- ko if: empfeaarchived == 'NO' -->
-                  <!-- ko if: empfeaid =='3' -->
                   <div class="oj-panel oj-panel-alt2 my-filmstrip-item1 efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
                     <div class="efadmin">
                       <!-- <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
@@ -1442,27 +1446,6 @@ display:none;
                       </div>
                     </div>
                   </div>
-                  <!-- /ko -->
-                  <!-- ko ifnot: empfeaid =='3' -->
-                  <div class="oj-panel oj-panel-alt2 my-filmstrip-item efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
-                    <div class="efadmin">
-                      <!-- <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
-                      <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
-                      <i class="fa fa-share-square-o admin" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures"></i> -->
-                      <i class="fa fa-pencil-square-o" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
-                      <i class="fa fa-trash-o" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
-                      <i class="fa fa-share-square-o" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
-                    </div>
-                    <div class="employee_c">
-                      <div class="emp_details">
-                        <div class="slash"></div>
-                        <a onclick="empf1(this.id)" data-bind="attr:{'id':empfeaid}">
-                          <span data-bind="html: empfeaheading"></span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /ko -->
                 <!-- /ko -->
               <!-- /ko -->
             </div>
@@ -1483,6 +1466,22 @@ display:none;
     </div>
   </div>
 </div>
+
+<!-- Employee Details Popup -->
+<div id="empfwrapper">
+  <!-- ko foreach: empdeatilsmatched -->
+  <div style="display:none" id="empf1" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
+    <div class="oj-dialog-header oj-helper-clearfix">
+      <span id="dialogTitleId" class="oj-dialog-title" data-bind="attr: {id: dempfeaid}, html:dempfeaheading"></span>
+    </div>
+    <div class="oj-dialog-body empf dialogbody">
+      <img data-bind="attr:{'src':dempfeabg}" align="right">
+      <div data-bind="html:dempfeatext"></div>
+    </div>
+  </div>
+  <!-- /ko -->
+</div>
+<!-- Employee Details Popup End-->
 
 <!------------------------------------Governance Board------------------------------------>
 <div class="oj-row row7 newrow governanceboard">
@@ -1517,22 +1516,6 @@ display:none;
     </div>
   </div>
 </div>
-
-<!-- Employee Details Popup -->
-<div id="empfwrapper">
-  <!-- ko foreach: empdeatilsmatched -->
-  <div style="display:none" id="empf1" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 50%;'}}">
-    <div class="oj-dialog-header oj-helper-clearfix">
-      <span id="dialogTitleId" class="oj-dialog-title" data-bind="attr: {id: dempfeaid}, html:dempfeaheading"></span>
-    </div>
-    <div class="oj-dialog-body empf dialogbody">
-      <img data-bind="attr:{'src':dempfeabg}" align="right">
-      <div data-bind="html:dempfeatext"></div>
-    </div>
-  </div>
-  <!-- /ko -->
-</div>
-<!-- Employee Details Popup End-->
 
 <!------------------------------------OUR SERVICES POPUPS------------------------------------>
 
@@ -2109,7 +2092,7 @@ display:none;
           </div><br> -->
           <br>
           <div class="oj-sm-12">
-            <button onclick="openeditslidertitlemodal()">Add Banner Title</button>
+            <button onclick="openeditslidertitlemodal()">Add/Edit Banner Title</button>
             <label class="required">*</label>
           </div><br><br>
 
@@ -2134,7 +2117,7 @@ display:none;
           </div><br> -->
           <br>
           <div class="oj-sm-12">
-            <button onclick="openeditsliderdescriptionmodal()">Add Banner Description</button>
+            <button onclick="openeditsliderdescriptionmodal()">Add/Edit Banner Description</button>
             <label class="required">*</label>
           </div><br><br>
 
@@ -2970,7 +2953,7 @@ display:none;
         </div> -->
         <br>
         <div class="oj-sm-12">
-          <button onclick="openeditempfdescriptionmodal()">Edit Employee Features Text</button>
+          <button onclick="openeditempfdescriptionmodal()">Add/Edit Employee Features Text</button>
           <label class="required">*</label>
         </div><br><br>
       </div>
