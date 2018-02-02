@@ -18,6 +18,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             /*---------------------------------ADMIN----------------------------------*/
+            // ADMIN VIEW
+            self.switchadminview=ko.observable(false);
             // CREATE COURSE
             self.coursetitle = ko.observable('');
             self.courselink = ko.observable('');
@@ -59,30 +61,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.subcategory = ko.observable('');
 
             // CREATE COMMUNITY CALL
-            self.calltitle = ko.observable('');
-            self.callspkr = ko.observable('');
-            self.calldesignation = ko.observable('');
-            self.date = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
-            self.starttime = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
-            self.callduration = ko.observable('');
-            self.callsdate = ko.observable('');
-            self.calltime = ko.observable('');
-            self.callvenue = ko.observable('');
-            self.calllink = ko.observable('');
-            self.calldialin = ko.observable('');
-            self.calldesc = ko.observable('');
-            self.reflink = ko.observable('');
-            self.callrecordinglink = ko.observable('');
-            self.callroles = ko.observable('');
-            self.callmode = ko.observable('');
             self.communityCallList = ko.observableArray([]);
-            self.organizerEmail = ko.observable('');
-            self.topic = ko.observable('');
-            self.invite = ko.observable('');
 
             self.courselist = ko.observableArray([]);
             self.reporteelist = ko.observableArray([]);
-
+            var sdatetime;
+            var edatetime;
 
             // REPORTEE
             self.selectreportees = ko.observableArray([]);
@@ -151,11 +135,26 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 training_type: ko.observable(''),
                 status: ko.observable(''),
                 categories: ko.observableArray([]),
+                categories_all:ko.observableArray([]),
                 classes: ko.observableArray([])
             });
 
 
             self.rolelist = ko.observableArray([]);
+
+            var editor_instance;
+            //below variable stores data in modal ..it gets updated on desc modal close
+            var editor_instance_data;
+
+            var intermediate_data;        
+            var intermediate_data1 = "";
+            var editor_instance_data1 = "";  
+            var intermediate_data2 = "";
+            var editor_instance_data2 = "";
+            var intermediate_data3 = "";
+            var editor_instance_data3 = "";          
+            var intermediate_data4 = "";
+            var editor_instance_data4 = "";
 
 
             // EVENT HANDLER FOR ROLE SELECTION
@@ -164,9 +163,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             //EVENT HANDLE FOR CATEGORY SELECTION
-            categorySelected = function (event, ui) {
-                populateSubcategory(ui.value);
-            }
+            // categorySelected = function (event, ui) {
+            //     populateSubcategory(ui.value);
+            // }
 
             // POPULLATE CATEGORY BASED ON ROLE
             populateCategory = function (role) {
@@ -193,7 +192,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             getRoleData = function () {
-                $.getJSON("https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/getFiltersV2").
+                $.getJSON(trainingbaseurl + "getFiltersV2").
                 then(function (reasons) {
 
                     // Get Roles in select in REQUEST TRAINING
@@ -214,55 +213,29 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             //-----------------   COMMUNITY CALL   ------------------------//
             //Development url for create, edit, clone and delete community call
-            this.patternValue = ko.observableArray(["dd-MMM-yy hh:mm"]);
-            this.dateTimeConverter = oj.Validation.converterFactory(oj.ConverterFactory.CONVERTER_TYPE_DATETIME).
-            createConverter({
-                pattern: "dd-MMM-yy hh:mm"
-            });
             self.callname = ko.observable('');
-            self.callspkr = ko.observable('');
-            self.calldesignation = ko.observable('');
-            self.starttime = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
             self.callduration = ko.observable('');
-            self.date = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
-            self.callsdate = ko.observable('');
-            self.calltime = ko.observable('');
-            self.callvenue = ko.observable('');
-            self.calllink = ko.observable('');
-            self.calldialin = ko.observable('');
+            self.comCallDate = ko.observable();
             self.calldesc = ko.observable('');
             self.callrecordlink = ko.observable('');
             self.selectedrole = ko.observableArray([]);
             self.selectedcallmode = ko.observableArray([]);
             self.callmodes = ko.observableArray(['Virtual', 'Town Hall']);
-            self.addiontal_link = ko.observable('');
             self.organizerEmail = ko.observable('');
             self.topic = ko.observable('');
-            self.invite = ko.observable('');
             self.com_call_keyevent = ko.observable('');
 
             resetcall = function () {
                 self.callname('');
-                self.callspkr('');
-                self.calldesignation('');
-                self.starttime(oj.IntlConverterUtils.dateToLocalIso(new Date()));
-                self.callduration('');
-                self.date(oj.IntlConverterUtils.dateToLocalIso(new Date()));
-                self.callsdate('');
-                self.calltime('');
-                self.callvenue('');
-                self.calllink('');
-                self.calldialin('');
+                self.comCallDate('');
                 self.calldesc('');
-                self.reflink('');
                 self.callrecordlink('');
                 self.selectedrole([]);
                 self.organizerEmail('');
                 self.topic('');
-                self.invite('');
-                self.addiontal_link('');
                 self.com_call_keyevent(false);
-
+                self.selectedcallmode('');
+                self.callduration('');
             }
 
 
@@ -280,66 +253,50 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     alert("Please enter Community call name");
                     return;
                 }
-
-                if (self.callspkr().length == 0) {
-                    alert("Please enter name of the speaker");
+                if (self.topic().length == 0) {
+                    alert("Please enter topic");
                     return;
                 }
-
-
-                if (self.calldesc().length == 0) {
-
-                    alert("Please enter description");
-                    return;
+                if (self.selectedrole().length == 0) {
+                    alert("Please select role");
+                }                
+                if (self.selectedcallmode().length == 0) {
+                    alert("Please select mode of delivary");
                 }
-                if (self.calldesc().length == 0) {
-
-                    alert("Select atleast one role");
-                    return;
-                }
-
                 if (self.callduration().length == 0) {
 
                     alert("Please enter duration");
                     return;
-                } else if (typeof self.callduration() == 'number') {
-                    alert("Please enter valid duration in minute(s)");
+                }      
+                if (self.comCallDate().length == 0) {
+
+                    alert("Please date and time");
                     return;
-                }
+                }   
+                if (self.organizerEmail().length == 0) {
 
-                if (self.selectedrole().length == 0) {
-                    alert("Please select role");
-                }
+                    alert("Please organizer email");
+                    return;
+                }   
 
-                if (self.selectedcallmode().length == 0) {
-                    alert("Please select mode of delivary");
-                }
                 selectedrole = ko.toJSON(self.selectedrole()).replace('[', '').replace(']', '').replace(/"/g, '');
                 selectedcallmode = ko.toJSON(self.selectedcallmode()).replace('[', '').replace(']', '').replace(/"/g, '');
-
+                var com_call_dt = self.comCallDate().replace("T", " ");
+                var desc_data = CKEDITOR.instances.communitycall_text.getData();
                 var call = {
                     name: self.callname(),
-                    speaker: self.callspkr(),
-                    designation: self.calldesignation(),
-                    call_date: self.date().split('T')[0],
-                    call_time: self.starttime().split('T')[1].substring(0, 5),
-                    duration: self.callduration(),
-                    locn: self.callvenue(),
-                    meetinglink: self.calllink(),
-                    dialin: self.calldialin(),
-                    description: self.calldesc(),
-                    reflink: self.reflink(),
-                    user: ssoemail,
-                    recording_link: self.callrecordlink(),
-                    mode_of_call: selectedcallmode,
-                    role: selectedrole,
-                    addl_link: self.addiontal_link(),
-                    organizer_email: self.organizerEmail(),
                     topic: self.topic(),
-                    invite: self.invite(),
-                    keyevent: self.com_call_keyevent()!=true?'No':'Yes' 
-
+                    role: selectedrole,
+                    mode_of_call: selectedcallmode,
+                    call_date: com_call_dt,//self.date().split('T')[0],
+                    duration: self.callduration(),
+                    organizer_email: self.organizerEmail(),
+                    recording_link: self.callrecordlink(),
+                    keyevent: self.com_call_keyevent()!=true?'No':'Yes' ,
+                    description: editor_instance_data,//$('#communitycall_text').val(),
+                    user: ssoemail
                 }
+                console.log("create com call : "+ko.toJSON(call));
                 $.ajax({
                     url: community_call_url,
                     cache: false,
@@ -354,13 +311,213 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
                 });
+                editor_instance_data = "";
                 $("#createcommunitycall_id").ojDialog("close");
 
             }
 
+            opendescriptionmodal = function () {
+                   editor_instance = CKEDITOR.instances.communitycall_text;
+                   //using below variable to restore data of desc field on modal close(secondary modal)
+                    if (editor_instance) {
+                        intermediate_data = editor_instance_data;
+                        editor_instance.destroy(true); 
+                    }   
+
+                    CKEDITOR.replace('communitycall_text', {
+                        height: 500,
+                        removePlugins: 'maximize'
+                    });  
+                    $( "#modaldesc" ).on( "ojbeforeclose", function( event, ui )
+                    {
+                        editor_instance_data = CKEDITOR.instances.communitycall_text.getData();
+                    } );
+
+                CKEDITOR.instances.communitycall_text.setData(intermediate_data);
+                $("#modaldesc").ojDialog("open");
+                                   
+            }
+
+            openEditComCallDescriptionModal = function () {
+
+                   editor_instance = CKEDITOR.instances.edit_com_call_editor;
+                    //using below variable to restore data of desc field on modal close(secondary modal)
+                    if (editor_instance) {
+                        intermediate_data = editor_instance_data;
+                        editor_instance.destroy(true); 
+                    }   
+
+                    CKEDITOR.replace('edit_com_call_editor', {
+                        height: 500,
+                        removePlugins: 'maximize'
+                    });  
+                    $( "#editcomcall_desc_modal" ).on( "ojbeforeclose", function( event, ui )
+                    {
+                        editor_instance_data = CKEDITOR.instances.edit_com_call_editor.getData();
+                    } );
+                    CKEDITOR.instances.edit_com_call_editor.setData(intermediate_data);
+                    $("#editcomcall_desc_modal").ojDialog("open");
+                                   
+            } 
+
+                openCloneComCallDescriptionModal = function () {
+
+                   editor_instance = CKEDITOR.instances.clone_com_call_editor;
+                    //using below variable to restore data of desc field on modal close(secondary modal)
+                    if (editor_instance) {
+                        intermediate_data = editor_instance_data;
+                        editor_instance.destroy(true); 
+                    }   
+
+                    CKEDITOR.replace('clone_com_call_editor', {
+                        height: 500,
+                        removePlugins: 'maximize'
+                    });  
+                    $( "#clonecomcall_desc_modal" ).on( "ojbeforeclose", function( event, ui )
+                    {
+                        editor_instance_data = CKEDITOR.instances.clone_com_call_editor.getData();
+                    } );
+                    CKEDITOR.instances.clone_com_call_editor.setData(intermediate_data);
+                    $("#clonecomcall_desc_modal").ojDialog("open");
+                                   
+            }   
+
+                openEventDescriptionModal = function () {
+
+                   editor_instance = CKEDITOR.instances.event_editor;
+                    //using below variable to restore data of desc field on modal close(secondary modal)
+                    if (editor_instance) {
+                        intermediate_data = editor_instance_data;
+                        editor_instance.destroy(true); 
+                    }   
+
+                    CKEDITOR.replace('event_editor', {
+                        height: 500,
+                        removePlugins: 'maximize'
+                    });  
+                    $( "#event_desc_modal" ).on( "ojbeforeclose", function( event, ui )
+                    {
+                        editor_instance_data = CKEDITOR.instances.event_editor.getData();
+                    } );
+                    CKEDITOR.instances.event_editor.setData(intermediate_data);
+                    $("#event_desc_modal").ojDialog("open");
+                                   
+            }      
+
+                openCourseDescriptionModal = function () {
+
+                   //var editor_instance2 = CKEDITOR.instances.course_editor;
+
+                   if(CKEDITOR.instances.course_editor){
+                    intermediate_data2 = editor_instance_data2;
+                    CKEDITOR.instances.course_editor.destroy(true);
+                   }
+                   
+                    intermediate_data2 = editor_instance_data2;
+                    CKEDITOR.replace('course_editor', {
+                        height: 500,
+                        removePlugins: 'maximize'
+                        
+                    });  
+                    $( "#course_modal" ).on( "ojbeforeclose", function( event, ui )
+                    {
+                        //alert("--------");
+                        editor_instance_data2 = CKEDITOR.instances.course_editor.getData();
+                    } );
+                    CKEDITOR.instances.course_editor.setData(intermediate_data2);
+                    $("#course_modal").ojDialog("open");
+                                   
+                }      
+
+                openAddClassDescriptionModal = function () {
+
+                    //using below variable to restore data of desc field on modal close(secondary modal)
+                    if (CKEDITOR.instances.add_class_editor) {
+                        intermediate_data1 = editor_instance_data1;
+                        CKEDITOR.instances.add_class_editor.destroy(true); 
+                    }   
+                    intermediate_data1 = editor_instance_data1;
+
+                    CKEDITOR.replace('add_class_editor', {
+                        height: 500,
+                        removePlugins: 'maximize'
+                    });  
+                    $( "#add_class_modal" ).on( "ojbeforeclose", function( event, ui )
+                    {
+                        editor_instance_data1 = CKEDITOR.instances.add_class_editor.getData();
+                    } );
+                    CKEDITOR.instances.add_class_editor.setData(intermediate_data1);
+                    $("#add_class_modal").ojDialog("open");
+                                   
+            }   
+
+                openEditCourseDescriptionModal = function () {
+
+                   if(CKEDITOR.instances.edit_course_editor){
+                    intermediate_data3 = editor_instance_data3;
+                    CKEDITOR.instances.edit_course_editor.destroy(true);
+                   }
+                   
+                    intermediate_data3 = editor_instance_data3;
+                    CKEDITOR.replace('edit_course_editor', {
+                        height: 500,
+                        removePlugins: 'maximize'
+                    });  
+                    $( "#edit_course_modal" ).on( "ojbeforeclose", function( event, ui )
+                    {
+                        //alert("--------");
+                        editor_instance_data3 = CKEDITOR.instances.edit_course_editor.getData();
+                    } );
+                    CKEDITOR.instances.edit_course_editor.setData(intermediate_data3);
+                    $("#edit_course_modal").ojDialog("open");
+                                   
+            }  
+            openEditClassDescriptionModal = function () {
+
+                    //using below variable to restore data of desc field on modal close(secondary modal)
+                    if (CKEDITOR.instances.edit_class_editor) {
+                        intermediate_data4 = editor_instance_data4;
+                        CKEDITOR.instances.edit_class_editor.destroy(true); 
+                    }   
+                    intermediate_data4 = editor_instance_data4;
+
+                    CKEDITOR.replace('edit_class_editor', {
+                        height: 500,
+                        removePlugins: 'maximize'
+                    });  
+                    $( "#edit_class_modal" ).on( "ojbeforeclose", function( event, ui )
+                    {
+                        editor_instance_data4 = CKEDITOR.instances.edit_class_editor.getData();
+                    } );
+                    CKEDITOR.instances.edit_class_editor.setData(intermediate_data4);
+                    $("#edit_class_modal").ojDialog("open");
+                                   
+            } 
+
             //----------------------- END OF COMMUNITY CALL  ---------------------//
             openCommunityCallDialog = function () {
+                //CKEDITOR.replace('communitycall_text'); 
+                // CKEDITOR.replace( 'communitycall_text', {
+                //     language: 'fr',
+                //     uiColor: '#9AB8F3',
+                //     height: 500
+                // }); 
+
+                //below code is used to clear the desc field on main modal of create com call
+                editor_instance = CKEDITOR.instances.communitycall_text;
+
+                    if (editor_instance) {
+                        editor_instance.destroy(true); 
+                    }
+                    editor_instance_data = "";   
+
+                //     CKEDITOR.replace('communitycall_text', {
+                //         uiColor: '#9AB8F3',
+                //         height: 500,
+                //         //removePlugins: 'maximize'
+                //     });  
                 $('#createcommunitycall_id').ojDialog("open");
+
             }
 
 
@@ -548,18 +705,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             /*----------------------------------PLACEHOLDER SELECT ROLE POPUP----------------------------------*/
             self.emptyPlaceholder = ko.observable(false);
 
-            self.handleAttached = function (info) {
-                // Implement if needed
-            };
 
             self.closeRole = function () {
                 $("#modalDialog1").ojDialog("close")
             };
 
             //EVENT HANDLE FOR CATEGORY SELECTION
-            categorySelected = function (event, ui) {
-                populateSubcategory(ui.value);
-            }
             self.openReqtraining = function () {
                 self.rtrname(ssoemail);
                 $("#trainingDialog").ojDialog("open");
@@ -621,7 +772,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 // ITERATE THROUGH THE LIST OF COURSES TO FIND A MATCH FOR THE COURSE ID
                 for (var i = 0; i < self.courselist.length; i++) {
                     var course = self.courselist[i];
-                    console.log(course.course_id);
+                    // console.log(course.course_id);
                     if (course.course_id === courseid) {
                         return course;
                     }
@@ -730,6 +881,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             searchcourses = function () {
+                if(self.switchadminview()){
+                    alert("This feature is diabled in Admin Mode");
+                    return;
+                }
                 self.searchfetchcourses();
             }
             /*-----------------------   GET COURSES LIST   ----------------------*/
@@ -744,11 +899,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     method: 'GET',
                     headers: {
                         free_text_search: '',
-                        email: ssoemail
+                        email: ssoemail,
+                        admin_view:self.switchadminview()==true?'Yes':'No'
                     },
                     success: function (allcourses) {
                         self.courselist = allcourses.courses;
-                        self.processCoursesFromService(allcourses);
+                        self.processCoursesFromService(allcourses.courses);
                         self.getCourseIdFromUrl();
 
                     },
@@ -760,6 +916,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.fetchcourses();
 
             self.resetCourseFilters = function () {
+                if(self.switchadminview()){
+                    alert("This feature is diabled in Admin Mode");
+                    return;
+                }
                 setuncheck('category');
                 setuncheck('prodtype');
                 setuncheck('traininglevel');
@@ -792,7 +952,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         },
                         success: function (allcourses) {
                             self.courselist = allcourses.courses;
-                            self.processCoursesFromService(allcourses);
+                            self.processCoursesFromService(allcourses.courses);
                             self.getCourseIdFromUrl();
                         },
                         error: function (xhr) {
@@ -803,6 +963,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             self.refinecourses = function () {
+                if(self.switchadminview()){
+                    alert("This feature is diabled in Admin Mode");
+                    return;
+                }
                 var selectedcategories = ko.toJSON(self.refinecategories()).replace('[', '').replace(']', '').replace(/"/g, '');
                 var selectedproductypes = ko.toJSON(self.refineproducttype()).replace('[', '').replace(']', '').replace(/"/g, '');
                 var selectedtraininglevels = ko.toJSON(self.refinetraininglevel()).replace('[', '').replace(']', '').replace(/"/g, '');
@@ -822,7 +986,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     method: 'GET',
                     headers: headerobj,
                     success: function (allcourses) {
-                        self.processCoursesFromService(allcourses);
+                        self.processCoursesFromService(allcourses.courses);
                     },
                     error: function (xhr) {
                         // alert(xhr);
@@ -946,15 +1110,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.processCoursesFromService = function (allcourses) {
 
                 self.categories([]);
-                for (var k = 0; k < allcourses.courses.length; k++) {
+                for (var k = 0; k < allcourses.length; k++) {
                     startday = ''; //allcourses.courses[k].schedule[0];
-                    var curcourse = allcourses.courses[k];
+                    var curcourse = allcourses[k];
                     var catagorylist = curcourse.categories;
+                    var category_all_List=curcourse.categories_all;
                     var catlistString = ko.toJSON(self.refinecategories());
                     var enrolled = "";
                     if (curcourse.classes.length > 0) {
                         var classCount = curcourse.classes.length;
                         for (var i = 0; i < classCount; i++) {
+                            if(curcourse.classes[i].enrollment_status==undefined){
+                                curcourse.classes[i].enrollment_status="Not Enrolled";
+                            }
                             if (curcourse.classes[i].enrollment_status != "Not Enrolled") {
                                 enrolled = curcourse.classes[i].enrollment_status;
                                 break;
@@ -965,12 +1133,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     for (var i = 0; i < catagorylist.length; i++) {
                         var categoryname = catagorylist[i].name;
                         var catid = catagorylist[i].id;
+                        var categoryAllId=category_all_List[i].category_id;
+                        var categoryAllName=category_all_List[i].name;
                         if (catlistString.length == 2 || catlistString.indexOf(catid) != -1) {
                             var categoryobj = self.getcategorybyname(categoryname);
                             categoryobj.courses.push({
                                 name: curcourse.name,
                                 description: curcourse.description,
-                                subdescription: curcourse.description.substring(0, 120) + '...',
+                                subdescription: curcourse.description!=undefined?curcourse.description.substring(0, 120) + '...':'',
                                 class_size: curcourse.class_size,
                                 prodcut_type: curcourse.prodcut_type,
                                 training_level: curcourse.training_level,
@@ -1048,7 +1218,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             // CHECK FOR ADMIN RIGHTS
             checkadminrights = function () {
-                
+                console.log('admin checked');
                 if (isAdmin) {
                     $("#tabs").ojTabs({
                         "disabledTabs": [5, 6]
@@ -1061,7 +1231,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         "disabledTabs": [5, 6, 7]
                     });
                     console.log("Hiding from user");
-                    $(".admin").css("display", "none");
+                    // $(".admin").css("display", "none");
+                    // $('.admin').hide();
+                    var appBanners = document.getElementsByClassName('admin'), i;
+                    
+                    for (var i = 0; i < appBanners.length; i ++) {
+                        appBanners[i].style.display = 'none';
+                    }
                 }
             }
 
@@ -1145,14 +1321,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             self.handleBindingsApplied = function (info) {
-                // Implement if needed
+                // checkadminrights();
             };
 
 
             self.handleDetached = function (info) {
-                // Implement if needed
+                // checkadminrights();
             };
 
+            
+            self.handleAttached = function (info) {
+                checkadminrights();
+                getStates();
+            };
 
             /*----------------------------------SEARCH----------------------------------*/
             self.currentValue = ko.observableArray();
@@ -1248,17 +1429,26 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                                 registration_link: events[i].link != undefined ? events[i].link : ''
 
                             });
-                        }
+                        }checkadminrights();
                     });
             }
 
             getAllEvents();
 
             // GET EVENTS END
-
+            eventCKInstance = function () {
+               editor_instance = CKEDITOR.instances.event_editor;
+                if (editor_instance) {
+                    editor_instance.destroy(true); 
+                }   
+                CKEDITOR.replace('event_editor', {
+                    uiColor: '#9AB8F3',
+                    height: 350,
+                    removePlugins: 'maximize'
+                });      
+            }
+            // var edit_ck_desc = CKEDITOR.instances.event_editor.getData();
             //CREATE EVENTS START
-            var sdatetime;
-            var edatetime;
             createEvent = function() {
                 // eventValidation();
                 // if(event_error_tracker > 0)
@@ -1270,7 +1460,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     location: self.event_location(),
                     start_time: sdatetime,
                     end_time: edatetime,
-                    description: self.event_description(),
+                    description: CKEDITOR.instances.event_editor.getData(),//self.event_description(),
                     key_event: self.is_key_event()!=true?'No':'Yes',
                     customer_name:self.customerName(),
                     // event_feedback:self.eventFeedback(),
@@ -1298,11 +1488,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             //CREATE EVENTS END
 
             openCreateEventDialog = function() {
+                editor_instance = CKEDITOR.instances.event_editor;
+
+                if (editor_instance) {
+                    editor_instance.destroy(true); 
+                }
+                editor_instance_data = "";   
+
                 resetEvent();
                 $('#clone_modal_footer').hide();
                 $('#edit_modal_footer').hide();
                 $('#create_modal_footer').show();
-                $("#createevents_id" ).ojDialog( {title: "Create Event" } );                
+                $('#edit_desc_event').hide();
+                $('#add_desc_event').show();
+                $("#createevents_id" ).ojDialog( {title: "Create Event" } );   
+                eventCKInstance();
                 $('#createevents_id').ojDialog("open");
             }
 
@@ -1367,7 +1567,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     location: self.event_location(),
                     start_time: sdatetime,
                     end_time: edatetime,
-                    description: self.event_description(),
+                    description: editor_instance_data,//CKEDITOR.instances.event_editor.getData(),//self.event_description(),
                     key_event: self.is_key_event()!=true?'No':'Yes',
                     customer_name:self.customerName(),
                     // event_feedback:self.eventFeedback(),
@@ -1375,6 +1575,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     partner_name: self.partnerName(),
                     link: self.registrationLink()
                 }
+                console.log("clone event data : "+ko.toJSON(clone_event_data));
                 $.ajax({
                     url: create_event_api,
                     cache: false,
@@ -1394,6 +1595,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             openCloneEventModal = function (clone_event) {
                 self.event_name(clone_event.name);
                 self.event_description(clone_event.description);
+                editor_instance_data = clone_event.description;
+                //$('#event_editor').froalaEditor('html.set', clone_event.description);
                 self.event_location(clone_event.location);
                 self.event_starttime(clone_event.start_time);
                 self.event_endtime(clone_event.end_time);
@@ -1406,13 +1609,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 $("#create_modal_footer").hide();
                 $("#edit_modal_footer").hide();
                 $("#clone_modal_footer").show();
-                $("#createevents_id" ).ojDialog( {title: "Clone Event" } );                
+                $("#add_desc_event").hide();
+                $("#edit_desc_event").show();
+                $("#createevents_id" ).ojDialog( {title: "Clone Event" } );     
+                eventCKInstance();
                 $("#createevents_id").ojDialog("open");
             }
             var event_no_for_edit;
             openEditEventModal = function (edit_event) {
                 self.event_name(edit_event.name);
                 self.event_description(edit_event.description);
+                editor_instance_data = edit_event.description;
+                //$('#event_editor').froalaEditor('html.set', edit_event.description);
                 self.event_location(edit_event.location);
                 self.event_starttime(edit_event.start_time);
                 self.event_endtime(edit_event.end_time);
@@ -1426,7 +1634,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 $("#create_modal_footer").hide();
                 $("#clone_modal_footer").hide();
                 $("#edit_modal_footer").show();
+                $('#add_desc_event').hide();
+                $('#edit_desc_event').show();
                 $("#createevents_id" ).ojDialog( {title: "Edit Event" } );
+                eventCKInstance();
                 $("#createevents_id").ojDialog("open");
                 
             }
@@ -1443,7 +1654,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     location: self.event_location(),
                     start_time: sdatetime,
                     end_time: edatetime,
-                    description: self.event_description(),
+                    description: editor_instance_data,//CKEDITOR.instances.event_editor.getData(),//self.event_description(),
                     key_event: self.is_key_event()!=true?'No':'Yes',
                     customer_name:self.customerName(),
                     // event_feedback:self.eventFeedback(),
@@ -1451,6 +1662,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     partner_name: self.partnerName(),
                     link: self.registrationLink()
                 }
+                console.log("edit event data : "+ko.toJSON(edit_event_data));
                 $.ajax({
                     url: create_event_api,
                     cache: false,
@@ -1518,7 +1730,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             name: calls[i].name != undefined ? calls[i].name : '',
                             speaker: calls[i].speaker != undefined ? calls[i].speaker : '',
                             designation: calls[i].designation != undefined ? calls[i].designation : '',
-                            call_date: calls[i].call_date != undefined ? calls[i].call_date.split('T')[0] : '',
+                            call_date: calls[i].call_date != undefined ? calls[i].call_date : '',
                             call_time: calls[i].call_time != undefined ? calls[i].call_time.substring(0, 5) + " PT" : '',
                             callduration: calls[i].duration != undefined ? calls[i].duration + " mins" : 'NA',
                             location: calls[i].locn != undefined ? calls[i].locn : '',
@@ -1532,13 +1744,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             subdescription: calls[i].description != undefined ? calls[i].description.substring(0, 150) + '...' : '',
                             organizer_email: calls[i].organizer_email != undefined ? calls[i].organizer_email : '',
                             topic: calls[i].topic != undefined ? calls[i].topic : '',
+                            com_call_home_datetime : calls[i].call_date != undefined ? calls[i].call_date.replace("T"," ").replace("Z","") : '',
                             /*invite: calls[i].invite != undefined ? calls[i].invite : '',*/
                             invite: calls[i].call_id != undefined ? community_call_calendar_link+"/"+calls[i].call_id : '',
                             call_id: calls[i].call_id != undefined ? calls[i].call_id : '',
                             key_event_value: calls[i].keyevent != 'No' ? true : false
                         });
 
-                    }
+                    }checkadminrights();
                 });
             }
 
@@ -1562,37 +1775,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             showcommunitycallsdetails = function (ccalls) {
-                self.ccName('');
-                self.ccDate('');
-                self.ccSpeaker('');
-                self.ccDesignation('');
-                self.ccCallType('');
-                self.ccMeetingLink('');
-                self.ccRoles('');
-                self.ccDescription('');
-                self.ccDialin('');
-                self.ccAdditionalLinks('');
-                self.ccRecordingLinks('');
-                self.ccOrganizerEmail('');
-                self.ccTopic('');
-                self.ccInvite('');
-
                 // SET NEW VALUE
-                self.ccName(ccalls.name);
-                self.ccDate(ccalls.call_date);
-                self.ccSpeaker(ccalls.speaker);
-                self.ccDesignation(ccalls.designation);
-                self.ccCallType(ccalls.mode_of_call);
-                self.ccMeetingLink(ccalls.meetinglink);
-                self.ccRoles(ccalls.role);
                 self.ccDescription(ccalls.description);
-                self.ccDialin(ccalls.dialin);
-                self.ccAdditionalLinks(ccalls.addl_link);
-                self.ccRecordingLinks(ccalls.recording_link);
-                self.ccOrganizerEmail(ccalls.organizer_email);
-                self.ccTopic(ccalls.topic);
-                self.ccInvite(ccalls.invite);
-                self.ccId(ccalls.call_id);
                 $("#communitycallsdetails").ojDialog("open");
             }
 
@@ -1610,109 +1794,78 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             self.editccName = ko.observable();
-            self.editccDate = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
-            self.editccTime = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
+            self.editccDate = ko.observable();
             self.editccDuration = ko.observable();
-            self.editccVenue = ko.observable();
-            self.editccSpeaker = ko.observable();
-            self.editccDesignation = ko.observable();
             self.editccCallType = ko.observableArray([]);
-            self.editccMeetingLink = ko.observable();
             self.editccSelectedRoles = ko.observableArray([]);
             self.editccDescription = ko.observable();
-            self.editccDialin = ko.observable();
-            self.editccAdditionalLinks = ko.observable();
             self.editccRecordingLinks = ko.observable();
-
             self.editccOrganizerEmail = ko.observable();
             self.editccTopic = ko.observable();
-            self.editccInvite = ko.observable();
             self.edit_com_call_keyevent = ko.observable('');
 
             var edit_call_id;
-            editcommunitycall = function (edit_calls, param2) {
-
+            editcommunitycall = function (edit_calls, param) {
+                     if (editor_instance) {
+                        editor_instance.destroy(true); 
+                    } 
                 self.editccName('');
                 self.editccDate('');
-                self.editccTime('');
                 self.editccDuration('');
-                self.editccVenue('');
-                self.editccSpeaker('');
-                self.editccDesignation('');
                 self.editccCallType([]);
-                self.editccMeetingLink('');
                 self.editccSelectedRoles([])
                 self.editccDescription('');
-                self.editccDialin('');
-                self.editccAdditionalLinks('');
                 self.editccRecordingLinks('');
-
                 self.editccOrganizerEmail('');
                 self.editccTopic('');
-                self.editccInvite('');
                 self.edit_com_call_keyevent('');
 
                 // SET NEW VALUE
                 self.editccName(edit_calls.name);
                 self.editccDate(edit_calls.call_date);
-                timeString = edit_calls.call_time.substring(0, 5);
-                timeFormattedString = "T" + timeString + ":00";
-                self.editccTime(timeFormattedString);
                 self.editccDuration(edit_calls.callduration);
-                self.editccVenue(edit_calls.location);
-                self.editccSpeaker(edit_calls.speaker);
-                self.editccDesignation(edit_calls.designation);
-                self.editccAdditionalLinks(edit_calls.addl_link);
                 var callTypeString = edit_calls.mode_of_call;
                 var callTypeArray = callTypeString.split(",");
                 self.editccCallType(callTypeArray);
-                self.editccMeetingLink(edit_calls.meetinglink);
                 var roleString = edit_calls.role;
                 var roleArray = [];
                 roleArray = roleString.split(",");
                 self.editccSelectedRoles(roleArray)
                 self.editccDescription(edit_calls.description);
-                self.editccDialin(edit_calls.dialin);
+                editor_instance_data = edit_calls.description;
+                //$('#edit_com_call_editor').froalaEditor('html.set', edit_calls.description);
                 self.editccRecordingLinks(edit_calls.recording_link);
-
                 self.editccOrganizerEmail(edit_calls.organizer_email);
                 self.editccTopic(edit_calls.topic);
-                self.editccInvite(edit_calls.invite);
                 edit_call_id = edit_calls.call_id;
-
                 self.edit_com_call_keyevent(edit_calls.key_event_value);
+
                 $("#editcommunitycall_id").ojDialog("open");
+                
             }
-
-
 
             editCommunityCallValues = function () {
                 editSelectedRole = ko.toJSON(self.editccSelectedRoles()).replace('[', '').replace(']', '').replace(/"/g, '');
                 editSelectedCallMode = ko.toJSON(self.editccCallType()).replace('[', '').replace(']', '').replace(/"/g, '');
-
+                //var editor_data = CKEDITOR.instances.edit_com_call_editor.getData();//$('#edit_com_call_editor').val();
+                
                 var edit_community_call_data = {
+
                     NAME: self.editccName(),
-                    speaker: self.editccSpeaker(),
-                    designation: self.editccDesignation(),
-                    call_date: self.editccDate(),
-                    call_time: self.editccTime().substring(1, 6),
+                    call_date: self.editccDate().replace("T", " ").replace("Z",""),
                     duration: self.editccDuration().substring(0, 2),
-                    locn: self.editccVenue(),
-                    meetinglink: self.editccMeetingLink(),
-                    dialin: self.editccDialin(),
-                    description: self.editccDescription(),
+                    description: editor_instance_data,//editor_data,//self.editccDescription(),
                     user: ssoemail,
                     recording_link: self.editccRecordingLinks(),
                     mode_of_call: editSelectedCallMode,
                     role: editSelectedRole,
-                    addl_link: self.editccAdditionalLinks(),
                     organizer_email: self.editccOrganizerEmail(),
                     topic: self.editccTopic(),
-                    invite: self.editccInvite(),
                     call_id: edit_call_id,
                     keyevent: self.edit_com_call_keyevent()!=true?'No':'Yes'
 
                 }
+                console.log("edit data : "+ko.toJSON(edit_community_call_data));
                 $.ajax({
                     url: community_call_url,
                     cache: false,
@@ -1731,6 +1884,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         console.log("error" + err);
                     }
                 });
+                editor_instance_data = "";
                 $("#editcommunitycall_id").ojDialog("close");
 
             }
@@ -1795,38 +1949,25 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.clone_com_call_keyevent = ko.observable('');
 
             cloneCommunityCall = function (clone_calls, param2) {
-
+                    if (editor_instance) {
+                        editor_instance.destroy(true); 
+                    } 
                 self.cloneccName('');
                 self.cloneccDate('');
-                self.cloneccTime('');
                 self.cloneccDuration('');
-                self.cloneccVenue('');
-                self.cloneccSpeaker('');
-                self.cloneccDesignation('');
                 self.cloneccCallType([]);
-                self.cloneccMeetingLink('');
                 self.cloneccSelectedRoles([])
                 self.cloneccDescription('');
-                self.cloneccDialin('');
-                self.cloneccAdditionalLinks('');
                 self.cloneccRecordingLinks('');
-
                 self.cloneccOrganizerEmail('');
                 self.cloneccTopic('');
-                self.cloneccInvite('');
                 self.clone_com_call_keyevent('');
 
                 // SET NEW VALUE
                 self.cloneccName(clone_calls.name);
                 self.cloneccDate(clone_calls.call_date);
-                var timeString = clone_calls.call_time.substring(0, 5);
-                var timeFormattedString = "T" + timeString + ":00";
-                self.cloneccTime(timeFormattedString);
                 self.cloneccDuration(clone_calls.callduration);
-                self.cloneccVenue(clone_calls.location);
                 self.cloneccSpeaker(clone_calls.speaker);
-                self.cloneccDesignation(clone_calls.designation);
-                self.cloneccAdditionalLinks(clone_calls.addl_link);
                 var callTypeString = clone_calls.mode_of_call;
                 var callTypeArray = callTypeString.split(",");
                 self.cloneccCallType(callTypeArray);
@@ -1834,14 +1975,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var roleString = clone_calls.role;
                 var roleArray = [];
                 roleArray = roleString.split(",");
-                self.cloneccSelectedRoles(roleArray)
+                self.cloneccSelectedRoles(roleArray);
                 self.cloneccDescription(clone_calls.description);
-                self.cloneccDialin(clone_calls.dialin);
+                editor_instance_data = clone_calls.description;
+                //$('#clone_com_call_editor').froalaEditor('html.set', clone_calls.description);
                 self.cloneccRecordingLinks(clone_calls.recording_link);
-
                 self.cloneccOrganizerEmail(clone_calls.organizer_email);
                 self.cloneccTopic(clone_calls.topic);
-                self.cloneccInvite(clone_calls.invite);
                 self.clone_com_call_keyevent(clone_calls.key_event_value);
 
                 $("#clonecommunitycall_id").ojDialog("open");
@@ -1859,12 +1999,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     return;
                 }
 
-                if (self.cloneccSpeaker().length == 0) {
-                    alert("Please enter name of the speaker");
-                    return;
-                }
-
-
                 if (self.cloneccDescription().length == 0) {
 
                     alert("Please enter description");
@@ -1880,39 +2014,32 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                     alert("Please enter duration");
                     return;
-                } else if (typeof self.cloneccDuration() == 'number') {
-                    alert("Please enter valid duration in minute(s)");
-                    return;
                 }
+                //  else if (typeof self.cloneccDuration() == 'number') {
+                //     alert("Please enter valid duration in minute(s)");
+                //     return;
+                // }
 
                 if (self.cloneccCallType().length == 0) {
                     alert("Please select mode of delivary");
                 }
                 cloneSelectedrole = ko.toJSON(self.cloneccSelectedRoles()).replace('[', '').replace(']', '').replace(/"/g, '');
                 cloneSelectedcallmode = ko.toJSON(self.cloneccCallType()).replace('[', '').replace(']', '').replace(/"/g, '');
-
+                //var clone_editor_data = CKEDITOR.instances.clone_com_call_editor.getData();//$('#clone_com_call_editor').val();
                 var clone_call = {
                     name: self.cloneccName(),
-                    speaker: self.cloneccSpeaker(),
-                    designation: self.cloneccDesignation(),
-                    call_date: self.cloneccDate(),
-                    call_time: self.cloneccTime().split('T')[1].substring(0, 5),
+                    call_date: self.cloneccDate().replace("T", " ").replace("Z",""),
                     duration: self.cloneccDuration().substring(0, 2),
-                    locn: self.cloneccVenue(),
-                    meetinglink: self.cloneccMeetingLink(),
-                    dialin: self.cloneccDialin(),
-                    description: self.cloneccDescription(),
-                    addl_link: self.cloneccAdditionalLinks(),
+                    description: editor_instance_data,//clone_editor_data,//self.cloneccDescription(),
                     user: ssoemail,
                     recording_link: self.cloneccRecordingLinks(),
                     mode_of_call: cloneSelectedcallmode,
                     role: cloneSelectedrole,
                     organizer_email: self.cloneccOrganizerEmail(),
                     topic: self.cloneccTopic(),
-                    invite: self.cloneccInvite(),
                     keyevent: self.clone_com_call_keyevent()!=true?'No':'Yes'
                 }
-
+                console.log("clone data : "+ko.toJSON(clone_call));
                 $.ajax({
                     url: community_call_url,
                     cache: false,
@@ -1927,6 +2054,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }).fail(function (xhr, textStatus, err) {
                     console.log("error during clone" + err);
                 });
+                editor_instance_data ="";
                 $("#clonecommunitycall_id").ojDialog("close");
 
             }
@@ -1961,7 +2089,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                 console.log("apex_link : "+apex_link)
                 getCommunityCalls(apex_link);
-                
+
             }
 
             loadCommunitycall = function () {
@@ -2113,7 +2241,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             $("#reportees").ojDialog("close");
                         }
                     }).fail(function (xhr, textStatus, err) {
-                        self.showToastDialog("Enrollment Failed.", true, 2000);
+                        self.showToastDialog("Enrollment Failed.", false, 2000);
                         console.log(ko.toJSON(err));
                     });
                 }
@@ -2150,6 +2278,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             self.openCreatetraining = function () {
+                editor_instance = CKEDITOR.instances.course_editor;
+
+                    if (editor_instance) {
+                        editor_instance.destroy(true); 
+                    }
+                    editor_instance_data = "";                   
+
                 resetCourse();
                 $("#createcoursedialog").ojDialog("open");
             }
@@ -2164,6 +2299,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.createCourse().status([]);
                 self.createCourse().contact_email('');
                 self.createCourse().categories([]);
+                self.createCourse().categories_all([]);
                 self.selectedCategoriesForUi([]);
                 resetClass();
             }
@@ -2175,14 +2311,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.cclass().enrollment_end_date('');
                 self.cclass().enrollment_end_date_view('');
                 self.cclass().city('');
-                self.cclass().state('');
-                self.cclass().status('');
+                self.cclass().state([]);
+                self.cclass().status([]);
                 self.cclass().key_event(false);
                 resetSchedule();
-                $(".classlist").empty();
+                // $(".classlist").empty();
             }
 
             resetSchedule = function () {
+                self.cclass().schedules([]);
                 self.csdate('');
                 self.cedate('');
                 self.ctimezone([]);
@@ -2194,12 +2331,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 console.log("Creating course . . .");
                 var mappedCategories = new Array();
                 self.selectedCategoriesForCourse().forEach(function (element) {
-                    mappedCategories.push(element.id);
+                    mappedCategories.push(element.category_id);
                 });
+                self.cclass().status(self.cclass().status()[0]);
+                self.cclass().state(self.cclass().state()[0]);
 
                 var coursedata = {
                     name: self.createCourse().name(),
-                    description: self.createCourse().description(),
+                    description: editor_instance_data2,//editor_instance_data,//$('#course_editor').val(),//self.createCourse().description(),
                     cloud_onpremise: self.createCourse().cloud_onpremise()[0],
                     training_level: self.createCourse().training_level()[0],
                     training_type: self.createCourse().training_type()[0],
@@ -2214,7 +2353,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var reqBody = {
                     courses: courses
                 }
-                console.log(ko.toJSON(reqBody));
+                console.log("course data : "+ko.toJSON(reqBody));
 
                 var url = trainingbaseurl + "createCourses";
                 $.ajax({
@@ -2224,21 +2363,23 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(reqBody),
                     success: function (data) {
-                        self.showToastDialog("Course Successfully Created", true, 1000);
+                        self.showToastDialog("Course Successfully Created", true, 2000);
                         console.log("Course Successfully Created");
+                        self.fetchcourses();
                         $("#createcoursedialog").ojDialog("close");
                         resetCourse();
                         console.log(ko.toJSON(data));
-
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
-                    self.showToastDialog("Course Creation Failed!", true, 2000);
+                    self.showToastDialog("Course Creation Failed!", false, 2000);
                 });
+
+                editor_instance_data2 = "";
 
             }
 
-
+            
 
 
             getCategoryHierarchy = function () {
@@ -2281,7 +2422,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                 if (ui.value[0].id != undefined) {
                     self.selectedCategoriesForCourse.push({
-                        id: ui.value[0].id,
+                        category_id: ui.value[0].id,
                         name: ui.value[0].innerText
                     });
                     self.selectedCategoriesForUi.push(ui.value[0].innerText);
@@ -2302,7 +2443,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }
             }
 
+            self.state=ko.observableArray([]);
+            getStates=function(){
+                $.getJSON(trainingbaseurl + "getStates").
+                then(function (response) {
+                    self.state(response.states);
+                });
+            }
+
             openaddsclasswindow = function () {
+                editor_instance = CKEDITOR.instances.add_class_editor;
+
+                    if (editor_instance) {
+                        editor_instance.destroy(true); 
+                    }
+                    editor_instance_data = "";  
+
                 resetClass();
                 $("#addclasstoclass").ojDialog("open");
             }
@@ -2312,11 +2468,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 $('#scheduleblock').show();
             }
 
-            resetSchedule = function () {
-                self.schedule().start_date('');
-                self.schedule().end_date('');
-                self.schedule().timezone([]);
-            }
+            // resetSchedule = function () {
+            //     self.schedule().start_date('');
+            //     self.schedule().end_date('');
+            //     self.schedule().timezone([]);
+            // }
 
             addschedule = function () {
                 console.log(ko.toJSON(self.csdate()));
@@ -2339,7 +2495,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     scheduledclass += "<li>" + self.cclass().schedules()[i].start_date + " to " + self.cclass().schedules()[i].end_date + " " + self.cclass().schedules()[i].timezone + " time  <span style=\"color:red;cursor:pointer\" onclick=\"deleteSchedule(" + i + ")\">X</span></li>";
                 }
                 $(".addedschedule").append(scheduledclass);
-                resetSchedule();
+                // resetSchedule();
             }
 
             deleteSchedule = function (index) {
@@ -2366,11 +2522,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
                 self.createCourse().classes().push({
-                    description: self.cclass().description(),
+                    description: editor_instance_data1,//$('#add_class_editor').val(),//self.cclass().description(),
                     class_size: self.cclass().class_size(),
                     enrollment_end_date: Date.parse(self.cclass().enrollment_end_date()).toString('dd MMM yyyy'),
                     city: self.cclass().city(),
-                    state: self.cclass().state(),
+                    state: self.cclass().state()[0],
                     key_event: self.cclass().key_event()!=true?'No':'Yes',
                     status: self.cclass().status()[0],
                     schedules: self.cclass().schedules()
@@ -2378,6 +2534,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 $("#addclasstoclass").ojDialog("close");
                 updateCourseClass();
                 //resetClass();
+                editor_instance_data1 = "";
 
             }
 
@@ -2400,6 +2557,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.cclass().enrollment_end_date(self.cclass().enrollment_end_date().length > 0 ? Date.parse(self.cclass().enrollment_end_date()).toString('dd MMM yyyy') : self.cclass().enrollment_end_date_view());
 
                 self.cclass().key_event(self.cclass().key_event()?'Yes':'No');
+                self.cclass().description(editor_instance_data4);
+
                 var classlist = new Array();
                 classlist.push(self.cclass());
 
@@ -2417,19 +2576,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(reqbody),
                     success: function (data) {
-                        self.showToastDialog("Class Successfully Updated", true, 1000);
+                        self.showToastDialog("Class Successfully Updated", true, 2000);
                         console.log("Class Successfully Updated : " + ko.toJSON(data));
                         $("#editclass").ojDialog("close");
                         resetClass();
                         self.fetchcourses();
-                        updateCourseClass();
+                        $("#edittraining").ojDialog("close");
+                        
+                        
+                    
                         
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
-                    self.showToastDialog("Class Failed Updated", true, 2000);
+                    self.showToastDialog("Class Failed Updated", false, 2000);
                 });
-
+                editor_instance_data4 = "";
 
             }
 
@@ -2480,12 +2642,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(body),
                     success: function (data) {
-                        self.showToastDialog("Class Successfully Deleted", true, 1000);
+                        self.showToastDialog("Class Successfully Deleted", true, 2000);
                         console.log("Class Successfully Deleted");
                         $("#editclass").ojDialog("close");
                         resetClass();
                         self.fetchcourses();
-                        updateCourseClass();
+                        $("#edittraining").ojDialog("close");
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
@@ -2496,17 +2658,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             saveCourse = function () {
 
-                console.log("saving course . . .");
+                console.log("saving course . . .: "+ko.toJSON(self.selectedCategoriesForCourse()));
                 var mappedCategories = new Array();
                 self.selectedCategoriesForCourse().forEach(function (element) {
-                    mappedCategories.push(element.category_id);
+                    if(!mappedCategories.includes(element.category_id)){
+                        mappedCategories.push(element.category_id);
+                    }
                 });
                 self.cclass().status(self.cclass().status()[0]);
-
+                self.cclass().state(self.cclass().state()[0]);
                 var coursedata = {
                     course_id: self.createCourse().course_id(),
                     name: self.createCourse().name(),
-                    description: self.createCourse().description(),
+                    description: editor_instance_data3,//$('#edit_course_editor').val(),//self.createCourse().description(),
                     cloud_onpremise: self.createCourse().cloud_onpremise()[0],
                     training_level: self.createCourse().training_level()[0],
                     training_type: self.createCourse().training_type()[0],
@@ -2531,26 +2695,33 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(reqBody),
                     success: function (data) {
-                        self.showToastDialog("Course Successfully Updated", true, 1000);
+                        self.showToastDialog("Course Successfully Updated", true, 2000);
                         console.log("Course Successfully Updated");
+                        self.fetchcourses();
                         $("#edittraining").ojDialog("close");
                         resetCourse();
-                        self.fetchcourses();
+                        
+                       
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
-                    self.showToastDialog("Update Failed!", true, 2000);
+                    self.showToastDialog("Update Failed!", false, 2000);
                     self.fetchcourses();
                 });
-
+                editor_instance_data3 = ""
             }
 
 
             editClass = function (class_to_edit) {
-                resetClass();
+               if (CKEDITOR.instances.edit_class_editor) {
+                    CKEDITOR.instances.edit_class_editor.destroy(true); 
+                } 
+                // resetClass();
                 console.log(Date.parse(class_to_edit.enrollment_end_date).toString('dd MMM yyyy'));
                 self.cclass().class_id(class_to_edit.class_id);
-                self.cclass().description(class_to_edit.description);
+                //self.cclass().description(class_to_edit.description);
+                //$('#edit_class_editor').froalaEditor('html.set', class_to_edit.description);
+                editor_instance_data4 = class_to_edit.description;
                 self.cclass().class_size(class_to_edit.class_size);
                 self.cclass().enrollment_end_date();
                 self.cclass().enrollment_end_date_view(Date.parse(class_to_edit.enrollment_end_date).toString('dd MMM yyyy'));
@@ -2565,25 +2736,29 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             updateCourseClass = function () {
 
-                var htmlData = "";
+                var htmlData = "<ul>";
                 $(".classlist").empty();
                 var classList = self.createCourse().classes();
 
                 for (var i = 0; i < classList.length; i++) {
 
-                    htmlData += "<ul><li>";
+                    htmlData += "<li>";
                     htmlData += "<i class=\"fa fa-trash-o\" style=\"cursor: pointer;float: right;margin-left: 5px\" title=\"Delete Course\" onclick=\"deleteClass()\" target=\"_blank\"></i><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\" style=\"cursor: pointer;float: right;margin-left: 5px\" title=\"Edit Course\" onclick=\'editClass(" + JSON.stringify(classList[i]) + ")\' target=\"_blank\"></i>";
                     htmlData += "<p>City: " + classList[i].city + "</p>";
                     htmlData += "<P> Strength: " + classList[i].class_size + "</P>";
                     htmlData += "<P> Enroll By: " + Date.parse(classList[i].enrollment_end_date).toString('dd MMM yyyy') + "</P>";
-                    // htmlData += "</li></ul>"
+                    htmlData += "</li>"
                 }
+                htmlData += "</ul>";
                 $(".classlist").append(htmlData);
             }
 
 
             // EDIT EXISTING COURSE FOR TRAINING
             edittraining = function (course) {
+               if (CKEDITOR.instances.edit_course_editor) {
+                    CKEDITOR.instances.edit_course_editor.destroy(true); 
+                } 
                 var courseid = course.course_id;
 
                 var courseToEdit = findCourseById(courseid);
@@ -2594,7 +2769,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     console.log(ko.toJSON(courseToEdit));
                     self.createCourse().course_id(courseToEdit.course_id);
                     self.createCourse().name(courseToEdit.name);
-                    self.createCourse().description(courseToEdit.description);
+                    //self.createCourse().description(courseToEdit.description);
+                    //$('#edit_course_editor').froalaEditor('html.set', courseToEdit.description);
+                    editor_instance_data3 = courseToEdit.description;
                     self.createCourse().contact_email(courseToEdit.contact);
                     self.createCourse().cloud_onpremise().push(courseToEdit.prodcut_type);
                     self.createCourse().training_level().push(courseToEdit.training_level);
@@ -2602,6 +2779,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     self.createCourse().status().push(courseToEdit.status);
                     self.createCourse().classes(courseToEdit.classes);
                     self.createCourse().categories(courseToEdit.categories);
+                    self.createCourse().categories_all(courseToEdit.categories_all);
 
                     // self.cclass(courseToEdit.classes);
                     // RENDER MAPPED CATEGORY FOR THE COURSE
@@ -2618,9 +2796,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             renderCourseCategory = function () {
 
                 self.selectedCategoriesForUi([]);
-                for (var i = 0; i < self.createCourse().categories().length; i++) {
-                    self.selectedCategoriesForUi.push(self.createCourse().categories()[i].name);
-                    self.selectedCategoriesForCourse().push(self.createCourse().categories()[i]);
+                for (var i = 0; i < self.createCourse().categories_all().length; i++) {
+                    self.selectedCategoriesForUi.push(self.createCourse().categories_all()[i].name);
+                    self.selectedCategoriesForCourse().push(self.createCourse().categories_all()[i]);
 
                 }
 
@@ -2656,7 +2834,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         }
                     }).fail(function (xhr, textStatus, err) {
                         // alert(err);
-                        self.showToastDialog("Course Deletion Failed!", true, 2000);
+                        self.showToastDialog("Course Deletion Failed!", false, 2000);
                     });
 
                 }
@@ -2694,6 +2872,35 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     self.rtrcategory(ui.value[0].innerText);
                 }
             }
+
+            self.adminviewSelected=function(){
+                self.fetchcourses();
+            }
+
+
+            self.searchcontent=function(elem,data){
+                
+                if(self.switchadminview()){
+                    console.log("typing . . .");
+                    filtercourse(data.value);
+                }
+            }
+
+
+            filtercourse=function(value){
+
+                // Store the courses in a temp variable
+                var temcourses=new Array();
+                for(var i=0;i<self.courselist.length;i++){
+                    var course=self.courselist[i];
+                    if(course!=undefined &&course.name!=undefined && course.name.toLowerCase().includes(value.toLowerCase())){
+                        temcourses.push(course);
+                    }
+                }
+                self.processCoursesFromService(temcourses);
+
+            }
+            
         }
         return new DashboardViewModel();
     }

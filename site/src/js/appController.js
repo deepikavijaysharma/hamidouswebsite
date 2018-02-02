@@ -43,20 +43,24 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         'admin': {
           label: 'Admin'
         },
-		'archive': {
+        'archive': {
           label: 'Archive'
         },
-		'empfeaturearchive': {
+        'empfeaturearchive': {
           label: 'Employee Feature Archive'
         },
-		'keydatesarchives': {
+        'keydatesarchives': {
           label: 'Key Dates Archive'
+        },
+        'reports': {
+          label: 'Reports'
         }
       });
       oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
 
       // Navigation setup
-      var navData = [{
+      var navData = [
+        {
           name: 'Home',
           id: 'home'
         },
@@ -68,7 +72,10 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
           name: 'Tools and Resources',
           id: 'tools'
         }
-
+        // {
+        //   name: 'Reports',
+        //   id: 'reports'
+        // }
       ];
       self.navDataSource = new oj.ArrayTableDataSource(navData, {
         idAttribute: 'id'
@@ -94,17 +101,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         }
       }
 
-      initsso = function () {
-        if (ssoemail.length == 0) {
-          self.ssowindow = window.open("http://solutionengineering.us.oracle.com/seaas/");
-        }
-      }
-
-      closesso = function () {
-        if (ssoemail.length > 0) {
-          self.ssowindow = window.open("https://login-stage.oracle.com:443/oam/server/logout", target = "_self");
-        }
-      }
+     
 
       getemailfromcookie = function () {
 
@@ -119,26 +116,6 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
             a[b[0]] = b[1];
             return a;
           }, {})["ORA_UCM_INFO"];
-
-        // var w = document.cookie.trim().split(";");
-
-        // var arr = "";
-
-        // for (var j=0; j<w.length; j++) {
-        //     if (w[j].match("ORA_UCM_INFO")) 
-        //     {
-        //       arr = j;
-        //       break;    
-        //     }
-        // }
-
-        // var y = w[arr].split("~");
-
-        // for (var r=2; r<y.length-1; r++) {
-        //       var sname = y[r]+" ";
-        //       console.log(sname);
-        // }
-
         user = typeof user !== "undefined" ? user : "";
         var n = user.lastIndexOf("~");
 
@@ -148,41 +125,50 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
           ssoemail = email;
           // ssoname = sname;
         } else {
-          ssoemail = "";
-          // ssoemail = "premraj.sahu@oracle.com";
-          
+          ssoemail = "";          
         }
       }
+
+      initsso = function () {
+        if (ssoemail.length == 0) {
+          self.ssowindow = window.open("http://solutionengineering.us.oracle.com/seaas/");
+        }
+      }
+
+      closesso = function () {
+        if (ssoemail.length > 0 && self.ssowindow!=undefined) {
+          self.ssowindow.close();
+        }
+      }
+      logoutUser = function () {
+        if (ssoemail.length > 0) {
+          self.ssowindow = window.open("https://login-stage.oracle.com:443/oam/server/logout", target = "_self");
+        }
+      }
+
+      getemailfromcookie();
+      initsso();
       
-
-      // checkadmin=function(){
-      //   var checkurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/training/isAdmin";
-      //   if (ssoemail.length > 0) {
-      //     console.log("Admin check commenced");
-      //     $.ajax({
-      //       url: checkurl,
-      //       method: 'GET',
-      //       headers: {
-      //           email: ssoemail
-      //       },
-      //       success: function (data) {
-      //         isAdmin=data.is_admin;
-      //         newUserAdminCheck=true;
-      //       },
-      //       error: function (xhr) {
-      //           //alert(xhr);
-      //           newUserAdminCheck=false;
-      //       }
-      //   });
-      //   }
-      // }
-
       setInterval(function () {
         getemailfromcookie();
         isloggedin();
+        closesso();
       }, 500);
 
- 
+      //Generating a Unique ID for the session to be used for ANALYTICS
+      uniqueidgen = function () {
+        $.ajax({
+          url: homebaseurl + 'GEN_UNIQUE_ID',
+          type: 'PUT',
+          success: function (uniqueidgen) {
+            sessionid = uniqueidgen.uniq_id;
+            //console.log("Session ID is :", sessionid);
+          }
+        }).fail(function (xhr, textStatus, err) {
+          alert(err);
+        });
+      }
+      uniqueidgen();
 
       // Drawer
       // Close offcanvas on medium and larger screens
@@ -230,7 +216,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
          new footerLink('Home', 'home', '?root=home'),
         new footerLink('ECAL Site', 'ecal', 'http://innovate.us.oracle.com/ecal/', '_blank'),
         new footerLink('Cloud Accelerate Site', 'cloudaccelerate', 'http://innovate.us.oracle.com/cloudaccelerate/', '_blank'),
-		new footerLink('Contact Us', 'contactus', 'mailto:heather.hughes@oracle.com'),
+    new footerLink('Contact Us', 'contactus', 'mailto:heather.hughes@oracle.com'),
         
       ]);
     }
