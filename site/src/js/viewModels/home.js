@@ -461,12 +461,12 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
              self.slimgid('');
         }
 
+        var intermediate_data_sl_title;
         openslidertitlemodal = function () 
         {
-            editor_instance_title_slider = CKEDITOR.instances.sltextarea2;
-            var intermediate_data;
+            editor_instance_title_slider = CKEDITOR.instances.sltextarea1;
             if (editor_instance_title_slider) {
-                intermediate_data = editor_instance_title_slider_data;
+                intermediate_data_sl_title = editor_instance_title_slider_data;
                 editor_instance_title_slider.destroy(true);
             }
 
@@ -480,17 +480,17 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 editor_instance_title_slider_data = CKEDITOR.instances.sltextarea1.getData();
             });
 
-            CKEDITOR.instances.sltextarea1.setData(intermediate_data);
+            CKEDITOR.instances.sltextarea1.setData(intermediate_data_sl_title);
             $("#modaltitleslider").ojDialog("open");
         }
 
+        var intermediate_data_sl_desc
         opensliderdescriptionmodal = function () 
         {
             editor_instance_slider = CKEDITOR.instances.sltextarea2;
-            var intermediate_data;
             if (editor_instance_slider) 
             {
-                intermediate_data = editor_instance_slider_data;
+                intermediate_data_sl_desc = editor_instance_slider_data;
                 editor_instance_slider.destroy(true);
             }
 
@@ -505,16 +505,16 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 editor_instance_slider_data = CKEDITOR.instances.sltextarea2.getData();
             });
 
-            CKEDITOR.instances.sltextarea2.setData(intermediate_data);
+            CKEDITOR.instances.sltextarea2.setData(intermediate_data_sl_desc);
             $("#modaldescslider").ojDialog("open");
         }
 
+        var intermediate_data_sl_edit_title;
         openeditslidertitlemodal = function () 
         {
             editor_instance_edit_title_slider = CKEDITOR.instances.sledittextarea1;
-            var intermediate_data;
             if (editor_instance_edit_title_slider) {
-                intermediate_data = editor_instance_edit_title_slider_data;
+                intermediate_data_sl_edit_title = editor_instance_edit_title_slider_data;
                 editor_instance_edit_title_slider.destroy(true);
             }
 
@@ -528,15 +528,16 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 editor_instance_edit_title_slider_data = CKEDITOR.instances.sledittextarea1.getData();
             });
 
-            CKEDITOR.instances.sledittextarea1.setData(intermediate_data);
+            CKEDITOR.instances.sledittextarea1.setData(intermediate_data_sl_edit_title);
             $("#modaledittitleslider").ojDialog("open");
         }
 
-        openeditsliderdescriptionmodal = function () {
+        var intermediate_data_sl_edit_desc;
+        openeditsliderdescriptionmodal = function () 
+        {
             editor_instance_edit_slider = CKEDITOR.instances.sledittextarea2;
-            var intermediate_data;
             if (editor_instance_edit_slider) {
-                intermediate_data = editor_instance_edit_slider_data;
+                intermediate_data_sl_edit_desc = editor_instance_edit_slider_data;
                 editor_instance_edit_slider.destroy(true);
             }
 
@@ -550,7 +551,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 editor_instance_edit_slider_data = CKEDITOR.instances.sledittextarea2.getData();
             });
 
-            CKEDITOR.instances.sledittextarea2.setData(intermediate_data);
+            CKEDITOR.instances.sledittextarea2.setData(intermediate_data_sl_edit_desc);
             $("#modaleditdescslider").ojDialog("open");
         }
         /******************************************SLIDER ENDS********************************************************************/
@@ -1830,7 +1831,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#editnewrefdialogpaas").ojDialog("close");
         }
 
-
         deletereferences = function (ref_delete) 
         {
             console.log("delete reference",ref_delete);
@@ -1909,13 +1909,14 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         var editor_instance_edit_empf_data;//this variable stores data in modal ..it gets updated on desc modal close
         var empphotopath = "";
 
+        var intermediate_data_empf_desc;
         openempfdescriptionmodal = function () 
         {
             editor_instance_empf = CKEDITOR.instances.txt2;
-            var intermediate_data;
-            console.log(editor_instance_empf);
-            if (editor_instance_empf) {
-                intermediate_data = editor_instance_empf_data;
+            if (editor_instance_empf) 
+            {
+                // editor_instance_empf.destroy(true);
+                intermediate_data_empf_desc = editor_instance_empf_data;
                 editor_instance_empf.destroy(true);
             }
             CKEDITOR.replace('txt2', {
@@ -1928,16 +1929,17 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 editor_instance_empf_data = CKEDITOR.instances.txt2.getData();
             });
             // console.log("--------" + editor_instance_empf_data);
-            CKEDITOR.instances.txt2.setData(intermediate_data);
+            CKEDITOR.instances.txt2.setData(intermediate_data_empf_desc);
             $("#modaldescempf").ojDialog("open");
         }
 
+        var intermediate_data_empf_edit_desc;
         openeditempfdescriptionmodal = function () 
         {
             editor_instance_edit_empf = CKEDITOR.instances.edtxt2;
-            var intermediate_data;
-            if (editor_instance_edit_empf) {
-                intermediate_data = editor_instance_edit_empf_data;
+            if (editor_instance_edit_empf) 
+            {
+                intermediate_data_empf_edit_desc = editor_instance_edit_empf_data;
                 editor_instance_edit_empf.destroy(true);
             }
             CKEDITOR.replace('edtxt2', {
@@ -1949,7 +1951,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#modaleditdescempf").on("ojbeforeclose", function (event, ui) {
                 editor_instance_edit_empf_data = CKEDITOR.instances.edtxt2.getData();
             });
-            CKEDITOR.instances.edtxt2.setData(intermediate_data);
+            CKEDITOR.instances.edtxt2.setData(intermediate_data_empf_edit_desc);
             $("#modaleditdescempf").ojDialog("open");
         }
 
@@ -1997,7 +1999,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     resetempfeatures();
                 }
               }).fail(function (xhr, textStatus, err) {
-                alert(err);
+                console.log("Error in employee_features API ",err);
               });
             };
             efreader.readAsDataURL(empphotopath);
@@ -2676,6 +2678,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
 
         openaddnewefdialog = function () {
+            if (CKEDITOR.instances.txt2) {
+                CKEDITOR.instances.txt2.destroy(true);
+            }
+            editor_instance_empf = "";
             $("#addnewefdialog").ojDialog("open");
         }
         closeaddnewefdialog= function () {
