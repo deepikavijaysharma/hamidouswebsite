@@ -1632,7 +1632,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     alert(err);
                 });
             };
-            refreaderpass.(reflogopathpass);
+            refreaderpass.readAsDataURL(reflogopathpass);
         }
 
         //EDIT REFERENCES observables
