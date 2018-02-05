@@ -2294,7 +2294,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             // }).fail(function (xhr, textStatus, err) {
             //     alert("Error in sending analytics", err);
             // });
-            // return true;
+            return true;
         }
 
         /******************************************ANALYTICS ENDS***************************************************************************/
