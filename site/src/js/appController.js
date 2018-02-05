@@ -71,10 +71,6 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         {
           name: 'Tools and Resources',
           id: 'tools'
-        },
-        {
-          name: 'Reports',
-          id: 'reports'
         }
       ];
       self.navDataSource = new oj.ArrayTableDataSource(navData, {
@@ -125,7 +121,8 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
           ssoemail = email;
           // ssoname = sname;
         } else {
-          ssoemail = "";          
+          ssoemail = "";      
+		// ssoemail = "ashritha.malli@oracle.com";  
         }
       }
 
