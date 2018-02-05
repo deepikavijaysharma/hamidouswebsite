@@ -1726,6 +1726,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     self.communityCallList([]);
                     self.searchcallstext([]);
                     for (var i = 0; i < calls.length; i++) {
+                         var date_only = calls[i].call_date.substr(0,10);
+                         var time_only = calls[i].call_date.substr(11,19);
                         self.communityCallList.push({
                             name: calls[i].name != undefined ? calls[i].name : '',
                             speaker: calls[i].speaker != undefined ? calls[i].speaker : '',
@@ -1749,7 +1751,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             invite: calls[i].call_id != undefined ? community_call_calendar_link+"/"+calls[i].call_id : '',
                             call_id: calls[i].call_id != undefined ? calls[i].call_id : '',
                             key_event_value: calls[i].keyevent != 'No' ? true : false
-                        });
+                        }); 
+                            if (new Date(date_only+" "+time_only) < new Date()){
+                                $(".cal_invite").hide();
+                                $(".rec_link").show();
+                            }else{
+                                 $(".rec_link").hide();
+                                 $(".cal_invite").show();
+                        }
 
                     }checkadminrights();
                 });
