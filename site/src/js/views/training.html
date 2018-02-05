@@ -247,15 +247,15 @@
           <img src="css/images/event_cal_icon_small.png" align="middle">&nbsp;
           <span>Events</span>
         </li>
-         <li>
+         <li style="display:none">
           <img src="css/images/event_cal_icon_small.png" align="middle">&nbsp;
           <span>Events Report</span>
         </li>
-        <li onclick="window.open('http://solutionengineering.us.oracle.com/hubs/?root=ecacertification')" align="middle">
-          <img src="css/images/certificate-icon.jpg">&nbsp;
+        <li onclick="window.open('http://solutionengineering.us.oracle.com/hubs/?root=ecacertification')">
+          <img src="css/images/certificate-icon.jpg" align="middle">&nbsp;
           <a href="#">ECA Certification</a>
         </li>
-        <li onclick="window.open('http://solutionengineering.us.oracle.com/hubs/?root=ecaenablement')" align="middle">
+        <li onclick="window.open('http://solutionengineering.us.oracle.com/hubs/?root=ecaenablement')">
           <img src="css/images/enablement_icon.png">&nbsp;
           <a href="#">ECA Enablement</a>
         </li>
@@ -277,7 +277,7 @@
               <div class="oj-flex-item oj-sm-4 oj-md-2 oj-lg-2 labeldiv" style="display:none">
                 <label>Catalogue</label>
               </div>
-              <div class="oj-flex-item  oj-lg-8">
+              <div class="oj-flex-item  oj-sm-12 oj-lg-8">
                 <input id="search-input" placeholder="Search courses . . ." data-bind="ojComponent:{
                   component: 'ojInputSearch', 
                   value: searchtext,
@@ -285,7 +285,7 @@
                   optionChange:searchcontent
                 }" />
               </div>
-              <div class="oj-flex-item oj-sm-7 oj-md-7 oj-lg-4 oj-xl-4 req_block">
+              <div class="oj-flex-item oj-sm-12 oj-lg-4 oj-xl-4 req_block">
                 <button id="trainingButton" class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
                   component: 'ojButton',
                   chroming: 'full',
@@ -302,7 +302,7 @@
           <!-- COURSES -->
           <div class="oj-flex coursesblock">
 
-            <div class="oj-flex-item oj-md-4 oj-lg-3">
+            <div class="oj-flex-item oj-md-3 oj-lg-3">
               <div class="eblocks blocks oj-flex-item  oj-sm-12 oj-md-4 oj-lg-4" style="height: auto">
                 <div class="oj-flex-item refine">
                   <div class="title">Refine Courses</div>
@@ -316,12 +316,12 @@
                     <!-- ko foreach: refinelist -->
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1">
+                      <div class="oj-sm-1 oj-md-2 oj-lg-1">
                           <label>
                             <input type="checkbox" class="category" name="category" data-bind="value: id" onchange="refineupdate(this)">
                           </label>
                         </div>
-                        <div class="oj-sm-11">
+                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
                           <span data-bind="text: name"></span>
                         </div>
                       </div>
@@ -337,12 +337,12 @@
                     <!-- ko foreach: producttype -->
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1">
+                       <div class="oj-sm-1 oj-md-2 oj-lg-1">
                           <label>
                             <input type="checkbox" class="prodtype" name="prodtype" data-bind="value: name" onchange="refineupdate(this)">
                           </label>
                         </div>
-                        <div class="oj-sm-11">
+                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
                           <span data-bind="text: name"></span>
                         </div>
                       </div>
@@ -359,12 +359,12 @@
                     <!-- ko foreach: training_levels -->
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1">
+                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
                           <label>
                             <input type="checkbox" class="traininglevel" name="traininglevel" data-bind="value: name" onchange="refineupdate(this)">
                           </label>
                         </div>
-                        <div class="oj-sm-11">
+                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
                           <span data-bind="text: name"></span>
                         </div>
                       </div>
@@ -380,12 +380,12 @@
                     <!-- ko foreach: training_types -->
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1">
+                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
                           <label>
                             <input type="checkbox" class="trainingtype" name="trainingtype" data-bind="value: name" onchange="refineupdate(this)">
                           </label>
                         </div>
-                        <div class="oj-sm-11">
+                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
                           <span data-bind="text: name"></span>
                         </div>
                       </div>
@@ -401,12 +401,12 @@
                     <!-- ko foreach: cities -->
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1">
+                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
                           <label>
                             <input type="checkbox" class="cities" name="cities" data-bind="value: name" onchange="refineupdate(this)">
                           </label>
                         </div>
-                        <div class="oj-sm-11">
+                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
                           <span data-bind="text: name"></span>
                         </div>
                       </div>
@@ -423,12 +423,12 @@
                     <!-- ko foreach: roles -->
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1">
+                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
                           <label>
                             <input type="checkbox" class="roles" name="roles" data-bind="value: id" onchange="refineupdate(this)">
                           </label>
                         </div>
-                        <div class="oj-sm-11">
+                       <div class="oj-sm-11 oj-md-10 oj-lg-11">
                           <span data-bind="text: name"></span>
                         </div>
                       </div>
@@ -449,15 +449,17 @@
                 </div>
               </div>
             </div>
-            <div class="oj-flex-item oj-md-8 oj-lg-9 rightcoursesblock">
+            <div class="oj-flex-item oj-md-9 oj-lg-9 rightcoursesblock">
+             <div class="oj-margin">
               <!-- ko foreach: categories -->
               <div class="oj-flex">
+             
                 <div class="oj-sm-12 catheadings  ">
                   <h4 class="oj-sm-12" data-bind="text:name"></h4>
                 </div>
                 <div class="oj-flex oj-sm-12 blocksouter">
                   <!-- ko foreach: courses -->
-                  <div class="oj-sm-12 oj-md-6 oj-lg-4 blocks oj-flex-item oj-margin">
+                  <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks oj-flex-item oj-margin">
                     <!--<span class="admin" style="cursor: pointer;color: red;float: right" data-bind="click:function(){deletecourse(this)}">X</span>-->
                     <div class="oj-sm-12 admin" style="margin-bottom: 5px;position:relative;z-index:1000">
                       <i class="fa fa-pencil-square-o admin" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Edit Course"
@@ -485,7 +487,8 @@
                   <!-- /ko -->
                 </div>
               </div>
-              <!-- /ko -->
+              
+              <!-- /ko --> </div>
             </div>
           </div>
         </div>
@@ -926,7 +929,7 @@
           <!-- SEARCH -->
           <form id="form1">
             <div class="oj-flex search">
-              <div class="oj-flex-item oj-sm-8">
+              <div class="oj-flex-item oj-md-8">
                 <input id="search-input" style="margin-bottom: 10px" placeholder="Search speaker, community call, description. . ." data-bind="ojComponent:{
             component: 'ojInputSearch', 
             value: searchcallstext,
@@ -945,7 +948,7 @@
 
           <!-- Repeat this -->
           <div class=" oj-flex coursesblock">
-            <div class="oj-flex-item oj-md-4 oj-lg-3">
+            <div class="oj-flex-item oj-md-3 oj-lg-3">
               <div class="eblocks blocks oj-flex-item  oj-sm-12 oj-md-4 oj-lg-4" style="height: auto;">
                 <div class="oj-flex-item refine">
                   <div class="title">Refine Courses</div>
@@ -961,12 +964,12 @@
                     <!-- ko foreach: roles -->
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1">
+                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
                           <label>
                             <input type="checkbox" class="refine" name="community_roles" data-bind="value: name" onchange="refineupdate(this)">
                           </label>
                         </div>
-                        <div class="oj-sm-11">
+                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
                           <span data-bind="text: name"></span>
                         </div>
                       </div>
@@ -980,24 +983,24 @@
                   <ul class="refinelist">
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1">
+                       <div class="oj-sm-1 oj-md-2 oj-lg-1">
                           <label>
                             <input type="checkbox" class="refine" name="communitymodes" value="virtual" onchange="refineupdate(this)">
                           </label>
                         </div>
-                        <div class="oj-sm-11">
+                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
                           <span>Virtual</span>
                         </div>
                       </div>
                     </li>
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1">
+                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
                           <label>
                             <input type="checkbox" class="refine" name="communitymodes" value="Town Hall" onchange="refineupdate(this)">
                           </label>
                         </div>
-                        <div class="oj-sm-11">
+                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
                           <span>Town Hall</span>
                         </div>
                       </div>
@@ -1008,12 +1011,12 @@
                     <!-- <ul class="refinelist"> -->
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1">
+                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
                           <label>
                             <input type="checkbox" class="refine" name="past" value="past" onchange="refineupdate(this)">
                           </label>
                         </div>
-                        <div class="oj-sm-11">
+                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
                           <span>Replay</span>
                         </div>
                       </div>
@@ -1035,7 +1038,8 @@
                 <div> </div>
               </div>
             </div>
-            <div class="oj-flex-item oj-md-8 oj-lg-9 communitycall">
+            <div class="oj-flex-item oj-md-9 oj-lg-9 communitycall">
+            <div class="oj-margin">
               <Label class="required smallinfotext">Date-Time is in PST </Label>
               <!-- ko foreach:communityCallList -->
               <div class="oj-flex oj-sm-12 ccrow">
@@ -1105,6 +1109,7 @@
               </div>
               <!-- /ko -->
             </div>
+             </div>
           </div>
         </div>
       </div>
@@ -1481,10 +1486,10 @@
         </div>
       </div>
       <!--========================== EVENTS REPORT ==========================-->
-      <div id="tabs-6">
+      <div id="tabs-6" style="display:none">
         <div class="container">
          <div class=" oj-flex coursesblock">
-            <div class="oj-flex-item oj-md-4 oj-lg-3">
+            <div class="oj-flex-item oj-md-3 oj-lg-3">
               <div class="eblocks blocks oj-flex-item  oj-sm-12 oj-md-4 oj-lg-4" style="height: auto;">
                 <div class="oj-flex-item refine">
                   <div class="title">Refine Events</div>
@@ -1500,12 +1505,12 @@
                     <!-- ko foreach: roles -->
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1">
+                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
                           <label>
                             <input type="checkbox" class="refine" name="community_roles" data-bind="value: name" onchange="refineupdate(this)">
                           </label>
                         </div>
-                        <div class="oj-sm-11">
+                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
                           <span data-bind="text: name"></span>
                         </div>
                       </div>
@@ -1519,24 +1524,24 @@
                   <ul class="refinelist">
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1">
+                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
                           <label>
                             <input type="checkbox" class="refine" name="communitymodes" value="virtual" onchange="refineupdate(this)">
                           </label>
                         </div>
-                        <div class="oj-sm-11">
+                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
                           <span>Virtual</span>
                         </div>
                       </div>
                     </li>
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1">
+                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
                           <label>
                             <input type="checkbox" class="refine" name="communitymodes" value="Town Hall" onchange="refineupdate(this)">
                           </label>
                         </div>
-                        <div class="oj-sm-11">
+                         <div class="oj-sm-11 oj-md-10 oj-lg-11">
                           <span>Town Hall</span>
                         </div>
                       </div>
@@ -1547,12 +1552,12 @@
                     <!-- <ul class="refinelist"> -->
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1">
+                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
                           <label>
                             <input type="checkbox" class="refine" name="past" value="past" onchange="refineupdate(this)">
                           </label>
                         </div>
-                        <div class="oj-sm-11">
+                          <div class="oj-sm-11 oj-md-10 oj-lg-11">
                           <span>Replay</span>
                         </div>
                       </div>
@@ -1574,8 +1579,11 @@
                 <div> </div>
               </div>
             </div>
-            <div class="oj-flex-item oj-md-8 oj-lg-9 bgwhite">
-             <div class="oj-sm-12 row5">
+            <div class="oj-flex-item oj-md-9 oj-lg-9 ">
+           
+             <div class="oj-margin"> 
+             <div class="bgwhite eventsreports">
+             <div class="oj-sm-12 row5 ">
               <div class="oj-flex">
                 <div class="oj-sm-12">
                   <div class="oj-margin">
@@ -1638,6 +1646,8 @@
               </div>
             </div>
             </div>
+            </div>
+             </div>
           </div>
         
         </div>

@@ -57,6 +57,7 @@ $appLayoutWebHeaderBgColor: $headerBgColor !default;
 $appLayoutWebHeaderBoxShadow: none !default;
 $fontSize:         1.25rem !default;
 $smallestFontSize2: oj-px-to-rem(12px, $baseFontSize: 14px) !default;
+$smallestFontSize3: oj-px-to-rem(13px, $baseFontSize: 14px) !default;
 $smallestFontSize1: oj-px-to-rem(14px, $baseFontSize: 14px) !default;
 $smallestFontSize: oj-px-to-rem(16px, $baseFontSize: 14px) !default;
 $smallFontSize:    oj-px-to-rem(18px, $baseFontSize: 14px) !default;
