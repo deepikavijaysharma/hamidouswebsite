@@ -836,7 +836,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.detailedEnrollstatus('');
 
 
-
                 // SET NEW VALUE
                 self.detailedDescription(course.description);
                 self.detailedName(course.name);
@@ -873,10 +872,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     $(".directlink").append("<b>Direct Link: <span>" + courselink + "</span></b>");
                 }
                 console.log(courselink);
+                analytics(course.name, course.category_name, 'View_details', 'Training Page', 'Training Courses', course.category_name);
                 $("#coursedetails").ojDialog("open");
-
-
-
             }
 
 
@@ -1145,7 +1142,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                                 prodcut_type: curcourse.prodcut_type,
                                 training_level: curcourse.training_level,
                                 training_type: curcourse.training_type,
-                                category_name: curcourse.category_name,
+                                category_name: categoryname,
                                 categoryid: curcourse.category_id,
                                 subcat_name: curcourse.subcat_name,
                                 classes: curcourse.classes,
@@ -1692,6 +1689,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.partnerName(event_details.partner_name);
                 self.registrationLink(event_details.registration_link);
                 $("#event_details_modal").ojDialog("open");
+                analytics(event_details.name, event_details.location, 'View_details', 'Training Page', 'Events', 'Event Details');
             }            
 
             /* ---------------------   EVENTS TAB END  -------------------------*/
@@ -1726,6 +1724,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     self.communityCallList([]);
                     self.searchcallstext([]);
                     for (var i = 0; i < calls.length; i++) {
+                         var date_only = calls[i].call_date.substr(0,10);
+                         var time_only = calls[i].call_date.substr(11,19);
                         self.communityCallList.push({
                             name: calls[i].name != undefined ? calls[i].name : '',
                             speaker: calls[i].speaker != undefined ? calls[i].speaker : '',
@@ -1749,7 +1749,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             invite: calls[i].call_id != undefined ? community_call_calendar_link+"/"+calls[i].call_id : '',
                             call_id: calls[i].call_id != undefined ? calls[i].call_id : '',
                             key_event_value: calls[i].keyevent != 'No' ? true : false
-                        });
+                        }); 
+                            if (new Date(date_only+" "+time_only) < new Date()){
+                                $(".cal_invite").hide();
+                                $(".rec_link").show();
+                            }else{
+                                 $(".rec_link").hide();
+                                 $(".cal_invite").show();
+                        }
 
                     }checkadminrights();
                 });
@@ -1778,6 +1785,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 // SET NEW VALUE
                 self.ccDescription(ccalls.description);
                 $("#communitycallsdetails").ojDialog("open");
+                analytics(ccalls.name, ccalls.call_id, 'View_details', 'Training Page', 'Community Calls', 'Community Calls Details');
             }
 
             self.closecommunitycallsdetails = function () {
@@ -2900,6 +2908,93 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.processCoursesFromService(temcourses);
 
             }
+
+            /******************************************ANALYTICS TRAINING*********************************************************************************/
+
+            analytics = function (itemtitle, itemname, itemtype, itemlevel1, itemlevel2, itemlevel3) {
+                var itemdesc;
+                if (ssoemail == "") {
+                    ssoemail = "test@oracle.com";
+                }
+                if (itemlevel2 == "Events") {
+                    if (itemtitle != "" && itemname != "") {
+                        itemdesc = itemtitle + " at " + itemname;
+                    }
+                    else if (itemtitle == "" && itemname != "") {
+                        itemdesc = itemname;
+                    }
+                    else if (itemtitle != "" && itemname == "") {
+                        itemdesc = itemtitle;
+                    }
+                    else {
+                        itemdesc = "";
+                    }
+                }
+                else if (itemlevel2 == "Community Calls") {
+                    if (itemtitle != "" && itemname != "") {
+                        itemdesc = itemtitle + " with call_id " + itemname;
+                    }
+                    else if (itemtitle == "" && itemname != "") {
+                        itemdesc = itemname;
+                    }
+                    else if (itemtitle != "" && itemname == "") {
+                        itemdesc = itemtitle;
+                    }
+                    else {
+                        itemdesc = "";
+                    }
+                }
+                else {
+                    if (itemtitle != "" && itemname != "") {
+                        itemdesc = itemtitle + " from category : " + itemname;
+                    }
+                    else if (itemtitle == "" && itemname != "") {
+                        itemdesc = itemname;
+                    }
+                    else if (itemtitle != "" && itemname == "") {
+                        itemdesc = itemtitle;
+                    }
+                    else {
+                        itemdesc = "";
+                    }
+                }
+                if (itemlevel3 == "") {
+                    var analytics = {
+                        "session_id": sessionid,
+                        "email": ssoemail,
+                        "event_description": itemdesc,
+                        "event_type": itemtype,
+                        "level_1": itemlevel1,
+                        "level_2": itemlevel2
+                    };
+                }
+                else {
+                    var analytics = {
+                        "session_id": sessionid,
+                        "email": ssoemail,
+                        "event_description": itemdesc,
+                        "event_type": itemtype,
+                        "level_1": itemlevel1,
+                        "level_2": itemlevel2,
+                        "level_3": itemlevel3
+                    };
+                }
+                console.log(analytics);
+                $.ajax({
+                    url: homebaseurl + 'POST_EVENT_DATA',
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(analytics),
+                    success: function (event) {
+                        console.log("Analytics of event sent.", event);
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    alert("Error in sending analytics", err);
+                });
+                return true;
+            }
+
+        /******************************************ANALYTICS TRAINING ENDS***************************************************************************/
             
         }
         return new DashboardViewModel();

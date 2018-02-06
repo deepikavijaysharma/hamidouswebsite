@@ -2234,6 +2234,203 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
         loadHomepage();
         
+
+        /******************************************OUR SERVICES******************************************************************************/
+
+
+        var editor_instance_os;
+        var editor_instance_os_data;//this variable stores data in modal ..it gets updated on desc modal close
+        var intermediate_data_os_desc;
+        openaddosdescriptionmodal = function (ospopupname) 
+        {
+            editor_instance_os = CKEDITOR.instances.ostxt2;
+            if (editor_instance_os) {
+                intermediate_data_os_desc = editor_instance_os_data;
+                editor_instance_os.destroy(true);
+            }
+            CKEDITOR.replace('ostxt2', {
+                uiColor: '#D3D3D3',
+                height: 500,
+                removePlugins: 'maximize'
+            });
+
+            $("#addOSdialog").on("ojbeforeclose", function (event, ui) {
+                editor_instance_os_data = CKEDITOR.instances.ostxt2.getData();
+                var uploadosheader = {
+                    "name": ospopupname,
+                    "description": editor_instance_os_data,
+                    "ins_or_upd": "ins"
+                }
+
+                console.log(uploadosheader);
+                $.ajax({
+                    url: homebaseurl + 'SEAAS_OS_UPDATE',
+                    headers: uploadosheader,
+                    async: true,
+                    crossDomain: true,
+                    cache: false,
+                    type: 'POST',
+                    success: function (dataos) {
+                        console.log(dataos);
+                        console.log("Our Services added successfully!");
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    console.log("Error in SEAAS_OS_UPDATE API ", err);
+                });
+            });
+            CKEDITOR.instances.ostxt2.setData(intermediate_data_os_desc);
+            $("#addOSdialog").ojDialog("open");
+        }
+
+        var editor_instance_edit_os;
+        var editor_instance_edit_os_data;//this variable stores data in modal ..it gets updated on desc modal close
+        var intermediate_data_os_edit_desc;
+        openeditosdescriptionmodal = function (ospopupeditedname) {
+            
+            editor_instance_edit_os = CKEDITOR.instances.edostxt2;
+            if (editor_instance_edit_os) {
+                intermediate_data_os_edit_desc = editor_instance_edit_os_data;
+                editor_instance_edit_os.destroy(true);
+            }
+            CKEDITOR.replace('edostxt2', {
+                uiColor: '#D3D3D3',
+                height: 500,
+                removePlugins: 'maximize'
+            });
+
+            $("#editOSdialog").on("ojbeforeclose", function (event, ui) {
+                editor_instance_edit_os_data = CKEDITOR.instances.edostxt2.getData();
+                var editor_text_data = editor_instance_os_data;
+                var uploadeditosheader = {
+                    "name": ospopupeditedname,
+                    "description": editor_instance_edit_os_data,
+                    "ins_or_upd": "upd"
+                }
+                $.ajax({
+                    url: homebaseurl + 'SEAAS_OS_UPDATE',
+                    headers: uploadeditosheader,
+                    async: true,
+                    crossDomain: true,
+                    cache: false,
+                    type: 'POST',
+                    success: function (dataedos) {
+                        console.log(dataedos);
+                        console.log("Our Services edited successfully!");
+                        // fetchempfeatures();
+                        closeaddosdialog();
+                        // resetempfeatures();
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    console.log("Error in SEAAS_OS_UPDATE API ", err);
+                });
+            });
+            CKEDITOR.instances.edostxt2.setData(intermediate_data_os_edit_desc);
+            $("#editOSdialog").ojDialog("open");
+        }
+
+        // addos = function (ospopupname) 
+        // {
+        //     var editor_text_data = editor_instance_os_data;
+        //     var uploadosheader = {
+        //         "name": ospopupname,
+        //         "description": editor_text_data,
+        //         "ins_or_upd": "ins"
+        //     }
+
+        //     console.log(uploadosheader);
+        //     $.ajax({
+        //         url: homebaseurl + 'SEAAS_OS_UPDATE',
+        //         headers: uploadosheader,
+        //         async: true,
+        //         crossDomain: true,
+        //         cache: false,
+        //         type: 'POST',
+        //         success: function (dataos) {
+        //             console.log(dataos);
+        //             console.log("Our Services added successfully!");
+        //             // fetchempfeatures();
+        //             closeaddosdialog();
+        //             // resetempfeatures();
+        //         }
+        //     }).fail(function (xhr, textStatus, err) {
+        //         console.log("Error in SEAAS_OS_UPDATE API ", err);
+        //     });
+        // }
+
+        //EDIT EMPLOYEE FEATURES observables
+        self.ostext = ko.observable('');
+        self.editostext = ko.observable('');
+        self.editosdesc = ko.observable('');
+
+        // editos = function (ospopupeditedname) {
+        //     var editor_text_data = editor_instance_os_data;
+        //     var uploadeditosheader = {
+        //         "name": ospopupeditedname,
+        //         "description": editor_instance_edit_os_data,
+        //         "ins_or_upd": "upd"
+        //     }
+
+        //     // SEND TO SERVER
+        //     $.ajax({
+        //         url: homebaseurl + 'SEAAS_OS_UPDATE',
+        //         headers: uploadeditosheader,
+        //         async: true,
+        //         crossDomain: true,
+        //         cache: false,
+        //         type: 'POST',
+        //         success: function (dataedos) {
+        //             console.log(dataedos);
+        //             console.log("Our Services edited successfully!");
+        //             // fetchempfeatures();
+        //             closeaddosdialog();
+        //             // resetempfeatures();
+        //         }
+        //     }).fail(function (xhr, textStatus, err) {
+        //         console.log("Error in SEAAS_OS_UPDATE API ", err);
+        //     });
+        // }
+
+        openEditOurServicesModal = function (editourservices) {
+            $("#editOSdialog").ojDialog("open");
+            console.log("Edit our services data", editourservices);
+
+            // self.editosdesc('');
+
+            // // SET NEW VALUE
+            // self.editosdesc(editourservices);
+            // editor_instance_edit_empf_data = editemployeefeatures.empfeatext;
+        }
+
+        closeEditOurServicesModa = function () {
+            $("#editOSdialog").ojDialog("close");
+        }
+
+
+        fetchourservices = function () {
+            $.getJSON(homebaseurl + 'SEAAS_OS_UPDATE').then(function (employeefeaturesdetails) {
+                // Fetch Employee features
+                self.empfeatlist([]);
+                var eflist = employeefeaturesdetails.items;// console.log(eflist);
+                for (var b = 0; b < eflist.length; b++) {
+                    self.empfeatlist.push({
+                        empfeaheading: eflist[b].features_heading,
+                        empfeatext: eflist[b].key_wins_text
+                    })
+                }
+            });
+        }
+        // fetchourservices();
+
+        resetos = function () {
+            // self.empfeatheading('');
+
+            // document.getElementById("edefbg").value = "";
+        }
+
+
+        /******************************************OUR SERVICES ENDS*************************************************************************/
+
+
         /******************************************ANALYTICS*********************************************************************************/
 
         analytics = function (itemtitle, itemname, itemtype, itemlevel1, itemlevel2, itemlevel3) 
@@ -2304,7 +2501,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#modalDialog1").ojDialog("close");
         }
 
-        opendialog=function(){                
+        opendialog = function (){                
             $("#modalDialog1").ojDialog("open");
             analytics('Awareness', 'Deliver a Cloud Day', 'View_details', 'Homepage', 'Our Services', 'Awareness');
         }
@@ -2703,6 +2900,17 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#orgpeopleimagedialog").ojDialog("close");
         }
 
+        openaddosdialog = function () {
+            if (CKEDITOR.instances.ostxt2) {
+                CKEDITOR.instances.ostxt2.destroy(true);
+            }
+            editor_instance_os = "";
+            $("#addOSdialog").ojDialog("open");
+        }
+        closeaddosdialog = function () {
+            $("#addOSdialog").ojDialog("close");
+        }
+        
         clearContents = function(element){
             element.value = '';
         }

@@ -501,7 +501,9 @@ display:none;
         <div class="row oj-sm-12">
           <div class="oj-flex oj-sm-12 nopadding servicesblocks1">
             <div class="row oj-flex oj-sm-12">
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 oj-xl-3 servicesblocksinner" >
+              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 oj-xl-3 servicesblocksinner">
+                <!-- <i class="fa fa-plus-square endorgdel" aria-hidden="true" title="Add Our Services" onclick="openaddosdescriptionmodal('Deliver a Cloud Day')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Deliver a Cloud Day')"></i> -->
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog"> <img src="css/images/1.png"><br>
                     <br>
@@ -3019,3 +3021,100 @@ display:none;
 <!-- Edit Employee Features Description ckeditor modal workaround end -->
 
 <!-- END OF EMPLOYEE FEATURES POPUPS -->
+
+
+<!-- OUR SERVICES POPUPS -->
+
+<!-- add our services confirmation start -->
+<!-- <div style="display:none" id="addOSdialog" title="Add Our Services" class="dialogbodymain" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+  <div class="oj-dialog-body dialogbody">
+    <div class="oj-flex">
+      <div class="oj-lg-6">
+        <br>
+        <div class="oj-sm-12">
+          <label>Enter Our Services Text: </label><label class="required">*</label>
+        </div>
+        <div class="oj-sm-12">
+          <textarea id="ostxt2" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:ostext}"></textarea>
+        </div>
+        <br>
+        <br>
+      </div>
+    </div>
+    <br>
+  </div>
+  <div class="oj-dialog-footer" style="background-color: lightgray">
+    <div>
+      <button id="resetosButton" data-dismiss="modal" class="orangebutton" onclick="resetos()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
+      <button id="okosButton" data-dismiss="modal" class="bluebutton" onclick="addos()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}">
+      </button>
+    </div>
+  </div>
+</div> -->
+<!-- add our services confirmation end -->
+
+<!-- edit our services confirmation start -->
+<!-- <div style="display:none" id="editOSdialog" title="Edit Our Services" class="dialogbodymain" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
+  <div class="oj-dialog-body dialogbody">
+    <div class="oj-flex">
+      <div class="oj-lg-6"><br>
+        <div class="oj-sm-12">
+          <label>Enter Our Services Text: </label>
+          <label class="required">*</label>
+        </div>
+        <div class="oj-sm-12">
+          <textarea id="edostxt2" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:editostext}"></textarea>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+  <div class="oj-dialog-footer" style="background-color: lightgray">
+    <div>
+      <button id="reseteditosButton" data-dismiss="modal" class="orangebutton" onclick="resetos()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
+      <button id="okeditosButton" data-dismiss="modal" class="bluebutton" onclick="editos()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}">
+      </button>
+    </div>
+  </div>
+</div> -->
+<!-- edit our services confirmation end -->
+
+<!-- Add Our Services Description ckeditor modal workaround start -->
+<div style="display:none" class="dialogbodymain" id="addOSdialog" title="Add Our Services Text" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+  <div class="oj-dialog-body roleWrapper">
+    <div class="nomargin-md oj-margin-left">
+      <div class="oj-flex">
+        <div class="oj-sm-12">
+          <label>Enter Our Services Text: </label>
+          <label class="required">*</label>
+        </div>
+        <div class="oj-sm-12">
+          <textarea id="ostxt2" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:ostext}"></textarea>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Our Services Description ckeditor modal workaround end -->
+
+<!-- Edit Our Services Description ckeditor modal workaround start -->
+<div style="display:none" class="dialogbodymain" id="editOSdialog" title="Edit Our Services Text" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+  <div class="oj-dialog-body roleWrapper">
+    <div class="nomargin-md oj-margin-left">
+      <div class="oj-flex">
+        <div class="oj-sm-12">
+          <label>Enter Our Services Text: </label>
+          <label class="required">*</label>
+        </div>
+        <div class="oj-sm-12">
+          <textarea id="edostxt2" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:editostext}"></textarea>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Edit Our Services Description ckeditor modal workaround end -->
+
+<!-- END OF OUR SERVICES POPUPS -->
