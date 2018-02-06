@@ -18,7 +18,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             var checkurl = trainingbaseurl + "isAdmin";
             if (ssoemail.length > 0) 
             {
-                console.log('admin new checked');
+                // console.log('Admin checking for :'+ssoemail);
                 $.ajax({
                     url: checkurl,
                     method: 'GET',
@@ -29,9 +29,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     success: function (data) {
                         isAdmin = data.is_admin;
                         newUserAdminCheck = true;
+                        checkadminrights();
                     },
                     error: function (xhr) {
                         newUserAdminCheck = false;
+                        checkadminrights();
                     }
                 }); return true;
             } 
@@ -44,13 +46,19 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         // // CHECK FOR ADMIN RIGHTS
         checkadminrights = function () {
-            console.log('admin checked');
+            // console.log('admin checked');
             if (isAdmin) {
-                console.log("Showing for admin");
+                // console.log("Showing for admin");
                 $(".admin").css("display", "inline-block");
+                $(".fa-pencil-square-o").css("display", "inline-block");
+                $(".fa-trash-o").css("display", "inline-block");
+                $(".fa-share-square-o").css("display", "inline-block");
             } else {
-                console.log("Hiding for user");
+                // console.log("Hiding for user");
                 $(".admin").css("display", "none");
+                $(".fa-pencil-square-o").css("display", "none");
+                $(".fa-trash-o").css("display", "none");
+                $(".fa-share-square-o").css("display", "none");
                 // var appBanners = document.getElementsByClassName('admin'), i;
                 // for (var i = 0; i < appBanners.length; i++) {
                 //     appBanners[i].style.visibility = 'none';
@@ -163,8 +171,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         self.empdeatilsmatched = ko.observableArray([]);
 
         self.openVideo = function() { 
-			$("#modalDialog1").ojDialog("open");
-		};
+            $("#modalDialog1").ojDialog("open");
+        };
         empf1 = function(id) 
         {
             console.log(id);
@@ -249,6 +257,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     fetchslider();
                     closeaddslidedialog();
                     resetslider();
+                    self.checkadminrightsnew();
                 }
             }).fail(function (xhr, textStatus, err) {
                 alert(err);
@@ -311,6 +320,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         source: imgid.items[l].images
                     })
                 }
+                self.checkadminrightsnew();
             });
         }
 
@@ -343,11 +353,14 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     closeaddslidedialog();
                     $("#editslidedialog").ojDialog("close");
                     resetslider();
+                    self.checkadminrightsnew();
                 },fail: function (xhr, textStatus, err) {
                         console.log("failed"+err);
+                        self.checkadminrightsnew();
                     },
                     error: function (xhr, textStatus, err) {
                         console.log("error"+err);
+                        self.checkadminrightsnew();
                     }
             });
         }
@@ -367,12 +380,15 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 success: function () {
                     console.log("Slider Archived");
                     fetchslider();
+                    self.checkadminrightsnew();
                 },
                 fail: function (xhr, textStatus, err) {
                     console.log("Fail: ",err);
+                    self.checkadminrightsnew();
                 },
                 error: function (xhr, textStatus, err) {
                     console.log("Error: ",err);
+                    self.checkadminrightsnew();
                 }
             });
         }
@@ -400,12 +416,15 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         closeDeleteSliderModal();
                         console.log("delete success for slider");
                         fetchslider();
+                        self.checkadminrightsnew();
                     },
                     fail: function (xhr, textStatus, err) {
                         console.log(err);
+                        self.checkadminrightsnew();
                     },
                     error: function (xhr, textStatus, err) {
                         console.log(err);
+                        self.checkadminrightsnew();
                     }
                 });
             });
@@ -446,6 +465,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         sliderarchived: sllist[s].archived
                     })
                 }
+                self.checkadminrightsnew();
             });
         }
         fetchslider();
@@ -570,6 +590,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     orgname: orglist[b].org_name
                 })
             }
+            self.checkadminrightsnew();
         });
 
         uploadorgpeopleimage = function (event, ui) 
@@ -610,9 +631,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                   fetchpeopleorg();
                   closeaddneworgdialog();
                   resetorg();
+                  self.checkadminrightsnew();
                 }
               }).fail(function (xhr, textStatus, err) {
                 alert(err);
+                self.checkadminrightsnew();
               });
             };
             reader.readAsDataURL(employeephotopath);
@@ -699,9 +722,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         resetorg();
                         fetchpeopleorg();
                         closeEditOrgModal();
+                        self.checkadminrightsnew();
                     }
                 }).fail(function (xhr, textStatus, err) {
                     alert("error in editing data",err);
+                    self.checkadminrightsnew();
                 });
             } 
             else
@@ -738,9 +763,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             resetorg();
                             fetchpeopleorg();
                             closeEditOrgModal();
+                            self.checkadminrightsnew();
                         }
                     }).fail(function (xhr, textStatus, err) {
                         alert("error in editing image data",err);
+                        self.checkadminrightsnew();
                     });
                 };
                 orgedreader.readAsDataURL(edemployeephotopath);
@@ -775,12 +802,15 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         console.log("delete success for organization");
                         fetchpeopleorg();
                         resetorg();
+                        self.checkadminrightsnew();
                     },
                     fail: function (xhr, textStatus, err) {
                         console.log(err);
+                        self.checkadminrightsnew();
                     },
                     error: function (xhr, textStatus, err) {
                         console.log(err);
+                        self.checkadminrightsnew();
                     }
                 });
             });
@@ -997,9 +1027,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                   fetchkeywins();
                   resetkeywins();
                   closeaddnewkeywinsdialog();
+                  self.checkadminrightsnew();
                 }
               }).fail(function (xhr, textStatus, err) {
                 alert(err);
+                self.checkadminrightsnew();
               });
             };
             akwreader.readAsDataURL(akwlogopath);
@@ -1051,9 +1083,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         fetchkeywins();
                         resetkeywins();
                         closeEditKeyWinsModal();
+                        self.checkadminrightsnew();
                     }
                 }).fail(function (xhr, textStatus, err) {
                     alert(err);
+                    self.checkadminrightsnew();
                 });
             }
             else 
@@ -1083,9 +1117,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             fetchkeywins();
                             closeEditKeyWinsModal();
                             resetkeywins();
+                            self.checkadminrightsnew();
                         }
                     }).fail(function (xhr, textStatus, err) {
                         alert(err);
+                        self.checkadminrightsnew();
                     });
                 };
                 ekwreader.readAsDataURL(ekwlogopath);
@@ -1135,12 +1171,15 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         fetchkeywins();
                         closeDeleteSKeyWinsModal();
                         console.log("delete success for key wins");
+                        self.checkadminrightsnew();
                     },
                     fail: function (xhr, textStatus, err) {
                         console.log(err);
+                        self.checkadminrightsnew();
                     },
                     error: function (xhr, textStatus, err) {
                         console.log(err);
+                        self.checkadminrightsnew();
                     }
                 });
             });
@@ -1204,9 +1243,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 data: ldata,
                 success: function (datalogogl) {
                     console.log("Go Lives logo added successfully!");
+                    self.checkadminrightsnew();
                 }
             }).fail(function (xhr, textStatus, err) {
                 alert(err);
+                self.checkadminrightsnew();
             });
         }
         uploadphotogl = function (pheader, pdata) 
@@ -1219,9 +1260,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 data: pdata,
                 success: function (dataphotogl) {
                     console.log("Go Lives presenter photo added successfully!");
+                    self.checkadminrightsnew();
                 }
             }).fail(function (xhr, textStatus, err) {
                 alert(err);
+                self.checkadminrightsnew();
             });
         }
         addgolives = function () 
@@ -1300,10 +1343,12 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     $("#editgltextdialog").ojDialog("close");
                     // closeaddgltextdialog();
                     resetgolives();
+                    self.checkadminrightsnew();
                 }
             }).fail(function (xhr, textStatus, err) {
                 console.log("error in sending data to service");
                 alert(err);
+                self.checkadminrightsnew();
             });
         }
 
@@ -1468,10 +1513,12 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         $("#editgltextdialog").ojDialog("close");
                         resetgolives();
                     }
+                    self.checkadminrightsnew();
                 }
             }).fail(function (xhr, textStatus, err) {
                 console.log("error in sending data to service in edit");
                 alert(err);
+                self.checkadminrightsnew();
             });
         }
 
@@ -1498,12 +1545,15 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         closeDeleteGoLivesModal();
                         console.log("delete success for go lives");
                         fetchgolives();
+                        self.checkadminrightsnew();
                     },
                     fail: function (xhr, textStatus, err) {
                         console.log(err);
+                        self.checkadminrightsnew();
                     },
                     error: function (xhr, textStatus, err) {
                         console.log(err);
+                        self.checkadminrightsnew();
                     }
                 });
             });
@@ -1535,9 +1585,12 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
                         });
                     }
+
+                    self.checkadminrightsnew();
                 }
             }).fail(function (xhr, textStatus, err) {
                 console.log(err);
+                self.checkadminrightsnew();
             });//console.log(ko.toJSON(self.goliveslist()));
         }
         fetchgolives();
@@ -1590,9 +1643,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     fetchreferences();
                     closeaddnewrefdialog();
                     resetreferences();
+                    self.checkadminrightsnew();
                 }
               }).fail(function (xhr, textStatus, err) {
                 alert(err);
+                self.checkadminrightsnew();
               });
             };
             refreader.readAsDataURL(reflogopath);
@@ -1627,9 +1682,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         fetchreferences();
                         closeaddnewrefdialogpaas();
                         resetreferences();
+                        self.checkadminrightsnew();
                     }
                 }).fail(function (xhr, textStatus, err) {
                     alert(err);
+                    self.checkadminrightsnew();
                 });
             };
             refreaderpass.readAsDataURL(reflogopathpass);
@@ -1678,9 +1735,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         fetchreferences();
                         closeReferencesModal();
                         resetreferences();
+                        self.checkadminrightsnew();
                     }
                 }).fail(function (xhr, textStatus, err) {
                     alert(err);
+                    self.checkadminrightsnew();
                 });
             }
             else
@@ -1711,9 +1770,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             fetchreferences();
                             closeReferencesModal();
                             resetreferences();
+                            self.checkadminrightsnew();
                         }
                     }).fail(function (xhr, textStatus, err) {
                         alert(err);
+                        self.checkadminrightsnew();
                     });
                 };
                 edrefreader.readAsDataURL(edreflogopath);
@@ -1773,9 +1834,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         fetchreferences();
                         closeReferencesPaasModal();
                         resetreferences();
+                        self.checkadminrightsnew();
                     }
                 }).fail(function (xhr, textStatus, err) {
                     alert(err);
+                    self.checkadminrightsnew();
                 });
             }
             else {
@@ -1804,9 +1867,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             fetchreferences();
                             closeReferencesPaasModal();
                             resetreferences();
+                            self.checkadminrightsnew();
                         }
                     }).fail(function (xhr, textStatus, err) {
                         alert(err);
+                        self.checkadminrightsnew();
                     });
                 };
                 edpaasrefreader.readAsDataURL(edpaasreflogopath);
@@ -1854,12 +1919,15 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         console.log("delete success for references");
                         fetchreferences();
                         closeDeleteReferencesModal();
+                        self.checkadminrightsnew();
                     },
                     fail: function (xhr, textStatus, err) {
                         console.log(err);
+                        self.checkadminrightsnew();
                     },
                     error: function (xhr, textStatus, err) {
                         console.log(err);
+                        self.checkadminrightsnew();
                     }
                 });
             });
@@ -1997,6 +2065,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     fetchempfeatures();
                     closeaddnewefdialog();
                     resetempfeatures();
+                    self.checkadminrightsnew();
                 }
               }).fail(function (xhr, textStatus, err) {
                 console.log("Error in employee_features API ",err);
@@ -2052,9 +2121,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         fetchempfeatures();
                         resetempfeatures();
                         closeEditEmployeeFeaturesModal();
+                        self.checkadminrightsnew();
                     }
                 }).fail(function (xhr, textStatus, err) {
                     alert(err);
+                    self.checkadminrightsnew();
                 });
             }
             else 
@@ -2082,6 +2153,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             fetchempfeatures();
                             resetempfeatures();
                             closeEditEmployeeFeaturesModal();
+                            self.checkadminrightsnew();
                         }
                     }).fail(function (xhr, textStatus, err) {
                         alert(err);
@@ -2127,6 +2199,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 success: function () {
                     console.log("Archive success for employee features");
                     fetchempfeatures();
+                    self.checkadminrightsnew();
                 },
                 fail: function (xhr, textStatus, err) {
                     console.log("Fail: ", err);
@@ -2158,6 +2231,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         console.log("delete success for employee features");
                         closeDeleteEmployeeFeaturesModal();
                         fetchempfeatures();
+                        self.checkadminrightsnew();
                     },
                     fail: function (xhr, textStatus, err) {
                         console.log(err);
@@ -2406,8 +2480,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#modalDialog12").ojDialog("open");
             analytics('Success', 'Deliver a Health Check', 'View_details', 'Homepage', 'Our Services', 'Success');
         }
-		
-		    closedialog13=function(){                
+        
+            closedialog13=function(){                
             $("#modalDialog13").ojDialog("close");
         }
 
@@ -2415,8 +2489,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#modalDialog13").ojDialog("open");
             analytics('Account Planning', 'Customer Discovery', 'View_details', 'Homepage', 'Our Services', 'Account Planning');
         }
-		
-		    closedialog14=function(){                
+        
+            closedialog14=function(){                
             $("#modalDialog14").ojDialog("close");
         }
 
@@ -2425,7 +2499,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             analytics('Account Planning', 'Platform Assessments', 'View_details', 'Homepage', 'Our Services', 'Account Planning');
         }
 
-		    closedialog15=function(){                
+            closedialog15=function(){                
             $("#modalDialog15").ojDialog("close");
         }
 
@@ -2485,10 +2559,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         $(document).ready(function() 
         {
-		    if (window.location.href.indexOf("waleed") != -1)
+            if (window.location.href.indexOf("waleed") != -1)
             {
-	          $("#empf1").ojDialog("open");
-	        }
+              $("#empf1").ojDialog("open");
+            }
             function isIE(userAgent) 
             {
               userAgent = userAgent || navigator.userAgent;
@@ -2550,18 +2624,18 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             });
   
         });
-		
+        
         $(document).ready(function() 
         { 
             $('#myCarousel').carousel({interval: 5000, cycle: true});
         }); 
         $('#myCarousel').carousel();
-		
-		/******************************************FLIP*****************************************************/
-	  
+        
+        /******************************************FLIP*****************************************************/
+      
         self.showingFront = true;    
         self.buttonClick = function(id) {
-		
+        
             var elem = document.getElementById(id);
 
             // Determine startAngle and endAngle
@@ -2576,8 +2650,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
             self.showingFront = !self.showingFront;
         };
-	  
-	   /******************************************FLIP ENDS*****************************************************/
+      
+       /******************************************FLIP ENDS*****************************************************/
         
         self.slide = [
             { name: '<div class="verticalcentertext"><div class="heading">NATD Solution Engineering and Customer Success<br>Organizational Road  Show  </div><div class="text">Listen in as Hamidou Dia and  the executive management team present<br>the FY18 vision  for the organization and  address top questions. </div><div class="slidernav"><ul><li><a href="https://otube.oracle.com/media/Solution+Engineering+Townhalll+-+Rich+Geraffo/0_kxtrumbd/3264" target="_blank">Rich Geraffo Presentation<span>&nbsp;&nbsp;<img src="css/images/aroow_right.png"></span></a></li><li class="oj-sm-only-hide">|</li><li><a href="https://otube.oracle.com/media/Solution+Engineering+Townhall+-+Hamidou+Dia/0_avsugpyl/3264" target="_blank">Hamidou Dia Presentation<span>&nbsp;&nbsp;<img src="css/images/aroow_right.png"></span></a></li><li class="oj-sm-only-hide">|</li><li><a href="https://otube.oracle.com/media/Solution+Engineering+TownhallA+Panel+Discussion+Part+1/0_nsg066tx/3264" target="_blank">Leadership Panel Part 1<span>&nbsp;&nbsp;<img src="css/images/aroow_right.png"></span></a></li><li class="oj-sm-only-hide">|</li><li><a href="https://otube.oracle.com/media/Solution+Engineering+Town+HallA+Panel+Discussion+Part+2+and+Q&A/0_s1q634j9/3264" target="_blank">Leadership Panel Part 2<span>&nbsp;&nbsp;<img src="css/images/aroow_right.png"></span></a></li></ul></div></div>',classname:'slide slide1' },
@@ -2590,9 +2664,9 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             { name: '<div class="verticalcentertext"><div class="verticalcentertextinner"><div class="heading">Add a New Slide</div><div class="buttons_c oj-rwow oj-flex"><div class="oj-sm-12 "><div class=" buttons">Edit</div></div><div class="oj-sm-12 oj-xl-6 oj-xl-float-end"></div></div></div></div>',classname:'slide slide7' }            
         ];
         self.pagingModel = null;
-		self.pagingModelfeatured = null;
-		self.pagingModelwins = null;
-		
+        self.pagingModelfeatured = null;
+        self.pagingModelwins = null;
+        
         getPagingModelslider = function()
         {
           if (!self.pagingModel)
@@ -2603,7 +2677,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
           }
           return self.pagingModel;
         };
-		getPagingModelfeatured = function()
+        getPagingModelfeatured = function()
         {
           if (!self.pagingModelfeatured)
           {
@@ -2613,7 +2687,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
           }
           return self.pagingModelfeatured;
         };
-		getPagingModelwins = function()
+        getPagingModelwins = function()
         {
           if (!self.pagingModelwins)
           {
@@ -2641,7 +2715,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         closeaddslidedialog = function () {
             $("#addslidedialog").ojDialog("close");
         }
-		
+        
         openaddgltextdialog = function () {
             $("#addgltextdialog").ojDialog("open");
         }
@@ -2709,7 +2783,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         self.handleActivated = function(info) {
             checkadmin();
-            checkadminrights();        
+            checkadminrights();   
+            self.checkadminrightsnew();     
         };
     }
 
