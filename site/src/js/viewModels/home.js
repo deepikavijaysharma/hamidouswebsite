@@ -2472,21 +2472,20 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         self.oslist = ko.observableArray([]);
         fetchourservices = function () {
-            $.getJSON(homebaseurl + 'SEAAS_OS_UPDATE').then(function (osdetails) {
-                // Fetch Employee features
-                self.oslist([]);
-                var ourslist = osdetails.items;
-                // console.log(ourslist);
-                // for (var b = 0; b < eflist.length; b++) {
-                //     self.oslist.push({
-                //         empfeaheading: eflist[b].features_heading,
-                //         empfeatext: eflist[b].key_wins_text
-                //     })
-                // }
-                self.checkadminrightsnew();
-            });
+            // $.getJSON(homebaseurl + 'SEAAS_OS_UPDATE').then(function (osdetails) {
+            //     self.oslist([]);
+            //     var ourslist = osdetails.items;
+            //     console.log(ourslist);
+            //     for (var b = 0; b < eflist.length; b++) {
+            //         self.oslist.push({
+            //             empfeaheading: eflist[b].features_heading,
+            //             empfeatext: eflist[b].key_wins_text
+            //         })
+            //     }
+            //     self.checkadminrightsnew();
+            // });
         }
-        fetchourservices();
+        // fetchourservices();
 
         resetos = function () {
             // self.empfeatheading('');
