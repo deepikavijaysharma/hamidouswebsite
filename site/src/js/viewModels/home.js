@@ -201,17 +201,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#empf3").ojDialog("open");
         };
 
-
-        // $('#text-area1, #text-area2, #edittext-area1, #edittext-area2, #addefheading, #txt2, #editefheading, #edtxt2').froalaEditor('paragraphFormat.apply', 'div');
-        
-        // froala editor start
-        // $(function () 
-        // {
-        //     $('#text-area1, #text-area2, #edittext-area1, #edittext-area2, #addefheading, #txt2, #editefheading, #edtxt2').froalaEditor({
-        //     })
-        // });
-        // froala editor end
-
         /******************************************SLIDER********************************************************************/
 
         var editor_instance_slider;
@@ -236,9 +225,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
             var sl = {
                 id: self.slid(),
-                // title: self.sltitle(),
                 title: editor_instance_title_slider_data,
-                // description: self.sldescription(),
                 description: editor_instance_slider_data,
                 button_label1: self.slbuttonlabel1(),
                 button_label2: self.slbuttonlabel2(),
@@ -261,6 +248,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 }
             }).fail(function (xhr, textStatus, err) {
                 alert(err);
+                self.checkadminrightsnew();
             });
         }
 
@@ -301,10 +289,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             self.editsldescription(edit_slider.sliderdesc);
             editor_instance_edit_title_slider_data = edit_slider.slidertitle;
             editor_instance_edit_slider_data = edit_slider.sliderdesc;
-            // self.editsltitle(editor_instance_edit_title_slider_data);
-            // self.editsldescription(editor_instance_edit_slider_data);
-            // $('#edittext-area1').froalaEditor('html.set', edit_slider.slidertitle);
-            // $('#edittext-area2').froalaEditor('html.set', edit_slider.sliderdesc);
             self.editslbuttonlabel1(edit_slider.sliderbl1);
             self.editslbuttonlabel2(edit_slider.sliderbl2);
             self.editsllinktext1(edit_slider.sliderlt1);
@@ -325,14 +309,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
 
         editslidervalues = function () {
-            // var editor_title_data = $('#edittext-area1').val();
-            // var editor_desc_data = $('#edittext-area2').val();
             var editor_title_data = editor_instance_edit_title_slider_data;
             var editor_desc_data = editor_instance_edit_slider_data;
             var edit_slider_data = {
                 id: self.editslid(),
-                // title: self.editsltitle(),
-                // description: self.editsldescription(),
                 title: editor_title_data,
                 description: editor_desc_data,
                 button_label1: self.editslbuttonlabel1(),
@@ -354,14 +334,15 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     $("#editslidedialog").ojDialog("close");
                     resetslider();
                     self.checkadminrightsnew();
-                },fail: function (xhr, textStatus, err) {
-                        console.log("failed"+err);
-                        self.checkadminrightsnew();
-                    },
-                    error: function (xhr, textStatus, err) {
-                        console.log("error"+err);
-                        self.checkadminrightsnew();
-                    }
+                },
+                fail: function (xhr, textStatus, err) {
+                    console.log("failed"+err);
+                    self.checkadminrightsnew();
+                },
+                error: function (xhr, textStatus, err) {
+                    console.log("error"+err);
+                    self.checkadminrightsnew();
+                }
             });
         }
 
@@ -929,6 +910,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             break;
                     }
                 }
+                self.checkadminrightsnew();
             });
         }
         fetchpeopleorg();
@@ -979,6 +961,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         keydendtime: kdlist[b].end_date != undefined ? kdlist[b].end_date.substring(11, 19) + " PT" : ''
                     })
                 }
+                self.checkadminrightsnew();
             });
         }
         fetchkeydates();
@@ -1206,6 +1189,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         keywphoto: kwlist[b].image
                     })
                 }//console.log(ko.toJSON(self.keywinslist()));
+                self.checkadminrightsnew();
             });
         }
         fetchkeywins();
@@ -1585,7 +1569,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
                         });
                     }
-
                     self.checkadminrightsnew();
                 }
             }).fail(function (xhr, textStatus, err) {
@@ -1954,6 +1937,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         reflogo: relist[b].image
                     })
                 }// console.log(ko.toJSON(self.reflist()));
+                self.checkadminrightsnew();
             });
         }
         fetchreferences();
@@ -1983,7 +1967,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             editor_instance_empf = CKEDITOR.instances.txt2;
             if (editor_instance_empf) 
             {
-                // editor_instance_empf.destroy(true);
                 intermediate_data_empf_desc = editor_instance_empf_data;
                 editor_instance_empf.destroy(true);
             }
@@ -1996,7 +1979,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#modaldescempf").on("ojbeforeclose", function (event, ui) {
                 editor_instance_empf_data = CKEDITOR.instances.txt2.getData();
             });
-            // console.log("--------" + editor_instance_empf_data);
             CKEDITOR.instances.txt2.setData(intermediate_data_empf_desc);
             $("#modaldescempf").ojDialog("open");
         }
@@ -2044,8 +2026,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             efreader.onload = function () {
               var uploadefheader = {
                 "id": self.empfeatid(),
-                "features_heading": self.empfeatheading(),//$('#addefheading').val(),
-                "key_wins_text": editor_text_data,//self.empfeattext(),//$('#txt2').val(),
+                "features_heading": self.empfeatheading(),
+                "key_wins_text": editor_text_data,
                 "mimetype": empphotopath.type
                 }
 
@@ -2069,6 +2051,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 }
               }).fail(function (xhr, textStatus, err) {
                 console.log("Error in employee_features API ",err);
+                self.checkadminrightsnew();
               });
             };
             efreader.readAsDataURL(empphotopath);
@@ -2091,13 +2074,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
 
         editemployeefeatures = function (edit_ef) {
-            // var editor_heading_data = $('#editefheading').val();
-            // var editor_text_data = $('#edtxt2').val();
             var edit_empfeat_data = {
                 id: self.editempfeatid(),
                 image: self.editempfeatbg(),
-                heading: self.editempfeatheading(),//editor_heading_data,
-                text: self.editempfeattext()//editor_text_data
+                heading: self.editempfeatheading(),
+                text: self.editempfeattext()
             }
             var editor_edit_text_data = editor_instance_edit_empf_data;
             console.log("edit employee feature data: " + ko.toJSON(edit_empfeat_data));
@@ -2105,8 +2086,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             {
                 var uploadeefheader = {
                     "id": self.editempfeatid(),
-                    "key_wins_text": editor_edit_text_data,//self.editempfeattext(),//$('#edtxt2').val(),
-                    "features_heading": self.editempfeatheading(),//$('#editefheading').val()
+                    "key_wins_text": editor_edit_text_data,
+                    "features_heading": self.editempfeatheading(),
                 }
 
                 // SEND TO SERVER
@@ -2134,8 +2115,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 eefreader.onload = function () {
                     var uploadeefheader = {
                         "id": self.editempfeatid(),
-                        "key_wins_text": editor_edit_text_data,//self.editempfeattext(),//$('#edtxt2').val(),
-                        "features_heading": self.editempfeatheading(),//$('#editefheading').val(),
+                        "key_wins_text": editor_edit_text_data,
+                        "features_heading": self.editempfeatheading(),
                         "mimetype": eeflogopath.type
                     }
 
@@ -2157,6 +2138,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         }
                     }).fail(function (xhr, textStatus, err) {
                         alert(err);
+                        self.checkadminrightsnew();
                     });
                 };
                 eefreader.readAsDataURL(eeflogopath);
@@ -2177,8 +2159,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             self.editempfeatheading(editemployeefeatures.empfeaheading);
             self.editempfeattext(editemployeefeatures.empfeatext);
             editor_instance_edit_empf_data = editemployeefeatures.empfeatext;
-            // $('#editefheading').froalaEditor('html.set', editemployeefeatures.empfeaheading);
-            // $('#edtxt2').froalaEditor('html.set', editemployeefeatures.empfeatext);
         }
 
         closeEditEmployeeFeaturesModal = function () {
@@ -2203,9 +2183,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 },
                 fail: function (xhr, textStatus, err) {
                     console.log("Fail: ", err);
+                    self.checkadminrightsnew();
                 },
                 error: function (xhr, textStatus, err) {
                     console.log("Error: ", err);
+                    self.checkadminrightsnew();
                 }
             });
         }
@@ -2235,9 +2217,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     },
                     fail: function (xhr, textStatus, err) {
                         console.log(err);
+                        self.checkadminrightsnew();
                     },
                     error: function (xhr, textStatus, err) {
                         console.log(err);
+                        self.checkadminrightsnew();
                     }
                 });
             });
@@ -2266,6 +2250,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     })
                 }
                 self.getEmpIdFromUrl();
+                self.checkadminrightsnew();
             });
             checkadminrights();
         }
@@ -2297,17 +2282,222 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         /******************************************EMPLOYEE FEATURES ENDS********************************************************************/
 
 
-        loadHomepage = function () 
-        {
-            fetchslider();
-            fetchpeopleorg();
-            fetchkeywins();
-            fetchgolives();
-            fetchreferences();
-            fetchempfeatures();
-        }
-        loadHomepage();
+        // loadHomepage = function () 
+        // {
+        //     fetchslider();
+        //     fetchpeopleorg();
+        //     fetchkeywins();
+        //     fetchgolives();
+        //     fetchreferences();
+        //     fetchempfeatures();
+        // }
+        // loadHomepage();
         
+
+        /******************************************OUR SERVICES******************************************************************************/
+
+
+        var editor_instance_os;
+        var editor_instance_os_data;//this variable stores data in modal ..it gets updated on desc modal close
+        var intermediate_data_os_desc;
+        openaddosdescriptionmodal = function (ospopupname) 
+        {
+            editor_instance_os = CKEDITOR.instances.ostxt2;
+            if (editor_instance_os) {
+                intermediate_data_os_desc = editor_instance_os_data;
+                editor_instance_os.destroy(true);
+            }
+            CKEDITOR.replace('ostxt2', {
+                uiColor: '#D3D3D3',
+                height: 500,
+                removePlugins: 'maximize'
+            });
+
+            $("#addOSdialog").on("ojbeforeclose", function (event, ui) {
+                editor_instance_os_data = CKEDITOR.instances.ostxt2.getData();
+                var uploadosheader = {
+                    "name": ospopupname,
+                    "description": editor_instance_os_data,
+                    "ins_or_upd": "ins"
+                }
+
+                console.log(uploadosheader);
+                $.ajax({
+                    url: homebaseurl + 'SEAAS_OS_UPDATE',
+                    headers: uploadosheader,
+                    type: 'POST',
+                    success: function (dataos) {
+                        console.log(dataos);
+                        console.log("Our Services added successfully!");
+                        self.checkadminrightsnew();
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    console.log("Error in SEAAS_OS_UPDATE API ", err);
+                    self.checkadminrightsnew();
+                });
+            });
+            CKEDITOR.instances.ostxt2.setData(intermediate_data_os_desc);
+            $("#addOSdialog").ojDialog("open");
+        }
+        self.ostext = ko.observable('');
+        self.editostext = ko.observable('');
+        self.editostitle = ko.observable('');
+
+        var editor_instance_edit_os;
+        var editor_instance_edit_os_data;//this variable stores data in modal ..it gets updated on desc modal close
+        var intermediate_data_os_edit_desc;
+        editor_instance_edit_empf_data = editemployeefeatures.empfeatext;
+        self.editostitle('');
+        openeditosdescriptionmodal = function (ospopupeditedname) {
+            
+            console.log(ospopupeditedname);
+            self.editostitle(ospopupeditedname);
+
+            editor_instance_edit_os = CKEDITOR.instances.edostxt2;
+            if (editor_instance_edit_os) {
+                intermediate_data_os_edit_desc = editor_instance_edit_os_data;
+                editor_instance_edit_os.destroy(true);
+            }
+            CKEDITOR.replace('edostxt2', {
+                uiColor: '#D3D3D3',
+                height: 500,
+                removePlugins: 'maximize'
+            });
+
+            $("#editOSdialog").on("ojbeforeclose", function (event, ui) {
+                editor_instance_edit_os_data = CKEDITOR.instances.edostxt2.getData();
+                var editor_text_data = editor_instance_os_data;
+                var uploadeditosheader = {
+                    "name": self.editostitle(),
+                    "description": editor_instance_edit_os_data,
+                    "ins_or_upd": "upd"
+                }
+                $.ajax({
+                    url: homebaseurl + 'SEAAS_OS_UPDATE',
+                    headers: uploadeditosheader,
+                    type: 'POST',
+                    success: function (dataedos) {
+                        console.log(dataedos);
+                        console.log("Our Services edited successfully!");
+                        // fetchempfeatures();
+                        closeaddosdialog();
+                        self.checkadminrightsnew();
+                        // resetempfeatures();
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    console.log("Error in SEAAS_OS_UPDATE API ", err);
+                    self.checkadminrightsnew();
+                });
+            });
+            CKEDITOR.instances.edostxt2.setData(intermediate_data_os_edit_desc);
+            $("#editOSdialog").ojDialog("open");
+        }
+
+        // addos = function (ospopupname) 
+        // {
+        //     var editor_text_data = editor_instance_os_data;
+        //     var uploadosheader = {
+        //         "name": ospopupname,
+        //         "description": editor_text_data,
+        //         "ins_or_upd": "ins"
+        //     }
+
+        //     console.log(uploadosheader);
+        //     $.ajax({
+        //         url: homebaseurl + 'SEAAS_OS_UPDATE',
+        //         headers: uploadosheader,
+        //         async: true,
+        //         crossDomain: true,
+        //         cache: false,
+        //         type: 'POST',
+        //         success: function (dataos) {
+        //             console.log(dataos);
+        //             console.log("Our Services added successfully!");
+        //             // fetchempfeatures();
+        //             closeaddosdialog();
+        //             // resetempfeatures();
+        //         }
+        //     }).fail(function (xhr, textStatus, err) {
+        //         console.log("Error in SEAAS_OS_UPDATE API ", err);
+        //     });
+        // }
+
+        //EDIT EMPLOYEE FEATURES observables
+        // self.ostext = ko.observable('');
+        // self.editostext = ko.observable('');
+        // self.editosdesc = ko.observable('');
+
+        // editos = function (ospopupeditedname) {
+        //     var editor_text_data = editor_instance_os_data;
+        //     var uploadeditosheader = {
+        //         "name": ospopupeditedname,
+        //         "description": editor_instance_edit_os_data,
+        //         "ins_or_upd": "upd"
+        //     }
+
+        //     // SEND TO SERVER
+        //     $.ajax({
+        //         url: homebaseurl + 'SEAAS_OS_UPDATE',
+        //         headers: uploadeditosheader,
+        //         async: true,
+        //         crossDomain: true,
+        //         cache: false,
+        //         type: 'POST',
+        //         success: function (dataedos) {
+        //             console.log(dataedos);
+        //             console.log("Our Services edited successfully!");
+        //             // fetchempfeatures();
+        //             closeaddosdialog();
+        //             // resetempfeatures();
+        //         }
+        //     }).fail(function (xhr, textStatus, err) {
+        //         console.log("Error in SEAAS_OS_UPDATE API ", err);
+        //     });
+        // }
+
+        // openEditOurServicesModal = function (editourservices) {
+        //     $("#editOSdialog").ojDialog("open");
+        //     console.log("Edit our services data", editourservices);
+
+            // self.editosdesc('');
+
+            // // SET NEW VALUE
+            // self.editosdesc(editourservices);
+            // editor_instance_edit_empf_data = editemployeefeatures.empfeatext;
+        // }
+
+        // closeEditOurServicesModa = function () {
+        //     $("#editOSdialog").ojDialog("close");
+        // }
+
+        self.oslist = ko.observableArray([]);
+        fetchourservices = function () {
+            $.getJSON(homebaseurl + 'SEAAS_OS_UPDATE').then(function (osdetails) {
+                // Fetch Employee features
+                self.oslist([]);
+                var ourslist = osdetails.items;
+                // console.log(ourslist);
+                // for (var b = 0; b < eflist.length; b++) {
+                //     self.oslist.push({
+                //         empfeaheading: eflist[b].features_heading,
+                //         empfeatext: eflist[b].key_wins_text
+                //     })
+                // }
+                self.checkadminrightsnew();
+            });
+        }
+        fetchourservices();
+
+        resetos = function () {
+            // self.empfeatheading('');
+
+            // document.getElementById("edefbg").value = "";
+        }
+
+
+        /******************************************OUR SERVICES ENDS*************************************************************************/
+
+
         /******************************************ANALYTICS*********************************************************************************/
 
         analytics = function (itemtitle, itemname, itemtype, itemlevel1, itemlevel2, itemlevel3) 
@@ -2480,8 +2670,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#modalDialog12").ojDialog("open");
             analytics('Success', 'Deliver a Health Check', 'View_details', 'Homepage', 'Our Services', 'Success');
         }
-        
-            closedialog13=function(){                
+		
+		    closedialog13=function(){                
             $("#modalDialog13").ojDialog("close");
         }
 
@@ -2489,8 +2679,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#modalDialog13").ojDialog("open");
             analytics('Account Planning', 'Customer Discovery', 'View_details', 'Homepage', 'Our Services', 'Account Planning');
         }
-        
-            closedialog14=function(){                
+		
+		    closedialog14=function(){                
             $("#modalDialog14").ojDialog("close");
         }
 
@@ -2499,7 +2689,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             analytics('Account Planning', 'Platform Assessments', 'View_details', 'Homepage', 'Our Services', 'Account Planning');
         }
 
-            closedialog15=function(){                
+		    closedialog15=function(){                
             $("#modalDialog15").ojDialog("close");
         }
 
@@ -2559,10 +2749,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         $(document).ready(function() 
         {
-            if (window.location.href.indexOf("waleed") != -1)
+		        if (window.location.href.indexOf("waleed") != -1)
             {
-              $("#empf1").ojDialog("open");
-            }
+	            $("#empf1").ojDialog("open");
+	          }
             function isIE(userAgent) 
             {
               userAgent = userAgent || navigator.userAgent;
@@ -2777,6 +2967,17 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#orgpeopleimagedialog").ojDialog("close");
         }
 
+        openaddosdialog = function () {
+            if (CKEDITOR.instances.ostxt2) {
+                CKEDITOR.instances.ostxt2.destroy(true);
+            }
+            editor_instance_os = "";
+            $("#addOSdialog").ojDialog("open");
+        }
+        closeaddosdialog = function () {
+            $("#addOSdialog").ojDialog("close");
+        }
+        
         clearContents = function(element){
             element.value = '';
         }
