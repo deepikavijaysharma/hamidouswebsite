@@ -683,7 +683,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     "organization": self.editorganizationselected(),
                     "name": self.editorgpeoplename(),
                     "designation": self.editorgpeopledesignation(),
-                    "dot_line": self.editorgdottedline(),
+                    "dot_line": self.editorgdottedline()!=true?'No':'Yes',
                     "website": self.editorgwebsite()
                 }
 
@@ -721,7 +721,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         "organization": self.editorganizationselected(),
                         "name": self.editorgpeoplename(),
                         "designation": self.editorgpeopledesignation(),
-                        "dot_line": self.editorgdottedline(),
+                        "dot_line": self.editorgdottedline()!=true?'No':'Yes',
                         "website": self.editorgwebsite(),
                         "mimetype": edemployeephotopath.type
                     }

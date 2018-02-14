@@ -136,7 +136,7 @@ right: 4px;
 }
 
 .wins .ani_container {
-    
+    min-height: 300px;
     position: relative;
 }
 
@@ -253,6 +253,9 @@ display:none;
 #ojDialogWrapper-modaldescempf_layer,#ojDialogWrapper-modaldescslider_layer,
 #ojDialogWrapper-modaledittitleslider_layer,#ojDialogWrapper-modaleditdescslider_layer{
   z-index: 1052;
+}
+.nocolor{
+color:#ffffff!important;
 }
 </style>
 <!------------------------------------SLIDER------------------------------------>
@@ -501,9 +504,7 @@ display:none;
         <div class="row oj-sm-12">
           <div class="oj-flex oj-sm-12 nopadding servicesblocks1">
             <div class="row oj-flex oj-sm-12">
-              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 oj-xl-3 servicesblocksinner">
-                <!-- <i class="fa fa-plus-square endorgdel" aria-hidden="true" title="Add Our Services" onclick="openaddosdescriptionmodal('Deliver a Cloud Day')"></i>
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Deliver a Cloud Day')"></i> -->
+              <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 oj-xl-3 servicesblocksinner" >
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog"> <img src="css/images/1.png"><br>
                     <br>
@@ -696,11 +697,14 @@ display:none;
                   <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
+                  <a class="nocolor" data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <span data-bind="text: orgname"></span>
+                  </a>
                   <!-- /ko -->
                   <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
-                  <!-- /ko -->
                   <span data-bind="text: orgname"></span>
+                  <!-- /ko -->
                   <!-- ko if: orgdotline == 'Yes' -->
                   <span>*</span>
                   <!-- /ko -->
@@ -724,11 +728,14 @@ display:none;
                   <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
+                  <a class="nocolor" data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <span data-bind="text: orgname"></span>
+                  </a>
                   <!-- /ko -->
                   <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
-                  <!-- /ko -->
                   <span data-bind="text: orgname"></span>
+                  <!-- /ko -->
                   <!-- ko if: orgdotline == 'Yes' -->
                   <span>*</span>
                   <!-- /ko -->
@@ -754,11 +761,14 @@ display:none;
                   <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
+                  <a class="nocolor" data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <span data-bind="text: orgname"></span>
+                  </a>
                   <!-- /ko -->
                   <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
-                  <!-- /ko -->
                   <span data-bind="text: orgname"></span>
+                  <!-- /ko -->
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
@@ -782,11 +792,14 @@ display:none;
                   <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
+                  <a class="nocolor" data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <span data-bind="text: orgname"></span>
+                  </a>
                   <!-- /ko -->
                   <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
-                  <!-- /ko -->
                   <span data-bind="text: orgname"></span>
+                  <!-- /ko -->
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
@@ -813,11 +826,14 @@ display:none;
                   <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
+                  <a class="nocolor" data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <span data-bind="text: orgname"></span>
+                  </a>
                   <!-- /ko -->
                   <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
-                  <!-- /ko -->
                   <span data-bind="text: orgname"></span>
+                  <!-- /ko -->
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
@@ -841,11 +857,14 @@ display:none;
                   <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
+                  <a class="nocolor" data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <span data-bind="text: orgname"></span>
+                  </a>
                   <!-- /ko -->
                   <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
-                  <!-- /ko -->
                   <span data-bind="text: orgname"></span>
+                  <!-- /ko -->
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
@@ -872,11 +891,14 @@ display:none;
                   <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
+                  <a class="nocolor" data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <span data-bind="text: orgname"></span>
+                  </a>
                   <!-- /ko -->
                   <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
-                  <!-- /ko -->
                   <span data-bind="text: orgname"></span>
+                  <!-- /ko -->
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
@@ -900,11 +922,14 @@ display:none;
                   <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
+                  <a class="nocolor" data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <span data-bind="text: orgname"></span>
+                  </a>
                   <!-- /ko -->
                   <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
-                  <!-- /ko -->
                   <span data-bind="text: orgname"></span>
+                  <!-- /ko -->
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
@@ -931,11 +956,14 @@ display:none;
                   <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
+                  <a class="nocolor" data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <span data-bind="text: orgname"></span>
+                  </a>
                   <!-- /ko -->
                   <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
-                  <!-- /ko -->
                   <span data-bind="text: orgname"></span>
+                  <!-- /ko -->
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
@@ -959,11 +987,14 @@ display:none;
                   <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
+                  <a class="nocolor" data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <span data-bind="text: orgname"></span>
+                  </a>
                   <!-- /ko -->
                   <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
-                  <!-- /ko -->
                   <span data-bind="text: orgname"></span>
+                  <!-- /ko -->
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
@@ -990,11 +1021,14 @@ display:none;
                   <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
+                  <a class="nocolor" data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <span data-bind="text: orgname"></span>
+                  </a>
                   <!-- /ko -->
                   <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
-                  <!-- /ko -->
                   <span data-bind="text: orgname"></span>
+                  <!-- /ko -->
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
@@ -1018,11 +1052,14 @@ display:none;
                   <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
+                  <a class="nocolor" data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <span data-bind="text: orgname"></span>
+                  </a>
                   <!-- /ko -->
                   <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
-                  <!-- /ko -->
                   <span data-bind="text: orgname"></span>
+                  <!-- /ko -->
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
@@ -1049,11 +1086,14 @@ display:none;
                   <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
+                  <a class="nocolor" data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <span data-bind="text: orgname"></span>
+                  </a>
                   <!-- /ko -->
                   <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
-                  <!-- /ko -->
                   <span data-bind="text: orgname"></span>
+                  <!-- /ko -->
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
@@ -1077,11 +1117,14 @@ display:none;
                   <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
+                  <a class="nocolor" data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <span data-bind="text: orgname"></span>
+                  </a>
                   <!-- /ko -->
                   <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
-                  <!-- /ko -->                  
                   <span data-bind="text: orgname"></span>
+                  <!-- /ko -->
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
@@ -1109,11 +1152,14 @@ display:none;
                   <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
+                  <a class="nocolor" data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <span data-bind="text: orgname"></span>
+                  </a>
                   <!-- /ko -->
                   <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
-                  <!-- /ko -->
                   <span data-bind="text: orgname"></span>
+                  <!-- /ko -->
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
@@ -1137,11 +1183,14 @@ display:none;
                   <a data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
                     <img data-bind="attr:{'src':orgimage,'id':orgempid}">
                   </a>
+                  <a class="nocolor" data-bind="attr:{'href':orgweb},click:analytics.bind($data,orglob,orgname,'link','Homepage','Our Organization',orglob)" target="_blank">
+                    <span data-bind="text: orgname"></span>
+                  </a>
                   <!-- /ko -->
                   <!-- ko ifnot: orgweb -->
                   <img data-bind="attr:{'src':orgimage,'id':orgempid}">
-                  <!-- /ko -->
                   <span data-bind="text: orgname"></span>
+                  <!-- /ko -->
                   <!-- ko if: orgdotline =='Yes' -->
                   <span>*</span>
                   <!-- /ko -->
@@ -1215,7 +1264,7 @@ display:none;
                     <div class="oj-sm-12 oj-lg-5 oj-flex" style="display:none">
                       <button class="oj-sm-align-center oj-flex bluebutton ">See All</button>
                     </div>
-                    <div class="oj-sm-12 oj-lg-12"><span class="oj-md-float-end">Missed out any course?<br>
+                    <div class="oj-sm-12 oj-lg-12"><span class="oj-md-float-end">Missed a course?<br>
                       <a href="?root=keydatesarchives">Checkout Archives</a></span></div>
                   </div>
                 </div>
@@ -1244,7 +1293,7 @@ display:none;
                 <div class="kwadmin">
                   <!-- <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Key Wins" data-bind="click:openEditKeyWinsModal"></i>
                   <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Key Wins" data-bind="click:deletekeywins"></i> -->
-                  <i class="fa fa-pencil-square-o endsl" aria-hidden="true" title="Edit Key Wins" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+                  <i class="fa fa-pencil-square-o endsl" aria-hidden="true" title="Edit Key Wins" data-bind="click:openEditKeyWinsModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   <i class="fa fa-trash-o endsldel" aria-hidden="true" title="Delete Key Wins" data-bind="click:deletekeywins,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 </div>
                 <p>
@@ -1326,10 +1375,10 @@ display:none;
                             </div>
                           </div>
                           <div class="summaryButton oj-sm-12 oj-flex">
-                            <div class="oj-sm-12 oj-md-6">
+                            <div class="oj-sm-12 oj-lg-6">
                               <button class="oj-sm-align-center oj-flex" data-bind="click: $parent.buttonClick.bind($data, 'wins'+golid)">Quick Summary</button>
                             </div>
-                            <div class="oj-sm-12 oj-md-6 oj-flex">
+                            <div class="oj-sm-12 oj-lg-6 oj-flex">
                               <a data-bind="attr:{'href':gollink},click:analytics.bind($data,'',golguest,'link','Homepage','Go Lives','')" target="_blank">Listen to Interview</a>
                             </div>
                           </div>
@@ -1491,21 +1540,20 @@ display:none;
       <div class="oj-sm-12">
         <div class="oj-flex contactcontainer">
           <div class="oj-sm-12 oj-md-12 oj-lg-7">
-          <div class="oj-margin">
-            <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:226352333084512" target="_blank">Heather Hughes</a></span>: SE Excellence Website Lead, Announcements, Employee Features, Key Dates</p>
-            <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:315985946465432" target="_blank">Kaushik Kundu</a></span>: SE Excellence Enablement Page Lead</p>
-             <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:520401307863468" target="_blank">Gary DeYoung</a></span>: SE Excellence Enablement Contributor</p>
-            <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:581203040684912" target="_blank">Maharshi Desai</a></span>: Oracle Cloud Hubs Website Lead, SE-as-a-Service,  ECAL â€“ Method, ECA Certification, ECA Enablement Web Site Lead </p>
-            <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:111797086113117" target="_blank">Bridget Guiley</a></span>: Go Lives, Wins, and References</p>
+            <div class="oj-margin">
+              <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:226352333084512" target="_blank">Heather Hughes</a></span>: SE Excellence Website Lead, Announcements, Employee Features, Key Dates</p>
+              <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:315985946465432" target="_blank">Kaushik Kundu</a></span>: SE Excellence Enablement Page Lead</p>
+              <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:520401307863468" target="_blank">Gary DeYoung</a></span>: SE Excellence Enablement Contributor</p>
+              <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:581203040684912" target="_blank">Maharshi Desai</a></span>: Oracle Cloud Hubs Website Lead, SE-as-a-Service,  ECAL – Method, ECA Certification, ECA Enablement Web Site Lead </p>
             </div>
           </div>
           <div class="oj-sm-12 oj-md-12 oj-lg-5">
-          <div class="oj-margin">
-            <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:916952584278634" target="_blank">Nick Donatone</a></span>: Cloud Customer Success, Links and Resources Page Lead </p>
-            <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:215930508555983" target="_blank">Al Kiessel</a></span>: ECAL â€“ Method, ECA Certification, ECA Enablement Content Lead </p>
-            <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:111850427926188" target="_blank">Bella Dosovitsky</a></span>: Platform Specialist Team</p>
-            <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:729524033994280" target="_blank">Souvik Sadhu</a></span>: Bangalore Hub Design Agency</p>
-            </p>
+            <div class="oj-margin">
+              <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:916952584278634" target="_blank">Nick Donatone</a></span>: Cloud Customer Success, Links and Resources Page Lead </p>
+              <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:111797086113117" target="_blank">Bridget Guiley</a></span>: Go Lives, Wins, and References</p>
+              <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:111850427926188" target="_blank">Bella Dosovitsky</a></span>: Platform Specialist Team</p>
+              <p><span class="orange"><a href="https://people.us.oracle.com/pls/oracle/f?p=8000:2:::::PERSON_ID:729524033994280" target="_blank">Souvik Sadhu</a></span>: Bangalore Hub Design Agency</p>
+              </p>
             </div>
           </div>
           <div class="oj-sm-12">
@@ -1586,9 +1634,9 @@ display:none;
     <ul>
       <li> ECAs lead this engagement and are responsible for the majority of the deliverables. </li>
       <li> Platform Specialists and Hub SEs work on Portfolio and Workload Analysis efforts, contribute to the physical architecture designs, and provide foundation services as needed (e.g. Customer Discovery of current state IT Portfolio, Customer Demos, Sizing/Quoting/Config). </li>
-      <li>This service may spawn the <a href="#" data-bind="click:opendialog7">“Build a POC”</a> service. </li>
-      <li>Business Value Consultants support any value-based activities and deliverables, which can also fall under the “Build a Business Case” service. </li>
-      <li>CSMs are responsible for ECAL Migration and Adoption Planning activities and deliverables, and the subsequent “Adopt a Cloud Solution” service. </li>
+      <li>This service may spawn the <a href="#" data-bind="click:opendialog7">â€œBuild a POCâ€</a> service. </li>
+      <li>Business Value Consultants support any value-based activities and deliverables, which can also fall under the â€œBuild a Business Caseâ€ service. </li>
+      <li>CSMs are responsible for ECAL Migration and Adoption Planning activities and deliverables, and the subsequent â€œAdopt a Cloud Solutionâ€ service. </li>
       <li>For more information, see our <a href="http://innovate.us.oracle.com/ecal/" target="_blank">ECAL</a> website. </li>
     </ul>
     <h4 style="color:#00758f;"> How do you request this service?</h4>
@@ -2155,7 +2203,7 @@ display:none;
    <div class="oj-dialog-footer" style="background-color: lightgray">
   <div>
     <button id="resetedsliderButton" data-dismiss="modal" class="orangebutton" onclick="resetslider()" style="cursor: pointer" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
-    <button id="savesedsliderButton" data-dismiss="modal" class="bluebutton" onclick="editslidervalues()" style="cursor: pointer" data-bind="ojComponent: {component:'ojButton', label: 'Edit Slider'}"></button>
+    <button id="savesedsliderButton" data-dismiss="modal" class="bluebutton" onclick="editslidervalues()" style="cursor: pointer" data-bind="ojComponent: {component:'ojButton', label: 'Save Slider'}"></button>
   </div>
   </div>
 </div>
@@ -3021,100 +3069,3 @@ display:none;
 <!-- Edit Employee Features Description ckeditor modal workaround end -->
 
 <!-- END OF EMPLOYEE FEATURES POPUPS -->
-
-
-<!-- OUR SERVICES POPUPS -->
-
-<!-- add our services confirmation start -->
-<!-- <div style="display:none" id="addOSdialog" title="Add Our Services" class="dialogbodymain" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="oj-dialog-body dialogbody">
-    <div class="oj-flex">
-      <div class="oj-lg-6">
-        <br>
-        <div class="oj-sm-12">
-          <label>Enter Our Services Text: </label><label class="required">*</label>
-        </div>
-        <div class="oj-sm-12">
-          <textarea id="ostxt2" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:ostext}"></textarea>
-        </div>
-        <br>
-        <br>
-      </div>
-    </div>
-    <br>
-  </div>
-  <div class="oj-dialog-footer" style="background-color: lightgray">
-    <div>
-      <button id="resetosButton" data-dismiss="modal" class="orangebutton" onclick="resetos()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
-      <button id="okosButton" data-dismiss="modal" class="bluebutton" onclick="addos()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}">
-      </button>
-    </div>
-  </div>
-</div> -->
-<!-- add our services confirmation end -->
-
-<!-- edit our services confirmation start -->
-<!-- <div style="display:none" id="editOSdialog" title="Edit Our Services" class="dialogbodymain" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="oj-dialog-body dialogbody">
-    <div class="oj-flex">
-      <div class="oj-lg-6"><br>
-        <div class="oj-sm-12">
-          <label>Enter Our Services Text: </label>
-          <label class="required">*</label>
-        </div>
-        <div class="oj-sm-12">
-          <textarea id="edostxt2" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:editostext}"></textarea>
-        </div>
-      </div>
-    </div>
-    <br>
-  </div>
-  <div class="oj-dialog-footer" style="background-color: lightgray">
-    <div>
-      <button id="reseteditosButton" data-dismiss="modal" class="orangebutton" onclick="resetos()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
-      <button id="okeditosButton" data-dismiss="modal" class="bluebutton" onclick="editos()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}">
-      </button>
-    </div>
-  </div>
-</div> -->
-<!-- edit our services confirmation end -->
-
-<!-- Add Our Services Description ckeditor modal workaround start -->
-<div style="display:none" class="dialogbodymain" id="addOSdialog" title="Add Our Services Text" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
-  <div class="oj-dialog-body roleWrapper">
-    <div class="nomargin-md oj-margin-left">
-      <div class="oj-flex">
-        <div class="oj-sm-12">
-          <label>Enter Our Services Text: </label>
-          <label class="required">*</label>
-        </div>
-        <div class="oj-sm-12">
-          <textarea id="ostxt2" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:ostext}"></textarea>
-        </div>
-        <br>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Add Our Services Description ckeditor modal workaround end -->
-
-<!-- Edit Our Services Description ckeditor modal workaround start -->
-<div style="display:none" class="dialogbodymain" id="editOSdialog" title="Edit Our Services Text" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
-  <div class="oj-dialog-body roleWrapper">
-    <div class="nomargin-md oj-margin-left">
-      <div class="oj-flex">
-        <div class="oj-sm-12">
-          <label>Enter Our Services Text: </label>
-          <label class="required">*</label>
-        </div>
-        <div class="oj-sm-12">
-          <textarea id="edostxt2" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:editostext}"></textarea>
-        </div>
-        <br>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Edit Our Services Description ckeditor modal workaround end -->
-
-<!-- END OF OUR SERVICES POPUPS -->
