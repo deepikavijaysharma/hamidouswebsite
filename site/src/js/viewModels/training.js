@@ -155,7 +155,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             var editor_instance_data3 = "";          
             var intermediate_data4 = "";
             var editor_instance_data4 = "";
-
+            self.event_report_list = ko.observableArray([]);
 
             // EVENT HANDLER FOR ROLE SELECTION
             rolesselected = function (event, ui) {
@@ -1716,6 +1716,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }                
                
             });
+            waitForElement("events_tab", function(){
+                var call_id_val1 = window.location.href;
+                // com_call_id is getting used to go directly to an old community call which doesnt 
+                //have a reply link. key_com_call is to navigate to key events com call from home page
+                var is_event_id_text_present = call_id_val1.indexOf("events_tab_trigger");
+                if (is_event_id_text_present != -1){
+                    $('#events_tab').trigger('click');
+                }                
+               
+            });
+
             /* ---------------------   COMMUNITY CALLS  -------------------------*/
 
             // GET THE LIST OF COMUNITY CALLS
@@ -2111,8 +2122,101 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 setuncheck("refine");
             }
             loadCommunitycall();
+            // events report start
+            
+            refineEventReport = function () {
+                var checkbox_value = [];
+                $(":checkbox").each(function () {
+                    var ischecked = $(this).is(":checked");
+                    if (ischecked) {
+                        checkbox_value.push($(this).val());
+                    }
+                });
+            }
+            
+
+//             loadEventReportData = function () {
+//                 var checkbox_value = [];
+//                 $(":checkbox").each(function () {
+//                     var ischecked = $(this).is(":checked");
+//                     if (ischecked) {
+//                         checkbox_value.push($(this).val());
+//                     }
+//                 });
+
+//                 $.getJSON(event_report_api).then(function (data) {
+//                     var calls = data.items;
+//                     self.event_report_list([]);
+//                     for (var i = 0; i < calls.length; i++) {
+//                         if(checkbox_value.length > 0 ){
+
+// for(var j=0; j<checkbox_value.length; j++) {
+
+//                             if (checkbox_value[j] == parseInt(checkbox_value[j] , 10)){
+//                                 var date1 = new Date(calls[i].start_date.substr(0,10));
+//                                 var date2 = new Date();
+//                                 var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+//                                 var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+//                                 if(diffDays <= checkbox_value[j]){
+//                                     self.event_report_list.push({
+//                                         training_type: calls[i].training_type != undefined ? calls[i].training_type : '',
+//                                         name: calls[i].name != undefined ? calls[i].name : '',
+//                                         start_date: calls[i].start_date != undefined ? calls[i].start_date.substr(0,10) : '',
+//                                         start_time: calls[i].start_date != undefined ? calls[i].start_date.substr(11,5) : '',
+//                                     });    
+//                                 }
+//                             }
+
+//                             else if(checkbox_value[j] == calls[i].training_type) {
+//                                 self.event_report_list.push({
+//                                     training_type: calls[i].training_type != undefined ? calls[i].training_type : '',
+//                                     name: calls[i].name != undefined ? calls[i].name : '',
+//                                     start_date: calls[i].start_date != undefined ? calls[i].start_date.substr(0,10) : '',
+//                                     start_time: calls[i].start_date != undefined ? calls[i].start_date.substr(11,5) : '',
+//                                         });    
+//                                     }
+
+//                                 }
+//                             }
+//                         }
+//                     });
+//                 }
 
 
+            loadEventReportData = function () {
+
+                $.getJSON(event_report_api).then(function (data) {
+                    var calls = data.items;
+                    self.event_report_list([]);
+                    var gotoSpecificTraining;
+                    for (var i = 0; i < calls.length; i++) {
+                                    var genericLink = window.location.href;
+                                    var query_param = "=training";
+                                    genericLink = genericLink.substr(0,genericLink.indexOf(query_param)+query_param.length);
+
+                                    if(calls[i].training_type == "COMMUNITY_CALLS"){
+                                        gotoSpecificTraining = genericLink+"#key_com_call="+calls[i].id;
+                                    }
+                                    else if(calls[i].training_type == "EVENT"){
+                                        gotoSpecificTraining = genericLink+"#events_tab_trigger="+calls[i].id;  
+                                    }
+                                    else if(calls[i].training_type == "TRAINING"){
+                                        gotoSpecificTraining = genericLink+"#"+calls[i].id;
+                                    }
+                                    self.event_report_list.push({
+                                        training_type: calls[i].training_type != undefined ? calls[i].training_type : '',
+                                        name: calls[i].name != undefined ? calls[i].name : '',
+                                        gotoTraining: gotoSpecificTraining,
+                                        start_date: calls[i].start_date != undefined ? calls[i].start_date.substr(0,10) : '',
+                                        start_time: calls[i].start_date != undefined ? calls[i].start_date.substr(11,5) : '',
+                                    });    
+                                }
+                            });
+
+
+                        }
+            loadEventReportData();
+            // events report end
 
             setssostatus = function (selector, visibility) {
                 var nodes = document.querySelectorAll(selector),

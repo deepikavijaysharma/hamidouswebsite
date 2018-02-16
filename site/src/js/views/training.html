@@ -243,11 +243,11 @@
           <img src="css/images/offer-icon.jpg" align="middle">&nbsp;
           <span>Offers</span>
         </li>
-        <li>
+        <li id="events_tab">
           <img src="css/images/event_cal_icon_small.png" align="middle">&nbsp;
           <span>Events</span>
         </li>
-         <li style="display:none">
+         <li>
           <img src="css/images/event_cal_icon_small.png" align="middle">&nbsp;
           <span>Events Report</span>
         </li>
@@ -1491,142 +1491,155 @@
         </div>
       </div>
       <!--========================== EVENTS REPORT ==========================-->
-      <div id="tabs-6" style="display:none">
+      <div id="tabs-6">
         <div class="container">
+          
+          <form id="form1">
+            <div class="oj-flex search">
+              <div class="oj-flex-item oj-md-12">
+                <input id="search-input" style="margin-bottom: 10px" placeholder="Search community call,training, and events. . ." data-bind="ojComponent:{
+            component: 'ojInputSearch', 
+            value: searchcallstext,
+            update : searchcommunitycalls
+          }" />
+              </div>
+
+            </div>
+          </form>
+
+
          <div class=" oj-flex coursesblock">
-            <div class="oj-flex-item oj-md-3 oj-lg-3">
+            <div class="oj-flex-item oj-md-4 oj-lg-3">
               <div class="eblocks blocks oj-flex-item  oj-sm-12 oj-md-4 oj-lg-4" style="height: auto;">
                 <div class="oj-flex-item refine">
-                  <div class="title">Refine Events</div>
+                  <div class="title">Refine Report</div>
                   <hr>
 
-                  <!-- ~~~~~~~~~~~~~ ROLES ~~~~~~~~~~~~~~ -->
-                  <!-- ko if: roles().length>0 -->
-
-                  <div class="titlesmall">Roles</div>
-
-                  <!-- /ko -->
+                 <div class="titlesmall">Type</div>
                   <ul class="refinelist">
-                    <!-- ko foreach: roles -->
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
+                        <div class="oj-sm-1">
                           <label>
-                            <input type="checkbox" class="refine" name="community_roles" data-bind="value: name" onchange="refineupdate(this)">
+                            <input type="checkbox" class="refine" value="COMMUNITY_CALLS" >
                           </label>
                         </div>
-                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
-                          <span data-bind="text: name"></span>
+                        <div class="oj-sm-11">
+                          <span>Community Call</span>
                         </div>
                       </div>
                     </li>
-
-                    <!-- /ko -->
+                    <li>
+                      <div class="oj-flex">
+                        <div class="oj-sm-1">
+                          <label>
+                            <input type="checkbox" class="refine" value="EVENT" 
+                            >
+                          </label>
+                        </div>
+                        <div class="oj-sm-11">
+                          <span>Event</span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="oj-flex">
+                        <div class="oj-sm-1">
+                          <label>
+                            <input type="checkbox" class="refine" value="TRAINING" 
+                            >
+                          </label>
+                        </div>
+                        <div class="oj-sm-11">
+                          <span>Training</span>
+                        </div>
+                      </div>
+                    </li>
                   </ul>
                   <!-- ~~~~~~~~~~~~~ CALL MODE ~~~~~~~~~~~~~~ -->
 
-                  <div class="titlesmall">Call Type</div>
+                  <div class="titlesmall">No. of Days</div>
                   <ul class="refinelist">
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
+                        <div class="oj-sm-1">
                           <label>
-                            <input type="checkbox" class="refine" name="communitymodes" value="virtual" onchange="refineupdate(this)">
+                            <input type="checkbox" class="refine" value="15" >
                           </label>
                         </div>
-                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
-                          <span>Virtual</span>
+                        <div class="oj-sm-11">
+                          <span>15</span>
                         </div>
                       </div>
                     </li>
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
+                        <div class="oj-sm-1">
                           <label>
-                            <input type="checkbox" class="refine" name="communitymodes" value="Town Hall" onchange="refineupdate(this)">
+                            <input type="checkbox" class="refine" value="30" >
                           </label>
                         </div>
-                         <div class="oj-sm-11 oj-md-10 oj-lg-11">
-                          <span>Town Hall</span>
+                        <div class="oj-sm-11">
+                          <span>30</span>
                         </div>
                       </div>
                     </li>
-                    <!-- </ul> -->
-                    <!-- ~~~~~~~~~~~~~ PAST CALL ~~~~~~~~~~~~~~ -->
-                    <!-- <div class="titlesmall">PAST CALLS</div> -->
-                    <!-- <ul class="refinelist"> -->
                     <li>
                       <div class="oj-flex">
-                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
+                        <div class="oj-sm-1">
                           <label>
-                            <input type="checkbox" class="refine" name="past" value="past" onchange="refineupdate(this)">
+                            <input type="checkbox" class="refine" value="60" >
                           </label>
                         </div>
-                          <div class="oj-sm-11 oj-md-10 oj-lg-11">
-                          <span>Replay</span>
+                        <div class="oj-sm-11">
+                          <span>60</span>
                         </div>
                       </div>
                     </li>
                   </ul>
                   <div class="oj-flex refinebuttons">
                     <div class="oj-sm-12 oj-xl-6">
-                      <button class="oj-sm-align-center oj-md-align-center oj-flex bluebutton" id="button" data-bind="click: searchcommunitycalls, 
+                      <button class="oj-sm-align-center oj-md-align-center oj-flex bluebutton" id="button" data-bind="click: loadEventReportData, 
                                 ojComponent: { component: 'ojButton', label: 'Refine' }"> </button>
                     </div>
                     <div class="oj-sm-12 oj-xl-6">
-                      <button class="oj-sm-align-center oj-md-align-center oj-flex orangebutton" data-bind="ojComponent: {
+                      <button id="event_report_submit" class="oj-sm-align-center oj-md-align-center oj-flex orangebutton" data-bind="ojComponent: {
             component: 'ojButton',
             chroming: 'full',
-            label: 'Reset'},click:loadCommunitycall"> </button>
+            label: 'Reset'},click:refineEventReport"> </button>
                     </div>
                   </div>
                 </div>
                 <div> </div>
               </div>
             </div>
-            <div class="oj-flex-item oj-md-9 oj-lg-9 ">
-           
-             <div class="oj-margin"> 
-             <div class="bgwhite eventsreports">
-             <div class="oj-sm-12 row5 ">
+            <div class="oj-flex-item oj-md-8 oj-lg-9 bgwhite">
+             <div class="oj-sm-12 row5">
               <div class="oj-flex">
                 <div class="oj-sm-12">
                   <div class="oj-margin">
-                    <!-- ko foreach:eventsList -->
+                    <!-- ko foreach:event_report_list -->
                     <div class="calrow">
                       <div class="oj-flex">
-                        <div class="oj-sm-12 oj-lg-5 cTitle oj-flex">
+                        <div class="oj-sm-12 oj-lg-4 cTitle oj-flex">
                           <span class="event_name" data-bind="text:name"></span>
                         </div>
-                        <div class="oj-sm-12 oj-lg-3 cDate">
+                        <div class="oj-sm-12 oj-lg-4 cDate">
+                          <p>
+                            <span><a class="cclink" data-bind="attr:{href:gotoTraining}" target="_blank">Agenda and Registration</a></span>
+                          </p>
+                        </div>
+                        <div class="oj-sm-12 oj-lg-2 cDate">
                           <p>
                             <span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;
-                            <span class="event_date" data-bind="text:date"></span>
+                            <span class="event_date" data-bind="text:start_date"></span>
                           </p>
+                        </div>
+                        <div class="oj-sm-12 oj-lg-2 cDate">
                           <p>
                             <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;
-                            <span class="event_date" data-bind="text:time"></span>
+                            <span class="event_date" data-bind="text:start_time"></span>
                           </p>
-                        </div>
-
-                        <div class="oj-sm-12 oj-lg-3 cDate oj-flex">
-                          <p>
-                            <span class="event_date" data-bind="text:location"></span>
-                          </p>
-                        </div>
-
-                        <div class="oj-sm-12 oj-lg-1 editicons ">
-                          <a class="cclink" data-bind="attr:{href:registration_link}" target="_blank" style="text-decoration: none;">
-                            <i class="fa fa-calendar" aria-hidden="true" style="cursor: pointer; font-size: 14px" title="Link"></i>
-                          </a>
-                          <i class="fa fa-files-o admin" aria-hidden="true" style="cursor: pointer; font-size: 14px" title="Clone Event" data-bind="click:openCloneEventModal"
-                            target="_blank"></i>
-                          <i class="fa fa-pencil-square-o admin" aria-hidden="true" style="cursor: pointer; font-size: 14px" title="Edit Event" data-bind="click:openEditEventModal"
-                            target="_blank"></i>
-                          <i class="fa fa-trash-o admin" aria-hidden="true" style="cursor: pointer; font-size: 14px" title="Delete Event" data-bind="click:deleteEvent"
-                            target="_blank"></i>
-                          <br>
-                          <a data-bind="click:showEventDetails" target="_blank" class="ccdetailsbutton">Details</a>
                         </div>
 
                       </div>
@@ -1649,8 +1662,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-            </div>
             </div>
             </div>
           </div>
