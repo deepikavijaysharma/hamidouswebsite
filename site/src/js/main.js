@@ -26,6 +26,7 @@ var community_call_url = com_call_api+"COMMUNITY_CALLS";
 var community_call_calendar_link = com_call_api+"get_ical";
 var events_api = com_call_api+"GetKeyEvents";
 var create_event_api = com_call_api+"event";
+var event_report_api = com_call_api+"REPORT_ALL_DATA";
 /**
  * Example of Require.js boostrap javascript
  */
