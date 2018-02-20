@@ -140,6 +140,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             });
 
 
+            self.event_report_type=ko.observableArray([]);
+            self.event_report_no_days=ko.observableArray([]);
+            self.event_report_key_event=ko.observableArray([]);
+            self.searcheventreportstext=ko.observable('');
+
             self.rolelist = ko.observableArray([]);
 
             var editor_instance;
@@ -155,7 +160,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             var editor_instance_data3 = "";          
             var intermediate_data4 = "";
             var editor_instance_data4 = "";
-
+            self.event_report_list = ko.observableArray([]);
 
             // EVENT HANDLER FOR ROLE SELECTION
             rolesselected = function (event, ui) {
@@ -1055,6 +1060,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         case "past":
                             self.refinepastcalls.push(desc.defaultValue);
                             break;
+
+                        case "reporttype":
+                            self.event_report_type.push(desc.defaultValue);
+                            break;
+
+                        case "reportdays":
+                            self.event_report_no_days.push(desc.defaultValue);
+                            break;
+
+                        case "reportkeyevent":
+                            self.event_report_key_event.push(desc.defaultValue);
+                            break;
                     }
 
 
@@ -1094,6 +1111,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                         case "past":
                             self.refinepastcalls.remove(desc.defaultValue);
+                            break;
+                        
+                        case "reporttype":
+                            self.event_report_type.remove(desc.defaultValue);
+                            break;
+                            
+                        case "reportdays":
+                            self.event_report_no_days.remove(desc.defaultValue);
+                            break;
+                            
+                        case "reportkeyevent":
+                            self.event_report_key_event.remove(desc.defaultValue);
                             break;
                     }
 
@@ -1716,6 +1745,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }                
                
             });
+            waitForElement("events_tab", function(){
+                var call_id_val1 = window.location.href;
+                // com_call_id is getting used to go directly to an old community call which doesnt 
+                //have a reply link. key_com_call is to navigate to key events com call from home page
+                var is_event_id_text_present = call_id_val1.indexOf("events_tab_trigger");
+                if (is_event_id_text_present != -1){
+                    $('#events_tab').trigger('click');
+                }                
+               
+            });
+
             /* ---------------------   COMMUNITY CALLS  -------------------------*/
 
             // GET THE LIST OF COMUNITY CALLS
@@ -2111,8 +2151,137 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 setuncheck("refine");
             }
             loadCommunitycall();
+            // events report start
+            
+            refineEventReport = function () {
+                var checkbox_value = [];
+                $(":checkbox").each(function () {
+                    var ischecked = $(this).is(":checked");
+                    if (ischecked) {
+                        checkbox_value.push($(this).val());
+                    }
+                });
+            }
+            
+
+//             loadEventReportData = function () {
+//                 var checkbox_value = [];
+//                 $(":checkbox").each(function () {
+//                     var ischecked = $(this).is(":checked");
+//                     if (ischecked) {
+//                         checkbox_value.push($(this).val());
+//                     }
+//                 });
+
+//                 $.getJSON(event_report_api).then(function (data) {
+//                     var calls = data.items;
+//                     self.event_report_list([]);
+//                     for (var i = 0; i < calls.length; i++) {
+//                         if(checkbox_value.length > 0 ){
+
+// for(var j=0; j<checkbox_value.length; j++) {
+
+//                             if (checkbox_value[j] == parseInt(checkbox_value[j] , 10)){
+//                                 var date1 = new Date(calls[i].start_date.substr(0,10));
+//                                 var date2 = new Date();
+//                                 var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+//                                 var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+//                                 if(diffDays <= checkbox_value[j]){
+//                                     self.event_report_list.push({
+//                                         training_type: calls[i].training_type != undefined ? calls[i].training_type : '',
+//                                         name: calls[i].name != undefined ? calls[i].name : '',
+//                                         start_date: calls[i].start_date != undefined ? calls[i].start_date.substr(0,10) : '',
+//                                         start_time: calls[i].start_date != undefined ? calls[i].start_date.substr(11,5) : '',
+//                                     });    
+//                                 }
+//                             }
+
+//                             else if(checkbox_value[j] == calls[i].training_type) {
+//                                 self.event_report_list.push({
+//                                     training_type: calls[i].training_type != undefined ? calls[i].training_type : '',
+//                                     name: calls[i].name != undefined ? calls[i].name : '',
+//                                     start_date: calls[i].start_date != undefined ? calls[i].start_date.substr(0,10) : '',
+//                                     start_time: calls[i].start_date != undefined ? calls[i].start_date.substr(11,5) : '',
+//                                         });    
+//                                     }
+
+//                                 }
+//                             }
+//                         }
+//                     });
+//                 }
 
 
+            loadEventReportData = function () {
+    
+                var eventreportparam="/";
+
+                // READ SEARCH TEXT
+                if(self.searcheventreportstext().length>0){
+                    eventreportparam+=self.searcheventreportstext()+"/";
+                }else{
+                    eventreportparam+="$-$/";
+                }
+
+                // READ KEY_EVENT
+                if(self.event_report_key_event().includes('1')){
+                    eventreportparam+="Yes/";
+                }else{
+                    eventreportparam+="No/";
+                }
+
+                // READ REPORT TYPE
+
+                if(self.event_report_type().length>0){
+                    var eventreporttype =ko.toJSON(self.event_report_type()).replace('[', '').replace(']', '').replace(/"/g, '');
+                    eventreportparam+=eventreporttype+"/";
+                }else{
+                    eventreportparam+="$-$/";
+                }
+
+                // READ REPORT TYPE
+
+                if(self.event_report_no_days().length>0){
+                    var eventreportnodays =ko.toJSON(self.event_report_no_days()).replace('[', '').replace(']', '').replace(/"/g, '');
+                    eventreportparam+=eventreportnodays;
+                }else{
+                    eventreportparam+="$-$";
+                }
+
+                eventreportparam=eventreportparam.replace(/,/g, '\*');
+
+                $.getJSON(event_report_api+eventreportparam).then(function (data) {
+                    var calls = data.items;
+                    self.event_report_list([]);
+                    var gotoSpecificTraining;
+                    for (var i = 0; i < calls.length; i++) {
+                                    var genericLink = window.location.href;
+                                    var query_param = "=training";
+                                    genericLink = genericLink.substr(0,genericLink.indexOf(query_param)+query_param.length);
+
+                                    if(calls[i].training_type == "COMMUNITY_CALLS"){
+                                        gotoSpecificTraining = genericLink+"#key_com_call="+calls[i].id;
+                                    }
+                                    else if(calls[i].training_type == "EVENT"){
+                                        gotoSpecificTraining = genericLink+"#events_tab_trigger="+calls[i].id;  
+                                    }
+                                    else if(calls[i].training_type == "TRAINING"){
+                                        gotoSpecificTraining = genericLink+"#"+calls[i].id;
+                                    }
+                                    self.event_report_list.push({
+                                        training_type: calls[i].training_type != undefined ? calls[i].training_type : '',
+                                        name: calls[i].name != undefined ? calls[i].name : '',
+                                        gotoTraining: gotoSpecificTraining,
+                                        start_date: calls[i].start_date != undefined ? calls[i].start_date.substr(0,10) : '',
+                                        start_time: calls[i].start_date != undefined ? calls[i].start_date.substr(11,5) : '',
+                                    });    
+                                }
+                            });
+
+
+                        }
+            loadEventReportData();
+            // events report end
 
             setssostatus = function (selector, visibility) {
                 var nodes = document.querySelectorAll(selector),
@@ -2908,6 +3077,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }
                 self.processCoursesFromService(temcourses);
 
+            }
+
+            reseteventreportfilter=function(){
+                setuncheck('reporttype');
+                setuncheck('reportdays');
+                setuncheck('reportkeyevent');
+                self.event_report_type([]);
+                self.event_report_no_days([]);
+                self.event_report_key_event('');
+                loadEventReportData();
             }
             
         }
