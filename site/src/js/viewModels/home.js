@@ -59,10 +59,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 $(".fa-pencil-square-o").css("display", "none");
                 $(".fa-trash-o").css("display", "none");
                 $(".fa-share-square-o").css("display", "none");
-                // var appBanners = document.getElementsByClassName('admin'), i;
-                // for (var i = 0; i < appBanners.length; i++) {
-                //     appBanners[i].style.visibility = 'none';
-                // }
             }
         }
 
@@ -215,25 +211,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         self.addslider = function () 
         {
             var selectedimageid = '';
-
-            // if (self.sltitle().length == 0) {
-            //     alert("Please enter Banner Title");
-            //     return;
-            // }
-
             selectedimageid = ko.toJSON(self.slimgid());
-
-            // var sl = {
-            //     id: self.slid(),
-            //     title: editor_instance_title_slider_data,
-            //     description: editor_instance_slider_data,
-            //     button_label1: self.slbuttonlabel1(),
-            //     button_label2: self.slbuttonlabel2(),
-            //     link_text1:self.sllinktext1(),
-            //     link_text2: self.sllinktext2(),
-            //     image_id: self.slimgid()
-            // }
-
             var sl = {
                 id: self.slid(),
                 title: self.sltitle(),
@@ -244,7 +222,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 link_text2: self.sllinktext2(),
                 image_id: self.slimgid()
             }
-
             $.ajax({
                 url: homebaseurl+'home_screen_data',
                 cache: false,
@@ -298,8 +275,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             self.editslid(edit_slider.sliderid);
             self.editsltitle(edit_slider.slidertitle);
             self.editsldescription(edit_slider.sliderdesc);
-            // editor_instance_edit_title_slider_data = edit_slider.slidertitle;
-            // editor_instance_edit_slider_data = edit_slider.sliderdesc;
             self.editslbuttonlabel1(edit_slider.sliderbl1);
             self.editslbuttonlabel2(edit_slider.sliderbl2);
             self.editsllinktext1(edit_slider.sliderlt1);
@@ -326,8 +301,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 id: self.editslid(),
                 title: self.editsltitle(),
                 description: self.editsldescription(),
-                // title: editor_title_data,
-                // description: editor_desc_data,
                 button_label1: self.editslbuttonlabel1(),
                 button_label2:self.editslbuttonlabel2(),
                 link_text1: self.editsllinktext1(),
@@ -475,130 +448,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
              self.slimgid('');
         }
 
-        /*var intermediate_data_sl_title;
-        openslidertitlemodal = function () 
-        {
-            editor_instance_title_slider = CKEDITOR.instances.sltextarea1;
-            if (editor_instance_title_slider) {
-                intermediate_data_sl_title = editor_instance_title_slider_data;
-                editor_instance_title_slider.destroy(true);
-            }
-
-            CKEDITOR.replace('sltextarea1', {
-                uiColor: '#D3D3D3',
-                height: 500,
-                removePlugins: 'maximize',
-                enterMode: CKEDITOR.ENTER_BR,
-                on:
-                {
-                    instanceReady: function () {
-                        this.editable().setStyle('background-color', '#95A8AE');
-                    }
-                }
-            });
-
-            $("#modaltitleslider").on("ojbeforeclose", function (event, ui) 
-            {
-                editor_instance_title_slider_data = CKEDITOR.instances.sltextarea1.getData();
-            });
-
-            CKEDITOR.instances.sltextarea1.setData(intermediate_data_sl_title);
-            $("#modaltitleslider").ojDialog("open");
-        }
-
-        var intermediate_data_sl_desc
-        opensliderdescriptionmodal = function () 
-        {
-            editor_instance_slider = CKEDITOR.instances.sltextarea2;
-            if (editor_instance_slider) 
-            {
-                intermediate_data_sl_desc = editor_instance_slider_data;
-                editor_instance_slider.destroy(true);
-            }
-
-            CKEDITOR.replace('sltextarea2', {
-                uiColor: '#D3D3D3',
-                height: 500,
-                removePlugins: 'maximize',
-                enterMode: CKEDITOR.ENTER_BR,
-                on: 
-                {
-                    instanceReady: function () 
-                    {
-                        this.editable().setStyle('background-color', '#95A8AE');
-                    }
-                }
-            });
-
-            $("#modaldescslider").on("ojbeforeclose", function (event, ui) 
-            {
-                editor_instance_slider_data = CKEDITOR.instances.sltextarea2.getData();
-            });
-
-            CKEDITOR.instances.sltextarea2.setData(intermediate_data_sl_desc);
-            $("#modaldescslider").ojDialog("open");
-        }
-
-        var intermediate_data_sl_edit_title;
-        openeditslidertitlemodal = function () 
-        {
-            editor_instance_edit_title_slider = CKEDITOR.instances.sledittextarea1;
-            if (editor_instance_edit_title_slider) {
-                intermediate_data_sl_edit_title = editor_instance_edit_title_slider_data;
-                editor_instance_edit_title_slider.destroy(true);
-            }
-
-            CKEDITOR.replace('sledittextarea1', {
-                uiColor: '#D3D3D3',
-                height: 500,
-                removePlugins: 'maximize',
-                enterMode: CKEDITOR.ENTER_BR,
-                on:
-                {
-                    instanceReady: function () {
-                        this.editable().setStyle('background-color', '#95A8AE');
-                    }
-                }
-            });
-
-            $("#modaledittitleslider").on("ojbeforeclose", function (event, ui) {
-                editor_instance_edit_title_slider_data = CKEDITOR.instances.sledittextarea1.getData();
-            });
-
-            CKEDITOR.instances.sledittextarea1.setData(intermediate_data_sl_edit_title);
-            $("#modaledittitleslider").ojDialog("open");
-        }
-
-        var intermediate_data_sl_edit_desc;
-        openeditsliderdescriptionmodal = function () 
-        {
-            editor_instance_edit_slider = CKEDITOR.instances.sledittextarea2;
-            if (editor_instance_edit_slider) {
-                intermediate_data_sl_edit_desc = editor_instance_edit_slider_data;
-                editor_instance_edit_slider.destroy(true);
-            }
-
-            CKEDITOR.replace('sledittextarea2', {
-                uiColor: '#D3D3D3',
-                height: 500,
-                removePlugins: 'maximize',
-                enterMode: CKEDITOR.ENTER_BR,
-                on:
-                {
-                    instanceReady: function () {
-                        this.editable().setStyle('background-color', '#95A8AE');
-                    }
-                }
-            });
-
-            $("#modaleditdescslider").on("ojbeforeclose", function (event, ui) {
-                editor_instance_edit_slider_data = CKEDITOR.instances.sledittextarea2.getData();
-            });
-
-            CKEDITOR.instances.sledittextarea2.setData(intermediate_data_sl_edit_desc);
-            $("#modaleditdescslider").ojDialog("open");
-        }*/
-
         /******************************************SLIDER ENDS********************************************************************/
 
         
@@ -681,8 +530,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         {
             edemployeephotopath = event.target.files[0];
             console.log("filename for photo of edit org",edemployeephotopath);
-            // console.log("edit key wins filename length ", edemployeephotopath.length);
-            // $("#input-2").replaceWith($("#input-2").val('').clone(true));
         }
         openEditOrgModal = function (edit_org) {
             $("#editorgdialog").ojDialog("open");
@@ -970,8 +817,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             self.editorgpeopledesignation('');
             self.editorgdottedline('');
             self.editorgwebsite('');
-            // document.getElementById("input-2").value = "";
-            // document.getElementById("edinput-2").value = ""; 
         }
         /******************************************OUR ORGANIZATION ENDS*****************************************************/
         
@@ -1628,10 +1473,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             self.editglguest('');
             self.editgllink('');
             self.editgldiscussion('');
-            // document.getElementById("gllogo").value = "";
-            // document.getElementById("glphoto").value = "";
-            // document.getElementById("edgllogo").value = "";
-            // document.getElementById("edglphoto").value = "";
         }
         /******************************************GO LIVES END********************************************************************/
 
@@ -1995,215 +1836,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         /******************************************REFERENCES ENDS********************************************************************/
 
         /******************************************EMPLOYEE FEATURES*************************************************************************/
-
-        // var editor_instance_empf;
-        // var editor_instance_empf_data;//this variable stores data in modal ..it gets updated on desc modal close
-        // var editor_instance_edit_empf;
-        // var editor_instance_edit_empf_data;//this variable stores data in modal ..it gets updated on desc modal close
-        // var empphotopath = "";
-
-        // var intermediate_data_empf_desc;
-        // openempfdescriptionmodal = function () 
-        // {
-        //     editor_instance_empf = CKEDITOR.instances.txt2;
-        //     if (editor_instance_empf) 
-        //     {
-        //         intermediate_data_empf_desc = editor_instance_empf_data;
-        //         editor_instance_empf.destroy(true);
-        //     }
-        //     CKEDITOR.replace('txt2', {
-        //         uiColor: '#D3D3D3',
-        //         height: 500,
-        //         removePlugins: 'maximize'
-        //     });
-
-        //     $("#modaldescempf").on("ojbeforeclose", function (event, ui) {
-        //         editor_instance_empf_data = CKEDITOR.instances.txt2.getData();
-        //     });
-        //     CKEDITOR.instances.txt2.setData(intermediate_data_empf_desc);
-        //     $("#modaldescempf").ojDialog("open");
-        // }
-
-        // var intermediate_data_empf_edit_desc;
-        // openeditempfdescriptionmodal = function () 
-        // {
-        //     editor_instance_edit_empf = CKEDITOR.instances.edtxt2;
-        //     if (editor_instance_edit_empf) 
-        //     {
-        //         intermediate_data_empf_edit_desc = editor_instance_edit_empf_data;
-        //         editor_instance_edit_empf.destroy(true);
-        //     }
-        //     CKEDITOR.replace('edtxt2', {
-        //         uiColor: '#D3D3D3',
-        //         height: 500,
-        //         removePlugins: 'maximize'
-        //     });
-
-        //     $("#modaleditdescempf").on("ojbeforeclose", function (event, ui) {
-        //         editor_instance_edit_empf_data = CKEDITOR.instances.edtxt2.getData();
-        //     });
-        //     CKEDITOR.instances.edtxt2.setData(intermediate_data_empf_edit_desc);
-        //     $("#modaleditdescempf").ojDialog("open");
-        // }
-
-        // empphotoselected = function (event)
-        // {
-        //     empphotopath = event.target.files[0];
-        //     console.log("add employee features background filename",empphotopath);
-        // }
-        // addempfeatures = function () 
-        // {
-        //     if (self.empfeatheading().length == 0) {
-        //         alert("Please enter Employee Features Heading");
-        //         return;
-        //     }
-
-        //     // if (self.empfeattext().length == 0) {
-        //     //     alert("Please enter Employee Features Text");
-        //     //     return;
-        //     // }
-        //     var editor_text_data = editor_instance_empf_data;
-        //     var efreader = new FileReader();
-        //     efreader.onload = function () {
-        //         var empfimagedata = efreader.result.split('base64,')[1];
-        //         var uploadefheader = {
-        //             "id": self.empfeatid(),
-        //             "features_heading": self.empfeatheading(),
-        //             "key_wins_text": editor_text_data,
-        //             "logo": 
-        //             [{
-        //                 "logo": empfimagedata,
-        //                 "mime_type": empphotopath.type
-        //             }]
-        //         }
-
-        //       // SEND TO SERVER
-        //       $.ajax({
-        //         url: homebaseurl +'employee_features_new',
-        //         data: ko.toJSON(uploadefheader),
-        //         cache: false,
-        //         type: 'POST',
-        //         contentType: 'application/json; charset=utf-8',
-        //         success: function (dataempfeat) {
-        //             console.log(dataempfeat);
-        //             console.log("Employee Features added successfully!");
-        //             fetchempfeatures();
-        //             closeaddnewefdialog();
-        //             resetempfeatures();
-        //             self.checkadminrightsnew();
-        //         }
-        //       }).fail(function (xhr, textStatus, err) {
-        //         console.log("Error in employee_features API ",err);
-        //         self.checkadminrightsnew();
-        //       });
-        //     };
-        //     efreader.readAsDataURL(empphotopath);
-        // }
-
-        // //EDIT EMPLOYEE FEATURES observables
-        // self.editempfeatid = ko.observable('');
-        // self.editempfeatbg = ko.observable('');
-        // self.editempfeatheading = ko.observable('');
-        // self.editempfeattext = ko.observable('');
-
-        // var eeflogopath = "";
-
-        // eeflogoselected = function (event) 
-        // {
-        //     eeflogopath = event.target.files[0];
-        //     console.log("add key logo filename", eeflogopath);
-        //     console.log("edit key wins filename length ", eeflogopath.size);
-        //     // $("#edefbg").replaceWith($("#edefbg").val('').clone(true));
-        // }
-
-        // editemployeefeatures = function (edit_ef) {
-        //     var edit_empfeat_data = {
-        //         id: self.editempfeatid(),
-        //         image: self.editempfeatbg(),
-        //         heading: self.editempfeatheading(),
-        //         text: self.editempfeattext()
-        //     }
-        //     var editor_edit_text_data = editor_instance_edit_empf_data;
-        //     console.log("edit employee feature data: " + ko.toJSON(edit_empfeat_data));
-        //     if (eeflogopath.length == 0) 
-        //     {
-        //         var uploadeefheader = {
-        //             "id": self.editempfeatid(),
-        //             "key_wins_text": editor_edit_text_data,
-        //             "features_heading": self.editempfeatheading(),
-        //         }
-
-        //         // SEND TO SERVER
-        //         $.ajax({
-        //             url: homebaseurl + 'employee_features',
-        //             headers: uploadeefheader,
-        //             cache: false,
-        //             type: 'POST',
-        //             contentType: 'application/json; charset=utf-8',
-        //             success: function (dataeef) {
-        //                 console.log("edit success for employee features");
-        //                 fetchempfeatures();
-        //                 resetempfeatures();
-        //                 closeEditEmployeeFeaturesModal();
-        //                 self.checkadminrightsnew();
-        //             }
-        //         }).fail(function (xhr, textStatus, err) {
-        //             alert(err);
-        //             self.checkadminrightsnew();
-        //         });
-        //     }
-        //     else 
-        //     {
-        //         var eefreader = new FileReader();
-        //         eefreader.onload = function () {
-        //             var uploadeefheader = {
-        //                 "id": self.editempfeatid(),
-        //                 "key_wins_text": editor_edit_text_data,
-        //                 "features_heading": self.editempfeatheading(),
-        //                 "mimetype": eeflogopath.type
-        //             }
-
-        //             var eefimagedata = eefreader.result.split('base64,')[1];
-        //             // SEND TO SERVER
-        //             $.ajax({
-        //                 url: homebaseurl + 'employee_features',
-        //                 headers: uploadeefheader,
-        //                 cache: false,
-        //                 type: 'POST',
-        //                 contentType: 'application/json; charset=utf-8',
-        //                 data: eefimagedata,
-        //                 success: function (dataeef) {
-        //                     console.log("edit success for employee features");
-        //                     fetchempfeatures();
-        //                     resetempfeatures();
-        //                     closeEditEmployeeFeaturesModal();
-        //                     self.checkadminrightsnew();
-        //                 }
-        //             }).fail(function (xhr, textStatus, err) {
-        //                 alert(err);
-        //                 self.checkadminrightsnew();
-        //             });
-        //         };
-        //         eefreader.readAsDataURL(eeflogopath);
-        //     }
-        // }
-
-        // openEditEmployeeFeaturesModal = function (editemployeefeatures) {
-        //     $("#editempfdialog").ojDialog("open");
-        //     console.log("Edit employee features data", editemployeefeatures);
-        //     self.editempfeatid('');
-        //     self.editempfeatbg('');
-        //     self.editempfeatheading('');
-        //     self.editempfeattext('');
-
-        //     // SET NEW VALUE
-        //     self.editempfeatid(editemployeefeatures.empfeaid);
-        //     self.editempfeatbg(editemployeefeatures.empfeabg);
-        //     self.editempfeatheading(editemployeefeatures.empfeaheading);
-        //     self.editempfeattext(editemployeefeatures.empfeatext);
-        //     editor_instance_edit_empf_data = editemployeefeatures.empfeatext;
-        // }
-
 
         var empphotopath = "";
         empphotoselected = function (event) {
@@ -2867,10 +2499,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         $(document).ready(function() 
         {
-		        if (window.location.href.indexOf("waleed") != -1)
+            if (window.location.href.indexOf("waleed") != -1)
             {
-	            $("#empf1").ojDialog("open");
-	          }
+                $("#empf1").ojDialog("open");
+            }
             function isIE(userAgent) 
             {
               userAgent = userAgent || navigator.userAgent;
@@ -2959,7 +2591,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             self.showingFront = !self.showingFront;
         };
       
-       /******************************************FLIP ENDS*****************************************************/
+        /******************************************FLIP ENDS*****************************************************/
         
         self.slide = [
             { name: '<div class="verticalcentertext"><div class="heading">NATD Solution Engineering and Customer Success<br>Organizational Road  Show  </div><div class="text">Listen in as Hamidou Dia and  the executive management team present<br>the FY18 vision  for the organization and  address top questions. </div><div class="slidernav"><ul><li><a href="https://otube.oracle.com/media/Solution+Engineering+Townhalll+-+Rich+Geraffo/0_kxtrumbd/3264" target="_blank">Rich Geraffo Presentation<span>&nbsp;&nbsp;<img src="css/images/aroow_right.png"></span></a></li><li class="oj-sm-only-hide">|</li><li><a href="https://otube.oracle.com/media/Solution+Engineering+Townhall+-+Hamidou+Dia/0_avsugpyl/3264" target="_blank">Hamidou Dia Presentation<span>&nbsp;&nbsp;<img src="css/images/aroow_right.png"></span></a></li><li class="oj-sm-only-hide">|</li><li><a href="https://otube.oracle.com/media/Solution+Engineering+TownhallA+Panel+Discussion+Part+1/0_nsg066tx/3264" target="_blank">Leadership Panel Part 1<span>&nbsp;&nbsp;<img src="css/images/aroow_right.png"></span></a></li><li class="oj-sm-only-hide">|</li><li><a href="https://otube.oracle.com/media/Solution+Engineering+Town+HallA+Panel+Discussion+Part+2+and+Q&A/0_s1q634j9/3264" target="_blank">Leadership Panel Part 2<span>&nbsp;&nbsp;<img src="css/images/aroow_right.png"></span></a></li></ul></div></div>',classname:'slide slide1' },
@@ -3059,11 +2691,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             $("#addnewkeywinsdialog").ojDialog("close");
         }
 
-        openaddnewefdialog = function () {
-            // if (CKEDITOR.instances.txt2) {
-            //     CKEDITOR.instances.txt2.destroy(true); 
-            // }
-            // editor_instance_empf = "";   
+        openaddnewefdialog = function () {  
             $("#addnewefdialog").ojDialog("open");
         }
         closeaddnewefdialog= function () {

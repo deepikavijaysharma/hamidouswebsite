@@ -246,9 +246,6 @@ display:none;
   -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2) !important;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2) !important;
 }
-/* .ojDialogWrapper-modaleditdescempf_layer{
-  z-index: 1051;
-} */
 #ojDialogWrapper-modaltitleslider_layer,#ojDialogWrapper-modaleditdescempf_layer,
 #ojDialogWrapper-modaldescempf_layer,#ojDialogWrapper-modaldescslider_layer,
 #ojDialogWrapper-modaledittitleslider_layer,#ojDialogWrapper-modaleditdescslider_layer{
@@ -285,9 +282,6 @@ color:#ffffff!important;
           <!-- ko if: $index() == 0 -->
           <div class="item active" data-bind="attr:{'id':sliderid}">
             <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
-              <!-- <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider"></i>
-              <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>
-              <i class="fa fa-share-square-o endslarc admin" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider"></i> -->
               <i class="fa fa-pencil-square-o endsl " aria-hidden="true" title="Edit Slider"  data-bind="click:editslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
               <i class="fa fa-trash-o endsldel " aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
               <i class="fa fa-share-square-o endslarc" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
@@ -338,9 +332,6 @@ color:#ffffff!important;
           <!-- ko if: $index() != 0 -->
           <div class="item" data-bind="attr:{'id':sliderid}"> 
             <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
-              <!-- <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Slider" data-bind="click:editslider" ></i>
-              <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider"></i>
-              <i class="fa fa-share-square-o endslarc admin" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider"></i> -->
               <i class="fa fa-pencil-square-o endsl " aria-hidden="true" title="Edit Slider" data-bind="click:editslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
               <i class="fa fa-trash-o endsldel " aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
               <i class="fa fa-share-square-o endslarc" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
@@ -505,7 +496,7 @@ color:#ffffff!important;
           <div class="oj-flex oj-sm-12 nopadding servicesblocks1">
             <div class="row oj-flex oj-sm-12">
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 oj-xl-3 servicesblocksinner">
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Deliver a Cloud Day')" ></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Deliver a Cloud Day')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog"> <img src="css/images/1.png"><br><br>
                     <p>Deliver a Cloud Day</p>
@@ -513,7 +504,7 @@ color:#ffffff!important;
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 oj-xl-3 servicesblocksinner" >
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Develop a Cloud Vision')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Develop a Cloud Vision')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog2"><img src="css/images/4.png"><br>
                     <br>
@@ -522,7 +513,7 @@ color:#ffffff!important;
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 oj-xl-3 servicesblocksinner">
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Design a cloud Solution')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Design a cloud Solution')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog3"> <img src="css/images/7.png"><br>
                     <br>
@@ -531,7 +522,7 @@ color:#ffffff!important;
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 oj-xl-3 servicesblocksinner" >
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Adopt a Cloud Solution')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Adopt a Cloud Solution')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog4"> <img src="css/images/10.png"><br>
                     <br>
@@ -540,7 +531,7 @@ color:#ffffff!important;
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 oj-xl-3 servicesblocksinner">
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Support a Marketing Event')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Support a Marketing Event')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog5"> <img src="css/images/2.png"><br>
                     <br>
@@ -549,7 +540,7 @@ color:#ffffff!important;
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 oj-xl-3 servicesblocksinner" >
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Develop a Value Hypothesis')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Develop a Value Hypothesis')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog6"> <img src="css/images/5.png"><br>
                     <br>
@@ -558,7 +549,7 @@ color:#ffffff!important;
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 oj-xl-3 servicesblocksinner" >
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Build a POC')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Build a POC')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog7"> <img src="css/images/8.png"><br>
                     <br>
@@ -567,7 +558,7 @@ color:#ffffff!important;
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 oj-xl-3 servicesblocksinner" >
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Deliver a Support Onboarding')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Deliver a Support Onboarding')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog8"> <img src="css/images/11.png"><br>
                     <br>
@@ -576,7 +567,7 @@ color:#ffffff!important;
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 oj-xl-3 servicesblocksinner" >
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Build an Executive Briefing')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Build an Executive Briefing')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog9"> <img src="css/images/3.png"><br>
                     <br>
@@ -585,7 +576,7 @@ color:#ffffff!important;
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 oj-xl-3 servicesblocksinner" >
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Create a Packaged Proposal')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Create a Packaged Proposal')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog10"> <img src="css/images/6.png"><br>
                     <br>
@@ -594,7 +585,7 @@ color:#ffffff!important;
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 oj-xl-3 servicesblocksinner" >
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Build a Business Case')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Build a Business Case')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection"  data-bind="click:opendialog11"> <img src="css/images/9.png"><br>
                     <br>
@@ -603,7 +594,7 @@ color:#ffffff!important;
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 oj-xl-3 servicesblocksinner" >
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Deliver a Health Check')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Deliver a Health Check')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection"  data-bind="click:opendialog12"> <img src="css/images/12.png"><br>
                     <br>
@@ -637,25 +628,25 @@ color:#ffffff!important;
             <div class="oj-flex">
               <div  id="btnGo2"></div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Customer Discovery')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Customer Discovery')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog13"><img src="css/images/tick_med.png"><br><br>Customer Discovery</div>
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Platform Assessments')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Platform Assessments')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog14"><img src="css/images/tick_med.png"><br><br>Platform Assessments</div>
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Hands-on Workshops')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Hands-on Workshops')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog15"><img src="css/images/tick_med.png"><br><br>Hands-on Workshops</div>
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Customer Demos')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Customer Demos')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog16"><img src="css/images/tick_med.png"><br><br>Customer Demos</div>
                 </div>
@@ -665,25 +656,25 @@ color:#ffffff!important;
           <div class="oj-sm-12 oj-lg-6">
             <div class="oj-flex">
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('RFx Response Support')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('RFx Response Support')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog17"><img src="css/images/tick_med.png"><br><br>RFx Response Support</div>
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Sizing, Quoting and Configuration Support')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Sizing, Quoting and Configuration Support')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog18"><img src="css/images/tick_med.png"><br><br>Sizing, Quoting &amp; Config Support</div>
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock" >
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Project Management Support')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Project Management Support')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog19">Project Management Support</div>
                 </div>
               </div>
               <div class="oj-flex-item oj-sm-12 oj-md-6 oj-lg-3 seserviceblock reusuable" >
-                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Reusable Asset Harvesting')"></i>
+                <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Our Services" onclick="openeditosdescriptionmodal('Reusable Asset Harvesting')" data-bind="css:checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 <div class="centerelement">
                   <div class="clicksection" data-bind="click:opendialog20">Reusable Asset Harvesting</div>
                 </div>
@@ -728,8 +719,6 @@ color:#ffffff!important;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
                     <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
@@ -759,8 +748,6 @@ color:#ffffff!important;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
                     <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>                  </div>
                 </div>
@@ -792,8 +779,6 @@ color:#ffffff!important;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
                     <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
@@ -823,8 +808,6 @@ color:#ffffff!important;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
                     <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
@@ -857,8 +840,6 @@ color:#ffffff!important;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
                     <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
@@ -888,8 +869,6 @@ color:#ffffff!important;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
                     <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
@@ -922,8 +901,6 @@ color:#ffffff!important;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
                     <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
@@ -953,8 +930,6 @@ color:#ffffff!important;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
                     <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
@@ -987,8 +962,6 @@ color:#ffffff!important;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
                     <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
@@ -1018,8 +991,6 @@ color:#ffffff!important;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
                     <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
@@ -1052,8 +1023,6 @@ color:#ffffff!important;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
                     <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
@@ -1083,8 +1052,6 @@ color:#ffffff!important;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
                     <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
@@ -1117,8 +1084,6 @@ color:#ffffff!important;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
                     <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
@@ -1149,8 +1114,6 @@ color:#ffffff!important;
                   <!-- /ko -->
                   <div class="orgadm">
                     <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
                     <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
@@ -1183,8 +1146,6 @@ color:#ffffff!important;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
                     <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
@@ -1214,8 +1175,6 @@ color:#ffffff!important;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <!-- <i class="fa fa-trash-o endorgdel admin " aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
-                    <i class="fa fa-pencil-square-o endorgdel admin" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal"></i> -->
                     <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div> 
@@ -1312,8 +1271,6 @@ color:#ffffff!important;
               <!-- ko foreach: keywinslist --> 
               <div class="oj-panel oj-panel-alt2 my-filmstrip-item kwadpar" data-bind="attr:{'id':keywid}">
                 <div class="kwadmin">
-                  <!-- <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Key Wins" data-bind="click:openEditKeyWinsModal"></i>
-                  <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Key Wins" data-bind="click:deletekeywins"></i> -->
                   <i class="fa fa-pencil-square-o endsl" aria-hidden="true" title="Edit Key Wins" data-bind="click:openEditKeyWinsModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   <i class="fa fa-trash-o endsldel" aria-hidden="true" title="Delete Key Wins" data-bind="click:deletekeywins,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                 </div>
@@ -1371,8 +1328,6 @@ color:#ffffff!important;
                     <div class="cardface">
                       <div class="wins_block oj-sm-12">
                         <div class="gladmin">
-                          <!-- <i class="fa fa-pencil-square-o endsl admin" aria-hidden="true" title="Edit Go Lives" data-bind="click:openEditGoLiveslmodal"></i>
-                          <i class="fa fa-trash-o endsldel admin" aria-hidden="true" title="Delete Go Lives" data-bind="click:deletegolives"></i> -->
                           <i class="fa fa-pencil-square-o endsl" aria-hidden="true" title="Edit Go Lives" data-bind="click:openEditGoLiveslmodal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                           <i class="fa fa-trash-o endsldel" aria-hidden="true" title="Delete Go Lives" data-bind="click:deletegolives,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                         </div>
@@ -1440,8 +1395,6 @@ color:#ffffff!important;
                     <img data-bind="attr:{'src':reflogo}">
                   </a>
                   <div class="refadmin">
-                    <!-- <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesModal"></i>
-                    <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i> -->
                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-trash-o" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
@@ -1463,8 +1416,6 @@ color:#ffffff!important;
                     <img data-bind="attr:{'src':reflogo}">
                   </a>
                   <div class="refadmin">
-                    <!-- <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesPaasModal"></i>
-                    <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences"></i> -->
                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Edit Refrences" data-bind="click:openReferencesPaasModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-trash-o" aria-hidden="true" title="Delete Refrences" data-bind="click:deletereferences,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
@@ -1500,9 +1451,6 @@ color:#ffffff!important;
                 <!-- ko if: empfeaarchived == 'NO' -->
                   <div class="oj-panel oj-panel-alt2 my-filmstrip-item1 efadpar" data-bind="style:{'background':'url('+empfeabg+')'},attr:{'id':empfeaid}">
                     <div class="efadmin">
-                      <!-- <i class="fa fa-pencil-square-o admin" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal"></i>
-                      <i class="fa fa-trash-o admin" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures"></i>
-                      <i class="fa fa-share-square-o admin" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures"></i> -->
                       <i class="fa fa-pencil-square-o" aria-hidden="true" title="Edit Employee Features" data-bind="click:openEditEmployeeFeaturesModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                       <i class="fa fa-trash-o" aria-hidden="true" title="Delete Employee Features" data-bind="click:deleteemployeefeatures,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                       <i class="fa fa-share-square-o" aria-hidden="true" title="Archive Employee Features" data-bind="click:archiveemployeefeatures,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
@@ -1905,145 +1853,6 @@ color:#ffffff!important;
     </div>
   </div>
 </div>
-<!-- edit slider confirmation end -->
-
-
-<!-- add slider confirmation start -->
-<!-- <div style="display:none" id="addslidedialog" title="Add New Slide Details" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}" class="dialogbodymain">
-  <div class="oj-dialog-body asdialog popupfont dialogbody">
-    <div class="oj-flex">
-      <div class="oj-lg-6">
-        <div class="oj-margin-right nomargin-md"><br>
-
-          <div class="oj-sm-12">
-            <button onclick="openslidertitlemodal()">Add Banner Title</button>
-            <label class="required">*</label>
-          </div><br><br>
-
-          <div class="form-group">
-            <label class="addslidelabel">Primary Button:</label>
-            <div class="input-group">
-              <input class="form-control" placeholder="Label" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:slbuttonlabel1,rootAttributes: {style:'max-width:15em'}}">
-              <input class="form-control" placeholder="Link" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:sllinktext1, rootAttributes: {style:'max-width:15em'}}">
-            </div>
-          </div>
-              
-        </div>
-      </div><br>
-      <div class="oj-lg-6">
-        <div class="oj-margin-right nomargin-md"><br>
-
-          <div class="oj-sm-12">
-            <button onclick="opensliderdescriptionmodal()">Add Banner Description</button>
-            <label class="required">*</label>
-          </div><br><br>
-
-          <div class="form-group">
-            <label class="addslidelabel">Secondary Button:</label>
-            <div class="input-group">
-              <input class="form-control" placeholder="Label" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:slbuttonlabel2,rootAttributes: {style:'max-width:15em'}}">
-              <input class="form-control" placeholder="Link" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:sllinktext2, rootAttributes: {style:'max-width:15em'}}">
-            </div>
-          </div>
-
-        </div>
-      </div><br>
-      <div class="form-group"><br>
-        <label class="addslidelabel">Banner Background:</label>
-        <div class="input-group">
-          <div id="avatars">
-            <ul style="display: flex;" class="bgpicker">
-              <div class="oj-flex oj-sm-12"> -->
-                <!-- ko foreach: slimage() -->
-                <!-- <li class="avatars">
-                  <input type="radio" data-bind="attr:{'id':idimg},value:idimg,checked: 10" name="avatar" onclick="idimage(value)" />
-                  <img class="avatarsimg" data-bind="attr:{'src':source,'id':idimg,'name':idimg},value:idimg" />
-                </li> -->
-                <!-- /ko -->
-              <!-- </div>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
- <div class="oj-dialog-footer" style="background-color: lightgray">
-  <div>
-    <button id="resetsliderButton" data-dismiss="modal" class="orangebutton" onclick="resetslider()" style="cursor: pointer" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
-    <button id="savesliderButton" data-dismiss="modal" class="bluebutton" style="cursor: pointer" data-bind="ojComponent: {component: 'ojButton', label: 'Save'},click: addslider"></button>
-  </div>
-  </div>
-</div> -->
-<!-- add slider confirmation end -->
-
-<!-- edit slider confirmation start -->
-<!-- <div style="display:none" id="editslidedialog" title="Edit Slider" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}" class="dialogbodymain">
-  <div class="oj-dialog-body asdialog popupfont dialogbody">
-    <div class="oj-flex">
-      <div class="oj-lg-6">
-        <div class="oj-margin-right nomargin-md"><br>
-
-          <div class="oj-sm-12">
-            <button onclick="openeditslidertitlemodal()">Add/Edit Banner Title</button>
-            <label class="required">*</label>
-          </div><br><br>
-
-          <div class="form-group">
-            <label class="addslidelabel">Primary Button:</label>
-            <div class="input-group">
-              <input class="form-control" placeholder="Label" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:editslbuttonlabel1,rootAttributes: {style:'max-width:15em'}}">
-              <input class="form-control" placeholder="Link" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:editsllinktext1, rootAttributes: {style:'max-width:15em'}}">
-            </div>
-          </div>
-          
-        </div>
-      </div><br>
-      <div class="oj-lg-6">
-        <div class="oj-margin-right nomargin-md"><br>
-          
-          <div class="oj-sm-12">
-            <button onclick="openeditsliderdescriptionmodal()">Add/Edit Banner Description</button>
-            <label class="required">*</label>
-          </div><br><br>
-
-          <div class="form-group">
-            <label class="addslidelabel">Secondary Button:</label>
-            <div class="input-group">
-              <input class="form-control" placeholder="Label" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:editslbuttonlabel2,rootAttributes: {style:'max-width:15em'}}">
-              <input class="form-control" placeholder="Link" id="text-input" type="text" data-bind="ojComponent:{component: 'ojInputText',value:editsllinktext2, rootAttributes: {style:'max-width:15em'}}">
-            </div>
-          </div>
-
-        </div>
-      </div><br>
-      <div class="form-group"><br>
-        <label class="addslidelabel">Banner Background:</label>
-        <div class="input-group">
-          <div id="avatars">
-            <ul style="display: flex;">
-              <div class="oj-flex oj-sm-12"> -->
-                <!-- ko foreach: slimage() -->
-                <!-- <li class="avatars">
-                  <input type="radio" data-bind="attr:{'id':idimg},value:idimg,checked: $parent.editslimgid" name="avatar" onclick="idimage(value)"
-                  />
-                  <img class="avatarsimg" data-bind="attr:{'src':source,'id':idimg,'name':idimg},value:idimg" />
-                </li> -->
-                <!-- /ko -->
-              <!-- </div>
-            </ul>
-          </div>
-        </div>
-        <br>
-      </div>
-    </div>
-  </div>
-   <div class="oj-dialog-footer" style="background-color: lightgray">
-  <div>
-    <button id="resetedsliderButton" data-dismiss="modal" class="orangebutton" onclick="resetslider()" style="cursor: pointer" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
-    <button id="savesedsliderButton" data-dismiss="modal" class="bluebutton" onclick="editslidervalues()" style="cursor: pointer" data-bind="ojComponent: {component:'ojButton', label: 'Save Slider'}"></button>
-  </div>
-  </div>
-</div> -->
 <!-- edit slider confirmation end -->
 
 <!-- delete slider confirmation start -->
@@ -2849,97 +2658,6 @@ color:#ffffff!important;
 </div>
 <!-- edit employee features confirmation end -->
 
-<!-- add employee features confirmation start -->
-<!-- <div style="display:none" id="addnewefdialog" title="Add New Employee Features" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="oj-dialog-body dialogbody">
-    <div class="oj-flex">
-      <div class="oj-lg-6">
-        <div class="oj-margin-right nomargin-md">
-          <div class="form-group">
-            <label class="addslidelabel">Employee Features Background:</label>
-            <div class="input-group">
-              <input class="form-control" id="efbg" class="buttons btn btn-default file" type="file" onchange="empphotoselected(event)">
-            </div>
-          </div>
-          <br>
-          <div class="form-group">
-            <label class="addslidelabel">Employee Features Heading:</label>
-            <div class="input-group">
-              <input id="addefheading" class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:empfeatheading}"> -->
-              <!-- <textarea id="addefheading" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojTextArea',value:empfeatheading}"></textarea> -->
-            <!-- </div>
-          </div>
-        </div>
-      </div>
-      <div class="oj-lg-6"> -->
-        <!-- <div class="oj-margin-right nomargin-md">
-          <div class="form-group">
-            <label class="addslidelabel">Employee Features Text:</label><br>
-            <textarea id="txt2" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:empfeattext}"></textarea><br><br>
-          </div>
-        </div> -->
-        <!-- <br>
-        <div class="oj-sm-12">
-          <button onclick="openempfdescriptionmodal()">Add Employee Features Text</button>
-          <label class="required">*</label>
-        </div><br><br>
-      </div>
-    </div><br>     
-  </div>
-  <div class="oj-dialog-footer" style="background-color: lightgray">
-    <div>
-      <button id="resetefButton" data-dismiss="modal" class="orangebutton" onclick="resetempfeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
-      <button id="okButton" data-dismiss="modal" class="bluebutton" onclick="addempfeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
-    </div>
-  </div>
-</div> -->
-<!-- add employee features confirmation end --> 
-
-<!-- edit employee features confirmation start -->
-<!-- <div style="display:none" id="editempfdialog" title="Edit Employee Features" class="dialogbodymain" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 80%;'}}">
-  <div class="oj-dialog-body dialogbody">
-    <div class="oj-flex">
-      <div class="oj-lg-6">
-        <div class="oj-margin-right nomargin-md">
-          <div class="form-group">
-            <label class="addslidelabel">Employee Features Background:</label>
-            <div class="input-group">
-              <input class="form-control" id="edefbg" class="buttons btn btn-default file" type="file" onchange="eeflogoselected(event)">
-              <img class="editkw" data-bind="attr:{'src':editempfeatbg,'id':editempfeatid}"> </div>
-          </div><br>
-          <div class="form-group">
-            <label class="addslidelabel">Employee Features Heading:</label>
-            <div class="input-group">
-              <input id="editefheading" class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editempfeatheading}"> -->
-              <!-- <textarea id="editefheading" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojTextArea',value:editempfeatheading}"></textarea> -->
-            <!-- </div>
-          </div>
-        </div>
-      </div>
-      <div class="oj-lg-6"> -->
-        <!-- <div class="oj-margin-right nomargin-md">
-          <div class="form-group">
-            <label class="addslidelabel">Employee Features Text:</label><br>
-            <textarea id="edtxt2" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:editempfeattext}"></textarea><br><br>
-          </div>
-        </div> -->
-        <!-- <br>
-        <div class="oj-sm-12">
-          <button onclick="openeditempfdescriptionmodal()">Add/Edit Employee Features Text</button>
-          <label class="required">*</label>
-        </div><br><br>
-      </div>
-    </div><br>
-  </div>
-  <div class="oj-dialog-footer" style="background-color: lightgray">
-    <div>
-      <button id="reseteditefButton" data-dismiss="modal" class="orangebutton" onclick="resetempfeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
-      <button id="okeditefButton" data-dismiss="modal" class="bluebutton" onclick="editemployeefeatures()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"> </button>
-    </div>
-  </div>
-</div> -->
-<!-- edit employee features confirmation end --> 
-
 <!-- delete employee features confirmation start -->
 <div id="dialogWrapper1">
   <div style="display:none" id="delete_empfeat" title="Delete Confirmation" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'icon',rootAttributes: { style: 'width: 35%; height: auto; min-width 100px; '}}">
@@ -3023,30 +2741,5 @@ color:#ffffff!important;
   </div>
 </div>
 <!-- edit our services confirmation end -->
-
-<!-- Edit Our Services Description ckeditor modal workaround start -->
-<!-- <div style="display:none" class="dialogbodymain" id="editOSdialog" title="Edit Our Services Text" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
-  <div class="oj-dialog-body roleWrapper">
-    <div class="nomargin-md oj-margin-left">
-      <div class="oj-flex">
-        <div class="oj-sm-12">
-          <label>Enter Our Services Text: </label>
-          <label class="required">*</label>
-        </div>
-        <div class="oj-sm-12">
-          <textarea id="edostxt2" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:editostext}"></textarea>
-        </div>
-        <br>
-      </div>
-    </div>
-  </div>
-  <div class="oj-dialog-footer" style="background-color: lightgray">
-    <div>
-      <button id="reseteditosButton" data-dismiss="modal" class="orangebutton" onclick="resetos()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
-      <button id="okeditosButton" data-dismiss="modal" class="bluebutton" onclick="editos()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"></button>
-    </div>
-  </div>
-</div> -->
-<!-- Edit Our Services Description ckeditor modal workaround end -->
 
 <!-- END OF OUR SERVICES POPUPS -->
