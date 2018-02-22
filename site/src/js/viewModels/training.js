@@ -140,6 +140,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             });
 
 
+            self.event_report_type=ko.observableArray([]);
+            self.event_report_no_days=ko.observableArray([]);
+            self.event_report_key_event=ko.observableArray([]);
+            self.searcheventreportstext=ko.observable('');
+
             self.rolelist = ko.observableArray([]);
 
             var editor_instance;
@@ -1055,6 +1060,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         case "past":
                             self.refinepastcalls.push(desc.defaultValue);
                             break;
+
+                        case "reporttype":
+                            self.event_report_type.push(desc.defaultValue);
+                            break;
+
+                        case "reportdays":
+                            setuncheck('reportdays');
+                            desc.checked = true;
+                            self.event_report_no_days.removeAll();
+                            self.event_report_no_days.push(desc.defaultValue);
+                            break;
+
+                        case "reportkeyevent":
+                            self.event_report_key_event.push(desc.defaultValue);
+                            break;
                     }
 
 
@@ -1094,6 +1114,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                         case "past":
                             self.refinepastcalls.remove(desc.defaultValue);
+                            break;
+                        
+                        case "reporttype":
+                            self.event_report_type.remove(desc.defaultValue);
+                            break;
+                            
+                        case "reportdays":
+                            self.event_report_no_days.remove(desc.defaultValue);
+                            break;
+                            
+                        case "reportkeyevent":
+                            self.event_report_key_event.remove(desc.defaultValue);
                             break;
                     }
 
@@ -1331,6 +1363,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             
             self.handleAttached = function (info) {
+                self.event_report_type.push('COMMUNITY_CALLS');
+                self.event_report_type.push('EVENT');
+                self.event_report_type.push('TRAINING');
+                self.event_report_no_days.push('15');
+                loadEventReportData();
                 checkadminrights();
                 getStates();
             };
@@ -1726,6 +1763,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }                
                
             });
+
+            
+            waitForElement("events_report", function(){
+				if (window.location.href.indexOf("tab") != -1) 
+            {
+                var type = window.location.href.split('#tab=');
+                var hash = '';
+                if (type.length > 1)
+                {
+					
+                    hash = '#'+type[1];
+                }
+               $(hash).trigger('click'); 
+            }
+              });
+
 
             /* ---------------------   COMMUNITY CALLS  -------------------------*/
 
@@ -2184,8 +2237,44 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             loadEventReportData = function () {
+    
+                var eventreportparam="/";
 
-                $.getJSON(event_report_api).then(function (data) {
+                // READ SEARCH TEXT
+                if(self.searcheventreportstext().length>0){
+                    eventreportparam+=self.searcheventreportstext()+"/";
+                }else{
+                    eventreportparam+="$-$/";
+                }
+
+                // READ KEY_EVENT
+                if(self.event_report_key_event().includes('1')){
+                    eventreportparam+="Yes/";
+                }else{
+                    eventreportparam+="$-$/";
+                }
+
+                // READ REPORT TYPE
+
+                if(self.event_report_type().length>0){
+                    var eventreporttype =ko.toJSON(self.event_report_type()).replace('[', '').replace(']', '').replace(/"/g, '');
+                    eventreportparam+=eventreporttype+"/";
+                }else{
+                    eventreportparam+="$-$/";
+                }
+
+                // READ REPORT TYPE
+
+                if(self.event_report_no_days().length>0){
+                    var eventreportnodays =ko.toJSON(self.event_report_no_days()).replace('[', '').replace(']', '').replace(/"/g, '');
+                    eventreportparam+=eventreportnodays;
+                }else{
+                    eventreportparam+="$-$";
+                }
+
+                eventreportparam=eventreportparam.replace(/,/g, '\*');
+
+                $.getJSON(event_report_api+eventreportparam).then(function (data) {
                     var calls = data.items;
                     self.event_report_list([]);
                     var gotoSpecificTraining;
@@ -2215,7 +2304,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
                         }
-            loadEventReportData();
+            
             // events report end
 
             setssostatus = function (selector, visibility) {
@@ -3012,6 +3101,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }
                 self.processCoursesFromService(temcourses);
 
+            }
+
+            reseteventreportfilter=function(){
+                setuncheck('reporttype');
+                setuncheck('reportdays');
+                setuncheck('reportkeyevent');
+                self.event_report_type([]);
+                self.event_report_no_days([]);
+                self.event_report_key_event('');
+                self.searcheventreportstext([]);
+                loadEventReportData();
             }
             
         }
