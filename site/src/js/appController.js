@@ -54,6 +54,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         },
         'reports': {
           label: 'Reports'
+        },
+        'analytics': {
+          label: 'Analytics'
         }
       });
       oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
@@ -71,11 +74,11 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         {
           name: 'Tools and Resources',
           id: 'tools'
+        },
+        {
+          name: 'Analytics',
+          id: 'analytics'
         }
-        // {
-        //   name: 'Reports',
-        //   id: 'reports'
-        // }
       ];
       self.navDataSource = new oj.ArrayTableDataSource(navData, {
         idAttribute: 'id'
@@ -125,7 +128,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
           ssoemail = email;
           // ssoname = sname;
         } else {
-          ssoemail = "";          
+          ssoemail="";   
         }
       }
 
@@ -147,7 +150,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       }
 
       getemailfromcookie();
-      initsso();
+      // initsso();
       
       setInterval(function () {
         getemailfromcookie();
