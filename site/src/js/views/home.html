@@ -1226,30 +1226,33 @@ color:#ffffff!important;
           <div class="oj-flex">
             <div class="oj-sm-12">
               <div class="oj-margin">
+              <div class="keydatesinner">
                 <!-- ko foreach: keydateslist --> 
                 <div class="calrow">
                   <div class="oj-flex">
-                    <div class="oj-sm-12 oj-lg-4 cDate oj-flex">
-                      <p><span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;<span data-bind="text: keydstartdate"></span><br>
-                       Time: <span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;<span data-bind="text: keydstarttime"></span></p>
+                    <div class="oj-sm-12 oj-lg-2 cDate oj-flex">
+                      <p><span class="oj-fwk-icon oj-fwk-icon-calendar"></span>&nbsp;<span data-bind="text: keydstartdate"></span>
+                    </p>
                     </div>
-                    <div class="oj-sm-12 oj-lg-5 cTitle oj-flex" data-bind="text: keydname"></div>
-                    <div class="oj-sm-12 oj-lg-3 calbutton">
-                      <!-- ko if: keydtype == 'COMMUNITY_CALLS' -->
-                      <div class="orangeBbutton oj-lg-float-end">
-                        <a data-bind="attr:{'href':keydhlink+'key_com_call='+keydcid},click:analytics.bind($data,keydtype,keydname,'link','Homepage','Key Dates','')" target="_blank">Link</a>
-                      </div>
-                      <!-- /ko -->
+                    <div class="oj-sm-12 oj-lg-2 cDate oj-flex">
+                      
+                      <p><span class="oj-fwk-icon oj-fwk-icon-clock"></span>&nbsp;<span data-bind="text: keydstarttime"></span></p>
+                    </div>
+                    
+                    <div class="oj-sm-12 oj-lg-8 cTitle oj-flex">
+                      <!-- ko if: keydtype == 'COMMUNITY_CALLS' -->                     
+                        <a data-bind="attr:{'href':keydhlink+'key_com_call='+keydcid},click:analytics.bind($data,keydtype,keydname,'link','Homepage','Key Dates',''),text: keydname" target="_blank">Link</a>
+                         <!-- /ko -->
                       <!-- ko ifnot: keydtype == 'COMMUNITY_CALLS' -->
                         <!-- ko if: keydtype == 'EVENT' -->
-                        <div class="orangeBbutton oj-lg-float-end">
-                          <a data-bind="attr:{'href':keydhevlink},click:analytics.bind($data,keydtype,keydname,'link','Homepage','Key Dates','')" target="_blank">Link</a>
-                        </div>
+                       
+                          <a data-bind="attr:{'href':keydhevlink},click:analytics.bind($data,keydtype,keydname,'link','Homepage','Key Dates',''),text: keydname" target="_blank">Link</a>
+                       
                         <!-- /ko -->
                         <!-- ko ifnot: keydtype == 'EVENT' -->
-                        <div class="orangeBbutton oj-lg-float-end">
-                          <a data-bind="attr:{'href':keydhlink+keydcid},click:analytics.bind($data,keydtype,keydname,'link','Homepage','Key Dates','')" target="_blank">Link</a>
-                        </div>
+                        
+                          <a data-bind="attr:{'href':keydhlink+keydcid},click:analytics.bind($data,keydtype,keydname,'link','Homepage','Key Dates',''),text: keydname" target="_blank">Link</a>
+                        
                         <!-- /ko -->                        
                       <!-- /ko -->
                     </div>
@@ -1257,12 +1260,13 @@ color:#ffffff!important;
                   </div>
                 </div>
                 <!-- /ko -->
-
+ </div>
                 <div class="oj-sm-12 oj-sm-center" >
                   <div class="oj-flex valign">
                     <div class="oj-sm-12 oj-lg-4 oj-flex"></div>
-                    <div class="oj-sm-12 oj-lg-5 oj-flex" style="display:none">
-                      <button class="oj-sm-align-center oj-flex bluebutton ">See All</button>
+                    <div class="oj-sm-12 oj-lg-5 oj-flex" style="">
+                    <br>
+                      <a href="?root=training&tab=events_report" class="oj-sm-align-center oj-flex bluebutton ">See All</a>
                     </div>
                     <div class="oj-sm-12 oj-lg-12"><span class="oj-md-float-end">Missed a course?<br>
                       <a href="?root=keydatesarchives">Checkout Archives</a></span></div>
@@ -1276,7 +1280,6 @@ color:#ffffff!important;
     </div>
   </div>
 </div>
-
 <!------------------------------------Key Wins------------------------------------>
 <a class="anchor" id="keywins"></a>
 <div class="oj-row row7 newrow">

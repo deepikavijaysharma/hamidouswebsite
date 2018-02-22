@@ -1087,6 +1087,11 @@ float: right
 .keydatestitle {
 @include headings;
 }
+.keydatesinner{
+	max-height:600px;
+	overflow-y:scroll;
+	margin-bottom:10px;
+	}
 .oj-tabs-panel,.oj-tabs-tab.oj-selected,html:not([dir="rtl"]) .oj-first-child-selected > .oj-tabs-nav-root .oj-tabs-tab.oj-selected .oj-tabs-tab-content,.oj-tabs-horizontal > .oj-tabs-nav-root .oj-tabs-tab-content, .oj-tabs-horizontal.oj-tabs-bottom > .oj-tabs-nav-root .oj-tabs-tab-content {
 background: transparent;
 border:none;
@@ -1139,6 +1144,7 @@ font-size:$smallestFontSize;
 align-items:center;
 justify-content:center;
 text-align:center;
+padding:10px;
 @media  #{$responsiveQueryMediumDown} {
 margin-bottom:10px;
 

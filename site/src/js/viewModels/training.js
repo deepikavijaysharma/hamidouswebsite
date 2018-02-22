@@ -1750,6 +1750,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var is_key_com_call_text_present = call_id_val1.indexOf("key_com_call");
                 if (is_com_call_id_text_present != -1 || is_key_com_call_text_present !=-1){
                     $('#com_call_tab').trigger('click');
+					location.hash = '';
                 }                
                
             });
@@ -1760,24 +1761,25 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var is_event_id_text_present = call_id_val1.indexOf("events_tab_trigger");
                 if (is_event_id_text_present != -1){
                     $('#events_tab').trigger('click');
+					location.hash = '';
                 }                
                
             });
 
             
-            waitForElement("events_report", function(){
-				if (window.location.href.indexOf("tab") != -1) 
-            {
-                var type = window.location.href.split('#tab=');
-                var hash = '';
-                if (type.length > 1)
-                {
-					
-                    hash = '#'+type[1];
-                }
-               $(hash).trigger('click'); 
-            }
-              });
+           waitForElement("events_report", function(){
+				 var call_id_val1 = window.location.href;
+                // com_call_id is getting used to go directly to an old community call which doesnt 
+                //have a reply link. key_com_call is to navigate to key events com call from home page
+                var is_event_id_text_present = call_id_val1.indexOf("events_report");
+                if (is_event_id_text_present != -1){
+                    $('#events_report').trigger('click');
+					location.hash = '';
+                }                
+               
+                      
+               
+            });
 
 
             /* ---------------------   COMMUNITY CALLS  -------------------------*/
