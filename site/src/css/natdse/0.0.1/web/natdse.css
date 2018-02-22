@@ -16080,6 +16080,9 @@ content: none !important
     display: flex;
     align-items: center;
     justify-content: center; }
+	.row5 .keydatesinner {
+    max-height: 600px;
+    overflow-y: scroll; }
   .row5 .oj-tabs-panel, .row5 .oj-tabs-tab.oj-selected, .row5 html:not([dir="rtl"]) .oj-first-child-selected > .oj-tabs-nav-root .oj-tabs-tab.oj-selected .oj-tabs-tab-content, .row5 .oj-tabs-horizontal > .oj-tabs-nav-root .oj-tabs-tab-content, .row5 .oj-tabs-horizontal.oj-tabs-bottom > .oj-tabs-nav-root .oj-tabs-tab-content {
     background: transparent;
     border: none; }

@@ -3357,3 +3357,57 @@ border: #000 solid 1px;
 .editdis{
 display: none;
 }
+/*----------------------------------Events Reports ----------------------------------*/
+.eventsreports{
+	padding-top:25px;
+	padding-bottom:25px;
+	.row5{
+		margin-top:0px;
+		}
+	}
+#ojDialogWrapper-course_modal_layer{
+	#ojDialogWrapper-course_modal
+	{
+		z-index: 1052!important;
+	}
+	#ojDialogWrapper-add_class_modal{
+		z-index: 1052!important;
+	}
+}
+#ojDialogWrapper-modaldesc_layer{
+	#ojDialogWrapper-modaldesc{
+		z-index: 1052!important;
+	}
+}
+#ojDialogWrapper-add_class_modal_layer{
+	#ojDialogWrapper-add_class_modal{
+		z-index: 1052!important;
+	}
+}
+#ojDialogWrapper-add_class_modal_layer{
+	#ojDialogWrapper-add_class_modal{
+		z-index: 1052!important;
+	}
+}
+#ojDialogWrapper-add_class_modal{
+		z-index: 1052!important;
+	}
+
+
+	#ojDialogWrapper-editcomcall_desc_modal{
+		z-index: 1052!important;
+	}
+
+	#ojDialogWrapper-modaltitleslider_layer,#ojDialogWrapper-modaleditdescempf_layer,
+#ojDialogWrapper-modaldescempf_layer,#ojDialogWrapper-modaldescslider_layer,
+#ojDialogWrapper-modaledittitleslider_layer,#ojDialogWrapper-modaleditdescslider_layer,#ojDialogWrapper-edit_course_modal_layer,#ojDialogWrapper-course_modal,#ojDialogWrapper-addclasstoclass{
+  z-index: 1052!important;
+}
+
+#ojDialogWrapper-edit_course_modal,#ojDialogWrapper-edit_course_modal_layer,#ojDialogWrapper-course_modal_layer,#ojDialogWrapper-modaldesc_layer,#ojDialogWrapper-editcomcall_desc_modal_layer,#ojDialogWrapper-event_desc_modal_layer{
+	z-index:1052;
+	}
+	
+#ojDialogWrapper-add_class_modal_layer{
+	z-index:1053;
+	}	
