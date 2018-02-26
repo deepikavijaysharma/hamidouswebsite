@@ -1066,6 +1066,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             break;
 
                         case "reportdays":
+                            setuncheck('reportdays');
+                            desc.checked = true;
+                            self.event_report_no_days.removeAll();
                             self.event_report_no_days.push(desc.defaultValue);
                             break;
 
@@ -1360,6 +1363,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             
             self.handleAttached = function (info) {
+                self.event_report_type.push('COMMUNITY_CALLS');
+                self.event_report_type.push('EVENT');
+                self.event_report_type.push('TRAINING');
+                self.event_report_no_days.push('15');
+                loadEventReportData();
                 checkadminrights();
                 getStates();
             };
@@ -1755,6 +1763,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }                
                
             });
+
+            
+            waitForElement("events_report", function(){
+				if (window.location.href.indexOf("tab") != -1) 
+            {
+                var type = window.location.href.split('#tab=');
+                var hash = '';
+                if (type.length > 1)
+                {
+					
+                    hash = '#'+type[1];
+                }
+               $(hash).trigger('click'); 
+            }
+              });
+
 
             /* ---------------------   COMMUNITY CALLS  -------------------------*/
 
@@ -2227,7 +2251,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 if(self.event_report_key_event().includes('1')){
                     eventreportparam+="Yes/";
                 }else{
-                    eventreportparam+="No/";
+                    eventreportparam+="$-$/";
                 }
 
                 // READ REPORT TYPE
@@ -2280,7 +2304,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
                         }
-            loadEventReportData();
+            
             // events report end
 
             setssostatus = function (selector, visibility) {
@@ -2464,6 +2488,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     editor_instance_data = "";                   
 
                 resetCourse();
+                // reset the old class list from the UI
+                $(".classlist").empty();
+
                 $("#createcoursedialog").ojDialog("open");
             }
 
@@ -3086,6 +3113,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.event_report_type([]);
                 self.event_report_no_days([]);
                 self.event_report_key_event('');
+                self.searcheventreportstext([]);
                 loadEventReportData();
             }
             
