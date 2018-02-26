@@ -2520,6 +2520,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.cclass().status([]);
                 self.cclass().key_event(false);
                 resetSchedule();
+                editor_instance_data4="";
                 // $(".classlist").empty();
             }
 
@@ -2737,6 +2738,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     schedules: self.cclass().schedules()
                 });
                 $("#addclasstoclass").ojDialog("close");
+                $(".classlist").empty();
                 updateCourseClass();
                 //resetClass();
                 editor_instance_data1 = "";
