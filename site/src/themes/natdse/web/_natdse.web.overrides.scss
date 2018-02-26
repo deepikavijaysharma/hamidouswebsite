@@ -721,7 +721,7 @@ line-height:2.28571rem;
 /*----------------------------------Homepage Subnav----------------------------------*/
 .homesubnav{
 background:#fff;
-z-index:2;
+z-index:1001;
 padding-top:25px;
 padding-bottom:25px;
 .container{
@@ -3415,6 +3415,9 @@ z-index:1053;
 .analytics{
 margin-top: 30px;
 padding: 40px;
+@media  #{$responsiveQueryMediumDown} {
+padding: 10px;
+}
 .heading{
 @include headings;
 text-align:left;
@@ -3464,6 +3467,7 @@ color:$red;
 }
 .dboardrow1{
 margin-top:20px;
+margin-bottom:20px;
 }
 .dboardcol{
 
@@ -3477,13 +3481,18 @@ border:none;
 color:$lightgrey1;
 font-weight:normal;
 border-bottom:1px solid $lightgrey1;
+margin-bottom:20px;
 font-size:$smallFontSize;}
 .bluebutton{
 @include bluebutton;
 margin: 0 auto;
+margin-bottom:10px;
 }
 }	
 .oj-popup-layer.oj-focus-within{
 position: relative;
 z-index: 2000;	
 	}
+.selectrange{
+	margin-bottom:20px;
+	}	

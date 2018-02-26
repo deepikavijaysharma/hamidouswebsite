@@ -1,5 +1,7 @@
 <div class="oj-flex">
-  <div class="oj-sm-12 selectrange">
+    
+    
+    <div class="oj-sm-12 selectrange">
     <form id="formId" class="oj-form">
       
       <!-- You need to set the aria-labelledby attribute
@@ -17,30 +19,34 @@
         <option value="lmonth">Last Month</option>
         <option value="CR">Custom Range</option>
       </select>
-      <input id="startdate" placeholder="From date" data-bind="ojComponent: {component: 'ojInputDate', 
-                                              value: value,
-                                               disabled: disableFormControls,}"/>
-      <input placeholder="End date" id="enddate" data-bind="ojComponent: {component: 'ojInputDate', 
-                                              value: value,
-                                               disabled: disableFormControls,}"/>
+      <input id="sdate" placeholder="From date" data-bind="ojComponent: {component: 'ojInputDate', 
+                                              value: start_date, disabled: disableFormControls}"/>
+                                              
+      <input placeholder="To Date" id="edate" data-bind="ojComponent: {component: 'ojInputDate', 
+                                              value: end_date, disabled: disableFormControls}"/>
+                                              
      <input id="inputButton" class="bluebutton" type="button" 
-           data-bind="ojComponent: {component: 'ojButton', label: 'Apply'}"/>
+           data-bind="ojComponent: {component: 'ojButton', label: 'Apply'}" onclick="applyFilter()"/>
     </form>
   </div>
-  <div class="dboardrow1 oj-flex oj-sm-12">
-    <div class="oj-lg-3 dboardcol">
-      <div class="oj-margin">Total Visitors <br><span class="largetext">571</span></div>
+
+  
+    
+     <div class="dboardrow1 oj-flex oj-sm-12">
+    <div class="oj-sm-12 oj-lg-3 dboardcol">
+      <div class="oj-margin">Total Visitors <br><span class="largetext" data-bind="text:total_visitor"></span></div>
     </div>
-    <div class="oj-lg-3 dboardcol">
-      <div class="oj-margin">New Visitors <br><span class="largetext">5</span></div>
+    <div class="oj-sm-12 oj-lg-3 dboardcol">
+      <div class="oj-margin">New Visitors <br><span class="largetext" data-bind="text:total_unique_visitor"></span></div>
     </div>
-    <div class="oj-lg-3 dboardcol">
-      <div class="oj-margin">Returning Visitors <br><span class="largetext">51</span></div>
+    <div class="oj-sm-12 oj-lg-3 dboardcol">
+      <div class="oj-margin">Returning Visitors <br><span class="largetext" data-bind="text:total_returning_visitor"></span></div>
     </div>
-    <div class="oj-lg-3 dboardcol">
-      <div class="oj-margin">Course Registration <br><span class="largetext">57</span></div>
+    <div class="oj-sm-12 oj-lg-3 dboardcol">
+      <div class="oj-margin">Course Registration <br><span class="largetext" data-bind="text:total_course_registration"></span></div>
     </div>
   </div>
+
   <div class="dboardrow1 oj-flex oj-sm-12">
   
     <div class="oj-lg-6">

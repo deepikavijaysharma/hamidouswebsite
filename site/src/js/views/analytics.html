@@ -3,34 +3,29 @@
  The Universal Permissive License (UPL), Version 1.0
  -->
 
+
+
+
 <div class="container">
-  <div class="oj-sm-12 breadcrumbs">
-    <ul>
-     
-        <a href="?root=home">Home</a> >Reports
-    </ul>
+<div class="oj-flex  bgwhite analytics">
+<div class="oj-sm-12">
+  <h1 class="heading">Analytics</h1>
   </div>
-  <div class="oj-flex">
-
-    <div id="vtabs" data-bind="ojComponent:{component: 'ojTabs', 
+  <div class="oj-sm-12">
+    <div class="oj-sm-12" id="vtabs" data-bind="ojComponent:{component: 'ojTabs', 
                             orientation: 'vertical',selected: 0}">
-
       <ul>
-        <li>
-          <span>DashBoard</span>
-        </li>
-        <li>
-          <span>Tab 2</span>
-        </li>
+        <li> <span>DashBoard</span> </li>
+        <li> <span>Events Report</span> </li>
       </ul>
-
       <div id="tabs-1">
-        <div data-bind="ojModule: {name: 'tab1'}"></div>
+        <div data-bind="ojModule: {name: 'analytics_dashboard'}"></div>
       </div>
-
       <div id="tabs-2">
-        <div data-bind="ojModule: {name: 'tab1'}"></div>
+        <div data-bind="ojModule: {name: 'analytics_events'}"></div>
       </div>
     </div>
   </div>
+</div>
+
 </div>
