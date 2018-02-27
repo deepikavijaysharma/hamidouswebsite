@@ -1988,6 +1988,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             self.editempfeatbg(editemployeefeatures.empfeabg);
             self.editempfeatheading(editemployeefeatures.empfeaheading);
             self.editempfeattext(editemployeefeatures.empfeatext);
+            var eflink = window.location.hostname + "/excellence/?root=home#employeefeature=" + editemployeefeatures.empfeaid;
+            $(".directlinkef").empty();
+            if (true) {
+                $(".directlinkef").append("<b>Direct Link: <span>" + eflink + "</span></b>");
+            }
         }
 
         closeEditEmployeeFeaturesModal = function () {
@@ -2210,8 +2215,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         name: ourslist[0].name,
                         description: descriptionstring
                     })
-                    console.log(ko.toJSON(self.oslist()));
-                    console.log(self.oslist());
                     self.checkadminrightsnew();
                 }
             }).fail(function (xhr, textStatus, err) {

@@ -2627,6 +2627,7 @@ color:#ffffff!important;
               <input class="form-control" id="edefbg" class="buttons btn btn-default file" type="file" onchange="eeflogoselected(event)">
               <img class="editkw" data-bind="attr:{'src':editempfeatbg,'id':editempfeatid}"> </div>
           </div><br>
+          <div class="form-group"><p class="directlinkef admin" style="color: blue; display: inline-block;"></p></div><br>
           <div class="form-group">
             <label class="addslidelabel">Employee Features Heading:</label>
             <div class="input-group">
@@ -2671,44 +2672,6 @@ color:#ffffff!important;
   </div>
 </div>
 <!-- delete employee features confirmation end -->
-
-<!-- Add Employee Features Description ckeditor modal workaround start -->
-<div style="display:none" class="dialogbodymain" id="modaldescempf" title="Add Employee Feature Text" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
-  <div class="oj-dialog-body roleWrapper">
-    <div class="nomargin-md oj-margin-left">
-      <div class="oj-flex">
-        <div class="oj-sm-12">
-          <label>Enter Employee Feature Text: </label>
-          <label class="required">*</label>
-        </div>
-        <div class="oj-sm-12">
-          <textarea id="txt2" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:empfeattext}"></textarea>
-        </div>
-        <br>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Add Employee Features Description ckeditor modal workaround end -->
-
-<!-- Edit Employee Features Description ckeditor modal workaround start -->
-<div style="display:none" class="dialogbodymain" id="modaleditdescempf" title="Edit Employee Feature Text" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
-  <div class="oj-dialog-body roleWrapper">
-    <div class="nomargin-md oj-margin-left">
-      <div class="oj-flex">
-        <div class="oj-sm-12">
-          <label>Enter Employee Feature Text: </label>
-          <label class="required">*</label>
-        </div>
-        <div class="oj-sm-12">
-          <textarea id="edtxt2" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:editempfeattext}"></textarea>
-        </div>
-        <br>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Edit Employee Features Description ckeditor modal workaround end -->
 
 <!-- END OF EMPLOYEE FEATURES POPUPS -->
 
