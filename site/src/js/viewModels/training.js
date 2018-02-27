@@ -160,42 +160,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             var editor_instance_data3 = "";          
             var intermediate_data4 = "";
             var editor_instance_data4 = "";
-
             self.event_report_list = ko.observableArray([]);
-
-            self.keydateslist = ko.observableArray([]);
-
-            /******************************************for refreshing home page key dates*****************************************************/
-            fetchkeydates = function () {
-                $.getJSON(homebaseurl + 'KeyDates').then(function (keydatesdetails) {
-                    // Fetch key dates details
-                    var homelink;
-                    homelink = window.location.href;
-                    homelink += "?root=training#";
-                    self.keydateslist([]);
-                    var stdate, kstdate, endate, kendate;
-                    var kdlist = keydatesdetails.items;
-                    for (var b = 0; b < kdlist.length; b++) {
-                        kstdate = kdlist[b].start_date != undefined ? kdlist[b].start_date.split('T')[0] : '';
-                        stdate = new Date(kstdate);
-                        kendate = kdlist[b].end_date != undefined ? kdlist[b].end_date.split('T')[0] : '';
-                        endate = new Date(kendate);
-                        self.keydateslist.push({
-                            keydcid: kdlist[b].course_id,
-                            keydtype: kdlist[b].training_type,
-                            keydname: kdlist[b].name,
-                            keydhlink: homelink,
-                            keydhevlink: kdlist[b].link,
-                            keydstartdate: stdate.toDateString(),
-                            keydstarttime: kdlist[b].start_date != undefined ? kdlist[b].start_date.substring(11, 19) + " PT" : '',
-                            keydenddate: endate.toDateString(),
-                            keydendtime: kdlist[b].end_date != undefined ? kdlist[b].end_date.substring(11, 19) + " PT" : ''
-                        })
-                    }
-                });
-            }
-
-            /******************************************for refreshing home page key dates ENDS*****************************************************/
 
             // EVENT HANDLER FOR ROLE SELECTION
             rolesselected = function (event, ui) {
@@ -278,7 +243,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.callduration('');
             }
 
-
             // CREATE COMMUNITY CALL
             createcommunitycall = function () {
                 var selectedrole = '';
@@ -341,13 +305,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     success: function (data) {
                         resetcall();
                         loadCommunitycall();
-                        fetchkeydates();
+
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
                 });
                 editor_instance_data = "";
                 $("#createcommunitycall_id").ojDialog("close");
+
             }
 
             opendescriptionmodal = function () {
@@ -870,6 +835,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.detailedEnrollstatus('');
 
 
+
                 // SET NEW VALUE
                 self.detailedDescription(course.description);
                 self.detailedName(course.name);
@@ -906,8 +872,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     $(".directlink").append("<b>Direct Link: <span>" + courselink + "</span></b>");
                 }
                 console.log(courselink);
-                analytics(course.name, course.category_name, 'View_details', 'Training Page', 'Training Courses', course.category_name);
                 $("#coursedetails").ojDialog("open");
+
+
+
             }
 
 
@@ -1203,7 +1171,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                                 prodcut_type: curcourse.prodcut_type,
                                 training_level: curcourse.training_level,
                                 training_type: curcourse.training_type,
-                                category_name: categoryname,
+                                category_name: curcourse.category_name,
                                 categoryid: curcourse.category_id,
                                 subcat_name: curcourse.subcat_name,
                                 classes: curcourse.classes,
@@ -1541,11 +1509,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     success: function (data) {
                         getAllEvents();
                         resetEvent();
-                        fetchkeydates();
+
                     }
                     }).fail(function (xhr, textStatus, err) {
                 });
                 $("#createevents_id").ojDialog("close");
+
             }
             //CREATE EVENTS END
 
@@ -1754,7 +1723,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.partnerName(event_details.partner_name);
                 self.registrationLink(event_details.registration_link);
                 $("#event_details_modal").ojDialog("open");
-                analytics(event_details.name, event_details.location, 'View_details', 'Training Page', 'Events', 'Event Details');
             }            
 
             /* ---------------------   EVENTS TAB END  -------------------------*/
@@ -1776,7 +1744,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var is_key_com_call_text_present = call_id_val1.indexOf("key_com_call");
                 if (is_com_call_id_text_present != -1 || is_key_com_call_text_present !=-1){
                     $('#com_call_tab').trigger('click');
-					location.hash = '';
                 }                
                
             });
@@ -1787,25 +1754,24 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 var is_event_id_text_present = call_id_val1.indexOf("events_tab_trigger");
                 if (is_event_id_text_present != -1){
                     $('#events_tab').trigger('click');
-					location.hash = '';
                 }                
                
             });
 
             
-           waitForElement("events_report", function(){
-				 var call_id_val1 = window.location.href;
-                // com_call_id is getting used to go directly to an old community call which doesnt 
-                //have a reply link. key_com_call is to navigate to key events com call from home page
-                var is_event_id_text_present = call_id_val1.indexOf("events_report");
-                if (is_event_id_text_present != -1){
-                    $('#events_report').trigger('click');
-					location.hash = '';
-                }                
-               
-                      
-               
-            });
+            waitForElement("events_report", function(){
+				if (window.location.href.indexOf("tab") != -1) 
+            {
+                var type = window.location.href.split('#tab=');
+                var hash = '';
+                if (type.length > 1)
+                {
+					
+                    hash = '#'+type[1];
+                }
+               $(hash).trigger('click'); 
+            }
+              });
 
 
             /* ---------------------   COMMUNITY CALLS  -------------------------*/
@@ -1879,7 +1845,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 // SET NEW VALUE
                 self.ccDescription(ccalls.description);
                 $("#communitycallsdetails").ojDialog("open");
-                analytics(ccalls.name, ccalls.call_id, 'View_details', 'Training Page', 'Community Calls', 'Community Calls Details');
             }
 
             self.closecommunitycallsdetails = function () {
@@ -2468,21 +2433,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             } else {
                                 self.searchfetchcourses();
                             }
-                            self.showToastDialog("Successfully Enrolled.", true, 2000);
+                            self.showToastDialog("Successfully Enrolled.",2000);
                             $("#reportees").ojDialog("close");
                         }
                     }).fail(function (xhr, textStatus, err) {
-                        self.showToastDialog("Enrollment Failed.", false, 2000);
+                        self.showToastDialog("Enrollment Failed.", 0);
                         console.log(ko.toJSON(err));
                     });
                 }
 
             }
-
-            self.showToastDialog = function (msg, autoclose, timeinmillisec) {
+            self.showToastDialog = function (msg, timeinmillisec) {
                 self.msg(msg);
                 $("#toastdiv").ojDialog("open");
-                if (autoclose) {
+                if (timeinmillisec>0) {
                     setTimeout(function () {
                         $("#toastdiv").ojDialog("close");
                     }, timeinmillisec);
@@ -2500,7 +2464,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         enrollforCourse(self.selectreportees());
                     } else {
 
-                        self.showToastDialog("Please login to enroll", false, 2000);
+                        self.showToastDialog("Please login to enroll", 0);
                     }
                 }
             }
@@ -2517,6 +2481,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     editor_instance_data = "";                   
 
                 resetCourse();
+                // reset the old class list from the UI
+                $(".classlist").empty();
+
                 $("#createcoursedialog").ojDialog("open");
             }
 
@@ -2546,6 +2513,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.cclass().status([]);
                 self.cclass().key_event(false);
                 resetSchedule();
+                editor_instance_data4="";
                 // $(".classlist").empty();
             }
 
@@ -2560,6 +2528,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             // REQUEST COURSE CREATION BASED ON SAVED DATA
             self.createcourse = function () {
                 console.log("Creating course . . .");
+                if(self.selectedCategoriesForCourse().length==0){
+                    self.showToastDialog("Please select Category for the course.",0);
+                    return;
+                }
                 var mappedCategories = new Array();
                 self.selectedCategoriesForCourse().forEach(function (element) {
                     mappedCategories.push(element.category_id);
@@ -2594,19 +2566,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(reqBody),
                     success: function (data) {
-                        self.showToastDialog("Course Successfully Created", true, 2000);
+                        self.showToastDialog("Course Successfully Created",2000);
                         console.log("Course Successfully Created");
                         self.fetchcourses();
                         $("#createcoursedialog").ojDialog("close");
                         resetCourse();
                         console.log(ko.toJSON(data));
-                        fetchkeydates();
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
-                    self.showToastDialog("Course Creation Failed!", false, 2000);
+                    self.showToastDialog("Course Creation Failed!", 0);
                 });
+
                 editor_instance_data2 = "";
+
             }
 
             
@@ -2736,17 +2709,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             addClassTotheCourse = function () {
                 if (self.cclass().schedules().length < 1) {
-                    self.showToastDialog("Atleast create one schedule for the class", false, 0);
+                    self.showToastDialog("Atleast create one schedule for the class", 0);
                     return;
                 }
 
                 if (self.cclass().class_size().length < 1) {
-                    self.showToastDialog("Please enter valid class size.", false, 0);
+                    self.showToastDialog("Please enter valid class size.", 0);
                     return;
                 }
 
                 if (self.cclass().city().length < 1) {
-                    self.showToastDialog("Please enter valid City.", false, 0);
+                    self.showToastDialog("Please enter valid City.", 0);
                     return;
                 }
 
@@ -2762,6 +2735,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     schedules: self.cclass().schedules()
                 });
                 $("#addclasstoclass").ojDialog("close");
+                $(".classlist").empty();
                 updateCourseClass();
                 //resetClass();
                 editor_instance_data1 = "";
@@ -2770,17 +2744,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             saveClassTotheCourse = function () {
                 if (self.cclass().schedules().length < 1) {
-                    self.showToastDialog("Atleast create one schedule for the class", false, 0);
+                    self.showToastDialog("Atleast create one schedule for the class", 0);
                     return;
                 }
 
                 if (self.cclass().class_size().length < 1) {
-                    self.showToastDialog("Please enter valid class size.", false, 0);
+                    self.showToastDialog("Please enter valid class size.", 0);
                     return;
                 }
 
                 if (self.cclass().city().length < 1) {
-                    self.showToastDialog("Please enter valid City.", false, 0);
+                    self.showToastDialog("Please enter valid City.", 0);
                     return;
                 }
 
@@ -2806,7 +2780,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(reqbody),
                     success: function (data) {
-                        self.showToastDialog("Class Successfully Updated", true, 2000);
+                        self.showToastDialog("Class Successfully Updated",2000);
                         console.log("Class Successfully Updated : " + ko.toJSON(data));
                         $("#editclass").ojDialog("close");
                         resetClass();
@@ -2819,7 +2793,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
-                    self.showToastDialog("Class Failed Updated", false, 2000);
+                    self.showToastDialog("Class Failed Updated", 0);
                 });
                 editor_instance_data4 = "";
 
@@ -2872,7 +2846,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(body),
                     success: function (data) {
-                        self.showToastDialog("Class Successfully Deleted", true, 2000);
+                        self.showToastDialog("Class Successfully Deleted",2000);
                         console.log("Class Successfully Deleted");
                         $("#editclass").ojDialog("close");
                         resetClass();
@@ -2881,7 +2855,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
-                    self.showToastDialog("Class Failed Updated", true, 2000);
+                    self.showToastDialog("Class Failed Updated", 2000);
                 });
             }
 
@@ -2925,7 +2899,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(reqBody),
                     success: function (data) {
-                        self.showToastDialog("Course Successfully Updated", true, 2000);
+                        self.showToastDialog("Course Successfully Updated", 2000);
                         console.log("Course Successfully Updated");
                         self.fetchcourses();
                         $("#edittraining").ojDialog("close");
@@ -2935,7 +2909,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
-                    self.showToastDialog("Update Failed!", false, 2000);
+                    self.showToastDialog("Update Failed!", 0);
                     self.fetchcourses();
                 });
                 editor_instance_data3 = ""
@@ -3059,12 +3033,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         contentType: 'application/json; charset=utf-8',
                         data: ko.toJSON(body),
                         success: function (data) {
-                            self.showToastDialog("Course Successfully deleted", true, 2000);
+                            self.showToastDialog("Course Successfully deleted", 2000);
                             self.fetchcourses();
                         }
                     }).fail(function (xhr, textStatus, err) {
                         // alert(err);
-                        self.showToastDialog("Course Deletion Failed!", false, 2000);
+                        self.showToastDialog("Course Deletion Failed!", 0);
                     });
 
                 }
@@ -3141,93 +3115,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.searcheventreportstext([]);
                 loadEventReportData();
             }
-
-            /******************************************ANALYTICS TRAINING*********************************************************************************/
-
-            analytics = function (itemtitle, itemname, itemtype, itemlevel1, itemlevel2, itemlevel3) {
-                var itemdesc;
-                if (ssoemail == "") {
-                    ssoemail = "test@oracle.com";
-                }
-                if (itemlevel2 == "Events") {
-                    if (itemtitle != "" && itemname != "") {
-                        itemdesc = itemtitle + " at " + itemname;
-                    }
-                    else if (itemtitle == "" && itemname != "") {
-                        itemdesc = itemname;
-                    }
-                    else if (itemtitle != "" && itemname == "") {
-                        itemdesc = itemtitle;
-                    }
-                    else {
-                        itemdesc = "";
-                    }
-                }
-                else if (itemlevel2 == "Community Calls") {
-                    if (itemtitle != "" && itemname != "") {
-                        itemdesc = itemtitle + " with call_id " + itemname;
-                    }
-                    else if (itemtitle == "" && itemname != "") {
-                        itemdesc = itemname;
-                    }
-                    else if (itemtitle != "" && itemname == "") {
-                        itemdesc = itemtitle;
-                    }
-                    else {
-                        itemdesc = "";
-                    }
-                }
-                else {
-                    if (itemtitle != "" && itemname != "") {
-                        itemdesc = itemtitle + " from category : " + itemname;
-                    }
-                    else if (itemtitle == "" && itemname != "") {
-                        itemdesc = itemname;
-                    }
-                    else if (itemtitle != "" && itemname == "") {
-                        itemdesc = itemtitle;
-                    }
-                    else {
-                        itemdesc = "";
-                    }
-                }
-                if (itemlevel3 == "") {
-                    var analytics = {
-                        "session_id": sessionid,
-                        "email": ssoemail,
-                        "event_description": itemdesc,
-                        "event_type": itemtype,
-                        "level_1": itemlevel1,
-                        "level_2": itemlevel2
-                    };
-                }
-                else {
-                    var analytics = {
-                        "session_id": sessionid,
-                        "email": ssoemail,
-                        "event_description": itemdesc,
-                        "event_type": itemtype,
-                        "level_1": itemlevel1,
-                        "level_2": itemlevel2,
-                        "level_3": itemlevel3
-                    };
-                }
-                console.log(analytics);
-                $.ajax({
-                    url: homebaseurl + 'POST_EVENT_DATA',
-                    type: 'POST',
-                    contentType: 'application/json; charset=utf-8',
-                    data: ko.toJSON(analytics),
-                    success: function (event) {
-                        console.log("Analytics of event sent.", event);
-                    }
-                }).fail(function (xhr, textStatus, err) {
-                    alert("Error in sending analytics", err);
-                });
-                return true;
-            }
-
-        /******************************************ANALYTICS TRAINING ENDS***************************************************************************/
             
         }
         return new DashboardViewModel();
