@@ -27,6 +27,7 @@ var community_call_calendar_link = com_call_api+"get_ical";
 var events_api = com_call_api+"GetKeyEvents";
 var create_event_api = com_call_api+"event";
 var event_report_api = com_call_api+"REPORT_ALL_DATA";
+var analytics_report_base_url="https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/ANALYTICS/";
 /**
  * Example of Require.js boostrap javascript
  */
