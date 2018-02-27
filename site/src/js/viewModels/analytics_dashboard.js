@@ -2,13 +2,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
   function tabmodel() {
     var self = this;
- self.val = ko.observable(["tod"]);
+      self.period = ko.observable(["0"]);
 	   self.formState = ko.observable('enabled');
 	   
 	   
 	    self.disableFormControls = ko.computed(function () {
 		  
-              if (self.val() == 'CR')
+              if (self.period() == '-1')
                 return false;
               else
                return true;
@@ -31,7 +31,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
     var total_new_visitor_url = analytics_report_base_url + "UNIQ_USERS/";//$-$/01-jan-2018/01-mar-2018";
     var total_returning_visitor_url = analytics_report_base_url + "RETURNING_USERS/";//$-$/01-jan-2018/01-mar-2018";
     var total_course_enrollment_url = analytics_report_base_url + "ENROLLMENTS/";//$-$/01-jan-2018/01-mar-2018";
+    var course_enrollment_trend_url=analytics_report_base_url+"ENROLLMENTS_TOP5/";
 
+
+    // BAR GRAPH DATA
+    
+    self.stackValue = ko.observable('off');
+    self.orientationValue = ko.observable('vertical');
+    self.locationValue = ko.observable('back');
+    self.refObjTypeValue = ko.observable('line');
+    self.refObjItemsTypeValue = ko.observable('constant');
+    self.axisValue = ko.observable('yAxis');
+    self.barSeriesValue = ko.observableArray([]);
+    self.barGroupsValue = ko.observableArray([]);
 
     console.log("Min date: "+self.mindate());
 
@@ -48,17 +60,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
     // GET TOTAL VISITOR COUNT
     async function getTotalVisitorCount(period,startdate,enddate) {
 
+      var url=total_visitor_url;
+
       // ADD PERIOD IF SELECTED
-      total_visitor_url+=period.length>0?period+"/":"$-$/";
+      url+=period.length>0?period+"/":"$-$/";
 
       // ADD START DATE IF SELECTED
-      total_visitor_url+=startdate.length>0?startdate+"/":"$-$/";
+      url+=startdate.length>0?startdate+"/":"$-$/";
 
       // ADD END DATE IF SELECTED
-      total_visitor_url+=enddate.length>0?enddate:"$-$";
+      url+=enddate.length>0?enddate:"$-$";
 
       $
-        .getJSON(total_visitor_url)
+        .getJSON(url)
         .then(function (data) {
           self.total_visitor(data.items[0].count);
         });
@@ -67,17 +81,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
     // GET NEW VISITOR COUNT
     async function getNewVisitorCount(period,startdate,enddate) {
 
+      var url=total_new_visitor_url;
+      
        // ADD PERIOD IF SELECTED
-       total_new_visitor_url+=period.length>0?period+"/":"$-$/";
+       url+=period.length>0?period+"/":"$-$/";
 
        // ADD START DATE IF SELECTED
-       total_new_visitor_url+=startdate.length>0?startdate+"/":"$-$/";
+       url+=startdate.length>0?startdate+"/":"$-$/";
  
        // ADD END DATE IF SELECTED
-       total_new_visitor_url+=enddate.length>0?enddate:"$-$";
+       url+=enddate.length>0?enddate:"$-$";
 
       $
-        .getJSON(total_new_visitor_url)
+        .getJSON(url)
         .then(function (data) {
           self.total_unique_visitor(data.items[0].count);
         });
@@ -86,17 +102,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
     // GET NEW VISITOR COUNT
     async function getReturningVisitorCount(period,startdate,enddate) {
 
+      var url=total_returning_visitor_url;
+
+
        // ADD PERIOD IF SELECTED
-       total_returning_visitor_url+=period.length>0?period+"/":"$-$/";
+       url+=period.length>0?period+"/":"$-$/";
 
        // ADD START DATE IF SELECTED
-       total_returning_visitor_url+=startdate.length>0?startdate+"/":"$-$/";
+       url+=startdate.length>0?startdate+"/":"$-$/";
  
        // ADD END DATE IF SELECTED
-       total_returning_visitor_url+=enddate.length>0?enddate:"$-$";
+       url+=enddate.length>0?enddate:"$-$";
 
       $
-        .getJSON(total_returning_visitor_url)
+        .getJSON(url)
         .then(function (data) {
           self.total_returning_visitor(data.items[0].count);
         });
@@ -105,33 +124,90 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
     // GET NEW VISITOR COUNT
     async function getCourseEnrollmentCount(period,startdate,enddate) {
 
+      var url=total_course_enrollment_url;
+
        // ADD PERIOD IF SELECTED
-       total_course_enrollment_url+=period.length>0?period+"/":"$-$/";
+       url+=period.length>0?period+"/":"$-$/";
 
        // ADD START DATE IF SELECTED
-       total_course_enrollment_url+=startdate.length>0?startdate+"/":"$-$/";
+       url+=startdate.length>0?startdate+"/":"$-$/";
  
        // ADD END DATE IF SELECTED
-       total_course_enrollment_url+=enddate.length>0?enddate:"$-$";
+       url+=enddate.length>0?enddate:"$-$";
 
 
       $
-        .getJSON(total_course_enrollment_url)
+        .getJSON(url)
         .then(function (data) {
           self.total_course_registration(data.items[0].count);
         });
     }
+
+
+    async function getCourseEnrollmentTremd(period,startdate,enddate){
+      var url=course_enrollment_trend_url;
+
+      // ADD PERIOD IF SELECTED
+      url+=period.length>0?period+"/":"$-$/";
+
+      // ADD START DATE IF SELECTED
+      url+=startdate.length>0?startdate+"/":"$-$/";
+
+      // ADD END DATE IF SELECTED
+      url+=enddate.length>0?enddate:"$-$";
+
+      $
+              .getJSON(url)
+              .then(function (data) {
+                console.log(data.items);
+                var countval=new Array();
+                self.barGroupsValue([]);
+                self.barSeriesValue([]);
+                for(var i=0;i<data.items.length;i++){
+                  countval.push(data.items[i].count);
+                  self.barGroupsValue.push(data.items[i].name);
+                }
+
+                self.barSeriesValue.push({
+                  name:"Courses",
+                  items:countval
+                })
+              });
+
+    }
+
     // Load all data once page is loaded
     self.handleActivated = function (info) {
-      getTotalVisitorCount("","01-jan-2018","01-mar-2018");
-      getNewVisitorCount("","01-jan-2018","01-mar-2018");
-      getReturningVisitorCount("","01-jan-2018","01-mar-2018");
-      getCourseEnrollmentCount("","01-jan-2018","01-mar-2018");
+      getTotalVisitorCount("Week","","");
+      getNewVisitorCount("Week","","");
+      getReturningVisitorCount("Week","","");
+      getCourseEnrollmentCount("Week","","");
+      getCourseEnrollmentTremd("Week","","");
     }
+    
 
     // Filter Button Handler
     applyFilter=function(){
-      console.log(getDateString(new Date(self.start_date())));
+
+      if(new Date(self.start_date())>=new Date(self.end_date())){
+          alert("End Date should be greater than Start Date");
+          return;
+      }
+      
+      var period=self.period()!='-1'?self.period():"";
+      var startdate=self.period()!='-1'?"":getDateString(new Date(self.start_date()));
+      var enddate=self.period()!='-1'?"":getDateString(new Date(self.end_date()));
+
+      console.log('Start: '+startdate);
+      console.log('End: '+enddate);
+      console.log('Period: '+period);
+
+
+      getTotalVisitorCount(period,startdate,enddate);
+      getNewVisitorCount(period,startdate,enddate);
+      getReturningVisitorCount(period,startdate,enddate);
+      getCourseEnrollmentCount(period,startdate,enddate);
+      getCourseEnrollmentTremd(period,startdate,enddate);
     }
 	
 	
@@ -256,38 +332,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
         });
       }	
 	  
-	 //TAG CLOUD END 	
-	 
-	 //BAR GRAPH START 
-	 /* toggle button variables */
-        self.stackValue = ko.observable('off');
-        self.orientationValue = ko.observable('vertical');
-        
-        /* chart data */
-        var barSeries = [{name: "Series 1", items: [42, 34]},
-                         {name: "Series 2", items: [55, 30]},
-                         {name: "Series 3", items: [36, 50]},
-                         {name: "Series 4", items: [22, 46]},
-                         {name: "Series 5", items: [22, 46]}];
-    
-        var barGroups = ["Group A", "Group B"];
-   
-        self.barSeriesValue = ko.observableArray(barSeries);
-        self.barGroupsValue = ko.observableArray(barGroups);
-        
-        /* toggle buttons*/
-        self.stackOptions = [
-            {id: 'unstacked', label: 'unstacked', value: 'off', icon: 'oj-icon demo-bar-unstack'},
-            {id: 'stacked', label: 'stacked', value: 'on', icon: 'oj-icon demo-bar-stack'}
-        ];
-        self.orientationOptions = [
-            {id: 'vertical', label: 'vertical', value: 'vertical', icon: 'oj-icon demo-bar-vert'},
-            {id: 'horizontal', label: 'horizontal', value: 'horizontal', icon: 'oj-icon demo-bar-horiz'}
-        ];
-	 
-	 
-	 
-	 //BAR GRAPH END 
+   //TAG CLOUD END 	
           
   }
   return new tabmodel();
