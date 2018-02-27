@@ -243,12 +243,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.callduration('');
             }
 
-
-
-
-            // showToastDialog("","");
-
-
             // CREATE COMMUNITY CALL
             createcommunitycall = function () {
                 var selectedrole = '';
@@ -2439,21 +2433,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             } else {
                                 self.searchfetchcourses();
                             }
-                            self.showToastDialog("Successfully Enrolled.", true, 2000);
+                            self.showToastDialog("Successfully Enrolled.",2000);
                             $("#reportees").ojDialog("close");
                         }
                     }).fail(function (xhr, textStatus, err) {
-                        self.showToastDialog("Enrollment Failed.", false, 2000);
+                        self.showToastDialog("Enrollment Failed.", 0);
                         console.log(ko.toJSON(err));
                     });
                 }
 
             }
-
-            self.showToastDialog = function (msg, autoclose, timeinmillisec) {
+            self.showToastDialog = function (msg, timeinmillisec) {
                 self.msg(msg);
                 $("#toastdiv").ojDialog("open");
-                if (autoclose) {
+                if (timeinmillisec>0) {
                     setTimeout(function () {
                         $("#toastdiv").ojDialog("close");
                     }, timeinmillisec);
@@ -2471,7 +2464,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         enrollforCourse(self.selectreportees());
                     } else {
 
-                        self.showToastDialog("Please login to enroll", false, 2000);
+                        self.showToastDialog("Please login to enroll", 0);
                     }
                 }
             }
@@ -2535,6 +2528,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             // REQUEST COURSE CREATION BASED ON SAVED DATA
             self.createcourse = function () {
                 console.log("Creating course . . .");
+                if(self.selectedCategoriesForCourse().length==0){
+                    self.showToastDialog("Please select Category for the course.",0);
+                    return;
+                }
                 var mappedCategories = new Array();
                 self.selectedCategoriesForCourse().forEach(function (element) {
                     mappedCategories.push(element.category_id);
@@ -2569,7 +2566,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(reqBody),
                     success: function (data) {
-                        self.showToastDialog("Course Successfully Created", true, 2000);
+                        self.showToastDialog("Course Successfully Created",2000);
                         console.log("Course Successfully Created");
                         self.fetchcourses();
                         $("#createcoursedialog").ojDialog("close");
@@ -2578,7 +2575,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
-                    self.showToastDialog("Course Creation Failed!", false, 2000);
+                    self.showToastDialog("Course Creation Failed!", 0);
                 });
 
                 editor_instance_data2 = "";
@@ -2712,17 +2709,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             addClassTotheCourse = function () {
                 if (self.cclass().schedules().length < 1) {
-                    self.showToastDialog("Atleast create one schedule for the class", false, 0);
+                    self.showToastDialog("Atleast create one schedule for the class", 0);
                     return;
                 }
 
                 if (self.cclass().class_size().length < 1) {
-                    self.showToastDialog("Please enter valid class size.", false, 0);
+                    self.showToastDialog("Please enter valid class size.", 0);
                     return;
                 }
 
                 if (self.cclass().city().length < 1) {
-                    self.showToastDialog("Please enter valid City.", false, 0);
+                    self.showToastDialog("Please enter valid City.", 0);
                     return;
                 }
 
@@ -2747,17 +2744,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             saveClassTotheCourse = function () {
                 if (self.cclass().schedules().length < 1) {
-                    self.showToastDialog("Atleast create one schedule for the class", false, 0);
+                    self.showToastDialog("Atleast create one schedule for the class", 0);
                     return;
                 }
 
                 if (self.cclass().class_size().length < 1) {
-                    self.showToastDialog("Please enter valid class size.", false, 0);
+                    self.showToastDialog("Please enter valid class size.", 0);
                     return;
                 }
 
                 if (self.cclass().city().length < 1) {
-                    self.showToastDialog("Please enter valid City.", false, 0);
+                    self.showToastDialog("Please enter valid City.", 0);
                     return;
                 }
 
@@ -2783,7 +2780,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(reqbody),
                     success: function (data) {
-                        self.showToastDialog("Class Successfully Updated", true, 2000);
+                        self.showToastDialog("Class Successfully Updated",2000);
                         console.log("Class Successfully Updated : " + ko.toJSON(data));
                         $("#editclass").ojDialog("close");
                         resetClass();
@@ -2796,7 +2793,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
-                    self.showToastDialog("Class Failed Updated", false, 2000);
+                    self.showToastDialog("Class Failed Updated", 0);
                 });
                 editor_instance_data4 = "";
 
@@ -2849,7 +2846,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(body),
                     success: function (data) {
-                        self.showToastDialog("Class Successfully Deleted", true, 2000);
+                        self.showToastDialog("Class Successfully Deleted",2000);
                         console.log("Class Successfully Deleted");
                         $("#editclass").ojDialog("close");
                         resetClass();
@@ -2858,7 +2855,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
-                    self.showToastDialog("Class Failed Updated", true, 2000);
+                    self.showToastDialog("Class Failed Updated", 2000);
                 });
             }
 
@@ -2902,7 +2899,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(reqBody),
                     success: function (data) {
-                        self.showToastDialog("Course Successfully Updated", true, 2000);
+                        self.showToastDialog("Course Successfully Updated", 2000);
                         console.log("Course Successfully Updated");
                         self.fetchcourses();
                         $("#edittraining").ojDialog("close");
@@ -2912,7 +2909,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
-                    self.showToastDialog("Update Failed!", false, 2000);
+                    self.showToastDialog("Update Failed!", 0);
                     self.fetchcourses();
                 });
                 editor_instance_data3 = ""
@@ -3036,12 +3033,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         contentType: 'application/json; charset=utf-8',
                         data: ko.toJSON(body),
                         success: function (data) {
-                            self.showToastDialog("Course Successfully deleted", true, 2000);
+                            self.showToastDialog("Course Successfully deleted", 2000);
                             self.fetchcourses();
                         }
                     }).fail(function (xhr, textStatus, err) {
                         // alert(err);
-                        self.showToastDialog("Course Deletion Failed!", false, 2000);
+                        self.showToastDialog("Course Deletion Failed!", 0);
                     });
 
                 }
