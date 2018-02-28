@@ -715,7 +715,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             self.organizationpeopleecalist.push({
                                 orgdesig: orgplist[b].designation,
                                 orgempid: orgplist[b].empid,
-                                orgimage: orgplist[b].image,
+                                orgimage: orgplist[b].image + "#" + new Date().getTime(),
                                 orgname: orgplist[b].name,
                                 orglob: orgplist[b].organization,
                                 orgdotline: orgplist[b].dot_line,
@@ -726,7 +726,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             self.organizationpeoplepslist.push({
                                 orgdesig: orgplist[b].designation,
                                 orgempid: orgplist[b].empid,
-                                orgimage: orgplist[b].image,
+                                orgimage: orgplist[b].image + "#" + new Date().getTime(),
                                 orgname: orgplist[b].name,
                                 orglob: orgplist[b].organization,
                                 orgdotline: orgplist[b].dot_line,
@@ -737,7 +737,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             self.organizationpeopleodlist.push({
                                 orgdesig: orgplist[b].designation,
                                 orgempid: orgplist[b].empid,
-                                orgimage: orgplist[b].image,
+                                orgimage: orgplist[b].image + "#" + new Date().getTime(),
                                 orgname: orgplist[b].name,
                                 orglob: orgplist[b].organization,
                                 orgdotline: orgplist[b].dot_line,
@@ -748,7 +748,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             self.organizationpeopleseelist.push({
                                 orgdesig: orgplist[b].designation,
                                 orgempid: orgplist[b].empid,
-                                orgimage: orgplist[b].image,
+                                orgimage: orgplist[b].image + "#" + new Date().getTime(),
                                 orgname: orgplist[b].name,
                                 orglob: orgplist[b].organization,
                                 orgdotline: orgplist[b].dot_line,
@@ -759,7 +759,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             self.organizationpeopleialist.push({
                                 orgdesig: orgplist[b].designation,
                                 orgempid: orgplist[b].empid,
-                                orgimage: orgplist[b].image,
+                                orgimage: orgplist[b].image + "#" + new Date().getTime(),
                                 orgname: orgplist[b].name,
                                 orglob: orgplist[b].organization,
                                 orgdotline: orgplist[b].dot_line,
@@ -770,7 +770,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             self.organizationpeoplecshlist.push({
                                 orgdesig: orgplist[b].designation,
                                 orgempid: orgplist[b].empid,
-                                orgimage: orgplist[b].image,
+                                orgimage: orgplist[b].image + "#" + new Date().getTime(),
                                 orgname: orgplist[b].name,
                                 orglob: orgplist[b].organization,
                                 orgdotline: orgplist[b].dot_line,
@@ -781,7 +781,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             self.organizationpeopleccslist.push({
                                 orgdesig: orgplist[b].designation,
                                 orgempid: orgplist[b].empid,
-                                orgimage: orgplist[b].image,
+                                orgimage: orgplist[b].image + "#" + new Date().getTime(),
                                 orgname: orgplist[b].name,
                                 orglob: orgplist[b].organization,
                                 orgdotline: orgplist[b].dot_line,
@@ -792,7 +792,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             self.organizationpeoplehdwlist.push({
                                 orgdesig: orgplist[b].designation,
                                 orgempid: orgplist[b].empid,
-                                orgimage: orgplist[b].image,
+                                orgimage: orgplist[b].image + "#" + new Date().getTime(),
                                 orgname: orgplist[b].name,
                                 orglob: orgplist[b].organization,
                                 orgdotline: orgplist[b].dot_line,
@@ -1075,7 +1075,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         keywid: kwlist[b].id,
                         keywlink: kwlist[b].link,
                         keywtext: kwlist[b].text,
-                        keywphoto: kwlist[b].image
+                        keywphoto: kwlist[b].image + "#" + new Date().getTime()
                     })
                 }//console.log(ko.toJSON(self.keywinslist()));
                 self.checkadminrightsnew();
@@ -1450,9 +1450,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             golguest: gllist[b].episode_guest,
                             gollink: gllist[b].link,
                             goldescription: gllist[b].go_live_description,
-                            golbackground: gllist[b].background,
-                            gollogo: gllist[b].logo,
-
+                            golbackground: gllist[b].background + "#" + new Date().getTime(),
+                            gollogo: gllist[b].logo + "#" + new Date().getTime()
                         });
                     }
                     self.checkadminrightsnew();
@@ -1816,7 +1815,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         refid: relist[b].id,
                         reftype: relist[b].type,
                         reflink: relist[b].reference_link,
-                        reflogo: relist[b].image
+                        reflogo: relist[b].image + "#" + new Date().getTime()
                     })
                 }// console.log(ko.toJSON(self.reflist()));
                 self.checkadminrightsnew();
@@ -2079,7 +2078,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         empfeaid: eflist[b].id,
                         empfeaheading: eflist[b].features_heading,
                         empfeatext: eflist[b].key_wins_text,
-                        empfeabg: eflist[b].image,
+                        empfeabg: eflist[b].image + "#" + new Date().getTime(),
                         empfeaarchived: eflist[b].archived
                     })
                 }
@@ -2280,17 +2279,17 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 };
             }
             console.log(analytics);
-            // $.ajax({
-            //     url: homebaseurl + 'POST_EVENT_DATA',
-            //     type: 'POST',
-            //     contentType: 'application/json; charset=utf-8',
-            //     data: ko.toJSON(analytics),
-            //     success: function (event) {
-            //         console.log("Analytics of event sent.", event);
-            //     }
-            // }).fail(function (xhr, textStatus, err) {
-            //     alert("Error in sending analytics", err);
-            // });
+            $.ajax({
+                url: homebaseurl + 'POST_EVENT_DATA',
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: ko.toJSON(analytics),
+                success: function (event) {
+                    console.log("Analytics of event sent.", event);
+                }
+            }).fail(function (xhr, textStatus, err) {
+                console.log("Error in sending analytics", err);
+            });
             return true;
         }
 

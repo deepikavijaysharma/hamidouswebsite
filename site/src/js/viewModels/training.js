@@ -2709,9 +2709,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             // }
 
             addschedule = function () {
-                console.log(ko.toJSON(self.csdate()));
-                console.log(ko.toJSON(self.cedate()));
-                console.log(ko.toJSON(self.ctimezone()));
+                if (new Date(self.csdate()) >= new Date(self.cedate())) {
+                    alert("End Date should be greater than Start Date");
+                    return;
+                }
+
+                if (self.ctimezone().length == 0) {
+                    alert("Please select a timezone.");
+                    return;
+                }
 
                 self.cclass().schedules().push({
                     start_date: Date.parse(self.csdate()).toString('dd MMM yyyy HH:mm'),

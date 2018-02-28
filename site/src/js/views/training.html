@@ -1389,7 +1389,7 @@
                     <div class="oj-md-3">
                       <button id="outlinedPush" class="bluebutton" style="cursor: pointer" data-bind="ojComponent: {
                     component:'ojButton',
-                    label: 'Edit Event'},click:editEvent"> </button>
+                    label: 'Save Event'},click:editEvent"> </button>
                     </div>
                     <div class="oj-md-3">
                       <button id="outlinedPush" class="orangebutton bluebutton" onclick="resetEvent()" style="cursor: pointer" data-bind="ojComponent: {
@@ -1446,7 +1446,7 @@
                           </p>
                         </div>
 
-                        <div class="oj-sm-12 oj-lg-3 cDate oj-flex">
+                        <div class="oj-sm-12 oj-lg-3 cDate oj-flex" style="word-break: break-all;">
                           <p>
                             <span class="event_date" data-bind="text:location"></span>
                           </p>
@@ -1454,7 +1454,7 @@
 
                         <div class="oj-sm-12 oj-lg-1 editicons ">
                           <a class="cclink" data-bind="attr:{href:registration_link}" target="_blank" style="text-decoration: none;">
-                            <i class="fa fa-calendar" aria-hidden="true" style="cursor: pointer; font-size: 14px" title="Link"></i>
+                            <i class="fa fa-link" aria-hidden="true" style="cursor: pointer; font-size: 14px;color: #333333;" title="Link"></i>
                           </a>
                           <i class="fa fa-files-o admin" aria-hidden="true" style="cursor: pointer; font-size: 14px" title="Clone Event" data-bind="click:openCloneEventModal"
                             target="_blank"></i>
