@@ -3398,12 +3398,6 @@ z-index: 1052!important;
 z-index: 1052!important;
 }
 
-#ojDialogWrapper-modaltitleslider_layer,#ojDialogWrapper-modaleditdescempf_layer,
-#ojDialogWrapper-modaldescempf_layer,#ojDialogWrapper-modaldescslider_layer,
-#ojDialogWrapper-modaledittitleslider_layer,#ojDialogWrapper-modaleditdescslider_layer,#ojDialogWrapper-edit_course_modal_layer,#ojDialogWrapper-course_modal,#ojDialogWrapper-addclasstoclass{
-z-index: 1052!important;
-}
-
 #ojDialogWrapper-edit_course_modal,#ojDialogWrapper-edit_course_modal_layer,#ojDialogWrapper-course_modal_layer,#ojDialogWrapper-modaldesc_layer,#ojDialogWrapper-editcomcall_desc_modal_layer,#ojDialogWrapper-event_desc_modal_layer{
 z-index:1052;
 }
@@ -3463,19 +3457,37 @@ font-size:$smallestFontSize1;
 
 .largetext{
 font-size:$largestFontSize;
-color:$red;
+
 }
 .dboardrow1{
 margin-top:20px;
 margin-bottom:20px;
 }
 .dboardcol{
-
+border-right:1px solid #000;
 text-align:center;
 box-sizing:border-box;
+@media  #{$responsiveQuerySmallOnly} {
+border:none;
+border-bottom:1px solid #000;
+}
+@media  #{$responsiveQueryMediumOnly} {
+margin-bottom:10px;
+
+}
 }	
 .dboardcol:last-child{
+@media  #{$responsiveQueryLargeUp} {
 border:none;
+}
+@media  #{$responsiveQueryMediumOnly} {
+border:none;
+}
+}	
+.dboardcol:nth-child(2){
+@media  #{$responsiveQueryMediumOnly} {
+border:none;
+}
 }
 .heading2{
 color:$lightgrey1;
