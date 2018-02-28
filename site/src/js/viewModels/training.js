@@ -3229,7 +3229,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         console.log("Analytics of event sent.", event);
                     }
                 }).fail(function (xhr, textStatus, err) {
-                    alert("Error in sending analytics", err);
+                    console.log("Error in sending analytics", err);
                 });*/
                 return true;
             }
