@@ -597,6 +597,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 });
             }
 
+            searchdata = function (nameKey, myArray) {
+                for (var i = 0; i < myArray.length; i++) {
+                    if (myArray[i].id === nameKey) {
+                        return myArray[i].name;
+                    }
+                }
+            }
             //  VARIABLES FOR LEFT PANEL CATEGORIES 
             self.refinelist = ko.observableArray([]);
             self.catlist = ko.observableArray([]);
@@ -991,11 +998,48 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }
             }
 
+            // self.refinecourses = function () {
+            //     if(self.switchadminview()){
+            //         alert("This feature is diabled in Admin Mode");
+            //         return;
+            //     }
+            //     var selectedcategories = ko.toJSON(self.refinecategories()).replace('[', '').replace(']', '').replace(/"/g, '');
+            //     var selectedproductypes = ko.toJSON(self.refineproducttype()).replace('[', '').replace(']', '').replace(/"/g, '');
+            //     var selectedtraininglevels = ko.toJSON(self.refinetraininglevel()).replace('[', '').replace(']', '').replace(/"/g, '');
+            //     var selectedtrainingtypes = ko.toJSON(self.refinetrainingtype()).replace('[', '').replace(']', '').replace(/"/g, '');
+            //     var selectedcitis = ko.toJSON(self.refinecitis()).replace('[', '').replace(']', '').replace(/"/g, '');
+            //     var selectedroles = ko.toJSON(self.refineroles()).replace('[', '').replace(']', '').replace(/"/g, '');
+            //     var headerobj = {
+            //         category_id: selectedcategories,
+            //         product_type: selectedproductypes,
+            //         training_level: selectedtraininglevels,
+            //         training_type: selectedtrainingtypes,
+            //         city: selectedcitis,
+            //         role_id: selectedroles
+            //     }
+            //     // searchanalytics('', self.refinecitis()[0], self.refineroles()[0], '', 'TR');
+            //     searchanalytics('', self.refinecitis()[0], self.refineroles()[0], self.refinecategories()[0], 'TR');
+            //     $.ajax({
+            //         url: trainingbaseurl + "getCoursesV2",
+            //         method: 'GET',
+            //         headers: headerobj,
+            //         success: function (allcourses) {
+            //             self.processCoursesFromService(allcourses.courses);
+            //         },
+            //         error: function (xhr) {
+            //             // alert(xhr);
+            //         }
+            //     });
+            // }
+
             self.refinecourses = function () {
-                if(self.switchadminview()){
+                if (self.switchadminview()) {
                     alert("This feature is diabled in Admin Mode");
                     return;
                 }
+
+                var text = self.searchtext().length > 0 ? self.searchtext()[0] : '';
+                
                 var selectedcategories = ko.toJSON(self.refinecategories()).replace('[', '').replace(']', '').replace(/"/g, '');
                 var selectedproductypes = ko.toJSON(self.refineproducttype()).replace('[', '').replace(']', '').replace(/"/g, '');
                 var selectedtraininglevels = ko.toJSON(self.refinetraininglevel()).replace('[', '').replace(']', '').replace(/"/g, '');
@@ -1008,8 +1052,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     training_level: selectedtraininglevels,
                     training_type: selectedtrainingtypes,
                     city: selectedcitis,
-                    role_id: selectedroles
+                    role_id: selectedroles,
+                    free_text_search: text
                 }
+                searchanalytics(text, selectedcitis, searchdata(selectedroles, self.roles()), searchdata(selectedcategories, self.refinelist()), 'TR');
                 $.ajax({
                     url: trainingbaseurl + "getCoursesV2",
                     method: 'GET',
@@ -2158,6 +2204,31 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             }
 
+            searchanalytics = function (searchtext, cities, roles, categories, calltype) {
+                var analytics = {
+                    "SESSION_ID": sessionid,
+                    "SEARCH_TEXT": searchtext,
+                    "CITIES": cities,
+                    "ROLES": roles,
+                    "CATEGORIES": categories,
+                    "CALL_TYPE": calltype,
+                    "USER_EMAIL": ssoemail
+                };
+                console.log(analytics);
+                $.ajax({
+                    url: homebaseurl + 'POST_EVENT_SEARCH',
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(analytics),
+                    success: function (event) {
+                        console.log("Analytics of event sent.", event);
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    console.log("Error in sending analytics", err);
+                });
+                return true;
+            }
+
             self.searchcallstext = ko.observable('');
             //  SEARCH COMMUNITY CALLS
             searchcommunitycalls = function () {
@@ -2187,6 +2258,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }
 
                 console.log("apex_link : "+apex_link)
+                
+                // $("#search-inputcc").on({'ojoptionchange': function (event, data) {
+                //         window.console.log("Update event fired");
+                //         searchanalytics(self.searchcallstext()[0], '', self.refinecommunitycallroles()[0], '', 'CC');
+                //     }                
+                // });
                 getCommunityCalls(apex_link);
 
             }
