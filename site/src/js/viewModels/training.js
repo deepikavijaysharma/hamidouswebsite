@@ -3151,7 +3151,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             /******************************************ANALYTICS TRAINING*********************************************************************************/
 
-            analytics = function (itemtitle, itemname, itemtype, itemlevel1, itemlevel2, itemlevel3) {
+            analytics = function (itemtitle, itemname, itemtype, itemlevel1, itemlevel2, itemlevel3) 
+            {
                 var itemdesc;
                 if (ssoemail == "") {
                     ssoemail = "test@oracle.com";
@@ -3220,7 +3221,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     };
                 }
                 console.log(analytics);
-                /*$.ajax({
+                $.ajax({
                     url: homebaseurl + 'POST_EVENT_DATA',
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
@@ -3230,10 +3231,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }
                 }).fail(function (xhr, textStatus, err) {
                     console.log("Error in sending analytics", err);
-                });*/
+                });
                 return true;
             }
-
         /******************************************ANALYTICS TRAINING ENDS***************************************************************************/
             
         }

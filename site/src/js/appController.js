@@ -126,7 +126,6 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         
         if (email) {
           ssoemail = email;
-          // ssoname = sname;
         } else {
           ssoemail="";   
         }
