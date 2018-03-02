@@ -436,6 +436,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                                    
             }      
 
+            checkCharacterLimit=function(text){
+
+                var pass=true;
+                if(text.length>4000){
+                    self.showToastDialog("Please keep the description text below 4000 characters. Current character count "+text.length);
+                    pass=true;
+                }
+                return pass;
+            }
                 openCourseDescriptionModal = function () {
 
                    //var editor_instance2 = CKEDITOR.instances.course_editor;
@@ -455,6 +464,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     {
                         //alert("--------");
                         editor_instance_data2 = CKEDITOR.instances.course_editor.getData();
+
+                        checkCharacterLimit(editor_instance_data2);
                     } );
                     CKEDITOR.instances.course_editor.setData(intermediate_data2);
                     $("#course_modal").ojDialog("open");
@@ -477,6 +488,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     $( "#add_class_modal" ).on( "ojbeforeclose", function( event, ui )
                     {
                         editor_instance_data1 = CKEDITOR.instances.add_class_editor.getData();
+                        checkCharacterLimit(editor_instance_data1);
                     } );
                     CKEDITOR.instances.add_class_editor.setData(intermediate_data1);
                     $("#add_class_modal").ojDialog("open");
@@ -499,6 +511,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     {
                         //alert("--------");
                         editor_instance_data3 = CKEDITOR.instances.edit_course_editor.getData();
+                        checkCharacterLimit(editor_instance_data3);
                     } );
                     CKEDITOR.instances.edit_course_editor.setData(intermediate_data3);
                     $("#edit_course_modal").ojDialog("open");
@@ -520,6 +533,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     $( "#edit_class_modal" ).on( "ojbeforeclose", function( event, ui )
                     {
                         editor_instance_data4 = CKEDITOR.instances.edit_class_editor.getData();
+                        checkCharacterLimit(editor_instance_data4);
                     } );
                     CKEDITOR.instances.edit_class_editor.setData(intermediate_data4);
                     $("#edit_class_modal").ojDialog("open");
@@ -2641,6 +2655,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     self.showToastDialog("Please select Category for the course.",0);
                     return;
                 }
+
+                if(checkCharacterLimit(editor_instance_data2)){
+                    return;
+                }
                 var mappedCategories = new Array();
                 self.selectedCategoriesForCourse().forEach(function (element) {
                     mappedCategories.push(element.category_id);
@@ -2837,6 +2855,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     return;
                 }
 
+                if(checkCharacterLimit(editor_instance_data1)){
+                    return;
+                }
+
 
                 self.createCourse().classes().push({
                     description: editor_instance_data1,//$('#add_class_editor').val(),//self.cclass().description(),
@@ -2869,6 +2891,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                 if (self.cclass().city().length < 1) {
                     self.showToastDialog("Please enter valid City.", 0);
+                    return;
+                }
+                if(checkCharacterLimit(editor_instance_data4)){
                     return;
                 }
 
@@ -2971,6 +2996,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             saveCourse = function () {
+                if(checkCharacterLimit(editor_instance_data3)){
+                    return;
+                }
 
                 console.log("saving course . . .: "+ko.toJSON(self.selectedCategoriesForCourse()));
                 var mappedCategories = new Array();
