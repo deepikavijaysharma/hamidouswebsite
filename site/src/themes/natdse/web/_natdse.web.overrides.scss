@@ -3424,23 +3424,33 @@ border:none;
 background:transparent;
 
 }
+.oj-tabs-vertical > .oj-tabs-nav-root{
+padding:0px;
+}
 .oj-tabs-tab{
-background:#F6F6F6;
+background:#f3f3f3;
 border:none;
 font-size:$smallestFontSize;
-border-radius:5px !important;
-margin-bottom:10px !important; 
+border-radius:0px !important;
+margin-bottom:0px !important; 
 }	
 .oj-tabs-tab.oj-selected{
 background:#FF0000;
 border:none;
 font-size:$smallestFontSize;
-border-radius:5px !important;
-margin-bottom:10px !important;
+border-radius:0px !important;
+margin-bottom:0px !important;
 .oj-tabs-title{
 color: #fff;
 font-size:$smallestFontSize;
 }
+}
+
+.hor_tabs{
+margin-bottom:20px;
+.oj-tabs-tab{
+border-radius:5px !important;
+}	
 }
 
 .oj-tabs-title{
@@ -3453,7 +3463,23 @@ border:none;
 
 .oj-select,.oj-inputdatetime-date-only{
 font-size:$smallestFontSize1;
-}	
+}
+
+.oj-inputdatetime.oj-disabled .oj-inputdatetime-input, .oj-inputdatetime.oj-disabled .oj-inputdatetime-input-trigger,.oj-inputdatetime-calendar-clock-icon.oj-disabled, .oj-inputdatetime-calendar-icon.oj-disabled, .oj-inputdatetime-time-icon.oj-disabled{
+	background:rgb(252, 253, 254);
+	border:none;
+	}	
+.oj-inputdatetime-date-only{
+	border:1px solid rgb(223, 228, 231);
+	}	
+
+.tableheadings{
+font-weight:bold;
+border-bottom:1px solid rgb(212, 214, 215)  !important;
+background:rgb(212, 214, 215) none repeat scroll 0 0;
+padding:10px;
+}
+
 
 .largetext{
 font-size:$largestFontSize;
@@ -3463,13 +3489,19 @@ font-size:$largestFontSize;
 margin-top:20px;
 margin-bottom:20px;
 }
+.dboardrow2{
+margin-top:20px;
+margin-bottom:20px;
+border-bottom:1px solid rgb(212, 214, 215)  !important;
+font-size:$smallestFontSize1;
+}
 .dboardcol{
 border-right:1px solid #000;
 text-align:center;
 box-sizing:border-box;
 @media  #{$responsiveQuerySmallOnly} {
 border:none;
-border-bottom:1px solid #000;
+border-bottom:1px solid rgb(212, 214, 215) ;
 }
 @media  #{$responsiveQueryMediumOnly} {
 margin-bottom:10px;
@@ -3500,11 +3532,14 @@ font-size:$smallFontSize;}
 margin: 0 auto;
 margin-bottom:10px;
 }
+.oj-tabs-panel{
+background:#f3f3f3;
+}
 }	
 .oj-popup-layer.oj-focus-within{
 position: relative;
 z-index: 2000;	
-	}
+}
 .selectrange{
-	margin-bottom:20px;
-	}	
+margin-bottom:20px;
+}	

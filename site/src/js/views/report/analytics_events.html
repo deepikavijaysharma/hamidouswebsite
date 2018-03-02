@@ -1,109 +1,73 @@
 <div class="oj-flex">
-
-
-    <div class="oj-sm-12 selectrange">
-        <form id="formId" class="oj-form">
-
+  <div class="oj-sm-12">
+  <div class="oj-sm-12 selectrange">
+          <form id="formId" class="oj-form">
             <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
                                                       value: period,
                                                       rootAttributes: {style:'max-width:20em'}}">
-                <option value="Week">Last Week</option>
-                <option value="Month">Last Month</option>
-                <option value="90">Last 3 Months</option>
-                <option value="-1">Custom Range</option>
+              <option value="Week">Last Week</option>
+              <option value="Month">Last Month</option>
+              <option value="90">Last 3 Months</option>
+              <option value="-1">Custom Range</option>
             </select>
             <input id="sdate" placeholder="From date" data-bind="ojComponent: {component: 'ojInputDate', 
                                                 value: start_date, disabled: disableFormControls}" />
-
             <input placeholder="To Date" id="edate" data-bind="ojComponent: {component: 'ojInputDate', 
                                                 value: end_date, disabled: disableFormControls}" />
-
             <input id="inputButton" class="bluebutton" type="button" data-bind="ojComponent: {component: 'ojButton', label: 'Apply'}"
                 onclick="applyEventFilter()" />
-        </form>
-    </div>
-
-    <div>
-        <div class="oj-sm-12" id="vtabs" data-bind="ojComponent:{component: 'ojTabs', 
-            orientation: 'horizontal',selected: 0}">
-            <ul>
-                <li>
-                    <span>Top Links Visited</span>
-                </li>
-                <li>
-                    <span>Top Details Visited</span>
-                </li>
-            </ul>
-
-            <!-- TABLE FOR TOP LINK VISITED -->
-            <div id="tabs-1">
-                <div class="dboardrow1 oj-flex oj-sm-12" style="background-color:#4D9FB1;color: honeydew;padding-top: 10px;padding-bottom: 10px;border-radius: 5px">
-                    <div class="oj-flex oj-sm-12 dboardcol">
-                        <div class="oj-flex-item oj-sm-4">
-                            NAME
-                        </div>
-                        <div class="oj-flex-item oj-sm-4">
-                            SECTION
-                        </div>
-                        <div class="oj-flex-item oj-sm-4">
-                            VISIT COUNT
-                        </div>
-
-                    </div>
-                </div>
-                <!-- ko foreach: link_array -->
-                <div class="dboardrow1 oj-flex oj-sm-12" style="padding: 10px;">
-                    <div class="oj-flex oj-sm-12 dboardcol">
-                        <div class="oj-flex-item oj-sm-4" data-bind="text:name">
-
-                        </div>
-                        <div class="oj-flex-item oj-sm-4" data-bind="text:level">
-
-                        </div>
-                        <div class="oj-flex-item oj-sm-4" data-bind="text:count">
-
-                        </div>
-                    </div>
-                </div>
-                <!-- /ko -->
-
-            </div>
-
-            <!--  TABLE FOR TOP VISITED DETAILS -->
-            <div id="tabs-2">
-                <div class="dboardrow1 oj-flex oj-sm-12" style="background-color:#4D9FB1;color: honeydew;padding-top: 10px;padding-bottom: 10px;border-radius: 5px">
-                    <div class="oj-flex oj-sm-12 dboardcol">
-                        <div class="oj-flex-item oj-sm-4">
-                            NAME
-                        </div>
-                        <div class="oj-flex-item oj-sm-4">
-                            SECTION
-                        </div>
-                        <div class="oj-flex-item oj-sm-4">
-                            VISIT COUNT
-                        </div>
-
-                    </div>
-                </div>
-                <!-- ko foreach: link_array -->
-                <div class="dboardrow1 oj-flex oj-sm-12" style="padding: 10px;">
-                    <div class="oj-flex oj-sm-12 dboardcol">
-                        <div class="oj-flex-item oj-sm-4" data-bind="text:name">
-
-                        </div>
-                        <div class="oj-flex-item oj-sm-4" data-bind="text:level">
-
-                        </div>
-                        <div class="oj-flex-item oj-sm-4" data-bind="text:count">
-
-                        </div>
-                    </div>
-                </div>
-                <!-- /ko -->
-            </div>
+          </form>
         </div>
+    <div class="oj-sm-12" id="vtabs" data-bind="ojComponent:{component: 'ojTabs', 
+            orientation: 'horizontal',selected: 0}">
+      <ul class="hor_tabs">
+        <li> <span>Top Links Visited</span> </li>
+        <li> <span>Top Details Visited</span> </li>
+      </ul>
+      
+      <!-- TABLE FOR TOP LINK VISITED -->
+      <div id="tabs-1">
+        
+        <div class="dboardrow2 oj-flex oj-sm-12" >
+          <div class="oj-flex oj-sm-12 dboardcol tableheadings">
+            <div class="oj-flex-item oj-sm-12 oj-lg-4"> NAME </div>
+            <div class="oj-flex-item oj-sm-12 oj-lg-4"> SECTION </div>
+            <div class="oj-flex-item oj-sm-12 oj-lg-4"> VISIT COUNT </div>
+          </div>
+        </div>
+        <!-- ko foreach: link_array -->
+        <div class="dboardrow2 oj-flex oj-sm-12" style="padding: 10px;">
+          <div class="oj-flex oj-sm-12 dboardcol">
+            <div class="oj-flex-item oj-sm-12 oj-lg-4" data-bind="text:name"> </div>
+            <div class="oj-flex-item oj-sm-12 oj-lg-4" data-bind="text:level"> </div>
+            <div class="oj-flex-item oj-sm-12 oj-lg-4" data-bind="text:count"> </div>
+          </div>
+        </div>
+        <!-- /ko --> 
+        
+      </div>
+      
+      <!--  TABLE FOR TOP VISITED DETAILS -->
+      <div id="tabs-2">
+       
+        <div class="dboardrow2 oj-flex oj-sm-12">
+          <div class="oj-flex oj-sm-12 dboardcol tableheadings">
+            <div class="oj-flex-item oj-sm-12 oj-lg-4"> NAME </div>
+            <div class="oj-flex-item oj-sm-12 oj-lg-4"> SECTION </div>
+            <div class="oj-flex-item oj-sm-12 oj-lg-4"> VISIT COUNT </div>
+          </div>
+        </div>
+        <!-- ko foreach: link_array -->
+        <div class="dboardrow2 oj-flex oj-sm-12" style="padding: 10px;">
+          <div class="oj-flex oj-sm-12 dboardcol">
+            <div class="oj-flex-item oj-sm-12 oj-lg-4" data-bind="text:name"> </div>
+            <div class="oj-flex-item oj-sm-12 oj-lg-4" data-bind="text:level"> </div>
+            <div class="oj-flex-item oj-sm-12 oj-lg-4" data-bind="text:count"> </div>
+          </div>
+        </div>
+        <!-- /ko --> 
+      </div>
     </div>
-
-
+  </div>
 </div>
 </div>
