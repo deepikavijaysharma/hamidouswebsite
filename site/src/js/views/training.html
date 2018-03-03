@@ -1755,7 +1755,7 @@
                       <div class="oj-flex oj-sm-4  leftcoursetitle">
                         <div class="oj-sm-12">
                           <b>
-                            <h2 data-bind="text:city"></h2>
+                            <h2><span data-bind="text:city"></span>, <span data-bind="text:state"></span></h2>
                             <!-- ko if: key_event=='Yes' -->
                             <h2 class="admin">(key event)</h2>
                             <!-- /ko -->
@@ -1773,7 +1773,12 @@
                             </li>
                             
                             <!-- /ko -->
-                            <p data-bind="html:description"></p>
+                            <br>
+                            <fieldset>
+                              <legend>About the Class</legend>
+                              <p data-bind="html:description"></p>
+                              Enroll By <span data-bind="text:enrollment_end_date"></span>
+                          </fieldset>
                           </ul>
                         </div>
                       </div>
