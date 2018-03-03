@@ -11,7 +11,7 @@
         <div class="oj-flex">
           <div class="oj-sm-12">
             <label>Description </label>
-            <label class="required">*</label>
+            <label class="required">* [4000 characters limit]</label>
           </div>
           <div class="oj-sm-12">
             <textarea id="communitycall_text" rows="6" cols="50" placeholder="" data-bind="value:calldesc"></textarea>
@@ -30,7 +30,7 @@
         <div class="oj-flex">
           <div class="oj-sm-12">
             <label>Description </label>
-            <label class="required">*</label>
+            <label class="required">* [4000 characters limit]</label>
           </div>
           <div class="oj-sm-12">
             <textarea id="edit_com_call_editor" rows="6" cols="50" placeholder="" data-bind="value:editccDescription"></textarea>
@@ -49,7 +49,7 @@
         <div class="oj-flex">
           <div class="oj-sm-12">
             <label>Description </label>
-            <label class="required">*</label>
+            <label class="required">* [4000 characters limit]</label>
           </div>
           <div class="oj-sm-12">
             <textarea id="clone_com_call_editor" rows="6" cols="50" placeholder="" data-bind="value:cloneccDescription"></textarea>
@@ -67,7 +67,7 @@
         <div class="oj-flex">
           <div class="oj-sm-12">
             <label>Description </label>
-            <label class="required">*</label>
+            <label class="required">* [4000 characters limit]</label>
           </div>
           <div class="oj-sm-12">
             <textarea id="event_editor" rows="6" cols="50" placeholder="" data-bind="value:event_description"></textarea>
@@ -86,7 +86,7 @@
         <div class="oj-flex">
           <div class="oj-sm-12">
             <label>Description </label>
-            <label class="required">*</label>
+            <label class="required">* [4000 characters limit]</label>
           </div>
           <div class="oj-sm-12">
             <textarea id="course_editor" rows="6" cols="50" placeholder=""></textarea>
@@ -105,7 +105,7 @@
         <div class="oj-flex">
           <div class="oj-sm-12">
             <label>Description </label>
-            <label class="required">*</label>
+            <label class="required">* [4000 characters limit]</label>
           </div>
           <div class="oj-sm-12">
             <textarea id="add_class_editor" rows="6" cols="50" placeholder=""></textarea>
@@ -124,7 +124,7 @@
         <div class="oj-flex">
           <div class="oj-sm-12">
             <label>Description </label>
-            <label class="required">*</label>
+            <label class="required">* [4000 characters limit]</label>
           </div>
           <div class="oj-sm-12">
             <textarea id="edit_course_editor" rows="6" cols="50" placeholder=""></textarea>
@@ -143,7 +143,7 @@
         <div class="oj-flex">
           <div class="oj-sm-12">
             <label>Description </label>
-            <label class="required">*</label>
+            <label class="required">* [4000 characters limit]</label>
           </div>
           <div class="oj-sm-12">
             <textarea id="edit_class_editor" rows="6" cols="50" placeholder=""></textarea>
@@ -281,7 +281,7 @@
                 <input id="search-input" placeholder="Search courses . . ." data-bind="ojComponent:{
                   component: 'ojInputSearch', 
                   value: searchtext,
-                  update : searchcourses,
+                  update : refinecourses,
                   optionChange:searchcontent
                 }" />
               </div>
@@ -930,18 +930,11 @@
           <form id="form1">
             <div class="oj-flex search">
               <div class="oj-flex-item oj-md-8">
-                <input id="search-input" style="margin-bottom: 10px" placeholder="Search speaker, community call, description. . ." data-bind="ojComponent:{
-            component: 'ojInputSearch', 
-            value: searchcallstext,
-            update : searchcommunitycalls
-          }" />
+                <input id="search-inputcc" style="margin-bottom: 10px" placeholder="Search speaker, community call, description. . ." data-bind="ojComponent:{component: 'ojInputSearch',value: searchcallstext,update : searchcommunitycalls}" />
               </div>
 
               <div class="oj-flex-item oj-md-4 req_block admin">
-                <button class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
-            component: 'ojButton',
-            chroming: 'full',
-            label: 'Create Community Call'},click:openCommunityCallDialog"> </button>
+                <button class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {component: 'ojButton',chroming: 'full',label: 'Create Community Call'},click:openCommunityCallDialog"></button>
               </div>
             </div>
           </form>
@@ -1497,10 +1490,7 @@
           <form id="form1">
             <div class="oj-flex search">
               <div class="oj-flex-item oj-md-12">
-                <input id="search-input" style="margin-bottom: 10px" placeholder="Search community call,training and events. . ." data-bind="ojComponent:{
-            component: 'ojInputSearch', 
-            value: searcheventreportstext,
-          }" />
+                <input id="search-input" style="margin-bottom: 10px" placeholder="Search community call,training and events. . ." data-bind="ojComponent:{component: 'ojInputSearch',value: searcheventreportstext,}" />
               </div>
 
             </div>
@@ -1778,9 +1768,12 @@
                               <p style="font-size: 10pt;margin: 0px">
                                 <span data-bind="text:start_date"></span> -
                                 <span data-bind="text:end_date"></span>
+                                
                               </p>
                             </li>
+                            
                             <!-- /ko -->
+                            <p data-bind="html:description"></p>
                           </ul>
                         </div>
                       </div>
