@@ -1332,6 +1332,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.showingFront = !self.showingFront;
             };
 
+
+
             // CHECK FOR ADMIN RIGHTS
             checkadminrights = function () {
                 console.log('admin checked');

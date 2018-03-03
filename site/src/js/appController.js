@@ -11,7 +11,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
   function (oj, ko) {
     function ControllerViewModel() {
       var self = this;
-
+      self.navData=ko.observableArray([]);
       // Media queries for repsonsive layouts
       var smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
       self.smScreen = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
@@ -62,7 +62,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
 
       // Navigation setup
-      var navData = [
+      self.navData([
         {
           name: 'Home',
           id: 'home'
@@ -74,13 +74,10 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         {
           name: 'Tools and Resources',
           id: 'tools'
-        },
-        {
-          name: 'Analytics',
-          id: 'analytics'
         }
-      ];
-      self.navDataSource = new oj.ArrayTableDataSource(navData, {
+      ]);
+
+      self.navDataSource = new oj.ArrayTableDataSource(self.navData, {
         idAttribute: 'id'
       });
 
@@ -126,16 +123,42 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         
         if (email) {
           ssoemail = email;
+          // ssoname = sname;
         } else {
           ssoemail="";   
         }
       }
 
-      initsso = function () {
-        if (ssoemail.length == 0) {
-          self.ssowindow = window.open("http://solutionengineering.us.oracle.com/seaas/");
-        }
+      function addAnalytics(){
+        console.log(self.navData);
+        self.navData.push({
+          name: 'Reports',
+          id: 'analytics'
+        })
       }
+      checkadmin = function () {
+        var checkurl = trainingbaseurl + "isAdmin";
+        if (ssoemail.length > 0) {
+            
+            $.ajax({
+                url: checkurl,
+                method: 'GET',
+                headers: {
+                    email: ssoemail
+                },
+                success: function (data) {
+                    isAdmin = data.is_admin;
+                    if(isAdmin) {
+                      addAnalytics();
+                    }
+                },
+                error: function (xhr) {
+                }
+            });
+        } else {
+            isAdmin=false;
+        }
+    }
 
       closesso = function () {
         if (ssoemail.length > 0 && self.ssowindow!=undefined) {
@@ -155,6 +178,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         getemailfromcookie();
         isloggedin();
         closesso();
+        
       }, 500);
 
       //Generating a Unique ID for the session to be used for ANALYTICS

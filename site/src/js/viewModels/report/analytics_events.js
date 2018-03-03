@@ -144,8 +144,8 @@ define([
 
     // Load all data once page is loaded
     self.handleActivated = function (info) {
-      getTopTenLinkClicked("90", "", "");
-      getTopTenDetailsClicked("90", "", "");
+      getTopTenLinkClicked("Week", "", "");
+      getTopTenDetailsClicked("Week", "", "");
     }
 
   }
