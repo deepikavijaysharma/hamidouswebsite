@@ -11,7 +11,7 @@
         <div class="oj-flex">
           <div class="oj-sm-12">
             <label>Description </label>
-            <label class="required">*</label>
+            <label class="required">* [4000 characters limit]</label>
           </div>
           <div class="oj-sm-12">
             <textarea id="communitycall_text" rows="6" cols="50" placeholder="" data-bind="value:calldesc"></textarea>
@@ -30,7 +30,7 @@
         <div class="oj-flex">
           <div class="oj-sm-12">
             <label>Description </label>
-            <label class="required">*</label>
+            <label class="required">* [4000 characters limit]</label>
           </div>
           <div class="oj-sm-12">
             <textarea id="edit_com_call_editor" rows="6" cols="50" placeholder="" data-bind="value:editccDescription"></textarea>
@@ -49,7 +49,7 @@
         <div class="oj-flex">
           <div class="oj-sm-12">
             <label>Description </label>
-            <label class="required">*</label>
+            <label class="required">* [4000 characters limit]</label>
           </div>
           <div class="oj-sm-12">
             <textarea id="clone_com_call_editor" rows="6" cols="50" placeholder="" data-bind="value:cloneccDescription"></textarea>
@@ -67,7 +67,7 @@
         <div class="oj-flex">
           <div class="oj-sm-12">
             <label>Description </label>
-            <label class="required">*</label>
+            <label class="required">* [4000 characters limit]</label>
           </div>
           <div class="oj-sm-12">
             <textarea id="event_editor" rows="6" cols="50" placeholder="" data-bind="value:event_description"></textarea>
@@ -86,7 +86,7 @@
         <div class="oj-flex">
           <div class="oj-sm-12">
             <label>Description </label>
-            <label class="required">*</label>
+            <label class="required">* [4000 characters limit]</label>
           </div>
           <div class="oj-sm-12">
             <textarea id="course_editor" rows="6" cols="50" placeholder=""></textarea>
@@ -105,7 +105,7 @@
         <div class="oj-flex">
           <div class="oj-sm-12">
             <label>Description </label>
-            <label class="required">*</label>
+            <label class="required">* [4000 characters limit]</label>
           </div>
           <div class="oj-sm-12">
             <textarea id="add_class_editor" rows="6" cols="50" placeholder=""></textarea>
@@ -124,7 +124,7 @@
         <div class="oj-flex">
           <div class="oj-sm-12">
             <label>Description </label>
-            <label class="required">*</label>
+            <label class="required">* [4000 characters limit]</label>
           </div>
           <div class="oj-sm-12">
             <textarea id="edit_course_editor" rows="6" cols="50" placeholder=""></textarea>
@@ -143,7 +143,7 @@
         <div class="oj-flex">
           <div class="oj-sm-12">
             <label>Description </label>
-            <label class="required">*</label>
+            <label class="required">* [4000 characters limit]</label>
           </div>
           <div class="oj-sm-12">
             <textarea id="edit_class_editor" rows="6" cols="50" placeholder=""></textarea>
@@ -247,7 +247,7 @@
           <img src="css/images/event_cal_icon_small.png" align="middle">&nbsp;
           <span>Events</span>
         </li>
-         <li>
+         <li id="events_report">
           <img src="css/images/event_cal_icon_small.png" align="middle">&nbsp;
           <span>Events Report</span>
         </li>
@@ -281,7 +281,7 @@
                 <input id="search-input" placeholder="Search courses . . ." data-bind="ojComponent:{
                   component: 'ojInputSearch', 
                   value: searchtext,
-                  update : searchcourses,
+                  update : refinecourses,
                   optionChange:searchcontent
                 }" />
               </div>
@@ -930,18 +930,11 @@
           <form id="form1">
             <div class="oj-flex search">
               <div class="oj-flex-item oj-md-8">
-                <input id="search-input" style="margin-bottom: 10px" placeholder="Search speaker, community call, description. . ." data-bind="ojComponent:{
-            component: 'ojInputSearch', 
-            value: searchcallstext,
-            update : searchcommunitycalls
-          }" />
+                <input id="search-inputcc" style="margin-bottom: 10px" placeholder="Search speaker, community call, description. . ." data-bind="ojComponent:{component: 'ojInputSearch',value: searchcallstext,update : searchcommunitycalls}" />
               </div>
 
               <div class="oj-flex-item oj-md-4 req_block admin">
-                <button class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
-            component: 'ojButton',
-            chroming: 'full',
-            label: 'Create Community Call'},click:openCommunityCallDialog"> </button>
+                <button class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {component: 'ojButton',chroming: 'full',label: 'Create Community Call'},click:openCommunityCallDialog"></button>
               </div>
             </div>
           </form>
@@ -1389,7 +1382,7 @@
                     <div class="oj-md-3">
                       <button id="outlinedPush" class="bluebutton" style="cursor: pointer" data-bind="ojComponent: {
                     component:'ojButton',
-                    label: 'Edit Event'},click:editEvent"> </button>
+                    label: 'Save Event'},click:editEvent"> </button>
                     </div>
                     <div class="oj-md-3">
                       <button id="outlinedPush" class="orangebutton bluebutton" onclick="resetEvent()" style="cursor: pointer" data-bind="ojComponent: {
@@ -1446,7 +1439,7 @@
                           </p>
                         </div>
 
-                        <div class="oj-sm-12 oj-lg-3 cDate oj-flex">
+                        <div class="oj-sm-12 oj-lg-3 cDate oj-flex" style="word-break: break-all;">
                           <p>
                             <span class="event_date" data-bind="text:location"></span>
                           </p>
@@ -1454,7 +1447,7 @@
 
                         <div class="oj-sm-12 oj-lg-1 editicons ">
                           <a class="cclink" data-bind="attr:{href:registration_link}" target="_blank" style="text-decoration: none;">
-                            <i class="fa fa-calendar" aria-hidden="true" style="cursor: pointer; font-size: 14px" title="Link"></i>
+                            <i class="fa fa-link" aria-hidden="true" style="cursor: pointer; font-size: 14px;color: #333333;" title="Link"></i>
                           </a>
                           <i class="fa fa-files-o admin" aria-hidden="true" style="cursor: pointer; font-size: 14px" title="Clone Event" data-bind="click:openCloneEventModal"
                             target="_blank"></i>
@@ -1497,10 +1490,7 @@
           <form id="form1">
             <div class="oj-flex search">
               <div class="oj-flex-item oj-md-12">
-                <input id="search-input" style="margin-bottom: 10px" placeholder="Search community call,training and events. . ." data-bind="ojComponent:{
-            component: 'ojInputSearch', 
-            value: searcheventreportstext,
-          }" />
+                <input id="search-input" style="margin-bottom: 10px" placeholder="Search community call,training and events. . ." data-bind="ojComponent:{component: 'ojInputSearch',value: searcheventreportstext,}" />
               </div>
 
             </div>
@@ -1520,7 +1510,7 @@
                       <div class="oj-flex">
                         <div class="oj-sm-1">
                           <label>
-                            <input type="checkbox" class="refine reporttype" name="reporttype" value="COMMUNITY_CALLS" onchange="refineupdate(this)" >
+                            <input type="checkbox" class="refine reporttype" name="reporttype" checked value="COMMUNITY_CALLS" onchange="refineupdate(this)" >
                           </label>
                         </div>
                         <div class="oj-sm-11">
@@ -1532,7 +1522,7 @@
                       <div class="oj-flex">
                         <div class="oj-sm-1">
                           <label>
-                            <input type="checkbox" class="refine reporttype" name="reporttype" value="EVENT" onchange="refineupdate(this)"
+                            <input type="checkbox" class="refine reporttype" name="reporttype" checked value="EVENT" onchange="refineupdate(this)"
                             >
                           </label>
                         </div>
@@ -1545,7 +1535,7 @@
                       <div class="oj-flex">
                         <div class="oj-sm-1">
                           <label>
-                            <input type="checkbox" class="refine reporttype" name="reporttype" value="TRAINING" onchange="refineupdate(this)"
+                            <input type="checkbox" class="refine reporttype" name="reporttype" checked value="TRAINING" onchange="refineupdate(this)"
                             >
                           </label>
                         </div>
@@ -1563,7 +1553,7 @@
                       <div class="oj-flex">
                         <div class="oj-sm-1">
                           <label>
-                            <input type="checkbox" class="refine reportdays" name="reportdays" value="15" onchange="refineupdate(this)">
+                            <input type="checkbox" class="refine reportdays" name="reportdays" checked value="15" onchange="refineupdate(this)">
                           </label>
                         </div>
                         <div class="oj-sm-11">
@@ -1608,13 +1598,13 @@
                       </div>
                     </li>
                     <li>
-                      <div class="oj-flex">
+                      <div class="oj-flex ">
                         <div class="oj-sm-1">
                           <label>
-                            <input type="checkbox" class="refine reportkeyevent" name="reportkeyevent" value="1"  onchange="refineupdate(this)">
+                            <input type="checkbox" class="refine reportkeyevent admin" name="reportkeyevent" value="1"  onchange="refineupdate(this)">
                           </label>
                         </div>
-                        <div class="oj-sm-11">
+                        <div class="oj-sm-11 admin">
                           <span>Key Event</span>
                         </div>
                       </div>
@@ -1778,9 +1768,12 @@
                               <p style="font-size: 10pt;margin: 0px">
                                 <span data-bind="text:start_date"></span> -
                                 <span data-bind="text:end_date"></span>
+                                
                               </p>
                             </li>
+                            
                             <!-- /ko -->
+                            <p data-bind="html:description"></p>
                           </ul>
                         </div>
                       </div>
