@@ -303,14 +303,23 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 }      
                 if (self.comCallDate().length == 0) {
 
-                    alert("Please date and time");
+                    alert("Please select date and time");
                     return;
                 }   
                 if (self.organizerEmail().length == 0) {
 
-                    alert("Please organizer email");
+                    alert("Please enter organizer email");
                     return;
                 }   
+
+                if(editor_instance_data.length==0){
+                    self.showToastDialog("Please enter some description.",0);
+                    return;
+                }
+
+                if(!isUnderCharacterLimit(editor_instance_data)){
+                    return;
+                }
 
                 selectedrole = ko.toJSON(self.selectedrole()).replace('[', '').replace(']', '').replace(/"/g, '');
                 selectedcallmode = ko.toJSON(self.selectedcallmode()).replace('[', '').replace(']', '').replace(/"/g, '');
@@ -1069,22 +1078,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     role_id: selectedroles,
                     free_text_search: text
                 }
-                var refinetrrole = searchdata(selectedroles, self.roles());
-                var refinetrcategories = searchdata(selectedcategories, self.refinelist());
-                if (refinetrrole && refinetrcategories) {
-                    searchanalytics(text, selectedcitis, refinetrrole, refinetrcategories, 'TR');
-                }
-                else if (refinetrrole) {
-                    searchanalytics(text, selectedcitis, refinetrrole, '', 'TR');
-                }
-                else if (refinetrcategories) {
-                    searchanalytics(text, selectedcitis, '', refinetrcategories, 'TR');
-                }
-                else 
-                {
-                    return;
-                }
-		$.ajax({
+                searchanalytics(text, selectedcitis, searchdata(selectedroles, self.roles()), searchdata(selectedcategories, self.refinelist()), 'TR');
+                $.ajax({
                     url: trainingbaseurl + "getCoursesV2",
                     method: 'GET',
                     headers: headerobj,
@@ -1092,7 +1087,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         self.processCoursesFromService(allcourses.courses);
                     },
                     error: function (xhr) {
-                        console.log(xhr);
+                        // alert(xhr);
                     }
                 });
             }
@@ -1590,6 +1585,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 // eventValidation();
                 // if(event_error_tracker > 0)
                 //     return;
+                if(CKEDITOR.instances.event_editor.getData().length==0){
+                    self.showToastDialog("Please enter some description.",0);
+                    return;
+                }
+
+                if(!isUnderCharacterLimit(CKEDITOR.instances.event_editor.getData())){
+                    return;
+                }
                 sdatetime = self.event_starttime().replace("T", " ")
                 edatetime = self.event_endtime().replace("T", " ")
                 var create_event_data = {
@@ -1784,6 +1787,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 //     return;
                 sdatetime = self.event_starttime().replace("T", " ").replace("Z", "");
                 edatetime = self.event_endtime().replace("T", " ").replace("Z", "");
+
+                if(editor_instance_data.length==0){
+                    self.showToastDialog("Please enter some description.",0);
+                    return;
+                }
+
+                if(!isUnderCharacterLimit(editor_instance_data)){
+                    return;
+                }
+                
                 var edit_event_data = {
                     event_no: event_no_for_edit,
                     name: self.event_name(),
@@ -2024,6 +2037,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 editSelectedCallMode = ko.toJSON(self.editccCallType()).replace('[', '').replace(']', '').replace(/"/g, '');
                 //var editor_data = CKEDITOR.instances.edit_com_call_editor.getData();//$('#edit_com_call_editor').val();
                 
+                if(editor_instance_data.length==0){
+                    self.showToastDialog("Please enter some description.",0);
+                    return;
+                }
+
+                if(!isUnderCharacterLimit(editor_instance_data)){
+                    return;
+                }
+
                 var edit_community_call_data = {
 
                     NAME: self.editccName(),
@@ -2198,6 +2220,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 if (self.cloneccCallType().length == 0) {
                     alert("Please select mode of delivary");
                 }
+
+                if(editor_instance_data.length==0){
+                    self.showToastDialog("Please enter some description.",0);
+                    return;
+                }
+
+                if(!isUnderCharacterLimit(editor_instance_data)){
+                    return;
+                }
                 cloneSelectedrole = ko.toJSON(self.cloneccSelectedRoles()).replace('[', '').replace(']', '').replace(/"/g, '');
                 cloneSelectedcallmode = ko.toJSON(self.cloneccCallType()).replace('[', '').replace(']', '').replace(/"/g, '');
                 //var clone_editor_data = CKEDITOR.instances.clone_com_call_editor.getData();//$('#clone_com_call_editor').val();
@@ -2285,26 +2316,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 if(key_com_call_from_home != -1){
                     call_id_data = call_id_data_from_home;
                     apex_link = 'GetCommunityCallDetailsOnFreetextSearch/$-$/$-$/$-$/$-$/' + call_id_data;     
-                }//console.log("apex_link : "+apex_link)
+                }
+
+                console.log("apex_link : "+apex_link)
+                
+                // $("#search-inputcc").on({'ojoptionchange': function (event, data) {
+                //         window.console.log("Update event fired");
+                //         searchanalytics(self.searchcallstext()[0], '', self.refinecommunitycallroles()[0], '', 'CC');
+                //     }                
+                // });
                 getCommunityCalls(apex_link);
- 		var refinerole = self.refinecommunitycallroles()[0];
-                var refinesearchtext = self.searchcallstext()[0];              
-                if (self.searchcallstext()[0] && self.refinecommunitycallroles()[0])
-                {
-                    searchanalytics(refinesearchtext, '', refinerole, '', 'CC');
-                }
-                else if (self.searchcallstext()[0])
-                {
-                    searchanalytics(refinesearchtext, '', '', '', 'CC');
-                }
-                else if (self.refinecommunitycallroles()[0]) 
-                {
-                    searchanalytics('', '', refinerole, '', 'CC');
-                }
-                else
-                {
-                    return;
-                }       
+
             }
 
             loadCommunitycall = function () {
