@@ -1069,8 +1069,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     role_id: selectedroles,
                     free_text_search: text
                 }
-                searchanalytics(text, selectedcitis, searchdata(selectedroles, self.roles()), searchdata(selectedcategories, self.refinelist()), 'TR');
-                $.ajax({
+                var refinetrrole = searchdata(selectedroles, self.roles());
+                var refinetrcategories = searchdata(selectedcategories, self.refinelist());
+                if (refinetrrole && refinetrcategories) {
+                    searchanalytics(text, selectedcitis, refinetrrole, refinetrcategories, 'TR');
+                }
+                else if (refinetrrole) {
+                    searchanalytics(text, selectedcitis, refinetrrole, '', 'TR');
+                }
+                else if (refinetrcategories) {
+                    searchanalytics(text, selectedcitis, '', refinetrcategories, 'TR');
+                }
+                else 
+                {
+                    return;
+                }
+		$.ajax({
                     url: trainingbaseurl + "getCoursesV2",
                     method: 'GET',
                     headers: headerobj,
@@ -1078,7 +1092,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         self.processCoursesFromService(allcourses.courses);
                     },
                     error: function (xhr) {
-                        // alert(xhr);
+                        console.log(xhr);
                     }
                 });
             }
@@ -2271,17 +2285,26 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 if(key_com_call_from_home != -1){
                     call_id_data = call_id_data_from_home;
                     apex_link = 'GetCommunityCallDetailsOnFreetextSearch/$-$/$-$/$-$/$-$/' + call_id_data;     
-                }
-
-                console.log("apex_link : "+apex_link)
-                
-                // $("#search-inputcc").on({'ojoptionchange': function (event, data) {
-                //         window.console.log("Update event fired");
-                //         searchanalytics(self.searchcallstext()[0], '', self.refinecommunitycallroles()[0], '', 'CC');
-                //     }                
-                // });
+                }//console.log("apex_link : "+apex_link)
                 getCommunityCalls(apex_link);
-
+ 		var refinerole = self.refinecommunitycallroles()[0];
+                var refinesearchtext = self.searchcallstext()[0];              
+                if (self.searchcallstext()[0] && self.refinecommunitycallroles()[0])
+                {
+                    searchanalytics(refinesearchtext, '', refinerole, '', 'CC');
+                }
+                else if (self.searchcallstext()[0])
+                {
+                    searchanalytics(refinesearchtext, '', '', '', 'CC');
+                }
+                else if (self.refinecommunitycallroles()[0]) 
+                {
+                    searchanalytics('', '', refinerole, '', 'CC');
+                }
+                else
+                {
+                    return;
+                }       
             }
 
             loadCommunitycall = function () {
