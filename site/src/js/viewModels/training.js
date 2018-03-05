@@ -436,12 +436,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                                    
             }      
 
-            checkCharacterLimit=function(text){
+            isUnderCharacterLimit=function(text){
 
                 var pass=true;
                 if(text.length>4000){
                     self.showToastDialog("Please keep the description text below 4000 characters. Current character count "+text.length);
-                    pass=true;
+                    pass=false;
                 }
                 return pass;
             }
@@ -465,7 +465,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         //alert("--------");
                         editor_instance_data2 = CKEDITOR.instances.course_editor.getData();
 
-                        checkCharacterLimit(editor_instance_data2);
+                        isUnderCharacterLimit(editor_instance_data2);
                     } );
                     CKEDITOR.instances.course_editor.setData(intermediate_data2);
                     $("#course_modal").ojDialog("open");
@@ -488,7 +488,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     $( "#add_class_modal" ).on( "ojbeforeclose", function( event, ui )
                     {
                         editor_instance_data1 = CKEDITOR.instances.add_class_editor.getData();
-                        checkCharacterLimit(editor_instance_data1);
+                        isUnderCharacterLimit(editor_instance_data1);
                     } );
                     CKEDITOR.instances.add_class_editor.setData(intermediate_data1);
                     $("#add_class_modal").ojDialog("open");
@@ -511,7 +511,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     {
                         //alert("--------");
                         editor_instance_data3 = CKEDITOR.instances.edit_course_editor.getData();
-                        checkCharacterLimit(editor_instance_data3);
+                        isUnderCharacterLimit(editor_instance_data3);
                     } );
                     CKEDITOR.instances.edit_course_editor.setData(intermediate_data3);
                     $("#edit_course_modal").ojDialog("open");
@@ -533,7 +533,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     $( "#edit_class_modal" ).on( "ojbeforeclose", function( event, ui )
                     {
                         editor_instance_data4 = CKEDITOR.instances.edit_class_editor.getData();
-                        checkCharacterLimit(editor_instance_data4);
+                        isUnderCharacterLimit(editor_instance_data4);
                     } );
                     CKEDITOR.instances.edit_class_editor.setData(intermediate_data4);
                     $("#edit_class_modal").ojDialog("open");
@@ -1069,21 +1069,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     role_id: selectedroles,
                     free_text_search: text
                 }
-                var refinetrrole = searchdata(selectedroles, self.roles());
-                var refinetrcategories = searchdata(selectedcategories, self.refinelist());
-                if (refinetrrole && refinetrcategories) {
-                    searchanalytics(text, selectedcitis, refinetrrole, refinetrcategories, 'TR');
-                }
-                else if (refinetrrole) {
-                    searchanalytics(text, selectedcitis, refinetrrole, '', 'TR');
-                }
-                else if (refinetrcategories) {
-                    searchanalytics(text, selectedcitis, '', refinetrcategories, 'TR');
-                }
-                else 
-                {
-                    return;
-                }
+                searchanalytics(text, selectedcitis, searchdata(selectedroles, self.roles()), searchdata(selectedcategories, self.refinelist()), 'TR');
                 $.ajax({
                     url: trainingbaseurl + "getCoursesV2",
                     method: 'GET',
@@ -1092,7 +1078,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         self.processCoursesFromService(allcourses.courses);
                     },
                     error: function (xhr) {
-                        console.log(xhr);
+                        // alert(xhr);
                     }
                 });
             }
@@ -2285,26 +2271,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 if(key_com_call_from_home != -1){
                     call_id_data = call_id_data_from_home;
                     apex_link = 'GetCommunityCallDetailsOnFreetextSearch/$-$/$-$/$-$/$-$/' + call_id_data;     
-                }//console.log("apex_link : "+apex_link)
-                getCommunityCalls(apex_link);//console.log(self.refinecommunitycallroles()[0], self.searchcallstext()[0]);
-                var refinerole = self.refinecommunitycallroles()[0];
-                var refinesearchtext = self.searchcallstext()[0];              
-                if (self.searchcallstext()[0] && self.refinecommunitycallroles()[0])
-                {
-                    searchanalytics(refinesearchtext, '', refinerole, '', 'CC');
                 }
-                else if (self.searchcallstext()[0])
-                {
-                    searchanalytics(refinesearchtext, '', '', '', 'CC');
-                }
-                else if (self.refinecommunitycallroles()[0]) 
-                {
-                    searchanalytics('', '', refinerole, '', 'CC');
-                }
-                else
-                {
-                    return;
-                }                 
+
+                console.log("apex_link : "+apex_link)
+                
+                // $("#search-inputcc").on({'ojoptionchange': function (event, data) {
+                //         window.console.log("Update event fired");
+                //         searchanalytics(self.searchcallstext()[0], '', self.refinecommunitycallroles()[0], '', 'CC');
+                //     }                
+                // });
+                getCommunityCalls(apex_link);
+
             }
 
             loadCommunitycall = function () {
@@ -2681,7 +2658,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     return;
                 }
 
-                if(checkCharacterLimit(editor_instance_data2)){
+                if(!isUnderCharacterLimit(editor_instance_data2)){
                     return;
                 }
                 var mappedCategories = new Array();
@@ -2880,7 +2857,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     return;
                 }
 
-                if(checkCharacterLimit(editor_instance_data1)){
+                if(!isUnderCharacterLimit(editor_instance_data1)){
                     return;
                 }
 
@@ -2918,7 +2895,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     self.showToastDialog("Please enter valid City.", 0);
                     return;
                 }
-                if(checkCharacterLimit(editor_instance_data4)){
+                if(!isUnderCharacterLimit(editor_instance_data4)){
                     return;
                 }
 
@@ -3021,7 +2998,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             saveCourse = function () {
-                if(checkCharacterLimit(editor_instance_data3)){
+                if(!isUnderCharacterLimit(editor_instance_data3)){
                     return;
                 }
 
