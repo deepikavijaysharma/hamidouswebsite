@@ -234,7 +234,7 @@ define([
     // Filter Button Handler
     applyFilter = function () {
 
-      if (new Date(self.start_date()) >= new Date(self.end_date())) {
+      if (self.period()=='-1'&& (new Date(self.start_date()) >= new Date(self.end_date()))) {
         alert("End Date should be greater than Start Date");
         return;
       }
