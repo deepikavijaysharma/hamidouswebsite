@@ -125,7 +125,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
           ssoemail = email;
           // ssoname = sname;
         } else {
-          ssoemail="";   
+          ssoemail="angan.sen@oracle.com";   
         }
       }
 
@@ -180,7 +180,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         closesso();
         
       }, 500);
-
+      checkadmin();
       //Generating a Unique ID for the session to be used for ANALYTICS
       uniqueidgen = function () {
         $.ajax({
