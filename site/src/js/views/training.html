@@ -1755,7 +1755,7 @@
                       <div class="oj-flex oj-sm-4  leftcoursetitle">
                         <div class="oj-sm-12">
                           <b>
-                            <h2><span data-bind="text:city"></span>, <span data-bind="text:state"></span></h2>
+                            <h2><strong><span data-bind="text:city"></span>, <span data-bind="text:state"></span></strong></h2>
                             <!-- ko if: key_event=='Yes' -->
                             <h2 class="admin">(key event)</h2>
                             <!-- /ko -->
@@ -1770,19 +1770,23 @@
                                 <span data-bind="text:end_date"></span>
                                 
                               </p>
+                             
                             </li>
                             
                             <!-- /ko -->
                             <br>
-                            <fieldset>
-                              <legend>About the Class</legend>
-                              <p data-bind="html:description"></p>
-                              Enroll By <span data-bind="text:enrollment_end_date"></span>
-                          </fieldset>
+                           <p> <strong>Enroll By: </strong> <span data-bind="text:enrollment_end_date"></span></p>
                           </ul>
                         </div>
                       </div>
-                      <div class="oj-sm-8 rightcoursetitle">
+                      <div class="oj-flex oj-sm-8 rightcoursetitle">
+                      <div class="oj-sm-12">
+                       <fieldset>
+                              <legend>About the class</legend>
+                              <p data-bind="html:description"></p>
+                              
+                          </fieldset>
+                      </div>
                         <!-- data-bind="attr: { href: directURL}" -->
                         <p>
                               <!-- ko if: enrollment_status=="Approved" -->
