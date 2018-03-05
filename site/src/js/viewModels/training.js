@@ -2657,6 +2657,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     self.showToastDialog("Please select Category for the course.",0);
                     return;
                 }
+                if(editor_instance_data2.length==0){
+                    self.showToastDialog("Please enter some description.",0);
+                    return;
+                }
 
                 if(!isUnderCharacterLimit(editor_instance_data2)){
                     return;
@@ -2857,6 +2861,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     return;
                 }
 
+                if(editor_instance_data1.length==0){
+                    self.showToastDialog("Please enter some description.",0);
+                    return;
+                }
+
                 if(!isUnderCharacterLimit(editor_instance_data1)){
                     return;
                 }
@@ -2895,6 +2904,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     self.showToastDialog("Please enter valid City.", 0);
                     return;
                 }
+                if(editor_instance_data4.length==0){
+                    self.showToastDialog("Please enter some description.",0);
+                    return;
+                }
+
                 if(!isUnderCharacterLimit(editor_instance_data4)){
                     return;
                 }
@@ -2998,6 +3012,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
             saveCourse = function () {
+                if(editor_instance_data3.length==0){
+                    self.showToastDialog("Please enter some description.",0);
+                    return;
+                }
+
                 if(!isUnderCharacterLimit(editor_instance_data3)){
                     return;
                 }
