@@ -12,17 +12,22 @@ var uuid='';
 var sessionid = '';
 var isAdmin=false;
 var newUserAdminCheck=false;
-var homedevurl="https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/";//For Dev
-var homeprodurl = "https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/seaashm/";//For Production 
-var homebaseurl = homedevurl;
-//var homebaseurl = homeprodurl;
-var trainingdevurl="https://apex.oraclecorp.com/pls/apex/training_app_dev/";
-var trainingprodurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/";
-// var training_report_baseUrl=trainingprodurl;
-var training_report_baseUrl=trainingdevurl;
+
+/* Comment following URL for Prod and Dev servers*/
+var baseurl="https://apex.oraclecorp.com/pls/apex/training_app_dev/"; // DEV URL
+// var baseurl="https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/"; // PROD URL
+
+// HOME PAGE URL
+var homebaseurl = baseurl+"seaashm/";
+
+// TRAINING ANF REPORT URL
+var training_report_baseUrl=baseurl;
 var trainingbaseurl = training_report_baseUrl+"training/";
-var com_call_api = "https://apex.oraclecorp.com/pls/apex/training_app_dev/seaashm/"; //Dev URL
-// var com_call_api = "https://apex.oraclecorp.com/pls/apex/se_cloud_ready_training/seaashm/"; //Prod URL
+
+//  COMMUNITY CALL AND EVENT URL
+var com_call_api = baseurl+"seaashm/"; 
+
+
 var community_call_url = com_call_api+"COMMUNITY_CALLS";
 var community_call_calendar_link = com_call_api+"get_ical";
 var events_api = com_call_api+"GetKeyEvents";
