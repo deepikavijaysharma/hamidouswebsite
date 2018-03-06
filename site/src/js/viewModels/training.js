@@ -1271,7 +1271,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
                     for (var i = 0; i < catagorylist.length; i++) {
                         var categoryname = catagorylist[i].name;
-                        var catid = catagorylist[i].id;
+                        var catid = catagorylist[i].category_id;
                         var categoryAllId=category_all_List[i].category_id;
                         var categoryAllName=category_all_List[i].name;
                         if (catlistString.length == 2 || catlistString.indexOf(catid) != -1) {
