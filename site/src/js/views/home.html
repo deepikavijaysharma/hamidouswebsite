@@ -1871,81 +1871,6 @@ color:#ffffff!important;
 </div>
 <!-- delete slider confirmation end -->
 
-<!-- Add Slider Title ckeditor modal workaround start -->
-<div style="display:none" class="dialogbodymain" id="modaltitleslider" title="Add Slider Title" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
-  <div class="oj-dialog-body roleWrapper">
-    <div class="nomargin-md oj-margin-left">
-      <div class="oj-flex">
-        <div class="oj-sm-12">
-          <label>Enter Banner Title: </label>
-          <label class="required">*</label>
-        </div>
-        <div class="oj-sm-12">
-          <textarea id="sltextarea1" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:sldescription}"></textarea>
-        </div><br>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Add Slider Title ckeditor modal workaround end -->
-
-<!-- Add Slider Description ckeditor modal workaround start -->
-<div style="display:none" class="dialogbodymain" id="modaldescslider" title="Add Slider Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
-  <div class="oj-dialog-body roleWrapper">
-    <div class="nomargin-md oj-margin-left">
-      <div class="oj-flex">
-        <div class="oj-sm-12">
-          <label>Enter Banner Description: </label>
-          <label class="required">*</label>
-        </div>
-        <div class="oj-sm-12">
-          <!-- <textarea id="communitycall_text" rows="6" cols="50" placeholder="" data-bind="value:calldesc"></textarea> -->
-          <textarea id="sltextarea2" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:sldescription}"></textarea>
-        </div><br>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Add Slider Description ckeditor modal workaround end -->
-
-<!-- Edit Slider Title ckeditor modal workaround start -->
-<div style="display:none" class="dialogbodymain" id="modaledittitleslider" title="Add Slider Title" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
-  <div class="oj-dialog-body roleWrapper">
-    <div class="nomargin-md oj-margin-left">
-      <div class="oj-flex">
-        <div class="oj-sm-12">
-          <label>Enter Banner Title: </label>
-          <label class="required">*</label>
-        </div>
-        <div class="oj-sm-12">
-          <textarea id="sledittextarea1" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:editsltitle}"></textarea>
-        </div>
-        <br>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Edit Slider Title ckeditor modal workaround end -->
-
-<!-- Edit Slider Description ckeditor modal workaround start -->
-<div style="display:none" class="dialogbodymain" id="modaleditdescslider" title="Add Slider Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
-  <div class="oj-dialog-body roleWrapper">
-    <div class="nomargin-md oj-margin-left">
-      <div class="oj-flex">
-        <div class="oj-sm-12">
-          <label>Enter Banner Description: </label>
-          <label class="required">*</label>
-        </div>
-        <div class="oj-sm-12">
-          <textarea id="sledittextarea2" rows="6" cols="50" placeholder="" data-bind="ojComponent: {component: 'ojTextArea',value:editsldescription}"></textarea>
-        </div>
-        <br>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Edit Slider Description ckeditor modal workaround end -->
-
 <!-- END OF SLIDER POPUPS -->
 
 <!-- ORGANIZATION POPUPS -->
@@ -2578,14 +2503,14 @@ color:#ffffff!important;
       <div class="oj-lg-6">
         <div class="oj-margin-right nomargin-md">
           <div class="form-group">
-            <label class="addslidelabel">Employee Features Background:</label>
+            <label class="addslidelabel">Employee Features Background:<label class="required">*</label></label>
             <div class="input-group">
               <input class="form-control" id="efbg" class="buttons btn btn-default file" type="file" onchange="empphotoselected(event)">
             </div>
           </div>
           <br>
           <div class="form-group">
-            <label class="addslidelabel">Employee Features Heading:</label>
+            <label class="addslidelabel">Employee Features Heading:<label class="required">*</label></label>
             <div class="input-group">
               <!-- <input id="addefheading" class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:empfeatheading}"> -->
               <textarea id="addefheading" style="height: 192px;width:100%" data-bind="ojComponent: {component: 'ojTextArea',value:empfeatheading}"></textarea>
@@ -2596,7 +2521,7 @@ color:#ffffff!important;
       <div class="oj-lg-6">
         <div class="oj-margin-right nomargin-md">
           <div class="form-group">
-            <label class="addslidelabel">Employee Features Text:</label>
+            <label class="addslidelabel">Employee Features Text:<label class="required">*</label></label>
             <br>
             <textarea id="txt2" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:empfeattext}"></textarea>
             <br>
@@ -2622,14 +2547,14 @@ color:#ffffff!important;
       <div class="oj-lg-6">
         <div class="oj-margin-right nomargin-md">
           <div class="form-group">
-            <label class="addslidelabel">Employee Features Background:</label>
+            <label class="addslidelabel">Employee Features Background:<label class="required">*</label></label>
             <div class="input-group">
               <input class="form-control" id="edefbg" class="buttons btn btn-default file" type="file" onchange="eeflogoselected(event)">
               <img class="editkw" data-bind="attr:{'src':editempfeatbg,'id':editempfeatid}"> </div>
           </div><br>
           <div class="form-group"><p class="directlinkef admin" style="color: blue; display: inline-block;"></p></div><br>
           <div class="form-group">
-            <label class="addslidelabel">Employee Features Heading:</label>
+            <label class="addslidelabel">Employee Features Heading:<label class="required">*</label></label>
             <div class="input-group">
               <!-- <input id="editefheading" class="form-control" type="text" data-bind="ojComponent: {component: 'ojInputText',value:editempfeatheading}"> -->
               <textarea id="editefheading" style="height: 192px;width:100%" data-bind="ojComponent: {component: 'ojTextArea',value:editempfeatheading}"></textarea>
@@ -2640,7 +2565,7 @@ color:#ffffff!important;
       <div class="oj-lg-6">
         <div class="oj-margin-right nomargin-md">
           <div class="form-group">
-            <label class="addslidelabel">Employee Features Text:</label>
+            <label class="addslidelabel">Employee Features Text:<label class="required">*</label></label>
             <br>
             <textarea id="edtxt2" style="height:250px;width:100%" data-bind="ojComponent: {component: 'ojInputText',value:editempfeattext}"></textarea>
             <br>

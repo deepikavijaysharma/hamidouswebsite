@@ -210,6 +210,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
         self.addslider = function () 
         {
+            if (self.sltitle().length == 0) {
+                alert("Please add Title for the Banner.");
+                return;
+            }
             var selectedimageid = '';
             selectedimageid = ko.toJSON(self.slimgid());
             var sl = {
@@ -240,11 +244,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             });
         }
 
-        var editor_instance_edit_slider;
-        var editor_instance_edit_slider_data;//this variable stores data in modal ..it gets updated on desc modal close
-        var editor_instance_edit_title_slider;
-        var editor_instance_edit_title_slider_data;//this variable stores data in modal ..it gets updated on desc modal close
-        
         //EDIT SLIDER observables
         self.editslimage = ko.observableArray([]);
         self.editslimgid = ko.observable('');
@@ -295,8 +294,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
 
         editslidervalues = function () {
-            var editor_title_data = editor_instance_edit_title_slider_data;
-            var editor_desc_data = editor_instance_edit_slider_data;
+            if (self.editsltitle().length == 0) {
+                alert("Please add Title for the Banner.");
+                return;
+            }
             var edit_slider_data = {
                 id: self.editslid(),
                 title: self.editsltitle(),
@@ -479,6 +480,22 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
         addorgdialog = function () //ORGANIZATION people add
         {
+            if (self.orgpeoplename().length == 0) {
+                alert("Please add a name for the employee added in organization");
+                return;
+            }
+            if (self.orgpeopledesignation().length == 0) {
+                alert("Please add a designation for the employee added in organization");
+                return;
+            }
+            if (self.orgwebsite().length == 0) {
+                alert("Please add a website for the employee added in organization");
+                return;
+            }
+            if (document.getElementById("input-1").files.length == 0 ){
+                alert("Please add a Photo for the employee added in organization");
+                return;
+            }
             var reader = new FileReader();
             reader.onload = function () {
               self.organizationselected(self.orgsel()[0]);
@@ -500,12 +517,14 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
                 data: imagedata,
-                success: function (dataorg) {
-                  console.log("Organization people added successfully!");
-                  fetchpeopleorg();
-                  closeaddneworgdialog();
-                  resetorg();
-                  self.checkadminrightsnew();
+                success: function (dataorg) 
+                {
+                    console.log("Organization people added successfully!");
+                    fetchpeopleorg();
+                    closeaddneworgdialog();
+                    resetorg();
+                    document.getElementById("input-1").value = "";
+                    self.checkadminrightsnew();
                 }
               }).fail(function (xhr, textStatus, err) {
                 alert(err);
@@ -553,7 +572,22 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
         editorgdialog = function (edit_org, param2) 
         {
-            // self.editorganizationselected(self.editorgsel()[0]);
+            if (self.editorgpeoplename().length == 0) {
+                alert("Please add a name for the employee added in organization");
+                return;
+            }
+            if (self.editorgpeopledesignation().length == 0) {
+                alert("Please add a designation for the employee added in organization");
+                return;
+            }
+            if (self.editorgwebsite().length == 0) {
+                alert("Please add a website for the employee added in organization");
+                return;
+            }
+            if (document.getElementById("edinput-2").files.length == 0) {
+                alert("Please add a Photo for the employee added in organization");
+                return;
+            }
             var edit_org_data = 
             {
                 orgempid: self.editorganizationid(),
@@ -877,6 +911,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 return;
             }
 
+            if (document.getElementById("kwlogoupl").files.length == 0) {
+                alert("Please enter Key Wins Logo");
+                return;
+            }
+
             var akwreader = new FileReader();
             akwreader.onload = function () {
               var uploadakwheader = {
@@ -899,6 +938,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                   fetchkeywins();
                   resetkeywins();
                   closeaddnewkeywinsdialog();
+                  document.getElementById("kwlogoupl").value = "";
                   self.checkadminrightsnew();
                 }
               }).fail(function (xhr, textStatus, err) {
@@ -926,6 +966,21 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         editkeywins = function (edit_kw) 
         {
+            if (self.editkwlink().length == 0) {
+                alert("Please enter Key Wins Link");
+                return;
+            }
+
+            if (self.editkwtext().length == 0) {
+                alert("Please enter Key Wins Text");
+                return;
+            }
+
+            if (document.getElementById("kwlogoeditupl").files.length == 0) {
+                alert("Please enter Key Wins Logo");
+                return;
+            }
+
             var edit_keywins_data = {
                 id: self.editkwid(),
                 image: self.editkwlogo(),
@@ -1152,13 +1207,13 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 return;
             }
 
-            if (self.gllink().length == 0) {
-                alert("Please enter Go Lives Link");
+            if (document.getElementById("gllogo").files.length == 0) {
+                alert("Please enter Go Lives Logo");
                 return;
             }
 
-            if (self.gldiscussion().length == 0) {
-                alert("Please enter Go Lives Summary");
+            if (document.getElementById("glphoto").files.length == 0) {
+                alert("Please enter Go Lives Host Photo");
                 return;
             }
 
@@ -1213,8 +1268,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     };
                     glpreader.readAsDataURL(glphotopath);
                     fetchgolives();
-                    $("#editgltextdialog").ojDialog("close");
+                    $("#addgltextdialog").ojDialog("close");
                     resetgolives();
+                    document.getElementById("gllogo").value = "";
+                    document.getElementById("glphoto").value = "";
                     self.checkadminrightsnew();
                 }
             }).fail(function (xhr, textStatus, err) {
@@ -1269,6 +1326,26 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
         editgolives = function () 
         {
+            if (self.editglhostedby().length == 0) {
+                alert("Please enter Go Lives Host Person");
+                return;
+            }
+
+            if (self.editglguest().length == 0) {
+                alert("Please enter Go Lives Guest");
+                return;
+            }
+
+            if (document.getElementById("edgllogo").files.length == 0) {
+                alert("Please enter Go Lives Logo");
+                return;
+            }
+
+            if (document.getElementById("edglphoto").files.length == 0) {
+                alert("Please enter Go Lives Host Photo");
+                return;
+            }
+
             var edglheader =
             {
                 id: self.editglid(),
@@ -1485,6 +1562,16 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
         addreferences = function () 
         {
+            if (self.reflink().length == 0) {
+                alert("Please enter Link for the IAAS Reference");
+                return;
+            }
+
+            if (document.getElementById("reflog").files.length == 0) {
+                alert("Please enter IAAS Refrences Logo");
+                return;
+            }
+
             var refreader = new FileReader();
             refreader.onload = function () {
               var uploadrefheader = {
@@ -1507,6 +1594,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     fetchreferences();
                     closeaddnewrefdialog();
                     resetreferences();
+                    document.getElementById("reflog").value = "";
                     self.checkadminrightsnew();
                 }
               }).fail(function (xhr, textStatus, err) {
@@ -1522,7 +1610,18 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             reflogopathpass = event.target.files[0];
             console.log("add references logo paas filename", reflogopathpass);
         }
-        addreferencespaas = function () {
+        addreferencespaas = function () 
+        {
+            if (self.reflink().length == 0) {
+                alert("Please enter Link for the PAAS Reference");
+                return;
+            }
+
+            if (document.getElementById("reflogpass").files.length == 0) {
+                alert("Please enter PAAS Refrences Logo");
+                return;
+            }
+
             var refreaderpass = new FileReader();
             refreaderpass.onload = function () {
                 var uploadrefheaderpass = {
@@ -1546,6 +1645,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         fetchreferences();
                         closeaddnewrefdialogpaas();
                         resetreferences();
+                        document.getElementById("reflogpass").value = "";
                         self.checkadminrightsnew();
                     }
                 }).fail(function (xhr, textStatus, err) {
@@ -1571,6 +1671,16 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
         editreferencesdialog = function () 
         {
+            if (self.editreflink().length == 0) {
+                alert("Please enter Link for the IAAS Reference");
+                return;
+            }
+
+            if (document.getElementById("edreflog").files.length == 0) {
+                alert("Please enter IAAS Refrences Logo");
+                return;
+            }
+
             var edit_ref_data = {
                 refid: self.editrefid(),
                 reftype: self.editreftype(),
@@ -1670,7 +1780,18 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             console.log("edit refrences filename length ", edpaasreflogopath.size);
             // $("#edreflogpass").replaceWith($("#edreflogpass").val('').clone(true));
         }
-        editreferencespaasdialog = function () {
+        editreferencespaasdialog = function () 
+        {
+            if (self.editreflink().length == 0) {
+                alert("Please enter Link for the PAAS Reference");
+                return;
+            }
+
+            if (document.getElementById("edreflogpass").files.length == 0) {
+                alert("Please enter PAAS Refrences Logo");
+                return;
+            }
+
             var edit_ref_data = {
                 refid: self.editrefid(),
                 reftype: self.editreftype(),
@@ -1841,7 +1962,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             empphotopath = event.target.files[0];
             console.log("add employee features background filename", empphotopath);
         }
-        addempfeatures = function () {
+        addempfeatures = function () 
+        {
             if (self.empfeatheading().length == 0) {
                 alert("Please enter Employee Features Heading");
                 return;
@@ -1849,6 +1971,11 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
             if (self.empfeattext().length == 0) {
                 alert("Please enter Employee Features Text");
+                return;
+            }
+
+            if (document.getElementById("efbg").files.length == 0) {
+                alert("Please enter Employee Features Background");
                 return;
             }
 
@@ -1877,6 +2004,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         fetchempfeatures();
                         closeaddnewefdialog();
                         resetempfeatures();
+                        document.getElementById("efbg").value = "";
                         self.checkadminrightsnew();
                     }
                 }).fail(function (xhr, textStatus, err) {
@@ -1902,7 +2030,22 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             // $("#edefbg").replaceWith($("#edefbg").val('').clone(true));
         }
 
-        editemployeefeatures = function (edit_ef) {
+        editemployeefeatures = function (edit_ef) 
+        {
+            if (self.editempfeatheading().length == 0) {
+                alert("Please enter Employee Features Heading");
+                return;
+            }
+
+            if (self.editempfeattext().length == 0) {
+                alert("Please enter Employee Features Text");
+                return;
+            }
+
+            if (document.getElementById("edefbg").files.length == 0) {
+                alert("Please enter Employee Features Background");
+                return;
+            }
 
             var edit_empfeat_data = {
                 id: self.editempfeatid(),
