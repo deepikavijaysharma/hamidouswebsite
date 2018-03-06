@@ -349,12 +349,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         resetcall();
                         loadCommunitycall();
                         fetchkeydates();
+                        $("#createcommunitycall_id").ojDialog("close");
+                        self.showToastDialog("Community call created successfully!",2000);
+                        
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
+                    $("#createcommunitycall_id").ojDialog("close");
+                    self.showToastDialog("Community call creation failed!",0);
                 });
                 editor_instance_data = "";
-                $("#createcommunitycall_id").ojDialog("close");
+                
             }
 
             opendescriptionmodal = function () {
@@ -1599,6 +1604,27 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 // eventValidation();
                 // if(event_error_tracker > 0)
                 //     return;
+                if (self.event_name().length == 0) {
+                    self.showToastDialog("Please enter an Event name",0);
+                    return;
+                }
+
+                if (self.event_location().length == 0) {
+                    self.showToastDialog("Please enter a location.",0);
+                    return;
+                }
+
+                if (self.event_starttime().length == 0) {
+                    self.showToastDialog("Please select a valid Start Date.",0);
+                    return;
+                }else if (self.event_endtime().length == 0) {
+                    self.showToastDialog("Please select a valid End Date.",0);
+                    return;
+                }else if (new Date(self.event_starttime()) >= new Date(self.event_endtime())) {
+                    self.showToastDialog("End Date should be greater than Start Date.",0);
+                    return;
+                }
+
                 if(CKEDITOR.instances.event_editor.getData().length==0){
                     self.showToastDialog("Please enter some description.",0);
                     return;
@@ -1633,9 +1659,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         getAllEvents();
                         resetEvent();
                         fetchkeydates();
+                        self.showToastDialog("Event created successfully!",2000);
                     }
                     }).fail(function (xhr, textStatus, err) {
-                });
+                        self.showToastDialog("Event creation failed!",0);
+                    });
                 $("#createevents_id").ojDialog("close");
             }
             //CREATE EVENTS END
@@ -1688,12 +1716,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         success: function () {
                             getAllEvents();
                             closeEventDeleteModal();
-                            console.log("delete success");
+                            self.showToastDialog("Event deleted successfully!",2000);
                         },
                         fail: function (xhr, textStatus, err) {
+                            self.showToastDialog("Event deletion failed!",0);
                             console.log(err);
                         },
                         error: function (xhr, textStatus, err) {
+                            self.showToastDialog("Event deletion failed!",0);
                             console.log(err);
                         }
                     });
@@ -1738,9 +1768,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     success: function (data) {
                         getAllEvents();
                         resetEvent();
+                        self.showToastDialog("Event cloned successfully!",2000);
                     }
                 }).fail(function (xhr, textStatus, err) {
-                    // alert(err);
+                    self.showToastDialog("Event cloning failed!",0);
                 });
                 $("#createevents_id").ojDialog("close");                
             }
@@ -1802,6 +1833,28 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 sdatetime = self.event_starttime().replace("T", " ").replace("Z", "");
                 edatetime = self.event_endtime().replace("T", " ").replace("Z", "");
 
+                if (self.event_name().length == 0) {
+                    self.showToastDialog("Please enter an Event name",0);
+                    return;
+                }
+
+                if (self.event_location().length == 0) {
+                    self.showToastDialog("Please enter a location.",0);
+                    return;
+                }
+
+                if (self.event_starttime().length == 0) {
+                    self.showToastDialog("Please select a valid Start Date.",0);
+                    return;
+                }else if (self.event_endtime().length == 0) {
+                    self.showToastDialog("Please select a valid End Date.",0);
+                    return;
+                }else if (new Date(self.event_starttime()) >= new Date(self.event_endtime())) {
+                    self.showToastDialog("End Date should be greater than Start Date.",0);
+                    return;
+                }
+
+
                 if(editor_instance_data.length==0){
                     self.showToastDialog("Please enter some description.",0);
                     return;
@@ -1836,9 +1889,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         getAllEvents();
                         resetEvent();
                         fetchkeydates();
+                        self.showToastDialog("Event updated successfully!",2000);
                     }
                     }).fail(function (xhr, textStatus, err) {
-                });
+                        self.showToastDialog("Event update failed!",0);
+                    });
                 $("#createevents_id").ojDialog("close");                
 
             }
@@ -2087,12 +2142,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         console.log("edit success");
                         loadCommunitycall();
                         fetchkeydates();
+                        self.showToastDialog("Community call updated successfully!",2000);
                     },
                     fail: function (xhr, textStatus, err) {
                         console.log("failed" + err);
+                        self.showToastDialog("Community call update failed!",0);
                     },
                     error: function (xhr, textStatus, err) {
                         console.log("error" + err);
+                        self.showToastDialog("Community call update failed!",0);
                     }
                 });
                 editor_instance_data = "";
@@ -2116,12 +2174,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             loadCommunitycall();
                             closeDeleteModal();
                             console.log("delete success");
+                            self.showToastDialog("Community call deleted successfully!",2000);
                         },
                         fail: function (xhr, textStatus, err) {
                             console.log(err);
+                            self.showToastDialog("Community call deletion failed!",0);
                         },
                         error: function (xhr, textStatus, err) {
                             console.log(err);
+                            self.showToastDialog("Community call deletion failed!",0);
                         }
                     });
                 });
@@ -2268,11 +2329,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     data: ko.toJSON(clone_call),
                     success: function (data) {
                         loadCommunitycall();
-                        console.log("success")
+                        self.showToastDialog("Community call cloned successfully!",2000);
 
                     }
                 }).fail(function (xhr, textStatus, err) {
                     console.log("error during clone" + err);
+                    self.showToastDialog("Community call clone failed!",0);
                 });
                 editor_instance_data ="";
                 $("#clonecommunitycall_id").ojDialog("close");
@@ -2626,8 +2688,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             } else {
                                 self.searchfetchcourses();
                             }
-                            self.showToastDialog("Successfully Enrolled.",2000);
+                           
                             $("#reportees").ojDialog("close");
+                            self.showToastDialog("Successfully Enrolled.",2000);
                         }
                     }).fail(function (xhr, textStatus, err) {
                         self.showToastDialog("Enrollment Failed.", 0);
@@ -2767,13 +2830,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(reqBody),
                     success: function (data) {
-                        self.showToastDialog("Course Successfully Created",2000);
+                        
                         console.log("Course Successfully Created");
                         self.fetchcourses();
                         $("#createcoursedialog").ojDialog("close");
                         resetCourse();
                         console.log(ko.toJSON(data));
                         fetchkeydates();
+                        self.showToastDialog("Course Successfully Created",2000);
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
@@ -3003,13 +3067,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(reqbody),
                     success: function (data) {
-                        self.showToastDialog("Class Successfully Updated",2000);
+                        
                         console.log("Class Successfully Updated : " + ko.toJSON(data));
                         $("#editclass").ojDialog("close");
                         resetClass();
                         self.fetchcourses();
                         $("#edittraining").ojDialog("close");
                         fetchkeydates();
+                        self.showToastDialog("Class Successfully Updated",2000);
                     }
                 }).fail(function (xhr, textStatus, err) {
                     self.showToastDialog("Class Failed Updated", 0);
@@ -3065,16 +3130,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(body),
                     success: function (data) {
-                        self.showToastDialog("Class Successfully Deleted",2000);
+                        
                         console.log("Class Successfully Deleted");
                         $("#editclass").ojDialog("close");
                         resetClass();
                         self.fetchcourses();
                         $("#edittraining").ojDialog("close");
+                        self.showToastDialog("Class Successfully Deleted",2000);
                     }
                 }).fail(function (xhr, textStatus, err) {
                     // alert(err);
-                    self.showToastDialog("Class Failed Updated", 2000);
+                    self.showToastDialog("Class updation failed", 0);
                 });
             }
 
@@ -3126,12 +3192,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(reqBody),
                     success: function (data) {
-                        self.showToastDialog("Course Successfully Updated", 2000);
                         console.log("Course Successfully Updated");
                         self.fetchcourses();
                         $("#edittraining").ojDialog("close");
                         resetCourse();
-                        
+                        self.showToastDialog("Course Successfully Updated", 2000);
                        
                     }
                 }).fail(function (xhr, textStatus, err) {
