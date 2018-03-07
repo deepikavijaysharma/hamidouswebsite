@@ -3088,12 +3088,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             requesttraining = function () 
             {
-                // self.rtrselected(self.rtrsel()[0].name);
-                // self.rtrcatselected(self.refinesel()[0].name);
                 var rtr = {
-                    category: self.refinesel(),
+                    category: self.refinesel()[0],
                     name: ssoemail,
-                    role: self.rtrsel()
+                    role: self.rtrsel()[0]
                 }
                 console.log(ko.toJSON(rtr));
                 $.ajax({
