@@ -163,6 +163,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.event_report_list = ko.observableArray([]);
 
             self.keydateslist = ko.observableArray([]);
+            self.refinesel = ko.observableArray('');
+            self.rtrcatselected = ko.observable('');
 
             /******************************************for refreshing home page key dates*****************************************************/
             fetchkeydates = function () {
@@ -3086,27 +3088,27 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             requesttraining = function () 
             {
-                    self.rtrselected(self.rtrsel()[0].name);
-                    var rtr = {
-                      category: self.rtrcategory(),
-                      name: ssoemail,
-                      role: self.rtrselected()
+                // self.rtrselected(self.rtrsel()[0].name);
+                // self.rtrcatselected(self.refinesel()[0].name);
+                var rtr = {
+                    category: self.refinesel(),
+                    name: ssoemail,
+                    role: self.rtrsel()
+                }
+                console.log(ko.toJSON(rtr));
+                $.ajax({
+                    url: com_call_api+'RequestTraining',
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(rtr),
+                    success: function (rtrdata) {
+                        self.showToastDialog("Training requested", 2000);
+                        $("#trainingDialog").ojDialog("close");
                     }
-                    console.log(ko.toJSON(rtr));
-                    $.ajax({
-                      url: com_call_api+'RequestTraining',
-                      cache: false,
-                      type: 'POST',
-                      contentType: 'application/json; charset=utf-8',
-                      data: ko.toJSON(rtr),
-                      success: function (rtrdata) {
-                          console.log(ko.toJSON(rtrdata));
-                          alert("Training requested");
-                          $("#trainingDialog").ojDialog("close");
-                      }
-                  }).fail(function (xhr, textStatus, err) {
-                      alert(err);
-                  });
+                }).fail(function (xhr, textStatus, err) {
+                    alert(err);
+                });
             }
 
             deleteClass = function () {
@@ -3362,11 +3364,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             categoryfamily = function (e, ui) 
             {
                 // return ui.value[0].innerText;
-                if(ui.value[0].innerText!= undefined)
-                {
-                    console.log(ui.value[0].innerText);
-                    self.rtrcategory(ui.value[0].innerText);
-                }
+                // if(ui.value[0].innerText!= undefined)
+                // {
+                //     console.log(ui.value[0].innerText);
+                //     self.rtrcategory(ui.value[0].innerText);
+                // }
             }
 
             self.adminviewSelected=function(){

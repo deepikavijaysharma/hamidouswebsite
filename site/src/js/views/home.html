@@ -1887,9 +1887,11 @@ color:#ffffff!important;
             <div class="oj-sm-12">          
               <div class="input-group">
                 <select id="basicSelect" data-bind="ojComponent: {
-                  component: 'ojSelect',placeholder:'Select your Organization LOB',options: organizationlist(),value: orgsel, 
+                  component: 'ojSelect',options: organizationlist(),value: orgsel,
                   rootAttributes: {style:'max-width:20em'}
                 }">
+                  <!-- <option id="placeholdorg" data-bind="value:Select your Organization LOB">Select your Organization LOB</option> -->
+                  <option disabled value="" selected hidden>Select your Organization LOB</option>
                   <!-- ko foreach: organizationlist() -->
                   <option data-bind="text: orgname,value:orgname"></option>
                   <!-- /ko -->
@@ -2631,3 +2633,10 @@ color:#ffffff!important;
 <!-- edit our services confirmation end -->
 
 <!-- END OF OUR SERVICES POPUPS -->
+
+<!--  AUTO CLOSABLE DIALOG -->
+<div style="display:none;height:150px" class="dialogbodymain" id="toastdiv" title="Notification" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style:'height: auto; min-width 240px'}}">
+  <div class="dialogbody">
+    <h5 data-bind="text:msg"></h5>
+  </div>
+</div>

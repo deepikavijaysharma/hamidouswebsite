@@ -80,7 +80,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         checkadminrights();
                     },
                     error: function (xhr) {
-                        //alert(xhr);
                         newUserAdminCheck = false;
                         checkadminrights();
                     }
@@ -91,12 +90,26 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             }
         }
 
+        self.showToastDialog = function (msg, timeinmillisec) {
+            self.msg(msg);
+            $("#toastdiv").ojDialog("open");
+            if (timeinmillisec > 0) {
+                setTimeout(function () {
+                    $("#toastdiv").ojDialog("close");
+                }, timeinmillisec);
+            }
+        }
+
         self.currentNavArrowPlacement = ko.observable("adjacent");
         self.currentNavArrowVisibility = ko.observable("auto");
         
         getItemInitialDisplay1 = function (index) {
             return index < 2 ? '' : 'none';
         };
+
+        // TOAST MESSAGE DIALOG
+        self.title = ko.observable("");
+        self.msg = ko.observable("");
 
         //CREATE SLIDER observables
         self.slimage = ko.observableArray([]);
@@ -111,7 +124,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         self.sliderlist = ko.observableArray([]);
 
         //CREATE ORGANIZATION observables
-        self.orgsel= ko.observable('');
+        self.orgsel = ko.observableArray('');
         self.organization = ko.observableArray([]);
         self.organizationselected = ko.observable('');
         self.orgpeoplename = ko.observable('');
@@ -198,11 +211,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         };
 
         /******************************************SLIDER********************************************************************/
-
-        var editor_instance_slider;
-        var editor_instance_slider_data;//this variable stores data in modal ..it gets updated on desc modal close
-        var editor_instance_title_slider;
-        var editor_instance_title_slider_data;//this variable stores data in modal ..it gets updated on desc modal close
         
         idimage = function (event) 
         {
@@ -234,12 +242,13 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 data: ko.toJSON(sl),
                 success: function (sldata) {
                     fetchslider();
+                    self.showToastDialog("Banner Added Successfully.", 2000);
                     closeaddslidedialog();
                     resetslider();
                     self.checkadminrightsnew();
                 }
             }).fail(function (xhr, textStatus, err) {
-                alert(err);
+                console.log(err);
                 self.checkadminrightsnew();
             });
         }
@@ -318,6 +327,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 success: function (data) {
                     fetchslider();
                     closeaddslidedialog();
+                    self.showToastDialog("Banner Edited Successfully.", 2000);
                     $("#editslidedialog").ojDialog("close");
                     resetslider();
                     self.checkadminrightsnew();
@@ -346,6 +356,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 contentType: 'application/json; charset=utf-8',
                 data: ko.toJSON(data_sl_value),
                 success: function () {
+                    self.showToastDialog("Banner Archived Successfully.", 2000);
                     console.log("Slider Archived");
                     fetchslider();
                     self.checkadminrightsnew();
@@ -381,6 +392,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(data_sl_value),
                     success: function () {
+                        self.showToastDialog("Banner Deleted Successfully.", 2000);
                         closeDeleteSliderModal();
                         console.log("delete success for slider");
                         fetchslider();
@@ -480,6 +492,15 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
         addorgdialog = function () //ORGANIZATION people add
         {
+            // $('#basicSelect option:eq(0)').attr('selected', 'selected');
+            // $('#basicSelect option').prop('selected', function () {
+            //     return this.defaultSelected;
+            // });
+            // $("#myselect option:selected").text();
+            if ($('#basicSelect option:selected').val() == "") {
+                alert("Please select a LOB for organization");
+                return;
+            }
             if (self.orgpeoplename().length == 0) {
                 alert("Please add a name for the employee added in organization");
                 return;
@@ -521,13 +542,19 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 {
                     console.log("Organization people added successfully!");
                     fetchpeopleorg();
+                    self.showToastDialog("Organization people added successfully.", 2000);
                     closeaddneworgdialog();
                     resetorg();
                     document.getElementById("input-1").value = "";
+                    // $('#basicSelect option').prop('selected', function () {
+                        // return this.defaultSelected;
+                        // $('#basicSelect').prop('selectedIndex', 0);
+                    $('#basicSelect option:eq(0)').attr('selected', 'selected');
+                    // });
                     self.checkadminrightsnew();
                 }
               }).fail(function (xhr, textStatus, err) {
-                alert(err);
+                console.log(err);
                 self.checkadminrightsnew();
               });
             };
@@ -572,6 +599,10 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
         editorgdialog = function (edit_org, param2) 
         {
+            if ($('#basicSelect1 option:selected').val() == "") {
+                alert("Please select a LOB for organization");
+                return;
+            }
             if (self.editorgpeoplename().length == 0) {
                 alert("Please add a name for the employee added in organization");
                 return;
@@ -624,6 +655,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     },
                     success: function (dataorg) 
                     {
+                        self.showToastDialog("Organization people edited successfully.", 2000);
                         console.log("Organization people edited successfully!");
                         resetorg();
                         fetchpeopleorg();
@@ -631,7 +663,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         self.checkadminrightsnew();
                     }
                 }).fail(function (xhr, textStatus, err) {
-                    alert("error in editing data",err);
+                    console.log("error in editing data",err);
                     self.checkadminrightsnew();
                 });
             } 
@@ -665,6 +697,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         },
                         success: function (dataorg) 
                         {
+                            self.showToastDialog("Organization people edited successfully.", 2000);
                             console.log("Organization people edited successfully!");
                             resetorg();
                             fetchpeopleorg();
@@ -672,7 +705,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             self.checkadminrightsnew();
                         }
                     }).fail(function (xhr, textStatus, err) {
-                        alert("error in editing image data",err);
+                        console.log("error in editing image data",err);
                         self.checkadminrightsnew();
                     });
                 };
@@ -704,6 +737,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(data_org_value),
                     success: function () {
+                        self.showToastDialog("Organization people deleted successfully.", 2000);
                         closeDeleteOrganizationModal();
                         console.log("delete success for organization");
                         fetchpeopleorg();
@@ -934,6 +968,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 contentType: 'application/json; charset=utf-8',
                 data: akwimagedata,
                 success: function (dataakw) {
+                  self.showToastDialog("Key Win added successfully.", 2000);
                   console.log("Key Wins added successfully!");
                   fetchkeywins();
                   resetkeywins();
@@ -942,7 +977,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                   self.checkadminrightsnew();
                 }
               }).fail(function (xhr, textStatus, err) {
-                alert(err);
+                console.log(err);
                 self.checkadminrightsnew();
               });
             };
@@ -1006,6 +1041,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
                     success: function (dataakw) {
+                        self.showToastDialog("Key Win edited successfully.", 2000);
                         console.log("Keywin edited successfully");
                         fetchkeywins();
                         resetkeywins();
@@ -1040,6 +1076,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         contentType: 'application/json; charset=utf-8',
                         data: ekwimagedata,
                         success: function (dataakw) {
+                            self.showToastDialog("Key Win edited successfully.", 2000);
                             console.log("edit success for keywins");
                             fetchkeywins();
                             closeEditKeyWinsModal();
@@ -1096,6 +1133,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     data: ko.toJSON(data_kw_value),
                     success: function () {
                         fetchkeywins();
+                        self.showToastDialog("Key Win deleted successfully.", 2000);
                         closeDeleteSKeyWinsModal();
                         console.log("delete success for key wins");
                         self.checkadminrightsnew();
@@ -1268,6 +1306,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     };
                     glpreader.readAsDataURL(glphotopath);
                     fetchgolives();
+                    self.showToastDialog("Go Live added successfully.", 2000);
                     $("#addgltextdialog").ojDialog("close");
                     resetgolives();
                     document.getElementById("gllogo").value = "";
@@ -1461,6 +1500,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         fetchgolives();
                         resetgolives();
                     }
+                    self.showToastDialog("Go Live edited successfully.", 2000);
                     self.checkadminrightsnew();
                 }
             }).fail(function (xhr, textStatus, err) {
@@ -1489,6 +1529,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(data_gl_value),
                     success: function () {
+                        self.showToastDialog("Go Live deleted successfully.", 2000);
                         closeDeleteGoLivesModal();
                         console.log("delete success for go lives");
                         fetchgolives();
@@ -1592,13 +1633,14 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 data: arefimagedata,
                 success: function (dataref) {
                     fetchreferences();
+                    self.showToastDialog("IAAS References added successfully.", 2000);
                     closeaddnewrefdialog();
                     resetreferences();
                     document.getElementById("reflog").value = "";
                     self.checkadminrightsnew();
                 }
               }).fail(function (xhr, textStatus, err) {
-                alert(err);
+                console.log(err);
                 self.checkadminrightsnew();
               });
             };
@@ -1641,6 +1683,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     contentType: 'application/json; charset=utf-8',
                     data: arefimagedatapaas,
                     success: function (datarefpaas) {
+                        self.showToastDialog("PAAS References added successfully.", 2000);
                         console.log("References added successfully!");
                         fetchreferences();
                         closeaddnewrefdialogpaas();
@@ -1649,7 +1692,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         self.checkadminrightsnew();
                     }
                 }).fail(function (xhr, textStatus, err) {
-                    alert(err);
+                    console.log(err);
                     self.checkadminrightsnew();
                 });
             };
@@ -1705,6 +1748,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
                     success: function (dataedref) {
+                        self.showToastDialog("IAAS References edited successfully.", 2000);
                         console.log("Refrences edited successfully!");
                         fetchreferences();
                         closeReferencesModal();
@@ -1712,7 +1756,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         self.checkadminrightsnew();
                     }
                 }).fail(function (xhr, textStatus, err) {
-                    alert(err);
+                    console.log(err);
                     self.checkadminrightsnew();
                 });
             }
@@ -1740,6 +1784,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         contentType: 'application/json; charset=utf-8',
                         data: edarefimagedata,
                         success: function (dataedref) {
+                            self.showToastDialog("IAAS References edited successfully.", 2000);
                             console.log("Refrences edited successfully!");
                             fetchreferences();
                             closeReferencesModal();
@@ -1747,7 +1792,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             self.checkadminrightsnew();
                         }
                     }).fail(function (xhr, textStatus, err) {
-                        alert(err);
+                        console.log(err);
                         self.checkadminrightsnew();
                     });
                 };
@@ -1815,6 +1860,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
                     success: function (dataedref) {
+                        self.showToastDialog("PAAS References edited successfully.", 2000);
                         console.log("Refrences edited successfully!");
                         fetchreferences();
                         closeReferencesPaasModal();
@@ -1822,7 +1868,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         self.checkadminrightsnew();
                     }
                 }).fail(function (xhr, textStatus, err) {
-                    alert(err);
+                    console.log(err);
                     self.checkadminrightsnew();
                 });
             }
@@ -1848,6 +1894,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         contentType: 'application/json; charset=utf-8',
                         data: edpaasarefimagedata,
                         success: function (dataedref) {
+                            self.showToastDialog("PAAS References edited successfully.", 2000);
                             console.log("Refrences edited successfully!");
                             fetchreferences();
                             closeReferencesPaasModal();
@@ -1855,7 +1902,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                             self.checkadminrightsnew();
                         }
                     }).fail(function (xhr, textStatus, err) {
-                        alert(err);
+                        console.log(err);
                         self.checkadminrightsnew();
                     });
                 };
@@ -1901,6 +1948,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(data_ref_value),
                     success: function () {
+                        self.showToastDialog("References deleted successfully.", 2000);
                         console.log("delete success for references");
                         fetchreferences();
                         closeDeleteReferencesModal();
@@ -1999,7 +2047,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     contentType: 'application/json; charset=utf-8',
                     data: empfimagedata,
                     success: function (dataempfeat) {
-                        console.log(dataempfeat);
+                        self.showToastDialog("Employee Features added successfully.", 2000);
                         console.log("Employee Features added successfully!");
                         fetchempfeatures();
                         closeaddnewefdialog();
@@ -2070,6 +2118,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
                     success: function (dataeef) {
+                        self.showToastDialog("Employee Features edited successfully.", 2000);
                         console.log("edit success for employee features");
                         fetchempfeatures();
                         resetempfeatures();
@@ -2101,8 +2150,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                         contentType: 'application/json; charset=utf-8',
                         data: eefimagedata,
                         success: function (dataeef) {
+                            self.showToastDialog("Employee Features edited successfully.", 2000);
                             console.log("edit success for employee features");
-                            // self.empfeatlist([]);
                             fetchempfeatures();
                             resetempfeatures();
                             closeEditEmployeeFeaturesModal();
@@ -2153,6 +2202,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 contentType: 'application/json; charset=utf-8',
                 data: ko.toJSON(data_ef_value),
                 success: function () {
+                    self.showToastDialog("Employee Features archived successfully.", 2000);
                     console.log("Archive success for employee features");
                     fetchempfeatures();
                     self.checkadminrightsnew();
@@ -2186,6 +2236,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     contentType: 'application/json; charset=utf-8',
                     data: ko.toJSON(data_ef_value),
                     success: function () {
+                        self.showToastDialog("Employee Features deleted successfully.", 2000);
                         console.log("delete success for employee features");
                         closeDeleteEmployeeFeaturesModal();
                         fetchempfeatures();
@@ -2329,6 +2380,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 data: ko.toJSON(uploadedos),
                 contentType: 'application/json',
                 success: function (dataedos) {
+                    self.showToastDialog("Our Services edited successfully.", 2000);
                     console.log("Our Services edited successfully!");
                     closeeditosdescriptionmodal();
                     self.checkadminrightsnew();
@@ -2844,6 +2896,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
 
         openaddneworgdialog = function () {
+            $(".basicSelect").ojSelect({ "placeholder": "Please select ..." });
             $("#addneworgdialog").ojDialog("open");
         }
         closeaddneworgdialog= function () {
