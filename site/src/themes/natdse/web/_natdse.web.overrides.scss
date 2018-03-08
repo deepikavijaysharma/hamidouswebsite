@@ -1184,6 +1184,7 @@ align-items:center;
 /*----------------------------------FEATURED----------------------------------*/
 .featured{
 box-sizing:border-box;
+position:relative;
 .featuredtitle {
 @include headings;
 }
@@ -1284,6 +1285,7 @@ margin:10px;
 /*----------------------------------WINS AND GOLIVE----------------------------------*/
 .golive{
 box-sizing:border-box;
+position:relative;
 .golivetitle {
 @include headings;
 }
@@ -1339,6 +1341,11 @@ background:$lightgrey;
 .wins{
 .winstitle {
 @include headings;
+}
+.btnaddneworg{
+position:absolute;
+right:10px;
+top:10px;
 }
 .my-filmstrip-item{
 /*width:500px;*/
@@ -1502,6 +1509,7 @@ position: relative;
 .references{
 background:#fff;
 box-sizing:border-box;
+position:relative;
 .refertitle{
 @include headings;
 }
@@ -3466,12 +3474,12 @@ font-size:$smallestFontSize1;
 }
 
 .oj-inputdatetime.oj-disabled .oj-inputdatetime-input, .oj-inputdatetime.oj-disabled .oj-inputdatetime-input-trigger,.oj-inputdatetime-calendar-clock-icon.oj-disabled, .oj-inputdatetime-calendar-icon.oj-disabled, .oj-inputdatetime-time-icon.oj-disabled{
-	background:rgb(252, 253, 254);
-	border:none;
-	}	
+background:rgb(252, 253, 254);
+border:none;
+}	
 .oj-inputdatetime-date-only{
-	border:1px solid rgb(223, 228, 231);
-	}	
+border:1px solid rgb(223, 228, 231);
+}	
 
 .tableheadings{
 font-weight:bold;
@@ -3546,7 +3554,7 @@ margin-bottom:20px;
 
 /*Footer*/
 .oj-dialog-footer{
-	.oj-button-jqui, .oj-button-button{
-		font-size:14px;
-		}
-	}
+.oj-button-jqui, .oj-button-button{
+font-size:14px;
+}
+}

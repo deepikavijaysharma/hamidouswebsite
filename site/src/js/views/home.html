@@ -141,6 +141,9 @@ display: inline-block;
 vertical-align: top;
 margin-right: 20px;
 }
+.wins{
+	position:relative;
+	}
 .wins .oj-end {
 right: 4px;
 }
@@ -199,6 +202,9 @@ right: 4px;
 .btnaddnewref{
 display: inline-block;
 height: 22px!important;
+position:absolute;
+top:10px;
+right:10px;
 }
 .org_blocks_b{
 position: relative;
@@ -1261,10 +1267,11 @@ color:#ffffff!important;
   <div class="container shadowcont">
     <div class="oj-sm-12 golive bgwhite">
       <div class="oj-flex">
+      <button class="btn btn-info btn-xs btnaddnewref admin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddnewkeywinsdialog">Add New Key Wins</button>
         <div class="oj-sm-12 golivetitle"><img src="css/images/wins_large.png">&nbsp;Key Wins</div>
         <div class="oj-sm-12">
           <div class="oj-flex">
-            <button class="btn btn-info btn-xs btnaddnewref admin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddnewkeywinsdialog">Add New Key Wins</button>
+            
             <div id="filmStripwins" class="oj-sm-12" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 3,arrowVisibility: 'visible',arrowplacement:'overlay'}"> <!-- block 1 -->
               <!-- ko foreach: keywinslist --> 
               <div class="oj-panel oj-panel-alt2 my-filmstrip-item kwadpar" data-bind="attr:{'id':keywid}">
@@ -1294,11 +1301,12 @@ color:#ffffff!important;
   <div class="container shadowcont">
     <div class="oj-sm-12 wins bgwhite">
       <div class="oj-flex">
+      <button class="btn btn-info btn-xs btnaddneworg admin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddgltextdialog">Add New Go Lives</button>
         <div class="oj-sm-12 winstitle"><img src="css/images/featured_icon_lg.png">&nbsp;Featured Go-Lives</div>
         <div class="oj-sm-12">
           <div class="oj-flex"> 
             <!-- filmstrip container -->
-            <button class="btn btn-info btn-xs btnaddneworg admin oj-sm-float-end" data-toggle="modal" data-bind="click:openaddgltextdialog">Add New Go Lives</button>
+            
             <div id="filmStripwins" class="oj-sm-12 oj-filmstrip oj-component oj-filmstrip-container oj-component-initnode" data-bind="ojComponent: {component: 'ojFilmStrip',maxItemsPerPage: 2,arrowVisibility: 'visible'}">
 
               <!-- ko foreach: goliveslist() -->
