@@ -1955,7 +1955,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             waitForElement("events_report", function(){
 				if (window.location.href.indexOf("tab") != -1) 
             {
-                var type = window.location.href.split('#tab=');
+                var type = window.location.href.split('tab=');
                 var hash = '';
                 if (type.length > 1)
                 {
