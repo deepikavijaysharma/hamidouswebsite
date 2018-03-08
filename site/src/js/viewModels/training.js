@@ -3094,12 +3094,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 // self.rtrcatselected(self.refinesel()[0].name);
 
                 if(self.refinesel().length==0){
-                    self.showToastDialog("Please a Category.",0);
+                    self.showToastDialog("Please select a Category.",0);
                     return;
                 }
 
                 if(self.rtrsel().length==0){
-                    self.showToastDialog("Please a Role.",0);
+                    self.showToastDialog("Please select a Role.",0);
                     return;
                 }
                 var rtr = {

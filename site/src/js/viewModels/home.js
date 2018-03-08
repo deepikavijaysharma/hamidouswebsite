@@ -492,13 +492,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
         addorgdialog = function () //ORGANIZATION people add
         {
-            // $('#basicSelect option:eq(0)').attr('selected', 'selected');
-            // $('#basicSelect option').prop('selected', function () {
-            //     return this.defaultSelected;
-            // });
-            // $("#myselect option:selected").text();
-            if ($('#basicSelect option:selected').val() == "") {
-                alert("Please select a LOB for organization");
+            if (self.orgsel().length == 0) {
+                self.showToastDialog("Please select your Organization LOB.", 0);
                 return;
             }
             if (self.orgpeoplename().length == 0) {
@@ -519,9 +514,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             }
             var reader = new FileReader();
             reader.onload = function () {
-              self.organizationselected(self.orgsel()[0]);
               var uploadheader = {
-                "organization": self.organizationselected(),
+                "organization": self.orgsel()[0],
                 "name": self.orgpeoplename(),
                 "designation": self.orgpeopledesignation(),
                 "dot_line": self.orgdottedline()!=true?'No':'Yes',
@@ -546,11 +540,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                     closeaddneworgdialog();
                     resetorg();
                     document.getElementById("input-1").value = "";
-                    // $('#basicSelect option').prop('selected', function () {
-                        // return this.defaultSelected;
-                        // $('#basicSelect').prop('selectedIndex', 0);
-                    $('#basicSelect option:eq(0)').attr('selected', 'selected');
-                    // });
                     self.checkadminrightsnew();
                 }
               }).fail(function (xhr, textStatus, err) {
@@ -599,8 +588,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
         editorgdialog = function (edit_org, param2) 
         {
-            if ($('#basicSelect1 option:selected').val() == "") {
-                alert("Please select a LOB for organization");
+            if (self.editorganizationselected().length == 0) {
+                self.showToastDialog("Please select your Organization LOB.", 0);
                 return;
             }
             if (self.editorgpeoplename().length == 0) {
@@ -613,10 +602,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             }
             if (self.editorgwebsite().length == 0) {
                 alert("Please add a website for the employee added in organization");
-                return;
-            }
-            if (document.getElementById("edinput-2").files.length == 0) {
-                alert("Please add a Photo for the employee added in organization");
                 return;
             }
             var edit_org_data = 
@@ -1203,7 +1188,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         {
             console.log(lheader);
             $.ajax({
-                url: homedevurl + 'PutImagesGoLive',
+                url: homebaseurl + 'PutImagesGoLive',
                 headers: lheader,
                 type: 'PUT',
                 data: ldata,
@@ -1220,7 +1205,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         {
             console.log(pheader);
             $.ajax({
-                url: homedevurl + 'PutImagesGoLive',
+                url: homebaseurl + 'PutImagesGoLive',
                 headers: pheader,
                 type: 'PUT',
                 data: pdata,
@@ -1265,7 +1250,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             console.log(ko.toJSON(glheader));
 
             $.ajax({
-                url: homedevurl + 'GoLives',
+                url: homebaseurl + 'GoLives',
                 headers: glheader,
                 type: 'POST',
                 success: function (gldata) 
@@ -1396,7 +1381,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
 
             console.log(edglheader);
             $.ajax({
-                url: homedevurl + 'GoLives',
+                url: homebaseurl + 'GoLives',
                 headers: edglheader,
                 type: 'POST',
                 success: function (edgldata) 
@@ -2896,7 +2881,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
 
         openaddneworgdialog = function () {
-            $(".basicSelect").ojSelect({ "placeholder": "Please select ..." });
+            self.orgsel([]);
             $("#addneworgdialog").ojDialog("open");
         }
         closeaddneworgdialog= function () {

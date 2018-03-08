@@ -77,14 +77,14 @@
   .seserviceblock{
     position:relative;
   }
-  .addendsl {
+  /* .addendsl {
     position: absolute;
     z-index: 1000;
     right: 30px;
     top: 110px;
     width: 100%;
     float: right;
-  }
+  } */
 
   .golive img {
     max-height: 100px;
@@ -1129,7 +1129,6 @@ color:#ffffff!important;
                   <span>*</span>
                   <!-- /ko -->
                   <div class="orgadm">
-                    <i class="fa fa-trash-o endorgdel admin" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg"></i>
                     <i class="fa fa-trash-o endorgdel" aria-hidden="true" title="Delete Organization" data-bind="click:deleteorg,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                     <i class="fa fa-pencil-square-o endorgdel" aria-hidden="true" title="Edit Organization" data-bind="click:openEditOrgModal,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
                   </div>
@@ -1893,11 +1892,9 @@ color:#ffffff!important;
             <div class="oj-sm-12">          
               <div class="input-group">
                 <select id="basicSelect" data-bind="ojComponent: {
-                  component: 'ojSelect',options: organizationlist(),value: orgsel,
+                  component: 'ojSelect',placeholder: 'Select your Organization LOB',options: organizationlist(),value: orgsel,
                   rootAttributes: {style:'max-width:20em'}
                 }">
-                  <!-- <option id="placeholdorg" data-bind="value:Select your Organization LOB">Select your Organization LOB</option> -->
-                  <option disabled value="" selected hidden>Select your Organization LOB</option>
                   <!-- ko foreach: organizationlist() -->
                   <option data-bind="text: orgname,value:orgname"></option>
                   <!-- /ko -->

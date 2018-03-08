@@ -570,7 +570,7 @@ font-weight: normal;
 }
 .verticalcentertext{
 @media  #{$responsiveQueryMediumDown} {
-width:90%;
+width:100%;
 }
 
 }
@@ -3557,4 +3557,22 @@ margin-bottom:20px;
 .oj-button-jqui, .oj-button-button{
 font-size:14px;
 }
+}
+.addendsl {
+	position: absolute;
+	z-index: 1000;
+	right: 30px;
+	top: 110px;
+	width: 100%;
+	float: right;
+}
+.addendsl {
+	@media  #{$responsiveQueryMediumOnly} {
+		position: absolute;
+		z-index: 1000;
+		right: 30px;
+		top: 135px;
+		width: 100%;
+		float: right;
+	}
 }
