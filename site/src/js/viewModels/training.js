@@ -782,6 +782,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             //EVENT HANDLE FOR CATEGORY SELECTION
             self.openReqtraining = function () {
                 self.rtrname(ssoemail);
+                self.refinesel([]);
+                self.rtrsel([]);
                 $("#trainingDialog").ojDialog("open");
             };
 
@@ -3088,6 +3090,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             requesttraining = function () 
             {
+                // self.rtrselected(self.rtrsel()[0].name);
+                // self.rtrcatselected(self.refinesel()[0].name);
+
+                if(self.refinesel().length==0){
+                    self.showToastDialog("Please a Category.",0);
+                    return;
+                }
+
+                if(self.rtrsel().length==0){
+                    self.showToastDialog("Please a Role.",0);
+                    return;
+                }
                 var rtr = {
                     category: self.refinesel()[0],
                     name: ssoemail,

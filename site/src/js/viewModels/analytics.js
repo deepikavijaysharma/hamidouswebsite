@@ -10,8 +10,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
   
     function tabviewmodel() {
       var self = this;
-     
-
     }
     return new tabviewmodel();
   }

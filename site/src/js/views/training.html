@@ -187,22 +187,9 @@
             <div class="oj-flex oj-flex-item oj-sm-12 oj-margin reqheading"> Request your course: </div>
           </div>
           <div class="oj-flex">
-            <!-- <div class="oj-flex oj-flex-item oj-sm-12">
-              <div class="oj-margin oj-sm-12">
-                <div class="oj-flex-item oj-sm-4 ">
-                  <label>Category<label class="required">*</label><br></label><br>
-                  <div id="tree" style="width: 180px;height: auto;" data-bind="ojComponent:{
-                      component: 'ojTree',
-                      selectionMode: 'single',
-                      data:categoryForUi,
-                      optionChange:categoryfamily,
-                      value: rtrcategory
-                    }"> </div>
-                </div>
-              </div>
-            </div> -->
+
             <div class="oj-sm-12">
-              <select id="categorySelect" data-bind="ojComponent: { component: 'ojSelect',options: refinelist(),value: refinesel, rootAttributes: {style:'max-width:20em'} }">
+              <select id="categorySelect" data-bind="ojComponent: { component: 'ojSelect',placeholder: 'Select a Category',options: refinelist(),value: refinesel, rootAttributes: {style:'max-width:20em'} }">
                 <!-- ko if: refinelist().length>0 -->
                   <!-- ko foreach: refinelist -->
                     <option  data-bind="value: name,text: name"></option>

@@ -1,0 +1,55 @@
+<div class="oj-flex">
+  <div class="oj-sm-12">
+  <div class="oj-sm-12 selectrange">
+          <form id="formId" class="oj-form">
+            <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                                      value: period,
+                                                      rootAttributes: {style:'max-width:20em'}}">
+              <option value="Week">Last Week</option>
+              <option value="Month">Last Month</option>
+              <option value="90">Last 3 Months</option>
+              <option value="-1">Custom Range</option>
+            </select>
+            <input id="sdate" placeholder="From date" data-bind="ojComponent: {component: 'ojInputDate', 
+                                                value: start_date, disabled: disableFormControls}" />
+            <input placeholder="To Date" id="edate" data-bind="ojComponent: {component: 'ojInputDate', 
+                                                value: end_date, disabled: disableFormControls}" />
+            <input id="inputButton" class="bluebutton" type="button" data-bind="ojComponent: {component: 'ojButton', label: 'Apply'}"
+                onclick="applyEventFilter()" />
+          </form>
+        </div>
+    <div class="oj-sm-12" id="vtabs" data-bind="ojComponent:{component: 'ojTabs', 
+            orientation: 'horizontal',selected: 0}">
+      <ul class="hor_tabs">
+        <li> <span>Top Links Visited</span> </li>
+      </ul>
+      
+      <!-- TABLE FOR TOP LINK VISITED -->
+      <div id="tabs-1">
+        
+        <div class="dboardrow2 oj-flex oj-sm-12" >
+          <div class="oj-flex oj-sm-12 dboardcol tableheadings">
+            <div class="oj-flex-item oj-sm-12 oj-lg-4"> CATEGORY </div>
+            <div class="oj-flex-item oj-sm-12 oj-lg-4"> REQUEST PER ROLE </div>
+            <div class="oj-flex-item oj-sm-12 oj-lg-4"> TOTAL COUNT </div>
+          </div>
+        </div>
+        <!-- ko foreach: training_requested_array -->
+        <div class="dboardrow2 oj-flex oj-sm-12" style="padding: 10px;">
+          <div class="oj-flex oj-sm-12 dboardcol">
+            <div class="oj-flex-item oj-sm-12 oj-lg-4" data-bind="text:category"> </div>
+            <div class="oj-flex-item oj-sm-12 oj-lg-4" style="float: left">
+              <!-- ko foreach: request -->
+                  <p data-bind="text:$data"></p>
+              <!-- /ko -->
+            </div>
+            <div class="oj-flex-item oj-sm-12 oj-lg-4" data-bind="text:total"> </div>
+          </div>
+        </div>
+        <!-- /ko --> 
+        
+      </div>
+    </div>
+  </div>
+</div>
+</div>
