@@ -1098,10 +1098,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 else if (refinetrcategories) {
                     searchanalytics(text, selectedcitis, '', refinetrcategories, 'TR');
                 }
-                else 
-                {
-                    return;
-                }
+                
 		$.ajax({
                     url: trainingbaseurl + "getCoursesV2",
                     method: 'GET',
