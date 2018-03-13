@@ -85,7 +85,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
       isloggedin = function () {
         if (ssoemail.length > 0) {
           document.getElementById('logoutbutton').style.display = 'block';
-          document.getElementById('logoutbutton1').style.display = 'block';
+          // document.getElementById('logoutbutton1').style.display = 'block';
           // if(!newUserAdminCheck){
           //   checkadmin();
           // }
@@ -97,7 +97,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
           }
         } else {
           document.getElementById('logoutbutton').style.display = 'block';
-          document.getElementById('logoutbutton1').style.display = 'block';          
+          // document.getElementById('logoutbutton1').style.display = 'block';          
         }
       }
 
@@ -136,7 +136,52 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
           id: 'analytics'
         })
       }
+      // CHECK FOR ADMIN RIGHTS
+      checkadminrights = function () {
+        console.log('admin checked');
+        if (isAdmin) {
+          console.log("Showing for admin");
+          $(".adminindex").css("display", "inline-block");
+
+        } else {
+          console.log("Hiding from user");
+          var appBanners = document.getElementsByClassName('adminindex'), i;
+          for (var i = 0; i < appBanners.length; i++) {
+            appBanners[i].style.display = 'none';
+          }
+        }
+      }
+
+      // checkadmin = function () {
+      //   console.log("Admin check commencing for " + ssoemail);
+      //   var checkurl = trainingbaseurl + "isAdmin";
+      //   if (ssoemail.length > 0) {
+
+      //     $.ajax({
+      //       url: checkurl,
+      //       method: 'GET',
+      //       headers: {
+      //         email: ssoemail
+      //       },
+      //       success: function (data) {
+      //         isAdmin = data.is_admin;
+      //         newUserAdminCheck = true;
+      //         checkadminrights();
+      //       },
+      //       error: function (xhr) {
+      //         //alert(xhr);
+      //         newUserAdminCheck = false;
+      //         checkadminrights();
+      //       }
+      //     });
+      //   } else {
+      //     isAdmin = false;
+      //     checkadminrights();
+      //   }
+      // }
+
       checkadmin = function () {
+        console.log("Admin check commencing for " + ssoemail);
         var checkurl = trainingbaseurl + "isAdmin";
         if (ssoemail.length > 0) {
             
@@ -151,12 +196,17 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
                     if(isAdmin) {
                       addAnalytics();
                     }
+                  newUserAdminCheck = true;
+                  checkadminrights();
                 },
                 error: function (xhr) {
+                  newUserAdminCheck = false;
+                  checkadminrights();
                 }
             });
         } else {
             isAdmin=false;
+            checkadminrights();
         }
     }
 

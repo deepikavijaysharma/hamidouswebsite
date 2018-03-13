@@ -39,9 +39,7 @@
 <!-- This contains icon fonts used by the starter template -->
 <link rel="stylesheet" href="css/demo-alta-site-min.css" type="text/css"/>
 <link rel="stylesheet" href="css/styles.css" type="text/css"/>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body class="oj-web-applayout-body">
 <!-- Template for rendering navigation items shared between nav bar and nav list --> 
@@ -65,9 +63,16 @@
     <div role="navigation" data-bind="click: toggleDrawer, ojComponent: {component: 'ojNavigationList',
           navigationLevel: 'application', item: {template: 'navTemplate'}, data: navDataSource,
           selection: router.stateId, edge: 'start'}"> </div>
-
   </div>
   <div id="pageContent" class="oj-web-applayout-page"> 
+     <div class="logout loginnav" id="logoutbutton">
+        <ul>
+          <li class="feedback"><a href="https://apex.oraclecorp.com/pls/apex/f?p=27715:3:13538820816554" target="_blank">Feedback&nbsp;<i class="fa fa-comment"></i></a></li>
+          <li><a href="#" role="button" class="adminindex" aria-pressed="false" tabindex="-1" data-tabmod="-1" title="Logout">           
+              <span class="adminindex" data-bind="click:logoutUser"><i class="fa fa-power-off"></i></span>           
+          </a></li>
+        </ul>
+      </div>
     <!--
            ** Oracle JET V3.2.0 web application header pattern.
            ** Please see the demos under Cookbook/Patterns/App Shell: Web
@@ -83,47 +88,35 @@
                 ojComponent: {component:'ojButton', label: 'Application Navigation',
                 chroming: 'half', display: 'icons', icons: {start: 'fa fa-bars'}}"> </button>
         </div>
-        <div class="oj-flex-bar-end">
-          <a href="#" role="button" class="oj-navigationlist-focused-element oj-navigationlist-item-content oj-navigationlist-item-no-icon" aria-pressed="false" tabindex="-1" data-tabmod="-1">
-            <span>
-              <span id="logoutbutton" class="oj-navigationlist-item-label loginnav" data-bind="click:logoutUser">Logout</span>
-            </span>
-          </a>
-        </div>
       </div>
     </header>
     <div class="logoBar" id="logoBar">
+     
       <div class="container">
         <div class="oj-flex">
-          <div class="oj-sm-12 oj-md-12 oj-lg-5 oj-xl-3 oj-flex oraclelogo"><div class="oj-md-12 logoblock"><a href="?root=home"><img src="css/images/logo.png"></a></div><div class="oj-md-12 oraclelogotext"> <span class="">Solution Engineering</span></div></div>
+          <div class="oj-sm-12 oj-md-12 oj-lg-5 oj-xl-3 oj-flex oraclelogo">
+            <div class="oj-md-12 logoblock"><a href="?root=home"><img src="css/images/logo.png"></a></div>
+            <div class="oj-md-12 oraclelogotext"> <span class="">Solution Engineering</span></div>
+          </div>
           <div class="oj-sm-12 oj-md-12 oj-lg-7 oj-xl-9 oj-flex-item topnav">
             <div role="navigation" class="oj-flex oj-lg-12 oj-flex-bar-end">
               <div data-bind="ojComponent: {component: 'ojNavigationList',
               navigationLevel: 'application',
               item: {template: 'navTemplate'}, data: navDataSource,
               selection: router.stateId, edge: 'top'}"
-              class="oj-web-applayout-navbar oj-sm-only-hide oj-md-only-hide oj-lg-only-hide oj-sm-10">
-                 
-              </div>
-              <!-- Logout Button added to Navbar -->               
-              <div class="oj-flex oj-sm-only-hide oj-md-only-hide oj-lg-only-hide">
-                <a href="#" role="button" class="oj-navigationlist-focused-element oj-navigationlist-item-content oj-navigationlist-item-no-icon" aria-pressed="false" tabindex="-1" data-tabmod="-1">
-                  <span>
-                    <span id="logoutbutton1" class="oj-navigationlist-item-label loginnav" data-bind="click:logoutUser">Logout</span>
-                  </span>
-                </a>
-              </div>
+              class="oj-web-applayout-navbar oj-sm-only-hide oj-md-only-hide oj-lg-only-hide oj-sm-10"> </div>
+              <!-- Logout Button added to Navbar --> 
+              
             </div>
           </div>
         </div>
       </div>
     </div>
-    
     <div role="main" class="oj-web-applayout-content" data-bind="ojModule: router.moduleConfig"> </div>
     <footer class="oj-web-applayout-footer" role="contentinfo">
       <div class="container">
         <div class="oj-flex">
-          <div class="oj-flex-item oj-md-12">Oracle Solution Engineering   </div>
+          <div class="oj-flex-item oj-md-12">Oracle Solution Engineering </div>
           <div class="oj-flex-item oj-md-12">
             <ul>
               <!-- ko foreach: footerLinks -->
@@ -137,7 +130,7 @@
   </div>
 </div>
 <script type="text/javascript" src="js/libs/require/require.js"></script> 
-<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/main.js"></script> 
 <script type="text/javascript">
  
 
