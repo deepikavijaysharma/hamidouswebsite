@@ -2606,8 +2606,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                                 last_name: data.last_name
                             }
                             self.reporteelist.push(report);
+                            console.log(self.reporteelist());
                             if (data.directs.length > 0) {
-                                getEmployeeFromReportees(data.directs);
+                                getEmployeeFromReportees(data.directs, self.reporteelist()[0]);
                             }
 
                         },
@@ -2620,7 +2621,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             //  CONVERTING HIERARCHICAL ORAGINAZATION DATA TO LINEAR LIST OF EMPLOYEES
-            function getEmployeeFromReportees(data) {
+            function getEmployeeFromReportees(data, mgrdata) {
                 self.reporteelist([]);
                 for (var index = 0; index < data.length; index++) {
                     var report = {
@@ -2632,8 +2633,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     if (data[index].directs.lenght > 0) {
                         getEmployeeFromReportees(data[index]().directs);
                     }
-
                 }
+                var reportplus = {
+                    email: mgrdata.email,
+                    name: mgrdata.first_name + " " + mgrdata.last_name
+                }
+                self.reporteelist.push(reportplus);
+                console.log(self.reporteelist());
 
             }
 
