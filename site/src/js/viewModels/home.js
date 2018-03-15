@@ -343,33 +343,46 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             });
         }
 
-        archiveslider = function (slider_archive) 
+        archiveslider = function (slider_archive) {
+            console.log("Archived Slider", slider_archive);
+            openArchiveSliderModal(slider_archive);
+        }
+
+        openArchiveSliderModal = function (slider_archive) 
         {
             console.log("Archived Slider", slider_archive.sliderid);
             var data_sl_value = {
                 "id": slider_archive.sliderid,
                 "archived": "YES"
             };
-            $.ajax({
-                url: homebaseurl + 'home_screen_data',
-                method: 'DELETE',
-                contentType: 'application/json; charset=utf-8',
-                data: ko.toJSON(data_sl_value),
-                success: function () {
-                    self.showToastDialog("Banner Archived Successfully.", 2000);
-                    console.log("Slider Archived");
-                    fetchslider();
-                    self.checkadminrightsnew();
-                },
-                fail: function (xhr, textStatus, err) {
-                    console.log("Fail: ",err);
-                    self.checkadminrightsnew();
-                },
-                error: function (xhr, textStatus, err) {
-                    console.log("Error: ",err);
-                    self.checkadminrightsnew();
-                }
+            $("#archive_slider").ojDialog("open");
+            $("#archive_carousel").click(function () {
+                $.ajax({
+                    url: homebaseurl + 'home_screen_data',
+                    method: 'DELETE',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(data_sl_value),
+                    success: function () {
+                        self.showToastDialog("Banner Archived Successfully.", 2000);
+                        closeArchiveSliderModal();
+                        console.log("Slider Archived");
+                        fetchslider();
+                        self.checkadminrightsnew();
+                    },
+                    fail: function (xhr, textStatus, err) {
+                        console.log("Fail: ",err);
+                        self.checkadminrightsnew();
+                    },
+                    error: function (xhr, textStatus, err) {
+                        console.log("Error: ",err);
+                        self.checkadminrightsnew();
+                    }
+                });
             });
+        }
+
+        closeArchiveSliderModal = function () {
+            $("#archive_slider").ojDialog("close");
         }
 
         deleteslider = function (slider_delete) 
@@ -2176,31 +2189,44 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         }
 
         archiveemployeefeatures = function (employeefeatures_archive) {
+            console.log("Archived Employee Features", employeefeatures_archive);
+            openArchiveEmployeeFeaturesModal(employeefeatures_archive);
+        }
+
+        openArchiveEmployeeFeaturesModal = function (employeefeatures_archive) {
             console.log("Archived Employee Features", employeefeatures_archive.empfeaid);
             var data_ef_value = {
                 "id": employeefeatures_archive.empfeaid,
                 "archived": "YES"
             };
-            $.ajax({
-                url: homebaseurl + 'employee_features',
-                method: 'DELETE',
-                contentType: 'application/json; charset=utf-8',
-                data: ko.toJSON(data_ef_value),
-                success: function () {
-                    self.showToastDialog("Employee Features archived successfully.", 2000);
-                    console.log("Archive success for employee features");
-                    fetchempfeatures();
-                    self.checkadminrightsnew();
-                },
-                fail: function (xhr, textStatus, err) {
-                    console.log("Fail: ", err);
-                    self.checkadminrightsnew();
-                },
-                error: function (xhr, textStatus, err) {
-                    console.log("Error: ", err);
-                    self.checkadminrightsnew();
-                }
+            $("#archive_empfeat").ojDialog("open");
+            $("#archive_ef").click(function () {
+                $.ajax({
+                    url: homebaseurl + 'employee_features',
+                    method: 'DELETE',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(data_ef_value),
+                    success: function () {
+                        self.showToastDialog("Employee Features archived successfully.", 2000);
+                        console.log("Archive success for employee features");
+                        closeArchiveEmployeeFeaturesModal();
+                        fetchempfeatures();
+                        self.checkadminrightsnew();
+                    },
+                    fail: function (xhr, textStatus, err) {
+                        console.log("Fail: ", err);
+                        self.checkadminrightsnew();
+                    },
+                    error: function (xhr, textStatus, err) {
+                        console.log("Error: ", err);
+                        self.checkadminrightsnew();
+                    }
+                });
             });
+        }
+
+        closeArchiveEmployeeFeaturesModal = function () {
+            $("#archive_empfeat").ojDialog("close");
         }
 
         deleteemployeefeatures = function (ef_delete) {

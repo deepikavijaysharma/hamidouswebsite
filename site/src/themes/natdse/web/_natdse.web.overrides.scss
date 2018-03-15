@@ -6,6 +6,41 @@ img[src*=".svg"] {
 width: 100%;
 }
 /*IE ONLY*/
+.logout{
+position: absolute;
+right: 0;
+top: 10px;
+z-index:10000;
+a{
+	@media  #{$responsiveQueryMediumDown} {
+	color:#fff;
+}
+.fa{
+	font-size:16px;
+	}	
+	}
+
+ul{
+margin:0px;
+padding:0px;
+}
+li{
+list-style:none;
+display:inline;
+margin-left:10px;
+}
+.feedback{
+background: rgb(242, 145, 17) none repeat scroll 0 0;
+border-radius: 5px;
+color: rgb(255, 255, 255);
+padding: 5px;
+a{
+	color: rgb(255, 255, 255);
+	}
+}
+
+}
+
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
 .logoBar {
 height: auto;
@@ -2928,7 +2963,7 @@ width:28%;
 }
 
 .loginnav{
-font-size: 1.28571rem;
+font-size: 1em;
 color: #969696;
 margin-left: 20px;
 margin-right: 20px;
