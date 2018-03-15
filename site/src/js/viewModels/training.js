@@ -881,6 +881,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             showcoursedetails = function (course, param2) {
 
+            function waitForElement(id, callback){
+                var wait_for_community_call = setInterval(function(){
+                    if(document.getElementById(id)){
+                        clearInterval(wait_for_community_call);
+                        callback();
+                    }
+                }, 100);
+            }
+
+            waitForElement("course_details", function(){
+                    $('#course_details').trigger('click');
+              
+            });
+
+
                 self.detailedDescription('');
                 self.detailedName('');
                 self.detailedCatName('');
