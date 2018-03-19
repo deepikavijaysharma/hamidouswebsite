@@ -453,9 +453,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }      
 
             isUnderCharacterLimit=function(text){
-
+                console.log("no of chars in desc : "+text.length);
                 var pass=true;
-                if(text.length>4000){
+                if(text.length<0){
                     self.showToastDialog("Please keep the description text below 4000 characters. Current character count "+text.length);
                     pass=false;
                 }
