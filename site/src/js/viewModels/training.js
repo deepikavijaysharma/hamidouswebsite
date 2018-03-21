@@ -453,10 +453,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }      
 
             isUnderCharacterLimit=function(text){
-                console.log("no of chars in desc : "+text.length);
+
                 var pass=true;
-                if(text.length<0){
-                    self.showToastDialog("Please keep the description text below 4000 characters. Current character count "+text.length);
+                if(text.length>20000){
+                    self.showToastDialog("Please keep the description text below 20000 characters. Current character count "+text.length);
                     pass=false;
                 }
                 return pass;
@@ -2621,7 +2621,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                                 last_name: data.last_name
                             }
                             self.reporteelist.push(report);
-                            console.log(self.reporteelist());
                             if (data.directs.length > 0) {
                                 getEmployeeFromReportees(data.directs, self.reporteelist()[0]);
                             }
