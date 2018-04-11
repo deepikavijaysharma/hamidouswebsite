@@ -77,7 +77,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             // TOAST MESSAGE DIALOG
             self.title = ko.observable("");
             self.msg = ko.observable("");
-
+            self.success = ko.observableArray([]);
+            self.failed = ko.observableArray([]);
+            self.msg1 = ko.observableArray([]);
+            self.msg2 = ko.observableArray([]);
 
             // CREATE COURSE VARIABLES
             self.course_name = ko.observable('');
@@ -881,19 +884,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
             showcoursedetails = function (course, param2) {
 
-            function waitForElement(id, callback){
-                var wait_for_community_call = setInterval(function(){
-                    if(document.getElementById(id)){
-                        clearInterval(wait_for_community_call);
-                        callback();
-                    }
-                }, 100);
-            }
+                function waitForElement(id, callback){
+                    var wait_for_community_call = setInterval(function(){
+                        if(document.getElementById(id)){
+                            clearInterval(wait_for_community_call);
+                            callback();
+                        }
+                    }, 100);
+                }
 
-            waitForElement("course_details", function(){
-                    $('#course_details').trigger('click');
-              
-            });
+                waitForElement("course_details", function(){
+                        $('#course_details').trigger('click');
+                
+                });
 
 
                 self.detailedDescription('');
@@ -948,6 +951,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.detailedSchedule(course.schedules);
                 self.selectedcourseid = course.course_id;
 
+                console.log(course.classes);
+
                 // CREATE COURSE LINK
                 var courselink = window.location.href;
                 var first_param = "=training";
@@ -989,7 +994,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         self.courselist = allcourses.courses;
                         self.processCoursesFromService(allcourses.courses);
                         self.getCourseIdFromUrl();
-
+                        console.log(allcourses);
                     },
                     error: function (xhr) {
                         // alert(xhr);
@@ -2621,6 +2626,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                                 last_name: data.last_name
                             }
                             self.reporteelist.push(report);
+                            console.log(self.reporteelist());
                             if (data.directs.length > 0) {
                                 getEmployeeFromReportees(data.directs, self.reporteelist()[0]);
                             }
@@ -2695,7 +2701,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 
 
                     var enrollurl = trainingbaseurl + "enrollStudents";
-                    console.log(ko.toJSON(enrollment));
+                    console.log("enrolled data : ",ko.toJSON(enrollment));
                     $.ajax({
                         url: enrollurl,
                         cache: false,
@@ -2703,15 +2709,58 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         contentType: 'application/json; charset=utf-8',
                         data: ko.toJSON(enrollment),
                         success: function (data) {
-                            console.log(ko.toJSON(data));
-                            if (self.searchtext().length == 0) {
-                                self.fetchcourses();
-                            } else {
-                                self.searchfetchcourses();
+                            //console.log(data);
+                            if (data.failed.length == 0 && data.success.length>0)
+                            {
+                                if (data.success.length == 1) 
+                                {
+                                    self.showToastDialog("Successfully Enrolled", 4000);
+                                }
+                                else
+                                {
+                                    for (var e = 0; e < data.success.length; e++) 
+                                    {
+                                        self.success.push(data.success[e]);
+                                    }
+                                    self.showEnrollToastDialog(self.success(),0); 
+                                }
                             }
-                           
+                            else if (data.failed.length > 0 && data.success.length == 0) 
+                            {
+                                if (data.failed.length == 1) 
+                                {
+                                    self.showToastDialog("You are already Enrolled", 4000);
+                                }
+                                else
+                                {
+                                    for (var f = 0; f < data.failed.length; f++) 
+                                    {
+                                        self.failed.push(data.failed[f]);
+                                    }
+                                    self.showEnrollToastDialog(self.failed(), 0); 
+                                }
+                            }
+                            else if (data.failed.length > 0 && data.success.length > 0) 
+                            {
+                                for (var g = 0; g < data.success.length; g++) 
+                                {
+                                    self.success.push(data.success[g]);
+                                }
+                                for (var h = 0; h < data.failed.length; h++) 
+                                {
+                                    self.failed.push(data.failed[h]);
+                                }      
+                                self.showEnrollToastDialog(self.success(),self.failed(), 0)                            
+                            }                         
+                            if (self.searchtext().length == 0) 
+                            {
+                                self.fetchcourses();
+                            } 
+                            else 
+                            {
+                                self.searchfetchcourses();
+                            }                           
                             $("#reportees").ojDialog("close");
-                            self.showToastDialog("Successfully Enrolled.",2000);
                         }
                     }).fail(function (xhr, textStatus, err) {
                         self.showToastDialog("Enrollment Failed.", 0);
@@ -2726,6 +2775,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 if (timeinmillisec>0) {
                     setTimeout(function () {
                         $("#toastdiv").ojDialog("close");
+                    }, timeinmillisec);
+                }
+            }
+            self.showEnrollToastDialog = function (msg1,msg2, timeinmillisec) {
+                self.msg1(msg1);
+                self.msg2(msg2);
+                $("#enrolltoastdiv").ojDialog("open");
+                if (timeinmillisec > 0) {
+                    setTimeout(function () {
+                        $("#enrolltoastdiv").ojDialog("close");
                     }, timeinmillisec);
                 }
             }

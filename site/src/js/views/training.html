@@ -1388,7 +1388,7 @@
             <div id="dialogWrapper">
               <div style="display:none" id="delete_event_modal" title="Delete Confirmation" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'icon',rootAttributes: { style: 'width: 35%; height: auto; min-width 100px; '}}">
                 <div class="oj-dialog-body roleWrapper">
-                  <h4>Are you sure,you want to delete this ? </h4>
+                  <p align="center">Are you sure,you want to delete this ? </p>
                 </div>
                 <div class="oj-dialog-footer">
                   <button id="okButton" style="cursor: pointer;" onclick="closeEventDeleteModal()" data-bind="ojComponent: {component: 'ojButton', label: 'Cancel'}">
@@ -1822,6 +1822,25 @@
     </div>
   </div>
 
+  <div style="display:none;" class="dialogbodymain" id="enrolltoastdiv" title="Notification" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
+    <div class="dialogbody" style="width:95%">
+      <!-- ko if: (msg1 && msg2)-->
+        <h5>Successfully Enrolled following people : </h5><p data-bind="text:msg1"></p>
+        <h5>Following people are already enrolled : </h5><p data-bind="text:msg2"></p>
+      <!-- /ko -->
+      <!-- ko ifnot: (msg1 && msg2)-->
+        <!-- ko if: (msg1 )-->
+          <h5>Successfully Enrolled following people : </h5><p data-bind="text:msg1"></p>
+        <!-- /ko -->
+        <!-- ko ifnot: (msg1)-->
+          <!-- ko if: (msg2)-->
+            <h5>Following people are already enrolled : </h5><p data-bind="text:msg2"></p>
+          <!-- /ko -->
+        <!-- /ko -->
+      <!-- /ko -->
+    </div>
+  </div>
+
   <!--  SELECT REPORTEE DIALOG   -->
   <div id="dialogWrapper1">
     <div style="display:none;" class="dialogbodymain" id="reportees" title="Enroll Reportees" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
@@ -2219,7 +2238,7 @@
   <div id="dialogWrapper">
     <div style="display:none" id="delete_community_call" title="Delete Confirmation" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'icon',rootAttributes: { style: 'width: 35%; height: auto; min-width 100px; '}}">
       <div class="oj-dialog-body roleWrapper">
-        <h4>Are you sure,you want to delete this ? </h4>
+        <p align="center">Are you sure,you want to delete this ? </p>
       </div>
       <div class="oj-dialog-footer">
         <button id="okButton" style="cursor: pointer;" onclick="closeDeleteModal()" data-bind="ojComponent: {component: 'ojButton', label: 'Cancel'}">
