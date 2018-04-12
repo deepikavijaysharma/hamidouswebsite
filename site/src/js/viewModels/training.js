@@ -149,6 +149,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.searcheventreportstext=ko.observable('');
 
             self.rolelist = ko.observableArray([]);
+			
+			
 
             var editor_instance;
             //below variable stores data in modal ..it gets updated on desc modal close

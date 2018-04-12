@@ -13,9 +13,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
 
 
             var self = this;
-          self.currentFilter = ko.observable("se");
+          self.currentRole = ko.observable('all');
+		  self.currentCategory = ko.observable('all');
 		  
-this.newExpanded = ko.observableArray();
+			this.newExpanded = ko.observableArray();
     
 		  
 		  self.expandall = function(){
@@ -26,38 +27,33 @@ this.newExpanded = ko.observableArray();
 		  }
 		 
     
-		  self.readMore = function(){			 
-			
+		  self.readMore = function(){
 			  $('#readmorelink').hide();
 			  $('#readlesslink').show();
-			 $('#moretext').toggle('slow', function() {   
-  });
+			  $('#moretext').toggle('slow', function() {   
+  			 });
 			  
 			  }
 			  
-			 self.readLess = function(){			 
-			
-			   $('#readmorelink').show();
+			 self.readLess = function(){	 
+			  $('#readmorelink').show();
 			  $('#readlesslink').hide();
-			 $('#moretext').toggle('slow', function() {   
-  });
+			  $('#moretext').toggle('slow', function() {   
+ 			 });
 			  
 			  } 
 		  
-		 self.setFilter = function(data, event) {
+		 self.setFilter = function(data, event) {			 
         var id = event.target.id;
-		if ($("input#"+id).is(":checked")) {
-				 $(".filtersections").hide();
-                $("div#"+id).show();
-            } 
-			
-			else {
-               
-            }
+		if ($("input#"+id).is(":checked")) {			
+			 $(".toolsrow").hide();
+			$("."+self.currentRole()+"."+self.currentCategory()).show();	
+		}
+			else{
+				
+	 	}
         return true;
-      }
-
-
+      }  
         }
         return new DashboardViewModel();
     }

@@ -187,7 +187,20 @@
             <div class="oj-flex oj-flex-item oj-sm-12 oj-margin reqheading"> Request your course: </div>
           </div>
           <div class="oj-flex">
-
+            <!-- <div class="oj-flex oj-flex-item oj-sm-12">
+              <div class="oj-margin oj-sm-12">
+                <div class="oj-flex-item oj-sm-4 ">
+                  <label>Category<label class="required">*</label><br></label><br>
+                  <div id="tree" style="width: 180px;height: auto;" data-bind="ojComponent:{
+                      component: 'ojTree',
+                      selectionMode: 'single',
+                      data:categoryForUi,
+                      optionChange:categoryfamily,
+                      value: rtrcategory
+                    }"> </div>
+                </div>
+              </div>
+            </div> -->
             <div class="oj-sm-12">
               <select id="categorySelect" data-bind="ojComponent: { component: 'ojSelect',placeholder: 'Select a Category',options: refinelist(),value: refinesel, rootAttributes: {style:'max-width:20em'} }">
                 <!-- ko if: refinelist().length>0 -->
@@ -249,233 +262,233 @@
       <!-- tab contents -->
 
       <div id="tabs-1">
-        <div class="container">
-          <!-- SEARCH -->
-          <form id="form1">
-            <div class="search">
-              <button id="createTrainingButton" class="reqtrain-button oj-xl-float-end admin" data-bind="ojComponent: {
+    <div id="tab-live">
+          <div class="container"> 
+            <!-- SEARCH -->
+            <form id="form1">
+              <div class="search">
+                <button id="createTrainingButton" class="reqtrain-button oj-xl-float-end admin" data-bind="ojComponent: {
                       component: 'ojButton',
                       label: 'Create Course'},click:openCreatetraining"> </button>
-            </div>
-            <div class="oj-flex search">
-              <div class="oj-flex-item oj-sm-4 oj-md-2 oj-lg-2 labeldiv" style="display:none">
-                <label>Catalogue</label>
               </div>
-              <div class="oj-flex-item  oj-sm-12 oj-lg-8">
-                <input id="search-input" placeholder="Search courses . . ." data-bind="ojComponent:{
+              <div class="oj-flex search">
+                <div class="oj-flex-item oj-sm-4 oj-md-2 oj-lg-2 labeldiv" style="display:none">
+                  <label>Catalogue</label>
+                </div>
+                <div class="oj-flex-item  oj-sm-12 oj-lg-8">
+                  <input id="search-input" placeholder="Search courses . . ." data-bind="ojComponent:{
                   component: 'ojInputSearch', 
                   value: searchtext,
                   update : refinecourses,
                   optionChange:searchcontent
                 }" />
-              </div>
-              <div class="oj-flex-item oj-sm-12 oj-lg-4 oj-xl-4 req_block">
-                <button id="trainingButton" class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
+                </div>
+                <div class="oj-flex-item oj-sm-12 oj-lg-4 oj-xl-4 req_block">
+                  <button id="trainingButton" class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
                   component: 'ojButton',
                   chroming: 'full',
                   label: '+ Request Training'},click:openReqtraining"></button>
+                </div>
               </div>
+            </form>
+            <div class="oj-flex coursesblock admin">
+              <label id="switchLabel" for="switch">Admin View</label>
+              <input id="switch" data-bind="ojComponent: {component: 'ojSwitch',value: switchadminview,optionChange:adminviewSelected}" />
             </div>
-          </form>
-          <div class="oj-flex coursesblock admin">
-            <label id="switchLabel" for="switch">Admin View</label>
-            <input id="switch" data-bind="ojComponent: {component: 'ojSwitch',value: switchadminview,optionChange:adminviewSelected}" />
-          </div>
-          <!-- COURSES -->
-          <div class="oj-flex coursesblock">
-
-            <div class="oj-flex-item oj-md-3 oj-lg-3">
-              <div class="eblocks blocks oj-flex-item  oj-sm-12 oj-md-4 oj-lg-4" style="height: auto">
-                <div class="oj-flex-item refine">
-                  <div class="title">Refine Courses</div>
-                  <hr>
-
-                  <!-- ~~~~~~~~~~~~~ CATEGORIES ~~~~~~~~~~~~~~ -->
-                  <!-- ko if: refinelist().length>0 -->
-                  <div class="titlesmall">Categories</div>
-                  <!-- /ko -->
-                  <ul class="refinelist">
-                    <!-- ko foreach: refinelist -->
-                    <li>
-                      <div class="oj-flex">
-                      <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                          <label>
-                            <input type="checkbox" class="category" name="category" data-bind="value: id" onchange="refineupdate(this)">
-                          </label>
-                        </div>
-                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
-                          <span data-bind="text: name"></span>
-                        </div>
-                      </div>
-                    </li>
+            <!-- COURSES -->
+            <div class="oj-flex coursesblock">
+              <div class="oj-flex-item oj-md-3 oj-lg-3">
+                <div class="eblocks selectblock oj-flex-item  oj-sm-12" >
+                  <div class="oj-flex oj-sm-12 refine">
+                    <div class="oj-flex oj-sm-12 title">Training Type</div>
+                  <div class="oj-sm-12 selectblockinner"> <div data-bind="ojModule: {name: 'filter'}"></div></div>
+                </div>
+                 </div>
+                <div class="eblocks selectblock oj-flex-item  oj-sm-12" style="height: auto">
+                  <div class="oj-flex oj-sm-12 refine">
+                    <div class="oj-flex oj-sm-12 title">Refine Trainings</div>
+                    
+                  
+                    <div class="oj-sm-12 selectblockinner">
+                    <!-- ~~~~~~~~~~~~~ CATEGORIES ~~~~~~~~~~~~~~ --> 
+                    <!-- ko if: refinelist().length>0 -->
+                    <div class="titlesmall">Categories</div>
                     <!-- /ko -->
-                  </ul>
-
-                  <!-- ~~~~~~~~~~~~~ PRODUCT TYPE ~~~~~~~~~~~~~~ -->
-                  <!-- ko if: producttype().length>0 -->
-                  <div class="titlesmall">Product Type</div>
-                  <!-- /ko -->
-                  <ul class="refinelist">
-                    <!-- ko foreach: producttype -->
-                    <li>
-                      <div class="oj-flex">
-                       <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                          <label>
-                            <input type="checkbox" class="prodtype" name="prodtype" data-bind="value: name" onchange="refineupdate(this)">
-                          </label>
+                    <ul class="refinelist">
+                      <!-- ko foreach: refinelist -->
+                      <li>
+                        <div class="oj-flex">
+                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
+                            <label>
+                              <input type="checkbox" class="category" name="category" data-bind="value: id" onchange="refineupdate(this)">
+                            </label>
+                          </div>
+                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
                         </div>
-                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
-                          <span data-bind="text: name"></span>
-                        </div>
-                      </div>
-                    </li>
-
+                      </li>
+                      <!-- /ko -->
+                    </ul>
+                    
+                    <!-- ~~~~~~~~~~~~~ PRODUCT TYPE ~~~~~~~~~~~~~~ --> 
+                    <!-- ko if: producttype().length>0 -->
+                    <div class="titlesmall">Product Type</div>
                     <!-- /ko -->
-                  </ul>
-
-                  <!-- ~~~~~~~~~~~~~ TRAINING LEVEL ~~~~~~~~~~~~~~ -->
-                  <!-- ko if: training_levels().length>0 -->
-                  <div class="titlesmall">Training Level</div>
-                  <!-- /ko -->
-                  <ul class="refinelist">
-                    <!-- ko foreach: training_levels -->
-                    <li>
-                      <div class="oj-flex">
-                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                          <label>
-                            <input type="checkbox" class="traininglevel" name="traininglevel" data-bind="value: name" onchange="refineupdate(this)">
-                          </label>
+                    <ul class="refinelist">
+                      <!-- ko foreach: producttype -->
+                      <li>
+                        <div class="oj-flex">
+                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
+                            <label>
+                              <input type="checkbox" class="prodtype" name="prodtype" data-bind="value: name" onchange="refineupdate(this)">
+                            </label>
+                          </div>
+                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
                         </div>
-                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
-                          <span data-bind="text: name"></span>
-                        </div>
-                      </div>
-                    </li>
-
+                      </li>
+                      
+                      <!-- /ko -->
+                    </ul>
+                    
+                    <!-- ~~~~~~~~~~~~~ TRAINING LEVEL ~~~~~~~~~~~~~~ --> 
+                    <!-- ko if: training_levels().length>0 -->
+                    <div class="titlesmall">Training Level</div>
                     <!-- /ko -->
-                  </ul>
-                  <!-- ~~~~~~~~~~~~~ TRAINING TYPE ~~~~~~~~~~~~~~ -->
-                  <!-- ko if: training_types().length>0 -->
-                  <div class="titlesmall">Training Type</div>
-                  <!-- /ko -->
-                  <ul class="refinelist">
-                    <!-- ko foreach: training_types -->
-                    <li>
-                      <div class="oj-flex">
-                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                          <label>
-                            <input type="checkbox" class="trainingtype" name="trainingtype" data-bind="value: name" onchange="refineupdate(this)">
-                          </label>
+                    <ul class="refinelist">
+                      <!-- ko foreach: training_levels -->
+                      <li>
+                        <div class="oj-flex">
+                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
+                            <label>
+                              <input type="checkbox" class="traininglevel" name="traininglevel" data-bind="value: name" onchange="refineupdate(this)">
+                            </label>
+                          </div>
+                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
                         </div>
-                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
-                          <span data-bind="text: name"></span>
-                        </div>
-                      </div>
-                    </li>
-
+                      </li>
+                      
+                      <!-- /ko -->
+                    </ul>
+                    <!-- ~~~~~~~~~~~~~ TRAINING TYPE ~~~~~~~~~~~~~~ --> 
+                    <!-- ko if: training_types().length>0 -->
+                    <div class="titlesmall">Training Type</div>
                     <!-- /ko -->
-                  </ul>
-                  <!-- ~~~~~~~~~~~~~ CITIES ~~~~~~~~~~~~~~ -->
-                  <!-- ko if: cities().length>0 -->
-                  <div class="titlesmall">Cities</div>
-                  <!-- /ko -->
-                  <ul class="refinelist">
-                    <!-- ko foreach: cities -->
-                    <li>
-                      <div class="oj-flex">
-                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                          <label>
-                            <input type="checkbox" class="cities" name="cities" data-bind="value: name" onchange="refineupdate(this)">
-                          </label>
+                    <ul class="refinelist">
+                      <!-- ko foreach: training_types -->
+                      <li>
+                        <div class="oj-flex">
+                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
+                            <label>
+                              <input type="checkbox" class="trainingtype" name="trainingtype" data-bind="value: name" onchange="refineupdate(this)">
+                            </label>
+                          </div>
+                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
                         </div>
-                        <div class="oj-sm-11 oj-md-10 oj-lg-11">
-                          <span data-bind="text: name"></span>
-                        </div>
-                      </div>
-                    </li>
-
+                      </li>
+                      
+                      <!-- /ko -->
+                    </ul>
+                    <!-- ~~~~~~~~~~~~~ CITIES ~~~~~~~~~~~~~~ --> 
+                    <!-- ko if: cities().length>0 -->
+                    <div class="titlesmall">Cities</div>
                     <!-- /ko -->
-                  </ul>
-
-                  <!-- ~~~~~~~~~~~~~ ROLES ~~~~~~~~~~~~~~ -->
-                  <!-- ko if: roles().length>0 -->
-                  <div class="titlesmall">Roles</div>
-                  <!-- /ko -->
-                  <ul class="refinelist">
-                    <!-- ko foreach: roles -->
-                    <li>
-                      <div class="oj-flex">
-                        <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                          <label>
-                            <input type="checkbox" class="roles" name="roles" data-bind="value: id" onchange="refineupdate(this)">
-                          </label>
+                    <ul class="refinelist">
+                      <!-- ko foreach: cities -->
+                      <li>
+                        <div class="oj-flex">
+                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
+                            <label>
+                              <input type="checkbox" class="cities" name="cities" data-bind="value: name" onchange="refineupdate(this)">
+                            </label>
+                          </div>
+                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
                         </div>
-                       <div class="oj-sm-11 oj-md-10 oj-lg-11">
-                          <span data-bind="text: name"></span>
-                        </div>
-                      </div>
-                    </li>
-
+                      </li>
+                      
+                      <!-- /ko -->
+                    </ul>
+                    
+                    <!-- ~~~~~~~~~~~~~ ROLES ~~~~~~~~~~~~~~ --> 
+                    <!-- ko if: roles().length>0 -->
+                    <div class="titlesmall">Roles</div>
                     <!-- /ko -->
-                  </ul>
-                  <div class="oj-flex refinebuttons">
-                    <div class="oj-sm-12 oj-xl-6">
-                      <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: refinecourses, 
+                    <ul class="refinelist">
+                      <!-- ko foreach: roles -->
+                      <li>
+                        <div class="oj-flex">
+                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
+                            <label>
+                              <input type="checkbox" class="roles" name="roles" data-bind="value: id" onchange="refineupdate(this)">
+                            </label>
+                          </div>
+                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
+                        </div>
+                      </li>
+                      
+                      <!-- /ko -->
+                    </ul>
+                    <div class="oj-flex refinebuttons">
+                      <div class="oj-sm-12 oj-xl-6">
+                        <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: refinecourses, 
                           ojComponent: { component: 'ojButton', label: 'Refine' }"> </button>
-                    </div>
-                    <div class="oj-sm-12 oj-xl-6">
-                      <button class="oj-sm-align-center oj-flex orangebutton" id="button" data-bind="click: resetCourseFilters, 
+                      </div>
+                      <div class="oj-sm-12 oj-xl-6">
+                        <button class="oj-sm-align-center oj-flex orangebutton" id="button" data-bind="click: resetCourseFilters, 
                           ojComponent: { component: 'ojButton', label: 'Reset' }"> </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="oj-flex-item oj-md-9 oj-lg-9 rightcoursesblock">
-             <div class="oj-margin">
-              <!-- ko foreach: categories -->
-              <div class="oj-flex">
-             
-                <div class="oj-sm-12 catheadings  ">
-                  <h4 class="oj-sm-12" data-bind="text:name"></h4>
-                </div>
-                <div class="oj-flex oj-sm-12 blocksouter">
-                  <!-- ko foreach: courses -->
-                  <div class="oj-sm-12 oj-md-4 oj-lg-4 blocks oj-flex-item oj-margin">
-                    <!--<span class="admin" style="cursor: pointer;color: red;float: right" data-bind="click:function(){deletecourse(this)}">X</span>-->
-                    <div class="oj-sm-12 admin" style="margin-bottom: 5px;position:relative;z-index:1000">
-                      <i class="fa fa-pencil-square-o admin" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Edit Course"
-                        data-bind="click:function(){edittraining(this)}" target="_blank"></i>
-                      <i class="fa fa-trash-o admin" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Delete Course"
-                        data-bind="click:function(){deletecourse(this)}" target="_blank"></i>
-                    </div>
-                    <div class="oj-sm-12 blocksinner">
-                      <!-- <span class="badge">Mandatory Course</span> -->
-                      <div class="coursetitle" data-bind="text:name"></div>
-                      <!--<div class="desc" data-bind="html:subdescription"></div>-->
-                      <div class="desc">Type:
-                        <span class="desc" data-bind="text:training_type"></span> / Level:
-                        <span class="desc" data-bind="text:training_level"></span>
-                      </div>
-                      <!--<a data-bind="click:showcoursedetails" target="_blank" style="cursor:pointer" class="whitebutton">View Details</a>-->
-                    </div>
-                    <div class="middle">
-                      <div class="text">
-                        <a data-bind="click:showcoursedetails" target="_blank" style="cursor:pointer">View More</a>
                       </div>
                     </div>
                   </div>
-
-                  <!-- /ko -->
+                </div>
                 </div>
               </div>
-              
-              <!-- /ko --> </div>
+              <div class="oj-flex-item oj-md-9 oj-lg-9 rightcoursesblock">
+                <div class="oj-margin-left"> 
+                  <!-- ko foreach: categories -->
+                  <div class="oj-flex">
+                    <div id="accordionPage" class="oj-sm-12" data-bind="ojComponent: {component: 'ojAccordion'}">
+                      <div id="c1" class="oj-sm-12">
+                        <div class="oj-sm-12 catheadings  " > <span class="categoryheading" data-bind="text:name"></span> </div>
+                        <div class="oj-flex oj-sm-12 blocksouter"> 
+                          <!-- ko foreach: courses -->
+                          <div class="oj-sm-12  blocks oj-flex-item"> 
+                            <!--<span class="admin" style="cursor: pointer;color: red;float: right" data-bind="click:function(){deletecourse(this)}">X</span>-->
+                            <div class="oj-sm-12 admin" style="margin-bottom: 5px;position:relative;z-index:1000"> <i class="fa fa-pencil-square-o admin" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Edit Course"
+                        data-bind="click:function(){edittraining(this)}" target="_blank"></i> <i class="fa fa-trash-o admin" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Delete Course"
+                        data-bind="click:function(){deletecourse(this)}" target="_blank"></i> </div>
+                        
+                            <div class="oj-flex oj-sm-12 blocksinner">
+                              <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1">
+                                <div class="roundedwhite">L</div>
+                              </div>
+                              <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10"> 
+                              <div class="oj-margin">
+                                <!-- <span class="badge">Mandatory Course</span> -->
+                                <div class="coursetitle" data-bind="text:name"></div>
+                                <!--<div class="desc" data-bind="html:subdescription"></div>-->
+                                <div class="desc">Type: <span class="desc" data-bind="text:training_type"></span> / Level: <span class="desc" data-bind="text:training_level"></span> </div>
+                                <!--<a data-bind="click:showcoursedetails" target="_blank" style="cursor:pointer" class="whitebutton">View Details</a>--> </div>
+                              </div>
+                              <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 linkblock"><a data-bind="click:showcoursedetails" target="_blank" style="cursor:pointer"><img src="css/images/317-arrow-right2.png"></a></div>
+                            </div>
+                            
+                          </div>
+                          
+                          <!-- /ko --> 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- /ko --> </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
+        <!--========================== LIVE TRAINING ENDS ==========================-->
+        <div id="tab-ondemand" style="display:none;">
+          <div data-bind="ojModule: {name: 'ondemand'}"></div>
+        </div>
+      
+</div>
       <!--========================== COMMUNITY CALLS ==========================-->
 
 
@@ -1783,7 +1796,7 @@
                                 <img width="35px" height="35px" align="right" src="https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/da/59/f5/da59f574-9114-2382-296e-d8aab9aee65b/source/512x512bb.jpg"> </abbr>
                               <!-- /ko -->
                           <button class="bluebutton" style="cursor:pointer" data-bind="click:initEnroll,attr:{name:class_id}"> Click to Enroll </button>
-                        </p>                        
+                        </p>
                       </div>
 
 
