@@ -2710,6 +2710,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         data: ko.toJSON(enrollment),
                         success: function (data) {
                             //console.log(data);
+                            self.failed([]);
+                            self.success([]);
                             if (data.failed.length == 0 && data.success.length>0)
                             {
                                 if (data.success.length == 1) 

@@ -1759,7 +1759,8 @@
                             
                             <!-- /ko -->
                             <br>
-                           <p> <strong>Enroll By: </strong> <span data-bind="text:enrollment_end_date"></span></p>
+                            <p><strong>Enroll By: </strong> <span data-bind="text:enrollment_end_date"></span></p>
+                            <p class="admin"><strong>Enrollment Status: </strong><span data-bind="html:enrollmentCount"></span>/<span data-bind="html:class_size"></span></p>
                           </ul>
                         </div>
                       </div>
@@ -1782,7 +1783,7 @@
                                 <img width="35px" height="35px" align="right" src="https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/da/59/f5/da59f574-9114-2382-296e-d8aab9aee65b/source/512x512bb.jpg"> </abbr>
                               <!-- /ko -->
                           <button class="bluebutton" style="cursor:pointer" data-bind="click:initEnroll,attr:{name:class_id}"> Click to Enroll </button>
-                        </p>
+                        </p>                        
                       </div>
 
 
