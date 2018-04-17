@@ -56,7 +56,7 @@
                         <div class="oj-flex">
                           <div class="oj-sm-1 oj-md-2 oj-lg-1">
                             <label>
-                              <input type="checkbox" class="category" name="category" data-bind="value: id" onchange="refineupdate(this)">
+                            <input type="checkbox" class="category" name="category" data-bind="value: id" onchange="refineupdate(this)">
                             </label>
                           </div>
                           <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
@@ -180,8 +180,13 @@
       <div class="oj-margin-left">
         <div id="accordionPage" data-bind="ojComponent: {component: 'ojAccordion', multiple: true, 
                                                  expanded: newExpanded }">
-          <div id="c1"> <span><span>PM On-demand</span></span>
-            <div>
+         <div id="c1" data-bind="ojComponent: {component: 'ojCollapsible', expanded:false}">
+   <span><span>PM On-demand</span></span>
+    <div id="nestedAccordion" data-bind="ojComponent: {component: 'ojAccordion'}" >
+         
+       <div id="ic1" data-bind="ojComponent: {component: 'ojCollapsible'}">
+       <h4>Inner Header 1</h4>
+       <div>
               <div class="oj-sm-12  blocks oj-flex-item">
                 <div class="oj-flex oj-sm-12 blocksinner">
                   <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1">
@@ -197,9 +202,35 @@
                   </div>
                   <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 linkblock"><a data-bind="" target="_blank" style="cursor:pointer"><img src="css/images/317-arrow-right2.png"></a></div>
                 </div>
+              
+             </div>
               </div>
-            </div>
-          </div>
+             </div>
+      <div id="ic2" data-bind="ojComponent: {component: 'ojCollapsible'}">
+        <h4>Inner Header 1</h4>
+        <div>
+              <div class="oj-sm-12  blocks oj-flex-item">
+                <div class="oj-flex oj-sm-12 blocksinner">
+                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1">
+                    <div class="roundedwhite">L</div>
+                  </div>
+                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10">
+                    <div class="oj-margin"> 
+                      <!-- <span class="badge">Mandatory Course</span> -->
+                      <div class="coursetitle">TITLE</div>
+                      <!--<div class="desc" data-bind="html:subdescription"></div>-->
+                      <div class="desc">Type: <span class="desc">TYPE</span> / Level: <span class="desc">LEVEL</span> </div>
+                    </div>
+                  </div>
+                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 linkblock"><a data-bind="" target="_blank" style="cursor:pointer"><img src="css/images/317-arrow-right2.png"></a></div>
+                </div>
+              
+             </div>
+              </div>
+      </div>
+   </div>
+    </div>
+  
           <div id="c2"> <span><span>ECA</span></span>
              <div>
               <div class="oj-sm-12  blocks oj-flex-item">
