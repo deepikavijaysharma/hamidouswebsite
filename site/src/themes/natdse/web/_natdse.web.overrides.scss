@@ -3041,6 +3041,7 @@ margin-bottom:10px;
 }
 .oj-margin-edited{
 margin:0px 20px;
+margin-right:0px;
 @media  #{$responsiveQuerySmallOnly} {
 margin:0px 0px;
 }
@@ -3749,4 +3750,31 @@ font-size:14px;
 		width: 100%;
 		float: right;
 	}
+}
+
+#edittools{
+.oj-tree-list a{
+white-space: normal;
+}
+.oj-tree-node{
+margin-top:5px;
+margin-bottom:5px;
+display:flex;
+}
+.oj-clickable-icon-nocontext{
+	font-size:21px !important;
+	margin-right:10px !important;
+	}
+
+}
+.reqtools-button{
+background:$orange !important;
+margin-left:10px;
+padding:14px 35px;
+height:auto;
+cursor:pointer !important;
+font-size:$mediumFontSize !important;
+height:50px;
+border:none;
+color:#fff !important;
 }

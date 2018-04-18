@@ -1,435 +1,580 @@
 <div class="container">
   <div class="oj-flex tools ">
+  <div class="search oj-sm-12">
+                <button id="createTrainingButton" class="reqtools-button oj-xl-float-end admin" data-bind="ojComponent: {
+                      component: 'ojButton',
+                      label: 'Create Tools'},click:createtools"> </button>
+              </div>
     <div class="oj-flex-item oj-md-3 oj-lg-3 toolsfilter">
-    <div class="oj-sm-12 filterblock">
-      <form id="formId" class="oj-form">
-        <label id="mainlabelid">Role</label>
-        <!-- You need to set the aria-labelledby attribute
+      <div class="oj-sm-12 filterblock">
+        <form id="formId" class="oj-form">
+          <label id="mainlabelid">Role</label>
+          <!-- You need to set the aria-labelledby attribute
          to make this accessible.
          role="radiogroup" is set for you by ojRadioset. -->
-        <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid"
+          <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid"
          data-bind="ojComponent: {
           component: 'ojRadioset'}" > <span class="oj-choice-item">
-          <input data-id="all" id="all" type="radio" name="filter" value="all" data-bind="checked: currentRole,click: setFilter">
-          <label for="all">All</label>
-          </span><span class="oj-choice-item">
-          <input data-id="se" id="se" type="radio" name="filter" value="se" data-bind="checked: currentRole,click: setFilter">
-          <label for="se">SE</label>
-          </span> <span class="oj-choice-item">
-          <input data-id="eca" id="eca" type="radio" name="filter" value="eca" data-bind="checked: currentRole,click: setFilter">
-          <label for="eca">ECA</label>
-          </span> <span class="oj-choice-item">
-          <input data-id="csm" id="csm" type="radio" name="filter" value="csm" data-bind="checked: currentRole,click: setFilter">
-          <label for="csm">CSM</label>
-          </span>
-          <span class="oj-choice-item">
-          <input data-id="pm" id="pm" type="radio" name="filter" value="pm" data-bind="checked: currentRole,click: setFilter">
-          <label for="csm">PM</label>
-          </span>
-          
-          </div>
-      </form>
-    </div>
-    <div class="oj-sm-12 filterblock">
-      <form id="formId" class="oj-form">
-        <label id="mainlabelid">Category</label>
-        <!-- You need to set the aria-labelledby attribute
+            <input data-id="all" id="all" type="radio" name="filter" value="all" data-bind="checked: currentRole,click: setFilter">
+            <label for="all">All</label>
+            </span><span class="oj-choice-item">
+            <input data-id="se" id="se" type="radio" name="filter" value="se" data-bind="checked: currentRole,click: setFilter">
+            <label for="se">SE</label>
+            </span> <span class="oj-choice-item">
+            <input data-id="eca" id="eca" type="radio" name="filter" value="eca" data-bind="checked: currentRole,click: setFilter">
+            <label for="eca">ECA</label>
+            </span> <span class="oj-choice-item">
+            <input data-id="csm" id="csm" type="radio" name="filter" value="csm" data-bind="checked: currentRole,click: setFilter">
+            <label for="csm">CSM</label>
+            </span> <span class="oj-choice-item">
+            <input data-id="pm" id="pm" type="radio" name="filter" value="pm" data-bind="checked: currentRole,click: setFilter">
+            <label for="csm">PM</label>
+            </span> </div>
+        </form>
+      </div>
+      <div class="oj-sm-12 filterblock">
+        <form id="formId" class="oj-form">
+          <label id="mainlabelid">Category</label>
+          <!-- You need to set the aria-labelledby attribute
          to make this accessible.
          role="radiogroup" is set for you by ojRadioset. -->
-        <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid"
+          <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid"
          data-bind="ojComponent: {
-          component: 'ojRadioset'}" > 
-          <span class="oj-choice-item">
-          <input  data-id="all" id="all" type="radio" name="filter" value="all" data-bind="checked: currentCategory,click: setFilter">
-          <label for="all">All</label>
-          </span>
-           <span class="oj-choice-item">
-          <input  data-id="doc" id="doc" type="radio" name="filter" value="doc" data-bind="checked: currentCategory,click: setFilter">
-          <label for="doc">Documentation</label>
-          </span> <span class="oj-choice-item">
-          <input data-id="ref" id="ref" type="radio" name="filter" value="ref" data-bind="checked: currentCategory,click: setFilter">
-          <label for="ref">Reference</label>
-          </span> <span class="oj-choice-item">
-          <input data-id="res" id="res" type="radio" name="filter" value="res" data-bind="checked: currentCategory,click: setFilter">
-          <label for="res">Resources</label>         
-          </span>
-           <span class="oj-choice-item">
-          <input data-id="tool" id="tool" type="radio" name="filter" value="tool" data-bind="checked: currentCategory,click: setFilter">
-          <label for="csm">Tools</label>
-          </span>
-          <span class="oj-choice-item">
-          <input data-id="training" id="training" type="radio" name="filter" value="training" data-bind="checked: currentCategory,click: setFilter">
-          <label for="training">Training</label>
-          </span>
-          </div>
-      </form>
+          component: 'ojRadioset'}" > <span class="oj-choice-item">
+            <input  data-id="all" id="all" type="radio" name="filter" value="all" data-bind="checked: currentCategory,click: setFilter">
+            <label for="all">All</label>
+            </span> <span class="oj-choice-item">
+            <input  data-id="doc" id="doc" type="radio" name="filter" value="doc" data-bind="checked: currentCategory,click: setFilter">
+            <label for="doc">Documentation</label>
+            </span> <span class="oj-choice-item">
+            <input data-id="ref" id="ref" type="radio" name="filter" value="ref" data-bind="checked: currentCategory,click: setFilter">
+            <label for="ref">Reference</label>
+            </span> <span class="oj-choice-item">
+            <input data-id="res" id="res" type="radio" name="filter" value="res" data-bind="checked: currentCategory,click: setFilter">
+            <label for="res">Resources</label>
+            </span> <span class="oj-choice-item">
+            <input data-id="tool" id="tool" type="radio" name="filter" value="tool" data-bind="checked: currentCategory,click: setFilter">
+            <label for="csm">Tools</label>
+            </span> <span class="oj-choice-item">
+            <input data-id="training" id="training" type="radio" name="filter" value="training" data-bind="checked: currentCategory,click: setFilter">
+            <label for="training">Training</label>
+            </span> </div>
+        </form>
+      </div>
     </div>
-    </div>
-    
     <div class="oj-flex-item oj-md-9 oj-lg-9 oj-sm-margin-top">
       <div class="oj-margin-edited">
-      <div class="toolsbgwhite">
-     
-      <!-- SE --> 
-       
-         <div class="oj-flex toolsrow res se all" >
-              <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                <div class="roundedwhite">RES</div>
-              </div>
-              <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                <div class="oj-margin">
-                  <h1>GSE (Demo Central)</h1>
-                  Internal demo environments and scripts</div>
-              </div>
-              <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://demo.oracle.com/apex/f?p=DEMOWEB:1:10720583262872:::::" title="Internal demo environments and scripts" ><img src="css/images/317-arrow-right2.png"></a></div>
-            </div>
-            <div class="oj-flex toolsrow tool se all" >
-              <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                <div class="roundedwhite">TOOL</div>
-              </div>
-              <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                <div class="oj-margin">
-                  <h1>Oracle Sales Cloud</h1>
-                  Comprehensive site for Customer Resource Management</div>
-              </div>
-              <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://crm-fusioncrm.oracle.com/sales/faces/FuseWelcome?_adf.no-new-window-redirect=true&_adf.ctrl-state=14b1qefx5b_5&_afrLoop=269775379500619&_afrWindowMode=2&_afrWindowId=null" title="Comprehensive site for Customer Resource Management"><img src="css/images/317-arrow-right2.png"></a></div>
-            </div>
-            <div class="oj-flex toolsrow tool se all" >
-              <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                <div class="roundedwhite">TOOL</div>
-              </div>
-              <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                <div class="oj-margin">
-                  <h1>Sales Lookup Tool</h1>
-                  Tool to identify the sales team assigned to specific customers</div>
-              </div>
-              <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://apex-fusioncrm.oraclecorp.com/apex/f?p=115:2:204917934235::NO::P2_SEARCH_FLAG,P2_ACCOUNT_NAME,P2_ACCOUNT_NUM,P2_SALES_REP,P2_RESOURCE_RL,P2_COUNTRY,P2_SHOW_HIDE_DUP,P2_PARTNER:N," title="Tool to identify the sales team assigned to specific customers"><img src="css/images/317-arrow-right2.png"></a></div>
-            </div>
-            <div class="oj-flex toolsrow tool se all" >
-              <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                <div class="roundedwhite">TOOL</div>
-              </div>
-              <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                <div class="oj-margin">
-                  <h1>SC Time Application (SCTA)</h1>
-                  Sales Consulting Time Reporting Application</div>
-              </div>
-              <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://apex-fusioncrm.oraclecorp.com/apex/f?p=112:1" title="Sales Consulting Time Reporting Application"><img src="css/images/317-arrow-right2.png"></a></div>
-            </div>
-            <div class="oj-flex toolsrow tool se all" >
-              <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                <div class="roundedwhite">TOOL</div>
-              </div>
-              <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                <div class="oj-margin">
-                  <h1>SCRM</h1>
-                  Sales Consulting Resource Management Tool</div>
-              </div>
-              <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://scrm.oraclecorp.com/" title="Sales Consulting Resource Management Tool"><img src="css/images/317-arrow-right2.png"></a></div>
-            </div>
-           
-           <!-- SE --> 
-            
-            <!-- CSM --> 
-       
-        <div class="oj-flex toolsrow res csm all">
-              <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                <div class="roundedwhite">RES</div>
-              </div>
-              <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                <div class="oj-margin">
-                  <h1>GSE (Demo Central)</h1>
-                  Internal demo environments and scripts</div>
-              </div>
-              <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://demo.oracle.com/apex/f?p=DEMOWEB:1:10720583262872:::::" title="Internal demo environments and scripts" ><img src="css/images/317-arrow-right2.png"></a></div>
-            </div>
-            <div class="oj-flex toolsrow tool csm all">
-              <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                <div class="roundedwhite">TOOL</div>
-              </div>
-              <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                <div class="oj-margin">
-                  <h1>Oracle Sales Cloud</h1>
-                  Comprehensive site for Customer Resource Management</div>
-              </div>
-              <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://crm-fusioncrm.oracle.com/sales/faces/FuseWelcome?_adf.no-new-window-redirect=true&_adf.ctrl-state=14b1qefx5b_5&_afrLoop=269775379500619&_afrWindowMode=2&_afrWindowId=null" title="Comprehensive site for Customer Resource Management"><img src="css/images/317-arrow-right2.png"></a></div>
-            </div>
-            <div class="oj-flex toolsrow tool csm all">
-              <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                <div class="roundedwhite">TOOL</div>
-              </div>
-              <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                <div class="oj-margin">
-                  <h1>Sales Lookup Tool</h1>
-                  Tool to identify the sales team assigned to specific customers</div>
-              </div>
-              <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://apex-fusioncrm.oraclecorp.com/apex/f?p=115:2:204917934235::NO::P2_SEARCH_FLAG,P2_ACCOUNT_NAME,P2_ACCOUNT_NUM,P2_SALES_REP,P2_RESOURCE_RL,P2_COUNTRY,P2_SHOW_HIDE_DUP,P2_PARTNER:N," title="Tool to identify the sales team assigned to specific customers"><img src="css/images/317-arrow-right2.png"></a></div>
-            </div>
-            <div class="oj-flex toolsrow tool csm all">
-              <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                <div class="roundedwhite">TOOL</div>
-              </div>
-              <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                <div class="oj-margin">
-                  <h1>SC Time Application (SCTA)</h1>
-                  Sales Consulting Time Reporting Application</div>
-              </div>
-              <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://apex-fusioncrm.oraclecorp.com/apex/f?p=112:1" title="Sales Consulting Time Reporting Application"><img src="css/images/317-arrow-right2.png"></a></div>
-            </div>
-            <div class="oj-flex toolsrow csm all tool">
-              <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                <div class="roundedwhite">TOOL</div>
-              </div>
-              <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                <div class="oj-margin">
-                  <h1>SCRM</h1>
-                  Sales Consulting Resource Management Tool</div>
-              </div>
-              <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://scrm.oraclecorp.com/" title="Sales Consulting Resource Management Tool"><img src="css/images/317-arrow-right2.png"></a></div>
-            </div>
-            
-           <!-- CSM --> 
-           <!--PM-->
-           <div class="oj-flex toolsrow pm ref all">
-              <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                <div class="roundedwhite">REF</div>
-              </div>
-              <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                <div class="oj-margin">
-                  <h1>Product Release Cycles and Roadmaps</h1>
-                  Provides insight into the product release dates for cloud products</div>
-              </div>
-              <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://cloudops-knowledgebase.custhelp.com/app/home" title="Answers to common Oracle Public Cloud questions"><img src="css/images/317-arrow-right2.png"></a></div>
-            </div>
-            <div class="oj-flex toolsrow pm ref all">
-              <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                <div class="roundedwhite">REF</div>
-              </div>
-              <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                <div class="oj-margin">
-                  <h1>RFP Knowledge Base</h1>
-                  Answers to common Oracle Public Cloud questions</div>
-              </div>
-              <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://cloudops-knowledgebase.custhelp.com/app/home" title="Answers to common Oracle Public Cloud questions"><img src="css/images/317-arrow-right2.png"></a></div>
-            </div>
-           <!--PM-->
-           <!--DOC-->
-            <div class="oj-flex toolsrow doc all">
-              <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                <div class="roundedwhite">DOC</div>
-              </div>
-              <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                <div class="oj-margin">
-                  <h1>Bare Metal Cloud Documentation</h1>
-                  All official Oracle documentation on Bare Metal products</div>
-              </div>
-              <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://docs.us-phoenix-1.oraclecloud.com/Content/GSG/Concepts/baremetalintro.htm" title="All official Oracle documentation on Bare Metal products"><img src="css/images/317-arrow-right2.png"></a></div>
-            </div>
-           <!--DOC-->
-           <!--Training -->
+        <div class="toolsbgwhite"> 
           
-            <div class="oj-flex toolsrow training all">
-              <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                <div class="roundedwhite">T</div>
-              </div>
-              <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                <div class="oj-margin">
-                  <h1>ud Learning Subscriptions</h1>
-                  Explore the complete list of of Cloud Learning subscriptions that are complementary to customers.</div>
-              </div>
-              <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://my.oracle.com/content/web/CNT2462961" title="Explore the complete list of of Cloud Learning subscriptions that are complementary to customers."><img src="css/images/317-arrow-right2.png"></a></div>
+          <!-- SE -->
+          
+          <div class="oj-flex toolsrow res se all" >
+            <div class="oj-sm-12 " style="margin-bottom: 5px;position:relative;z-index:1000"> <i class="fa fa-pencil-square-o admin" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Edit Course"
+                        data-bind="click:function(){edittools(this)}" target="_blank"></i> <i class="fa fa-trash-o admin" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Delete Course"
+                        data-bind="click:function(){deletetools(this)}" target="_blank"></i> </div>
+            <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+              <div class="roundedwhite">RES</div>
             </div>
-            <div class="oj-flex toolsrow training all">
-              <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                <div class="roundedwhite">T</div>
-              </div>
-              <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                <div class="oj-margin">
-                  <h1>Oracle Learning Library - Cloud</h1>
-                  What would you like to learn today?</div>
-              </div>
-              <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://apexapps.oracle.com/pls/apex/f?p=44785:5:13315155904435::NO::P5_PRODUCT:Cloud" title="What would you like to learn today?"><img src="css/images/317-arrow-right2.png"></a></div>
+            <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+              <div class="oj-margin">
+                <h1>GSE (Demo Central)</h1>
+                Internal demo environments and scripts</div>
             </div>
-         
+            <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://demo.oracle.com/apex/f?p=DEMOWEB:1:10720583262872:::::" title="Internal demo environments and scripts" ><img src="css/images/317-arrow-right2.png"></a></div>
+          </div>
+          <div class="oj-flex toolsrow tool se all" >
+            <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+              <div class="roundedwhite">TOOL</div>
+            </div>
+            <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+              <div class="oj-margin">
+                <h1>Oracle Sales Cloud</h1>
+                Comprehensive site for Customer Resource Management</div>
+            </div>
+            <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://crm-fusioncrm.oracle.com/sales/faces/FuseWelcome?_adf.no-new-window-redirect=true&_adf.ctrl-state=14b1qefx5b_5&_afrLoop=269775379500619&_afrWindowMode=2&_afrWindowId=null" title="Comprehensive site for Customer Resource Management"><img src="css/images/317-arrow-right2.png"></a></div>
+          </div>
+          <div class="oj-flex toolsrow tool se all" >
+            <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+              <div class="roundedwhite">TOOL</div>
+            </div>
+            <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+              <div class="oj-margin">
+                <h1>Sales Lookup Tool</h1>
+                Tool to identify the sales team assigned to specific customers</div>
+            </div>
+            <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://apex-fusioncrm.oraclecorp.com/apex/f?p=115:2:204917934235::NO::P2_SEARCH_FLAG,P2_ACCOUNT_NAME,P2_ACCOUNT_NUM,P2_SALES_REP,P2_RESOURCE_RL,P2_COUNTRY,P2_SHOW_HIDE_DUP,P2_PARTNER:N," title="Tool to identify the sales team assigned to specific customers"><img src="css/images/317-arrow-right2.png"></a></div>
+          </div>
+          <div class="oj-flex toolsrow tool se all" >
+            <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+              <div class="roundedwhite">TOOL</div>
+            </div>
+            <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+              <div class="oj-margin">
+                <h1>SC Time Application (SCTA)</h1>
+                Sales Consulting Time Reporting Application</div>
+            </div>
+            <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://apex-fusioncrm.oraclecorp.com/apex/f?p=112:1" title="Sales Consulting Time Reporting Application"><img src="css/images/317-arrow-right2.png"></a></div>
+          </div>
+          <div class="oj-flex toolsrow tool se all" >
+            <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+              <div class="roundedwhite">TOOL</div>
+            </div>
+            <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+              <div class="oj-margin">
+                <h1>SCRM</h1>
+                Sales Consulting Resource Management Tool</div>
+            </div>
+            <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://scrm.oraclecorp.com/" title="Sales Consulting Resource Management Tool"><img src="css/images/317-arrow-right2.png"></a></div>
+          </div>
+          
+          <!-- SE --> 
+          
+          <!-- CSM -->
+          
+          <div class="oj-flex toolsrow res csm all">
+            <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+              <div class="roundedwhite">RES</div>
+            </div>
+            <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+              <div class="oj-margin">
+                <h1>GSE (Demo Central)</h1>
+                Internal demo environments and scripts</div>
+            </div>
+            <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://demo.oracle.com/apex/f?p=DEMOWEB:1:10720583262872:::::" title="Internal demo environments and scripts" ><img src="css/images/317-arrow-right2.png"></a></div>
+          </div>
+          <div class="oj-flex toolsrow tool csm all">
+            <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+              <div class="roundedwhite">TOOL</div>
+            </div>
+            <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+              <div class="oj-margin">
+                <h1>Oracle Sales Cloud</h1>
+                Comprehensive site for Customer Resource Management</div>
+            </div>
+            <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://crm-fusioncrm.oracle.com/sales/faces/FuseWelcome?_adf.no-new-window-redirect=true&_adf.ctrl-state=14b1qefx5b_5&_afrLoop=269775379500619&_afrWindowMode=2&_afrWindowId=null" title="Comprehensive site for Customer Resource Management"><img src="css/images/317-arrow-right2.png"></a></div>
+          </div>
+          <div class="oj-flex toolsrow tool csm all">
+            <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+              <div class="roundedwhite">TOOL</div>
+            </div>
+            <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+              <div class="oj-margin">
+                <h1>Sales Lookup Tool</h1>
+                Tool to identify the sales team assigned to specific customers</div>
+            </div>
+            <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://apex-fusioncrm.oraclecorp.com/apex/f?p=115:2:204917934235::NO::P2_SEARCH_FLAG,P2_ACCOUNT_NAME,P2_ACCOUNT_NUM,P2_SALES_REP,P2_RESOURCE_RL,P2_COUNTRY,P2_SHOW_HIDE_DUP,P2_PARTNER:N," title="Tool to identify the sales team assigned to specific customers"><img src="css/images/317-arrow-right2.png"></a></div>
+          </div>
+          <div class="oj-flex toolsrow tool csm all">
+            <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+              <div class="roundedwhite">TOOL</div>
+            </div>
+            <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+              <div class="oj-margin">
+                <h1>SC Time Application (SCTA)</h1>
+                Sales Consulting Time Reporting Application</div>
+            </div>
+            <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://apex-fusioncrm.oraclecorp.com/apex/f?p=112:1" title="Sales Consulting Time Reporting Application"><img src="css/images/317-arrow-right2.png"></a></div>
+          </div>
+          <div class="oj-flex toolsrow csm all tool">
+            <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+              <div class="roundedwhite">TOOL</div>
+            </div>
+            <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+              <div class="oj-margin">
+                <h1>SCRM</h1>
+                Sales Consulting Resource Management Tool</div>
+            </div>
+            <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://scrm.oraclecorp.com/" title="Sales Consulting Resource Management Tool"><img src="css/images/317-arrow-right2.png"></a></div>
+          </div>
+          
+          <!-- CSM --> 
+          <!--PM-->
+          <div class="oj-flex toolsrow pm ref all">
+            <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+              <div class="roundedwhite">REF</div>
+            </div>
+            <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+              <div class="oj-margin">
+                <h1>Product Release Cycles and Roadmaps</h1>
+                Provides insight into the product release dates for cloud products</div>
+            </div>
+            <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://cloudops-knowledgebase.custhelp.com/app/home" title="Answers to common Oracle Public Cloud questions"><img src="css/images/317-arrow-right2.png"></a></div>
+          </div>
+          <div class="oj-flex toolsrow pm ref all">
+            <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+              <div class="roundedwhite">REF</div>
+            </div>
+            <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+              <div class="oj-margin">
+                <h1>RFP Knowledge Base</h1>
+                Answers to common Oracle Public Cloud questions</div>
+            </div>
+            <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://cloudops-knowledgebase.custhelp.com/app/home" title="Answers to common Oracle Public Cloud questions"><img src="css/images/317-arrow-right2.png"></a></div>
+          </div>
+          <!--PM--> 
+          <!--DOC-->
+          <div class="oj-flex toolsrow doc all">
+            <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+              <div class="roundedwhite">DOC</div>
+            </div>
+            <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+              <div class="oj-margin">
+                <h1>Bare Metal Cloud Documentation</h1>
+                All official Oracle documentation on Bare Metal products</div>
+            </div>
+            <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://docs.us-phoenix-1.oraclecloud.com/Content/GSG/Concepts/baremetalintro.htm" title="All official Oracle documentation on Bare Metal products"><img src="css/images/317-arrow-right2.png"></a></div>
+          </div>
+          <!--DOC--> 
+          <!--Training -->
+          
+          <div class="oj-flex toolsrow training all">
+            <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+              <div class="roundedwhite">T</div>
+            </div>
+            <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+              <div class="oj-margin">
+                <h1>Oracle Cloud Learning Subscriptions</h1>
+                Explore the complete list of of Cloud Learning subscriptions that are complementary to customers.</div>
+            </div>
+            <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://my.oracle.com/content/web/CNT2462961" title="Explore the complete list of of Cloud Learning subscriptions that are complementary to customers."><img src="css/images/317-arrow-right2.png"></a></div>
+          </div>
+          <div class="oj-flex toolsrow training all">
+            <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+              <div class="roundedwhite">T</div>
+            </div>
+            <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+              <div class="oj-margin">
+                <h1>Oracle Learning Library - Cloud</h1>
+                What would you like to learn today?</div>
+            </div>
+            <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://apexapps.oracle.com/pls/apex/f?p=44785:5:13315155904435::NO::P5_PRODUCT:Cloud" title="What would you like to learn today?"><img src="css/images/317-arrow-right2.png"></a></div>
+          </div>
+          
           <!--Training --> 
           <!-- SH -->
           <div class="oj-flex toolsrow res all">
-                    <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                      <div class="roundedwhite">RES</div>
-                    </div>
-                    <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                      <div class="oj-margin">
-                       <h1>Oracle Cloud Solution Hubs Site</h1>
-                       Oracle Cloud Solution Hubs - Review the Cloud Solution Hub Site to gain insights in the new SE Service Delivery Model, Organizations, and Services they provide.</div>
-                    </div>
-                    <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="http://solutionengineering.us.oracle.com/site/?root=home" title="Oracle Cloud Solution Hubs Site"><img src="css/images/317-arrow-right2.png"></a></div>
-                  </div>
-             <!-- SH -->
+            <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+              <div class="roundedwhite">RES</div>
+            </div>
+            <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+              <div class="oj-margin">
+                <h1>Oracle Cloud Solution Hubs Site</h1>
+                Oracle Cloud Solution Hubs - Review the Cloud Solution Hub Site to gain insights in the new SE Service Delivery Model, Organizations, and Services they provide.</div>
+            </div>
+            <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="http://solutionengineering.us.oracle.com/site/?root=home" title="Oracle Cloud Solution Hubs Site"><img src="css/images/317-arrow-right2.png"></a></div>
+          </div>
+          <!-- SH --> 
           <!-- SB -->
           <div class="oj-flex toolsrow res all">
-              <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                <div class="roundedwhite">RES</div>
-              </div>
-              <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                <div class="oj-margin">
-                  <h1>Solution Bank</h1>
-                  SE Resources site to leverage top presentations, assets, and images for customer meetings</div>
-              </div>
-              <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="http://innovate.us.oracle.com/sb/" title="SE Resources site to leverage top presentations, assets, and images for customer meetings"><img src="css/images/317-arrow-right2.png"></a></div>
+            <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+              <div class="roundedwhite">RES</div>
             </div>
-             <!-- SB -->
-            <!-- ECA -->
-            <div align="right" class="excol"><a href="#" data-bind="click:expandall">Expand All</a> / <a href="#" data-bind="click:closeall">Close All</a></div>
-            <div id="accordionPage" data-bind="ojComponent: {component: 'ojAccordion', multiple: true, 
+            <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+              <div class="oj-margin">
+                <h1>Solution Bank</h1>
+                SE Resources site to leverage top presentations, assets, and images for customer meetings</div>
+            </div>
+            <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="http://innovate.us.oracle.com/sb/" title="SE Resources site to leverage top presentations, assets, and images for customer meetings"><img src="css/images/317-arrow-right2.png"></a></div>
+          </div>
+          <!-- SB --> 
+          <!-- ECA -->
+          <div align="right" class="excol"><a href="#" data-bind="click:expandall">Expand All</a> / <a href="#" data-bind="click:closeall">Close All</a></div>
+          <div id="accordionPage" data-bind="ojComponent: {component: 'ojAccordion', multiple: true, 
                                                  expanded: newExpanded }">
-              <div id="c1"> <span><span>SCRM</span></span>
-                <div>
-                  <div class="oj-flex toolsrow eca ref all" >
-                    <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                      <div class="roundedwhite">RES</div>
-                    </div>
-                    <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                      <div class="oj-margin">
-                        <h1>SCRM for NATD Presales</h1>
-                        CRM for NATD Presales - Master source for all SCRM Presale Guidance and Resources.</div>
-                    </div>
-                    <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://stbeehive.oracle.com/teamcollab/wiki/NATO+SC+SCTA+Resource+Hub:SCRM+for+NATD+Presales" title=" CRM for NATD Presales - Master source for all SCRM Presale Guidance and Resources."><img src="css/images/317-arrow-right2.png"></a></div>
+            <div id="c1"> <span><span>SCRM</span></span>
+              <div>
+                <div class="oj-flex toolsrow eca ref all" >
+                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+                    <div class="roundedwhite">RES</div>
                   </div>
-                  <div class="oj-flex toolsrow eca res all" >
-                    <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                      <div class="roundedwhite">RES</div>
-                    </div>
-                    <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                      <div class="oj-margin">
-                        <h1>SCRM Demo of ECAL Enagagement</h1>
-                        ECAL and SCRM Brown Bag Session - This session is a part of the SCRM series focusing on capturing the ECAL Engagement Events.</div>
-                    </div>
-                    <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://urldefense.proofpoint.com/v2/url?u=https-3A__oracletalk.webex.com_oracletalk_ldr.php-3FRCID-3D1c7ab901804913805b5e8aafd5bca50a&d=DwMGaQ&c=RoP1YumCXCgaWHvlZYR8PQcxBKCX5YTpkKY057SbK10&r=DWcsoLJh7SbndLdm2V7L2q5mjFuvTsBgGnXiZxEec1o&m=kFwED55v-FuvfYk6cgxrlNOKIM5iQRSRIaXqnEQKFxM&s=XIKD0v5VrU69JnFu3LdZo4Tg0DrVlS5d5RCO0N90cBQ&e=style=" title="ECAL and SCRM Brown Bag Session - This session is a part of the SCRM series focusing on capturing the ECAL Engagement Events."><img src="css/images/317-arrow-right2.png"></a></div>
+                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+                    <div class="oj-margin">
+                      <h1>SCRM for NATD Presales</h1>
+                      CRM for NATD Presales - Master source for all SCRM Presale Guidance and Resources.</div>
                   </div>
-                  <div class="oj-flex toolsrow eca ref all" >
-                    <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                      <div class="roundedwhite">REF</div>
-                    </div>
-                    <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                      <div class="oj-margin">
-                        <h1>Community of NAS SCRM users and Administrators</h1>
-                        SCRM for NAS OSN Conversation - Community of NAS SCRM users and administrators to discuss questions, issues, and information.</div>
-                    </div>
-                    <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://eeho.social.us2.oraclecloud.com/osn/web/cList/conversations/143192763style=" title="Community of NAS SCRM users and Administrators"><img src="css/images/317-arrow-right2.png"></a></div>
-                  </div>
-                  <div class="oj-flex toolsrow tool eca all" >
-                    <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                      <div class="roundedwhite">TOOL</div>
-                    </div>
-                    <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                      <div class="oj-margin">
-                        <h1>SCRM Application Access</h1>
-                      </div>
-                    </div>
-                    <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://apex-fusioncrm.oraclecorp.com/apex/f?p=362:1:111133345654718:::::" title="SCRM Application Access"><img src="css/images/317-arrow-right2.png"></a></div>
-                  </div>
-                  <div class="oj-flex toolsrow eca tool all" >
-                    <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                      <div class="roundedwhite">TOOL</div>
-                    </div>
-                    <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                      <div class="oj-margin">
-                        <h1>SCRM Application Access</h1>
-                      </div>
-                    </div>
-                    <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://apex-fusioncrm.oraclecorp.com/apex/f?p=112:1:101842437967781:::::&tz=-4:00" title="SCRM Application Access"><img src="css/images/317-arrow-right2.png"></a></div>
-                  </div>
+                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://stbeehive.oracle.com/teamcollab/wiki/NATO+SC+SCTA+Resource+Hub:SCRM+for+NATD+Presales" title=" CRM for NATD Presales - Master source for all SCRM Presale Guidance and Resources."><img src="css/images/317-arrow-right2.png"></a></div>
                 </div>
-              </div>
-              <div id="c2"> <span><span>SCRM and SE Services </span></span>
-                <div>
-                  <div class="oj-flex toolsrow res eca all" >
-                    <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                      <div class="roundedwhite">RES</div>
-                    </div>
-                    <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                      <div class="oj-margin">
-                        <h1>Oracle Cloud Solution Hubs Site</h1>
-                        Oracle Cloud Solution Hubs - Review the Cloud Solution Hub Site to gain insights in the new SE Service Delivery Model, Organizations, and Services they provide.</div>
-                    </div>
-                    <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="http://solutionengineering.us.oracle.com/site/?root=home" title="ud Solution Hubs Site"><img src="css/images/317-arrow-right2.png"></a></div>
+                <div class="oj-flex toolsrow eca res all" >
+                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+                    <div class="roundedwhite">RES</div>
                   </div>
-                  <div class="oj-flex toolsrow ref eca all" >
-                    <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                      <div class="roundedwhite">REF</div>
-                    </div>
-                    <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                      <div class="oj-margin">
-                        <h1>Oracle Cloud Solution Hubs Introduction Presentation</h1>
-                        Introducing Cloud Solution Hubs - This presentation provides an overview of the new solution engineering model as well as the methods for requesting resources in support of your engagement. </div>
-                    </div>
-                    <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="http://solutionengineering.us.oracle.com/site/css/pdf/Introducing-OracleCloudSolutionHubs-Sept2017.pptx" title="ud Solution Hubs Introduction Presentation"><img src="css/images/317-arrow-right2.png"></a></div>
+                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+                    <div class="oj-margin">
+                      <h1>SCRM Demo of ECAL Enagagement</h1>
+                      ECAL and SCRM Brown Bag Session - This session is a part of the SCRM series focusing on capturing the ECAL Engagement Events.</div>
                   </div>
-                  <div class="oj-flex toolsrow res eca all" >
-                    <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                      <div class="roundedwhite">RES</div>
-                    </div>
-                    <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                      <div class="oj-margin">
-                        <h1>SEaaS Request Resource</h1>
-                        SE Service Request Application - Temporary facility for requesting resources for your ECAL engagements.</div>
-                    </div>
-                    <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:9973068186263:::::" title="SEaaS Request Resource"></a></div>
-                  </div>
-                  <div class="oj-flex toolsrow ref eca all" >
-                    <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                      <div class="roundedwhite">REF</div>
-                    </div>
-                    <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                      <div class="oj-margin">
-                        <h1>SEaaS Catalog</h1>
-                        Solution Engineering SE as a Service Catalog </div>
-                    </div>
-                    <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="http://solutionengineering.us.oracle.com/site/?root=catalogs" title="SEaaS Catalog"></a></div>
-                  </div>
+                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://urldefense.proofpoint.com/v2/url?u=https-3A__oracletalk.webex.com_oracletalk_ldr.php-3FRCID-3D1c7ab901804913805b5e8aafd5bca50a&d=DwMGaQ&c=RoP1YumCXCgaWHvlZYR8PQcxBKCX5YTpkKY057SbK10&r=DWcsoLJh7SbndLdm2V7L2q5mjFuvTsBgGnXiZxEec1o&m=kFwED55v-FuvfYk6cgxrlNOKIM5iQRSRIaXqnEQKFxM&s=XIKD0v5VrU69JnFu3LdZo4Tg0DrVlS5d5RCO0N90cBQ&e=style=" title="ECAL and SCRM Brown Bag Session - This session is a part of the SCRM series focusing on capturing the ECAL Engagement Events."><img src="css/images/317-arrow-right2.png"></a></div>
                 </div>
-              </div>
-              <div id="c3"> <span><span>Sales Analytics </span></span>
-                <div>
-                
-<div class="oj-flex toolsrow eca tool all" >
-  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft ">
-    <div class="roundedwhite">TOOL</div>
-  </div>
-  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-    <div class="oj-margin">
-      <h1>Sales Intelligence Dashboard</h1>
-      Sales Analytics / Customer 360 - Sales Intelligence Dashboard</div>
-  </div>
-  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright "><a target="_blank" href="https://biapps-fusioncrm.oracle.com/analytics/saw.dll?Dashboard" title="Sales Intelligence Dashboard"><img src="css/images/317-arrow-right2.png"></a></div>
-</div>
-
+                <div class="oj-flex toolsrow eca ref all" >
+                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+                    <div class="roundedwhite">REF</div>
+                  </div>
+                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+                    <div class="oj-margin">
+                      <h1>Community of NAS SCRM users and Administrators</h1>
+                      SCRM for NAS OSN Conversation - Community of NAS SCRM users and administrators to discuss questions, issues, and information.</div>
+                  </div>
+                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://eeho.social.us2.oraclecloud.com/osn/web/cList/conversations/143192763style=" title="Community of NAS SCRM users and Administrators"><img src="css/images/317-arrow-right2.png"></a></div>
                 </div>
-              </div>
-              <div id="c4"> <span><span>ASR Lookup </span></span>
-                <div>
-                  <div class="oj-flex toolsrow tool eca all"  id="fulltext" >
-  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft ">
-    <div class="roundedwhite">TOOL</div>
-  </div>
-  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-    <div class="oj-margin" >
-      <h1>ASR/CRM Territory Lookup Tool</h1>
-      <p>ACCOUNT & SALES REP LOOK UP TOOL <a href="#" data-bind="click: readMore" id="readmorelink">[Read More...]</a> <div id="moretext" >The ASR (ACCOUNT & SALES REP LOOK UP TOOL) Tool is designed for Sales/Channel Managers, Sales/Channel Reps, BDCs, Pre-Sales, Sales Operations and any other valid Fusion CRM user to allow them to search for account coverage in Fusion.. All of them have full search access across all regions. Apart of it, the tool provides additional functionality for Sales/Channel Rep and Sales/Channel Managers. Sales reps can also retrieve the accounts assigned to their territory. A Channel Rep can also retrieve the partners setup on their territory. Sales Managers can also retrieve all accounts assigned to the reps that roll up to them. Channel Manager can also retrieve all accounts set on the territories for the reps that roll up to them.</p><p>This tool is designed to answer the following questions:<br>• Which of the Reps is assigned (Sales Rep)/setup (Channel Rep) to a specific account?<br>
-• What other co-prime reps are assigned/setup to that account?<br>
-• How many accounts are assigned/setup to a particular Sales/Channel Rep?<br>
-• List the accounts assigned/setup to a Sales/Channel Rep, sorted by size of account</p><p><a href="#" data-bind="click: readLess" id="readlesslink">[Read Less...]</a></p></div></div>
-  </div>
-  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright "><a target="_blank" href="https://apex-fusioncrm.oraclecorp.com/apex/f?p=115" title="ASR/CRM Territory Lookup Tool"><img src="css/images/317-arrow-right2.png"></a></div>
-</div>
-
+                <div class="oj-flex toolsrow tool eca all" >
+                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+                    <div class="roundedwhite">TOOL</div>
+                  </div>
+                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+                    <div class="oj-margin">
+                      <h1>SCRM Application Access</h1>
+                    </div>
+                  </div>
+                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://apex-fusioncrm.oraclecorp.com/apex/f?p=362:1:111133345654718:::::" title="SCRM Application Access"><img src="css/images/317-arrow-right2.png"></a></div>
+                </div>
+                <div class="oj-flex toolsrow eca tool all" >
+                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+                    <div class="roundedwhite">TOOL</div>
+                  </div>
+                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+                    <div class="oj-margin">
+                      <h1>SCRM Application Access</h1>
+                    </div>
+                  </div>
+                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://apex-fusioncrm.oraclecorp.com/apex/f?p=112:1:101842437967781:::::&tz=-4:00" title="SCRM Application Access"><img src="css/images/317-arrow-right2.png"></a></div>
                 </div>
               </div>
             </div>
-            
-             <!-- ECA -->
+            <div id="c2"> <span><span>SCRM and SE Services </span></span>
+              <div>
+                <div class="oj-flex toolsrow res eca all" >
+                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+                    <div class="roundedwhite">RES</div>
+                  </div>
+                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+                    <div class="oj-margin">
+                      <h1>Oracle Cloud Solution Hubs Site</h1>
+                      Oracle Cloud Solution Hubs - Review the Cloud Solution Hub Site to gain insights in the new SE Service Delivery Model, Organizations, and Services they provide.</div>
+                  </div>
+                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="http://solutionengineering.us.oracle.com/site/?root=home" title="ud Solution Hubs Site"><img src="css/images/317-arrow-right2.png"></a></div>
+                </div>
+                <div class="oj-flex toolsrow ref eca all" >
+                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+                    <div class="roundedwhite">REF</div>
+                  </div>
+                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+                    <div class="oj-margin">
+                      <h1>Oracle Cloud Solution Hubs Introduction Presentation</h1>
+                      Introducing Cloud Solution Hubs - This presentation provides an overview of the new solution engineering model as well as the methods for requesting resources in support of your engagement. </div>
+                  </div>
+                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="http://solutionengineering.us.oracle.com/site/css/pdf/Introducing-OracleCloudSolutionHubs-Sept2017.pptx" title="ud Solution Hubs Introduction Presentation"><img src="css/images/317-arrow-right2.png"></a></div>
+                </div>
+                <div class="oj-flex toolsrow res eca all" >
+                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+                    <div class="roundedwhite">RES</div>
+                  </div>
+                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+                    <div class="oj-margin">
+                      <h1>SEaaS Request Resource</h1>
+                      SE Service Request Application - Temporary facility for requesting resources for your ECAL engagements.</div>
+                  </div>
+                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="https://apex.oraclecorp.com/pls/apex/f?p=21625:1:9973068186263:::::" title="SEaaS Request Resource"><img src="css/images/317-arrow-right2.png"></a></div>
+                </div>
+                <div class="oj-flex toolsrow ref eca all" >
+                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+                    <div class="roundedwhite">REF</div>
+                  </div>
+                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+                    <div class="oj-margin">
+                      <h1>SEaaS Catalog</h1>
+                      Solution Engineering SE as a Service Catalog </div>
+                  </div>
+                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" href="http://solutionengineering.us.oracle.com/site/?root=catalogs" title="SEaaS Catalog"><img src="css/images/317-arrow-right2.png"></a></div>
+                </div>
+              </div>
             </div>
+            <div id="c3"> <span><span>Sales Analytics </span></span>
+              <div>
+                <div class="oj-flex toolsrow eca tool all" >
+                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft ">
+                    <div class="roundedwhite">TOOL</div>
+                  </div>
+                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+                    <div class="oj-margin">
+                      <h1>Sales Intelligence Dashboard</h1>
+                      Sales Analytics / Customer 360 - Sales Intelligence Dashboard</div>
+                  </div>
+                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright "><a target="_blank" href="https://biapps-fusioncrm.oracle.com/analytics/saw.dll?Dashboard" title="Sales Intelligence Dashboard"><img src="css/images/317-arrow-right2.png"></a></div>
+                </div>
+              </div>
+            </div>
+            <div id="c4"> <span><span>ASR Lookup </span></span>
+              <div>
+                <div class="oj-flex toolsrow tool eca all"  id="fulltext" >
+                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft ">
+                    <div class="roundedwhite">TOOL</div>
+                  </div>
+                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+                    <div class="oj-margin" >
+                      <h1>ASR/CRM Territory Lookup Tool</h1>
+                      <p>ACCOUNT & SALES REP LOOK UP TOOL <a href="#" data-bind="click: readMore" id="readmorelink">[Read More...]</a>
+                      <div id="moretext" style="display:none;">The ASR (ACCOUNT & SALES REP LOOK UP TOOL) Tool is designed for Sales/Channel Managers, Sales/Channel Reps, BDCs, Pre-Sales, Sales Operations and any other valid Fusion CRM user to allow them to search for account coverage in Fusion.. All of them have full search access across all regions. Apart of it, the tool provides additional functionality for Sales/Channel Rep and Sales/Channel Managers. Sales reps can also retrieve the accounts assigned to their territory. A Channel Rep can also retrieve the partners setup on their territory. Sales Managers can also retrieve all accounts assigned to the reps that roll up to them. Channel Manager can also retrieve all accounts set on the territories for the reps that roll up to them.
+                        </p>
+                        <p>This tool is designed to answer the following questions:<br>
+                          • Which of the Reps is assigned (Sales Rep)/setup (Channel Rep) to a specific account?<br>
+                          • What other co-prime reps are assigned/setup to that account?<br>
+                          • How many accounts are assigned/setup to a particular Sales/Channel Rep?<br>
+                          • List the accounts assigned/setup to a Sales/Channel Rep, sorted by size of account</p>
+                        <p><a href="#" data-bind="click: readLess" id="readlesslink">[Read Less...]</a></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright "><a target="_blank" href="https://apex-fusioncrm.oraclecorp.com/apex/f?p=115" title="ASR/CRM Territory Lookup Tool"><img src="css/images/317-arrow-right2.png"></a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- ECA --> 
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- TOOLS -->
+
+<div id="" data-bind="">
+  <div style="display:none" class="dialogbodymain" id="edittools" title="Edit" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+    <div class="oj-dialog-footer" style="background-color: lightgray">
+      <div class="oj-sm-8">
+        <button class="bluebutton " id="okButton" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}" onclick=""> </button>
+      </div>
+    </div>
+    <div class="dialogbody">
+      <div class="oj-flex"> 
+        
+        <div class="oj-flex-item oj-md-7 ">
+         <div class="oj-margin-right">
+          <div class="oj-flex oj-sm-12 inputrow">
+            <div class="oj-sm-12">
+              <label>Title</label>
+            </div>
+            <div class="oj-sm-12">
+              <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:name ,rootAttributes: { style: 'width: 100%;'}}"
+                />
+            </div>
+          </div>
+          <div class="oj-flex oj-sm-12 inputrow">
+            <div class="oj-sm-12">
+              <label>Link</label>
+            </div>
+            <div class="oj-sm-12">
+              <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:name ,rootAttributes: { style: 'width: 100%;'}}"
+                />
+            </div>
+          </div>
+          <div class="oj-flex oj-sm-12 inputrow">
+            <button onclick="openEditToolsDescriptionModal()">Edit Description</button>
+            <label class="required">*</label>
+          </div>
+         </div>
+         </div>
+        <div class="oj-md-5">
+        <div class="oj-margin-left">
+        <div class="oj-sm-12">
+              <label>Category</label>
+            </div>
+            <div class="oj-sm-12">
+        <div id="tree" style="width: 100%;height: auto;" data-bind="ojComponent:
+          {
+            component: 'ojTree',
+            selectionMode: 'multiple',
+            optionChange:categorySelected,
+            data:categoryForUi
+          }"> </div>
+          </div>
+          <div class="oj-sm-12">
+          <input id="selectedcategory" data-bind="ojComponent: {component: 'ojCombobox',optionChange:selectedCategoryChanged, 
+      multiple: true, value: $parent.selectedCategoriesForUi,rootAttributes: {style:'font-size:9pt;min-width:100%'}}" />
+       </div>
+       </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="" data-bind="">
+  <div style="display:none" class="dialogbodymain" id="createtools" title="Create" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+    <div class="oj-dialog-footer" style="background-color: lightgray">
+      <div class="oj-sm-8">
+        <button class="bluebutton " id="okButton" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}" onclick=""> </button>
+      </div>
+    </div>
+    <div class="dialogbody">
+      <div class="oj-flex"> 
+        
+        <div class="oj-flex-item oj-md-7 ">
+         <div class="oj-margin-right">
+          <div class="oj-flex oj-sm-12 inputrow">
+            <div class="oj-sm-12">
+              <label>Title</label>
+            </div>
+            <div class="oj-sm-12">
+              <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:name ,rootAttributes: { style: 'width: 100%;'}}"
+                />
+            </div>
+          </div>
+          <div class="oj-flex oj-sm-12 inputrow">
+            <div class="oj-sm-12">
+              <label>Link</label>
+            </div>
+            <div class="oj-sm-12">
+              <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:name ,rootAttributes: { style: 'width: 100%;'}}"
+                />
+            </div>
+          </div>
+          <div class="oj-flex oj-sm-12 inputrow">
+            <button onclick="openEditToolsDescriptionModal()">Add Description</button>
+            <label class="required">*</label>
+          </div>
+         </div>
+         </div>
+        <div class="oj-md-5">
+        <div class="oj-margin-left">
+        <div class="oj-sm-12">
+              <label>Category</label>
+            </div>
+            <div class="oj-sm-12">
+        <div id="tree" style="width: 100%;height: auto;" data-bind="ojComponent:
+          {
+            component: 'ojTree',
+            selectionMode: 'multiple',
+            optionChange:categorySelected,
+            data:categoryForUi
+          }"> </div>
+          </div>
+          <div class="oj-sm-12">
+          <input id="selectedcategory" data-bind="ojComponent: {component: 'ojCombobox',optionChange:selectedCategoryChanged, 
+      multiple: true, value: $parent.selectedCategoriesForUi,rootAttributes: {style:'font-size:9pt;min-width:100%'}}" />
+       </div>
+       </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="display:none" class="dialogbodymain" id="edit_tools_desc_modal" title="Tools Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+    <div class="oj-dialog-body roleWrapper">
+      <div class="nomargin-md oj-margin-left">
+        <div class="oj-flex">
+          <div class="oj-sm-12">
+            <label>Description </label>
+            <label class="required">* [20000 characters limit]</label>
+          </div>
+          <div class="oj-sm-12">
+            <textarea id="edit_tools_editor" rows="6" cols="50" placeholder=""></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- TOOLS -->
