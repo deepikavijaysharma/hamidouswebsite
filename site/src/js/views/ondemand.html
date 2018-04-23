@@ -1,36 +1,129 @@
-
-<div class="container"> 
+<div class="container">
   <!-- SEARCH -->
   <form id="form1">
     <div class="search">
       <button id="createTrainingButton" class="reqtrain-button oj-xl-float-end admin" data-bind="ojComponent: {
                       component: 'ojButton',
-                      label: 'Create Course'},click:openCreatetraining"> </button>
+                      label: 'Create Course'},click:onDemandCreate"> </button>
     </div>
     <div class="oj-flex search">
       <div class="oj-flex-item oj-sm-4 oj-md-2 oj-lg-2 labeldiv" style="display:none">
         <label>Catalogue</label>
       </div>
       <div class="oj-flex-item  oj-sm-12 oj-lg-8">
-        <input id="search-input" placeholder="Search courses . . ." data-bind="ojComponent:{
-                  component: 'ojInputSearch', 
-                  value: searchtext,
-                  update : refinecourses,
-                  optionChange:searchcontent
-                }" />
       </div>
       <div class="oj-flex-item oj-sm-12 oj-lg-4 oj-xl-4 req_block">
         <button id="trainingButton" class="reqtrain-button oj-xl-float-end" data-bind="ojComponent: {
                   component: 'ojButton',
                   chroming: 'full',
-                  label: '+ Request Training'},click:openReqtraining"></button>
+                  label: '+ Request Training'},click:onDemandRequest"></button>
       </div>
     </div>
   </form>
-  <div class="oj-flex coursesblock admin">
-    <label id="switchLabel" for="switch">Admin View</label>
-    <input id="switch" data-bind="ojComponent: {component: 'ojSwitch',value: switchadminview,optionChange:adminviewSelected}" />
+    <!--  CREATE COURSE DIALOG   -->
+<!--   <div id="ondemand_course_dialog" style="display:none" class="dialogbodymain"  title="Create Course" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
   </div>
+ -->
+
+<!-- CREATE COURSE DIALOG START -->
+    <div style="display:none" id=ondemand_course_dialog class="dialogbodymain" title="Create Course" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+      <div class="oj-dialog-footer" style="background-color: lightgray">
+
+        <div class="oj-sm-8">
+          <button class="bluebutton " id="okButton" data-bind="ojComponent: {component: 'ojButton', label: 'Create Course'},click:createOndemandCourse">
+          </button>
+        </div>
+      </div>
+      <div class="dialogbody">
+        <div class="oj-flex">
+          <!--  RIGHT PANEL -->
+          <div class="oj-flex-item oj-sm-7 ">
+
+            <!-- COURSE NAME -->
+            <!-- SECTION 1 -->
+            <div class="oj-flex oj-sm-12 inputrow">
+              <div class="oj-sm-12">
+                <label>Course Name</label>
+              </div>
+              <div class="oj-sm-12">
+                <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:course_name ,rootAttributes: { style: 'width: 100%;'}}"
+                />
+              </div>
+            </div>
+
+            <div class="oj-flex inputrow">
+              <!-- COURSE STATUS -->
+              <div class="oj-flex-item">
+                <div class="oj-sm-12">
+                  <label>Roles</label>
+                </div>
+                <div class="oj-sm-12">
+                  <select id="multiselect" data-bind="ojComponent: {component: 'ojSelect',
+                                                                      multiple: true,
+                                                                      options: roles_select,
+                                                                      value:selected_vals,
+                                                                      rootAttributes: {style:'max-width:20em'}}">
+
+                  </select>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!--  SECTION SPACE -->
+          <div class="oj-flex-item oj-sm-1"></div>
+          <!--  LEFT PANEL -->
+          <div class="oj-flex-item oj-sm-4 ">
+
+            <div class="oj-sm-12">
+              <button onclick="openODemandDescriptionModal()">Add Description</button>
+              <label class="required">*</label>
+            </div>
+            <br>
+
+            <label>Category
+              <br>
+            </label>
+            <br>
+            <div id="tree" style="width: 180px;height: auto;" data-bind="ojComponent:
+          {
+            component: 'ojTree',
+            selectionMode: 'multiple',
+            optionChange:onDemandCategorySelected,
+            data:onDemandCategoryForUi
+          }"> </div>
+
+            <div class="oj-sm-12">
+              <br>
+            </div>
+            <input id="selectedcategory" data-bind="ojComponent: {component: 'ojCombobox',optionChange:onDemandSelectedCategoryChanged, 
+      multiple: true, value: $parent.onDemandselectedCategoriesForUi,rootAttributes: {style:'font-size:9pt;min-width:100%'}}" />
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- CREATE COURSE DIALOG END -->
+
+<!-- CK EDITOR FOR CREATE ON DEMAND COURSE -->
+  <div style="display:none" class="dialogbodymain" id="ondemand_course_modal" title="Course Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+    <div class="oj-dialog-body roleWrapper">
+      <div class="nomargin-md oj-margin-left">
+        <div class="oj-flex">
+          <div class="oj-sm-12">
+            <label>Description </label>
+            <label class="required">* [20000 characters limit]</label>
+          </div>
+          <div class="oj-sm-12">
+            <textarea id="ondemand_course_editor" rows="6" cols="50" placeholder=""></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- CK EDITOR FOR CREATE ON DEMAND COURSE END-->  
+
   <!-- COURSES -->
   <div class="oj-flex coursesblock">
     <div class="oj-flex-item oj-md-3 oj-lg-3">
@@ -46,109 +139,12 @@
                     
                   
                     <div class="oj-sm-12 selectblockinner">
-                    <!-- ~~~~~~~~~~~~~ CATEGORIES ~~~~~~~~~~~~~~ --> 
-                    <!-- ko if: refinelist().length>0 -->
-                    <div class="titlesmall">Categories</div>
-                    <!-- /ko -->
-                    <ul class="refinelist">
-                      <!-- ko foreach: refinelist -->
-                      <li>
-                        <div class="oj-flex">
-                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                            <label>
-                            <input type="checkbox" class="category" name="category" data-bind="value: id" onchange="refineupdate(this)">
-                            </label>
-                          </div>
-                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
-                        </div>
-                      </li>
-                      <!-- /ko -->
-                    </ul>
-                    
-                    <!-- ~~~~~~~~~~~~~ PRODUCT TYPE ~~~~~~~~~~~~~~ --> 
-                    <!-- ko if: producttype().length>0 -->
-                    <div class="titlesmall">Product Type</div>
-                    <!-- /ko -->
-                    <ul class="refinelist">
-                      <!-- ko foreach: producttype -->
-                      <li>
-                        <div class="oj-flex">
-                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                            <label>
-                              <input type="checkbox" class="prodtype" name="prodtype" data-bind="value: name" onchange="refineupdate(this)">
-                            </label>
-                          </div>
-                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
-                        </div>
-                      </li>
-                      
-                      <!-- /ko -->
-                    </ul>
-                    
-                    <!-- ~~~~~~~~~~~~~ TRAINING LEVEL ~~~~~~~~~~~~~~ --> 
-                    <!-- ko if: training_levels().length>0 -->
-                    <div class="titlesmall">Training Level</div>
-                    <!-- /ko -->
-                    <ul class="refinelist">
-                      <!-- ko foreach: training_levels -->
-                      <li>
-                        <div class="oj-flex">
-                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                            <label>
-                              <input type="checkbox" class="traininglevel" name="traininglevel" data-bind="value: name" onchange="refineupdate(this)">
-                            </label>
-                          </div>
-                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
-                        </div>
-                      </li>
-                      
-                      <!-- /ko -->
-                    </ul>
-                    <!-- ~~~~~~~~~~~~~ TRAINING TYPE ~~~~~~~~~~~~~~ --> 
-                    <!-- ko if: training_types().length>0 -->
-                    <div class="titlesmall">Training Type</div>
-                    <!-- /ko -->
-                    <ul class="refinelist">
-                      <!-- ko foreach: training_types -->
-                      <li>
-                        <div class="oj-flex">
-                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                            <label>
-                              <input type="checkbox" class="trainingtype" name="trainingtype" data-bind="value: name" onchange="refineupdate(this)">
-                            </label>
-                          </div>
-                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
-                        </div>
-                      </li>
-                      
-                      <!-- /ko -->
-                    </ul>
-                    <!-- ~~~~~~~~~~~~~ CITIES ~~~~~~~~~~~~~~ --> 
-                    <!-- ko if: cities().length>0 -->
-                    <div class="titlesmall">Cities</div>
-                    <!-- /ko -->
-                    <ul class="refinelist">
-                      <!-- ko foreach: cities -->
-                      <li>
-                        <div class="oj-flex">
-                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                            <label>
-                              <input type="checkbox" class="cities" name="cities" data-bind="value: name" onchange="refineupdate(this)">
-                            </label>
-                          </div>
-                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
-                        </div>
-                      </li>
-                      
-                      <!-- /ko -->
-                    </ul>
-                    
                     <!-- ~~~~~~~~~~~~~ ROLES ~~~~~~~~~~~~~~ --> 
-                    <!-- ko if: roles().length>0 -->
+                    <!-- ko if: role_list().length>0 -->
                     <div class="titlesmall">Roles</div>
                     <!-- /ko -->
                     <ul class="refinelist">
-                      <!-- ko foreach: roles -->
+                      <!-- ko foreach: role_list -->
                       <li>
                         <div class="oj-flex">
                           <div class="oj-sm-1 oj-md-2 oj-lg-1">
@@ -159,16 +155,15 @@
                           <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
                         </div>
                       </li>
-                      
                       <!-- /ko -->
                     </ul>
                     <div class="oj-flex refinebuttons">
                       <div class="oj-sm-12 oj-xl-6">
-                        <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: refinecourses, 
+                        <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="
                           ojComponent: { component: 'ojButton', label: 'Refine' }"> </button>
                       </div>
                       <div class="oj-sm-12 oj-xl-6">
-                        <button class="oj-sm-align-center oj-flex orangebutton" id="button" data-bind="click: resetCourseFilters, 
+                        <button class="oj-sm-align-center oj-flex orangebutton" id="button" data-bind="
                           ojComponent: { component: 'ojButton', label: 'Reset' }"> </button>
                       </div>
                     </div>
@@ -178,16 +173,9 @@
     </div>
     <div class="oj-flex-item oj-md-9 oj-lg-9 rightcoursesblock">
       <div class="oj-margin-left">
-        <div id="accordionPage" data-bind="ojComponent: {component: 'ojAccordion', multiple: true, 
-                                                 expanded: newExpanded }">
-         <div id="c1" data-bind="ojComponent: {component: 'ojCollapsible', expanded:false}">
-   <span><span>PM On-demand</span></span>
-    <div id="nestedAccordion" data-bind="ojComponent: {component: 'ojAccordion'}" >
-         
-       <div id="ic1" data-bind="ojComponent: {component: 'ojCollapsible'}">
-       <h4>Inner Header 1</h4>
-       <div>
-              <div class="oj-sm-12  blocks oj-flex-item">
+	
+<script type="text/html" id="template2">
+  <div class="oj-sm-12  blocks oj-flex-item">
                 <div class="oj-flex oj-sm-12 blocksinner">
                   <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1">
                     <div class="roundedwhite">L</div>
@@ -195,7 +183,7 @@
                   <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10">
                     <div class="oj-margin"> 
                       <!-- <span class="badge">Mandatory Course</span> -->
-                      <div class="coursetitle">TITLE</div>
+                      <div data-bind="text: name"></div>
                       <!--<div class="desc" data-bind="html:subdescription"></div>-->
                       <div class="desc">Type: <span class="desc">TYPE</span> / Level: <span class="desc">LEVEL</span> </div>
                     </div>
@@ -204,114 +192,34 @@
                 </div>
               
              </div>
-              </div>
-             </div>
-      <div id="ic2" data-bind="ojComponent: {component: 'ojCollapsible'}">
-        <h4>Inner Header 1</h4>
-        <div>
-              <div class="oj-sm-12  blocks oj-flex-item">
-                <div class="oj-flex oj-sm-12 blocksinner">
-                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1">
-                    <div class="roundedwhite">L</div>
-                  </div>
-                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10">
-                    <div class="oj-margin"> 
-                      <!-- <span class="badge">Mandatory Course</span> -->
-                      <div class="coursetitle">TITLE</div>
-                      <!--<div class="desc" data-bind="html:subdescription"></div>-->
-                      <div class="desc">Type: <span class="desc">TYPE</span> / Level: <span class="desc">LEVEL</span> </div>
-                    </div>
-                  </div>
-                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 linkblock"><a data-bind="" target="_blank" style="cursor:pointer"><img src="css/images/317-arrow-right2.png"></a></div>
-                </div>
-              
-             </div>
-              </div>
-      </div>
-   </div>
-    </div>
   
-          <div id="c2"> <span><span>ECA</span></span>
-             <div>
-              <div class="oj-sm-12  blocks oj-flex-item">
-                <div class="oj-flex oj-sm-12 blocksinner">
-                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1">
-                    <div class="roundedwhite">L</div>
-                  </div>
-                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10">
-                    <div class="oj-margin"> 
-                      <!-- <span class="badge">Mandatory Course</span> -->
-                      <div class="coursetitle">TITLE</div>
-                      <!--<div class="desc" data-bind="html:subdescription"></div>-->
-                      <div class="desc">Type: <span class="desc">TYPE</span> / Level: <span class="desc">LEVEL</span> </div>
-                    </div>
-                  </div>
-                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 linkblock"><a data-bind="" target="_blank" style="cursor:pointer"><img src="css/images/317-arrow-right2.png"></a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="c3"> <span><span>CSM</span></span>
-             <div>
-              <div class="oj-sm-12  blocks oj-flex-item">
-                <div class="oj-flex oj-sm-12 blocksinner">
-                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1">
-                    <div class="roundedwhite">L</div>
-                  </div>
-                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10">
-                    <div class="oj-margin"> 
-                      <!-- <span class="badge">Mandatory Course</span> -->
-                      <div class="coursetitle">TITLE</div>
-                      <!--<div class="desc" data-bind="html:subdescription"></div>-->
-                      <div class="desc">Type: <span class="desc">TYPE</span> / Level: <span class="desc">LEVEL</span> </div>
-                    </div>
-                  </div>
-                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 linkblock"><a data-bind="" target="_blank" style="cursor:pointer"><img src="css/images/317-arrow-right2.png"></a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-           <div id="c4"> <span><span>OU</span></span>
-             <div>
-              <div class="oj-sm-12  blocks oj-flex-item">
-                <div class="oj-flex oj-sm-12 blocksinner">
-                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1">
-                    <div class="roundedwhite">L</div>
-                  </div>
-                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10">
-                    <div class="oj-margin"> 
-                      <!-- <span class="badge">Mandatory Course</span> -->
-                      <div class="coursetitle">TITLE</div>
-                      <!--<div class="desc" data-bind="html:subdescription"></div>-->
-                      <div class="desc">Type: <span class="desc">TYPE</span> / Level: <span class="desc">LEVEL</span> </div>
-                    </div>
-                  </div>
-                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 linkblock"><a data-bind="" target="_blank" style="cursor:pointer"><img src="css/images/317-arrow-right2.png"></a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-           <div id="c4"> <span><span>Soft Skill</span></span>
-             <div>
-              <div class="oj-sm-12  blocks oj-flex-item">
-                <div class="oj-flex oj-sm-12 blocksinner">
-                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1">
-                    <div class="roundedwhite">L</div>
-                  </div>
-                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10">
-                    <div class="oj-margin"> 
-                      <!-- <span class="badge">Mandatory Course</span> -->
-                      <div class="coursetitle">TITLE</div>
-                      <!--<div class="desc" data-bind="html:subdescription"></div>-->
-                      <div class="desc">Type: <span class="desc">TYPE</span> / Level: <span class="desc">LEVEL</span> </div>
-                    </div>
-                  </div>
-                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 linkblock"><a data-bind="" target="_blank" style="cursor:pointer"><img src="css/images/317-arrow-right2.png"></a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+</script>
+<script type="text/html" id="template1">
+  <div id="c1" data-bind="ojComponent: {component: 'ojCollapsible', expanded:false}">
+		<div><span data-bind="text: category_name"></span></div>
+  	<div> 
+	      <!-- ko template: { name: 'template1', foreach: $data.Child } -->
+        <!-- /ko --> 
+				<!-- ko template: { name: 'template2', foreach: courses } --> 
+        <!-- /ko -->
+		</div>
+	</div>    
+</script>
+
+<div id="accordionPage" data-bind="ojComponent: {component: 'ojAccordion', multiple: true, 
+                                                 expanded: newExpanded }">
+ <!-- ko foreach: toolslist -->
+   <div id="" data-bind="ojComponent: {component: 'ojCollapsible', expanded:false}">
+			<div><span data-bind="text: category_name"></span></div>
+				<div>
+					<!-- ko template: { name: 'template2', foreach: courses } --> <!-- /ko --> 
+								 <!-- ko template: { name: 'template1', foreach: $data.Child } -->
+									<!-- /ko -->	
+  			</div>
+			</div>	
+ <!-- /ko -->  						
+</div>
+
       </div>
     </div>
   </div>
