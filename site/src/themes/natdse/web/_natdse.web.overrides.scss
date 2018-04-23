@@ -3778,3 +3778,25 @@ height:50px;
 border:none;
 color:#fff !important;
 }
+#toolsaccordion{
+.oj-collapsible-header{
+background:rgb(0, 117, 143) none repeat scroll 0 0;
+border: medium none;
+font-size: 1.5em;
+font-weight: normal;
+color:#fff;
+box-sizing:border-box;
+padding:5px;
+}
+.oj-collapsible.oj-accordion-collapsible{
+margin-bottom:10px;
+}
+.oj-collapsible-header-icon{
+	color:#fff;
+	}
+.oj-collapsible-wrapper > .oj-collapsible-content{
+background: rgb(255, 255, 255) none repeat scroll 0 0;
+border: 1px solid rgb(226, 226, 226);
+padding: 20px;
+}	
+}
