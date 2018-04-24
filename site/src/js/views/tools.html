@@ -9,14 +9,11 @@
           <label id="mainlabelid">Role</label>
           <!-- ~~~~~~~~~~~~~ ROLES ~~~~~~~~~~~~~~ -->
           <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid" data-bind="ojComponent: {component: 'ojRadioset'}">
-            <span class="oj-choice-item">
-              <input type="radio" class="roles" data-id="all" name="roles" id="all" value="all" onchange="refineupdate(this)">
-              <label for="all"><span>All</span></label>
-            </span>
+           
             <!-- ko foreach: roles -->
             <span class="oj-choice-item">
-              <input type="radio" class="roles" name="roles" data-bind="value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
-              <label><span data-bind="text: name"></span></label>
+              <input type="radio" class="roles filterselect" name="roles" data-bind="checked: $parent.currentRole(),value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
+              <label"><span data-bind="text: name"></span></label>
             </span>
             <!-- /ko -->
           </div>
@@ -26,14 +23,11 @@
         <form id="formId" class="oj-form">
           <label id="mainlabelid">Category</label>
           <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid" data-bind="ojComponent: {component: 'ojRadioset'}" >
-            <span class="oj-choice-item">
-              <input type="radio" class="roles" data-id="all" name="category" id="all" value="all" onchange="refineupdate(this)">
-              <label for="all"><span>All</span></label>
-            </span>
+            
             <!-- ko foreach: refinelist -->
             <span class="oj-choice-item">
-              <input type="radio" class="category" name="category" data-bind="value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
-              <label><span data-bind="text: name"></span></label>
+              <input type="radio" class="category filterselect" name="category" data-bind="checked: $parent.currentCategory(),value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
+              <label class="filterlabel"><span data-bind="text: name"></span></label>
             </span>                    
             <!-- /ko -->
           </div>
@@ -53,10 +47,13 @@
         <div class="toolsbgwhite"> 
           
           <!-- SE -->
-          <div id="toolsaccordion" data-bind="ojComponent: {component: 'ojAccordion', multiple: true }">
+           <div align="right" class="excol"><a href="#" data-bind="click:expandall">Expand All</a> / <a href="#" data-bind="click:closeall">Close All</a></div>
+          <div id="toolsaccordion" data-bind="ojComponent: {component: 'ojAccordion', multiple: true, expanded: newExpanded }">
+          
             <!-- ko foreach: selectedcategories -->
               <!-- ko if: categories().length > 0 -->
-              <div data-bind="ojComponent: {component: 'ojCollapsible', expanded:false},attr:{'id':name}">
+              
+              <div data-bind="ojComponent: {component: 'ojCollapsible', expanded: $parent.expandedValue},attr:{'id':name}">
                 <div class="oj-sm-12 catheadings oj-collapsible-header"><span class="categoryheading " data-bind="text:name"></span></div>
                 <div>
                   <!-- ko foreach: categories -->
@@ -84,7 +81,7 @@
             <!-- /ko -->
             
           </div>
-          <div align="right" class="excol"><a href="#" data-bind="click:expandall">Expand All</a> / <a href="#" data-bind="click:closeall">Close All</a></div>
+         
         </div>
       </div>
     </div>

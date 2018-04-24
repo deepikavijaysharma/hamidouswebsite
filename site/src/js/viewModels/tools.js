@@ -12,18 +12,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
         function DashboardViewModel() 
         {
             var self = this;
-            self.currentRole = ko.observable('all');
-            self.currentCategory = ko.observable('all');
+            self.currentRole = ko.observable('0');
+			self.expandedValue = ko.observable(false);
+            self.currentCategory = ko.observable('0');
             self.categoryForUi = ko.observableArray([]);
             self.catlist = ko.observableArray([]);
-            this.newExpanded = ko.observableArray();
+            this.newExpanded = ko.observableArray([]);
+			 this.newExpanded.push({"id":"CSM"});
             var editor_instance_data3 = "";
             this.val = ko.observableArray(["CH"]);
-            // self.expandall = function(){
-            //     $("#accordionPage").ojAccordion( { "expanded": ['c1','c2','c3','c4'], "multiple": true } );
-            // }
-           
-		     
+			
+			
+		    
             self.readMore = function()
             {
                 $('#readmorelink').hide();
@@ -159,10 +159,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                             for (var y = 0; y < allcourses[w].contents.length; w++) {
                                 self.processTnRFromService(allcourses[w].contents, allcourses[w].name);
                                 self.expand.push(allcourses[w].name);
-                                self.expandall(self.expand());
+                                //self.expandall(self.expand());
+								console.log("allids "+self.expand());
                             }
                         }
-                        console.log(ko.toJSON(self.expand()));
+                        
                     },
                     error: function (xhr) {
                         console.log(xhr);
@@ -209,7 +210,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                                                 if (toolsdata[0].name === allcourses[w].name) { // console.log(allcourses[w].links);
                                                     self.processTnRFromService(allcourses[w].contents, allcourses[w].name);
                                                     self.expand.push(allcourses[w].name);
-                                                    self.expandall(self.expand());
+                                                    //self.expandall(self.expand());
                                                 }
                                             }
                                         }
@@ -226,15 +227,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                 }
             }
 
-            self.expandall = function (exp) {
-                $("#toolsaccordion").ojAccordion("option","expanded", exp, "multiple");
-                // this.newExpanded.push({ 
-                //     "id": exp 
-                // });
+            self.expandall = function () {
+				self.expandedValue(true);
+				
             }
             // console.log("expand items:"+ self.expand());
             self.closeall = function () {
-                $("#toolsaccordion").ojAccordion({ "expanded": [] });
+               self.expandedValue(false);
             }
 
             setuncheck = function (classname) {
@@ -327,7 +326,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                 $.getJSON("http://solutionengineering-devops.us.oracle.com:8080/tools/filters").then(function (response) {
                     // ROLES
                     self.roles([]);
-                    console.log(response.rolesList);
+					 self.roles.push({
+                            name: 'All',
+                            id: '0'
+                        })
+                    
                     for (var i = 0; i < response.rolesList.length; i++) {
                         self.roles.push({
                             name: response.rolesList[i].role,
@@ -336,6 +339,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                     }
                     // CATEGORIES
                     self.refinelist([]);
+					self.refinelist.push({
+                             name: 'All',
+                            id: '0'
+                        })
                     for (var j = 0; j < response.typesList.length; j++) {
                         self.refinelist.push({
                             id: response.typesList[j].id,

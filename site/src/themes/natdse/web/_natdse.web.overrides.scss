@@ -3020,7 +3020,8 @@ margin-top:30px;
 padding-top:20px;
 
 .toolsfilter{
-
+background:#fff;
+padding-bottom:10px;
 .oj-label{
 background:#00758f;
 color:#fff;
@@ -3034,9 +3035,12 @@ font-weight:normal;
 	}
 .radiobg{
 padding:12px 24px;
+input.filterselect{
+	margin-right:10px;
+	}
 }
 .oj-choice-item{
-margin-bottom:10px;
+margin-bottom:5px;
 }
 }
 .oj-margin-edited{
