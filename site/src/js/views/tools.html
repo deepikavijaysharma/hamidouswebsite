@@ -9,9 +9,13 @@
           <label id="mainlabelid">Role</label>
           <!-- ~~~~~~~~~~~~~ ROLES ~~~~~~~~~~~~~~ -->
           <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid" data-bind="ojComponent: {component: 'ojRadioset'}">
+            <span class="oj-choice-item">
+              <input type="radio" class="roles" data-id="all" name="roles" id="all" value="all" onchange="refineupdate(this)">
+              <label for="all"><span>All</span></label>
+            </span>
             <!-- ko foreach: roles -->
             <span class="oj-choice-item">
-              <input type="radio" class="roles" name="roles" data-bind="value: id,attr: {'id':id,'data-id':id},click:$parent.setFilter">
+              <input type="radio" class="roles" name="roles" data-bind="value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
               <label><span data-bind="text: name"></span></label>
             </span>
             <!-- /ko -->
@@ -21,23 +25,23 @@
       <div class="oj-sm-12 filterblock">
         <form id="formId" class="oj-form">
           <label id="mainlabelid">Category</label>
-          <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid" data-bind="ojComponent: {component: 'ojRadioset'}" > 
-            <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid" data-bind="ojComponent: {component: 'ojRadioset'}">
-              <!-- ko foreach: refinelist -->
-              <span class="oj-choice-item">
-                <input type="radio" class="category" name="category" data-bind="value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
-                <label>
-                  <span data-bind="text: name"></span>
-                </label>
-              </span>                    
-              <!-- /ko -->
-            </div>
+          <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid" data-bind="ojComponent: {component: 'ojRadioset'}" >
+            <span class="oj-choice-item">
+              <input type="radio" class="roles" data-id="all" name="category" id="all" value="all" onchange="refineupdate(this)">
+              <label for="all"><span>All</span></label>
+            </span>
+            <!-- ko foreach: refinelist -->
+            <span class="oj-choice-item">
+              <input type="radio" class="category" name="category" data-bind="value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
+              <label><span data-bind="text: name"></span></label>
+            </span>                    
+            <!-- /ko -->
           </div>
         </form>
       </div>
       <div class="oj-flex refinebuttons">
         <div class="oj-sm-12 oj-xl-6">
-          <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: refinecourses, ojComponent: { component: 'ojButton', label: 'Refine' }"> </button>
+          <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: refinetools, ojComponent: { component: 'ojButton', label: 'Refine' }"> </button>
         </div>
         <div class="oj-sm-12 oj-xl-6">
           <button class="oj-sm-align-center oj-flex orangebutton" id="button" data-bind="click: resetCourseFilters, ojComponent: { component: 'ojButton', label: 'Reset' }"> </button>
@@ -49,29 +53,34 @@
         <div class="toolsbgwhite"> 
           
           <!-- SE -->
-          <div id="toolsaccordion" data-bind="ojComponent: {component: 'ojAccordion', multiple: true, expanded: newExpanded }">
+          <div id="toolsaccordion" data-bind="ojComponent: {component: 'ojAccordion', multiple: true }">
             <!-- ko foreach: selectedcategories -->
-            <div data-bind="ojComponent: {component: 'ojCollapsible', expanded:false},attr:{'id':name}">
-              <div class="oj-sm-12 catheadings oj-collapsible-header"><span class="categoryheading " data-bind="text:name"></span></div>
-              <div>
-                <!-- ko foreach: categories -->
-                <div class="oj-flex toolsrow res se all" >
-                  <div class="oj-sm-12 " style="margin-bottom: 5px;position:relative;z-index:1000"> <i class="fa fa-pencil-square-o admin" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Edit Course"
-                              data-bind="click:function(){edittools(this)}" target="_blank"></i> <i class="fa fa-trash-o admin" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Delete Course"
-                              data-bind="click:function(){deletetools(this)}" target="_blank"></i> </div>
-                  <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                    <div class="roundedwhite" data-bind="text:category.substring(0, 3).toUpperCase();"></div>
+              <!-- ko if: categories().length > 0 -->
+              <div data-bind="ojComponent: {component: 'ojCollapsible', expanded:false},attr:{'id':name}">
+                <div class="oj-sm-12 catheadings oj-collapsible-header"><span class="categoryheading " data-bind="text:name"></span></div>
+                <div>
+                  <!-- ko foreach: categories -->
+                  <div class="oj-flex toolsrow res se all" data-bind="attr:{'id':category}">
+                    <div class="oj-sm-12 " style="margin-bottom: 5px;position:relative;z-index:1000"> <i class="fa fa-pencil-square-o admin" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Edit Course"
+                                data-bind="click:function(){edittools(this)}" target="_blank"></i> <i class="fa fa-trash-o admin" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Delete Course"
+                                data-bind="click:function(){deletetools(this)}" target="_blank"></i> </div>
+                    <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+                      <div class="roundedwhite" data-bind="text:category.substring(0, 3).toUpperCase();"></div>
+                    </div>
+                    <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+                      <div class="oj-margin">
+                        <h1 data-bind="text:name"></h1>
+                        <span data-bind="text:description"></span></div>
+                    </div>
+                    <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" data-bind="attr:{'href':url}"><img src="css/images/317-arrow-right2.png"></a></div>
                   </div>
-                  <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                    <div class="oj-margin">
-                      <h1 data-bind="text:name"></h1>
-                      <span data-bind="text:description"></span></div>
-                  </div>
-                  <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" data-bind="attr:{'href':url}"><img src="css/images/317-arrow-right2.png"></a></div>
+                  <!-- /ko -->
                 </div>
-                <!-- /ko -->
               </div>
-            </div>
+              <!-- /ko -->
+              <!-- ko ifnot: categories().length > 0 -->
+              <p>No Items Found</p>
+              <!-- /ko -->
             <!-- /ko -->
             
           </div>
@@ -215,4 +224,11 @@
       </div>
     </div>
   </div>
+  <!--  AUTO CLOSABLE DIALOG -->
+  <div style="display:none;height:150px" class="dialogbodymain" id="toastdiv" title="Notification" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style:'height: auto; min-width 240px'}}">
+    <div class="dialogbody">
+      <h5 data-bind="text:msg"></h5>
+    </div>
+  </div>
+  
 <!-- TOOLS -->

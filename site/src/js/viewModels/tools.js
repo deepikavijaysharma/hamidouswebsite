@@ -19,12 +19,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
             this.newExpanded = ko.observableArray();
             var editor_instance_data3 = "";
             this.val = ko.observableArray(["CH"]);
-            self.expandall = function(){
-                $("#accordionPage").ojAccordion( { "expanded": ['c1','c2','c3','c4'], "multiple": true } );
-            }
-            self.closeall = function(){
-                $("#accordionPage").ojAccordion( { "expanded": []} );
-            }
+            // self.expandall = function(){
+            //     $("#accordionPage").ojAccordion( { "expanded": ['c1','c2','c3','c4'], "multiple": true } );
+            // }
+           
 		     
             self.readMore = function()
             {
@@ -59,40 +57,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
             self.refineroles = ko.observableArray([]);
             self.roles = ko.observableArray([]);
             self.refinelist = ko.observableArray([]);
-            // self.categories = ko.observableArray([]);
             self.selectedcategories = ko.observableArray([]);
-            self.refinecourses = function () {
-                self.selectedcategories([]);
-                var selectedcategories = ko.toJSON(self.refinecategories()).replace('[', '').replace(']', '').replace(/"/g, '');
-                var selectedroles = ko.toJSON(self.refineroles()).replace('[', '').replace(']', '').replace(/"/g, '');
-                var headerobj = {
-                    category_id: selectedcategories,
-                    role_id: selectedroles
-                }
-                var refinetrrole = searchdata(selectedroles, self.roles());
-                var refinetrcategories = searchdata(selectedcategories, self.refinelist());
+            self.expand = ko.observableArray([]);
 
-                // self.selectedcategories.push({
-                //     name: refinetrcategories,
-                //     categories: ko.observableArray([])
-                //     });
-
-                $.ajax({
-                    url: "http://solutionengineering-devops.us.oracle.com:8080/resources/link/list",
-                    method: 'GET',
-                    success: function (allcourses) 
-                    {// console.log(allcourses);
-                        for (var w = 0; w < allcourses.length; w++) {
-                            if (refinetrcategories===allcourses[w].name) { // console.log(allcourses[w].links);
-                                self.processTnRFromService(allcourses[w].links, allcourses[w].name);
-                            }
-                        }
-                    },
-                    error: function (xhr) {
-                        console.log(xhr);
-                    }
-                });
-            }
             self.getcategorybyname = function (catname) {
                 // Look if the category is already present in the array
                 for (var i = 0; i < self.selectedcategories().length; i++) {
@@ -105,6 +72,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                     name: catname,
                     categories: ko.observableArray([])
                 });
+                console.log(self.selectedcategories());
                 var lastindex = self.selectedcategories().length - 1;
                 return self.selectedcategories()[lastindex];
             }
@@ -119,13 +87,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
 
             self.processTnRFromService = function (allcourses, catselected) 
             {
+                console.log(allcourses);
+                console.log(catselected);                
                 for (var k = 0; k < allcourses.length; k++) { // console.log(allcourses[k]);
                     var categoryobj = self.getcategorybyname(catselected);
                     categoryobj.categories.push({
+                        id: allcourses[k].id,
                         name: allcourses[k].name,
                         category: catselected,
                         description: allcourses[k].description,
-                        url: allcourses[k].url
+                        url: allcourses[k].link
                     });
                 }
             }
@@ -150,41 +121,120 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                 self.refinecategories([]);
                 self.refineroles([]);
             }
-            refineupdate = function (desc) {
+            refineupdate = function (desc) 
+            {
                 var type = desc.name;
-                if (desc.checked) {
-
-                    switch (type) {
+                if (desc.checked) 
+                {
+                    switch (type) 
+                    {
                         case "category":
-                            setuncheck('category');
+                            // setuncheck('category');
                             desc.checked = true;
                             self.refinecategories.removeAll();
                             self.refinecategories.push(desc.defaultValue);
                             break;
 
                         case "roles":
-
-                            setuncheck('roles');
+                            // setuncheck('roles');
                             desc.checked = true;
                             self.refineroles.removeAll();
                             self.refineroles.push(desc.defaultValue);
                             break;
-
                     }
-
-
-                } else {
-                    switch (type) {
-                        case "category":
-                            self.refinecategories.remove(desc.defaultValue);
-                            break;
-
-                        case "roles":
-                            self.refineroles.remove(desc.defaultValue);
-                            break;
-                    }
-
+                } 
+                else 
+                {
+                    alltools();
                 }
+            }
+            alltools = function()
+            {
+                $.ajax({
+                    url: "http://solutionengineering-devops.us.oracle.com:8080/tools/contents",
+                    method: 'GET',
+                    success: function (allcourses) {
+                        console.log(allcourses);
+                        for (var w = 0; w < allcourses.length; w++) {
+                            for (var y = 0; y < allcourses[w].contents.length; w++) {
+                                self.processTnRFromService(allcourses[w].contents, allcourses[w].name);
+                                self.expand.push(allcourses[w].name);
+                                self.expandall(self.expand());
+                            }
+                        }
+                        console.log(ko.toJSON(self.expand()));
+                    },
+                    error: function (xhr) {
+                        console.log(xhr);
+                    }
+                });
+            }
+            alltools();
+
+            self.refinetools = function () 
+            {
+                self.selectedcategories([]);
+                var selectedcategories = ko.toJSON(self.refinecategories()).replace('[', '').replace(']', '').replace(/"/g, '');
+                var selectedroles = ko.toJSON(self.refineroles()).replace('[', '').replace(']', '').replace(/"/g, '');
+                if (selectedcategories == "all" || selectedroles == "all") {
+                    alltools();
+                }
+                else {
+                    var headerobj = {
+                        categoryid: selectedcategories,
+                        roleid: selectedroles
+                    }
+                    console.log(headerobj);
+                    $.ajax({
+                        url: "http://solutionengineering-devops.us.oracle.com:8080/tools/contents/find",
+                        cache: false,
+                        type: 'GET',
+                        headers: headerobj,
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (toolsdata) 
+                        {
+                            var refinetrrole = searchdata(selectedroles, self.roles());
+                            var refinetrcategories = searchdata(selectedcategories, self.refinelist());
+                            $.ajax({
+                                url: "http://solutionengineering-devops.us.oracle.com:8080/tools/contents",
+                                method: 'GET',
+                                success: function (allcourses) {
+                                    console.log(allcourses);
+                                    for (var w = 0; w < allcourses.length; w++) 
+                                    {
+                                        if (allcourses[w].contents.length > 0)
+                                        {
+                                            self.getcategorybyname(toolsdata[0].name);
+                                            for (var y = 0; y < allcourses[w].contents.length; w++) {
+                                                if (toolsdata[0].name === allcourses[w].name) { // console.log(allcourses[w].links);
+                                                    self.processTnRFromService(allcourses[w].contents, allcourses[w].name);
+                                                    self.expand.push(allcourses[w].name);
+                                                    self.expandall(self.expand());
+                                                }
+                                            }
+                                        }
+                                    }//console.log(ko.toJSON(self.expand()));
+                                },
+                                error: function (xhr) {
+                                    console.log(xhr);
+                                }
+                            });
+                        }
+                    }).fail(function (xhr, textStatus, err) {
+                        console.log(err);
+                    });
+                }
+            }
+
+            self.expandall = function (exp) {
+                $("#toolsaccordion").ojAccordion("option","expanded", exp, "multiple");
+                // this.newExpanded.push({ 
+                //     "id": exp 
+                // });
+            }
+            // console.log("expand items:"+ self.expand());
+            self.closeall = function () {
+                $("#toolsaccordion").ojAccordion({ "expanded": [] });
             }
 
             setuncheck = function (classname) {
@@ -193,6 +243,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                     x[i].checked = false;
                 }
             }
+
+            // TOAST MESSAGE DIALOG
+            self.msg = ko.observable("");
+
+            self.showToastDialog = function (msg, timeinmillisec) {
+                self.msg(msg);
+                $("#toastdiv").ojDialog("open");
+                if (timeinmillisec > 0) {
+                    setTimeout(function () {
+                        $("#toastdiv").ojDialog("close");
+                    }, timeinmillisec);
+                }
+            }
+
             getCategoryHierarchy = function () 
             {
                 $.getJSON(trainingbaseurl + "getCategories").then(function (response) 
@@ -258,33 +322,28 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
             self.refinelist = ko.observableArray([]);
             self.roles = ko.observableArray([]);
 
-            getLeftpanelData = function () {
-                $.getJSON(trainingbaseurl + "getFiltersV2").
-                    then(function (reasons) {
-
-                        // ROLES
-                        self.roles([]);
-                        var stateList = reasons.roles;
-                        for (var i = 0; i < stateList.length; i++) {
-
-                            self.roles.push({
-                                name: stateList[i].name,
-                                id: stateList[i].id
-                            })
-                        }
-                    });
-                $.getJSON("http://solutionengineering-devops.us.oracle.com:8080/resources/link/list").then(function (response) {
+            getLeftpanelData = function () 
+            {
+                $.getJSON("http://solutionengineering-devops.us.oracle.com:8080/tools/filters").then(function (response) {
+                    // ROLES
+                    self.roles([]);
+                    console.log(response.rolesList);
+                    for (var i = 0; i < response.rolesList.length; i++) {
+                        self.roles.push({
+                            name: response.rolesList[i].role,
+                            id: response.rolesList[i].id
+                        })
+                    }
                     // CATEGORIES
-                    self.refinelist([]);// console.log(response);
-                    for (var i = 0; i < response.length; i++) {
+                    self.refinelist([]);
+                    for (var j = 0; j < response.typesList.length; j++) {
                         self.refinelist.push({
-                            id: response[i].id,
-                            name: response[i].name
+                            id: response.typesList[j].id,
+                            name: response.typesList[j].name
                         })
                     }
                 });
             }
-
             getLeftpanelData();
 			
             openEditToolsDescriptionModal = function () 
