@@ -1,7 +1,14 @@
+<!-- DISPLAY TOOLS STARTS-->
+
 <div class="container">
   <div class="oj-flex tools ">
     <div class="search oj-sm-12">
-      <button id="createTrainingButton" class="reqtools-button oj-xl-float-end admin" data-bind="ojComponent: {component: 'ojButton',label: 'Create Tools'},click:createtools"> </button>
+      <div align="right" class="excol"><button id="createTrainingButton" class="reqtools-button oj-xl-float-end admin" data-bind="ojComponent: {component: 'ojButton',label: 'Add Link'},click:addtools"> </button></div>
+
+      <div align="right" class="excol">
+        <a href="#" data-bind="click:expandall">Expand All</a> /
+        <a href="#" data-bind="click:closeall">Close All</a>
+      </div>
     </div>
     <div class="oj-flex-item oj-md-3 oj-lg-3 toolsfilter">
       <div class="oj-sm-12 filterblock">
@@ -13,15 +20,17 @@
             <!-- ko foreach: roles -->
             <span class="oj-choice-item">
               <input type="radio" class="roles filterselect" name="roles" data-bind="checked: $parent.currentRole(),value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
-              <label"><span data-bind="text: name"></span></label>
+              <label><span data-bind="text: name"></span></label>
             </span>
             <!-- /ko -->
+
           </div>
         </form>
       </div>
       <div class="oj-sm-12 filterblock">
         <form id="formId" class="oj-form">
           <label id="mainlabelid">Category</label>
+          <!-- ~~~~~~~~~~~~~ CATEGORIES ~~~~~~~~~~~~~~ -->
           <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid" data-bind="ojComponent: {component: 'ojRadioset'}" >
             
             <!-- ko foreach: refinelist -->
@@ -30,6 +39,7 @@
               <label class="filterlabel"><span data-bind="text: name"></span></label>
             </span>                    
             <!-- /ko -->
+
           </div>
         </form>
       </div>
@@ -44,42 +54,46 @@
     </div>
     <div class="oj-flex-item oj-md-9 oj-lg-9 oj-sm-margin-top">
       <div class="oj-margin-edited">
-        <div class="toolsbgwhite"> 
+        <div> 
           
           <!-- SE -->
-           <div align="right" class="excol"><a href="#" data-bind="click:expandall">Expand All</a> / <a href="#" data-bind="click:closeall">Close All</a></div>
+
           <div id="toolsaccordion" data-bind="ojComponent: {component: 'ojAccordion', multiple: true, expanded: newExpanded }">
-          
-            <!-- ko foreach: selectedcategories -->
-              <!-- ko if: categories().length > 0 -->
+
+            <!-- ko if: cat().length > 0 -->
+              <!-- ko foreach: cat -->
               
-              <div data-bind="ojComponent: {component: 'ojCollapsible', expanded: $parent.expandedValue},attr:{'id':name}">
-                <div class="oj-sm-12 catheadings oj-collapsible-header"><span class="categoryheading " data-bind="text:name"></span></div>
-                <div>
-                  <!-- ko foreach: categories -->
-                  <div class="oj-flex toolsrow res se all" data-bind="attr:{'id':category}">
-                    <div class="oj-sm-12 " style="margin-bottom: 5px;position:relative;z-index:1000"> <i class="fa fa-pencil-square-o admin" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Edit Course"
-                                data-bind="click:function(){edittools(this)}" target="_blank"></i> <i class="fa fa-trash-o admin" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Delete Course"
-                                data-bind="click:function(){deletetools(this)}" target="_blank"></i> </div>
-                    <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                      <div class="roundedwhite" data-bind="text:category.substring(0, 3).toUpperCase();"></div>
+                <div data-bind="ojComponent: {component: 'ojCollapsible'},attr:{'id':name}">
+                  <div class="oj-sm-12 catheadings oj-collapsible-header"><span class="categoryheading " data-bind="text:name"></span></div>
+                  <div>
+
+                    <!-- ko foreach: contents -->
+                    <div class="oj-flex toolsrow res se all" data-bind="attr:{'id':id}">
+                      <div class="oj-sm-12 " style="margin-bottom: 5px;position:relative;z-index:1000"> <i class="fa fa-pencil-square-o admin" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Edit Course"
+                                  data-bind="click:edittools,attr:{'id':id}" target="_blank"></i> <i class="fa fa-trash-o admin" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Delete Course"
+                                  data-bind="click:deletetools,attr:{'id':id}" target="_blank"></i> </div>
+                      <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+                        <div class="roundedwhite"><img width="16px" height="16px" data-bind="attr:{'src':imageLink}" /></div>
+                      </div>
+                      <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+                        <div class="oj-margin">
+                          <h1 data-bind="text:name"></h1>
+                          <span data-bind="text:description"></span></div>
+                      </div>
+                      <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" data-bind="attr:{'href':link}"><img src="css/images/317-arrow-right2.png"></a></div>
                     </div>
-                    <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                      <div class="oj-margin">
-                        <h1 data-bind="text:name"></h1>
-                        <span data-bind="text:description"></span></div>
-                    </div>
-                    <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" data-bind="attr:{'href':url}"><img src="css/images/317-arrow-right2.png"></a></div>
+                    <!-- /ko -->
+
                   </div>
-                  <!-- /ko -->
                 </div>
-              </div>
-              <!-- /ko -->
-              <!-- ko ifnot: categories().length > 0 -->
-              <p>No Items Found</p>
+              
               <!-- /ko -->
             <!-- /ko -->
-            
+
+            <!-- ko ifnot: cat().length > 0 -->
+              <p>No Items Found</p>
+            <!-- /ko -->
+
           </div>
          
         </div>
@@ -88,144 +102,197 @@
   </div>
 </div>
 
-<!-- TOOLS -->
+<!-- DISPLAY TOOLS ENDS-->
 
-<div id="" data-bind="">
-  <div style="display:none" class="dialogbodymain" id="edittools" title="Edit" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
-    <div class="oj-dialog-footer" style="background-color: lightgray">
-      <div class="oj-sm-8">
-        <button class="bluebutton " id="okButton" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}" onclick=""> </button>
-      </div>
-    </div>
-    <div class="dialogbody">
-      <div class="oj-flex"> 
-        
-        <div class="oj-flex-item oj-md-7 ">
-         <div class="oj-margin-right">
+
+
+<!-- TOOLS POPUPS-->
+
+<!-- Add Tools start-->
+
+<div style="display:none" class="dialogbodymain" id="createtools" title="Create" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+  
+  <div class="dialogbody">
+    <div class="oj-flex"> 
+      
+      <div class="oj-flex-item oj-md-7 ">
+        <div class="oj-margin-right">
           <div class="oj-flex oj-sm-12 inputrow">
             <div class="oj-sm-12">
-              <label>Title</label>
+              <label>Title</label><label class="required">*</label>
             </div>
             <div class="oj-sm-12">
-              <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:name ,rootAttributes: { style: 'width: 100%;'}}"
-                />
+              <input type="text" data-bind="ojComponent: {component: 'ojInputText',value:toolstitle ,rootAttributes: { style: 'width: 100%;'}}" />
             </div>
           </div>
           <div class="oj-flex oj-sm-12 inputrow">
             <div class="oj-sm-12">
-              <label>Link</label>
+              <label>Link</label><label class="required">*</label>
             </div>
             <div class="oj-sm-12">
-              <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:name ,rootAttributes: { style: 'width: 100%;'}}"
-                />
+              <input type="text" data-bind="ojComponent: {component: 'ojInputText',value:toolslink ,rootAttributes: { style: 'width: 100%;'}}" />
             </div>
           </div>
           <div class="oj-flex oj-sm-12 inputrow">
-            <button onclick="openEditToolsDescriptionModal()">Edit Description</button>
-            <label class="required">*</label>
-          </div>
-         </div>
-         </div>
-        <div class="oj-md-5">
-          <div class="oj-margin-left">
             <div class="oj-sm-12">
-              <label>Category</label>
+              <label>Description</label><label class="required">*</label>
             </div>
             <div class="oj-sm-12">
-              <select id="categorySelectedit" data-bind="ojComponent: {component: 'ojSelect',placeholder: 'Select a Category', value: val, rootAttributes: {style:'max-width:20em'}}">
-                <option value="All">All</option>
-                <option value="Documentation">Documentation</option>
-                <option value="Reference">Reference</option>
-                <option value="Resources">Resources</option>
-                <option value="Tools">Tools</option>
-                <option value="Training">Training</option>                
-              </select>
+              <textarea id="adddesc" data-bind="ojComponent: {component: 'ojInputText',value:toolsdescription ,rootAttributes: { style: 'width: 100%;'}}"></textarea>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-
-
-<div id="" data-bind="">
-  <div style="display:none" class="dialogbodymain" id="createtools" title="Create" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
-    <div class="oj-dialog-footer" style="background-color: lightgray">
-      <div class="oj-sm-8">
-        <button class="bluebutton " id="okButton" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}" onclick=""> </button>
-      </div>
-    </div>
-    <div class="dialogbody">
-      <div class="oj-flex"> 
-        
-        <div class="oj-flex-item oj-md-7 ">
-         <div class="oj-margin-right">
-          <div class="oj-flex oj-sm-12 inputrow">
-            <div class="oj-sm-12">
-              <label>Title</label>
-            </div>
-            <div class="oj-sm-12">
-              <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:name ,rootAttributes: { style: 'width: 100%;'}}"
-                />
-            </div>
-          </div>
-          <div class="oj-flex oj-sm-12 inputrow">
-            <div class="oj-sm-12">
-              <label>Link</label>
-            </div>
-            <div class="oj-sm-12">
-              <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:name ,rootAttributes: { style: 'width: 100%;'}}"
-                />
-            </div>
-          </div>
-          <div class="oj-flex oj-sm-12 inputrow">
-            <button onclick="openEditToolsDescriptionModal()">Add Description</button>
-            <label class="required">*</label>
-          </div>
-         </div>
-         </div>
-        <div class="oj-md-5">
-          <div class="oj-margin-left">
-            <div class="oj-sm-12">
-              <label>Category</label>
-            </div>
-            <div class="oj-sm-12">
-              <select id="categorySelectadd" data-bind="ojComponent: {component: 'ojSelect',placeholder: 'Select a Category', value: val, rootAttributes: {style:'max-width:20em'}}">
-                <option value="All">All</option>
-                <option value="Documentation">Documentation</option>
-                <option value="Reference">Reference</option>
-                <option value="Resources">Resources</option>
-                <option value="Tools">Tools</option>
-                <option value="Training">Training</option>
-              </select>
-            </div>
-          </div>
-        </div>
-    </div>
-  </div>
-</div>
-
-<div style="display:none" class="dialogbodymain" id="edit_tools_desc_modal" title="Tools Description" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
-    <div class="oj-dialog-body roleWrapper">
-      <div class="nomargin-md oj-margin-left">
-        <div class="oj-flex">
+      <div class="oj-md-5">
+        <div class="oj-margin-left">
           <div class="oj-sm-12">
-            <label>Description </label>
-            <label class="required">* [20000 characters limit]</label>
+            <label>Roles</label><label class="required">*</label>
+          </div>
+          <div class="oj-sm-12 inputrow oj-flex">
+            <select id="roleSelectadd" data-bind="ojComponent: {component: 'ojSelect', multiple: true, placeholder: 'Select a Role', options: roles, value: toolsrolesel, rootAttributes: {style:'max-width:20em'}}">
+              <!-- ko foreach: roles() -->
+                <!-- ko if: $index() > 0 -->
+                <option data-bind="text: name,value: id"></option>
+                <!-- /ko -->
+              <!-- /ko -->
+            </select>
           </div>
           <div class="oj-sm-12">
-            <textarea id="edit_tools_editor" rows="6" cols="50" placeholder=""></textarea>
+            <label>Category</label><label class="required">*</label>
+          </div>
+          <div class="oj-sm-12 inputrow oj-flex">
+            <select id="categorySelectadd" data-bind="ojComponent: {component: 'ojSelect', multiple: true, placeholder: 'Select a Category', options: refinelist, value: toolscategorysel, rootAttributes: {style:'max-width:20em'}}">
+              <!-- ko foreach: refinelist() -->
+                <!-- ko if: $index() > 0 -->
+                <option data-bind="text: name,value: id"></option>
+                <!-- /ko -->
+              <!-- /ko -->
+            </select>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <!--  AUTO CLOSABLE DIALOG -->
-  <div style="display:none;height:150px" class="dialogbodymain" id="toastdiv" title="Notification" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style:'height: auto; min-width 240px'}}">
-    <div class="dialogbody">
-      <h5 data-bind="text:msg"></h5>
+
     </div>
   </div>
   
+  <div class="oj-dialog-footer" style="background-color: lightgray">
+    <div class="oj-sm-8">
+      <button id="resetefButton" data-dismiss="modal" class="orangebutton" onclick="resettools()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
+      <button id="okButton" data-dismiss="modal" class="bluebutton" onclick="createtools()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"></button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Add Tools end-->
+
+<!-- Update Tools start-->
+
+<div style="display:none" class="dialogbodymain" id="edittools" title="Update" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+
+  <div class="dialogbody">
+    <div class="oj-flex">
+
+      <div class="oj-flex-item oj-md-7 ">
+        <div class="oj-margin-right">
+          <div class="oj-flex oj-sm-12 inputrow">
+            <div class="oj-sm-12">
+              <label>Title</label>
+              <label class="required">*</label>
+            </div>
+            <div class="oj-sm-12">
+              <input type="text" data-bind="ojComponent: {component: 'ojInputText',value:edittoolstitle ,rootAttributes: { style: 'width: 100%;'}}"
+              />
+            </div>
+          </div>
+          <div class="oj-flex oj-sm-12 inputrow">
+            <div class="oj-sm-12">
+              <label>Link</label>
+              <label class="required">*</label>
+            </div>
+            <div class="oj-sm-12">
+              <input type="text" data-bind="ojComponent: {component: 'ojInputText',value:edittoolslink ,rootAttributes: { style: 'width: 100%;'}}"
+              />
+            </div>
+          </div>
+          <div class="oj-flex oj-sm-12 inputrow">
+            <div class="oj-sm-12">
+              <label>Description</label>
+              <label class="required">*</label>
+            </div>
+            <div class="oj-sm-12">
+              <textarea id="upddesc" data-bind="ojComponent: {component: 'ojInputText',value:edittoolsdescription ,rootAttributes: { style: 'width: 100%;'}}"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="oj-md-5">
+        <div class="oj-margin-left">
+          <div class="oj-sm-12">
+            <label>Roles</label>
+            <label class="required">*</label>
+          </div>
+          <div class="oj-sm-12 inputrow oj-flex">
+            <select id="roleSelectupd" data-bind="ojComponent: {component: 'ojSelect', multiple: true, placeholder: 'Select a Role', options: roles, optionChange: edittoolsrolesel, value: edittoolsrolesel, rootAttributes: {style:'max-width:20em'}}">
+              <!-- ko foreach: roles() -->
+                <!-- ko if: $index() > 0 -->
+                <option data-bind="text: name,value: id"></option>
+                <!-- /ko -->
+              <!-- /ko -->
+            </select>
+          </div>
+          <div class="oj-sm-12">
+            <label>Category</label>
+            <label class="required">*</label>
+          </div>
+          <div class="oj-sm-12 inputrow oj-flex">
+            <select id="categorySelectupd" data-bind="ojComponent: {component: 'ojSelect', multiple: true, placeholder: 'Select a Category', options: refinelist, optionChange: edittoolscategorysel, value: edittoolscategorysel, rootAttributes: {style:'max-width:20em'}}">
+              <!-- ko foreach: refinelist() -->
+                <!-- ko if: $index() > 0 -->
+                <option data-bind="text: name,value: id"></option>
+                <!-- /ko -->
+              <!-- /ko -->
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="oj-dialog-footer" style="background-color: lightgray">
+    <div class="oj-sm-8">
+      <button id="resetupdefButton" data-dismiss="modal" class="orangebutton" onclick="resettools()" data-bind="ojComponent: {component: 'ojButton', label: 'Reset'}"></button>
+      <button id="okupdButton" data-dismiss="modal" class="bluebutton" onclick="updatetools()" data-bind="ojComponent: {component: 'ojButton', label: 'Save'}"></button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Update Tools end-->
+
+<!-- Delete Tools confirmation start-->
+
+<div style="display:none" id="deletetools" title="Delete Confirmation" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',cancelBehavior: 'icon',rootAttributes: { style: 'width: 35%; height: auto; min-width 100px; '}}">
+  <div class="oj-dialog-body roleWrapper">
+    <p align="center">Are you sure you want to delete this tool? </p>
+    <div class="oj-dialog-footer">
+      <button id="okButton" class="orangebutton" onclick="closedeltools()" data-bind="ojComponent: {component: 'ojButton', label: 'Cancel'}"></button>
+      <button id="delete_tools" class="bluebutton" onclick="deletetools()" data-bind="ojComponent: {component: 'ojButton', label: 'Delete'}"></button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Tools confirmation end-->
+
 <!-- TOOLS -->
+
+
+
+<!--  AUTO CLOSABLE DIALOG STARTS-->
+<div style="display:none;height:150px" class="dialogbodymain" id="toastdiv" title="Notification" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style:'height: auto; min-width 240px'}}">
+  <div class="dialogbody">
+    <h5 data-bind="text:msg"></h5>
+  </div>
+</div>
+<!--  AUTO CLOSABLE DIALOG ENDS-->
