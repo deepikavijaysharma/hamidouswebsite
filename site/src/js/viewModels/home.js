@@ -2770,6 +2770,18 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 $(this).parent().addClass('active');
                 } // End if
             });
+			
+			var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+        if (window.location.hash) {
+			
+            setTimeout(function () {
+                var hash = window.location.hash;
+                window.location.hash = "";
+                window.location.hash = hash;
+			
+				
+            }, 800);
+        }
   
         });
         
