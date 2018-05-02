@@ -100,27 +100,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                 }
             }
 
-            edittools = function (course) 
-            {
-                $("#edittools").ojDialog("open");
-            }
-				
-            deletetools = function (coursedata) 
-            {
-                if (confirm("Do you really wish to delete the course?"))
-                {
-                    var course = new Array();
-                    console.log("Deleting tools. . . ");
-                }
-            }		
-
-            self.resetCourseFilters = function () {
-                setuncheck('category');
-                setuncheck('roles');
-                self.refinecategories([]);
-                self.refineroles([]);
-                getLeftpanelData();
-            }
+            self.handleAttached = function (info) {
+                // checkadminrights();
+                alltools();
+            };
 
             /******************************************LEFT PANEL DATA RECORDED STARTS***************************************************************/
             
@@ -170,7 +153,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                     headers: headerobj,
                     contentType: 'application/json; charset=utf-8',
                     success: function (allcourses) 
-                    {// console.log(allcourses);
+                    {//console.log(allcourses);
                         self.cat(allcourses);
                         for (var w = 0; w < allcourses.length; w++) 
                         {
@@ -181,8 +164,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                         console.log(xhr);
                     }
                 });
-            }
-            alltools();
+            }// alltools();
 
             /******************************************DEFAULT FILTER ENDS***************************************************************/
 
@@ -246,6 +228,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
 
             }
 
+            console.log(self.expand());
             self.closeall = function () {
                 for (var w = 0; w < self.expand().length; w++) {
                     $("#" + self.expand()[w]).ojCollapsible({ "expanded": false });
@@ -303,6 +286,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
             }
             getLeftpanelData();
 
+            self.resetCourseFilters = function () {
+                setuncheck('category');
+                setuncheck('roles');
+                self.refinecategories([]);
+                self.refineroles([]);
+                getLeftpanelData();
+            }
+
             /******************************************LEFT PANEL DATA ENDS*************************************************************************/
 
             /******************************************ADD TOOLS AND RESOURCES STARTS***************************************************************/
@@ -311,6 +302,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
             {
                 self.toolsrolesel([]);
                 self.toolscategorysel([]);
+                self.toolstitle('');
+                self.toolslink('');
+                self.toolsdescription('');
                 $("#createtools").ojDialog("open");
             }
 
@@ -354,12 +348,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                         closetools();
                         self.showToastDialog("Tools created successfully!", 2000);
                         alltools();
+                        // for (var w = 0; w < mappedCategoryIds.length; w++) {
+                        //     if (mappedCategoryIds == self.expand()[w]){
+                        //     $("#" + self.expand()[w]).ojCollapsible({ "expanded": true });}
+                        // }
                     }
                 }).fail(function (xhr, textStatus, err) {
                     closetools();
                     self.showToastDialog("Tools creation failed!", 0);
                 });
-            }
+            }           
             
             resettools = function () 
             {

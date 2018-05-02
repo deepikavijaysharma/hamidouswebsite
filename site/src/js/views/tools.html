@@ -70,18 +70,17 @@
 
                     <!-- ko foreach: contents -->
                     <div class="oj-flex toolsrow res se all" data-bind="attr:{'id':id}">
-                      <div class="oj-sm-12 " style="margin-bottom: 5px;position:relative;z-index:1000"> <i class="fa fa-pencil-square-o admin" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Edit Course"
-                                  data-bind="click:edittools,attr:{'id':id}" target="_blank"></i> <i class="fa fa-trash-o admin" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Delete Course"
-                                  data-bind="click:deletetools,attr:{'id':id}" target="_blank"></i> </div>
+                      <div class="oj-sm-12 admin" style="margin-bottom: 5px;position:relative;z-index:1000">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Edit Course" data-bind="click:edittools,attr:{'id':id}" target="_blank"></i>
+                        <i class="fa fa-trash-o" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Delete Course" data-bind="click:deletetools,attr:{'id':id}" target="_blank"></i> 
+                      </div>
                       <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
                         <div class="roundedwhite"><img width="16px" height="16px" data-bind="attr:{'src':imageLink}" /></div>
                       </div>
                       <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                        <div class="oj-margin">
-                          <h1 data-bind="text:name"></h1>
-                          <span data-bind="text:description"></span></div>
+                        <div class="oj-margin"><h1 data-bind="text:name"></h1><span data-bind="text:description"></span></div>
                       </div>
-                      <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a target="_blank" data-bind="attr:{'href':link}"><img src="css/images/317-arrow-right2.png"></a></div>
+                      <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a data-bind="attr:{'href':link}" target="_blank"><img src="css/images/317-arrow-right2.png"></a></div>
                     </div>
                     <!-- /ko -->
 
@@ -111,7 +110,7 @@
 
 <!-- Add Tools start-->
 
-<div style="display:none" class="dialogbodymain" id="createtools" title="Create" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+<div style="display:none" class="dialogbodymain" id="createtools" title="Create Tools and Resources" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
   
   <div class="dialogbody">
     <div class="oj-flex"> 
@@ -189,7 +188,7 @@
 
 <!-- Update Tools start-->
 
-<div style="display:none" class="dialogbodymain" id="edittools" title="Update" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
+<div style="display:none" class="dialogbodymain" id="edittools" title="Update Tools and Resources" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
 
   <div class="dialogbody">
     <div class="oj-flex">

@@ -145,10 +145,7 @@ font-size: 15px;
 }
 }
 .anchor{
-  display: block;
-  height: 120px; /*same height as header*/
-  margin-top: -120px; /*same height as header*/
-  visibility: hidden;
+padding-top:68px;
 }
 .oj-margin-right{
 margin-right:10px;
@@ -3023,8 +3020,8 @@ margin-top:30px;
 padding-top:20px;
 
 .toolsfilter{
-
-
+background:#fff;
+padding-bottom:10px;
 .oj-label{
 background:#00758f;
 color:#fff;
@@ -3033,7 +3030,7 @@ font-size:$mediumFontSize;
 font-weight:normal;
 }
 .filterblock{
-	padding-bottom:10px;
+	margin-bottom:10px;
 	background:#fff;
 	}
 .radiobg{
