@@ -3834,3 +3834,42 @@ height: 14px;
 		margin:3px 6px 0 0;
 		}	
 }
+.toolspage{
+	.search{
+		.oj-inputsearch{
+			max-width:100%;
+			margin:0px;
+			height:50px;
+			@media  #{$responsiveQueryLargeDown} {
+			max-width:85%;
+			}
+		}
+		.oj-inputsearch-choice{
+		padding:15px;
+		margin:0px;
+		height: auto;
+		color:$grey;
+		height:50px;
+		}
+		#search-button{
+			@include bluebutton;
+			margin-left:10px;
+			padding:14px 35px;
+			height:auto;
+			cursor:pointer;
+			font-size:$mediumFontSize;
+			height:50px;
+			@media  #{$responsiveQuerySmallOnly} {
+			margin-left:0px;
+			margin-top:10px;
+			}
+			@media  #{$responsiveQueryXSmallOnly} {
+			font-size:$smallestFontSize;
+			}
+		}
+		span{
+			float: left;
+			    width: 80%;
+		}
+	} 
+}
