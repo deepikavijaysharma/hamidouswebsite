@@ -5,7 +5,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
         function DashboardViewModel() {
 
-            this.newExpanded = ko.observableArray();
+            self.newExpanded = ko.observableArray();
             self.course = ko.observable();
             self.course_id = ko.observable('');
             self.course_name = ko.observable('');
@@ -30,6 +30,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             var updated_url;
             var error_count;
             // var sub_categories = new Array();
+            var all_categories_ids = new Array();
 
             // MODAL HANDLE START
             self.createCourseModalOpen = function () {
@@ -110,18 +111,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     categoriesres = response.categories;
                     self.main_category_list([]);
                     for (var i = 0; i < categoriesres.length; i++) {
-
+                        all_categories_ids.push(categoriesres[i].id);
                         self.main_category_list.push({
                             name: categoriesres[i].name,
                             id: categoriesres[i].id
                         })
                     } 
                     self.onDemandCategoryForUi([]);
+                    console.log("forUI=====>"+ko.toJSON(self.onDemandCategoryForUi()));
                     if (categoriesres.length > 0) {
                         processOnDemandCategoryList(categoriesres, self.onDemandCategoryForUi());
                     }
                 });
-
             }
 
             processOnDemandCategoryList = function (categories, childarray) {
@@ -186,7 +187,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
             self.createOndemandCourse = function () {
                 validation(self.course_url());
-                console.log(error_count);
                 if (error_count == 0){
                     var mappedCategories = new Array();
                     self.onDemandSelectedCategoriesForCourse().forEach(function (element) {
@@ -252,24 +252,23 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
 
             fetchondemand = function () {
 			 $.getJSON(trainingbaseurl+'getCategoriesCourses', function (data) { 
-                console.log("fetching ondemand....");
-                self.toolslist(data); 
+                self.toolslist(data);
                 })
 			}
 
-            // getCategoryObjects = function (categories) {
-            //     for (var i = 0; i < categories.length; i++) {
-            //         var item = {
-            //             title: categories[i].name,
-            //             id: categories[i].id
-            //         }
-            //         if (categories[i].categories != undefined && categories[i].categories.length > 0) {
-            //             getCategoryObjects(categories[i].categories);
+            getCategoryObjects = function (categories) {
+                for (var i = 0; i < categories.length; i++) {
+                    var item = {
+                        title: categories[i].name,
+                        id: categories[i].id
+                    }
+                    if (categories[i].categories != undefined && categories[i].categories.length > 0) {
+                        getCategoryObjects(categories[i].categories);
 
-            //         }
-            //         sub_categories.push(item);
-            //     }
-            // }
+                    }
+                    sub_categories.push(item);
+                }
+            }
             
             openDeleteModal = function (delete_id) {
                 $("#delete_ondemand").ojDialog("open");
@@ -280,7 +279,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                         success: function () {
                             fetchondemand();
                             $("#delete_ondemand").ojDialog("close");
-                            showMessage("Course Deleted Successfully")
+                            showMessage("Course Deleted Successfully");
                         },
                         fail: function (xhr, textStatus, err) {
                             showMessage("Failed to Delete Course");
@@ -322,7 +321,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             }
 
             resetOnDemand = function () {
-                emptyAllFields();
+                $("input:checkbox[name=roles]:checked").each(function(){
+                    $(this).prop('checked',false);
+                });
+                $("input:checkbox[name=categories]:checked").each(function(){
+                    $(this).prop('checked',false);
+                });
             }
             //BUSINESS LOGIC END
 
@@ -369,12 +373,25 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 x.className = "show";
                 setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
             }
+
+            self.expandAll = function () {
+                for(var i=0; i<all_categories_ids.length; i++) {
+                    $("#id_" + all_categories_ids[i]).ojCollapsible({ "expanded": true });
+                }
+            }
+            
+            self.collapseAll = function () {
+                for(var i=0; i<all_categories_ids.length; i++) {
+                    $("#id_" + all_categories_ids[i]).ojCollapsible({ "expanded": false });
+                }                
+            }
             //MODULAR COMMON FUNCTIONS END
 
             //FUNCTION CALLS ON PAGE LOAD START
 			getOnDemadnRoleData();
             getOnDemandCategoryHierarchy();
             fetchondemand();
+            //getOnDemandCategoryHierarchy();
             //FUNCTION CALLS ON PAGE LOAD END
         }
 		

@@ -43,11 +43,13 @@
 </style>
 <div class="container">
   <!-- SEARCH -->
+  <div class="oj-flex">
+    <div class="oj-sm-12">
   <form id="form1">
     <div class="search">
       <button id="createTrainingButton" class="reqtrain-button oj-xl-float-end admin" data-bind="ojComponent: {
                       component: 'ojButton',
-                      label: 'Create Course'},click:createCourseModalOpen"> </button>
+                      label: 'Create On Demand Course'},click:createCourseModalOpen"> </button>
     </div>
     <div class="oj-flex search">
       <div class="oj-flex-item  oj-sm-12">
@@ -57,7 +59,11 @@
       </div>      
     </div>
   </form>
-
+</div>
+  <div class="oj-sm-12 excol" align="right">
+    <a href="#" data-bind="click:expandAll">Expand All</a> /
+    <a href="#" data-bind="click:collapseAll">Close All</a>
+  </div>
 <!-- CREATE COURSE DIALOG START -->
     <div style="display:none" id=ondemand_course_dialog class="dialogbodymain" title="Create Course" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 80%; height: auto; min-width 240px; '}}">
       <div class="oj-dialog-footer" style="background-color: lightgray">
@@ -75,7 +81,7 @@
           <div class="oj-flex-item oj-sm-7 ">
             <div class="oj-flex oj-sm-12 inputrow">
               <div class="oj-sm-12">
-                <label>Course Name</label>
+                <label>On Demand Course Name</label>
               </div>
               <div class="oj-sm-12">
                 <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:course_name ,rootAttributes: { style: 'width: 100%;'}}"
@@ -194,7 +200,7 @@
   <!-- delete community call confirmation end -->
 
   <!-- on demand course details modal start -->
-  <div style="display:none;height:500px" class="dialogbodymain" id="ondemand_course_details" title="Event Details" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 60%'}}">
+  <div style="display:none;height:500px" class="dialogbodymain" id="ondemand_course_details" title="On Demand Course Details" data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 60%'}}">
     <div class="dialogbody">
       <div class="oj-flex">
         <div class="oj-lg-12">
@@ -207,7 +213,7 @@
   </div>
   <!-- on demand course details modal end -->
   <!-- COURSES -->
-  <div class="oj-flex coursesblock">
+  <div class="oj-flex oj-sm-12 coursesblock">
     <div class="oj-flex-item oj-md-3 oj-lg-3">
       <div class="eblocks selectblock oj-flex-item  oj-sm-12" >
                   <div class="oj-flex oj-sm-12 refine">
@@ -286,7 +292,7 @@
                 <div class="oj-margin"> 
                   <!-- <span class="badge">Mandatory Course</span> -->
                   <a data-bind="text: name, attr:{'href':url}" target="_blank"></a>
-                  <!-- ko if: summary-->
+                  <!-- ko if: summary !=null -->
                   <div class="desc">Summary: <span data-bind="html:summary"/> </div>
                   <!-- /ko --> 
                 </div>
@@ -297,8 +303,10 @@
       </script>
 
       <script type="text/html" id="template1">
-        <div id="c1" data-bind="ojComponent: {component: 'ojCollapsible', expanded:false}">
+        <!-- ko if: courses.length>0-->
+        <div data-bind="attr:{id:'id_'+category_id}, ojComponent: {component: 'ojCollapsible'}">
       		<div><span data-bind="text: category_name"></span></div>
+          
         	<div> 
       	      <!-- ko template: { name: 'template1', foreach: $data.Child } -->
               <!-- /ko --> 
@@ -306,23 +314,26 @@
               <!-- /ko -->
       		</div>
       	</div>    
+        <!-- /ko --> 
       </script>
 
       <div id="accordionPage" data-bind="ojComponent: {component: 'ojAccordion', multiple: true, 
                                                        expanded: newExpanded }">
        <!-- ko foreach: toolslist -->
-         <div id="" data-bind="ojComponent: {component: 'ojCollapsible', expanded:false}">
+         <div data-bind="attr:{id:'id_'+category_id}, ojComponent: {component: 'ojCollapsible'}">
       			<div><span data-bind="text: category_name"></span></div>
       				<div>
-      					<!-- ko template: { name: 'template2', foreach: courses } --> <!-- /ko --> 
+      					
+                <!-- ko template: { name: 'template2', foreach: courses } --> <!-- /ko --> 
       								 <!-- ko template: { name: 'template1', foreach: $data.Child } -->
-      									<!-- /ko -->	
+                        <!-- /ko -->  
         			</div>
-      			</div>	
+      	</div>	
        <!-- /ko -->  						
       </div>
 
       </div>
     </div>
   </div>
+</div>
 </div>
