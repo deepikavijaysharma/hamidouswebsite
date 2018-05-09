@@ -5,19 +5,14 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs/ojconveyorbelt', 'ojs/ojcheckboxset', 'ojs/ojanimation', 'ojs/ojbutton', 'ojs/ojinputtext', 'ojs/ojdialog', 'ojs/ojdatetimepicker',
-        'ojs/ojselectcombobox', 'ojs/ojtimezonedata', 'ojs/ojswitch', 'ojs/ojswitch', 'ojs/ojdialog', 'ojs/ojcollapsible', 'ojs/ojaccordion', 'ojs/ojtree','ojs/ojtabs'
-    ],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 
+    'ojs/ojradioset', 'ojs/ojbutton'],
     function (oj, ko, $) {
 
         function DashboardViewModel() {
 
-
             var self = this;
-            
-            self.val = ko.observableArray();
-
-			self.selectedview =  ko.observableArray();
+            self.selectedview =  ko.observable("tab-live");
 			self.setFilter = function() {
 				 
 				 if(self.selectedview()=='tab-live'){
@@ -28,11 +23,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
 						 $('#tab-ondemand').show();
 						 $('#tab-live').hide();
 				}
-				
-				 
    
 			 }
-            
+           
         }
         return new DashboardViewModel();
     }

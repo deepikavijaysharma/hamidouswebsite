@@ -649,11 +649,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.roles = ko.observableArray([]);
             self.selectedcategories = ko.observableArray([]);
             self.rl = ko.observableArray([]);
+            self.states_list = ko.observableArray([]);
 
             getLeftpanelData = function () {
                 $.getJSON(trainingbaseurl + "getFiltersV2").
                 then(function (reasons) {
-
                     // CATEGORIES
                     self.refinelist([]);
                     var categorlist = reasons.categories;
@@ -720,6 +720,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             id: stateList[i].id
                         })
                     }
+
+                    // STATES
+                    self.states_list([]);
+                    var states_data = reasons.states;
+                    for (var i = 0; i < states_data.length; i++) {
+
+                        self.states_list.push({
+                            name: states_data[i],
+                            id: states_data[i]
+                        })
+                    }
+
                 });
             }
 

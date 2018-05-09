@@ -31,6 +31,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             var error_count;
             // var sub_categories = new Array();
             var all_categories_ids = new Array();
+            self.searchtext_val = ko.observable('');
 
             // MODAL HANDLE START
             self.createCourseModalOpen = function () {
@@ -303,13 +304,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 });
                 console.log("roles--"+selected_roles_refine);
                 console.log("cats--"+selected_categories_refine);
+                console.log("free text--"+self.searchtext_val());
                 $.ajax({
                     url: trainingbaseurl+"getCategoriesCourses",
                     cache: false,
                     type: 'GET',
                     headers: {
                         "role_id": selected_roles_refine,
-                        "category_id": selected_categories_refine
+                        "category_id": selected_categories_refine,
+                        "freetextsearch": self.searchtext_val()
                     },
                     contentType: 'application/json; charset=utf-8',
                     success: function (data) {
@@ -327,6 +330,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 $("input:checkbox[name=categories]:checked").each(function(){
                     $(this).prop('checked',false);
                 });
+                fetchondemand();
             }
             //BUSINESS LOGIC END
 

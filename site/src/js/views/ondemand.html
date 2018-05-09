@@ -49,12 +49,14 @@
     <div class="search">
       <button id="createTrainingButton" class="reqtrain-button oj-xl-float-end admin" data-bind="ojComponent: {
                       component: 'ojButton',
-                      label: 'Create On Demand Course'},click:createCourseModalOpen"> </button>
+                      label: 'Create On-Demand Course'},click:createCourseModalOpen"> </button>
     </div>
     <div class="oj-flex search">
       <div class="oj-flex-item  oj-sm-12">
-        <input id="search-input" placeholder="Search courses . . ." data-bind="ojComponent:{
-        component: 'ojInputSearch'
+        <input id="search-input" placeholder="Search on-demand courses . . ." data-bind="ojComponent:{
+        component: 'ojInputSearch',
+        value: searchtext_val,
+        update : refineOnDemand
       }" />
       </div>      
     </div>
@@ -81,7 +83,7 @@
           <div class="oj-flex-item oj-sm-7 ">
             <div class="oj-flex oj-sm-12 inputrow">
               <div class="oj-sm-12">
-                <label>On Demand Course Name</label>
+                <label>On-Demand Course Name</label>
               </div>
               <div class="oj-sm-12">
                 <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:course_name ,rootAttributes: { style: 'width: 100%;'}}"

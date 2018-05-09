@@ -1,12 +1,28 @@
 <form id="form1">
   
-  <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+<!--   <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
                                                     value: selectedview,
                                                     rootAttributes: {style:'max-width:20em'},optionChange: setFilter}">
     <option value="tab-live">Live Trainings</option>
     <option value="tab-ondemand">On-demand Trainings</option>
     
-  </select>
+  </select> -->
+
+    <div id="basicSelect"
+         data-bind="ojComponent: {
+          component: 'ojRadioset', 
+          value: selectedview,
+          optionChange:setFilter}" >
+
+        <span class="oj-choice-item">
+            <input type="radio" name="tr_type" value="tab-live">Live Trainings</input>
+        </span>
+        <span class="oj-choice-item">
+            <input type="radio" name="tr_type" value="tab-ondemand">On-demand Trainings</input>
+        </span>
+
+      
+    </div>  
 
 
     

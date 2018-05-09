@@ -310,6 +310,27 @@
                     
                   
                     <div class="oj-sm-12 selectblockinner">
+
+                    <!-- ~~~~~~~~~~~~~ ROLES ~~~~~~~~~~~~~~ --> 
+                    <!-- ko if: roles().length>0 -->
+                    <div class="titlesmall">Roles</div>
+                    <!-- /ko -->
+                    <ul class="refinelist">
+                      <!-- ko foreach: roles -->
+                      <li>
+                        <div class="oj-flex">
+                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
+                            <label>
+                              <input type="checkbox" class="roles" name="roles" data-bind="value: id" onchange="refineupdate(this)">
+                            </label>
+                          </div>
+                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
+                        </div>
+                      </li>
+                      
+                      <!-- /ko -->
+                    </ul>
+                                          
                     <!-- ~~~~~~~~~~~~~ CATEGORIES ~~~~~~~~~~~~~~ --> 
                     <!-- ko if: refinelist().length>0 -->
                     <div class="titlesmall">Categories</div>
@@ -326,26 +347,6 @@
                           <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
                         </div>
                       </li>
-                      <!-- /ko -->
-                    </ul>
-                    
-                    <!-- ~~~~~~~~~~~~~ PRODUCT TYPE ~~~~~~~~~~~~~~ --> 
-                    <!-- ko if: producttype().length>0 -->
-                    <div class="titlesmall">Product Type</div>
-                    <!-- /ko -->
-                    <ul class="refinelist">
-                      <!-- ko foreach: producttype -->
-                      <li>
-                        <div class="oj-flex">
-                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                            <label>
-                              <input type="checkbox" class="prodtype" name="prodtype" data-bind="value: name" onchange="refineupdate(this)">
-                            </label>
-                          </div>
-                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
-                        </div>
-                      </li>
-                      
                       <!-- /ko -->
                     </ul>
                     
@@ -368,31 +369,14 @@
                       
                       <!-- /ko -->
                     </ul>
-                    <!-- ~~~~~~~~~~~~~ TRAINING TYPE ~~~~~~~~~~~~~~ --> 
-                    <!-- ko if: training_types().length>0 -->
-                    <div class="titlesmall">Training Type</div>
+
+                   
+                    <!-- ~~~~~~~~~~~~~ STATES ~~~~~~~~~~~~~~ --> 
+                    <!-- ko if: states_list().length>0 -->
+                    <div class="titlesmall">States</div>
                     <!-- /ko -->
                     <ul class="refinelist">
-                      <!-- ko foreach: training_types -->
-                      <li>
-                        <div class="oj-flex">
-                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                            <label>
-                              <input type="checkbox" class="trainingtype" name="trainingtype" data-bind="value: name" onchange="refineupdate(this)">
-                            </label>
-                          </div>
-                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
-                        </div>
-                      </li>
-                      
-                      <!-- /ko -->
-                    </ul>
-                    <!-- ~~~~~~~~~~~~~ CITIES ~~~~~~~~~~~~~~ --> 
-                    <!-- ko if: cities().length>0 -->
-                    <div class="titlesmall">Cities</div>
-                    <!-- /ko -->
-                    <ul class="refinelist">
-                      <!-- ko foreach: cities -->
+                      <!-- ko foreach: states_list -->
                       <li>
                         <div class="oj-flex">
                           <div class="oj-sm-1 oj-md-2 oj-lg-1">
@@ -406,26 +390,7 @@
                       
                       <!-- /ko -->
                     </ul>
-                    
-                    <!-- ~~~~~~~~~~~~~ ROLES ~~~~~~~~~~~~~~ --> 
-                    <!-- ko if: roles().length>0 -->
-                    <div class="titlesmall">Roles</div>
-                    <!-- /ko -->
-                    <ul class="refinelist">
-                      <!-- ko foreach: roles -->
-                      <li>
-                        <div class="oj-flex">
-                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                            <label>
-                              <input type="checkbox" class="roles" name="roles" data-bind="value: id" onchange="refineupdate(this)">
-                            </label>
-                          </div>
-                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
-                        </div>
-                      </li>
-                      
-                      <!-- /ko -->
-                    </ul>
+
                     <div class="oj-flex refinebuttons">
                       <div class="oj-sm-12 oj-xl-6">
                         <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: refinecourses, 
