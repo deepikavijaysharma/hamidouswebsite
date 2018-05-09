@@ -1756,7 +1756,7 @@ height:20px;
 margin-bottom:10px;
 }
 .coursesblock{
-margin-top:20px;
+
 .catheadings{
 padding: 5px 5px 5px 0px;
 
@@ -1791,8 +1791,11 @@ max-width:250px;
 max-width:100%;
 }
 position:relative;
-padding:15px;
+
 }
+.refineblocksinner{
+	padding:10px;
+	}
 .selectblock{
 	background:#fff;
 margin-bottom:10px;
@@ -3587,7 +3590,7 @@ z-index: 1052!important;
 z-index: 1052!important;
 }
 
-#ojDialogWrapper-edit_course_modal,#ojDialogWrapper-edit_course_modal_layer,#ojDialogWrapper-course_modal_layer,#ojDialogWrapper-modaldesc_layer,#ojDialogWrapper-editcomcall_desc_modal_layer,#ojDialogWrapper-event_desc_modal_layer{
+#ojDialogWrapper-edit_course_modal,#ojDialogWrapper-edit_course_modal_layer,#ojDialogWrapper-course_modal_layer,#ojDialogWrapper-modaldesc_layer,#ojDialogWrapper-editcomcall_desc_modal_layer,#ojDialogWrapper-event_desc_modal_layer,#ojDialogWrapper-ondemand_course_modal,#ojDialogWrapper-ondemand_course_modal_layer{
 z-index:1052;
 }
 
@@ -3806,7 +3809,7 @@ border: 1px solid rgb(226, 226, 226);
 padding: 20px;
 }	
 }
-#createtools, #edittools{
+#createtools, #edittools,#ondemand_course_dialog{
 ul.oj-select-choices{
 min-height: 2.28571rem;
 padding-bottom: 0;
@@ -3874,4 +3877,11 @@ height: 14px;
 			    width: 80%;
 		}
 	} 
+}
+
+#tab-ondemand {
+.excol{
+margin-top:10px;
+margin-bottom:10px;
+}
 }
