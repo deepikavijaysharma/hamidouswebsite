@@ -5,8 +5,7 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 
-    'ojs/ojradioset', 'ojs/ojaccordion', 'ojs/ojcollapsible', 'ojs/ojmodule', 'ojs/ojmoduleanimations', 'ojs/ojanimation','ojs/ojdialog', 'ojs/ojbutton','ojs/ojinputtext','ojs/ojtree','ojs/ojselectcombobox'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset', 'ojs/ojradioset', 'ojs/ojaccordion', 'ojs/ojcollapsible', 'ojs/ojmodule', 'ojs/ojmoduleanimations', 'ojs/ojanimation','ojs/ojdialog', 'ojs/ojbutton','ojs/ojinputtext','ojs/ojtree','ojs/ojselectcombobox'],
     function (oj, ko, $) {
 
         function DashboardViewModel() 
@@ -18,15 +17,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
             self.categoryForUi = ko.observableArray([]);
             self.catlist = ko.observableArray([]);
             this.newExpanded = ko.observableArray([]);
-			this.newExpanded.push({"id":"CSM"});
-            this.val = ko.observableArray(["CH"]);      
-
+            this.val = ko.observableArray(["CH"]); 
             //DISPLAY TOOLS CONTENTS
             self.cat = ko.observableArray([]);
 
             //VARIABLES FOR FILTERING 
             self.refinecategories = ko.observableArray([]);
             self.refineroles = ko.observableArray([]);
+            // self.refinecategories.push(0); 
+            // self.refineroles.push(0); 
             self.selectedcategories = ko.observableArray([]);
             self.expand = ko.observableArray([]);
 
@@ -48,10 +47,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
             self.edittoolslink = ko.observable('');
             self.edittoolsrolesel = ko.observableArray([]);
             self.edittoolscategorysel = ko.observableArray([]);
+            self.edittoolscategoryselname = ko.observableArray([]);
             self.edittoolsdescription = ko.observable('');
 
             // TOAST MESSAGE DIALOG
             self.msg = ko.observable("");
+
+            //SEARCH TEXT
+            self.freetext = ko.observable("");
             
             // CHECK FOR ADMIN RIGHTS
             checkadminrights = function () {
@@ -62,8 +65,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
 
                 } else {
                     console.log("Hiding from user");
-                    // $(".admin").css("display", "none");
-                    // $('.admin').hide();
                     var appBanners = document.getElementsByClassName('admin'), i;
 
                     for (var i = 0; i < appBanners.length; i++) {
@@ -101,14 +102,25 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
             }
 
             self.handleAttached = function (info) {
-                // checkadminrights();
-                alltools();
+                setcheck("category", "roles");
+                alltools(false,null);
             };
 
             /******************************************LEFT PANEL DATA RECORDED STARTS***************************************************************/
             
             refineupdate = function (desc) 
             {
+                // console.log(desc.checked);
+                // if (self.refineroles() == "")
+                // {
+                //     var x = document.getElementsByClassName(roleclassname);
+                //     x[0].checked = true;
+                // }
+                // else if (self.refinecategories() == "") {
+                //     var y = document.getElementsByClassName(roleclassname);
+                //     x[0].checked = true;
+                // }
+                // setcheck("category","roles");
                 var type = desc.name;
                 if (desc.checked) 
                 {
@@ -119,6 +131,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                             desc.checked = true;
                             self.refinecategories.removeAll();
                             self.refinecategories.push(desc.defaultValue);
+                            // console.log(desc.defaultValue);
+                            if (desc.defaultValue == 0)
+                            {
+                                setuncheck('category',0);
+                            }
+                            else{
+                                setuncheck('category', null);
+                            }
                             break;
 
                         case "roles":
@@ -126,13 +146,51 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                             desc.checked = true;
                             self.refineroles.removeAll();
                             self.refineroles.push(desc.defaultValue);
+                            // console.log(desc.defaultValue);
+                            if (desc.defaultValue == 0) {
+                                setuncheck('roles', 0);
+                            }
+                            else {
+                                setuncheck('roles', null);
+                            }
                             break;
                     }
                 } 
+                // else 
+                // {
+                //     alltools(false,null);
+                // }
                 else 
                 {
-                    alltools();
+                    switch (type) 
+                    {
+                        case "category":
+                            self.refinecategories.remove(desc.defaultValue);
+                            if (desc.defaultValue == 0) {
+                                setuncheck('category', 0);
+                            }
+                            else {
+                                setuncheck('category', null);
+                            }
+                            break;
+
+                        case "roles":
+                            self.refineroles.remove(desc.defaultValue);
+                            if (desc.defaultValue == 0) {
+                                setuncheck('roles', 0);
+                            }
+                            else {
+                                setuncheck('roles', null);
+                            }
+                            break;
+                    }
                 }
+                console.log(self.refinecategories());
+                console.log(self.refineroles());
+                // if (((self.refinecategories() == "") && (self.refineroles() == "")) || (self.refinecategories() == "") || (self.refineroles() == ""))
+                // {
+                //     setcheck("category","roles");
+                // }
             }
 
             /******************************************LEFT PANEL DATA RECORDED ENDS***************************************************************/
@@ -140,11 +198,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
 
             /******************************************DEFAULT FILTER STARTS***********************************************************************/
 
-            alltools = function()
+            alltools = function (istrue, catarray)
             {
                 var headerobj = {
                     categoryid: "",
-                    roleid: ""
+                    roleid: "",
+                    freetext: ""
                 }
                 $.ajax({
                     url: "http://solutionengineering-devops.us.oracle.com:8080/tools/contents/find",
@@ -153,18 +212,30 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                     headers: headerobj,
                     contentType: 'application/json; charset=utf-8',
                     success: function (allcourses) 
-                    {//console.log(allcourses);
+                    {
                         self.cat(allcourses);
-                        for (var w = 0; w < allcourses.length; w++) 
+                        // console.log(self.cat()[0].name);
+                        if(istrue){
+                            for (var w = 0; w < catarray.length; w++) {
+                                $("#" + self.expand()[w]).ojCollapsible({ "expanded": true });
+                            }
+                            for (var w = 0; w < allcourses.length; w++) {
+                                self.expand.push(allcourses[w].name);
+                            }
+                        }
+                        else
                         {
-                            self.expand.push(allcourses[w].name);
+                            for (var w = 0; w < allcourses.length; w++) 
+                            {
+                                self.expand.push(allcourses[w].name);
+                            }
                         }
                     },
                     error: function (xhr) {
                         console.log(xhr);
                     }
                 });
-            }// alltools();
+            }
 
             /******************************************DEFAULT FILTER ENDS***************************************************************/
 
@@ -173,33 +244,49 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
 
             self.refinetools = function () 
             {
+                var selected_roles_refine = new Array();
+                var selected_categories_refine = new Array();
+                $("input:checkbox[name=roles]:checked").each(function () {
+                    selected_roles_refine.push($(this).val());
+                });
+                $("input:checkbox[name=category]:checked").each(function () {
+                    selected_categories_refine.push($(this).val());
+                });
+                console.log("roles--" + selected_roles_refine);
+                console.log("cats--" + selected_categories_refine);
+                var text = self.freetext().length > 0 ? self.freetext() : '';
                 self.selectedcategories([]);
                 var selectedcategories = ko.toJSON(self.refinecategories()).replace('[', '').replace(']', '').replace(/"/g, '');
-                var selectedroles = ko.toJSON(self.refineroles()).replace('[', '').replace(']', '').replace(/"/g, '');// console.log(selectedroles);// console.log(selectedcategories);
-                if ((selectedcategories == 0 || selectedcategories == "") && (selectedroles == 0 || selectedroles == "")) {
+                var selectedroles = ko.toJSON(self.refineroles()).replace('[', '').replace(']', '').replace(/"/g, '');
+                if ((selected_categories_refine == 0 || selected_categories_refine == "") && (selected_roles_refine == 0 || selected_roles_refine == "")) {
                     var headerobj = {
                         categoryid: "",
-                        roleid: ""
+                        roleid: "",
+                        freetext: self.freetext()
                     }
                 }
-                else if ((selectedcategories == 0 || selectedcategories == "") && (selectedroles > 0 || selectedroles != "")) {
+                else if ((selected_categories_refine == 0 || selected_categories_refine == "") && (selected_roles_refine > 0 || selected_roles_refine != "")) {
                     var headerobj = {
                         categoryid: "",
-                        roleid: selectedroles
+                        roleid: selected_roles_refine,
+                        freetext: self.freetext()
                     }
                 }
-                else if ((selectedcategories > 0 || selectedcategories != "") && (selectedroles == 0 || selectedroles == "")) {
+                else if ((selected_categories_refine > 0 || selected_categories_refine != "") && (selected_roles_refine == 0 || selected_roles_refine == "")) {
                     var headerobj = {
-                        categoryid: selectedcategories,
-                        roleid: ""
+                        categoryid: selected_categories_refine,
+                        roleid: "",
+                        freetext: self.freetext()
                     }
                 }
                 else {
                     var headerobj = {
-                        categoryid: selectedcategories,
-                        roleid: selectedroles
+                        categoryid: selected_categories_refine,
+                        roleid: selected_roles_refine,
+                        freetext: self.freetext()
                     }
-                }// console.log(headerobj);
+                }
+                console.log(headerobj);
                 $.ajax({
                     url: "http://solutionengineering-devops.us.oracle.com:8080/tools/contents/find",
                     cache: false,
@@ -207,7 +294,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                     headers: headerobj,
                     contentType: 'application/json; charset=utf-8',
                     success: function (allcourses) 
-                    {//console.log(allcourses);
+                    {
+                        console.log(allcourses);
                         self.cat(allcourses);
                         for (var w = 0; w < allcourses.length; w++) 
                         {
@@ -221,24 +309,59 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
 
             /******************************************FILTER ENDS**************************************************************************/
 
-            self.expandall = function () {
-                for (var w = 0; w < self.expand().length; w++) {
+            self.expandall = function () 
+            {
+                for (var w = 0; w < self.expand().length; w++) 
+                {
                     $("#" + self.expand()[w]).ojCollapsible({ "expanded": true });
                 }
-
             }
 
-            console.log(self.expand());
-            self.closeall = function () {
-                for (var w = 0; w < self.expand().length; w++) {
+            self.closeall = function () 
+            {
+                for (var w = 0; w < self.expand().length; w++) 
+                {
                     $("#" + self.expand()[w]).ojCollapsible({ "expanded": false });
                 }
             }
 
-            setuncheck = function (classname) {
+            setuncheck = function (classname,itemid) 
+            {
                 var x = document.getElementsByClassName(classname);
-                for (var i = 0; i < x.length; i++) {
+                if (itemid == 0)
+                {
+                    for (var i = itemid+1; i < x.length; i++) {
+                        x[i].checked = false;
+                    }
+                }
+                else{
+                     x[0].checked = false;
+                }
+            }
+            
+
+            setcheck = function (roleclassname, categoryclassname) {
+                var x = document.getElementsByClassName(roleclassname);
+                var y = document.getElementsByClassName(categoryclassname);
+                // if (self.refineroles() == "") {
+                //     x[0].checked = true;
+                // }
+                // else if (self.refinecategories() == "") {
+                //     y[0].checked = true;
+                // }
+                // else if ((self.refineroles() == "") && (self.refinecategories() == "")) {
+                //     x[0].checked = true;
+                //     y[0].checked = true;
+                // }
+                // x[0].checked = true;
+                // y[0].checked = true;
+                for (var i = 1; i < x.length; i++) {
+                    x[0].checked = true;
                     x[i].checked = false;
+                }
+                for (var j = 1; j < y.length; j++) {
+                    y[0].checked = true;
+                    y[j].checked = false;
                 }
             }
 
@@ -256,20 +379,37 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
 
             getLeftpanelData = function () 
             {
-                $.getJSON("http://solutionengineering-devops.us.oracle.com:8080/tools/filters").then(function (response) {
+                $.getJSON(trainingbaseurl + "getFiltersV2").then(function (reasons) {
+
                     // ROLES
                     self.roles([]);
                     self.roles.push({
                         id: '0',
                         name: 'All'
                     })
-                    
-                    for (var i = 0; i < response.rolesList.length; i++) {
+                    var rolist = reasons.roles;
+                    for (var i = 0; i < rolist.length; i++) {
                         self.roles.push({
-                            id: response.rolesList[i].id,
-                            name: response.rolesList[i].role
+                            id: rolist[i].id,
+                            name: rolist[i].name
                         })
                     }
+                });
+
+                $.getJSON("http://solutionengineering-devops.us.oracle.com:8080/tools/filters").then(function (response) {
+                    // ROLES
+                    // self.roles([]);
+                    // self.roles.push({
+                    //     id: '0',
+                    //     name: 'All'
+                    // })
+                    
+                    // for (var i = 0; i < response.rolesList.length; i++) {
+                    //     self.roles.push({
+                    //         id: response.rolesList[i].id,
+                    //         name: response.rolesList[i].role
+                    //     })
+                    // }
                     // CATEGORIES
                     self.refinelist([]);
                     self.refinelist.push({
@@ -282,15 +422,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                             name: response.typesList[j].name
                         })
                     }
+                    setcheck("roles", "category");
                 });
             }
             getLeftpanelData();
 
             self.resetCourseFilters = function () {
-                setuncheck('category');
-                setuncheck('roles');
-                self.refinecategories([]);
-                self.refineroles([]);
+                // setuncheck('category');
+                // setuncheck('roles');
+                // self.refinecategories([]);
+                // self.refineroles([]);
+                // setcheck("roles","category");
                 getLeftpanelData();
             }
 
@@ -346,12 +488,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                     data: ko.toJSON(addtoolsdata),
                     success: function (data) {
                         closetools();
+                        alltools(true, self.toolscategorysel());
                         self.showToastDialog("Tools created successfully!", 2000);
-                        alltools();
-                        // for (var w = 0; w < mappedCategoryIds.length; w++) {
-                        //     if (mappedCategoryIds == self.expand()[w]){
-                        //     $("#" + self.expand()[w]).ojCollapsible({ "expanded": true });}
-                        // }
                     }
                 }).fail(function (xhr, textStatus, err) {
                     closetools();
@@ -384,23 +522,26 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
 
             edittools = function (upd) 
             {
+                console.log(upd);
                 self.edittoolsrolesel([]);
                 self.edittoolscategorysel([]);
                 self.edittoolsid('');
                 self.edittoolstitle('');
                 self.edittoolslink('');
                 self.edittoolsdescription('');
+                self.edittoolscategoryselname([]);
 
                 // SET NEW VALUES
                 self.edittoolsid(upd.id);
                 self.edittoolstitle(upd.name);
                 self.edittoolslink(upd.link);
+                // self.edittoolscategoryselname([]);
                 for (var a = 0; a < upd.mappedRolesIds.length; a++) 
-                {// console.log(upd.mappedRolesIds[a].replace('[', '').replace(']', '').replace(/"/g, '').replace(/,/g, ''));
+                {
                     self.edittoolsrolesel.push(upd.mappedRolesIds[a].replace('[', '').replace(']', '').replace(/"/g, '').replace(/,/g, ''));
                 }
                 for (var b = 0; b < upd.mappedCategoryIds.length; b++) 
-                {// console.log(upd.mappedCategoryIds[b].replace('[', '').replace(']', '').replace(/"/g, '').replace(/,/g, ''));
+                {
                     self.edittoolscategorysel.push(upd.mappedCategoryIds[b].replace('[', '').replace(']', '').replace(/"/g, '').replace(/,/g, ''));
                 }
                 self.edittoolsdescription(upd.description);
@@ -452,8 +593,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
                     data: ko.toJSON(updatetoolsdata),
                     success: function (data) {
                         closeedittools();
+                        var editcat = without(self.edittoolscategorysel(), "").toString();
+                        console.log(editcat);
+                        // var editcat = self.edittoolscategorysel();
+                        // var editcatarray = JSON.parse("[" + self.edittoolscategorysel() + "]");
+                        for (var w = 0; w < self.expand().length; w++) {
+                            $("#" + self.expand()[w]).ojCollapsible({ "expanded": false });
+                        }
+                        alltools(true, editcat);
                         self.showToastDialog("Tools updated successfully!", 2000);
-                        alltools();
                     }
                 }).fail(function (xhr, textStatus, err) {
                     closeedittools();
@@ -477,18 +625,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
 
             opendeletetools = function (contentid) 
             {
-                // console.log("deleting id tools - " + contentid.id);
+                if(contentid == undefined)return;
+                var str = contentid.id;
+                console.log("deleting id tools - " + str);
                 $("#deletetools").ojDialog("open");
                 $("#delete_tools").click(function () 
                 {
                     $.ajax({
-                        url: "http://solutionengineering-devops.us.oracle.com:8080/tools/contents/" + contentid.id,
+                        url: "http://solutionengineering-devops.us.oracle.com:8080/tools/contents/" + str,
                         method: 'DELETE',
                         contentType: 'application/json; charset=utf-8',
                         success: function () {
                             closedeltools();
+                            alltools(false,null);
                             self.showToastDialog("Tools deleted successfully!", 2000);
-                            alltools();
                         },
                         fail: function (xhr, textStatus, err) {
                             console.log(err);

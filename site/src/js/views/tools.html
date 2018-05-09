@@ -1,9 +1,16 @@
 <!-- DISPLAY TOOLS STARTS-->
 
-<div class="container">
+<div class="container toolspage">
   <div class="oj-flex tools ">
     <div class="search oj-sm-12">
-      <div align="right" class="excol"><button id="createTrainingButton" class="reqtools-button oj-xl-float-end admin" data-bind="ojComponent: {component: 'ojButton',label: 'Add Link'},click:addtools"> </button></div>
+
+      <div align="right" class="excol"><span>
+        <input id="search-input" placeholder="Search tools and resources . . ." data-bind="ojComponent:{
+                                          component: 'ojInputSearch', 
+                                          value: freetext,
+                                          update : refinetools
+                                        }" />
+      </span><button id="createTrainingButton" class="reqtools-button oj-xl-float-end admin" data-bind="ojComponent: {component: 'ojButton',label: 'Add Link'},click:addtools"> </button></div>
 
     </div>
     <div class="oj-sm-12 excol" align="right">
@@ -15,11 +22,11 @@
         <form id="formId" class="oj-form">
           <label id="mainlabelid">Role</label>
           <!-- ~~~~~~~~~~~~~ ROLES ~~~~~~~~~~~~~~ -->
-          <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid" data-bind="ojComponent: {component: 'ojRadioset'}">
+          <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid" data-bind="ojComponent: {component: 'ojCheckboxset', value: refineroles}">
            
             <!-- ko foreach: roles -->
             <span class="oj-choice-item">
-              <input type="radio" class="roles filterselect" name="roles" data-bind="checked: $parent.currentRole(),value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
+              <input type="checkbox" class="roles filterselect" name="roles" data-bind="value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
               <label><span data-bind="text: name"></span></label>
             </span>
             <!-- /ko -->
@@ -31,11 +38,11 @@
         <form id="formId" class="oj-form">
           <label id="mainlabelid">Category</label>
           <!-- ~~~~~~~~~~~~~ CATEGORIES ~~~~~~~~~~~~~~ -->
-          <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid" data-bind="ojComponent: {component: 'ojRadioset'}" >
+          <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid" data-bind="ojComponent: {component: 'ojCheckboxset', value: refinecategories}" >
             
             <!-- ko foreach: refinelist -->
             <span class="oj-choice-item">
-              <input type="radio" class="category filterselect" name="category" data-bind="checked: $parent.currentCategory(),value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
+              <input type="checkbox" class="category filterselect" name="category" data-bind="value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
               <label class="filterlabel"><span data-bind="text: name"></span></label>
             </span>                    
             <!-- /ko -->
@@ -62,20 +69,27 @@
           <div id="toolsaccordion" data-bind="ojComponent: {component: 'ojAccordion', multiple: true, expanded: newExpanded }">
 
             <!-- ko if: cat().length > 0 -->
-              <!-- ko foreach: cat -->
+              <!-- ko foreach:{data:cat,  as: 'categories'}  -->
               
                 <div data-bind="ojComponent: {component: 'ojCollapsible'},attr:{'id':name}">
                   <div class="oj-sm-12 catheadings oj-collapsible-header"><span class="categoryheading " data-bind="text:name"></span></div>
                   <div>
 
-                    <!-- ko foreach: contents -->
+                    <!-- ko foreach: categories.contents -->
                     <div class="oj-flex toolsrow res se all" data-bind="attr:{'id':id}">
                       <div class="oj-sm-12 admin" style="margin-bottom: 5px;position:relative;z-index:1000">
                         <i class="fa fa-pencil-square-o" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Edit Course" data-bind="click:edittools,attr:{'id':id}" target="_blank"></i>
                         <i class="fa fa-trash-o" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Delete Course" data-bind="click:deletetools,attr:{'id':id}" target="_blank"></i> 
                       </div>
                       <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                        <div class="roundedwhite"><img width="16px" height="16px" data-bind="attr:{'src':imageLink}" /></div>
+                        <!-- ko if: img == null -->
+                        <div class="roundedwhite">
+                          <img width="16px" height="16px" data-bind="attr:{'src': imageLink}" />
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko ifnot: img == null -->
+                        <div class="roundedwhite"><img width="16px" height="16px" data-bind="attr:{'src': 'data:image/png;base64,' + categories.img}" /></div>
+                        <!-- /ko -->
                       </div>
                       <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
                         <div class="oj-margin"><h1 data-bind="text:name"></h1><span data-bind="text:description"></span></div>
