@@ -23,9 +23,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
 
             //VARIABLES FOR FILTERING 
             self.refinecategories = ko.observableArray([]);
-            self.refineroles = ko.observableArray([]);
-            // self.refinecategories.push(0); 
-            // self.refineroles.push(0); 
+            self.refineroles = ko.observableArray([]); 
             self.selectedcategories = ko.observableArray([]);
             self.expand = ko.observableArray([]);
 
@@ -102,7 +100,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
             }
 
             self.handleAttached = function (info) {
-                setcheck("category", "roles");
+                setuncheck('category');
+                setuncheck('roles');
                 alltools(false,null);
             };
 
@@ -110,87 +109,37 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
             
             refineupdate = function (desc) 
             {
-                // console.log(desc.checked);
-                // if (self.refineroles() == "")
-                // {
-                //     var x = document.getElementsByClassName(roleclassname);
-                //     x[0].checked = true;
-                // }
-                // else if (self.refinecategories() == "") {
-                //     var y = document.getElementsByClassName(roleclassname);
-                //     x[0].checked = true;
-                // }
-                // setcheck("category","roles");
                 var type = desc.name;
                 if (desc.checked) 
                 {
                     switch (type) 
                     {
                         case "category":
-                            // setuncheck('category');
                             desc.checked = true;
                             self.refinecategories.removeAll();
                             self.refinecategories.push(desc.defaultValue);
-                            // console.log(desc.defaultValue);
-                            if (desc.defaultValue == 0)
-                            {
-                                setuncheck('category',0);
-                            }
-                            else{
-                                setuncheck('category', null);
-                            }
                             break;
 
                         case "roles":
-                            // setuncheck('roles');
                             desc.checked = true;
                             self.refineroles.removeAll();
                             self.refineroles.push(desc.defaultValue);
-                            // console.log(desc.defaultValue);
-                            if (desc.defaultValue == 0) {
-                                setuncheck('roles', 0);
-                            }
-                            else {
-                                setuncheck('roles', null);
-                            }
                             break;
                     }
-                } 
-                // else 
-                // {
-                //     alltools(false,null);
-                // }
+                }
                 else 
                 {
                     switch (type) 
                     {
                         case "category":
                             self.refinecategories.remove(desc.defaultValue);
-                            if (desc.defaultValue == 0) {
-                                setuncheck('category', 0);
-                            }
-                            else {
-                                setuncheck('category', null);
-                            }
                             break;
 
                         case "roles":
                             self.refineroles.remove(desc.defaultValue);
-                            if (desc.defaultValue == 0) {
-                                setuncheck('roles', 0);
-                            }
-                            else {
-                                setuncheck('roles', null);
-                            }
                             break;
                     }
                 }
-                console.log(self.refinecategories());
-                console.log(self.refineroles());
-                // if (((self.refinecategories() == "") && (self.refineroles() == "")) || (self.refinecategories() == "") || (self.refineroles() == ""))
-                // {
-                //     setcheck("category","roles");
-                // }
             }
 
             /******************************************LEFT PANEL DATA RECORDED ENDS***************************************************************/
@@ -214,7 +163,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
                     success: function (allcourses) 
                     {
                         self.cat(allcourses);
-                        // console.log(self.cat()[0].name);
                         if(istrue){
                             for (var w = 0; w < catarray.length; w++) {
                                 $("#" + self.expand()[w]).ojCollapsible({ "expanded": true });
@@ -253,11 +201,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
                     selected_categories_refine.push($(this).val());
                 });
                 console.log("roles--" + selected_roles_refine);
-                console.log("cats--" + selected_categories_refine);
-                var text = self.freetext().length > 0 ? self.freetext() : '';
-                self.selectedcategories([]);
-                var selectedcategories = ko.toJSON(self.refinecategories()).replace('[', '').replace(']', '').replace(/"/g, '');
-                var selectedroles = ko.toJSON(self.refineroles()).replace('[', '').replace(']', '').replace(/"/g, '');
+                console.log("cats--" + selected_categories_refine);// var text = self.freetext().length > 0 ? self.freetext() : '';
                 if ((selected_categories_refine == 0 || selected_categories_refine == "") && (selected_roles_refine == 0 || selected_roles_refine == "")) {
                     var headerobj = {
                         categoryid: "",
@@ -294,8 +238,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
                     headers: headerobj,
                     contentType: 'application/json; charset=utf-8',
                     success: function (allcourses) 
-                    {
-                        console.log(allcourses);
+                    {// console.log(allcourses);
                         self.cat(allcourses);
                         for (var w = 0; w < allcourses.length; w++) 
                         {
@@ -305,6 +248,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
                 }).fail(function (xhr, textStatus, err) {
                     console.log(err);
                 });
+                // for (var w = 0; w < self.expand().length; w++) {
+                //     $("#" + self.expand()[w]).ojCollapsible({ "expanded": false });
+                // }
+                // alltools(true, self.cat());
             }
 
             /******************************************FILTER ENDS**************************************************************************/
@@ -325,43 +272,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
                 }
             }
 
-            setuncheck = function (classname,itemid) 
+            setuncheck = function (classname) 
             {
                 var x = document.getElementsByClassName(classname);
-                if (itemid == 0)
-                {
-                    for (var i = itemid+1; i < x.length; i++) {
-                        x[i].checked = false;
-                    }
-                }
-                else{
-                     x[0].checked = false;
-                }
-            }
-            
-
-            setcheck = function (roleclassname, categoryclassname) {
-                var x = document.getElementsByClassName(roleclassname);
-                var y = document.getElementsByClassName(categoryclassname);
-                // if (self.refineroles() == "") {
-                //     x[0].checked = true;
-                // }
-                // else if (self.refinecategories() == "") {
-                //     y[0].checked = true;
-                // }
-                // else if ((self.refineroles() == "") && (self.refinecategories() == "")) {
-                //     x[0].checked = true;
-                //     y[0].checked = true;
-                // }
-                // x[0].checked = true;
-                // y[0].checked = true;
-                for (var i = 1; i < x.length; i++) {
-                    x[0].checked = true;
+                for (var i = 0; i < x.length; i++) {
                     x[i].checked = false;
-                }
-                for (var j = 1; j < y.length; j++) {
-                    y[0].checked = true;
-                    y[j].checked = false;
                 }
             }
 
@@ -383,57 +298,34 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
 
                     // ROLES
                     self.roles([]);
-                    self.roles.push({
-                        id: '0',
-                        name: 'All'
-                    })
                     var rolist = reasons.roles;
                     for (var i = 0; i < rolist.length; i++) {
                         self.roles.push({
-                            id: rolist[i].id,
+                            id: i,
                             name: rolist[i].name
                         })
                     }
                 });
 
                 $.getJSON("http://solutionengineering-devops.us.oracle.com:8080/tools/filters").then(function (response) {
-                    // ROLES
-                    // self.roles([]);
-                    // self.roles.push({
-                    //     id: '0',
-                    //     name: 'All'
-                    // })
-                    
-                    // for (var i = 0; i < response.rolesList.length; i++) {
-                    //     self.roles.push({
-                    //         id: response.rolesList[i].id,
-                    //         name: response.rolesList[i].role
-                    //     })
-                    // }
+
                     // CATEGORIES
                     self.refinelist([]);
-                    self.refinelist.push({
-                        id: '0',
-                        name: 'All'
-                    })
                     for (var j = 0; j < response.typesList.length; j++) {
                         self.refinelist.push({
                             id: response.typesList[j].id,
                             name: response.typesList[j].name
                         })
                     }
-                    setcheck("roles", "category");
                 });
             }
             getLeftpanelData();
 
             self.resetCourseFilters = function () {
-                // setuncheck('category');
-                // setuncheck('roles');
-                // self.refinecategories([]);
-                // self.refineroles([]);
-                // setcheck("roles","category");
-                getLeftpanelData();
+                setuncheck('category');
+                setuncheck('roles');
+                self.freetext([]);
+                alltools(false, null);
             }
 
             /******************************************LEFT PANEL DATA ENDS*************************************************************************/
@@ -595,8 +487,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
                         closeedittools();
                         var editcat = without(self.edittoolscategorysel(), "").toString();
                         console.log(editcat);
-                        // var editcat = self.edittoolscategorysel();
-                        // var editcatarray = JSON.parse("[" + self.edittoolscategorysel() + "]");
                         for (var w = 0; w < self.expand().length; w++) {
                             $("#" + self.expand()[w]).ojCollapsible({ "expanded": false });
                         }
