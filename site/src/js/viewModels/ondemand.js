@@ -330,6 +330,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 $("input:checkbox[name=categories]:checked").each(function(){
                     $(this).prop('checked',false);
                 });
+                self.searchtext_val(" ");
                 fetchondemand();
             }
             //BUSINESS LOGIC END

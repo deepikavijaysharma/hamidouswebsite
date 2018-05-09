@@ -1034,7 +1034,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.refinetrainingtype([]);
                 self.refinecitis([]);
                 self.refineroles([]);
-
+                self.searchtext([]);
                 self.fetchcourses();
             }
 
