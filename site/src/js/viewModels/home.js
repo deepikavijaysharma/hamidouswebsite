@@ -302,8 +302,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             });
 			var slidenumber = self.editslid() -1 ;
 			$(".directlinkslider").empty();
-			var eflink = window.location.hostname + "/excellence/?root=home#slide=" + slidenumber;
-			 $(".directlinkslider").append("<b>Direct Link: <span>" + eflink + "</span></b>");
+			var sliderlink = window.location.hostname + "/excellence/?root=home#slide=" + slidenumber;
+			 $(".directlinkslider").append("<b>Direct Link: <span>" + sliderlink + "</span></b>");
         }
 
         editslidervalues = function () {
@@ -2793,14 +2793,17 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         { 
             $('#myCarousel').carousel({interval: 5000, cycle: true});
 			if (window.location.hash) {
+			
+            setTimeout(function () {
                 var urlhash = window.location.hash.substring(1);
 				if(urlhash.includes("slide=")){
 			     var res = urlhash.split('slide=');				 
 				 $('#myCarousel').carousel(parseInt(res[1]));
-				 $('#myCarousel').carousel('pause');              
+				 $('#myCarousel').carousel('pause');
+              
 				}
 				
-           
+            }, 800);
         }
         }); 
         $('#myCarousel').carousel();
