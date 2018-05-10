@@ -206,7 +206,7 @@
     <div class="dialogbody">
       <div class="oj-flex">
         <div class="oj-lg-12">
-          <p style="text-align: center;">
+          <p>
             <span data-bind="html:course_description"></span>
           </p>
         </div>
@@ -286,8 +286,8 @@
             data-bind="click:function(){deleteOnDemandCourse(this)}" target="_blank"></i> </div>
             <div class="oj-flex oj-sm-12 blocksinner">
               <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1">
-                <div class="roundedwhite">
-                  <img style="display:block;" data-bind="attr:{src: image}" />  
+                <div class="roundedwhite" style="overflow: hidden;">
+                  <img style="display:block;width:100%; max-width: 65px; max-height: 65px" data-bind="attr:{src: image}" />  
                 </div>
               </div>
               <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10">
@@ -295,7 +295,7 @@
                   <!-- <span class="badge">Mandatory Course</span> -->
                   <a data-bind="text: name, attr:{'href':url}" target="_blank"></a>
                   <!-- ko if: summary !=null -->
-                  <div class="desc">Summary: <span data-bind="html:summary"/> </div>
+                  <div class="desc"><span data-bind="html:summary"/> </div>
                   <!-- /ko --> 
                 </div>
               </div>
