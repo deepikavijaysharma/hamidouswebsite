@@ -100,6 +100,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
             }
 
             self.handleAttached = function (info) {
+                checkadminrights();
                 setuncheck('category');
                 setuncheck('roles');
                 alltools(false,null);

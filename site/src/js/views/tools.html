@@ -1,108 +1,104 @@
 <!-- DISPLAY TOOLS STARTS-->
 
 <div class="container toolspage">
-  <div class="oj-flex tools ">
+  <div class="oj-flex tools subnav">
     <div class="search oj-sm-12">
-
-      <div align="right" class="excol"><span>
-        <input id="search-input" placeholder="Search tools and resources . . ." data-bind="ojComponent:{
-                                          component: 'ojInputSearch', 
-                                          value: freetext,
-                                          update : refinetools
-                                        }" />
-      </span><button id="createTrainingButton" class="reqtools-button oj-xl-float-end admin" data-bind="ojComponent: {component: 'ojButton',label: 'Add Link'},click:addtools"> </button></div>
-
+      <div align="right" class="excol">
+        <span><input id="search-input" placeholder="Search tools and resources . . ." data-bind="ojComponent:{component: 'ojInputSearch',value: freetext,update : refinetools}" /></span>
+        <button id="createTrainingButton" class="reqtools-button oj-xl-float-end admin" data-bind="ojComponent: {component: 'ojButton',label: 'Add Link'},click:addtools"> </button>
+      </div>
     </div>
     <div class="oj-sm-12 excol" align="right">
-        <a href="#" data-bind="click:expandall">Expand All</a> /
-        <a href="#" data-bind="click:closeall">Close All</a>
-      </div>
-    <div class="oj-flex-item oj-md-3 oj-lg-3 toolsfilter">
-      <div class="oj-sm-12 filterblock">
-        <form id="formId" class="oj-form">
-          <label id="mainlabelid">Role</label>
-          <!-- ~~~~~~~~~~~~~ ROLES ~~~~~~~~~~~~~~ -->
-          <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid" data-bind="ojComponent: {component: 'ojCheckboxset', value: refineroles}">
-           
-            <!-- ko foreach: roles -->
-            <span class="oj-choice-item">
-              <input type="checkbox" class="roles filterselect" name="roles" data-bind="value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
-              <label><span data-bind="text: name"></span></label>
-            </span>
-            <!-- /ko -->
-
-          </div>
-        </form>
-      </div>
-      <div class="oj-sm-12 filterblock">
-        <form id="formId" class="oj-form">
-          <label id="mainlabelid">Category</label>
-          <!-- ~~~~~~~~~~~~~ CATEGORIES ~~~~~~~~~~~~~~ -->
-          <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid" data-bind="ojComponent: {component: 'ojCheckboxset', value: refinecategories}" >
-            
-            <!-- ko foreach: refinelist -->
-            <span class="oj-choice-item">
-              <input type="checkbox" class="category filterselect" name="category" data-bind="value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
-              <label class="filterlabel"><span data-bind="text: name"></span></label>
-            </span>                    
-            <!-- /ko -->
-
-          </div>
-        </form>
-        <div class="oj-flex refinebuttons">
-        <div class="oj-sm-12 oj-xl-6">
-          <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: refinetools, ojComponent: { component: 'ojButton', label: 'Refine' }"> </button>
-        </div>
-        <div class="oj-sm-12 oj-xl-6">
-          <button class="oj-sm-align-center oj-flex orangebutton" id="button" data-bind="click: resetCourseFilters, ojComponent: { component: 'ojButton', label: 'Reset' }"> </button>
-        </div>
-      </div>
-      </div>
-      
+        <a href="#" data-bind="click:expandall">Expand All</a> / <a href="#" data-bind="click:closeall">Close All</a>
     </div>
-    <div class="oj-flex-item oj-md-9 oj-lg-9 oj-sm-margin-top">
-      <div class="oj-margin-edited">
-        <div> 
-          
-          <!-- SE -->
-
-          <div id="toolsaccordion" data-bind="ojComponent: {component: 'ojAccordion', multiple: true, expanded: newExpanded }">
-
-            <!-- ko if: cat().length > 0 -->
-              <!-- ko foreach:{data:cat,  as: 'categories'}  -->
-              
-                <div data-bind="ojComponent: {component: 'ojCollapsible'},attr:{'id':name}">
-                  <div class="oj-sm-12 catheadings oj-collapsible-header"><span class="categoryheading " data-bind="text:name"></span></div>
-                  <div>
-
-                    <!-- ko foreach: categories.contents -->
-                    <div class="oj-flex toolsrow res se all" data-bind="attr:{'id':id}">
-                      <div class="oj-sm-12 admin" style="margin-bottom: 5px;position:relative;z-index:1000">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Edit Course" data-bind="click:edittools,attr:{'id':id}" target="_blank"></i>
-                        <i class="fa fa-trash-o" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Delete Course" data-bind="click:deletetools,attr:{'id':id}" target="_blank"></i> 
-                      </div>
-                      <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
-                        <div class="roundedwhite"><img style="display:block;" data-bind="attr:{'src': 'http://solutionengineering-devops.us.oracle.com:8080/tools/type/image/'+categories.id}" /></div>
-                      </div>
-                      <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
-                        <div class="oj-margin"><h1 data-bind="text:name"></h1><span data-bind="text:description"></span></div>
-                      </div>
-                      <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a data-bind="attr:{'href':link}" target="_blank"><img src="css/images/317-arrow-right2.png"></a></div>
-                    </div>
-                    <!-- /ko -->
-
-                  </div>
-                </div>
-              
+    <div class="oj-flex oj-sm-12 coursesblock">
+      <div class="oj-flex-item oj-md-3 oj-lg-3 toolsfilter eblocks oj-sm-12">
+        <div class="oj-sm-12 filterblock selectblock">
+          <form id="formId" class="oj-form">
+            <label id="mainlabelid">Role</label>
+            <!-- ~~~~~~~~~~~~~ ROLES ~~~~~~~~~~~~~~ -->
+            <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid" data-bind="ojComponent: {component: 'ojCheckboxset', value: refineroles}">
+            
+              <!-- ko foreach: roles -->
+              <span class="oj-choice-item">
+                <input type="checkbox" class="roles filterselect" name="roles" data-bind="value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
+                <label><span data-bind="text: name"></span></label>
+              </span>
               <!-- /ko -->
-            <!-- /ko -->
 
-            <!-- ko ifnot: cat().length > 0 -->
-              <p>No Items Found</p>
-            <!-- /ko -->
+            </div>
+          </form>
+        </div>
+        <div class="oj-sm-12 filterblock selectblock">
+          <form id="formId" class="oj-form">
+            <label id="mainlabelid">Category</label>
+            <!-- ~~~~~~~~~~~~~ CATEGORIES ~~~~~~~~~~~~~~ -->
+            <div class="radiobg" id="radiosetBasicDemoId" aria-labelledby="mainlabelid" data-bind="ojComponent: {component: 'ojCheckboxset', value: refinecategories}" >
+              
+              <!-- ko foreach: refinelist -->
+              <span class="oj-choice-item">
+                <input type="checkbox" class="category filterselect" name="category" data-bind="value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
+                <label class="filterlabel"><span data-bind="text: name"></span></label>
+              </span>                    
+              <!-- /ko -->
 
+            </div>
+          </form>
+          <div class="oj-flex refinebuttons">
+            <div class="oj-sm-12 oj-xl-6">
+              <button class="oj-sm-align-center oj-flex bluebutton" id="button" data-bind="click: refinetools, ojComponent: { component: 'ojButton', label: 'Refine' }"> </button>
+            </div>
+            <div class="oj-sm-12 oj-xl-6">
+              <button class="oj-sm-align-center oj-flex orangebutton" id="button" data-bind="click: resetCourseFilters, ojComponent: { component: 'ojButton', label: 'Reset' }"> </button>
+            </div>
           </div>
-         
+        </div>
+        
+      </div>
+      <div class="oj-flex-item oj-md-9 oj-lg-9 oj-sm-margin-top">
+        <div class="oj-margin-edited">
+          <div> 
+            
+            <!-- SE -->
+
+            <div id="toolsaccordion" data-bind="ojComponent: {component: 'ojAccordion', multiple: true, expanded: newExpanded }">
+
+              <!-- ko if: cat().length > 0 -->
+                <!-- ko foreach:{data:cat,  as: 'categories'}  -->
+                
+                  <div data-bind="ojComponent: {component: 'ojCollapsible'},attr:{'id':name}">
+                    <div class="oj-sm-12 catheadings oj-collapsible-header"><span class="categoryheading " data-bind="text:name"></span></div>
+                    <div>
+
+                      <!-- ko foreach: categories.contents -->
+                      <div class="oj-flex toolsrow res se all" data-bind="attr:{'id':id}">
+                        <div class="oj-sm-12 admin" style="margin-bottom: 5px;position:relative;z-index:1000">
+                          <i class="fa fa-pencil-square-o" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Edit Course" data-bind="click:edittools,attr:{'id':id}" target="_blank"></i>
+                          <i class="fa fa-trash-o" aria-hidden="true" style="cursor: pointer;float: right;margin-left: 5px" title="Delete Course" data-bind="click:deletetools,attr:{'id':id}" target="_blank"></i> 
+                        </div>
+                        <div class="oj-sm-4 oj-md-2 oj-lg-2 oj-xl-1 toolscolleft">
+                          <div class="roundedwhite"><img style="display:block;" data-bind="attr:{'src': 'http://solutionengineering-devops.us.oracle.com:8080/tools/type/image/'+categories.id}" /></div>
+                        </div>
+                        <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
+                          <div class="oj-margin"><h1 data-bind="text:name"></h1><span data-bind="text:description"></span></div>
+                        </div>
+                        <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a data-bind="attr:{'href':link}" target="_blank"><img src="css/images/317-arrow-right2.png"></a></div>
+                      </div>
+                      <!-- /ko -->
+
+                    </div>
+                  </div>
+                
+                <!-- /ko -->
+              <!-- /ko -->
+
+              <!-- ko ifnot: cat().length > 0 -->
+                <p>No Items Found</p>
+              <!-- /ko -->
+
+            </div>
+          
+          </div>
         </div>
       </div>
     </div>
