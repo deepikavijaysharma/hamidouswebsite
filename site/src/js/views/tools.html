@@ -21,7 +21,7 @@
             
               <!-- ko foreach: roles -->
               <span class="oj-choice-item">
-                <input type="checkbox" class="roles filterselect" name="roles" data-bind="value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
+                <input type="checkbox" class="roles filterselect" name="roles" data-bind="value: id,attr: {'id':id,'data-id':id,'alt':name}" onchange="refineupdate(this)">
                 <label><span data-bind="text: name"></span></label>
               </span>
               <!-- /ko -->
@@ -37,7 +37,7 @@
               
               <!-- ko foreach: refinelist -->
               <span class="oj-choice-item">
-                <input type="checkbox" class="category filterselect" name="category" data-bind="value: id,attr: {'id':id,'data-id':id}" onchange="refineupdate(this)">
+                <input type="checkbox" class="category filterselect" name="category" data-bind="value: id,attr: {'id':id,'data-id':id,'alt':name}" onchange="refineupdate(this)">
                 <label class="filterlabel"><span data-bind="text: name"></span></label>
               </span>                    
               <!-- /ko -->
@@ -82,7 +82,11 @@
                         <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10 toolscolmid">
                           <div class="oj-margin"><h1 data-bind="text:name"></h1><span data-bind="text:description"></span></div>
                         </div>
-                        <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright"><a data-bind="attr:{'href':link}" target="_blank"><img src="css/images/317-arrow-right2.png"></a></div>
+                        <div class="oj-sm-2 oj-md-1 oj-lg-1 oj-xl-1 toolscolright">
+                          <a data-bind="attr:{'href':link},click:analytics.bind($data,name,categories.name,'link','Tools and Resources Page','Tools and Resourses Category','Tools and Resources Link')" target="_blank">
+                            <img src="css/images/317-arrow-right2.png">
+                          </a>
+                        </div>
                       </div>
                       <!-- /ko -->
 
@@ -154,9 +158,7 @@
           <div class="oj-sm-12 inputrow oj-flex">
             <select id="roleSelectadd" data-bind="ojComponent: {component: 'ojSelect', multiple: true, placeholder: 'Select a Role', options: roles, value: toolsrolesel, rootAttributes: {style:'max-width:20em'}}">
               <!-- ko foreach: roles() -->
-                <!-- ko if: $index() > 0 -->
                 <option data-bind="text: name,value: id"></option>
-                <!-- /ko -->
               <!-- /ko -->
             </select>
           </div>
@@ -166,9 +168,7 @@
           <div class="oj-sm-12 inputrow oj-flex">
             <select id="categorySelectadd" data-bind="ojComponent: {component: 'ojSelect', multiple: true, placeholder: 'Select a Category', options: refinelist, value: toolscategorysel, rootAttributes: {style:'max-width:20em'}}">
               <!-- ko foreach: refinelist() -->
-                <!-- ko if: $index() > 0 -->
                 <option data-bind="text: name,value: id"></option>
-                <!-- /ko -->
               <!-- /ko -->
             </select>
           </div>

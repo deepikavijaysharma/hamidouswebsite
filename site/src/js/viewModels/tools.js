@@ -109,7 +109,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
             /******************************************LEFT PANEL DATA RECORDED STARTS***************************************************************/
             
             refineupdate = function (desc) 
-            {
+            {//console.log(desc.alt);
                 var type = desc.name;
                 if (desc.checked) 
                 {
@@ -195,40 +195,54 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
             {
                 var selected_roles_refine = new Array();
                 var selected_categories_refine = new Array();
+                var selected_roles_alt = new Array();
+                var selected_categories_alt = new Array();
                 $("input:checkbox[name=roles]:checked").each(function () {
                     selected_roles_refine.push($(this).val());
+                    selected_roles_alt.push($(this).attr("alt"));
                 });
                 $("input:checkbox[name=category]:checked").each(function () {
                     selected_categories_refine.push($(this).val());
+                    selected_categories_alt.push($(this).attr("alt"));
                 });
                 console.log("roles--" + selected_roles_refine);
                 console.log("cats--" + selected_categories_refine);// var text = self.freetext().length > 0 ? self.freetext() : '';
+                if (selected_roles_refine && selected_categories_refine) {
+                    searchanalytics(self.freetext(), '', selected_roles_alt, selected_categories_alt, 'TNR');
+                }
+                else if (selected_roles_refine) {
+                    searchanalytics(self.freetext(), '', selected_roles_alt, '', 'TNR');
+                }
+                else if (refinetrcategories) {
+                    searchanalytics(self.freetext(), '', '', selected_categories_alt, 'TNR');
+                }
+                console.log(self.freetext()[0]);
                 if ((selected_categories_refine == 0 || selected_categories_refine == "") && (selected_roles_refine == 0 || selected_roles_refine == "")) {
                     var headerobj = {
                         categoryid: "",
                         roleid: "",
-                        freetext: self.freetext()
+                        freetext: self.freetext()[0]
                     }
                 }
                 else if ((selected_categories_refine == 0 || selected_categories_refine == "") && (selected_roles_refine > 0 || selected_roles_refine != "")) {
                     var headerobj = {
                         categoryid: "",
                         roleid: selected_roles_refine,
-                        freetext: self.freetext()
+                        freetext: self.freetext()[0]
                     }
                 }
                 else if ((selected_categories_refine > 0 || selected_categories_refine != "") && (selected_roles_refine == 0 || selected_roles_refine == "")) {
                     var headerobj = {
                         categoryid: selected_categories_refine,
                         roleid: "",
-                        freetext: self.freetext()
+                        freetext: self.freetext()[0]
                     }
                 }
                 else {
                     var headerobj = {
                         categoryid: selected_categories_refine,
                         roleid: selected_roles_refine,
-                        freetext: self.freetext()
+                        freetext: self.freetext()[0]
                     }
                 }
                 console.log(headerobj);
@@ -239,7 +253,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
                     headers: headerobj,
                     contentType: 'application/json; charset=utf-8',
                     success: function (allcourses) 
-                    {// console.log(allcourses);
+                    {//console.log(allcourses);
                         self.cat(allcourses);
                         for (var w = 0; w < allcourses.length; w++) 
                         {
@@ -382,11 +396,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
                     success: function (data) {
                         closetools();
                         alltools(true, self.toolscategorysel());
-                        self.showToastDialog("Tools created successfully!", 2000);
+                        self.showToastDialog("Link created successfully!", 2000);
                     }
                 }).fail(function (xhr, textStatus, err) {
                     closetools();
-                    self.showToastDialog("Tools creation failed!", 0);
+                    self.showToastDialog("Link creation failed!", 0);
                 });
             }           
             
@@ -492,11 +506,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
                             $("#" + self.expand()[w]).ojCollapsible({ "expanded": false });
                         }
                         alltools(true, editcat);
-                        self.showToastDialog("Tools updated successfully!", 2000);
+                        self.showToastDialog("Link updated successfully!", 2000);
                     }
                 }).fail(function (xhr, textStatus, err) {
                     closeedittools();
-                    self.showToastDialog("Tools updation failed!", 0);
+                    self.showToastDialog("Link updation failed!", 0);
                 });
             }
 
@@ -529,7 +543,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
                         success: function () {
                             closedeltools();
                             alltools(false,null);
-                            self.showToastDialog("Tools deleted successfully!", 2000);
+                            self.showToastDialog("Link deleted successfully!", 2000);
                         },
                         fail: function (xhr, textStatus, err) {
                             console.log(err);
@@ -548,6 +562,63 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
 
             /******************************************DELETE TOOLS AND RESOURCES ENDS********************************************************************/
 
+            /******************************************ANALYTICS START************************************************************************************/
+
+            searchanalytics = function (searchtext, cities, roles, categories, calltype) {
+                var analytics = {
+                    "SESSION_ID": sessionid,
+                    "SEARCH_TEXT": searchtext,
+                    "CITIES": cities,
+                    "ROLES": roles,
+                    "CATEGORIES": categories,
+                    "CALL_TYPE": calltype,
+                    "USER_EMAIL": ssoemail
+                };
+                console.log(analytics);
+                // $.ajax({
+                //     url: homebaseurl + 'POST_EVENT_SEARCH',
+                //     type: 'POST',
+                //     contentType: 'application/json; charset=utf-8',
+                //     data: ko.toJSON(analytics),
+                //     success: function (event) {
+                //         console.log("Analytics of event sent.", event);
+                //     }
+                // }).fail(function (xhr, textStatus, err) {
+                //     console.log("Error in sending analytics", err);
+                // });
+                return true;
+            }
+
+            analytics = function (itemtitle, itemname, itemtype, itemlevel1, itemlevel2, itemlevel3) {
+                if (ssoemail == "") {
+                    ssoemail = "test@oracle.com";
+                }
+                var itemdesc = itemtitle + " from category : " + itemname;
+                var analytics = {
+                    "session_id": sessionid,
+                    "email": ssoemail,
+                    "event_description": itemdesc,
+                    "event_type": itemtype,
+                    "level_1": itemlevel1,
+                    "level_2": itemlevel2,
+                    "level_3": itemlevel3
+                };
+                console.log(analytics);
+                $.ajax({
+                    url: homebaseurl + 'POST_EVENT_DATA',
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(analytics),
+                    success: function (event) {
+                        console.log("Analytics of event sent.", event);
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    console.log("Error in sending analytics", err);
+                });
+                return true;
+            }
+
+            /******************************************ANALYTICS ENDS************************************************************************************/
         }
         return new DashboardViewModel();
     }
