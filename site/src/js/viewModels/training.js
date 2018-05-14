@@ -3550,9 +3550,23 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         itemdesc = "";
                     }
                 }
+                else if (itemlevel2 == "On-demand Trainings") {
+                    if (itemtitle != "" && itemname != "") {
+                        itemdesc = itemtitle + " from On-demand Trainings category : " + itemname;
+                    }
+                    else if (itemtitle == "" && itemname != "") {
+                        itemdesc = itemname;
+                    }
+                    else if (itemtitle != "" && itemname == "") {
+                        itemdesc = itemtitle;
+                    }
+                    else {
+                        itemdesc = "";
+                    }
+                }
                 else {
                     if (itemtitle != "" && itemname != "") {
-                        itemdesc = itemtitle + " from category : " + itemname;
+                        itemdesc = itemtitle + " from Trainings category : " + itemname;
                     }
                     else if (itemtitle == "" && itemname != "") {
                         itemdesc = itemname;

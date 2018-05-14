@@ -199,14 +199,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
                 var selected_categories_alt = new Array();
                 $("input:checkbox[name=roles]:checked").each(function () {
                     selected_roles_refine.push($(this).val());
-                    selected_roles_alt.push($(this).attr("alt"));
+                    selected_roles_alt.push($(this).attr("alt").replace('[', '').replace(']', '').replace(/"/g, '').replace(/,/g, ''));
                 });
                 $("input:checkbox[name=category]:checked").each(function () {
                     selected_categories_refine.push($(this).val());
-                    selected_categories_alt.push($(this).attr("alt"));
+                    selected_categories_alt.push(($(this).attr("alt")).replace('[', '').replace(']', '').replace(/"/g, '').replace(/,/g, ''));
                 });
-                console.log("roles--" + selected_roles_refine);
-                console.log("cats--" + selected_categories_refine);// var text = self.freetext().length > 0 ? self.freetext() : '';
+                console.log("roles--" + selected_roles_alt);
+                console.log("cats--" + selected_categories_alt);// var text = self.freetext().length > 0 ? self.freetext() : '';
                 if (selected_roles_refine && selected_categories_refine) {
                     searchanalytics(self.freetext(), '', selected_roles_alt, selected_categories_alt, 'TNR');
                 }
@@ -216,7 +216,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
                 else if (refinetrcategories) {
                     searchanalytics(self.freetext(), '', '', selected_categories_alt, 'TNR');
                 }
-                console.log(self.freetext()[0]);
+                // console.log(self.freetext()[0]);
                 if ((selected_categories_refine == 0 || selected_categories_refine == "") && (selected_roles_refine == 0 || selected_roles_refine == "")) {
                     var headerobj = {
                         categoryid: "",
@@ -564,32 +564,34 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
 
             /******************************************ANALYTICS START************************************************************************************/
 
-            searchanalytics = function (searchtext, cities, roles, categories, calltype) {
-                var analytics = {
+            searchanalytics = function (searchtext, cities, roles, categories, calltype) 
+            {
+                var searchanalytics = {
                     "SESSION_ID": sessionid,
                     "SEARCH_TEXT": searchtext,
                     "CITIES": cities,
-                    "ROLES": roles,
-                    "CATEGORIES": categories,
+                    "ROLES": roles.toString(),
+                    "CATEGORIES": categories.toString(),
                     "CALL_TYPE": calltype,
                     "USER_EMAIL": ssoemail
                 };
-                console.log(analytics);
-                // $.ajax({
-                //     url: homebaseurl + 'POST_EVENT_SEARCH',
-                //     type: 'POST',
-                //     contentType: 'application/json; charset=utf-8',
-                //     data: ko.toJSON(analytics),
-                //     success: function (event) {
-                //         console.log("Analytics of event sent.", event);
-                //     }
-                // }).fail(function (xhr, textStatus, err) {
-                //     console.log("Error in sending analytics", err);
-                // });
+                console.log(searchanalytics);
+                $.ajax({
+                    url: homebaseurl + 'POST_EVENT_SEARCH',
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(searchanalytics),
+                    success: function (event) {
+                        console.log("Analytics of search event sent.", event);
+                    }
+                }).fail(function (xhr, textStatus, err) {
+                    console.log("Error in sending search event analytics", err);
+                });
                 return true;
             }
 
-            analytics = function (itemtitle, itemname, itemtype, itemlevel1, itemlevel2, itemlevel3) {
+            analytics = function (itemtitle, itemname, itemtype, itemlevel1, itemlevel2, itemlevel3) 
+            {
                 if (ssoemail == "") {
                     ssoemail = "test@oracle.com";
                 }

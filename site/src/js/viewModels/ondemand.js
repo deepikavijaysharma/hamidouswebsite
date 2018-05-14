@@ -91,9 +91,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 });
                 CKEDITOR.instances.ondemand_course_editor.setData(ondemand_ckeditor_data);
                 $("#ondemand_course_modal").ojDialog("open");
-            }             
+            }
+            OnDemandCourseLinkAnalytics = function (course) {
+                var catname = new Array();
+                catname.push(course);// console.log(c[0]['CAT LIST'][0]['Category Name']);
+                analytics(course.name, catname[0]['CAT LIST'][0]['Category Name'], 'Link', 'Training Page', 'On-demand Trainings', 'On-demand Trainings Link');
+            }               
             showOnDemandCourseDetails = function (course) {
+                var catname = new Array();
+                catname.push(course);
                 self.course_description(course.description);
+                analytics(course.name, catname[0]['CAT LIST'][0]['Category Name'], 'View_details', 'Training Page', 'On-demand Trainings', 'On-demand Trainings Details');
                 $("#ondemand_course_details").ojDialog("open");
             }            
             deleteOnDemandCourse = function (course) {
@@ -305,6 +313,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 console.log("roles--"+selected_roles_refine);
                 console.log("cats--"+selected_categories_refine);
                 console.log("free text--"+self.searchtext_val());
+                // if (selected_roles_refine && selected_categories_refine) {
+                //     searchanalytics(self.freetext(), '', selected_roles_alt, selected_categories_alt, 'TNR');
+                // }
+                // else if (selected_roles_refine) {
+                //     searchanalytics(self.freetext(), '', selected_roles_alt, '', 'TNR');
+                // }
+                // else if (refinetrcategories) {
+                //     searchanalytics(self.freetext(), '', '', selected_categories_alt, 'TNR');
+                // }
                 $.ajax({
                     url: trainingbaseurl+"getCategoriesCourses",
                     cache: false,

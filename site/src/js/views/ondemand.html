@@ -293,7 +293,7 @@
               <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10">
                 <div class="oj-margin"> 
                   <!-- <span class="badge">Mandatory Course</span> -->
-                  <a data-bind="text: name, attr:{'href':url}" target="_blank"></a>
+                  <a data-bind="text: name, attr:{'href':url},click:OnDemandCourseLinkAnalytics" target="_blank"></a>
                   <!-- ko if: summary !=null -->
                   <div class="desc"><span data-bind="html:summary"/> </div>
                   <!-- /ko --> 
