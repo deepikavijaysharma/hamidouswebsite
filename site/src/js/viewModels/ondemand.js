@@ -304,6 +304,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             refineOnDemand = function () {
                 var selected_roles_refine = new Array();
                 var selected_categories_refine = new Array();
+                var selected_roles_alt, selected_categories_alt;
                 $("input:checkbox[name=roles]:checked").each(function(){
                     selected_roles_refine.push($(this).val());
                 });
@@ -313,15 +314,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 console.log("roles--"+selected_roles_refine);
                 console.log("cats--"+selected_categories_refine);
                 console.log("free text--"+self.searchtext_val());
-                // if (selected_roles_refine && selected_categories_refine) {
-                //     searchanalytics(self.freetext(), '', selected_roles_alt, selected_categories_alt, 'TNR');
-                // }
-                // else if (selected_roles_refine) {
-                //     searchanalytics(self.freetext(), '', selected_roles_alt, '', 'TNR');
-                // }
-                // else if (refinetrcategories) {
-                //     searchanalytics(self.freetext(), '', '', selected_categories_alt, 'TNR');
-                // }
+                selected_categories_alt = ko.toJSON(selected_categories_refine).replace('[', '').replace(']', '').replace(/"/g, '');
+                selected_roles_alt = ko.toJSON(selected_roles_refine).replace('[', '').replace(']', '').replace(/"/g, '');
+                if (selected_roles_refine && selected_categories_refine) {
+                    searchanalytics(self.searchtext_val()[0], '', selected_roles_alt, selected_categories_alt, 'TR');
+                }
+                else if (selected_roles_refine) {
+                    searchanalytics(self.searchtext_val()[0], '', selected_roles_alt, '', 'TR');
+                }
+                else if (selected_categories_refine) {
+                    searchanalytics(self.searchtext_val()[0], '', '', selected_categories_alt, 'TR');
+                }
                 $.ajax({
                     url: trainingbaseurl+"getCategoriesCourses",
                     cache: false,

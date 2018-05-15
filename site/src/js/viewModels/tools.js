@@ -213,7 +213,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojcheckboxset
                 else if (selected_roles_refine) {
                     searchanalytics(self.freetext(), '', selected_roles_alt, '', 'TNR');
                 }
-                else if (refinetrcategories) {
+                else if (selected_categories_refine) {
                     searchanalytics(self.freetext(), '', '', selected_categories_alt, 'TNR');
                 }
                 // console.log(self.freetext()[0]);
