@@ -265,8 +265,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
         self.editsllinktext2 = ko.observable('');
         self.editsliderlist = ko.observableArray([]);
             
-        editslider = function (edit_slider, param2) 
-        {
+        editslider = function (index,edit_slider) 
+        { //alert(index());
             self.editslimage([]);
             self.editslimgid('');
             self.editslid('');
@@ -300,9 +300,9 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 }
                 self.checkadminrightsnew();
             });
-			var slidenumber = self.editslid() -1 ;
+			//var slidenumber = self.editslid() -1 ;
 			$(".directlinkslider").empty();
-			var sliderlink = window.location.hostname + "/excellence/?root=home#slide=" + slidenumber;
+			var sliderlink = window.location.hostname + "/excellence/?root=home#slide=" + index();
 			 $(".directlinkslider").append("<b>Direct Link: <span>" + sliderlink + "</span></b>");
         }
 
@@ -2774,7 +2774,6 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
                 $(this).parent().addClass('active');
                 } // End if
             });
-			
 			var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
         if (window.location.hash) {
 			
@@ -2787,6 +2786,7 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             }, 800);
         }
   
+  
         });
         
         $(document).ready(function() 
@@ -2797,7 +2797,8 @@ define(['ojs/ojcore', 'knockout',  'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcont
             setTimeout(function () {
                 var urlhash = window.location.hash.substring(1);
 				if(urlhash.includes("slide=")){
-			     var res = urlhash.split('slide=');				 
+			     var res = urlhash.split('slide=');	
+				 console.log("res"+parseInt(res[1]));			 
 				 $('#myCarousel').carousel(parseInt(res[1]));
 				 $('#myCarousel').carousel('pause');
               

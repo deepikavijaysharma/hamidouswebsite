@@ -298,7 +298,7 @@ color:#ffffff!important;
           <!-- ko if: $index() == 0 -->
           <div class="item active" data-bind="attr:{'id':sliderid}">
             <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
-              <i class="fa fa-pencil-square-o endsl " aria-hidden="true" title="Edit Slider"  data-bind="click:editslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+              <i class="fa fa-pencil-square-o endsl " aria-hidden="true" title="Edit Slider"  data-bind="click:editslider.bind($data, $index,$data),css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
               <i class="fa fa-trash-o endsldel " aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
               <i class="fa fa-share-square-o endslarc" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
               <div class="verticalcentertext">
@@ -348,7 +348,7 @@ color:#ffffff!important;
           <!-- ko if: $index() != 0 -->
           <div class="item" data-bind="attr:{'id':sliderid}"> 
             <div class="slide genricslide1" data-bind="style:{'backgroundImage':'url('+ sliderimg +')'}">
-              <i class="fa fa-pencil-square-o endsl " aria-hidden="true" title="Edit Slider" data-bind="click:editslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
+              <i class="fa fa-pencil-square-o endsl " aria-hidden="true" title="Edit Slider" data-bind="click:editslider.bind($data, $index,$data),css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
               <i class="fa fa-trash-o endsldel " aria-hidden="true" title="Delete Slider" data-bind="click:deleteslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
               <i class="fa fa-share-square-o endslarc" aria-hidden="true" title="Archive Slider" data-bind="click:archiveslider,css: $parent.checkadminrightsnew() == true ? 'adminvisible' : 'adminhide'"></i>
               <div class="verticalcentertext">
