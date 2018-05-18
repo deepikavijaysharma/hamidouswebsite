@@ -316,19 +316,19 @@
                     <div class="titlesmall">Roles</div>
                     <!-- /ko -->
                     <ul class="refinelist">
-                      <!-- ko foreach: roles -->
                       <li>
                         <div class="oj-flex">
-                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                            <label>
-                              <input type="checkbox" class="roles" name="roles" data-bind="value: id" onchange="refineupdate(this)">
-                            </label>
-                          </div>
-                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
+                          <div 
+                               data-bind="ojComponent: {
+                                component: 'ojRadioset'}" >
+                                <!-- ko foreach: roles -->
+                              <span class="oj-choice-item">
+                                  <input type="radio" name="roles" data-bind="value: id"><span data-bind="text: name"></span></input>
+                              </span>
+                                 <!-- /ko -->
+                          </div>  
                         </div>
                       </li>
-                      
-                      <!-- /ko -->
                     </ul>
                                           
                     <!-- ~~~~~~~~~~~~~ CATEGORIES ~~~~~~~~~~~~~~ --> 
@@ -336,60 +336,62 @@
                     <div class="titlesmall">Categories</div>
                     <!-- /ko -->
                     <ul class="refinelist">
-                      <!-- ko foreach: refinelist -->
                       <li>
                         <div class="oj-flex">
-                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                            <label>
-                              <input type="checkbox" class="category" name="category" data-bind="value: id" onchange="refineupdate(this)">
-                            </label>
-                          </div>
-                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
+                          <div
+                               data-bind="ojComponent: {
+                                component: 'ojRadioset'}" >
+                                <!-- ko foreach: refinelist -->
+                              <span class="oj-choice-item">
+                                  <input type="radio" name="categories" data-bind="value: id"><span data-bind="text: name"></span></input>
+                              </span>
+                                 <!-- /ko -->
+                          </div>  
                         </div>
                       </li>
-                      <!-- /ko -->
                     </ul>
-                    
+
                     <!-- ~~~~~~~~~~~~~ TRAINING LEVEL ~~~~~~~~~~~~~~ --> 
                     <!-- ko if: training_levels().length>0 -->
                     <div class="titlesmall">Training Level</div>
                     <!-- /ko -->
                     <ul class="refinelist">
-                      <!-- ko foreach: training_levels -->
                       <li>
                         <div class="oj-flex">
-                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                            <label>
-                              <input type="checkbox" class="traininglevel" name="traininglevel" data-bind="value: name" onchange="refineupdate(this)">
-                            </label>
-                          </div>
-                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
+                          <div
+                               data-bind="ojComponent: {
+                                component: 'ojRadioset'
+                               }" >
+                                <!-- ko foreach: training_levels -->
+                              <span class="oj-choice-item">
+                                  <input type="radio" name="training_levels_radio" data-bind="value: id"><span data-bind="text: name"></span></input>
+                              </span>
+                                 <!-- /ko -->
+                          </div>  
                         </div>
                       </li>
-                      
-                      <!-- /ko -->
-                    </ul>
-
-                   
+                    </ul>                    
+                  
                     <!-- ~~~~~~~~~~~~~ STATES ~~~~~~~~~~~~~~ --> 
                     <!-- ko if: states_list().length>0 -->
                     <div class="titlesmall">States</div>
                     <!-- /ko -->
                     <ul class="refinelist">
-                      <!-- ko foreach: states_list -->
                       <li>
                         <div class="oj-flex">
-                          <div class="oj-sm-1 oj-md-2 oj-lg-1">
-                            <label>
-                              <input type="checkbox" class="cities" name="cities" data-bind="value: name" onchange="refineupdate(this)">
-                            </label>
-                          </div>
-                          <div class="oj-sm-11 oj-md-10 oj-lg-11"> <span data-bind="text: name"></span> </div>
+                          <div
+                               data-bind="ojComponent: {
+                                component: 'ojRadioset'
+                               }" >
+                                <!-- ko foreach: states_list -->
+                              <span class="oj-choice-item">
+                                  <input type="radio" name="states" data-bind="value: name"><span data-bind="text: name"></span></input>
+                              </span>
+                                 <!-- /ko -->
+                          </div>  
                         </div>
                       </li>
-                      
-                      <!-- /ko -->
-                    </ul>
+                    </ul>   
 
                     <div class="oj-flex refinebuttons">
                       <div class="oj-sm-12 oj-xl-6">
