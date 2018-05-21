@@ -84,6 +84,7 @@
             <div class="oj-flex oj-sm-12 inputrow">
               <div class="oj-sm-12">
                 <label>On-Demand Course Name</label>
+                <label class="required">*</label>
               </div>
               <div class="oj-sm-12">
                 <input type="text" placeholder="" data-bind="ojComponent: {component: 'ojInputText',value:course_name ,rootAttributes: { style: 'width: 100%;'}}"
@@ -95,6 +96,7 @@
               <div class="oj-flex-item">
                 <div class="oj-sm-12">
                   <label>Roles</label>
+                  <label class="required">*</label>
                 </div>
                 <div class="oj-sm-12">
                   <select id="multiselect" data-bind="ojComponent: {component: 'ojSelect',
@@ -134,12 +136,10 @@
             <div class="oj-sm-12">
               <button id="add_desc" onclick="openODemandDescriptionModal()">Add Description</button>
               <button id="edit_desc" onclick="openODemandDescriptionModal()">Edit Description</button>
-              <label class="required">*</label>
             </div>
             <br>
 
-            <label>Category
-              <br>
+            <label>Category&nbsp;<label class="required">*</label>
             </label>
             <br>
             <div id="tree" style="width: 180px;height: auto;" data-bind="ojComponent:
@@ -292,8 +292,12 @@
               </div>
               <div class="oj-sm-6 oj-md-9 oj-lg-9 oj-xl-10">
                 <div class="oj-margin"> 
-                  <!-- <span class="badge">Mandatory Course</span> -->
-                  <a data-bind="text: name, attr:{'href':url},click:OnDemandCourseLinkAnalytics" target="_blank"></a>
+                  <!-- ko if: (url) -->
+                  <a data-bind="text: name, attr:{'href':url},click:analytics.bind($data,$parent.category_name, name, 'Link', 'Training Page', 'On-demand Trainings', 'On-demand Trainings Link')" target="_blank"></a>
+                  <!-- /ko -->
+                   <!-- ko ifnot: (url) -->
+                   <a data-bind="text: name" href="#"></a>
+                   <!-- /ko -->
                   <!-- ko if: summary !=null -->
                   <div class="desc"><span data-bind="html:summary"/> </div>
                   <!-- /ko --> 

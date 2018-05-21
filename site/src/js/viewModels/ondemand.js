@@ -27,12 +27,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
             var categories_from_api = new Array();
             var course_id_for_edit;
             self.message = ko.observable('');
-            var updated_url;
             var error_count;
             // var sub_categories = new Array();
             var all_categories_ids = new Array();
             self.searchtext_val = ko.observable('');
-
+            var updated_url = "";
             // MODAL HANDLE START
             self.createCourseModalOpen = function () {
                 emptyAllFields();
@@ -228,6 +227,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 }
             }
             self.editOndemandCourse = function () {
+                if (self.course_url() == null) self.course_url("");
                 validation(self.course_url());
                 var mappedCategories = new Array();
                 self.onDemandSelectedCategoriesForCourse().forEach(function (element) {
@@ -243,6 +243,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                     SUMMARY:self.course_summary()
                 }
                 var ondemand_course_data = {courses:new Array(coursedata)};   
+                console.log("edit data : "+ko.toJSON(ondemand_course_data));
                 $.ajax({
                     url: trainingbaseurl+"editTrainingCourse",
                     cache: false,
@@ -387,9 +388,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs
                 if (self.course_name().length < 1) {
                     showMessage("Please enter valid course name");
                     error_count++;
-                }                
+                }                   
 
-                updated_url = (input_url.indexOf('://') === -1) ? 'http://' + input_url : input_url;   
+                if (input_url.length > 0)
+                    updated_url = (input_url.indexOf('://') === -1) ? 'http://' + input_url : input_url;
             }            
 
             function showMessage(message) {
