@@ -1177,7 +1177,145 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     }
                 });
             }
+            // The method maintains the filters based on use selection
+            //  Method triggers on each option selection
+            refineupdate = function (desc) {
+                var type = desc.name;
+                if (desc.checked) {
 
+                    switch (type) {
+                        case "category":
+                            setuncheck('category');
+                            desc.checked = true;
+                            self.refinecategories.removeAll();
+                            self.refinecategories.push(desc.defaultValue);
+                            break;
+
+                        case "prodtype":
+                            setuncheck('prodtype');
+                            desc.checked = true;
+                            self.refineproducttype.removeAll();
+                            self.refineproducttype.push(desc.defaultValue);
+                            break;
+
+                        case "traininglevel":
+                            setuncheck('traininglevel');
+                            desc.checked = true;
+                            self.refinetraininglevel.removeAll();
+                            self.refinetraininglevel.push(desc.defaultValue);
+                            break;
+
+                        case "trainingtype":
+                            setuncheck('trainingtype');
+                            desc.checked = true;
+                            self.refinetrainingtype.removeAll();
+                            self.refinetrainingtype.push(desc.defaultValue);
+                            break;
+
+                        case "cities":
+                            setuncheck('cities');
+                            desc.checked = true;
+                            self.refinecitis.removeAll();
+                            self.refinecitis.push(desc.defaultValue);
+                            break;
+
+                        case "roles":
+
+                            setuncheck('roles');
+                            desc.checked = true;
+                            self.refineroles.removeAll();
+                            self.refineroles.push(desc.defaultValue);
+                            break;
+
+                        case "community_roles":
+                            self.refinecommunitycallroles.push(desc.defaultValue);
+                            break;
+
+                        case "communitymodes":
+                            self.refinecommunitycallmodes.push(desc.defaultValue);
+                            break;
+
+                        case "past":
+                            self.refinepastcalls.push(desc.defaultValue);
+                            break;
+
+                        case "reporttype":
+                            self.event_report_type.push(desc.defaultValue);
+                            break;
+
+                        case "reportdays":
+                            setuncheck('reportdays');
+                            desc.checked = true;
+                            self.event_report_no_days.removeAll();
+                            self.event_report_no_days.push(desc.defaultValue);
+                            break;
+
+                        case "reportkeyevent":
+                            self.event_report_key_event.push(desc.defaultValue);
+                            break;
+                    }
+
+
+                } else {
+                    switch (type) {
+                        case "category":
+                            self.refinecategories.remove(desc.defaultValue);
+                            break;
+
+                        case "prodtype":
+                            self.refineproducttype.remove(desc.defaultValue);
+                            break;
+
+                        case "traininglevel":
+                            self.refinetraininglevel.remove(desc.defaultValue);
+                            break;
+
+                        case "trainingtype":
+                            self.refinetrainingtype.remove(desc.defaultValue);
+                            break;
+
+                        case "cities":
+                            self.refinecitis.remove(desc.defaultValue);
+                            break;
+
+                        case "roles":
+                            self.refineroles.remove(desc.defaultValue);
+                            break;
+
+                        case "community_roles":
+                            self.refinecommunitycallroles.remove(desc.defaultValue);
+                            break;
+
+                        case "communitymodes":
+                            self.refinecommunitycallmodes.remove(desc.defaultValue);
+                            break;
+
+                        case "past":
+                            self.refinepastcalls.remove(desc.defaultValue);
+                            break;
+                        
+                        case "reporttype":
+                            self.event_report_type.remove(desc.defaultValue);
+                            break;
+                            
+                        case "reportdays":
+                            self.event_report_no_days.remove(desc.defaultValue);
+                            break;
+                            
+                        case "reportkeyevent":
+                            self.event_report_key_event.remove(desc.defaultValue);
+                            break;
+                    }
+
+                }
+            }
+
+            setuncheck = function (classname) {
+                var x = document.getElementsByClassName(classname);
+                for (var i = 0; i < x.length; i++) {
+                    x[i].checked = false;
+                }
+            }
             self.processCoursesFromService = function (allcourses) {
 
                 self.categories([]);
@@ -2347,6 +2485,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 self.refinecommunitycallmodes([]);
                 self.refinepastcalls([]);
                 searchcommunitycalls();
+                setuncheck("refine");
             }
             loadCommunitycall();
             // events report start
@@ -2449,6 +2588,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 eventreportparam=eventreportparam.replace(/,/g, '\*');
 
                 $.getJSON(event_report_api+eventreportparam).then(function (data) {
+                    console.log("--------"+data.items.length);
                     var calls = data.items;
                     self.event_report_list([]);
                     var gotoSpecificTraining;
@@ -3394,6 +3534,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             }
 
             reseteventreportfilter=function(){
+                setuncheck('reporttype');
+                setuncheck('reportdays');
+                setuncheck('reportkeyevent');                
                 self.event_report_type([]);
                 self.event_report_no_days([]);
                 self.event_report_key_event('');
