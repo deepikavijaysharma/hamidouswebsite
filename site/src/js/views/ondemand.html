@@ -325,6 +325,9 @@
 
       <div id="accordionPage" data-bind="ojComponent: {component: 'ojAccordion', multiple: true, 
                                                        expanded: newExpanded }">
+       <!-- ko ifnot: toolslist().length>0-->
+       <div style="text-align: center"><p>On demand training not found..</p></div>
+       <!-- /ko -->   
        <!-- ko foreach: toolslist -->
          <div data-bind="attr:{id:'id_'+category_id}, ojComponent: {component: 'ojCollapsible'}">
       			<div><span data-bind="text: category_name"></span></div>

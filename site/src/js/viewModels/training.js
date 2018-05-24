@@ -172,7 +172,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
             self.keydateslist = ko.observableArray([]);
             self.refinesel = ko.observableArray('');
             self.rtrcatselected = ko.observable('');
-
+            var statesArray = new Array();
             /******************************************for refreshing home page key dates*****************************************************/
             fetchkeydates = function () {
                 $.getJSON(homebaseurl + 'KeyDates').then(function (keydatesdetails) {
@@ -722,22 +722,24 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                             id: stateList[i].id
                         })
                     }
-
+                    var uniqueStates = [];
+                    $.each(statesArray, function(i, el){
+                        if($.inArray(el, uniqueStates) === -1) uniqueStates.push(el);
+                    });
                     // STATES
                     self.states_list([]);
-                    var states_data = reasons.states;
-                    for (var i = 0; i < states_data.length; i++) {
+                    //var states_data = reasons.states;
+                    for (var i = 0; i < uniqueStates.length; i++) {
 
                         self.states_list.push({
-                            name: states_data[i],
-                            id: states_data[i]
+                            name: uniqueStates[i],
+                            id: uniqueStates[i]
                         })
                     }
 
                 });
             }
 
-            getLeftpanelData();
 
             // RESET CATEGORY FIELD
             resetcat = function () {
@@ -1010,6 +1012,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                         self.courselist = allcourses.courses;
                         self.processCoursesFromService(allcourses.courses);
                         self.getCourseIdFromUrl();
+                        getLeftpanelData();
                         console.log(allcourses);
                     },
                     error: function (xhr) {
@@ -1329,6 +1332,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                     if (curcourse.classes.length > 0) {
                         var classCount = curcourse.classes.length;
                         for (var i = 0; i < classCount; i++) {
+                            statesArray.push(curcourse.classes[i].state);
                             if(curcourse.classes[i].enrollment_status==undefined){
                                 curcourse.classes[i].enrollment_status="Not Enrolled";
                             }
@@ -2500,55 +2504,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'date', 'ojs/ojknockout', 'ojs/ojtab
                 });
             }
             
-
-//             loadEventReportData = function () {
-//                 var checkbox_value = [];
-//                 $(":checkbox").each(function () {
-//                     var ischecked = $(this).is(":checked");
-//                     if (ischecked) {
-//                         checkbox_value.push($(this).val());
-//                     }
-//                 });
-
-//                 $.getJSON(event_report_api).then(function (data) {
-//                     var calls = data.items;
-//                     self.event_report_list([]);
-//                     for (var i = 0; i < calls.length; i++) {
-//                         if(checkbox_value.length > 0 ){
-
-// for(var j=0; j<checkbox_value.length; j++) {
-
-//                             if (checkbox_value[j] == parseInt(checkbox_value[j] , 10)){
-//                                 var date1 = new Date(calls[i].start_date.substr(0,10));
-//                                 var date2 = new Date();
-//                                 var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-//                                 var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
-//                                 if(diffDays <= checkbox_value[j]){
-//                                     self.event_report_list.push({
-//                                         training_type: calls[i].training_type != undefined ? calls[i].training_type : '',
-//                                         name: calls[i].name != undefined ? calls[i].name : '',
-//                                         start_date: calls[i].start_date != undefined ? calls[i].start_date.substr(0,10) : '',
-//                                         start_time: calls[i].start_date != undefined ? calls[i].start_date.substr(11,5) : '',
-//                                     });    
-//                                 }
-//                             }
-
-//                             else if(checkbox_value[j] == calls[i].training_type) {
-//                                 self.event_report_list.push({
-//                                     training_type: calls[i].training_type != undefined ? calls[i].training_type : '',
-//                                     name: calls[i].name != undefined ? calls[i].name : '',
-//                                     start_date: calls[i].start_date != undefined ? calls[i].start_date.substr(0,10) : '',
-//                                     start_time: calls[i].start_date != undefined ? calls[i].start_date.substr(11,5) : '',
-//                                         });    
-//                                     }
-
-//                                 }
-//                             }
-//                         }
-//                     });
-//                 }
-
-
             loadEventReportData = function () {
     
                 var eventreportparam="/";

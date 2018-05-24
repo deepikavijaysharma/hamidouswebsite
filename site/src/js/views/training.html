@@ -409,6 +409,9 @@
               </div>
               <div class="oj-flex-item oj-md-9 oj-lg-9 rightcoursesblock">
                 <div class="oj-margin-left"> 
+                  <!-- ko ifnot: categories().length > 0 -->
+                  <div style="text-align: center"><p>Live training not found..</p></div>
+                  <!-- /ko-->
                   <!-- ko foreach: categories -->
                   <div class="oj-flex">
                     <div id="accordionPage" class="oj-sm-12" data-bind="ojComponent: {component: 'ojAccordion'}">
