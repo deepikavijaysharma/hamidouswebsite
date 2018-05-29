@@ -2985,6 +2985,9 @@ font-size: 1em;
 color: #969696;
 margin-left: 20px;
 margin-right: 20px;
+a{
+	@media  #{$responsiveQueryLargeDown} {
+color:#fff;}	}
 }
 
 .dottedline{
@@ -3769,6 +3772,7 @@ white-space: normal;
 margin-top:5px;
 margin-bottom:5px;
 display:flex;
+
 }
 .oj-clickable-icon-nocontext{
 	font-size:21px !important;
@@ -3885,3 +3889,37 @@ margin-top:10px;
 margin-bottom:10px;
 }
 }
+/*INFRA*/
+
+.infra{
+margin-top: 30px;
+padding: 40px;
+}
+
+#mainchart{
+	position: relative;
+	width:100%
+	}
+
+.graphs{
+	position: relative;
+	width:100%
+	}
+
+.goback{
+	float:right;
+	}
+
+.greenBg{
+	background:#6bc986;
+	}	
+.yellowBg{
+	background:#ffd83c;
+	}	
+.redBg{
+	background:#fc4544;
+	}
+	
+#table_contextmenu{
+	display:none;
+	}				

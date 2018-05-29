@@ -1,0 +1,283 @@
+
+<div class="oj-sm-12" id="mainchart" style="position: relative; width:100%">
+  <h1 class="heading" align="center">GSE Environment Per Month</h1>
+  
+  <canvas id="chart" data-bind="chart: { type: 'bar', data: BarData, options: BarOptions}"></canvas>
+  <p align="center"><a href="#" data-bind="click:showreport">Click here to see GSE UCM - NATD Demo Full Registration Report</a></p>
+</div>
+<div id="graph0" class="graphs" style="display:none;">
+  <h1 class="heading">Demos/Env/Month: Integration
+</h1>
+  <div data-bind="click:goback" class="goback"><a href="#"><< Back</a></div>
+  <canvas id="subchart1" data-bind="chart: { type: 'horizontalBar', data: subchart1, options: subchartOptions}"></canvas>
+</div>
+<div id="graph1" class="graphs" style="display:none">
+  <h1 class="heading">Demos/Env/Month: IaaS/AppDev
+</h1>
+  <div data-bind="click:goback" class="goback"><a href="#"><< Back</a></div>
+  <canvas id="subchart2" data-bind="chart: { type: 'horizontalBar', data: subchart2, options: subchartOptions}"></canvas>
+</div>
+<div id="graph2" class="graphs" style="display:none">
+  <h1 class="heading">Demos/Env/Month: Security</h1>
+  <div data-bind="click:goback" class="goback"><a href="#"><< Back</a></div>
+  <canvas id="subchart3" data-bind="chart: { type: 'horizontalBar', data: subchart3, options: subchartOptions}"></canvas>
+</div>
+<div id="graph3" class="graphs" style="display:none">
+  <h1 class="heading">Demos/Env/Month: Information Management</h1>
+  <div data-bind="click:goback" class="goback"><a href="#"><< Back</a></div>
+  <canvas id="subchart4" data-bind="chart: { type: 'horizontalBar', data: subchart4, options: subchartOptions}"></canvas>
+</div>
+<div id="graph4" class="graphs" style="display:none">
+  <h1 class="heading">Demos/Env/Month: Analytics</h1>
+  <div data-bind="click:goback" class="goback"><a href="#"><< Back</a></div>
+  <canvas id="subchart5" data-bind="chart: { type: 'horizontalBar', data: subchart5, options: subchartOptions}"></canvas>
+</div>
+<div id="graph5" class="graphs" style="display:none">
+  <h1 class="heading">Demos/Env/Month</h1>
+  <div data-bind="click:goback" class="goback"><a href="#"><< Back</a></div>
+  <canvas id="subchart6" data-bind="chart: { type: 'horizontalBar', data: subchart6, options: subchartOptions}"></canvas>
+</div>
+<div id="graph6" class="graphs" style="display:none">
+  <h1 class="heading">Demos/Env/Month: National</h1>
+  <div data-bind="click:goback" class="goback"><a href="#"><< Back</a></div>
+  <canvas id="subchart7" data-bind="chart: { type: 'horizontalBar', data: subchart7, options: subchartOptions}"></canvas>
+</div>
+<div id="graph7" class="graphs" style="display:none">
+  <h1 class="heading">Demos/Env/Month: Enterprise Named & EGA/CPG/Util</h1>
+  <div data-bind="click:goback" class="goback"><a href="#"><< Back</a></div>
+  <canvas id="subchart8" data-bind="chart: { type: 'horizontalBar', data: subchart8, options: subchartOptions}"></canvas>
+</div>
+<div id="graph8" class="graphs" style="display:none">
+  <h1 class="heading">Demos/Env/Month: Retail & Healthcare</h1>
+  <div data-bind="click:goback" class="goback"><a href="#"><< Back</a></div>
+  <canvas id="subchart9" data-bind="chart: { type: 'horizontalBar', data: subchart9, options: subchartOptions}"></canvas>
+</div>
+<div id="graph9" class="graphs" style="display:none">
+  <h1 class="heading">Demos/Env/Month: FSI/Telco</h1>
+  <div data-bind="click:goback" class="goback"><a href="#"><< Back</a></div>
+  <canvas id="subchart10" data-bind="chart: { type: 'horizontalBar', data: subchart10, options: subchartOptions}"></canvas>
+</div>
+<div id="graph10" class="graphs" style="display:none">
+  <h1 class="heading">Demos/Env/Month: PS</h1>
+  <div data-bind="click:goback" class="goback"><a href="#"><< Back</a></div>
+  <canvas id="subchart11" data-bind="chart: { type: 'horizontalBar', data: subchart11, options: subchartOptions}"></canvas>
+</div>
+<div id="graph11" class="graphs" style="display:none">
+  <h1 class="heading">Demos/Env/Month: CSM</h1>
+  <div data-bind="click:goback" class="goback"><a href="#"><< Back</a></div>
+  <canvas id="subchart12" data-bind="chart: { type: 'horizontalBar', data: subchart12, options: subchartOptions}"></canvas>
+</div>
+<div id="graph12" class="graphs" style="display:none">
+  <h1 class="heading">Demos/Env/Month: Workshops/Hubs</h1>
+  <div data-bind="click:goback" class="goback"><a href="#"><< Back</a></div>
+  <canvas id="subchart13" data-bind="chart: { type: 'horizontalBar', data: subchart13, options: subchartOptions}"></canvas>
+</div>
+<div id="dialogWrapper">
+  <div style="display:none" id="reportsDialog" title="" 
+       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 90%; height: auto;'}}">
+        <div class="oj-dialog-header oj-helper-clearfix">
+        <span id="dialogTitleId" class="oj-dialog-title">GSE UCM - NATD Demo Registration Reports<br>As on 5th April 2018</span> 
+     </div>
+     <div class="oj-dialog-body">
+     
+       <table id="table" summary="Department List" aria-label="Departments Table"
+       data-bind="ojComponent: {component: 'ojTable', 
+                                data: datasource, 
+                                display: 'grid',
+                                selectionMode: {row: 'multiple', column: 'multiple'}, 
+                                columnsDefault: {sortable: 'none'}, 
+                                columns: [{headerText: 'Group', 
+                                           field: 'Group'
+                                           },
+                                          {headerText: 'Team', 
+                                           field: 'Team'},
+                                          {headerText: 'Team Lead', 
+                                           field: 'TeamLead'},
+                                          {headerText: 'GSE Account Owner', 
+                                           field: 'GSEAccountOwner',
+                                           footerTemplate: 'heading_footer_template'},
+                                           {headerText: 'GSE Report Link', 
+                                           footerTemplate: 'gsereport_template',
+                                           field: 'GSEReportLink'},
+                                           {headerText: 'GSE UCM Environments - Total Number', 
+                                           field: 'GSEUCMEnvironmentsTotalNumber',
+                                           footerTemplate: 'gsetotal_template'
+                                           },
+                                           {headerText: 'GSE UCM Environments - Zero Demos', 
+                                           field: 'GSEUCMEnvironmentsZeroDemos',
+                                           footerTemplate: 'gsezero_template'},{headerText: 'Total Demos', 
+                                           field: 'TotalDemos',
+                                           footerTemplate: 'totaldemo_template'},
+                                           {headerText: 'Future Demos', 
+                                           field: 'FutureDemos',
+                                           footerTemplate: 'futuredemo_template'},
+                                           {headerText: 'Demos Month to Date', 
+                                           field: 'DemosMonthtoDate',
+                                           footerTemplate: 'demosmontodate_template'},
+                                           {headerText: 'Demos Prior Month', 
+                                           field: 'DemosPriorMonth',
+                                           footerTemplate: 'demospriormonth_template'},
+                                           {headerText: 'Demos 2 Months Back', 
+                                           field: 'Demos2MonthsBack',
+                                           footerTemplate: 'demo2months_template'},
+                                           {headerText: 'Total Past Demos', 
+                                           field: 'TotalPastDemos',
+                                           footerTemplate: 'totalpast_template'},
+                                           {headerText: 'Percent with Zero Demos', 
+                                           field: 'PercentwithZeroDemos',
+                                           footerTemplate: 'percentwithzero_template'},
+                                           {headerText: 'Demos/Env/Month', 
+                                           field: 'DemosEnvMonth',                                      
+                                           footerTemplate: 'demosenvmonth_template'}],
+                                		rowTemplate: 'row_template'}">
+                                        
+                                        
+</table>
+
+<script type="text/html" id="heading_footer_template">
+
+     <td>
+       All NATD SC Orgs (calculated)<br><br>All NATD SC Orgs (reported)
+     </td>
+	
+	
+</script>
+<script type="text/html" id="gsetotal_template">
+     <td>
+       <span data-bind="text:$parent.gsetotalnumber"></span><br><br><span data-bind="text:$parent.gsetotalnumberreport"></span>
+     </td>
+	
+</script>
+<script type="text/html" id="gsezero_template">
+     <td>
+       <span data-bind="text:$parent.gsezeronumber"></span><br><br><span data-bind="text:$parent.gsezeronumberreport"></span>
+     </td>
+	
+</script>
+<script type="text/html" id="totaldemo_template">
+
+     <td>
+       <span data-bind="text:$parent.gsetotaldemo"></span><br><br><span data-bind="text:$parent.gsetotaldemoreport"></span>
+     </td>
+	
+	
+</script>
+<script type="text/html" id="futuredemo_template">
+
+     <td>
+       <span data-bind="text:$parent.futuredemo"></span><br><br><span data-bind="text:$parent.futuredemoreport"></span>
+     </td>
+	
+	
+</script>
+<script type="text/html" id="demosmontodate_template">
+
+     <td>
+       <span data-bind="text:$parent.demosmonthtodate"></span><br><br><span data-bind="text:$parent.demosmonthtodatereport"></span>
+     </td>
+	
+	
+</script>
+<script type="text/html" id="demospriormonth_template">
+
+     <td>
+       <span data-bind="text:$parent.demospriormonth"></span><br><br><span data-bind="text:$parent.demospriormonthreport"></span>
+     </td>
+	
+	
+</script>
+<script type="text/html" id="demo2months_template">
+
+     <td>
+       <span data-bind="text:$parent.demostwomonths"></span><br><br><span data-bind="text:$parent.demostwomonthsreport"></span>
+     </td>
+	
+	
+</script>
+<script type="text/html" id="totalpast_template">
+
+     <td>
+       <span data-bind="text:$parent.totalpastdemo"></span><br><br><span data-bind="text:$parent.totalpastdemoreport"></span>
+     </td>
+	
+	
+</script>
+<script type="text/html" id="percentwithzero_template">
+
+     <td data-bind="css: $parent.addBgpercent($parent.percentwithzero)">
+       <span data-bind="text:$parent.percentwithzero"></span>%<br><br><span data-bind="text:$parent.percentwithzeroreport"></span>%
+     </td>
+	
+	
+</script>
+<script type="text/html" id="demosenvmonth_template">
+
+     <td data-bind="css: $parent.addBgvalue($parent.demosenvmonth)">
+       <span data-bind="text:$parent.demosenvmonth"></span><br><br><span data-bind="text:$parent.demosenvmonthreport"></span>
+     </td>
+	
+	
+</script>
+<script type="text/html" id="gsereport_template">
+
+      <td>
+		 <a href="#" data-bind= "attr: { href: $parent.envreportlink}" target="_blank">Report</a>
+        </td>
+	
+	
+</script>
+<script type="text/html" id="row_template">
+ <tr>
+        <td data-bind="text: Group">
+        </td>
+        <td data-bind="text: Team">
+        </td>
+        <td data-bind="text: TeamLead">
+        </td>
+        <td data-bind="html: GSEAccountOwner">
+        </td>
+		 <td>
+		 <a href="#" data-bind= "attr: { href: GSEReportLink}" target="_blank">Report</a>
+        </td>
+		<td data-bind="text: GSEUCMEnvironmentsTotalNumber">
+		
+        </td>
+		<td  data-bind="text: GSEUCMEnvironmentsZeroDemos">
+		 
+        </td>
+		<td data-bind="text: TotalDemos">
+		
+        </td>
+		<td data-bind="text: FutureDemos">
+		
+        </td>
+		<td data-bind="text: DemosMonthtoDate">
+		 
+        </td>
+		
+		<td data-bind="text: DemosPriorMonth">
+		 
+        </td>
+		<td data-bind="text: Demos2MonthsBack">
+		
+        </td>
+		<td data-bind="text: TotalPastDemos">
+		
+        </td>
+		<td data-bind="css: $parent.addBgpercent(PercentwithZeroDemos)">
+		 <span data-bind="text: PercentwithZeroDemos"></span>%
+        </td>
+		<td data-bind="text: DemosEnvMonth,css: $parent.addBgvalue(DemosEnvMonth)">
+		
+        </td>
+    </tr>
+	
+</script>
+     </div>
+     <div class="oj-dialog-footer">
+       
+      </div>
+  </div>
+ 
+
+</div>

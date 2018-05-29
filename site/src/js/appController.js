@@ -57,6 +57,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         },
         'analytics': {
           label: 'Analytics'
+        },
+		'infrastructure': {
+          label: 'Infrastructure'
         }
       });
       oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
@@ -74,6 +77,11 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
         {
           name: 'Tools and Resources',
           id: 'tools'
+        },
+		
+        {
+          name: 'Infrastructure',
+          id: 'infrastructure'
         }
       ]);
 
@@ -131,10 +139,10 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
 
       function addAnalytics(){
         console.log(self.navData);
-        self.navData.push({
+        /*self.navData.push({
           name: 'Reports',
           id: 'analytics'
-        })
+        })*/
       }
       // CHECK FOR ADMIN RIGHTS
       checkadminrights = function () {

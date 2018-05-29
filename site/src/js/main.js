@@ -66,7 +66,11 @@ requirejs.config(
     'ojtreeview' : 'libs/oj/v3.2.0/debug/ojtreeview',
     'bootstrap': 'libs/bootstrap/bootstrap.min',
     'ckeditor':'libs/ckeditor/ckeditor',
-    'ckeditor-jquery':'libs/ckeditor/adapters/jquery'
+    'ckeditor-jquery':'libs/ckeditor/adapters/jquery',
+	'graphs':'libs/graphs/chart',
+	'knockoutchart':'libs/graphs/knockout.chart'
+	
+	
   }
   
 
@@ -93,7 +97,7 @@ requirejs.config(
  * objects in the callback
  */
 require(['ojs/ojcore', 'knockout', 'appController', 'ojs/ojknockout',
-  'ojs/ojmodule', 'ojs/ojrouter', 'ojs/ojnavigationlist', 'ojs/ojbutton', 'ojs/ojtoolbar', 'ckeditor', 'ckeditor-jquery'],
+  'ojs/ojmodule', 'ojs/ojrouter', 'ojs/ojnavigationlist', 'ojs/ojbutton', 'ojs/ojtoolbar', 'ckeditor', 'ckeditor-jquery','graphs','knockoutchart'],
   function (oj, ko, app) { // this callback gets executed when all required modules are loaded
 
     $(function() {
